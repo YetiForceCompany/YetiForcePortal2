@@ -53,13 +53,10 @@ class Core_Request {
 			}
 		}
 		if($isJSON) {
-			$oldValue = Core_Json::$useBuiltinEncoderDecoder;
-			Core_Json::$useBuiltinEncoderDecoder = false;
-			$decodeValue = Core_Json::decode($value);
+			$decodeValue = Core_Json::json_decode($value);
 			if(isset($decodeValue)) {
 				$value = $decodeValue;
 			}
-			Core_Json::$useBuiltinEncoderDecoder  = $oldValue;
 		}
 
         //Handled for null because vtlib_purify returns empty string

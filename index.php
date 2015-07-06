@@ -7,5 +7,3 @@ require_once('core/Init.php');
 
 $coreUI = new Core_WebUI();
 $coreUI->process(new Core_Request($_REQUEST));
-
-var_dump(YF_PATH_ROOT);

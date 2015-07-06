@@ -3,22 +3,29 @@
 class Core_User {
 	protected static $user = false;
 	
-	function getUser() {
+	public function getUser() {
 		if (!self::$user) {
 			self::$user = $_SESSION['user'];
 		}
 		return self::$user;
 	}
 	
-	function setUser($user) {
+	public function setUser($user) {
 		self::$user = $user;
 	}
 
-	protected function checkLogin(Vtiger_Request $request) {
-		if (!$this->hasLogin()) {
+	public function checkLogin(Vtiger_Request $request) {
+		if (!self::hasLogin()) {
 			header('Location: index.php');
 			throw new AppException('Login is required');
 		}
+	}
+
+	public function hasLogin() {
+		if (array_key_exists('user',$_SESSION)) {
+			return true;
+		}
+		return false;
 	}
 	
 }

@@ -36,11 +36,7 @@ class Core_WebUI {
 	}
 
 	function isInstalled() {
-		global $dbconfig;
-		if (empty($dbconfig) || empty($dbconfig['db_name']) || $dbconfig['db_name'] == '_DBC_TYPE_') {
-			//return false;
-		}
-		return true;
+		return !file_exists('modules/Install');
 	}
 
 	function process (Core_Request $request) {
@@ -48,37 +44,34 @@ class Core_WebUI {
 
 		$currentLanguage = Core_Language::getLanguage();
 		$module = $request->getModule();
-
+/*
 		if ($currentUser && $qualifiedModuleName) {
-			$moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage,$qualifiedModuleName);
+			$moduleLanguageStrings = Core_Language::getModuleStringsFromFile($currentLanguage,$qualifiedModuleName);
 			vglobal('mod_strings', $moduleLanguageStrings['languageStrings']);
 		}
-
+*/
 		$view = $request->get('view');
 		$action = $request->get('action');
 		$response = false;
 
 		try {
 			if($this->isInstalled() === false && $module != 'Install') {
-				header('Location:install/Install.php');
-				exit;
+				
 			}
 
 			if(empty($module)) {
-				if ($this->hasLogin()) {
-					$defaultModule = vglobal('default_module');
+				if (Core_User::hasLogin()) {
+					$defaultModule = Config::get('defaultModule');
 					if(!empty($defaultModule) && $defaultModule != 'Home') {
-						$module = $defaultModule; $qualifiedModuleName = $defaultModule; $view = 'List';
-                        if($module == 'Calendar') { 
-                            // To load MyCalendar instead of list view for calendar
-                            //TODO: see if it has to enhanced and get the default view from module model
-                            $view = 'Calendar';
-                        }
+						$module = $defaultModule; 
+						$view = 'List';
 					} else {
-						$module = 'Home'; $qualifiedModuleName = 'Home'; $view = 'DashBoard';
+						$module = 'Home'; 
+						$view = 'DashBoard';
 					}
 				} else {
-					$module = 'Users'; $qualifiedModuleName = 'Settings:Users'; $view = 'Login';
+					$module = 'Users'; 
+					$view = 'Login';
 				}
 				$request->set('module', $module);
 				$request->set('view', $view);
@@ -94,8 +87,9 @@ class Core_WebUI {
 				}
 				$componentName = $view;
 			}
-			$handlerClass = Vtiger_Loader::getComponentClassName($componentType, $componentName, $qualifiedModuleName);
+			$handlerClass = Core_Loader::getModuleClassName($module, $componentType, $componentName);
 			$handler = new $handlerClass();
+			
             if ($handler) {
                 vglobal('currentModule', $module);
 				$csrfProtection = vglobal('csrfProtection');
@@ -130,18 +124,15 @@ class Core_WebUI {
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+				throw new PortalException(vtranslate('LBL_HANDLER_NOT_FOUND'));
 			}
 		} catch(Exception $e) {
-			if ($view) {
+			if (false) {
 				// Log for developement.
-				error_log($e->getTraceAsString(), E_NOTICE);
-				Vtiger_Functions::throwNewException($e->getMessage());
+				//error_log($e->getTraceAsString(), E_ERROR);
+				die($e->getMessage());
 			} else {
-				$response = new Vtiger_Response();
-				$response->setEmitType(Vtiger_Response::$EMIT_JSON);
-				$response->setError($e->getMessage());
-				//Vtiger_Functions::throwNewException($e->getMessage());
+				die(Core_Json::encode($e->getMessage()));
 			}
 		}
 

@@ -149,7 +149,7 @@ class Core_Language {
         if ($userInstance) {
 			$language = $userInstance->language;
         }else{
-			$language = Core_Config::get('language');
+			$language = Config::get('language');
 		}
         return $language;
     }

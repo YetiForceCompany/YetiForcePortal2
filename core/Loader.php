@@ -38,14 +38,14 @@ class Core_Loader {
 		if (file_exists($filePath)) {
 			return $className;
 		}
-
+var_dump($className);
 		$filePath = 'Basic' . DIRECTORY_SEPARATOR . $moduleType . DIRECTORY_SEPARATOR . $fieldName;
 		$className = 'Basic' . '_' . $moduleType . '_' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
 		}
-
-		throw new AppException('HANDLER_NOT_FOUND');
+var_dump($className);
+		throw new PortalException('HANDLER_NOT_FOUND');
 	}
 
 	/**
@@ -66,8 +66,8 @@ class Core_Loader {
 
 }
 
-class Core_Config {
-	public static function get($attr, $defvalue) {
+class Config {
+	public static function get($attr, $defvalue = '') {
 		global $config;
 		if(isset($config)){
 			if(isset($config[$key])) {
@@ -78,5 +78,8 @@ class Core_Config {
 	}
 }
 
+class PortalException extends Exception {	
+
+}
 
 spl_autoload_register('Core_Loader::autoLoad');
