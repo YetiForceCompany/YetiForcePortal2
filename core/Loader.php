@@ -13,6 +13,7 @@ class Core_Loader {
 		}
 
 		if (!file_exists($name)) {
+			throw new PortalException('FILE_NOT_FOUND: ' . $name) ;
 			return false;
 		}
 
@@ -33,18 +34,19 @@ class Core_Loader {
 	}
 
 	public static function getModuleClassName($moduleName, $moduleType, $fieldName) {
-		$filePath = $moduleName . DIRECTORY_SEPARATOR . $moduleType . DIRECTORY_SEPARATOR . $fieldName;
+		$filePath = 'modules'. DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName. '.php';
 		$className = $moduleName . '_' . $moduleType . '_' . $fieldName;
+
 		if (file_exists($filePath)) {
 			return $className;
 		}
-var_dump($className);
-		$filePath = 'Basic' . DIRECTORY_SEPARATOR . $moduleType . DIRECTORY_SEPARATOR . $fieldName;
+
+		$filePath = 'modules'. DIRECTORY_SEPARATOR . 'Basic' . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName. '.php';
 		$className = 'Basic' . '_' . $moduleType . '_' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
 		}
-var_dump($className);
+
 		throw new PortalException('HANDLER_NOT_FOUND');
 	}
 
@@ -55,9 +57,19 @@ var_dump($className);
 	 */
 	public static function autoLoad($className) {
 		$parts = explode('_', $className);
+		$noOfParts = count($parts);
+
+		if($noOfParts > 2) {
+			$parts[1] = strtolower($parts[1]) . 's';
+			$filePath = 'modules'. DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parts). '.php';
+			if (file_exists($filePath)) {
+				return self::import($filePath);
+			}
+		}
+		
 		$parts[0] = strtolower($parts[0]);
 		$filePath = implode(DIRECTORY_SEPARATOR, $parts). '.php';
-
+		
 		if (file_exists($filePath)) {
 			return self::import($filePath);
 		}

@@ -5,7 +5,7 @@ class Core_User {
 	
 	public function getUser() {
 		if (!self::$user) {
-			self::$user = $_SESSION['user'];
+			self::$user = (object) $_SESSION['user'];
 		}
 		return self::$user;
 	}
@@ -14,7 +14,7 @@ class Core_User {
 		self::$user = $user;
 	}
 
-	public function checkLogin(Vtiger_Request $request) {
+	public function checkLogin(Core_Request $request) {
 		if (!self::hasLogin()) {
 			header('Location: index.php');
 			throw new AppException('Login is required');
