@@ -1,6 +1,8 @@
 <?php
 
-class Core_Request {
+class Core_Request
+{
+
 	// Datastore
 	private $valuemap;
 	private $defaultmap = array();
@@ -8,7 +10,8 @@ class Core_Request {
 	/**
 	 * Default constructor
 	 */
-	function __construct($values, $stripifgpc=true) {
+	function __construct($values, $stripifgpc = true)
+	{
 		$this->valuemap = $values;
 		if ($stripifgpc && !empty($this->valuemap) && get_magic_quotes_gpc()) {
 			$this->valuemap = $this->stripslashes_recursive($this->valuemap);
@@ -18,7 +21,8 @@ class Core_Request {
 	/**
 	 * Strip the slashes recursively on the values.
 	 */
-	function stripslashes_recursive($value) {
+	function stripslashes_recursive($value)
+	{
 		$value = is_array($value) ? array_map(array($this, 'stripslashes_recursive'), $value) : stripslashes($value);
 		return $value;
 	}
@@ -26,12 +30,13 @@ class Core_Request {
 	/**
 	 * Get key value (otherwise default value)
 	 */
-	function get($key, $defvalue = '') {
+	function get($key, $defvalue = '')
+	{
 		$value = $defvalue;
-		if(isset($this->valuemap[$key])) {
+		if (isset($this->valuemap[$key])) {
 			$value = $this->valuemap[$key];
 		}
-		if($value === '' && isset($this->defaultmap[$key])) {
+		if ($value === '' && isset($this->defaultmap[$key])) {
 			$value = $this->defaultmap[$key];
 		}
 
@@ -43,38 +48,41 @@ class Core_Request {
 				$isJSON = true;
 			}
 		}
-		if($isJSON) {
+		if ($isJSON) {
 			$decodeValue = Core_Json::json_decode($value);
-			if(isset($decodeValue)) {
+			if (isset($decodeValue)) {
 				$value = $decodeValue;
 			}
 		}
 
-        //Handled for null because vtlib_purify returns empty string
-        if(!empty($value)){
-            //$value = vtlib_purify($value);
-        }
+		//Handled for null because vtlib_purify returns empty string
+		if (!empty($value)) {
+			//$value = vtlib_purify($value);
+		}
 		return $value;
 	}
 
 	/**
 	 * Get data map
 	 */
-	function getAll() {
+	function getAll()
+	{
 		return $this->valuemap;
 	}
 
 	/**
 	 * Check for existence of key
 	 */
-	function has($key) {
+	function has($key)
+	{
 		return isset($this->valuemap[$key]);
 	}
 
 	/**
 	 * Is the value (linked to key) empty?
 	 */
-	function isEmpty($key) {
+	function isEmpty($key)
+	{
 		$value = $this->get($key);
 		return empty($value);
 	}
@@ -82,35 +90,39 @@ class Core_Request {
 	/**
 	 * Set the value for key
 	 */
-	function set($key, $newvalue) {
-		$this->valuemap[$key]= $newvalue;
+	function set($key, $newvalue)
+	{
+		$this->valuemap[$key] = $newvalue;
 	}
 
 	/**
 	 * Set default value for key
 	 */
-	function setDefault($key, $defvalue) {
+	function setDefault($key, $defvalue)
+	{
 		$this->defaultmap[$key] = $defvalue;
 	}
 
 	/**
 	 * Shorthand function to get value for (key=mode)
 	 */
-	function getMode() {
+	function getMode()
+	{
 		return $this->get('mode');
 	}
 
-	function getModule() {
+	function getModule()
+	{
 		return $this->get('module');
 	}
 
-	function isAjax() {
-		if(!empty($_SERVER['HTTP_X_PJAX']) && $_SERVER['HTTP_X_PJAX'] == true) {
+	function isAjax()
+	{
+		if (!empty($_SERVER['HTTP_X_PJAX']) && $_SERVER['HTTP_X_PJAX'] == true) {
 			return true;
-		} elseif(!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+		} elseif (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			return true;
 		}
 		return false;
 	}
-	
 }

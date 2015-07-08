@@ -1,8 +1,8 @@
 <?php
-
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-class Core_Language {
+class Core_Language
+{
 
 	//Contains module language translations
 	protected static $languageContainer = [];
@@ -13,13 +13,14 @@ class Core_Language {
 	 * @param <String> $module - module scope in which the translation need to be check
 	 * @return <String> - translated string
 	 */
-	public static function translate($key, $module = '', $currentLanguage = '') {
+	public static function translate($key, $module = '', $currentLanguage = '')
+	{
 		if (empty($currentLanguage)) {
 			$currentLanguage = self::getLanguage();
 		}
 		//decoding for Start Date & Time and End Date & Time 
 		if (!is_array($key))
-			$key = decode_html($key);
+			$key = html_entity_decode($key);
 		$translatedString = self::getLanguageTranslatedString($currentLanguage, $key, $module);
 
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
@@ -44,7 +45,8 @@ class Core_Language {
 	 * @param <String> $module - module name
 	 * @return <String> translated string or null if translation not found
 	 */
-	public static function getLanguageTranslatedString($language, $key, $module = '') {
+	public static function getLanguageTranslatedString($language, $key, $module = '')
+	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
 		if (!empty($moduleStrings['phpLang'][$key])) {
 			return stripslashes($moduleStrings['phpLang'][$key]);
@@ -63,7 +65,8 @@ class Core_Language {
 	 * @param <String> $module - module scope in which the translation need to be check
 	 * @return <String> - translated string
 	 */
-	public static function jstranslate($language, $key, $module = '') {
+	public static function jstranslate($language, $key, $module = '')
+	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
 		if (!empty($moduleStrings['jsLang'][$key])) {
 			return $moduleStrings['jsLang'][$key];
@@ -76,14 +79,10 @@ class Core_Language {
 		return $key;
 	}
 
-	/**
-	 * Function that returns translation strings from file
-	 * @global <array> $languageStrings - language specific string which is used in translations
-	 * @param <String> $module - module Name
-	 * @return <array> - array if module has language strings else returns empty array
-	 */
-	public static function getModuleStringsFromFile($language, $module = 'Basic') {
+	public static function getModuleStringsFromFile($language, $module = 'Basic')
+	{
 		if (empty(self::$languageContainer[$language][$module])) {
+			$file = 'language' . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $module . '.php';
 			$phpLang = $jsLang = [];
 			if (file_exists($file)) {
 				require $file;
@@ -91,14 +90,18 @@ class Core_Language {
 				self::$languageContainer[$language][$module]['jsLang'] = $jsLang;
 			}
 		}
-		return self::$languageContainer[$language][$module];
+		if (isset(self::$languageContainer[$language][$module])) {
+			return self::$languageContainer[$language][$module];
+		}
+		return [];
 	}
 
 	/**
 	 * Function that returns current language
 	 * @return <String> -
 	 */
-	public static function getLanguage() {
+	public static function getLanguage()
+	{
 		$userInstance = Core_User::getUser();
 		$language = '';
 		if ($userInstance) {
@@ -110,10 +113,20 @@ class Core_Language {
 	}
 
 	/**
+	 * Function to returns all language information
+	 * @return <Array>
+	 */
+	public static function getAllLanguages()
+	{
+		return Config::get('languages');
+	}
+
+	/**
 	 * Function that returns current language short name
 	 * @return <String> -
 	 */
-	public static function getShortLanguageName() {
+	public static function getShortLanguageName()
+	{
 		$language = self::getLanguage();
 		return substr($language, 0, 2);
 	}
@@ -124,7 +137,8 @@ class Core_Language {
 	 * @param <String> languageStrings or jsLanguageStrings
 	 * @return <Array>
 	 */
-	public static function export($module, $type = 'phpLang') {
+	public static function export($module, $type = 'phpLang')
+	{
 		$language = self::getLanguage();
 		$exportLangString = [];
 
@@ -139,13 +153,4 @@ class Core_Language {
 		}
 		return $exportLangString;
 	}
-
-	/**
-	 * Function to returns all language information
-	 * @return <Array>
-	 */
-	public static function getAllLanguages() {
-		return Config::get('languages');
-	}
-
 }

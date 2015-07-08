@@ -1,10 +1,11 @@
 <?php
-
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-class Core_WebUI {
+class Core_WebUI
+{
 
-	public function process(Core_Request $request) {
+	public function process(Core_Request $request)
+	{
 		$module = $request->getModule();
 		$view = $request->get('view');
 		$action = $request->get('action');
@@ -49,12 +50,12 @@ class Core_WebUI {
 				}
 
 				//$this->triggerCheckPermission($handler, $request);
-
-				// Every settings page handler should implement this method
-				if (stripos($qualifiedModuleName, 'Settings') === 0 || ($module == 'Users')) {
-					$handler->checkPermission($request);
-				}
-
+				/*
+				  // Every settings page handler should implement this method
+				  if (stripos($qualifiedModuleName, 'Settings') === 0 || ($module == 'Users')) {
+				  $handler->checkPermission($request);
+				  }
+				 */
 				$notPermittedModules = array('ModComments', 'Integration', 'DashBoard');
 
 				if (in_array($module, $notPermittedModules) && $view == 'List') {
@@ -81,8 +82,9 @@ class Core_WebUI {
 			$response->emit();
 		}
 	}
-	
-	protected function triggerCheckPermission($handler, $request) {
+
+	protected function triggerCheckPermission($handler, $request)
+	{
 		$moduleName = $request->getModule();
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
@@ -100,22 +102,24 @@ class Core_WebUI {
 		throw new AppException(vtranslate($moduleName) . ' ' . vtranslate('LBL_NOT_ACCESSIBLE'));
 	}
 
-	protected function triggerPreProcess($handler, $request) {
+	protected function triggerPreProcess($handler, $request)
+	{
 		if ($request->isAjax()) {
 			return true;
 		}
 		$handler->preProcess($request);
 	}
 
-	protected function triggerPostProcess($handler, $request) {
+	protected function triggerPostProcess($handler, $request)
+	{
 		if ($request->isAjax()) {
 			return true;
 		}
 		$handler->postProcess($request);
 	}
 
-	function isInstalled() {
+	function isInstalled()
+	{
 		return !file_exists('modules/Install');
 	}
-
 }

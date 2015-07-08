@@ -1,12 +1,15 @@
 <?php
 
-abstract class Core_Controller {
+abstract class Core_Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		self::setHeaders();
 	}
 
-	public function loginRequired() {
+	public function loginRequired()
+	{
 		return true;
 	}
 
@@ -14,15 +17,18 @@ abstract class Core_Controller {
 
 	abstract function process(Core_Request $request);
 
-	public function validateRequest(Core_Request $request) {
+	public function validateRequest(Core_Request $request)
+	{
 		
 	}
 
-	public function preProcess(Core_Request $request) {
+	public function preProcess(Core_Request $request)
+	{
 		
 	}
 
-	public function postProcess(Core_Request $request) {
+	public function postProcess(Core_Request $request)
+	{
 		
 	}
 
@@ -33,7 +39,8 @@ abstract class Core_Controller {
 	 * Function that will expose methods for external access
 	 * @param <String> $name - method name
 	 */
-	protected function exposeMethod($name) {
+	protected function exposeMethod($name)
+	{
 		if (!in_array($name, $this->exposedMethods)) {
 			$this->exposedMethods[] = $name;
 		}
@@ -44,14 +51,16 @@ abstract class Core_Controller {
 	 * @param string $name - method name
 	 * @return boolean
 	 */
-	public function isMethodExposed($name) {
+	public function isMethodExposed($name)
+	{
 		if (in_array($name, $this->exposedMethods)) {
 			return true;
 		}
 		return false;
 	}
 
-	public function invokeExposedMethod() {
+	public function invokeExposedMethod()
+	{
 		$parameters = func_get_args();
 		$name = array_shift($parameters);
 		if (!empty($name) && $this->isMethodExposed($name)) {
@@ -60,7 +69,8 @@ abstract class Core_Controller {
 		throw new PortalException(vtranslate('LBL_NOT_ACCESSIBLE'));
 	}
 
-	public function setHeaders() {
+	public function setHeaders()
+	{
 		header("Expires: " . gmdate("D, d M Y H:i:s") . " GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
@@ -72,5 +82,4 @@ abstract class Core_Controller {
 			header('Pragma: no-cache');
 		}
 	}
-
 }

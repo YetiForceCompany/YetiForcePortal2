@@ -1,8 +1,8 @@
 <?php
-
 Core_Loader::import('libraries/Smarty/SmartyBC.class.php');
 
-class Core_Viewer extends SmartyBC {
+class Core_Viewer extends SmartyBC
+{
 
 	const DEFAULTLAYOUT = 'main';
 
@@ -12,12 +12,13 @@ class Core_Viewer extends SmartyBC {
 	 * Constructor - Sets the templateDir and compileDir for the Smarty files
 	 * @param <String> - $media Layout/Media name
 	 */
-	public function __construct($media = '') {
+	public function __construct($media = '')
+	{
 		parent::__construct();
 
 		self::$currentLayout = self::getLayoutName();
-		$templatesDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR. self::getLayoutName();
-		$compileDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR. self::getLayoutName();
+		$templatesDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
+		$compileDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
 
 		if (!file_exists($compileDir)) {
 			mkdir($compileDir, 0777, true);
@@ -30,7 +31,8 @@ class Core_Viewer extends SmartyBC {
 	 * Function to return for default layout name
 	 * @return <String> - Default Layout Name
 	 */
-	public static function getLayoutName() {
+	public static function getLayoutName()
+	{
 		return self::DEFAULTLAYOUT;
 	}
 
@@ -40,14 +42,15 @@ class Core_Viewer extends SmartyBC {
 	 * @param <String> $moduleName
 	 * @return <String> - Module specific template path if exists, otherwise default template path for the given template name
 	 */
-	public function getTemplatePath($templateName, $moduleName = '') {
+	public function getTemplatePath($templateName, $moduleName = '')
+	{
 		foreach ($this->getTemplateDir() as $templateDir) {
-			$tpl = 'modules'. DIRECTORY_SEPARATOR. $moduleName. DIRECTORY_SEPARATOR. $templateName;
-			$completeFilePath = $templateDir. $tpl;
+			$tpl = 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $templateName;
+			$completeFilePath = $templateDir . $tpl;
 			if (!empty($moduleName) && file_exists($completeFilePath)) {
 				return $tpl;
 			} else {
-				$filePath = "modules/Base/$templateName";
+				$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . $templateName;
 			}
 		}
 		return $filePath;
@@ -60,10 +63,11 @@ class Core_Viewer extends SmartyBC {
 	 * @param <Boolean> $fetch
 	 * @return html data
 	 */
-	public function view($templateName, $moduleName = '', $fetch = false) {
+	public function view($templateName, $moduleName = '', $fetch = false)
+	{
 		$templatePath = $this->getTemplatePath($templateName, $moduleName);
 		$templateFound = $this->templateExists($templatePath);
-		
+
 		if ($templateFound) {
 			if ($fetch) {
 				return $this->fetch($templatePath);
@@ -81,9 +85,9 @@ class Core_Viewer extends SmartyBC {
 	 * @param <String> $media Layout/Media
 	 * @return Core_Viewer instance
 	 */
-	static function getInstance($media = '') {
+	static function getInstance($media = '')
+	{
 		$instance = new self($media);
 		return $instance;
 	}
-
 }
