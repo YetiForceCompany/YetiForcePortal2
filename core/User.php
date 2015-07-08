@@ -22,7 +22,7 @@ class Core_User
 	{
 		if (!self::hasLogin()) {
 			header('Location: index.php');
-			throw new AppException('Login is required');
+			throw new PortalException('Login is required');
 		}
 	}
 
@@ -31,6 +31,15 @@ class Core_User
 		if (array_key_exists('user', $_SESSION)) {
 			return true;
 		}
+		return false;
+	}
+	
+	public static function doLogin($email, $password)
+	{
+		$api = Core_Api::getInstance();
+		$api->doLogin($email, $password);
+		
+		
 		return false;
 	}
 }

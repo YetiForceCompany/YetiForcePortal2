@@ -5,12 +5,12 @@ class Core_Request
 
 	// Datastore
 	private $valuemap;
-	private $defaultmap = array();
+	private $defaultmap = [];
 
 	/**
 	 * Default constructor
 	 */
-	function __construct($values, $stripifgpc = true)
+	public function __construct($values, $stripifgpc = true)
 	{
 		$this->valuemap = $values;
 		if ($stripifgpc && !empty($this->valuemap) && get_magic_quotes_gpc()) {
@@ -21,7 +21,7 @@ class Core_Request
 	/**
 	 * Strip the slashes recursively on the values.
 	 */
-	function stripslashes_recursive($value)
+	public function stripslashes_recursive($value)
 	{
 		$value = is_array($value) ? array_map(array($this, 'stripslashes_recursive'), $value) : stripslashes($value);
 		return $value;
@@ -30,7 +30,7 @@ class Core_Request
 	/**
 	 * Get key value (otherwise default value)
 	 */
-	function get($key, $defvalue = '')
+	public function get($key, $defvalue = '')
 	{
 		$value = $defvalue;
 		if (isset($this->valuemap[$key])) {
@@ -57,7 +57,7 @@ class Core_Request
 
 		//Handled for null because vtlib_purify returns empty string
 		if (!empty($value)) {
-			//$value = vtlib_purify($value);
+			$value = $this->_cleanInputs($value);
 		}
 		return $value;
 	}
@@ -65,7 +65,7 @@ class Core_Request
 	/**
 	 * Get data map
 	 */
-	function getAll()
+	public function getAll()
 	{
 		return $this->valuemap;
 	}
@@ -73,7 +73,7 @@ class Core_Request
 	/**
 	 * Check for existence of key
 	 */
-	function has($key)
+	public function has($key)
 	{
 		return isset($this->valuemap[$key]);
 	}
@@ -81,7 +81,7 @@ class Core_Request
 	/**
 	 * Is the value (linked to key) empty?
 	 */
-	function isEmpty($key)
+	public function isEmpty($key)
 	{
 		$value = $this->get($key);
 		return empty($value);
@@ -90,7 +90,7 @@ class Core_Request
 	/**
 	 * Set the value for key
 	 */
-	function set($key, $newvalue)
+	public function set($key, $newvalue)
 	{
 		$this->valuemap[$key] = $newvalue;
 	}
@@ -98,7 +98,7 @@ class Core_Request
 	/**
 	 * Set default value for key
 	 */
-	function setDefault($key, $defvalue)
+	public function setDefault($key, $defvalue)
 	{
 		$this->defaultmap[$key] = $defvalue;
 	}
@@ -106,17 +106,28 @@ class Core_Request
 	/**
 	 * Shorthand function to get value for (key=mode)
 	 */
-	function getMode()
+	public function getMode()
 	{
 		return $this->get('mode');
 	}
 
-	function getModule()
+	public function getModule()
 	{
 		return $this->get('module');
 	}
 
-	function isAjax()
+	function getAction()
+	{
+		$view = $this->get('view');
+		$action = $this->get('action');
+		if (!empty($action)) {
+			return $action;
+		} else {
+			return $view;
+		}
+	}
+
+	public function isAjax()
 	{
 		if (!empty($_SERVER['HTTP_X_PJAX']) && $_SERVER['HTTP_X_PJAX'] == true) {
 			return true;
@@ -124,5 +135,18 @@ class Core_Request
 			return true;
 		}
 		return false;
+	}
+
+	private function _cleanInputs($data)
+	{
+		$clean_input = [];
+		if (is_array($data)) {
+			foreach ($data as $k => $v) {
+				$clean_input[$k] = $this->_cleanInputs($v);
+			}
+		} else {
+			$clean_input = trim(strip_tags($data));
+		}
+		return $clean_input;
 	}
 }

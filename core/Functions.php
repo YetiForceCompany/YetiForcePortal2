@@ -1,6 +1,5 @@
 <?php
 
-class Core_Language
-{
-	
+function translate($label, $module) {
+	return Core_Language::translate($label, $module);
 }

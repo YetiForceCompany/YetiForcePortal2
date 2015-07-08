@@ -3,17 +3,17 @@
 class Users_View_Login extends Base_View_Base
 {
 
-	function loginRequired()
+	public function loginRequired()
 	{
 		return false;
 	}
 
-	function checkPermission(Core_Request $request)
+	public function checkPermission(Core_Request $request)
 	{
 		return true;
 	}
 
-	function process(Core_Request $request)
+	public function process(Core_Request $request)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);

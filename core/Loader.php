@@ -49,7 +49,7 @@ class Core_Loader
 			return $className;
 		}
 
-		throw new PortalException('HANDLER_NOT_FOUND');
+		throw new PortalException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 
 	/**

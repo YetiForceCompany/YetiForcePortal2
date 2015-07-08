@@ -3,6 +3,7 @@
 
 require_once('config/version.php');
 require_once('core/Loader.php');
+Core_Loader::import('core/Functions.php');
 
 $parts = explode(DIRECTORY_SEPARATOR, YF_PATH_BASE);
 define('YF_PATH_ROOT', implode(DIRECTORY_SEPARATOR, $parts));

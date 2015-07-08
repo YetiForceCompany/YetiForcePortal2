@@ -40,9 +40,9 @@ class Core_WebUI
 				$componentName = $view;
 			}
 			$handlerClass = Core_Loader::getModuleClassName($module, $componentType, $componentName);
-			$handler = new $handlerClass();
 
-			if ($handler) {
+			if (class_exists($handlerClass)) {
+				$handler = new $handlerClass();
 				// $user = Core_User::getUser();
 
 				if ($handler->loginRequired()) {
@@ -66,7 +66,7 @@ class Core_WebUI
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				throw new PortalException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+				throw new PortalException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (PortalException $e) {
 			if (false) {
@@ -89,7 +89,7 @@ class Core_WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+			throw new PortalException(vtranslate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -99,7 +99,7 @@ class Core_WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new AppException(vtranslate($moduleName) . ' ' . vtranslate('LBL_NOT_ACCESSIBLE'));
+		throw new PortalException(vtranslate($moduleName) . ' ' . vtranslate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	protected function triggerPreProcess($handler, $request)

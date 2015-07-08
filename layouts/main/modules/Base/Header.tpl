@@ -17,14 +17,14 @@
 			  <script src="libraries/Scripts/respond/respond.min.js"></script>
 			<![endif]-->
 			
-			{foreach key=index item=script from=$STYLES}
-				<link rel="{$script->getRel()}" href="{$script->getHref()}" />
+			{foreach item=SCRIPT from=$STYLES}
+				<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}" />
 			{/foreach}
-			{foreach key=index item=script from=$HEADER_SCRIPTS}
-				<script src="{$script->getSrc()}"></script>
+			{foreach item=SCRIPT from=$HEADER_SCRIPTS}
+				<script src="{$SCRIPT->getSrc()}"></script>
 			{/foreach}
 		</head>
-		<body data-language="{$LANGUAGE}">
+		<body data-language="{$LANGUAGE}" class="{$MODULE_NAME}_{$ACTION_NAME}">
 			<div id="js_strings" class="hide noprint">{Core_Json::encode(Core_Language::export($MODULE_NAME, 'jsLang'))}</div>
 			<div id="page">
 				<!-- container which holds data temporarly for pjax calls -->

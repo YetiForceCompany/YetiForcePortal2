@@ -5,7 +5,11 @@
  */
 abstract class Base_View_Base extends Core_Controller
 {
-
+	public function loginRequired()
+	{
+		return true;
+	}
+	
 	protected $viewer = false;
 
 	public function __construct()
@@ -24,8 +28,7 @@ abstract class Base_View_Base extends Core_Controller
 
 	public function getPageTitle(Core_Request $request)
 	{
-		$title = $request->getModule();
-		return $title;
+		return $request->getAction();
 	}
 
 	public function preProcess(Core_Request $request, $display = true)
@@ -34,6 +37,7 @@ abstract class Base_View_Base extends Core_Controller
 
 		$viewer = $this->getViewer($request);
 		$viewer->assign('MODULE_NAME', $module);
+		$viewer->assign('ACTION_NAME', $request->getAction());
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
 		$viewer->assign('STYLES', $this->getHeaderCss($request));
@@ -61,7 +65,7 @@ abstract class Base_View_Base extends Core_Controller
 		$displayed = $viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	function postProcess(Core_Request $request)
+	public function postProcess(Core_Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
@@ -73,9 +77,14 @@ abstract class Base_View_Base extends Core_Controller
 	 * @param Core_Request $request - request model
 	 * @return <array> - array of Core_Script
 	 */
-	function getHeaderCss(Core_Request $request)
+	public function getHeaderCss(Core_Request $request)
 	{
-		$cssFileNames = ['libraries/Bootstrap/css/bootstrap.css'];
+		$cssFileNames = [
+			'libraries/Bootstrap/css/bootstrap.css',
+			'libraries/Bootstrap/css/bootstrap-theme.css',
+			'layouts/' . Core_Viewer::getLayoutName() . '/skins/basic/styles.css',
+		];
+
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
 		return $headerCssInstances;
 	}
@@ -85,23 +94,27 @@ abstract class Base_View_Base extends Core_Controller
 	 * @param Core_Request $request - request model
 	 * @return <array> - array of Core_Script
 	 */
-	function getHeaderScripts(Core_Request $request)
+	public function getHeaderScripts(Core_Request $request)
 	{
 		$headerScriptInstances = [];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
 	}
 
-	function getFooterScripts(Core_Request $request)
+	public function getFooterScripts(Core_Request $request)
 	{
-		$jsFileNames = [];
+		$jsFileNames = [
+			'libraries/Scripts/jquery/jquery.js',
+			'libraries/Bootstrap/js/bootstrap.js',
+		];
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return $jsScriptInstances;
 	}
 
-	function convertScripts($fileNames, $fileExtension)
+	public function convertScripts($fileNames, $fileExtension)
 	{
 		$scriptsInstances = [];
+
 		foreach ($fileNames as $fileName) {
 			$script = new Core_Script();
 			$script->set('type', $fileExtension);
@@ -111,8 +124,7 @@ abstract class Base_View_Base extends Core_Controller
 				continue;
 			}
 
-			$minFilePath = str_replace('.' . $fileExtension, '.min' . $fileExtension, $fileName);
-
+			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
 			if (Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
@@ -122,7 +134,7 @@ abstract class Base_View_Base extends Core_Controller
 		return $scriptsInstances;
 	}
 
-	function resourceUrl($url)
+	public function resourceUrl($url)
 	{
 		if (stripos($url, '://') === false && $fs = @filemtime($url)) {
 			$url = $url . '?s=' . $fs;
