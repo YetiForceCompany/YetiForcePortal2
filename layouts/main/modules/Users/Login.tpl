@@ -2,6 +2,9 @@
 	<div class="container loginContainer">
 		<form action="index.php?module=Users&action=Login" method="POST">
 			<img src="{Config::get('logo')}" class="img-responsive logo" alt="Logo"title="Logo">
+			{if isset($LOGIN_ERROR)}
+				<br /><div class="alert alert-danger" role="alert">{$LOGIN_ERROR}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+			{/if}
 			<div class="form-group">
 				<label for="inputEmail" class="sr-only">{translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" required="" autofocus="">

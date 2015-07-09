@@ -26,16 +26,15 @@ class Core_Api
 	public function call($method, $data)
 	{
 		$crmPath = $this->url.$method;
-		var_dump($crmPath);
-		//$request = Requests::post($crmPath, [], ['method' => $method, 'data' => $data]);
+		$request = Requests::post($crmPath, [], ['data' => $data]);
+		$response = Core_Json::decode($request->body);
+		//echo "<pre>";var_dump($response);
+		return $response;
 	}
 
-	public function doLogin($email, $password)
+	public function authentication($email, $password)
 	{
-		//$crmPath = $this->url.$method;
-		$crmPath = $this->url.'Users/authentication';
-		$request = Requests::post($crmPath, [], ['data' => ['email' => $email, 'password' => $password]]);
-		var_dump($request->body);
-		//$request = Requests::call('', ['method' => $method, 'data' => $data]);
+		$request = $this->call('Users/authentication', ['email' => $email, 'password' => $password]);
+		return $request;
 	}
 }

@@ -1,9 +1,12 @@
 <?php
-/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
+/**
+ * Main configuration file
+ */
+defined('_EXEC') or die;
+
 $config = [];
 $config['crmPath'] = 'http://yeti/';
-$config['apiLogin'] = 'test';
-$config['apiPass'] = 'test';
+$config['apiKey'] = 'n8erhg39rbn48nb438bn';
 $config['language'] = 'pl_pl';
 $config['theme'] = 'default';
 $config['defaultModule'] = 'HelpDesk';

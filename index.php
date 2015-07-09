@@ -1,12 +1,15 @@
 <?php
-/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
-ini_set('html_errors', 1);
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 'On');
+/**
+ * Main file
+ * @package YetiForce.Portal
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 error_reporting(E_ALL);
-define('YF_PATH_BASE', __DIR__);
+define('YF_ROOT', __DIR__);
+define('_EXEC', 1);
 
 require_once('core/Init.php');
 
-$coreUI = new Core_WebUI();
-$coreUI->process(new Core_Request($_REQUEST));
+$coreUI = new \Core\WebUI();
+$coreUI->process(new \Core\Request($_REQUEST));

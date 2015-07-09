@@ -1,7 +1,13 @@
 <?php
-/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-class Core_Loader
+namespace Core;
+
+/**
+ * Main autoloader SPL
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+class Loader
 {
 
 	protected static $includeCache = [];
@@ -38,7 +44,7 @@ class Core_Loader
 	{
 		$filePath = 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
 		$className = $moduleName . '_' . $moduleType . '_' . $fieldName;
-
+		//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 		if (file_exists($filePath)) {
 			return $className;
 		}
@@ -111,4 +117,4 @@ class PortalException extends Exception
 	
 }
 
-spl_autoload_register('Core_Loader::autoLoad');
+spl_autoload_register('Core\Loader::autoLoad');

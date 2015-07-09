@@ -12,8 +12,10 @@ class Users_Action_Login extends Base_Action_Base
 		$email = $request->get('email');
 		$password = $request->get('password');
 		$response = Core_User::doLogin($email, $password);
-		if($response){
-			
+
+		if(!$response['auth']){
+			$_SESSION['loginError'] = $response['massage'];
 		}
+		//header('Location: /');
 	}
 }

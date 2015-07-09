@@ -33,13 +33,22 @@ class Core_User
 		}
 		return false;
 	}
-	
+
 	public static function doLogin($email, $password)
 	{
 		$api = Core_Api::getInstance();
-		$api->doLogin($email, $password);
-		
-		
-		return false;
+		$auth = $api->authentication($email, $password);
+		$resp = ['auth' => $auth['auth']];
+		if ($auth['auth'] === true) {
+			session_regenerate_id(true);
+			$_SESSION['user'] = [
+				'id' => $auth['userID'],
+				'name' => $auth['fullName'],
+				'email' => $auth['email'],
+			];
+		}else{
+			$resp['massage'] = $auth['error'];
+		}
+		return $resp;
 	}
 }
