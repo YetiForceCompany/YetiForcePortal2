@@ -9,7 +9,10 @@ error_reporting(E_ALL);
 define('YF_ROOT', __DIR__);
 define('_EXEC', 1);
 
-require_once('core/Init.php');
+require_once('libraries/vendor/autoload.php');
 
-$coreUI = new \Core\WebUI();
-$coreUI->process(new \Core\Request($_REQUEST));
+session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
+session_start();
+
+$coreUI = new Core\WebUI();
+//$coreUI->process(new \Core\Request($_REQUEST));

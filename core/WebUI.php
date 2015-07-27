@@ -1,7 +1,9 @@
 <?php
+namespace Core;
+
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-class Core_WebUI
+class WebUI
 {
 
 	public function process(Core_Request $request)
@@ -17,7 +19,7 @@ class Core_WebUI
 			}
 
 			if (empty($module)) {
-				if (Core_User::hasLogin()) {
+				if (Core\User::hasLogin()) {
 					$module = Config::get('defaultModule');
 					$moduleInstance = Base_Model_Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
@@ -39,7 +41,7 @@ class Core_WebUI
 				}
 				$componentName = $view;
 			}
-			$handlerClass = Core_Loader::getModuleClassName($module, $componentType, $componentName);
+			$handlerClass = Core\Loader::getModuleClassName($module, $componentType, $componentName);
 
 			if (class_exists($handlerClass)) {
 				$handler = new $handlerClass();
@@ -68,13 +70,13 @@ class Core_WebUI
 			} else {
 				throw new PortalException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (PortalException $e) {
+		} catch (Core\PortalException $e) {
 			if (false) {
 				// Log for developement.
 				//error_log($e->getTraceAsString(), E_ERROR);
 				die($e->getMessage());
 			} else {
-				die(Core_Json::encode($e->getMessage()));
+				die(Core\Json::encode($e->getMessage()));
 			}
 		}
 

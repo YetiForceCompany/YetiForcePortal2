@@ -1,10 +1,11 @@
 <?php
 
-namespace Core;
+//namespace Core;
 
 /**
- * Main autoloader SPL
+ * System files loader
  * @license licenses/License.html
+ * @package YetiForce.Config
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 class Loader

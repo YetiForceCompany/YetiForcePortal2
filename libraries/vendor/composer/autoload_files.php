@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-
+	$baseDir . '/config/version.php',
+	$baseDir . '/config/config.php',
+	//$baseDir . '/core/Loader.php',
+	$baseDir . '/core/Functions.php',
 );

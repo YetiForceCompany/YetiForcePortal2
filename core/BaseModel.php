@@ -1,7 +1,9 @@
 <?php
-
 /**
- * Base Model Class
+ * Base model class
+ * @package YetiForce.Model
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 class Core_BaseModel
 {

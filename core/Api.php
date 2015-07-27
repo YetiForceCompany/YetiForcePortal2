@@ -1,4 +1,10 @@
 <?php
+/**
+ * Basic communication file
+ * @package YetiForce.API
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 Core_Loader::import('libraries/Requests/Requests.php');
 
 class Core_Api

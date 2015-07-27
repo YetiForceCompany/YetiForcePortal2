@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Base controller class
+ * @package YetiForce.Controller
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 abstract class Core_Controller
 {
 
