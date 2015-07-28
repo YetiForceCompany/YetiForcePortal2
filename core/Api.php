@@ -5,19 +5,21 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-Core_Loader::import('libraries/Requests/Requests.php');
+namespace Core;
 
-class Core_Api
+use Requests,
+	Core;
+
+class Api
 {
 
 	protected static $_instance;
 	protected $url;
-	
+	protected $log = 'cache/logs/api.log';
+
 	function __construct()
 	{
-		Requests::register_autoloader();
-		$this->url = Config::get('crmPath').'api/webservice/';
-		
+		$this->url = \Config::get('crmPath') . 'api/webservice/';
 	}
 
 	public static function getInstance()
@@ -31,10 +33,16 @@ class Core_Api
 
 	public function call($method, $data)
 	{
-		$crmPath = $this->url.$method;
+		$crmPath = $this->url . $method;
 		$request = Requests::post($crmPath, [], ['data' => $data]);
-		$response = Core_Json::decode($request->body);
-		//echo "<pre>";var_dump($response);
+		$response = Core\Json::decode($request->body);
+		if (\Config::getBoolean('debug')) {
+			$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;
+			$content .= 'Metod: ' . $method . PHP_EOL;
+			$content .= 'Request: ' . print_r($data, true) . PHP_EOL;
+			$content .= 'Response: ' . print_r($response, true) . PHP_EOL;
+			file_put_contents($this->log, $content, FILE_APPEND);
+		}
 		return $response;
 	}
 

@@ -1,11 +1,13 @@
 <?php
 /**
  * Base controller class
- * @package YetiForce.Controller
+ * @package YetiForce.Core
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-abstract class Core_Controller
+namespace Core;
+
+abstract class Controller
 {
 
 	public function __construct()
@@ -18,21 +20,21 @@ abstract class Core_Controller
 		return true;
 	}
 
-	abstract function getViewer(Core_Request $request);
+	abstract function getViewer(Request $request);
 
-	abstract function process(Core_Request $request);
+	abstract function process(Request $request);
 
-	public function validateRequest(Core_Request $request)
+	public function validateRequest(Request $request)
 	{
 		
 	}
 
-	public function preProcess(Core_Request $request)
+	public function preProcess(Request $request)
 	{
 		
 	}
 
-	public function postProcess(Core_Request $request)
+	public function postProcess(Request $request)
 	{
 		
 	}
@@ -71,7 +73,7 @@ abstract class Core_Controller
 		if (!empty($name) && $this->isMethodExposed($name)) {
 			return call_user_func_array(array($this, $name), $parameters);
 		}
-		throw new PortalException(vtranslate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(vtranslate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	public function setHeaders()

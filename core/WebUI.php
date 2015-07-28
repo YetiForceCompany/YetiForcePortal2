@@ -1,12 +1,19 @@
 <?php
+/**
+ * WebUI class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 namespace Core;
 
-/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
+use Base\Model,
+	Config;
 
 class WebUI
 {
 
-	public function process(Core_Request $request)
+	public function process(Request $request)
 	{
 		$module = $request->getModule();
 		$view = $request->get('view');
@@ -17,11 +24,11 @@ class WebUI
 			if ($this->isInstalled() === false && $module != 'Install') {
 				
 			}
-
+			$userInstance = User::getUser();
 			if (empty($module)) {
-				if (Core\User::hasLogin()) {
+				if ($userInstance->hasLogin()) {
 					$module = Config::get('defaultModule');
-					$moduleInstance = Base_Model_Module::getInstance($module);
+					$moduleInstance = Model\Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
 				} else {
 					$module = 'Users';
@@ -41,7 +48,7 @@ class WebUI
 				}
 				$componentName = $view;
 			}
-			$handlerClass = Core\Loader::getModuleClassName($module, $componentType, $componentName);
+			$handlerClass = Loader::getModuleClassName($module, $componentType, $componentName);
 
 			if (class_exists($handlerClass)) {
 				$handler = new $handlerClass();
@@ -68,15 +75,15 @@ class WebUI
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				throw new PortalException("HANDLER_NOT_FOUND: $handlerClass");
+				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (Core\PortalException $e) {
+		} catch (AppException $e) {
 			if (false) {
 				// Log for developement.
 				//error_log($e->getTraceAsString(), E_ERROR);
 				die($e->getMessage());
 			} else {
-				die(Core\Json::encode($e->getMessage()));
+				die(Json::encode($e->getMessage()));
 			}
 		}
 
@@ -91,7 +98,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new PortalException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+			throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -101,7 +108,7 @@ class WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new PortalException(vtranslate($moduleName) . ' ' . vtranslate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(vtranslate($moduleName) . ' ' . vtranslate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	protected function triggerPreProcess($handler, $request)

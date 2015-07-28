@@ -1,13 +1,12 @@
 <?php
-
-//namespace Core;
-
 /**
  * System files loader
  * @license licenses/License.html
- * @package YetiForce.Config
+ * @package YetiForce.Core
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+namespace Core;
+
 class Loader
 {
 
@@ -21,7 +20,7 @@ class Loader
 		}
 
 		if (!file_exists($name)) {
-			throw new PortalException('FILE_NOT_FOUND: ' . $name);
+			throw new AppException('FILE_NOT_FOUND: ' . $name);
 			return false;
 		}
 
@@ -44,78 +43,28 @@ class Loader
 	public static function getModuleClassName($moduleName, $moduleType, $fieldName)
 	{
 		$filePath = 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = $moduleName . '_' . $moduleType . '_' . $fieldName;
+		$className = $moduleName . '\\' . $moduleType . '\\' . $fieldName;
 		//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 		if (file_exists($filePath)) {
 			return $className;
 		}
 
 		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Basic' . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = 'Basic' . '_' . $moduleType . '_' . $fieldName;
+		$className = 'Basic' . '\\' . $moduleType . '\\' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
 		}
 
-		throw new PortalException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
-	}
-
-	/**
-	 * Function to auto load the required class files matching the directory pattern modules/xyz/types/Abc.php for class xyz_Abc_Type
-	 * @param <String> $className
-	 * @return <Boolean>
-	 */
-	public static function autoLoad($className)
-	{
-		$parts = explode('_', $className);
-		$noOfParts = count($parts);
-
-		if ($noOfParts > 2) {
-			$parts[1] = strtolower($parts[1]) . 's';
-			$filePath = 'modules' . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parts) . '.php';
-			if (file_exists($filePath)) {
-				return self::import($filePath);
-			}
-		}
-
-		$parts[0] = strtolower($parts[0]);
-		$filePath = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
-
-		if (file_exists($filePath)) {
-			return self::import($filePath);
-		}
-		return false;
+		throw new AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }
 
-class Config
+class AppException extends \Exception
 {
 
-	protected static $config;
-
-	public static function get($key, $defvalue = '')
+	public function __construct($message, $code = 200, Exception $previous = null)
 	{
-		if (empty(self::$config)) {
-			require_once('config/config.php');
-			self::$config = $config;
-		}
-		if (isset(self::$config)) {
-			if (isset(self::$config[$key])) {
-				return self::$config[$key];
-			}
-		}
-		return $defvalue;
-	}
-
-	/** Get boolean value */
-	public static function getBoolean($key, $defvalue = false)
-	{
-		return self::get($key, $defvalue);
+		parent::__construct($message, $code, $previous);
+		//var_dump($message, $code, $previous);
 	}
 }
-
-class PortalException extends Exception
-{
-	
-}
-
-spl_autoload_register('Core\Loader::autoLoad');

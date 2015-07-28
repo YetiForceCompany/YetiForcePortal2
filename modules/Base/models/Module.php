@@ -1,6 +1,15 @@
 <?php
+/**
+ * Basic Module Model Class
+ * @package YetiForce.Model
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Base\model;
 
-class Base_Model_Module
+use Core;
+
+class Module
 {
 
 	protected $defaultView = 'List';
@@ -12,7 +21,7 @@ class Base_Model_Module
 
 	public static function getInstance($module)
 	{
-		$handlerModule = Core_Loader::getModuleClassName($module, 'Models', 'Module');
+		$handlerModule = Core\Loader::getModuleClassName($module, 'Models', 'Module');
 		$instance = new $handlerModule();
 		return $instance;
 	}

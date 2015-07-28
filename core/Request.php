@@ -1,6 +1,13 @@
 <?php
+/**
+ * Request class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_Request
+class Request
 {
 
 	// Datastore
@@ -49,7 +56,7 @@ class Core_Request
 			}
 		}
 		if ($isJSON) {
-			$decodeValue = Core_Json::json_decode($value);
+			$decodeValue = Json::json_decode($value);
 			if (isset($decodeValue)) {
 				$value = $decodeValue;
 			}

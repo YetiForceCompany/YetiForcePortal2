@@ -1,15 +1,22 @@
 <?php
-
 /**
- * Abstract View Controller Class
+ * Users view class
+ * @package YetiForce.View
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-abstract class Base_View_Base extends Core_Controller
+namespace Base\View;
+
+use Core;
+
+abstract class Index extends Core\Controller
 {
+
 	public function loginRequired()
 	{
 		return true;
 	}
-	
+
 	protected $viewer = false;
 
 	public function __construct()
@@ -17,21 +24,21 @@ abstract class Base_View_Base extends Core_Controller
 		parent::__construct();
 	}
 
-	public function getViewer(Core_Request $request)
+	public function getViewer(Core\Request $request)
 	{
 		if (!$this->viewer) {
-			$viewer = new Core_Viewer();
+			$viewer = new Core\Viewer();
 			$this->viewer = $viewer;
 		}
 		return $this->viewer;
 	}
 
-	public function getPageTitle(Core_Request $request)
+	public function getPageTitle(Core\Request $request)
 	{
 		return $request->getAction();
 	}
 
-	public function preProcess(Core_Request $request, $display = true)
+	public function preProcess(Core\Request $request, $display = true)
 	{
 		$module = $request->getModule();
 
@@ -41,13 +48,14 @@ abstract class Base_View_Base extends Core_Controller
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
 		$viewer->assign('STYLES', $this->getHeaderCss($request));
-		$viewer->assign('LANGUAGE', Core_Language::getLanguage());
+		$viewer->assign('LANGUAGE', Core\Language::getLanguage());
+		$viewer->assign('LANG', Core\Language::getShortLanguageName());
 		if ($display) {
 			$this->preProcessDisplay($request);
 		}
 	}
 
-	protected function preProcessTplName(Core_Request $request)
+	protected function preProcessTplName(Core\Request $request)
 	{
 		return 'Header.tpl';
 	}
@@ -55,17 +63,17 @@ abstract class Base_View_Base extends Core_Controller
 	//Note : To get the right hook for immediate parent in PHP,
 	// specially in case of deep hierarchy
 	//TODO: Need to revisit this.
-	/* function preProcessParentTplName(Core_Request $request) {
+	/* function preProcessParentTplName(Core\Request $request) {
 	  return parent::preProcessTplName($request);
 	  } */
 
-	protected function preProcessDisplay(Core_Request $request)
+	protected function preProcessDisplay(Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$displayed = $viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	public function postProcess(Core_Request $request)
+	public function postProcess(Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
@@ -74,15 +82,15 @@ abstract class Base_View_Base extends Core_Controller
 
 	/**
 	 * Retrieves css styles that need to loaded in the page
-	 * @param Core_Request $request - request model
-	 * @return <array> - array of Core_Script
+	 * @param Core\Request $request - request model
+	 * @return <array> - array of Core\Script
 	 */
-	public function getHeaderCss(Core_Request $request)
+	public function getHeaderCss(Core\Request $request)
 	{
 		$cssFileNames = [
 			'libraries/Bootstrap/css/bootstrap.css',
 			'libraries/Bootstrap/css/bootstrap-theme.css',
-			'layouts/' . Core_Viewer::getLayoutName() . '/skins/basic/styles.css',
+			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
@@ -91,17 +99,17 @@ abstract class Base_View_Base extends Core_Controller
 
 	/**
 	 * Retrieves headers scripts that need to loaded in the page
-	 * @param Core_Request $request - request model
-	 * @return <array> - array of Core_Script
+	 * @param Core\Request $request - request model
+	 * @return <array> - array of Core\Script
 	 */
-	public function getHeaderScripts(Core_Request $request)
+	public function getHeaderScripts(Core\Request $request)
 	{
 		$headerScriptInstances = [];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
 	}
 
-	public function getFooterScripts(Core_Request $request)
+	public function getFooterScripts(Core\Request $request)
 	{
 		$jsFileNames = [
 			'libraries/Scripts/jquery/jquery.js',
@@ -116,7 +124,7 @@ abstract class Base_View_Base extends Core_Controller
 		$scriptsInstances = [];
 
 		foreach ($fileNames as $fileName) {
-			$script = new Core_Script();
+			$script = new Core\Script();
 			$script->set('type', $fileExtension);
 			// external javascript source file handling
 			if (strpos($fileName, 'http://') === 0 || strpos($fileName, 'https://') === 0) {
@@ -125,7 +133,7 @@ abstract class Base_View_Base extends Core_Controller
 			}
 
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			if (Config::getBoolean('minScripts') && file_exists($minFilePath)) {
+			if (\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));

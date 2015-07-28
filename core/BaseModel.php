@@ -1,11 +1,13 @@
 <?php
 /**
- * Base model class
- * @package YetiForce.Model
+ * Base class
+ * @package YetiForce.Core
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-class Core_BaseModel
+namespace Core;
+
+class BaseModel
 {
 
 	protected $valueMap;

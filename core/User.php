@@ -1,52 +1,66 @@
 <?php
+/**
+ * User class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_User
+class User extends BaseModel
 {
 
 	protected static $user = false;
 
 	public static function getUser()
 	{
-		if (!self::$user && array_key_exists('user', $_SESSION)) {
-			self::$user = (object) $_SESSION['user'];
+		if (!self::$user) {
+			$user = isset($_SESSION['user']) ? $_SESSION['user'] : false;
+			self::$user = new self($user);
 		}
 		return self::$user;
 	}
 
-	public function setUser($user)
+	/**
+	 * Function to set the value for a given key
+	 * @param $key
+	 * @param $value
+	 * @return Core\BaseModel
+	 */
+	public function set($key, $value)
 	{
-		self::$user = $user;
+		$_SESSION['user'][$key] = $value;
+		$this->valueMap[$key] = $value;
+		return $this;
 	}
 
-	public function checkLogin(Core_Request $request)
+	public function checkLogin(Core\Request $request)
 	{
-		if (!self::hasLogin()) {
+		if (!$this->hasLogin()) {
 			header('Location: index.php');
-			throw new PortalException('Login is required');
+			throw new AppException('Login is required');
 		}
 	}
 
-	public static function hasLogin()
+	public function hasLogin()
 	{
-		if (array_key_exists('user', $_SESSION)) {
-			return true;
-		}
-		return false;
+		return $this->get('logged');
 	}
 
-	public static function doLogin($email, $password)
+	public function doLogin($email, $password)
 	{
-		$api = Core_Api::getInstance();
+		$api = Api::getInstance();
 		$auth = $api->authentication($email, $password);
-		$resp = ['auth' => $auth['auth']];
-		if ($auth['auth'] === true) {
+		$resp = [];
+		if (isset($auth['auth']) && $auth['auth'] === true) {
 			session_regenerate_id(true);
-			$_SESSION['user'] = [
-				'id' => $auth['userID'],
-				'name' => $auth['fullName'],
-				'email' => $auth['email'],
-			];
-		}else{
+			$this->set('logged', true);
+			$this->set('id', $auth['userID']);
+			$this->set('name', $auth['userID']);
+			$this->set('email', $auth['fullName']);
+			$resp = ['auth' => $auth['email']];
+		} else {
+			$resp['errorExists'] = true;
 			$resp['massage'] = $auth['error'];
 		}
 		return $resp;

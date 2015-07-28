@@ -1,10 +1,16 @@
 <?php
-Core_Loader::import('libraries/Smarty/SmartyBC.class.php');
+/**
+ * Base controller class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_Viewer extends SmartyBC
+class Viewer extends \SmartyBC
 {
 
-	const DEFAULTLAYOUT = 'main';
+	const DEFAULTLAYOUT = 'Default';
 
 	static $currentLayout;
 
@@ -17,8 +23,8 @@ class Core_Viewer extends SmartyBC
 		parent::__construct();
 
 		self::$currentLayout = self::getLayoutName();
-		$templatesDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
-		$compileDir = YF_PATH_BASE . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
+		$templatesDir = YF_ROOT . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
+		$compileDir = YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . self::getLayoutName();
 
 		if (!file_exists($compileDir)) {
 			mkdir($compileDir, 0777, true);
@@ -83,7 +89,7 @@ class Core_Viewer extends SmartyBC
 	/**
 	 * Static function to get the Instance of the Class Object
 	 * @param <String> $media Layout/Media
-	 * @return Core_Viewer instance
+	 * @return Core\Viewer instance
 	 */
 	static function getInstance($media = '')
 	{

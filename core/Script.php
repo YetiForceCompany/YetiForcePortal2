@@ -1,6 +1,13 @@
 <?php
+/**
+ * Script controller class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_Script extends Core_BaseModel
+class Script extends BaseModel
 {
 
 	protected static $types = [

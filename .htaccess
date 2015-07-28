@@ -11,5 +11,6 @@ Options -Indexes
 	php_flag	display_startup_errors		On
 	php_flag	file_uploads				On
 	php_flag	magic_quotes_gpc			Off
-	php_flag	magic_quotes_runtime        Off
+	php_flag	magic_quotes_runtime		Off
+	php_value	error_log					cache/logs/php.log
 </IfModule>

@@ -1,6 +1,13 @@
 <?php
+/**
+ * Json class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_Json
+class Json
 {
 
 	/**
@@ -11,7 +18,7 @@ class Core_Json
 	const TYPE_ARRAY = 1;
 	const TYPE_OBJECT = 0;
 
-	public static function decode($encodedValue, $objectDecodeType = Core_Json::TYPE_ARRAY)
+	public static function decode($encodedValue, $objectDecodeType = Json::TYPE_ARRAY)
 	{
 		return json_decode($encodedValue, $objectDecodeType);
 	}

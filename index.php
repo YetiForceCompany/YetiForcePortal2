@@ -15,4 +15,7 @@ session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR 
 session_start();
 
 $coreUI = new Core\WebUI();
-//$coreUI->process(new \Core\Request($_REQUEST));
+$coreUI->process(new Core\Request($_REQUEST));
+
+//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+

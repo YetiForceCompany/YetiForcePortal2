@@ -1,27 +1,33 @@
 <?php
-
 /**
  * Abstract Action Controller Class
+ * @package YetiForce.Actions
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-abstract class Base_Action_Base extends Core_Controller
+namespace Base\Action;
+
+use Core;
+
+abstract class Base extends Core\Controller
 {
 
-	public function getViewer(Core_Request $request)
+	public function getViewer(Core\Request $request)
 	{
-		throw new PortalException('Action - implement getViewer - JSONViewer');
+		throw new AppException('Action - implement getViewer - JSONViewer');
 	}
 
-	public function validateRequest(Core_Request $request)
+	public function validateRequest(Core\Request $request)
 	{
 		return $request->validateReadAccess();
 	}
 
-	public function preProcess(Core_Request $request)
+	public function preProcess(Core\Request $request)
 	{
 		return true;
 	}
 
-	public function postProcess(Core_Request $request)
+	public function postProcess(Core\Request $request)
 	{
 		return true;
 	}

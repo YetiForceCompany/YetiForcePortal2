@@ -1,7 +1,13 @@
 <?php
-/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
+/**
+ * Language controller class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
+namespace Core;
 
-class Core_Language
+class Language
 {
 
 	//Contains module language translations
@@ -25,7 +31,7 @@ class Core_Language
 
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
 		if ($translatedString === null) {
-			$defaultLanguage = Config::get('language');
+			$defaultLanguage = \Config::get('language');
 			if (!empty($defaultLanguage) && strcasecmp($defaultLanguage, $currentLanguage) !== 0) {
 				$translatedString = self::getLanguageTranslatedString($defaultLanguage, $key, $module);
 			}
@@ -102,12 +108,12 @@ class Core_Language
 	 */
 	public static function getLanguage()
 	{
-		$userInstance = Core_User::getUser();
+		$userInstance = User::getUser();
 		$language = '';
 		if ($userInstance) {
-			$language = $userInstance->language;
+			$language = $userInstance->get('language');
 		} else {
-			$language = Config::get('language');
+			$language = \Config::get('language');
 		}
 		return $language;
 	}
@@ -118,7 +124,7 @@ class Core_Language
 	 */
 	public static function getAllLanguages()
 	{
-		return Config::get('languages');
+		return \Config::get('languages');
 	}
 
 	/**

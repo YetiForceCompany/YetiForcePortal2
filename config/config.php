@@ -16,7 +16,8 @@ $config['languages'] = [
 	'pl_pl' => 'Polski',
 ];
 $config['minScripts'] = false;
-$config['logo'] = 'layouts/main/skins/images/logo.png';
+$config['debug'] = false;
+$config['logo'] = 'layouts/Default/skins/images/logo.png';
 /** If timezone is configured, try to set it */
 if (isset($config['timezone']) && function_exists('date_default_timezone_set')) {
 	@date_default_timezone_set($config['timezone']);
