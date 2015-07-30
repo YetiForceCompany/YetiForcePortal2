@@ -16,10 +16,10 @@ $config['languages'] = [
 	'pl_pl' => 'Polski',
 ];
 $config['minScripts'] = false;
-$config['debug'] = false;
+$config['debug'] = true;
 $config['encryptDataTransfer'] = true;
-$config['privateKey'] = 'config/private.key';
-$config['publicKey'] = 'config/public.key';
+$config['privateKey'] = 'config/ssl/private.key';
+$config['publicKey'] = 'config/ssl/public.key';
 $config['logo'] = 'layouts/Default/skins/images/logo.png';
 /** If timezone is configured, try to set it */
 if (isset($config['timezone']) && function_exists('date_default_timezone_set')) {

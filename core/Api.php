@@ -34,21 +34,28 @@ class Api
 	public function call($method, $data)
 	{
 		$crmPath = $this->url . $method;
-		if (Config::getBoolean('encryptDataTransfer')) {
-			$_SESSION['systemError'] = $response['error'];
+		if (\Config::getBoolean('encryptDataTransfer')) {
+			$data = $this->encryptData($data);
 		}
 		$data = [
 			'head' => $this->getHead(),
 			'data' => $data,
 		];
+
 		$request = Requests::post($crmPath, [], $data);
 		$response = Core\Json::decode($request->body);
 		if (\Config::getBoolean('debug')) {
 			$this->addLogs($method, $data, $response);
 		}
+
 		if (isset($response['error'])) {
 			$_SESSION['systemError'] = $response['error'];
 		}
+		
+		if ($response['encrypted'] && isset($response['result'])) {
+			$response['result'] = $this->decryptData($response['result']);
+		}
+		
 		if (isset($response['result']))
 			return $response['result'];
 	}
@@ -79,19 +86,19 @@ class Api
 
 	public function encryptData($data)
 	{
-		$publicKey = 'file://' . \Config::get('publicKey');
-		openssl_public_encrypt($data, $encrypted, $publicKey);
+		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \Config::get('publicKey');
+		openssl_public_encrypt(Core\Json::encode($data), $encrypted, $publicKey);
 		return $encrypted;
 	}
 
 	public function decryptData($data)
 	{
-		$privateKey = 'file://' . \Config::get('privateKey');
+		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \Config::get('privateKey');
 		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
 			throw new AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey);
-		return $decrypted;
+		return Core\Json::decode($data);
 	}
 }
