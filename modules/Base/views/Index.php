@@ -70,7 +70,11 @@ abstract class Index extends Core\Controller
 	protected function preProcessDisplay(Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
-		$displayed = $viewer->view($this->preProcessTplName($request), $request->getModule());
+		if (isset($_SESSION['systemError'])) {
+			$viewer->assign('ERRORS', $_SESSION['systemError']);
+			unset($_SESSION['systemError']);
+		}
+		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
 	public function postProcess(Core\Request $request)

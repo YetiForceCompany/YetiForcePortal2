@@ -17,7 +17,7 @@ $config['languages'] = [
 ];
 $config['minScripts'] = false;
 $config['debug'] = true;
-$config['encryptDataTransfer'] = true;
+$config['encryptDataTransfer'] = false;
 $config['privateKey'] = 'config/ssl/private.key';
 $config['publicKey'] = 'config/ssl/public.key';
 $config['logo'] = 'layouts/Default/skins/images/logo.png';

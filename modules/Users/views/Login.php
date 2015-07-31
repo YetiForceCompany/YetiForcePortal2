@@ -27,10 +27,6 @@ class Login extends View\Index
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);
-		if (isset($_SESSION['loginError'])) {
-			$viewer->assign('LOGIN_ERROR', $_SESSION['loginError']);
-			unset($_SESSION['loginError']);
-		}
 		$viewer->view('Login.tpl', $module);
 	}
 }

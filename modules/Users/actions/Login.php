@@ -24,10 +24,8 @@ class Login extends Action\Base
 		$email = $request->get('email');
 		$password = $request->get('password');
 		$userInstance = Core\User::getUser();
-		$response = $userInstance->doLogin($email, $password);
-		if (isset($response['errorExists'])) {
-			$_SESSION['loginError'] = $response['massage'];
-		}
+		$userInstance->doLogin($email, $password);
+
 		header('Location: /');
 	}
 }
