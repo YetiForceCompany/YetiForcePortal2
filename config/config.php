@@ -17,9 +17,9 @@ $config['languages'] = [
 ];
 $config['minScripts'] = false;
 $config['debug'] = true;
-$config['encryptDataTransfer'] = false;
-$config['privateKey'] = 'config/ssl/private.key';
-$config['publicKey'] = 'config/ssl/public.key';
+$config['encryptDataTransfer'] = TRUE;
+$config['privateKey'] = 'config/private.key';
+$config['publicKey'] = 'config/public.key';
 $config['logo'] = 'layouts/Default/skins/images/logo.png';
 /** If timezone is configured, try to set it */
 if (isset($config['timezone']) && function_exists('date_default_timezone_set')) {

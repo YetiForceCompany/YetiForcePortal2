@@ -35,27 +35,25 @@ class Api
 	{
 		$crmPath = $this->url . $method;
 
-		$requestData = [
-			'head' => $this->getHead(),
-			'data' => $data,
-		];
 		if (\Config::getBoolean('encryptDataTransfer')) {
-			//$data = $this->encryptData($data);
+			$data = $this->encryptData($data);
 		}
-		$request = Requests::post($crmPath, [], $requestData);
-		$response = Core\Json::decode($request->body);
+
+		$request = Requests::post($crmPath, $this->getHead(), $data);
+		$response = $request->body;
+
+		if ($request->headers->getValues('encrypted')[0] == 1) {
+			$response = $this->decryptData($response);
+		}
+		$response = Core\Json::decode($response);
 		if (\Config::getBoolean('debug')) {
 			$this->addLogs($method, $data, $response);
 		}
-		//var_dump($request);
+		
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
 		}
-		
-		if ($response['encrypted'] && isset($response['result'])) {
-			//$response['result'] = $this->decryptData($response['result']);
-		}
-		
+
 		if (isset($response['result']))
 			return $response['result'];
 	}
@@ -66,6 +64,7 @@ class Api
 			'language' => $_SESSION['language'],
 			'version' => VERSION,
 			'apiKey' => \Config::get('apiKey'),
+			'encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'ip' => $this->getRemoteIP(),
 		];
 	}
@@ -87,6 +86,7 @@ class Api
 
 	public function encryptData($data)
 	{
+
 		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \Config::get('publicKey');
 		openssl_public_encrypt(Core\Json::encode($data), $encrypted, $publicKey);
 		return $encrypted;
@@ -100,9 +100,9 @@ class Api
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey);
-		return Core\Json::decode($data);
+		return $decrypted;
 	}
-	
+
 	function getRemoteIP($onlyIP = false)
 	{
 		$address = $_SERVER['REMOTE_ADDR'];

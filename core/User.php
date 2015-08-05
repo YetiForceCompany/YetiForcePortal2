@@ -61,7 +61,7 @@ class User extends BaseModel
 			$resp = ['auth' => $auth['email']];
 		} else {
 			$resp['errorExists'] = true;
-			$resp['massage'] = $auth['error'];
+			//$resp['massage'] = $auth['error'];
 		}
 		return $resp;
 	}
