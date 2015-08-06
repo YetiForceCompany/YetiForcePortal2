@@ -110,7 +110,7 @@ class Language
 	{
 		$userInstance = User::getUser();
 		$language = '';
-		if ($userInstance) {
+		if ($userInstance && $userInstance->has('language')) {
 			$language = $userInstance->get('language');
 		} else {
 			$language = \Config::get('language');

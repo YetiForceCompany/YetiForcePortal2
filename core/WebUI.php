@@ -22,7 +22,8 @@ class WebUI
 
 		try {
 			if ($this->isInstalled() === false && $module != 'Install') {
-				
+				header('Location:index.php?module=Install&view=Install');
+				exit;
 			}
 			$userInstance = User::getUser();
 			if (empty($module)) {

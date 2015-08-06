@@ -24,9 +24,13 @@
 				<script src="{$SCRIPT->getSrc()}"></script>
 			{/foreach}
 		</head>
-		<body data-language="{$LANGUAGE}" class="{$MODULE_NAME}_{$ACTION_NAME}">
+		<body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
 			<div id="js_strings" class="hide noprint">{\Core\Json::encode(\Core\Language::export($MODULE_NAME, 'jsLang'))}</div>
-			<div id="page">
+			<div class="hide">
+				<input type="hidden" value="{$MODULE_NAME}" id="module" name="module">
+				<input type="hidden" value="{$ACTION_NAME}" id="view" name="view">
+			</div>
+			<div id="page" class="container">
 				<!-- container which holds data temporarly for pjax calls -->
 				<div id="pjaxContainer" class="hide noprint"></div>
 {/strip}

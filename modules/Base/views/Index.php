@@ -94,6 +94,7 @@ abstract class Index extends Core\Controller
 		$cssFileNames = [
 			'libraries/Bootstrap/css/bootstrap.css',
 			'libraries/Bootstrap/css/bootstrap-theme.css',
+			'libraries/Scripts/chosen/chosen.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 		];
 
@@ -115,10 +116,18 @@ abstract class Index extends Core\Controller
 
 	public function getFooterScripts(Core\Request $request)
 	{
+		$moduleName = $request->getModule();
+		$action = $request->getAction();
 		$jsFileNames = [
 			'libraries/Scripts/jquery/jquery.js',
+			'libraries/Scripts/jquery/jquery.class.js',
 			'libraries/Bootstrap/js/bootstrap.js',
+			'libraries/Scripts/chosen/chosen.jquery.js',
+			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
+			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
+		
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return $jsScriptInstances;
 	}
