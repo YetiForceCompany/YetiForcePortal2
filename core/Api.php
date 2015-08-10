@@ -17,11 +17,18 @@ class Api
 	protected $url;
 	protected $log = 'cache/logs/api.log';
 
+	/**
+	 * Api class constructor
+	 */
 	function __construct()
 	{
 		$this->url = \Config::get('crmPath') . 'api/webservice/';
 	}
 
+	/**
+	 * Initiate API instance
+	 * @return Core::Api instance
+	 */
 	public static function getInstance()
 	{
 		if (!isset(self::$_instance)) {
@@ -31,22 +38,33 @@ class Api
 		return self::$_instance;
 	}
 
+	/**
+	 * 
+	 * @param string $method 
+	 * @param array $data
+	 * @return array
+	 */
 	public function call($method, $data)
 	{
 		$crmPath = $this->url . $method;
-
+		$rawData = $data;
 		if (\Config::getBoolean('encryptDataTransfer')) {
 			$data = $this->encryptData($data);
 		}
 
 		$request = Requests::post($crmPath, $this->getHead(), $data);
 		$response = $request->body;
-
+		
+		if (\Config::getBoolean('debugApi')) {
+			echo '<p>Request:</p><pre>'.print_r($rawData,true).'</pre><hr/><p>Response:</p><pre>'.print_r($response,true).'</pre>';
+		}
+		
 		if ($request->headers->getValues('encrypted')[0] == 1) {
 			$response = $this->decryptData($response);
 		}
 		$response = Core\Json::decode($response);
-		if (\Config::getBoolean('debug')) {
+		
+		if (\Config::getBoolean('logs')) {
 			$this->addLogs($method, $data, $response);
 		}
 		
@@ -58,17 +76,28 @@ class Api
 			return $response['result'];
 	}
 
+	/**
+	 * 
+	 * @return array
+	 */
 	public function getHead()
 	{
 		return [
-			'language' => $_SESSION['language'],
+			'language' => Language::getLanguage(),
 			'version' => VERSION,
 			'apiKey' => \Config::get('apiKey'),
 			'encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'ip' => $this->getRemoteIP(),
+			'fromUrl' => $_SERVER['HTTP_REFERER'],
 		];
 	}
 
+	/**
+	 * 
+	 * @param string $method
+	 * @param array $data
+	 * @param array $response
+	 */
 	public function addLogs($method, $data, $response)
 	{
 		$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;
@@ -78,12 +107,23 @@ class Api
 		file_put_contents($this->log, $content, FILE_APPEND);
 	}
 
+	/**
+	 * 
+	 * @param string $email
+	 * @param string $password
+	 * @return array
+	 */
 	public function authentication($email, $password)
 	{
 		$request = $this->call('Users/Authentication', ['email' => $email, 'password' => $password]);
 		return $request;
 	}
 
+	/**
+	 * 
+	 * @param array $data
+	 * @return string Encrypted string
+	 */
 	public function encryptData($data)
 	{
 
@@ -92,6 +132,12 @@ class Api
 		return $encrypted;
 	}
 
+	/**
+	 * 
+	 * @param array $data
+	 * @return array Decrypted string
+	 * @throws AppException
+	 */
 	public function decryptData($data)
 	{
 		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \Config::get('privateKey');
@@ -103,6 +149,11 @@ class Api
 		return $decrypted;
 	}
 
+	/**
+	 * 
+	 * @param bool $onlyIP
+	 * @return string
+	 */
 	function getRemoteIP($onlyIP = false)
 	{
 		$address = $_SERVER['REMOTE_ADDR'];

@@ -16,7 +16,8 @@ $config['languages'] = [
 	'pl_pl' => 'Polski',
 ];
 $config['minScripts'] = false;
-$config['debug'] = true;
+$config['debugApi'] = true;
+$config['logs'] = true;
 $config['encryptDataTransfer'] = TRUE;
 $config['privateKey'] = 'config/private.key';
 $config['publicKey'] = 'config/public.key';
