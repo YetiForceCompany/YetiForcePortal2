@@ -16,12 +16,11 @@ class User extends BaseModel
 	{
 		if (!self::$user) {
 			$user = isset($_SESSION['user']) ? $_SESSION['user'] : false;
-			if($user){
+			if ($user) {
 				self::$user = new self($user);
-			}  else {
+			} else {
 				self::$user = new self();
 			}
-				
 		}
 		return self::$user;
 	}
@@ -49,7 +48,7 @@ class User extends BaseModel
 
 	public function hasLogin()
 	{
-		return $this->get('logged');
+		return $this->has('logged') ? $this->get('logged') : false;
 	}
 
 	public function doLogin($email, $password)

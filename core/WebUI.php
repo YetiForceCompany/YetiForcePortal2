@@ -27,7 +27,7 @@ class WebUI
 			}
 			$userInstance = User::getUser();
 			if (empty($module)) {
-				if ($userInstance->hasLogin()) {
+				if ($userInstance && $userInstance->hasLogin()) {
 					$module = Config::get('defaultModule');
 					$moduleInstance = Model\Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
@@ -130,6 +130,6 @@ class WebUI
 
 	function isInstalled()
 	{
-		return !file_exists('modules/Install');
+		return Config::get('crmPath') != '__CRM_PATH__';
 	}
 }
