@@ -1,0 +1,6 @@
+/.settings
+/.project
+/.buildpath
+/cache/layouts
+/cache/session
+/cache/logs/*.log
