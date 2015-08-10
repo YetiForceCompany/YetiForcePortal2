@@ -28,6 +28,38 @@ class Install
 		header('Location: /');
 	}
 
+	public function removeInstallationFiles()
+	{
+		$this->recurseDelete('modules/Install/');
+		$this->recurseDelete('language/pl_pl/Install.php');
+		$this->recurseDelete('language/en_us/Install.php');
+	}
+
+	public function recurseDelete($src)
+	{
+		$vendorDir = dirname(dirname(__FILE__));
+		$rootDir = dirname(dirname($vendorDir));
+		if (!file_exists($rootDir . $src))
+			return;
+		$dirs = [];
+		@chmod($root_dir . $src, 0777);
+		if (is_dir($src)) {
+			foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
+				if ($item->isDir()) {
+					$dirs[] = $rootDir . $src . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
+				} else {
+					unlink($rootDir . $src . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+				}
+			}
+			arsort($dirs);
+			foreach ($dirs as $dir) {
+				rmdir($dir);
+			}
+		} else {
+			unlink($rootDir . $src);
+		}
+	}
+
 	public static function getInstance($module)
 	{
 		$handlerModule = Core\Loader::getModuleClassName($module, 'Model', 'Install');
