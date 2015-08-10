@@ -20,12 +20,12 @@ class Login extends Action\Base
 
 	public function process(Core\Request $request)
 	{
-		$_SESSION['language'] = $request->get('language');
 		$email = $request->get('email');
 		$password = $request->get('password');
 		$userInstance = Core\User::getUser();
+		$userInstance->set('language', $request->get('language'));
 		$userInstance->doLogin($email, $password);
 
-		header('Location: /');
+		//header('Location: /');
 	}
 }

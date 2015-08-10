@@ -54,17 +54,7 @@ class Loader
 		if (file_exists($filePath)) {
 			return $className;
 		}
-
-		throw new AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
-	}
-}
-
-class AppException extends \Exception
-{
-
-	public function __construct($message, $code = 200, Exception $previous = null)
-	{
-		parent::__construct($message, $code, $previous);
-		//var_dump($message, $code, $previous);
+		
+		throw new \AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }

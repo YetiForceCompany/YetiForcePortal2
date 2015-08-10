@@ -13,7 +13,7 @@
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-4 control-label">{translate('LBL_CRM_PATH', $MODULE_NAME)}</label>
 					<div class="col-sm-8">
-						<input type="text" name="crmPath" class="form-control">
+						<input type="url" name="crmPath" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">

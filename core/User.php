@@ -16,7 +16,12 @@ class User extends BaseModel
 	{
 		if (!self::$user) {
 			$user = isset($_SESSION['user']) ? $_SESSION['user'] : false;
-			self::$user = new self($user);
+			if($user){
+				self::$user = new self($user);
+			}  else {
+				self::$user = new self();
+			}
+				
 		}
 		return self::$user;
 	}

@@ -21,7 +21,7 @@ class Module
 
 	public static function getInstance($module)
 	{
-		$handlerModule = Core\Loader::getModuleClassName($module, 'Models', 'Module');
+		$handlerModule = Core\Loader::getModuleClassName($module, 'Model', 'Module');
 		$instance = new $handlerModule();
 		return $instance;
 	}
