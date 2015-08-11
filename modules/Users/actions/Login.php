@@ -13,6 +13,11 @@ use Base\Action,
 class Login extends Action\Base
 {
 
+	public function checkPermission()
+	{
+		return true;
+	}
+
 	public function loginRequired()
 	{
 		return false;
@@ -26,6 +31,6 @@ class Login extends Action\Base
 		$userInstance->set('language', $request->get('language'));
 		$userInstance->doLogin($email, $password);
 
-		//header('Location: /');
+		header('Location: /');
 	}
 }

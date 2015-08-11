@@ -51,18 +51,25 @@ class Api
 		if (\Config::getBoolean('encryptDataTransfer')) {
 			$data = $this->encryptData($data);
 		}
-
-		$request = Requests::post($crmPath, $this->getHead(), $data);
-		$response = $request->body;
 		
-		if (\Config::getBoolean('debugApi')) {
-			echo '<p>Request:</p><pre>'.print_r($rawData,true).'</pre><hr/><p>Response:</p><pre>'.print_r($response,true).'</pre>';
-		}
+		$startTime = microtime(true);
+		$request = Requests::post($crmPath, $this->getHead(), $data);
+		$responseRaw = $request->body;
 		
 		if ($request->headers->getValues('encrypted')[0] == 1) {
-			$response = $this->decryptData($response);
+			$responseRaw = $this->decryptData($responseRaw);
 		}
-		$response = Core\Json::decode($response);
+		$response = Core\Json::decode($responseRaw);
+		
+		if (\Config::getBoolean('debugApi')) {
+			$debugApi = 'Start time: '.date("Y-m-d H:i:s",$startTime).
+				'<br/>Execution time: '.round(microtime(true) - $startTime, 4).' s'.
+				'<br/>API metod: '.$method.
+				'<p>Request:</p><pre>'.print_r($rawData,true).'</pre>'.
+				'<p>Raw response:</p><pre>'.print_r($responseRaw,true).'</pre>'.
+				'<p>Data response:</p><pre>'.print_r($response,true).'</pre>';
+			$_SESSION['debugApi'][] = $debugApi;
+		}
 		
 		if (\Config::getBoolean('logs')) {
 			$this->addLogs($method, $data, $response);

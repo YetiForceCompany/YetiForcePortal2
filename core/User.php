@@ -55,18 +55,16 @@ class User extends BaseModel
 	{
 		$api = Api::getInstance();
 		$auth = $api->authentication($email, $password);
-		$resp = [];
-		if (isset($auth['auth']) && $auth['auth'] === true) {
+		if ($auth) {
 			session_regenerate_id(true);
-			$this->set('logged', true);
-			$this->set('id', $auth['userID']);
-			$this->set('name', $auth['userID']);
-			$this->set('email', $auth['fullName']);
-			$resp = ['auth' => $auth['email']];
-		} else {
-			$resp['errorExists'] = true;
-			//$resp['massage'] = $auth['error'];
+			$this->set('logged', $auth['logged']);
+			$this->set('id', $auth['id']);
+			$this->set('name', $auth['fullName']);
+			$this->set('email', $auth['email']);
+			$this->set('lastLoginTime', $auth['lastLoginTime']);
+			$this->set('supportStartDate', $auth['supportStartDate']);
+			$this->set('supportEndDate', $auth['supportEndDate']);
 		}
-		return $resp;
+		return $auth;
 	}
 }

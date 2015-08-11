@@ -82,6 +82,11 @@ abstract class Index extends Core\Controller
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 		$viewer->view('Footer.tpl');
+		if (\Config::getBoolean('debugApi') && $_SESSION['debugApi']) {
+			$viewer->assign('DEBUG_API', $_SESSION['debugApi']);
+			$viewer->view('DebugApi.tpl');
+			$_SESSION['debugApi'] = false;
+		}
 	}
 
 	/**
@@ -92,6 +97,7 @@ abstract class Index extends Core\Controller
 	public function getHeaderCss(Core\Request $request)
 	{
 		$cssFileNames = [
+			'libraries/Scripts/pace/pace.css',
 			'libraries/Bootstrap/css/bootstrap.css',
 			'libraries/Bootstrap/css/bootstrap-theme.css',
 			'libraries/Scripts/chosen/chosen.css',
@@ -109,7 +115,9 @@ abstract class Index extends Core\Controller
 	 */
 	public function getHeaderScripts(Core\Request $request)
 	{
-		$headerScriptInstances = [];
+		$headerScriptInstances = [
+			'libraries/Scripts/pace/pace.js',
+		];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
 	}

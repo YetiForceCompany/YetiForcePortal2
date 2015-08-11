@@ -53,25 +53,11 @@ class WebUI
 
 			if (class_exists($handlerClass)) {
 				$handler = new $handlerClass();
-				// $user = Core_User::getUser();
 
-				if ($handler->loginRequired()) {
-					$this->checkLogin($request);
+				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
+					throw new AppException('Login is required');
 				}
-
-				//$this->triggerCheckPermission($handler, $request);
-				/*
-				  // Every settings page handler should implement this method
-				  if (stripos($qualifiedModuleName, 'Settings') === 0 || ($module == 'Users')) {
-				  $handler->checkPermission($request);
-				  }
-				 */
-				$notPermittedModules = array('ModComments', 'Integration', 'DashBoard');
-
-				if (in_array($module, $notPermittedModules) && $view == 'List') {
-					header('Location:index.php?module=Home&view=DashBoard');
-				}
-
+				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
@@ -132,4 +118,5 @@ class WebUI
 	{
 		return Config::get('crmPath') != '__CRM_PATH__';
 	}
+
 }

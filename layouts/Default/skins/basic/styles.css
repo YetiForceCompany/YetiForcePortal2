@@ -8,6 +8,7 @@ img{
 .Users_Login .loginContainer{
 	width: 400px;
 	margin-top: 6%;
+	margin-bottom: 15px;
 }
 .Users_Login img.logo{
 	margin: 10px auto;
