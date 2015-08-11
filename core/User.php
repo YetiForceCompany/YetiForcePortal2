@@ -54,17 +54,29 @@ class User extends BaseModel
 	public function doLogin($email, $password)
 	{
 		$api = Api::getInstance();
-		$auth = $api->authentication($email, $password);
-		if ($auth) {
+		$response = $api->call('Users/Authentication', ['email' => $email, 'password' => $password]);
+		if ($response) {
 			session_regenerate_id(true);
-			$this->set('logged', $auth['logged']);
-			$this->set('id', $auth['id']);
-			$this->set('name', $auth['fullName']);
-			$this->set('email', $auth['email']);
-			$this->set('lastLoginTime', $auth['lastLoginTime']);
-			$this->set('supportStartDate', $auth['supportStartDate']);
-			$this->set('supportEndDate', $auth['supportEndDate']);
+			foreach ($response as $key => $value) {
+				$this->set($key, $value);
+			}
 		}
 		return $auth;
+	}
+
+	public function isPermitted($module)
+	{
+		return in_array($module, $this->getModulesList());
+	}
+
+	public function getModulesList()
+	{
+		if (isset($_SESSION['modules'])) {
+			return $_SESSION['modules'];
+		}
+		$api = Api::getInstance();
+		$modules = $api->call('Base/GetModulesList', [], 'get');
+		$_SESSION['modules'] = $modules;
+		return $modules;
 	}
 }

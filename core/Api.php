@@ -44,16 +44,16 @@ class Api
 	 * @param array $data
 	 * @return array
 	 */
-	public function call($method, $data)
+	public function call($method, $data, $requestType = 'post')
 	{
 		$crmPath = $this->url . $method;
 		$rawData = $data;
-		if (\Config::getBoolean('encryptDataTransfer')) {
+		if (\Config::getBoolean('encryptDataTransfer') && $requestType != 'get') {
 			$data = $this->encryptData($data);
 		}
 		
 		$startTime = microtime(true);
-		$request = Requests::post($crmPath, $this->getHead(), $data);
+		$request = Requests::$requestType($crmPath, $this->getHead(),$data);
 		$responseRaw = $request->body;
 		
 		if ($request->headers->getValues('encrypted')[0] == 1) {
@@ -95,7 +95,7 @@ class Api
 			'apiKey' => \Config::get('apiKey'),
 			'encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'ip' => $this->getRemoteIP(),
-			'fromUrl' => $_SERVER['HTTP_REFERER'],
+			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
 		];
 	}
 
@@ -112,18 +112,6 @@ class Api
 		$content .= 'Request: ' . print_r($data, true) . PHP_EOL;
 		$content .= 'Response: ' . print_r($response, true) . PHP_EOL;
 		file_put_contents($this->log, $content, FILE_APPEND);
-	}
-
-	/**
-	 * 
-	 * @param string $email
-	 * @param string $password
-	 * @return array
-	 */
-	public function authentication($email, $password)
-	{
-		$request = $this->call('Users/Authentication', ['email' => $email, 'password' => $password]);
-		return $request;
 	}
 
 	/**

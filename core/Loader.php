@@ -49,12 +49,12 @@ class Loader
 			return $className;
 		}
 
-		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Basic' . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = 'Basic' . '\\' . $moduleType . '\\' . $fieldName;
+		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
+		$className = 'Base' . '\\' . $moduleType . '\\' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
 		}
-		
+
 		throw new \AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }

@@ -12,16 +12,27 @@ use Core;
 abstract class Index extends Core\Controller
 {
 
-	public function loginRequired()
-	{
-		return true;
-	}
-
 	protected $viewer = false;
 
 	public function __construct()
 	{
 		parent::__construct();
+	}
+
+	public function loginRequired()
+	{
+		return true;
+	}
+
+	function checkPermission(Core\Request $request)
+	{
+		$moduleName = $request->getModule();
+		$userInstance = Core\User::getUser();
+		$modulePermission = $userInstance->isPermitted($moduleName);
+		if (!$modulePermission) {
+			throw new AppException('LBL_MODULE_PERMISSION_DENIED');
+		}
+		return true;
 	}
 
 	public function getViewer(Core\Request $request)
@@ -82,7 +93,7 @@ abstract class Index extends Core\Controller
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 		$viewer->view('Footer.tpl');
-		if (\Config::getBoolean('debugApi') && $_SESSION['debugApi']) {
+		if (\Config::getBoolean('debugApi') && isset($_SESSION['debugApi']) && $_SESSION['debugApi']) {
 			$viewer->assign('DEBUG_API', $_SESSION['debugApi']);
 			$viewer->view('DebugApi.tpl');
 			$_SESSION['debugApi'] = false;
@@ -135,7 +146,7 @@ abstract class Index extends Core\Controller
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
-		
+
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return $jsScriptInstances;
 	}

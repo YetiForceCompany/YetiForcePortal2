@@ -12,7 +12,7 @@ use Core;
 class Module
 {
 
-	protected $defaultView = 'List';
+	protected $defaultView = 'ListView';
 
 	public function getDefaultView()
 	{
