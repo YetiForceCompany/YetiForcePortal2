@@ -96,6 +96,7 @@ class Api
 			'encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'ip' => $this->getRemoteIP(),
 			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
+			'sessionID' => 'xx',
 		];
 	}
 

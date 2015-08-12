@@ -1,0 +1,4 @@
+{strip}
+	xx
+{/strip}
+

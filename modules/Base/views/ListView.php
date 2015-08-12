@@ -14,6 +14,8 @@ class ListView extends Index
 
 	public function process(Core\Request $request)
 	{
-
+		$module = $request->getModule();
+		$viewer = $this->getViewer($request);
+		$viewer->view('ListView.tpl', $module);
 	}
 }

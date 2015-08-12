@@ -61,6 +61,7 @@ abstract class Index extends Core\Controller
 		$viewer->assign('STYLES', $this->getHeaderCss($request));
 		$viewer->assign('LANGUAGE', Core\Language::getLanguage());
 		$viewer->assign('LANG', Core\Language::getShortLanguageName());
+		$viewer->assign('USER', Core\User::getUser());
 		if ($display) {
 			$this->preProcessDisplay($request);
 		}

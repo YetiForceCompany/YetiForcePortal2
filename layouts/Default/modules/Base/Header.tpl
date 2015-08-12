@@ -8,7 +8,7 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<meta name="robots" content="noindex" />	
 			<title>{translate($PAGETITLE, $MODULE_NAME)}</title>
-			<link rel="icon" href="layouts/main/skins/images/favicon.ico">
+			<link rel="icon" href="{"favicon.ico"|@fileTemplate:$MODULE_NAME}">
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,7 +16,7 @@
 			  <script src="libraries/Scripts/html5shiv/html5shiv.min.js"></script>
 			  <script src="libraries/Scripts/respond/respond.min.js"></script>
 			<![endif]-->
-			
+
 			{foreach item=SCRIPT from=$STYLES}
 				<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}" />
 			{/foreach}
@@ -30,8 +30,14 @@
 				<input type="hidden" value="{$MODULE_NAME}" id="module" name="module">
 				<input type="hidden" value="{$ACTION_NAME}" id="view" name="view">
 			</div>
-			<div id="page" class="container">
-				<!-- container which holds data temporarly for pjax calls -->
-				<div id="pjaxContainer" class="hide noprint"></div>
-{/strip}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2">
+						{include file="MenuBlock.tpl"|@templatePath:$MODULE_NAME}
+					</div>
+					<div class="col-md-10">
+						<div id="page" class="container">
+							<!-- container which holds data temporarly for pjax calls -->
+							<div id="pjaxContainer" class="hide noprint"></div>
+						{/strip}
 
