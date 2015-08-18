@@ -47,27 +47,30 @@ class Api
 	public function call($method, $data, $requestType = 'post')
 	{
 		$crmPath = $this->url . $method;
-		$rawData = $data;
+		$rawRequest = $data;
 		if (\Config::getBoolean('encryptDataTransfer') && $requestType != 'get') {
 			$data = $this->encryptData($data);
 		}
 		
 		$startTime = microtime(true);
 		$request = Requests::$requestType($crmPath, $this->getHead(),$data);
-		$responseRaw = $request->body;
+		$rawResponse = $request->body;
 		
 		if ($request->headers->getValues('encrypted')[0] == 1) {
-			$responseRaw = $this->decryptData($responseRaw);
+			$rawResponse = $this->decryptData($rawResponse);
 		}
-		$response = Core\Json::decode($responseRaw);
+		$response = Core\Json::decode($rawResponse);
 		
 		if (\Config::getBoolean('debugApi')) {
-			$debugApi = 'Start time: '.date("Y-m-d H:i:s",$startTime).
-				'<br/>Execution time: '.round(microtime(true) - $startTime, 4).' s'.
-				'<br/>API metod: '.$method.
-				'<p>Request:</p><pre>'.print_r($rawData,true).'</pre>'.
-				'<p>Raw response:</p><pre>'.print_r($responseRaw,true).'</pre>'.
-				'<p>Data response:</p><pre>'.print_r($response,true).'</pre>';
+			$debugApi = [
+				'date' => date('Y-m-d H:i:s',$startTime),
+				'time' =>round(microtime(true) - $startTime, 4),
+				'method' => $method,
+				'rawRequest' => $rawRequest,
+				'rawResponse' => $rawResponse,
+				'response' => $response,
+				'request' => $request->raw,
+			];
 			$_SESSION['debugApi'][] = $debugApi;
 		}
 		
