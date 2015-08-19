@@ -7,8 +7,8 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<meta name="robots" content="noindex" />	
-			<title>{translate($PAGETITLE, $MODULE_NAME)}</title>
-			<link rel="icon" href="{"favicon.ico"|@fileTemplate:$MODULE_NAME}">
+			<title>{FN::translate($PAGETITLE, $MODULE_NAME)}</title>
+			<link rel="icon" href="{FN::fileTemplate("favicon.ico",$MODULE_NAME)}">
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,19 +25,6 @@
 			{/foreach}
 		</head>
 		<body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
-			<div id="js_strings" class="hide noprint">{\Core\Json::encode(\Core\Language::export($MODULE_NAME, 'jsLang'))}</div>
-			<div class="hide">
-				<input type="hidden" value="{$MODULE_NAME}" id="module" name="module">
-				<input type="hidden" value="{$ACTION_NAME}" id="view" name="view">
-			</div>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-2">
-						{include file="MenuBlock.tpl"|@templatePath:$MODULE_NAME}
-					</div>
-					<div class="col-md-10">
-						<div id="page" class="container">
-							<!-- container which holds data temporarly for pjax calls -->
-							<div id="pjaxContainer" class="hide noprint"></div>
-						{/strip}
+			{include file=FN::templatePath("Body.tpl",$MODULE_NAME)}
+		{/strip}
 

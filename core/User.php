@@ -54,7 +54,13 @@ class User extends BaseModel
 	public function doLogin($email, $password)
 	{
 		$api = Api::getInstance();
-		$response = $api->call('Users/Authentication', ['email' => $email, 'password' => $password]);
+		$params = [
+			'version' => VERSION,
+			'language' => Language::getLanguage(),
+			'ip' => \FN::getRemoteIP(),
+			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
+		];
+		$response = $api->call('Users/Authentication', ['email' => $email, 'password' => $password, 'params' => $params]);
 		if ($response) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {

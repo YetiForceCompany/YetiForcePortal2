@@ -1,23 +1,25 @@
 {strip}
-	<div class="row">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Username</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="container-fluid">
+		<div class="row">
+			<table class="table">
+				<thead>
+					<tr>
+						{foreach item=HEADER from=$HEADERS}
+							<th>{$HEADER}</th>
+						{/foreach}
+					</tr>
+				</thead>
+				<tbody>
+					{foreach item=RECORD key=ID from=$RECORDS}
+						<tr>
+							{foreach item=COLUMN from=$RECORD}
+								<th>{$COLUMN}</th>
+							{/foreach}
+						</tr>
+					{/foreach}
+				</tbody>
+			</table>
+		</div>
 	</div>
 {/strip}
 

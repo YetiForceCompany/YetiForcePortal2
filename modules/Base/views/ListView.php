@@ -16,12 +16,13 @@ class ListView extends Index
 	{
 		$module = $request->getModule();
 		$api = Core\Api::getInstance();
-		$respons = $api->call($module . '/GetRecordsList', [], 'get');
+		$recordsList = $api->call($module . '/GetRecordsList', [], 'get');
 
 
 		$viewer = $this->getViewer($request);
-		$viewer->assign('HEADER', Core\Language::getLanguage());
-		$viewer->assign('RECORDS', Core\Language::getLanguage());
+		$viewer->assign('HEADERS', $recordsList['headers']);
+		$viewer->assign('RECORDS', $recordsList['records']);
+		$viewer->assign('COUNT', $recordsList['count']);
 		$viewer->view('ListView.tpl', $module);
 	}
 }

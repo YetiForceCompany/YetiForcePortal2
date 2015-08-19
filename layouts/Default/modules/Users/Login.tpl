@@ -14,22 +14,22 @@
 				{/foreach}
 			{/if}
 			<div class="form-group">
-				<label for="inputEmail" class="sr-only">{translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
-				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" required="" autofocus="">
+				<label for="inputEmail" class="sr-only">{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" required="" autofocus="">
 			</div>
 			<div class="form-group">
-				<label for="inputPassword" class="sr-only">{translate('LBL_PASSWORD', $MODULE_NAME)}</label>
-				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{translate('LBL_PASSWORD', $MODULE_NAME)}" required="">
+				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{FN::translate('LBL_PASSWORD', $MODULE_NAME)}" required="">
 			</div>
 			<div class="form-group">
-				<label for="inputPassword" class="sr-only">{translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=Core\Language::getAllLanguages()}
 						<option value="{$PREFIX}">{$LANG}</option>
 					{/foreach}
 				</select>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">{translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">{FN::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
 {/strip}
