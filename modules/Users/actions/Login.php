@@ -29,7 +29,7 @@ class Login extends Action\Base
 		$password = $request->get('password');
 		$userInstance = Core\User::getUser();
 		$userInstance->set('language', $request->get('language'));
-		$userInstance->doLogin($email, $password);
+		$userInstance->login($email, $password);
 
 		header('Location: /');
 	}

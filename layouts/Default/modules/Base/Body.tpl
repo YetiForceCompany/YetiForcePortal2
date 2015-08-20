@@ -6,11 +6,10 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2">
-				{include file=FN::templatePath("MenuBlock.tpl",$MODULE_NAME)}
+			<div class="col-md-2 leftPanel noPadding">
+				{include file=FN::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 			</div>
 			<div class="col-md-10">
-				<div id="page">
-					<!-- container which holds data temporarly for pjax calls -->
-					<div id="pjaxContainer" class="hide noprint"></div>
-				{/strip}
+				{include file=FN::templatePath("BodyHeader.tpl",$MODULE_NAME)}
+				{include file=FN::templatePath("BodyContent.tpl",$MODULE_NAME)}
+			{/strip}

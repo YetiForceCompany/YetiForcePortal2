@@ -30,3 +30,46 @@ img{
     min-height: 375px;
 	margin-top: 10px;
 }
+.nav .moduleIcon {
+	max-width: 20px;
+	margin-right: 10px;
+}
+.nav-pills > li > a{
+	padding: 8px 10px;
+}
+.nav-pills > li > a span{
+	padding: 8px 10px;
+}
+.noPadding{
+	padding: 0;
+}
+.userDetailsContainer .row{
+	padding: 5px;
+}
+.userDetailsContainer .logo{
+	margin-top: 6px;
+}
+.userDetailsContainer .userDetails{
+	padding-right: 0px;
+}
+.userDetailsContainer .userDetails p{
+	margin: 0;
+	font-size: 12px;
+}
+.userDetailsContainer .userDetails p.companyName{
+	font-size: 10px;
+}
+.bodyHeader .leftHeader{
+	background-color: #969696;
+	color: #fff;
+	height: 40px;
+}
+.bodyHeader .rightHeader{
+	background-color: #696969;
+	color: #fff;
+	height: 40px;
+}
+.bodyHeader .moduleIcon{
+	max-width: 30px;
+	margin: 5px 10px 0 0;
+}

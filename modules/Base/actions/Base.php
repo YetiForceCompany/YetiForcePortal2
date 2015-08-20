@@ -31,4 +31,9 @@ abstract class Base extends Core\Controller
 	{
 		return true;
 	}
+	
+	public function checkPermission()
+	{
+		return true;
+	}
 }

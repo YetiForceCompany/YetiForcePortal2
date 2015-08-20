@@ -17,7 +17,7 @@ $config['languages'] = [
 ];
 $config['minScripts'] = false;
 $config['debugApi'] = true;
-$config['logs'] = true;
+$config['logs'] = false;
 $config['encryptDataTransfer'] = false;
 $config['privateKey'] = 'config/private.key';
 $config['publicKey'] = 'config/public.key';

@@ -48,4 +48,9 @@ class FN
 		}
 		return $address;
 	}
+	
+	public static function getTranslatedModuleName($moduleName)
+	{
+		return $_SESSION['modules'][$moduleName];
+	}
 }

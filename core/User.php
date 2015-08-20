@@ -51,7 +51,7 @@ class User extends BaseModel
 		return $this->has('logged') ? $this->get('logged') : false;
 	}
 
-	public function doLogin($email, $password)
+	public function login($email, $password)
 	{
 		$api = Api::getInstance();
 		$params = [
@@ -60,7 +60,7 @@ class User extends BaseModel
 			'ip' => \FN::getRemoteIP(),
 			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
 		];
-		$response = $api->call('Users/Authentication', ['email' => $email, 'password' => $password, 'params' => $params]);
+		$response = $api->call('Users/Login', ['email' => $email, 'password' => $password, 'params' => $params]);
 		if ($response) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
@@ -68,6 +68,15 @@ class User extends BaseModel
 			}
 		}
 		return $auth;
+	}
+
+	public function logout()
+	{
+		$api = Api::getInstance();
+		$response = $api->call('Users/Logout', [], 'get');
+		if ($response) {
+			session_destroy();
+		}
 	}
 
 	public function isPermitted($module)
