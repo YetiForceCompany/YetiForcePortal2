@@ -1,7 +1,7 @@
 {strip}
 	<div class="container-fluid">
 		<div class="row">
-			<table class="table">
+			<table class="table listViewEntries">
 				<thead>
 					<tr>
 						{foreach item=HEADER from=$HEADERS}
@@ -11,7 +11,7 @@
 				</thead>
 				<tbody>
 					{foreach item=RECORD key=ID from=$RECORDS}
-						<tr>
+						<tr data-record="{$ID}">
 							{foreach item=COLUMN from=$RECORD}
 								<th>{$COLUMN}</th>
 							{/foreach}

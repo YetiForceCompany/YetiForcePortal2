@@ -141,9 +141,11 @@ abstract class Index extends Core\Controller
 		$jsFileNames = [
 			'libraries/Scripts/jquery/jquery.js',
 			'libraries/Scripts/jquery/jquery.class.js',
+			'libraries/Scripts/jquery-pjax/jquery.pjax.js',
 			'libraries/Bootstrap/js/bootstrap.js',
 			'libraries/Scripts/chosen/chosen.jquery.js',
-			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
+			'layouts/' . Core\Viewer::getLayoutName() . '/resources/App.js',
+			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];

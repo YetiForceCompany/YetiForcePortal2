@@ -20,7 +20,7 @@
 		<ul class="nav nav-pills nav-stacked">
 			{foreach item=MODULE key=KEY from=$USER->getModulesList()}
 				<li role="presentation" class="active">
-					<a data-module="{$KEY}" data-view="ListView" href="#">
+					<a href="index.php?module={$KEY}&view=ListView">
 						<img src="{FN::fileTemplate($KEY|cat:"48.png",$MODULE_NAME)}" class="moduleIcon" title="{$MODULE}" alt="{$MODULE}">
 						<spna>{$MODULE}</spna>
 					</a>

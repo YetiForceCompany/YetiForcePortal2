@@ -26,7 +26,7 @@ var app = {
 			moduleClassName = extendModules + "_" + view + "_Js";
 		}
 		if (typeof window[moduleClassName] == 'undefined') {
-			moduleClassName = "Vtiger_" + view + "_Js";
+			moduleClassName = "Base_" + view + "_Js";
 		}
 		if (typeof window[moduleClassName] != 'undefined') {
 			return new window[moduleClassName]();
@@ -57,11 +57,19 @@ var app = {
 		rand = Math.floor(Math.random() * chars.length);
 		return newchar = chars.substring(rand, rand + 1);
 	},
+	registerSideLoading: function (body) {
+		$(document).pjax('a[href]', 'div.bodyContent');
+		$(document).on('pjax:complete', function () {
+			var pageController = app.getPageController();
+			if (pageController)
+				pageController.registerEvents();
+		})
+	},
 }
 
 jQuery(document).ready(function () {
 	app.showSelectElement(jQuery('body'));
-
+	app.registerSideLoading(jQuery('body'));
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)
