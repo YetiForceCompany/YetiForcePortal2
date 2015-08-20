@@ -58,7 +58,7 @@ var app = {
 		return newchar = chars.substring(rand, rand + 1);
 	},
 	registerSideLoading: function (body) {
-		$(document).pjax('a[href]', 'div.bodyContent');
+		$(document).pjax('a[href]:not(.loadPage)', 'div.bodyContent');
 		$(document).on('pjax:complete', function () {
 			var pageController = app.getPageController();
 			if (pageController)

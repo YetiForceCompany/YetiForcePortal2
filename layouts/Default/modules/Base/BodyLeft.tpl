@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-md-10 userDetails">
 				<div class="pull-right">
-					<a href="index.php?module=Users&action=Logout">
+					<a href="index.php?module=Users&action=Logout" class="loadPage">
 						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 					</a>
 				</div>

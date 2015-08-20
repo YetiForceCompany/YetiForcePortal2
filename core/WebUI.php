@@ -35,9 +35,9 @@ class WebUI
 					$module = 'Users';
 					$view = 'Login';
 				}
-				$request->set('module', $module);
-				$request->set('view', $view);
 			}
+			$request->set('module', $module);
+			$request->set('view', $view);
 
 			if (!empty($action)) {
 				$componentType = 'Action';
@@ -55,14 +55,14 @@ class WebUI
 				$handler = new $handlerClass();
 
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
-					throw new AppException('Login is required');
+					throw new \AppException('Login is required');
 				}
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
+				throw new \AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (AppException $e) {
 			if (false) {
@@ -118,5 +118,4 @@ class WebUI
 	{
 		return Config::get('crmPath') != '__CRM_PATH__';
 	}
-
 }
