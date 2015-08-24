@@ -5,13 +5,13 @@ var app = {
 	 * @return : string - module name
 	 */
 	getModuleName: function () {
-		return jQuery('#module').val();
+		return this.getUrlParam('module');
 	},
 	/**
 	 * Function returns the current view name
 	 */
 	getViewName: function () {
-		return jQuery('#view').val();
+		return this.getUrlParam('view');
 	},
 	/**
 	 * Function returns the javascript controller based on the current view
@@ -50,6 +50,20 @@ var app = {
 		});
 
 		selectElement.chosen(params);
+	},
+	getUrlParam: function (name) {
+		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+				sURLVariables = sPageURL.split('&'),
+				sParameterName,
+				i;
+
+		for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === name) {
+				return sParameterName[1] === undefined ? true : sParameterName[1];
+			}
+		}
 	},
 	generateRandomChar: function () {
 		var chars, newchar, rand;
