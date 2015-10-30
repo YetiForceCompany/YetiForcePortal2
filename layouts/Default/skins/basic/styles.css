@@ -40,7 +40,7 @@ img{
 	padding: 5px;
 }
 .userDetailsContainer .logo{
-	margin-top: 5px;
+	margin: 5px;
 	height: 40px;
 }
 .userDetailsContainer .userDetails{
@@ -72,6 +72,17 @@ img{
 	max-width: 30px;
 	margin: 5px 10px 0 0;
 }
+.bodyHeader{
+	position: fixed;
+	height: 50px;
+	background: #4a5364;
+	right:0;
+	left: 50px;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
 .leftPanel {
 	position: fixed;
 	top: 0px;
@@ -88,6 +99,9 @@ img{
 	left: 0px;	
 }
 .leftPanel:hover + .mainBody{
+	left: 300px !important;
+}
+.leftPanel:hover + .mainBody .bodyHeader{
 	left: 300px;
 }
 .leftPanel .userDetailsContainer{
@@ -102,7 +116,7 @@ img{
 	left: 50px;
 	z-index:1100;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 33px);
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -111,7 +125,9 @@ img{
 .leftPanel .menuContainer{
 	background: #4a5364;
 	height: 100%;
-	
+	position: absolute;
+	left:0px;
+	top:50px;
 }
 .leftPanel .menuContainer .moduleList {
 	overflow: auto;
@@ -163,4 +179,50 @@ img{
 	display: table-cell;
 	vertical-align: middle;
 	line-height: 18px;
+}
+.footerContainer {
+	position: fixed;
+	width: 100%;
+	height: 33px;
+	bottom:0px;
+	left:0px;
+	z-index: 1200;
+	background: #404952;
+}
+.vtFooter {
+	text-align: center;
+}
+.vtFooter p {   
+	color: #ffffff;
+	border-top: 1px solid #dddddd;
+	padding: 1px 0;
+	font-size: 0.9em;
+	margin-bottom: 0;
+}
+.bodyContent{
+	margin-top:50px;
+}
+.bodyHeader .leftSide{
+	padding-left:10px;
+	padding-top:7px;
+	width: 400px;
+}
+.bodyHeader .rightSide{
+	position: relative;
+	min-height: 1px;
+	float:right;
+}
+.bodyHeader .rightSide .rightHeaderBtn{
+	padding: 7px 5px;
+}
+.bodyHeader .rightSide .rightHeaderBtn a{
+	line-height: 20px;
+	font-size: 18px;
+}
+hr{
+	margin-top:10px;
+	margin-bottom: 10px;
+}
+.mainContent{
+	padding: 0px 5px;
 }
