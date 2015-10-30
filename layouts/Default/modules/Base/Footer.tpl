@@ -1,5 +1,4 @@
 {strip}
-</div></div>
 {include file=FN::templatePath("BodyRight.tpl",$MODULE_NAME)}
 </div>
 </div>
