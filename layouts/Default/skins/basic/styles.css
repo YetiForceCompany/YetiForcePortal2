@@ -1,3 +1,10 @@
+html, body
+{
+	height: 100%;
+	width: 100%;
+	display: block;
+	background:#fff;
+}
 .bodyContainer{
 	background-color: #eee;
 }
@@ -58,6 +65,14 @@ img{
 .userDetailsContainer .userDetails p.companyName{
 	font-size: 10px;
 }
+.mainPage{
+	height:100%;
+	position:relative;
+	left:0;
+	right:0;
+	margin-left:50px;
+	background:#fff;
+}
 .bodyHeader .leftHeader{
 	background-color: #969696;
 	color: #fff;
@@ -78,6 +93,7 @@ img{
 	background: #4a5364;
 	right:0;
 	left: 50px;
+	z-index: 1200;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -99,7 +115,7 @@ img{
 	left: 0px;	
 }
 .leftPanel:hover + .mainBody{
-	left: 300px !important;
+	left: 250px !important;
 }
 .leftPanel:hover + .mainBody .bodyHeader{
 	left: 300px;
@@ -111,12 +127,12 @@ img{
 
 .mainBody{
 	background: #fff;
-	position: fixed;
-	top: 0px;
-	left: 50px;
+	position: relative;
+	height:100%;
+	top:0;
+	left: 0px;
+	width:calc(100% - 10px);
 	z-index:1100;
-	width: 100%;
-	height: calc(100% - 33px);
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -200,7 +216,12 @@ img{
 	margin-bottom: 0;
 }
 .bodyContent{
-	margin-top:50px;
+	position:relative;
+	padding-top:50px;
+	oveflow-x:hidden;
+	width: 100%;
+	background: #fff;
+	
 }
 .bodyHeader .leftSide{
 	padding-left:10px;
@@ -225,4 +246,7 @@ hr{
 }
 .mainContent{
 	padding: 0px 5px;
+}
+.widget_header{
+	padding-top: 5px;
 }

@@ -94,10 +94,10 @@
 									{assign var='count' value=$count+1}
 									{/if}
 									{/foreach*}
-									{if $count % 3 == 2}
+									{*if $count % 3 == 2}
 									</div>
-								{/if}
-							</div>
+								{/if*}
+								</div>
 							</div>
 						</li>
 					</ul>

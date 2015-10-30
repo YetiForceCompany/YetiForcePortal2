@@ -5,6 +5,7 @@
 </div>
 </div>
 </div>
+</div>
 <footer class="footerContainer navbar-default navbar-fixed-bottom noprint">
 	<div class="vtFooter">
 		<p>Copyright 2014 YetiForce.com All rights reserved. [ver. 2.2.177] [Czas ładowania strony: 1.216s.]<br>
