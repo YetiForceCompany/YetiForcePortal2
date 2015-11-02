@@ -11,25 +11,41 @@
 	</div>
 	<hr>
 	<div class="container-fluid">
+		<div class="listViewAction row">
+			<div class="col-md-4 paddingLRZero pull-left">
+				<div class="btn-group">
+					<a href="" class="btn btn-default">
+						<span class="glyphicon glyphicon-plus"></span>
+						&nbsp;
+						<strong>{FN::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-3 row paginationDiv pull-right">				
+				{include file=FN::templatePath("Pagination.tpl",$MODULE_NAME)}
+			</div>		
+		</div>
 		<div class="row">
-			<table class="table listViewEntries">
-				<thead>
-					<tr>
-						{foreach item=HEADER from=$HEADERS}
-							<th>{$HEADER}</th>
-						{/foreach}
-					</tr>
-				</thead>
-				<tbody>
-					{foreach item=RECORD key=ID from=$RECORDS}
-						<tr data-record="{$ID}">
-							{foreach item=COLUMN from=$RECORD}
-								<th>{$COLUMN}</th>
+			<div class="table-responsive">
+				<table class="table listViewEntries">
+					<thead>
+						<tr class='listViewHeaders'>
+							{foreach item=HEADER from=$HEADERS}
+								<th>{$HEADER}</th>
 							{/foreach}
 						</tr>
-					{/foreach}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{foreach item=RECORD key=ID from=$RECORDS}
+							<tr data-record="{$ID}">
+								{foreach item=COLUMN from=$RECORD}
+									<td>{$COLUMN}</td>
+								{/foreach}
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>	
+			</div>
 		</div>
 	</div>
 {/strip}

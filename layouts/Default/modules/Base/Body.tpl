@@ -5,7 +5,7 @@
 		<div class="mobileLeftPanel noPadding mobileOn">
 			{include file=FN::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 		</div>
-		<div class="leftPanel noPadding">
+		<div class="leftPanel noPadding mobileOff">
 			{include file=FN::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 		</div>	
 		<div class="mainBody">

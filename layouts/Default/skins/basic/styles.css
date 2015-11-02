@@ -37,6 +37,10 @@ img{
     min-height: 375px;
 	margin-top: 10px;
 }
+.paddingLRZero{
+	padding-left:0;
+	padding-right:0;
+}
 .noPadding{
 	padding: 0;
 }
@@ -339,4 +343,26 @@ hr{
 }
 .showMainMenu{
 	right: 0px;
+}
+.table-responsive{
+	overflow-x: auto;
+	display: block;
+}
+.paginationDiv .pageInfo {
+    border: 1px solid #ddd;
+    color: #337AB7;
+    float: right;
+    margin-left: 5px;
+    list-style: none;
+    padding: 6px 5px;
+}
+.paginationDiv .pagination{
+	margin: 0;
+	float: right;
+}
+.listViewHeaders{
+	text-transform: capitalize;
+}
+.listViewEntries{
+	font-weight: 400 !important;
 }
