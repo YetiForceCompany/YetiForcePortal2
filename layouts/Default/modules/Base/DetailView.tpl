@@ -11,16 +11,14 @@
 	</div>
 	<hr>
 	{foreach item=FIELDS key=BLOCK from=$DETAIL}
-		<div class="panel panel-default">
+		<div class="panel panel-default col-xs-12 paddingLRZero">
 			<div class="panel-heading">{$BLOCK}</div>
-			<table class="table">
 				{foreach item=FIELD key=NAME from=$FIELDS}
-					<tr>
-						<td>{$NAME}</td>
-						<td>{$FIELD}</td>
-					</tr>
+					<div class='col-sm-12 col-md-6 paddingLRZero'>
+						<div class='fieldName col-sm-6 col-md-6'>{$NAME}</div>
+						<div class='fieldValue col-sm-6 col-md-6'>{$FIELD}</div>
+					</div>
 				{/foreach}
-			</table>
 		</div>
 	{/foreach}
 {/strip}

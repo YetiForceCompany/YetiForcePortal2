@@ -366,3 +366,16 @@ hr{
 .listViewEntries{
 	font-weight: 400 !important;
 }
+.panel .fieldName{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	font-weight: bold;
+	border-top: 1px solid #ddd;
+}
+.panel .fieldValue{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	height:35px;
+}
