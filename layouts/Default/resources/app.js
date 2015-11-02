@@ -79,11 +79,17 @@ var app = {
 				pageController.registerEvents();
 		})
 	},
+	headerBtn: function(){
+		$('.rightHeaderBtnMenu').click(function(){
+			$('.mobileLeftPanel').toggleClass('showMainMenu');
+		});
+	},
 }
 
 jQuery(document).ready(function () {
 	app.showSelectElement(jQuery('body'));
 	app.registerSideLoading(jQuery('body'));
+	app.headerBtn();
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

@@ -1,7 +1,7 @@
 {strip}
     <div class="bodyHeader">
-		<div class="leftSide col-md-3">
-			<div class="pull-left selectSearch">
+		<div class="leftSide col-xs-3">
+			<div class="pull-left selectSearch mobileOff">
 				<div class="input-group globalSearchInput">
 					<span class="input-group-btn">
 						<select class="chzn-select form-control col-md-5" title="{*vtranslate('LBL_SEARCH_MODULE', $MODULE_NAME)*}" id="basicSearchModulesList" >
@@ -30,14 +30,14 @@
 			</div>	
 		</div>
 		<div class="rightSide">
-			<div class="pull-right rightHeaderBtn">
+			<div class="pull-right rightHeaderBtn mobileOff">
 				<div class="dropdown quickAction historyBtn">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn" aria-expanded="false" href="#">
 						<img class='dropdown-toggle alignMiddle popoverTooltip' src="{*vimage_path('history.png')}" alt="{vtranslate('LBL_PAGES_HISTORY',$MODULE)*}" data-content="{*vtranslate('LBL_PAGES_HISTORY')*}" />
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn">
+			<div class="pull-right rightHeaderBtn mobileOff">
 				<div class="remindersNotice quickAction">
 					<a class="btn btn-default btn-sm" title="{*vtranslate('LBL_CHAT',$MODULE)*}" href="#">
 						<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
@@ -45,7 +45,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn">
+			<div class="pull-right rightHeaderBtn mobileOff">
 				<div class="headerLinksAJAXChat quickAction">
 					<a class="btn btn-default btn-sm ChatIcon" title="{*vtranslate('LBL_CHAT',$MODULE)*}" href="#">
 						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			{if !empty($announcement)}
-				<div class="pull-right rightHeaderBtn">
+				<div class="pull-right rightHeaderBtn mobileOff">
 					<div class="quickAction">
 						<a class="btn btn-default btn-sm" href="#">
 							<img class='alignMiddle imgAnnouncement' src="{*vimage_path('btnAnnounceOff.png')*}" alt="{*vtranslate('LBL_ANNOUNCEMENT',$MODULE)*}" title="{*vtranslate('LBL_ANNOUNCEMENT',$MODULE)*}" id="announcementBtn" />
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 			{/if}
-			<div class="pull-right rightHeaderBtn">
+			<div class="pull-right rightHeaderBtn mobileOff">
 				<div class="dropdown quickAction">
 					<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{*vtranslate('LBL_QUICK_CREATE',$MODULE)*}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -101,6 +101,27 @@
 							</div>
 						</li>
 					</ul>
+				</div>
+			</div>
+			<div class="pull-right rightHeaderBtn rightHeaderBtnMenu mobileOn">
+				<div class="quickAction">
+					<a class="btn btn-default btn-sm" href="#">
+						<span aria-hidden="true" class="glyphicon glyphicon-menu-hamburger"></span>
+					</a>
+				</div>
+			</div>
+			<div class="pull-right rightHeaderBtn actionMenuBtn mobileOn">
+				<div class="quickAction">
+					<a class="btn btn-default btn-sm" href="#">
+						<span aria-hidden="true" class="glyphicon glyphicon-tasks"></span>
+					</a>
+				</div>
+			</div>
+			<div class="pull-left rightHeaderBtn searchMenuBtn mobileOn">
+				<div class="quickAction">
+					<a class="btn btn-default btn-sm" href="#">
+						<span aria-hidden="true" class="glyphicon glyphicon-search"></span>
+					</a>
 				</div>
 			</div>
 		</div>	
