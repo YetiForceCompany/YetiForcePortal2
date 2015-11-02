@@ -3,6 +3,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="pull-left">
+					{*include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)*}
 					<img src="{FN::fileTemplate($MODULE_NAME|cat:"48.png",$MODULE_NAME)}" class="moduleIcon" title="{FN::getTranslatedModuleName($MODULE_NAME)}" alt="{FN::getTranslatedModuleName($MODULE_NAME)}">
 				</div>
 				<h4>{FN::getTranslatedModuleName($MODULE_NAME)}</h4>
@@ -33,6 +34,7 @@
 							{foreach item=HEADER from=$HEADERS}
 								<th>{$HEADER}</th>
 							{/foreach}
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,6 +43,12 @@
 								{foreach item=COLUMN from=$RECORD}
 									<td>{$COLUMN}</td>
 								{/foreach}
+								<td>
+									<div class='actions'>
+										<a href=''><span class='glyphicon glyphicon-th-list alignMiddle'></span></a>
+										<a href=''><span class='glyphicon glyphicon-pencil alignMiddle'></span></a>
+									</div>
+								</td>
 							</tr>
 						{/foreach}
 					</tbody>

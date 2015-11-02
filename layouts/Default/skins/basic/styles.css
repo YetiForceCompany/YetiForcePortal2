@@ -379,3 +379,20 @@ hr{
 	border-right: 1px solid #ddd;
 	height:35px;
 }
+table tbody tr:hover  td .actions span{
+	opacity:1
+} 
+.actions a{
+	color: #000;
+}
+.actions span{	
+	opacity:0;
+	cursor: pointer;
+	float: right;
+	padding-right:10px;
+}
+@media only screen and (max-width: 1240px) {
+	.actions span{
+		opacity:1;
+	}
+}
