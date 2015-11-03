@@ -237,6 +237,10 @@ img{
 	min-height: 1px;
 	float:right;
 }
+.bodyHeader .rightSide img{
+	height: 22px;
+	margin: 0;
+}
 .bodyHeader .rightSide .rightHeaderBtn{
 	padding: 7px 5px;
 }
@@ -365,6 +369,7 @@ hr{
 }
 .listViewEntries{
 	font-weight: 400 !important;
+	cursor: pointer;
 }
 .panel .fieldName{
 	padding-bottom: 5px;
@@ -395,4 +400,31 @@ table tbody tr:hover  td .actions span{
 	.actions span{
 		opacity:1;
 	}
+}
+.selectorHistory {
+	font-weight: 900 !important;
+	text-align: center;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #111;
+	white-space: nowrap;
+	cursor: default;
+}
+.historyHour {
+	font-weight: 600 !important;
+}
+.historyList a{
+	color: #222 !important;
+	font-size: 15px !important;
+}
+.clearHistory{
+	font-weight: 900 !important;
+	text-align: center
+}
+.widget_header .breadCrumbs .breadcrumbsLinks{
+	margin:0;
+	font-size:19px;
 }

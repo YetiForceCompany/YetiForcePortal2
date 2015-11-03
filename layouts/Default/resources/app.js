@@ -32,6 +32,15 @@ var app = {
 			return new window[moduleClassName]();
 		}
 	},
+	formatDateZ: function (i) {
+		return (i <= 9 ? '0' + i : i);
+	},
+	howManyDaysFromDate: function (time) {
+		var fromTime = time.getTime();
+		var today = new Date();
+		var toTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+		return Math.floor(((toTime - fromTime) / (1000 * 60 * 60 * 24))) + 1;
+	},
 	showSelectElement: function (parent, view, params) {
 		var thisInstance = this;
 		var selectElement = jQuery();
@@ -83,6 +92,17 @@ var app = {
 		$('.rightHeaderBtnMenu').click(function(){
 			$('.mobileLeftPanel').toggleClass('showMainMenu');
 		});
+	},
+	translate: function (key) {
+		
+		var strings = jQuery('#js_strings').text();
+		if (strings != '') {
+			app.languageString = JSON.parse(strings);
+			if (key in app.languageString) {
+				return app.languageString[key];
+			}
+		}
+		return key;
 	},
 }
 

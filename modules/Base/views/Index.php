@@ -146,6 +146,7 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/App.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
+			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];

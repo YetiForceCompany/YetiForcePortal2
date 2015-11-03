@@ -33,7 +33,7 @@
 			<div class="pull-right rightHeaderBtn mobileOff">
 				<div class="dropdown quickAction historyBtn">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn" aria-expanded="false" href="#">
-						<img class='dropdown-toggle alignMiddle popoverTooltip' src="{*vimage_path('history.png')}" alt="{vtranslate('LBL_PAGES_HISTORY',$MODULE)*}" data-content="{*vtranslate('LBL_PAGES_HISTORY')*}" />
+						<img src="{FN::fileTemplate("history.png",$MODULE_NAME)}" class="moduleIcon" title="{FN::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}" alt="{FN::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}">
 					</a>
 				</div>
 			</div>
