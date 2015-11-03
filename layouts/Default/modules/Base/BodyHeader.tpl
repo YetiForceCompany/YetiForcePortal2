@@ -5,7 +5,10 @@
 				<div class="input-group globalSearchInput">
 					<span class="input-group-btn">
 						<select class="chzn-select form-control col-md-5" title="{*vtranslate('LBL_SEARCH_MODULE', $MODULE_NAME)*}" id="basicSearchModulesList" >
-							<option value="" class="globalSearch_module_All">{*vtranslate('LBL_ALL_RECORDS', $MODULE_NAME)*}</option>
+							<option value="" class="globalSearch_module_All" selected>{FN::translate('LBL_ALL_RECORDS', $MODULE_NAME)}</option>
+							{foreach item=MODULE key=KEY from=$USER->getModulesList()}
+								<option value="{$KEY}" class="globalSearch_module_{$KEY}">{FN::translate($MODULE,$MODULE_NAME)}</option>
+							{/foreach}
 							{*foreach key=MODULE_NAME item=fieldObject from=$SEARCHABLE_MODULES}
 							{if isset($SEARCHED_MODULE) && $SEARCHED_MODULE eq $MODULE_NAME && $SEARCHED_MODULE !== 'All'}
 							<option value="{$MODULE_NAME}" class="globalSearch_module_{$MODULE_NAME}" selected>{vtranslate($MODULE_NAME,$MODULE_NAME)}</option>

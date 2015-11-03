@@ -216,7 +216,7 @@ img{
 	color: #ffffff;
 	border-top: 1px solid #dddddd;
 	padding: 1px 0;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	margin-bottom: 0;
 }
 .bodyContent{
@@ -230,7 +230,7 @@ img{
 .bodyHeader .leftSide{
 	padding-left:10px;
 	padding-top:7px;
-	width: 400px;
+	width: 450px;
 }
 .bodyHeader .rightSide{
 	position: relative;
@@ -253,7 +253,8 @@ hr{
 	margin-bottom: 10px;
 }
 .mainContent{
-	padding: 0px 5px;
+	padding-left: 10px;
+	padding-right: 5px;
 }
 .widget_header{
 	padding-top: 5px;
@@ -375,12 +376,15 @@ hr{
 	padding-bottom: 5px;
 	padding-top: 5px;
 	font-weight: bold;
+	height:35px;
 	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 }
 .panel .fieldValue{
 	padding-bottom: 5px;
 	padding-top: 5px;
 	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	height:35px;
 }
@@ -399,6 +403,11 @@ table tbody tr:hover  td .actions span{
 @media only screen and (max-width: 1240px) {
 	.actions span{
 		opacity:1;
+	}
+}
+@media only screen and (max-width: 960px) {
+	.tabletOff{
+		display:none;
 	}
 }
 .selectorHistory {
@@ -427,4 +436,11 @@ table tbody tr:hover  td .actions span{
 .widget_header .breadCrumbs .breadcrumbsLinks{
 	margin:0;
 	font-size:19px;
+}
+.widget_header .breadCrumbs .breadcrumbsLinks a{
+	color: #000;
+}
+.editFields{
+	padding-bottom: 5px;
+	padding-top: 5px;
 }

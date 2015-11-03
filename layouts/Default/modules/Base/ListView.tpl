@@ -45,8 +45,8 @@
 								{/foreach}
 								<td>
 									<div class='actions'>
-										<a href=''><span class='glyphicon glyphicon-th-list alignMiddle'></span></a>
-										<a href=''><span class='glyphicon glyphicon-pencil alignMiddle'></span></a>
+										<a href="index.php?module={$MODULE_NAME}&view=DetailView&record={$ID}"><span class='glyphicon glyphicon-th-list alignMiddle'></span></a>
+										<a href="index.php?module={$MODULE_NAME}&view=EditView&record={$ID}"><span class='glyphicon glyphicon-pencil alignMiddle'></span></a>
 									</div>
 								</td>
 							</tr>
