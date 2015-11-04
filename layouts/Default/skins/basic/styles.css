@@ -413,6 +413,9 @@ table tbody tr:hover  td .actions span{
 		display:none;
 	}
 }
+.historyList{
+	overflow: auto;
+}
 .selectorHistory {
 	font-weight: 900 !important;
 	text-align: center;
@@ -446,4 +449,40 @@ table tbody tr:hover  td .actions span{
 .editFields{
 	padding-bottom: 5px;
 	padding-top: 5px;
+}
+.actionMenu{
+	position: fixed;
+	top: 50px;
+	right: 0px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 5px;
+	display: none
+}
+.actionMenu > div{
+	position: relative;
+	width: 100%;
+	padding-bottom: 5px;
+}
+.actionMenu img{
+	height: 19px;
+}
+.actionMenu .iconContainer{
+	padding-left: 15px;
+}
+.actionMenu .labelContainer{
+	padding-top: 5px;
+}
+.showActionMenu{
+	display:block;
+}
+.actionMenu .commonActionsButtonDropDown,
+.actionMenu .historyList{
+	position: fixed;
+	top: 50px;
+	left: 5px;
+	right: 5px;
+	bottom: 17px;
 }

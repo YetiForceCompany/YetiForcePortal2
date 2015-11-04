@@ -73,7 +73,7 @@
 						<li id="quickCreateModules">
 							<div class="panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><strong>{*vtranslate('LBL_QUICK_CREATE',$MODULE)*}</strong></h4>
+									<h4 class="panel-title"><strong>{FN::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 								</div>
 								<div class="panel-body paddingLRZero">
 									{*foreach key=NAME item=MODULEMODEL from=Vtiger_Module_Model::getQuickCreateModules(true)}

@@ -97,7 +97,25 @@ jQuery.Class("Vtiger_Header_Js", {
 	registerEvents: function () {
 		var thisInstance = this;
 		thisInstance.recentPageViews();		
-	}
+		thisInstance.headerBtn();
+	},
+	mainMenuHide: function(){
+		$('.mobileLeftPanel').removeClass('showMainMenu');
+	},
+	actionMenuHide: function(){
+		$('.actionMenu').removeClass('showActionMenu');
+	},
+	headerBtn: function(){
+		var thisInstance = this;
+		$('.rightHeaderBtnMenu').click(function(){
+			$('.mobileLeftPanel').toggleClass('showMainMenu');
+			thisInstance.actionMenuHide();
+		});
+		$('.actionMenuBtn ').click(function(){
+			$('.actionMenu').toggleClass('showActionMenu');
+			thisInstance.mainMenuHide();
+		});
+	},
 });
 jQuery(document).ready(function () {
 	Vtiger_Header_Js.getInstance().registerEvents();

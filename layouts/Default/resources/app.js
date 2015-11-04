@@ -88,11 +88,6 @@ var app = {
 				pageController.registerEvents();
 		})
 	},
-	headerBtn: function(){
-		$('.rightHeaderBtnMenu').click(function(){
-			$('.mobileLeftPanel').toggleClass('showMainMenu');
-		});
-	},
 	translate: function (key) {
 		
 		var strings = jQuery('#js_strings').text();
@@ -109,7 +104,6 @@ var app = {
 jQuery(document).ready(function () {
 	app.showSelectElement(jQuery('body'));
 	app.registerSideLoading(jQuery('body'));
-	app.headerBtn();
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

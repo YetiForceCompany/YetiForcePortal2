@@ -11,6 +11,8 @@ $phpLang = [
 	'LBL_HOME' => 'Strona główna',
 	'LBL_FOOTER_CONTENT' => 'Copyright 2014 YetiForce.com All rights reserved. %s<br/>Creating YetiForce software was possible thanks to the %s called Vtiger CRM and other programs that have open source codes.',
 	'LBL_ALL_RECORDS' => 'Wszystkie moduły',
+	'LBL_CHAT' => 'Czat',
+	'LBL_QUICK_CREATE' => 'Szybkie wybieranie',
 ];
 $jsLang = [
 	'JS_TODAY' => 'Dzisiaj',
