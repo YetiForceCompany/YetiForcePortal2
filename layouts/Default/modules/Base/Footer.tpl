@@ -5,7 +5,6 @@
 </div>
 </div>
 </div>
-</div>
 <footer class="footerContainer navbar-default navbar-fixed-bottom noprint">
 	<div class="vtFooter">
 		<p>{sprintf(FN::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), '[0.00 s.]', 'open source project' )}</p>

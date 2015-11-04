@@ -3,10 +3,10 @@
 	<div id="pjaxContainer" class="hide noprint"></div>	
 	<div class="mainPage">
 		{include file=FN::templatePath("ActionMenu.tpl",$MODULE_NAME)}		
-		<div class="mobileLeftPanel noPadding mobileOn">
+		<div class="mobileLeftPanel noPadding visible-phone">
 			{include file=FN::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 		</div>
-		<div class="leftPanel noPadding mobileOff">
+		<div class="leftPanel noPadding hidden-phone">
 			{include file=FN::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 		</div>	
 		<div class="mainBody">

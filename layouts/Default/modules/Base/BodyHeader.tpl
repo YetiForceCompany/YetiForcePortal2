@@ -1,31 +1,24 @@
 {strip}
     <div class="bodyHeader">
 		<div class="leftSide col-xs-3">
-			<div class="pull-left selectSearch mobileOff">
+			<div class="pull-left selectSearch hidden-phone">
 				<div class="input-group globalSearchInput">
 					<span class="input-group-btn">
-						<select class="chzn-select form-control col-md-5" title="{*vtranslate('LBL_SEARCH_MODULE', $MODULE_NAME)*}" id="basicSearchModulesList" >
+						<select class="chzn-select form-control col-md-5" title="{FN::translate('LBL_SEARCH_MODULE', $MODULE_NAME)}" id="basicSearchModulesList" >
 							<option value="" class="globalSearch_module_All" selected>{FN::translate('LBL_ALL_RECORDS', $MODULE_NAME)}</option>
 							{foreach item=MODULE key=KEY from=$USER->getModulesList()}
 								<option value="{$KEY}" class="globalSearch_module_{$KEY}">{FN::translate($MODULE,$MODULE_NAME)}</option>
 							{/foreach}
-							{*foreach key=MODULE_NAME item=fieldObject from=$SEARCHABLE_MODULES}
-							{if isset($SEARCHED_MODULE) && $SEARCHED_MODULE eq $MODULE_NAME && $SEARCHED_MODULE !== 'All'}
-							<option value="{$MODULE_NAME}" class="globalSearch_module_{$MODULE_NAME}" selected>{vtranslate($MODULE_NAME,$MODULE_NAME)}</option>
-							{else}
-							<option value="{$MODULE_NAME}" class="globalSearch_module_{$MODULE_NAME}">{vtranslate($MODULE_NAME,$MODULE_NAME)}</option>
-							{/if}
-							{/foreach*}
 						</select>
 					</span>
-					<input type="text" class="form-control" title="{*vtranslate('LBL_GLOBAL_SEARCH')*}" id="globalSearchValue" placeholder="{*vtranslate('LBL_GLOBAL_SEARCH')*}" results="10" />
+					<input type="text" class="form-control" title="{FN::translate('LBL_GLOBAL_SEARCH',$MODULE_NAME)}" id="globalSearchValue" placeholder="{FN::translate('LBL_GLOBAL_SEARCH',$MODULE_NAME)}" results="10" />
 					<span class="input-group-btn">
 						<button class="btn btn-default" id="searchIcon" type="button">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</span>
 					<span class="input-group-btn">
-						<button class="btn btn-default" id="globalSearch" title="{*vtranslate('LBL_ADVANCE_SEARCH')*}" type="button">
+						<button class="btn btn-default" id="globalSearch" title="{FN::translate('LBL_ADVANCE_SEARCH',$MODULE_NAME)}" type="button">
 							<span class="glyphicon glyphicon-th-large"></span>
 						</button>
 					</span>
@@ -33,40 +26,40 @@
 			</div>	
 		</div>
 		<div class="rightSide">
-			<div class="pull-right rightHeaderBtn mobileOff">
+			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction historyBtn">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn" aria-expanded="false" href="#">
 						<img src="{FN::fileTemplate("history.png",$MODULE_NAME)}" class="moduleIcon" title="{FN::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}" alt="{FN::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}">
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn mobileOff">
+			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="remindersNotice quickAction">
-					<a class="btn btn-default btn-sm" title="{*vtranslate('LBL_CHAT',$MODULE)*}" href="#">
+					<a class="btn btn-default btn-sm" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
 						<span class="badge hide">0</span>
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn mobileOff">
+			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="headerLinksAJAXChat quickAction">
-					<a class="btn btn-default btn-sm ChatIcon" title="{*vtranslate('LBL_CHAT',$MODULE)*}" href="#">
+					<a class="btn btn-default btn-sm ChatIcon" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 					</a>
 				</div>
 			</div>
 			{if !empty($announcement)}
-				<div class="pull-right rightHeaderBtn mobileOff">
+				<div class="pull-right rightHeaderBtn hidden-phone">
 					<div class="quickAction">
 						<a class="btn btn-default btn-sm" href="#">
-							<img class='alignMiddle imgAnnouncement' src="{*vimage_path('btnAnnounceOff.png')*}" alt="{*vtranslate('LBL_ANNOUNCEMENT',$MODULE)*}" title="{*vtranslate('LBL_ANNOUNCEMENT',$MODULE)*}" id="announcementBtn" />
+							<img class='alignMiddle imgAnnouncement' src="{FN::fileTemplate('btnAnnounceOff.png',$MODULE_NAME)}" alt="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" title="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" id="announcementBtn" />
 						</a>
 					</div>
 				</div>
 			{/if}
-			<div class="pull-right rightHeaderBtn mobileOff">
+			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction">
-					<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{*vtranslate('LBL_QUICK_CREATE',$MODULE)*}" href="#">
+					<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{FN::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
@@ -76,51 +69,28 @@
 									<h4 class="panel-title"><strong>{FN::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 								</div>
 								<div class="panel-body paddingLRZero">
-									{*foreach key=NAME item=MODULEMODEL from=Vtiger_Module_Model::getQuickCreateModules(true)}
-									{assign var='quickCreateModule' value=$MODULEMODEL->isQuickCreateSupported()}
-									{assign var='singularLabel' value=$MODULEMODEL->getSingularLabelKey()}
-									{if $singularLabel == 'SINGLE_Calendar'}
-									{assign var='singularLabel' value='LBL_EVENT_OR_TASK'}
-									{/if}	
-									{if $quickCreateModule == '1'}
-									{if $count % 3 == 0}
-									<div class="">
-									{/if}
-									<div class="col-xs-4{if $count % 3 != 2} paddingRightZero{/if}">
-									<a id="menubar_quickCreate_{$NAME}" class="quickCreateModule list-group-item" data-name="{$NAME}" data-url="{$MODULEMODEL->getQuickCreateUrl()}" href="javascript:void(0)" title="{vtranslate($singularLabel,$NAME)}">
-									<span>{vtranslate($singularLabel,$NAME)}</span>
-									</a>
-									</div>
-									{if $count % 3 == 2}
-									</div>
-									{/if}
-									{assign var='count' value=$count+1}
-									{/if}
-									{/foreach*}
-									{*if $count % 3 == 2}
-									</div>
-								{/if*}
+									
 								</div>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn rightHeaderBtnMenu mobileOn">
+			<div class="pull-right rightHeaderBtn rightHeaderBtnMenu visible-phone">
 				<div class="quickAction">
 					<a class="btn btn-default btn-sm" href="#">
 						<span aria-hidden="true" class="glyphicon glyphicon-menu-hamburger"></span>
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn actionMenuBtn mobileOn">
+			<div class="pull-right rightHeaderBtn actionMenuBtn visible-phone">
 				<div class="quickAction">
 					<a class="btn btn-default btn-sm" href="#">
 						<span aria-hidden="true" class="glyphicon glyphicon-tasks"></span>
 					</a>
 				</div>
 			</div>
-			<div class="pull-left rightHeaderBtn searchMenuBtn mobileOn">
+			<div class="pull-left rightHeaderBtn searchMenuBtn visible-phone">
 				<div class="quickAction">
 					<a class="btn btn-default btn-sm" href="#">
 						<span aria-hidden="true" class="glyphicon glyphicon-search"></span>

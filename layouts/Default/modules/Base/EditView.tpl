@@ -1,7 +1,7 @@
 {strip}
 	<div class="widget_header">
-		<div class="row">
-			<div class="col-xs-12">
+		<div class="row marginLRZero">
+			<div class="col-xs-12 paddingLRZero">
 				<div class="pull-left">
 					{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>

@@ -1,7 +1,7 @@
 {strip}
 	<div class="widget_header">
-		<div class="row">
-			<div class="col-xs-12">
+		<div class="row marginLRZero">
+			<div class="col-xs-12 paddingLRZero">
 				<div class="pull-left">
 					{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
@@ -21,7 +21,7 @@
 					{assign var=COUNT value=$COUNT+1}
 				{/foreach}
 				{if $COUNT % 2 == 1}
-					<div class='tabletOff col-sm-12 col-md-6 paddingLRZero'>
+					<div class='visible-desktop col-sm-12 col-md-6 paddingLRZero'>
 						<div class='fieldName col-sm-6 col-md-6'></div>
 						<div class='fieldValue col-sm-6 col-md-6'></div>
 					</div>

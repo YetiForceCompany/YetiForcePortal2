@@ -4,6 +4,7 @@ html, body
 	width: 100%;
 	display: block;
 	background:#fff;
+	padding: 0 !important;
 }
 .bodyContainer{
 	background-color: #eee;
@@ -46,6 +47,10 @@ img{
 }
 .noMargin{
 	margin:0;
+}
+.marginLRZero{
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
 .userDetailsContainer .row{
 	padding: 5px;
@@ -202,7 +207,6 @@ img{
 }
 .footerContainer {
 	position: fixed;
-	width: 100%;
 	height: 33px;
 	bottom:0px;
 	left:0px;
@@ -252,10 +256,6 @@ img{
 hr{
 	margin-top:10px;
 	margin-bottom: 10px;
-}
-.mainContent{
-	padding-left: 10px;
-	padding-right: 5px;
 }
 .widget_header{
 	padding-top: 5px;
@@ -326,11 +326,11 @@ hr{
 	display:table;
 }
 @media only screen and (max-width: 768px) {
+	.bodyContent{
+		padding-left:10px;
+	}
 	.bodyHeader .leftSide {
 		width: auto;
-	}
-	.mobileOff{ 
-		display: none;
 	}
 	.footerContainer{
 		height: 17px;
@@ -340,11 +340,6 @@ hr{
 	}
 	.bodyHeader{
 		left: 0px;
-	}
-}
-@media only screen and (min-width: 768px) {
-	.mobileOn{
-		display: none;
 	}
 }
 .showMainMenu{
@@ -406,11 +401,6 @@ table tbody tr:hover  td .actions span{
 @media only screen and (max-width: 1240px) {
 	.actions span{
 		opacity:1;
-	}
-}
-@media only screen and (max-width: 960px) {
-	.tabletOff{
-		display:none;
 	}
 }
 .historyList{

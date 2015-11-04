@@ -1,18 +1,16 @@
 {strip}
 	<div class="widget_header">
-		<div class="row">
-			<div class="col-xs-12">
+		<div class="row marginLRZero">
+			<div class="col-xs-12 paddingLRZero">
 				<div class="pull-left">
 					{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
-					{*<img src="{FN::fileTemplate($MODULE_NAME|cat:"48.png",$MODULE_NAME)}" class="moduleIcon" title="{FN::getTranslatedModuleName($MODULE_NAME)}" alt="{FN::getTranslatedModuleName($MODULE_NAME)}">*}
 				</div>
-				{*<h4>{FN::getTranslatedModuleName($MODULE_NAME)}</h4>*}
 			</div>
 		</div>
 	</div>
 	<hr>
-	<div class="container-fluid">
-		<div class="listViewAction row">
+	<div class="container-fluid paddingLRZero">
+		<div class="listViewAction row marginLRZero">
 			<div class="col-md-4 paddingLRZero pull-left">
 				<div class="btn-group">
 					<a href="" class="btn btn-default">
@@ -22,11 +20,11 @@
 					</a>
 				</div>
 			</div>
-			<div class="col-md-3 row paginationDiv pull-right">				
+			<div class="col-md-4 row paginationDiv pull-right">				
 				{include file=FN::templatePath("Pagination.tpl",$MODULE_NAME)}
 			</div>		
 		</div>
-		<div class="row">
+		<div class="row marginLRZero">
 			<div class="table-responsive">
 				<table class="table listViewEntries">
 					<thead>
