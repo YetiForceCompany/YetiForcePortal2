@@ -1,13 +1,13 @@
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-jQuery.Class("Vtiger_Header_Js", {
+jQuery.Class("Header_Js", {
 	quickCreateModuleCache: {},
 	self: false,
 	getInstance: function () {
 		if (this.self != false) {
 			return this.self;
 		}
-		this.self = new Vtiger_Header_Js();
+		this.self = new Header_Js();
 		return this.self;
 	}
 }, {	
@@ -118,5 +118,5 @@ jQuery.Class("Vtiger_Header_Js", {
 	},
 });
 jQuery(document).ready(function () {
-	Vtiger_Header_Js.getInstance().registerEvents();
+	Header_Js.getInstance().registerEvents();
 });
