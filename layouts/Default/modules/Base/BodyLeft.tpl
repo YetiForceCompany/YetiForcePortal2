@@ -21,7 +21,7 @@
 					<a href="index.php?module={$KEY}&view=ListView">
 						<div class="iconContainer">
 							<div class="iconImage">
-								<img src="{FN::fileTemplate($KEY|cat:"48.png",$MODULE_NAME)}" class="moduleIcon" title="{$MODULE}" alt="{$MODULE}">
+								<span class="{Core\Menu::getIcon($MODULE)}"></span>
 							</div>
 						</div>
 						<div class="labelContainer">

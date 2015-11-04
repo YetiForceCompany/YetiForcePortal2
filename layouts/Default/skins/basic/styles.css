@@ -180,8 +180,8 @@ img{
 	padding: 0px;
 	display: table;
 }
-.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > img{
-	height:20px;
+.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span{
+	font-size: 20px;
 }
 .leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage{
 	padding-left:15px;
@@ -225,6 +225,7 @@ img{
 	oveflow-x:hidden;
 	width: 100%;
 	background: #fff;
+	padding-bottom: 33px;
 	
 }
 .bodyHeader .leftSide{
@@ -309,8 +310,8 @@ hr{
 	padding: 0px;
 	display: table;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > img{
-	height:20px;
+.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span{
+	font-size: 15px
 }
 .mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage{
 	padding-left:15px;
