@@ -61,42 +61,17 @@
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
-					<li id="quickCreateModules">
+					<li>
 						<div class="panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title"><strong>{FN::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 							</div>
 							<div class="panel-body paddingLRZero">
-								{assign var='count' value=0}
-								{*foreach key=NAME item=MODULEMODEL from=Vtiger_Module_Model::getQuickCreateModules(true)}
-									{assign var='quickCreateModule' value=$MODULEMODEL->isQuickCreateSupported()}
-									{assign var='singularLabel' value=$MODULEMODEL->getSingularLabelKey()}
-									{if $singularLabel == 'SINGLE_Calendar'}
-										{assign var='singularLabel' value='LBL_EVENT_OR_TASK'}
-									{/if}	
-									{if $quickCreateModule == '1'}
-										{if $count % 3 == 0}
-											<div class="rows">
-											{/if}
-											<div class="col-xs-4{if $count % 3 != 2} paddingRightZero{/if}">
-												<a class="quickCreateModule list-group-item" data-name="{$NAME}" data-url="{$MODULEMODEL->getQuickCreateUrl()}" href="javascript:void(0)" title="{vtranslate($singularLabel,$NAME)}">
-												    <span>{vtranslate($singularLabel,$NAME)}</span>
-												</a>
-											</div>
-											{if $count % 3 == 2}
-											</div>
-										{/if}
-										{assign var='count' value=$count+1}
-									{/if}
-								{/foreach*}
-								{*if $count % 3 == 2}
-									</div>
-								{/if*}
 							</div>
 						</div>
 					</li>
 				</ul>
-			</div>						
+			</div>
 		</div>
 	</div>
 </div>
