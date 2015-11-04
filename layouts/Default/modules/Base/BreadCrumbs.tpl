@@ -3,7 +3,7 @@
 	<div class="breadCrumbs" >
 		
 		{assign var="BREADCRUMBS" value=Core\Menu::getBreadcrumbs()}
-		{assign var=HOMEICON value='userIcon-my-home-page'}
+		{assign var=HOMEICON value='moduleIcon-my-home-page'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks">
