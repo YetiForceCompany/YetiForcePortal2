@@ -97,7 +97,7 @@ jQuery.Class("Vtiger_Header_Js", {
 	registerEvents: function () {
 		var thisInstance = this;
 		thisInstance.recentPageViews();		
-		thisInstance.headerBtn();
+		thisInstance.buttonsInHeaderBar();
 	},
 	mainMenuHide: function(){
 		$('.mobileLeftPanel').removeClass('showMainMenu');
@@ -105,7 +105,7 @@ jQuery.Class("Vtiger_Header_Js", {
 	actionMenuHide: function(){
 		$('.actionMenu').removeClass('showActionMenu');
 	},
-	headerBtn: function(){
+	buttonsInHeaderBar: function(){
 		var thisInstance = this;
 		$('.rightHeaderBtnMenu').click(function(){
 			$('.mobileLeftPanel').toggleClass('showMainMenu');
