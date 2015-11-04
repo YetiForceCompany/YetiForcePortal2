@@ -1,6 +1,6 @@
 /* The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html */
 @font-face {
-	font-family: 'UserIcons';
+	font-family: 'ModuleIcons';
 	src:url('userIcons.eot?dfrtuf');
 	src:url('userIcons.eot?dfrtuf#iefix') format('embedded-opentype'),
 		url('userIcons.ttf?dfrtuf') format('truetype'),
@@ -9,8 +9,8 @@
 	font-weight: normal;
 	font-style: normal;
 }
-[class^="userIcon-"], [class*=" userIcon-"] {
-	font-family: 'UserIcons';
+[class^="moduleIcon-"], [class*=" moduleIcon-"] {
+	font-family: 'ModuleIcons';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -23,189 +23,189 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.userIcon-my-home-page-1:before {
+.moduleIcon-my-home-page-1:before {
 	content: "\e804";
 }
-.userIcon-virtual-desk:before {
+.moduleIcon-virtual-desk:before {
 	content: "\e675";
 }
-.userIcon-my-home-page:before {
+.moduleIcon-my-home-page:before {
 	content: "\e800";
 }
-.userIcon-calendar:before {
+.moduleIcon-calendar:before {
 	content: "\e801";
 }
-.userIcon-my-mailbox:before {
+.moduleIcon-my-mailbox:before {
 	content: "\e678";
 }
-.userIcon-compaines-and-contacts:before {
+.moduleIcon-compaines-and-contacts:before {
 	content: "\e679";
 }
-.userIcon-leads:before {
+.moduleIcon-leads:before {
 	content: "\e673";
 }
-.userIcon-contacts:before {
+.moduleIcon-contacts:before {
 	content: "\e674";
 }
-.userIcon-vendors:before {
+.moduleIcon-vendors:before {
 	content: "\e802";
 }
-.userIcon-accounts:before {
+.moduleIcon-accounts:before {
 	content: "\e803";
 }
-.userIcon-sales:before {
+.moduleIcon-sales:before {
 	content: "\e806";
 }
-.userIcon-campaigns:before {
+.moduleIcon-campaigns:before {
 	content: "\e807";
 }
-.userIcon-opportunities:before {
+.moduleIcon-opportunities:before {
 	content: "\e805";
 }
-.userIcon-quotes-enquires:before {
+.moduleIcon-quotes-enquires:before {
 	content: "\e82c";
 }
-.userIcon-requirement-cards:before {
+.moduleIcon-requirement-cards:before {
 	content: "\e808";
 }
-.userIcon-calculations:before {
+.moduleIcon-calculations:before {
 	content: "\e809";
 }
-.userIcon-quotes:before {
+.moduleIcon-quotes:before {
 	content: "\e80a";
 }
-.userIcon-sales-order:before {
+.moduleIcon-sales-order:before {
 	content: "\e82d";
 }
-.userIcon-purchase-order:before {
+.moduleIcon-purchase-order:before {
 	content: "\e80b";
 }
-.userIcon-price-books:before {
+.moduleIcon-price-books:before {
 	content: "\e80c";
 }
-.userIcon-projects2:before {
+.moduleIcon-projects2:before {
 	content: "\e80d";
 }
-.userIcon-projects:before {
+.moduleIcon-projects:before {
 	content: "\e6c5";
 }
-.userIcon-project_milestones:before {
+.moduleIcon-project_milestones:before {
 	content: "\e813";
 }
-.userIcon-project-task:before {
+.moduleIcon-project-task:before {
 	content: "\e6c8";
 }
-.userIcon-support:before {
+.moduleIcon-support:before {
 	content: "\e80e";
 }
-.userIcon-tickets:before {
+.moduleIcon-tickets:before {
 	content: "\e80f";
 }
-.userIcon-service-contracts:before {
+.moduleIcon-service-contracts:before {
 	content: "\e810";
 }
-.userIcon-faq:before {
+.moduleIcon-faq:before {
 	content: "\e811";
 }
-.userIcon-bookkeeping:before {
+.moduleIcon-bookkeeping:before {
 	content: "\e812";
 }
-.userIcon-costs:before {
+.moduleIcon-costs:before {
 	content: "\e814";
 }
-.userIcon-invoices:before {
+.moduleIcon-invoices:before {
 	content: "\e815";
 }
-.userIcon-payments-out:before {
+.moduleIcon-payments-out:before {
 	content: "\e816";
 }
-.userIcon-payments-in:before {
+.moduleIcon-payments-in:before {
 	content: "\e817";
 }
-.userIcon-human-resources:before {
+.moduleIcon-human-resources:before {
 	content: "\e818";
 }
-.userIcon-employees:before {
+.moduleIcon-employees:before {
 	content: "\e819";
 }
-.userIcon-time-control:before {
+.moduleIcon-time-control:before {
 	content: "\e81a";
 }
-.userIcon-annual-holiday-entitlement:before {
+.moduleIcon-annual-holiday-entitlement:before {
 	content: "\e81b";
 }
-.userIcon-secretary:before {
+.moduleIcon-secretary:before {
 	content: "\e81c";
 }
-.userIcon-letters-incoming:before {
+.moduleIcon-letters-incoming:before {
 	content: "\e6a7";
 }
-.userIcon-letters-outgoing:before {
+.moduleIcon-letters-outgoing:before {
 	content: "\e6a8";
 }
-.userIcon-reservations:before {
+.moduleIcon-reservations:before {
 	content: "\e81d";
 }
-.userIcon-database:before {
+.moduleIcon-database:before {
 	content: "\e81e";
 }
-.userIcon-products:before {
+.moduleIcon-products:before {
 	content: "\e81f";
 }
-.userIcon-outsourced-products:before {
+.moduleIcon-outsourced-products:before {
 	content: "\e820";
 }
-.userIcon-assets:before {
+.moduleIcon-assets:before {
 	content: "\e821";
 }
-.userIcon-services:before {
+.moduleIcon-services:before {
 	content: "\e822";
 }
-.userIcon-outsourced-services:before {
+.moduleIcon-outsourced-services:before {
 	content: "\e823";
 }
-.userIcon-sold-services:before {
+.moduleIcon-sold-services:before {
 	content: "\e824";
 }
-.userIcon-corporate-emails:before {
+.moduleIcon-corporate-emails:before {
 	content: "\e825";
 }
-.userIcon-text-messages:before {
+.moduleIcon-text-messages:before {
 	content: "\e826";
 }
-.userIcon-list-of-calls:before {
+.moduleIcon-list-of-calls:before {
 	content: "\e827";
 }
-.userIcon-mail-templates:before {
+.moduleIcon-mail-templates:before {
 	content: "\e828";
 }
-.userIcon-documents:before {
+.moduleIcon-documents:before {
 	content: "\e829";
 }
-.userIcon-pdf:before {
+.moduleIcon-pdf:before {
 	content: "\e82e";
 }
-.userIcon-user-access-control:before {
+.moduleIcon-user-access-control:before {
 	content: "\e832";
 }
-.userIcon-call-history:before {
+.moduleIcon-call-history:before {
 	content: "\e831";
 }
-.userIcon-rss:before {
+.moduleIcon-rss:before {
 	content: "\e830";
 }
-.userIcon-our-sites:before {
+.moduleIcon-our-sites:before {
 	content: "\e82b";
 }
-.userIcon-reports:before {
+.moduleIcon-reports:before {
 	content: "\e82f";
 }
-.userIcon-new-orders:before {
+.moduleIcon-new-orders:before {
 	content: "\e82a";
 }
-.userIcon-team-work:before {
+.moduleIcon-team-work:before {
 	content: "\e6ce";
 }
-.userIcon-ideas:before {
+.moduleIcon-ideas:before {
 	content: "\e6cf";
 }
