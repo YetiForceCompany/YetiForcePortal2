@@ -21,7 +21,7 @@
 					<a href="index.php?module={$KEY}&view=ListView">
 						<div class="iconContainer">
 							<div class="iconImage">
-								<span class="{Core\Menu::getIcon($MODULE)}"></span>
+								<span class="moduleIcon-{$MODULE}"></span>
 							</div>
 						</div>
 						<div class="labelContainer">
