@@ -111,6 +111,7 @@ abstract class Index extends Core\Controller
 		$cssFileNames = [
 			'libraries/Scripts/pace/pace.css',
 			'libraries/Bootstrap/css/bootstrap.css',
+			'libraries/Bootstrap/css/bootstrap-responsive.css',
 			'libraries/Bootstrap/css/bootstrap-theme.css',
 			'libraries/Scripts/chosen/chosen.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
