@@ -23,7 +23,14 @@
 						</button>
 					</span>
 				</div>
-			</div>	
+			</div>
+			<div class="pull-left searchMenuBtn visible-phone">
+				<div class="quickAction">
+					<a class="btn btn-default" href="#">
+						<span aria-hidden="true" class="glyphicon glyphicon-search"></span>
+					</a>
+				</div>
+			</div>
 		</div>
 		<div class="rightSide">
 			<div class="pull-right rightHeaderBtn hidden-phone">
@@ -87,13 +94,6 @@
 				<div class="quickAction">
 					<a class="btn btn-default btn-sm" href="#">
 						<span aria-hidden="true" class="glyphicon glyphicon-tasks"></span>
-					</a>
-				</div>
-			</div>
-			<div class="pull-left rightHeaderBtn searchMenuBtn visible-phone">
-				<div class="quickAction">
-					<a class="btn btn-default btn-sm" href="#">
-						<span aria-hidden="true" class="glyphicon glyphicon-search"></span>
 					</a>
 				</div>
 			</div>

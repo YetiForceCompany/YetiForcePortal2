@@ -105,15 +105,25 @@ jQuery.Class("Header_Js", {
 	actionMenuHide: function(){
 		$('.actionMenu').removeClass('showActionMenu');
 	},
+	searchMenuHide: function(){
+		$('.searchMenu').removeClass('showSearchMenu');
+	},
 	buttonsInHeaderBar: function(){
 		var thisInstance = this;
 		$('.rightHeaderBtnMenu').click(function(){
 			$('.mobileLeftPanel').toggleClass('showMainMenu');
 			thisInstance.actionMenuHide();
+			thisInstance.searchMenuHide();
 		});
 		$('.actionMenuBtn ').click(function(){
 			$('.actionMenu').toggleClass('showActionMenu');
 			thisInstance.mainMenuHide();
+			thisInstance.searchMenuHide();
+		});
+		$('.searchMenuBtn ').click(function(){
+			$('.searchMenu').toggleClass('showSearchMenu');
+			thisInstance.mainMenuHide();
+			thisInstance.actionMenuHide();
 		});
 	},
 });

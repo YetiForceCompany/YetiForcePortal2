@@ -476,3 +476,21 @@ table tbody tr:hover  td .actions span{
 	right: 5px;
 	bottom: 17px;
 }
+.searchMenu{
+	position: fixed;
+	top: 50px;
+	right:-300px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 10px;
+	width:300px;
+	-webkit-transition: right 0.5s ease;
+	-moz-transition: right 0.5s ease;
+	-o-transition: right 0.5s ease;
+	transition: right 0.5s ease;
+}
+.showSearchMenu{
+	right:0px;
+}
