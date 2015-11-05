@@ -1,4 +1,4 @@
-
+/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 var app = {
 	/**
 	 * Function to get the module name. This function will get the value from element which has id module
