@@ -13,45 +13,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="row noMargin">
-		<div class="remindersNotice quickAction">
-			<div class="labelContainer pull-left">
-				{FN::translate('LBL_CHAT',$MODULE_NAME)}
-			</div>	
-			<div class="iconContainer pull-right">
-				<a class="btn btn-default" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
-					<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-					<span class="badge hide">0</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="row noMargin">
-		<div class="headerLinksAJAXChat quickAction">
-			<div class="labelContainer pull-left">
-				{FN::translate('LBL_CHAT',$MODULE_NAME)}
-			</div>
-			<div class="iconContainer pull-right">
-				<a class="btn btn-default ChatIcon" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
-					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-				</a>
-			</div>
-		</div>
-	</div>
-	{if !empty($announcement)}
-		<div class="row noMargin">
-			<div class="quickAction">
-				<div class="labelContainer pull-left">
-					{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}
-				</div>
-				<div class='iconContainer pull-right'>
-					<a class="btn btn-default" href="#">
-						<img class='alignMiddle imgAnnouncement' src="{*vimage_path('btnAnnounceOff.png')*}" alt="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" title="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" id="announcementBtn" />
-					</a>
-				</div>
-			</div>
-		</div>
-	{/if}
 	<div class='row noMargin'>
 		<div class="dropdown quickAction">
 			<div class='labelContainer pull-left'>

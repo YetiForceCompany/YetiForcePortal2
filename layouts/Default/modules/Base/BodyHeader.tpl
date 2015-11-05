@@ -42,30 +42,6 @@
 				</div>
 			</div>
 			<div class="pull-right rightHeaderBtn hidden-phone">
-				<div class="remindersNotice quickAction">
-					<a class="btn btn-default btn-sm" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
-						<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-						<span class="badge hide">0</span>
-					</a>
-				</div>
-			</div>
-			<div class="pull-right rightHeaderBtn hidden-phone">
-				<div class="headerLinksAJAXChat quickAction">
-					<a class="btn btn-default btn-sm ChatIcon" title="{FN::translate('LBL_CHAT',$MODULE_NAME)}" href="#">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					</a>
-				</div>
-			</div>
-			{if !empty($announcement)}
-				<div class="pull-right rightHeaderBtn hidden-phone">
-					<div class="quickAction">
-						<a class="btn btn-default btn-sm" href="#">
-							<img class='alignMiddle imgAnnouncement' src="{FN::fileTemplate('btnAnnounceOff.png',$MODULE_NAME)}" alt="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" title="{FN::translate('LBL_ANNOUNCEMENT',$MODULE_NAME)}" id="announcementBtn" />
-						</a>
-					</div>
-				</div>
-			{/if}
-			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction">
 					<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{FN::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
