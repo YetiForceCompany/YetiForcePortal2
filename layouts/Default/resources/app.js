@@ -1,5 +1,6 @@
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 var app = {
+	languageString: [],
 	/**
 	 * Function to get the module name. This function will get the value from element which has id module
 	 * @return : string - module name
@@ -89,15 +90,18 @@ var app = {
 		})
 	},
 	translate: function (key) {
-		
-		var strings = jQuery('#js_strings').text();
-		if (strings != '') {
-			app.languageString = JSON.parse(strings);
-			if (key in app.languageString) {
-				return app.languageString[key];
+		if (app.languageString[key] != undefined) {
+			return app.languageString[key];
+		} else {
+			var strings = jQuery('#js_strings').text();
+			if (strings != '') {
+				app.languageString = JSON.parse(strings);
+				if (key in app.languageString) {
+					return app.languageString[key];
+				}
 			}
 		}
-		return key;
+		return key;		
 	},
 }
 
