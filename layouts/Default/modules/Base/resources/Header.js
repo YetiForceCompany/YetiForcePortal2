@@ -1,13 +1,13 @@
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 
-jQuery.Class("Header_Js", {
+jQuery.Class("Base_Header_Js", {
 	quickCreateModuleCache: {},
 	self: false,
 	getInstance: function () {
 		if (this.self != false) {
 			return this.self;
 		}
-		this.self = new Header_Js();
+		this.self = new Base_Header_Js();
 		return this.self;
 	}
 }, {	
@@ -97,36 +97,27 @@ jQuery.Class("Header_Js", {
 	registerEvents: function () {
 		var thisInstance = this;
 		thisInstance.recentPageViews();		
-		thisInstance.buttonsInHeaderBar();
+		thisInstance.registerMobileEvents();
 	},
-	mainMenuHide: function(){
-		$('.mobileLeftPanel').removeClass('showMainMenu');
-	},
-	actionMenuHide: function(){
-		$('.actionMenu').removeClass('showActionMenu');
-	},
-	searchMenuHide: function(){
-		$('.searchMenu').removeClass('showSearchMenu');
-	},
-	buttonsInHeaderBar: function(){
+	registerMobileEvents: function(){
 		var thisInstance = this;
 		$('.rightHeaderBtnMenu').click(function(){
 			$('.mobileLeftPanel').toggleClass('showMainMenu');
-			thisInstance.actionMenuHide();
-			thisInstance.searchMenuHide();
+			$('.actionMenu').removeClass('showActionMenu');
+			$('.searchMenu').removeClass('showSearchMenu');
 		});
 		$('.actionMenuBtn ').click(function(){
 			$('.actionMenu').toggleClass('showActionMenu');
-			thisInstance.mainMenuHide();
-			thisInstance.searchMenuHide();
+			$('.mobileLeftPanel').removeClass('showMainMenu');
+			$('.searchMenu').removeClass('showSearchMenu');
 		});
 		$('.searchMenuBtn ').click(function(){
 			$('.searchMenu').toggleClass('showSearchMenu');
-			thisInstance.mainMenuHide();
-			thisInstance.actionMenuHide();
+			$('.mobileLeftPanel').removeClass('showMainMenu');
+			$('.actionMenu').removeClass('showActionMenu');
 		});
 	},
 });
 jQuery(document).ready(function () {
-	Header_Js.getInstance().registerEvents();
+	Base_Header_Js.getInstance().registerEvents();
 });
