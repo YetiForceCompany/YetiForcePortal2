@@ -22,7 +22,7 @@
 					<a href="index.php?module={$KEY}&view=ListView">
 						<div class="iconContainer">
 							<div class="iconImage">
-								<span class="moduleIcon-{$MODULE}"></span>
+								<span class="moduleIcon-{$KEY}"></span>
 							</div>
 						</div>
 						<div class="labelContainer">

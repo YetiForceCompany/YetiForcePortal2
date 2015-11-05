@@ -30,7 +30,7 @@ abstract class Index extends Core\Controller
 		$userInstance = Core\User::getUser();
 		$modulePermission = $userInstance->isPermitted($moduleName);
 		if (!$modulePermission) {
-			throw new AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 		return true;
 	}
@@ -169,7 +169,6 @@ abstract class Index extends Core\Controller
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
 				continue;
 			}
-
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
 			if (\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));

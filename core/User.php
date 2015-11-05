@@ -81,7 +81,7 @@ class User extends BaseModel
 
 	public function isPermitted($module)
 	{
-		return in_array($module, $this->getModulesList());
+		return isset($this->getModulesList()[$module]);
 	}
 
 	public function getModulesList()
