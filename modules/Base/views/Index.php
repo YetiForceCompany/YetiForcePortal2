@@ -8,7 +8,7 @@
 namespace Base\View;
 
 use Core;
-
+use Core\Session;
 abstract class Index extends Core\Controller
 {
 
@@ -82,8 +82,8 @@ abstract class Index extends Core\Controller
 	protected function preProcessDisplay(Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
-		if (isset($_SESSION['systemError'])) {
-			$viewer->assign('ERRORS', $_SESSION['systemError']);
+		if (Session::has('systemError')) {
+			$viewer->assign('ERRORS', Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
@@ -94,10 +94,10 @@ abstract class Index extends Core\Controller
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 		$viewer->view('Footer.tpl');
-		if (\Config::getBoolean('debugApi') && isset($_SESSION['debugApi']) && $_SESSION['debugApi']) {
-			$viewer->assign('DEBUG_API', $_SESSION['debugApi']);
+		if (\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
+			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
-			$_SESSION['debugApi'] = false;
+			Session:set('debugApi', false);
 		}
 	}
 

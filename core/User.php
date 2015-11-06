@@ -7,6 +7,8 @@
  */
 namespace Core;
 
+use Core\Session;
+
 class User extends BaseModel
 {
 
@@ -15,7 +17,7 @@ class User extends BaseModel
 	public static function getUser()
 	{
 		if (!self::$user) {
-			$user = isset($_SESSION['user']) ? $_SESSION['user'] : false;
+			$user = Session::has('user') ? Session::get('user') : false;
 			if ($user) {
 				self::$user = new self($user);
 			} else {
@@ -86,12 +88,12 @@ class User extends BaseModel
 
 	public function getModulesList()
 	{
-		if (isset($_SESSION['modules'])) {
-			return $_SESSION['modules'];
+		if (Session::has('modules')) {
+			return Session::get('modules');
 		}
 		$api = Api::getInstance();
 		$modules = $api->call('Base/GetModulesList', [], 'get');
-		$_SESSION['modules'] = $modules;
+		Session::set('modules', $modules);
 		return $modules;
 	}
 }
