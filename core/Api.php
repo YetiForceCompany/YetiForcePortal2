@@ -97,7 +97,7 @@ class Api
 		return [
 			'Apikey' => \Config::get('apiKey'),
 			'Encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
-			'Sessionid' => $userInstance->has('logged') ? $userInstance->get('sessionID') : '0',
+			'Sessionid' => $userInstance->has('logged') ? $userInstance->get('SessionId') : '0',
 		];
 	}
 

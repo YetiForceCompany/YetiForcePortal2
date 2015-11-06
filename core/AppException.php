@@ -13,6 +13,11 @@ class AppException extends \Exception
 
 	public function __construct($message, $code = 200, Exception $previous = null)
 	{
+		if(\Config::getBoolean('debugApi')){
+			echo '<pre>';
+			debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+			echo '</pre>';
+		}
 		die($message);
 	}
 }

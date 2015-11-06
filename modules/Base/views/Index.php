@@ -97,7 +97,7 @@ abstract class Index extends Core\Controller
 		if (\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
-			Session:set('debugApi', false);
+			Session::set('debugApi', false);
 		}
 	}
 

@@ -88,8 +88,9 @@ class User extends BaseModel
 
 	public function getModulesList()
 	{
-		if (Session::has('modules')) {
-			return Session::get('modules');
+		$modules = Session::get('modules');
+		if (!empty($modules)) {
+			return $modules;
 		}
 		$api = Api::getInstance();
 		$modules = $api->call('Base/GetModulesList', [], 'get');
