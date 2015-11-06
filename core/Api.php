@@ -57,7 +57,7 @@ class Api
 		$request = Requests::$requestType($crmPath, $headers, $data);
 		$rawResponse = $request->body;
 
-		if ($request->headers->getValues('encrypted')[0] == 1) {
+		if ($request->headers->getValues('Encrypted')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Core\Json::decode($rawResponse);
@@ -95,9 +95,9 @@ class Api
 	{
 		$userInstance = User::getUser();
 		return [
-			'apiKey' => \Config::get('apiKey'),
-			'encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
-			'sessionID' => $userInstance->has('logged') ? $userInstance->get('sessionID') : '0',
+			'Apikey' => \Config::get('apiKey'),
+			'Encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
+			'Sessionid' => $userInstance->has('logged') ? $userInstance->get('sessionID') : '0',
 		];
 	}
 
