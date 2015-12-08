@@ -10,8 +10,8 @@
 					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 				</a>
 			</div>
-			<p>{$USER->get('firstname')}</p>
-			<p>{$USER->get('lastname')}</p>
+			<p>{$USER->get('firstName')}</p>
+			<p>{$USER->get('lastName')}</p>
 			<p class="companyName">{$USER->get('company')}</p>
 		</div>	
 	</div>

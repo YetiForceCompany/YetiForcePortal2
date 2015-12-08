@@ -62,7 +62,7 @@ class User extends BaseModel
 			'ip' => \FN::getRemoteIP(),
 			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
 		];
-		$response = $api->call('Users/Login', ['email' => $email, 'password' => $password, 'params' => $params]);
+		$response = $api->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params]);
 		if ($response) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
