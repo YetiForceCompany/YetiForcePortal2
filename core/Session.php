@@ -16,7 +16,10 @@ class Session
 	 * @return Value for the key
 	 */
 	public static function get($key){
-		return $_SESSION[$key];
+		if(isset($_SESSION[$key])){
+			return $_SESSION[$key];
+		}
+		return false;
 	}
 	/**
 	 * 

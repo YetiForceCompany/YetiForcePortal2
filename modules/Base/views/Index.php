@@ -38,7 +38,11 @@ abstract class Index extends Core\Controller
 	public function getViewer(Core\Request $request)
 	{
 		if (!$this->viewer) {
+			$moduleName = $request->getModule();
+			
 			$viewer = new Core\Viewer();
+			$viewer->assign('MODULE_NAME', $moduleName);
+			$viewer->assign('ACTION_NAME', $request->getAction());
 			$this->viewer = $viewer;
 		}
 		return $this->viewer;
@@ -51,11 +55,7 @@ abstract class Index extends Core\Controller
 
 	public function preProcess(Core\Request $request, $display = true)
 	{
-		$module = $request->getModule();
-
 		$viewer = $this->getViewer($request);
-		$viewer->assign('MODULE_NAME', $module);
-		$viewer->assign('ACTION_NAME', $request->getAction());
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
 		$viewer->assign('STYLES', $this->getHeaderCss($request));

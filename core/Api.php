@@ -48,13 +48,19 @@ class Api
 	{
 		$crmPath = $this->url . $method;
 		$rawRequest = $data;
-		if (\Config::getBoolean('encryptDataTransfer') && $requestType != 'get') {
-			$data = $this->encryptData($data);
-		}
-
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
-		$request = Requests::$requestType($crmPath, $headers, $data);
+		$options = $this->getOptions();
+
+		if ($requestType == 'get') {
+			$request = Requests::$requestType($crmPath, $headers, $options);
+		} else {
+			$data = Core\Json::encode($data);
+			if (\Config::getBoolean('encryptDataTransfer') && $requestType != 'get') {
+				$data = $this->encryptData($data);
+			}
+			$request = Requests::$requestType($crmPath, $headers, $data, $options);
+		}
 		$rawResponse = $request->body;
 
 		if ($request->headers->getValues('Encrypted')[0] == 1) {
@@ -67,7 +73,7 @@ class Api
 				'date' => date('Y-m-d H:i:s', $startTime),
 				'time' => round(microtime(true) - $startTime, 4),
 				'method' => $method,
-				'rawRequest' => [$headers,$rawRequest],
+				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
 				'response' => $response,
 				'request' => $request->raw,
@@ -98,6 +104,14 @@ class Api
 			'Apikey' => \Config::get('apiKey'),
 			'Encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'Sessionid' => $userInstance->has('logged') ? $userInstance->get('sessionId') : '0',
+			'Content-Type' => 'application/json',
+		];
+	}
+
+	public function getOptions()
+	{
+		return [
+			'auth' => [\Config::get('serverName'), \Config::get('serverPass')]
 		];
 	}
 

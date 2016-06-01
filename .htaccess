@@ -1,5 +1,4 @@
 ## No directory listings
-IndexIgnore *
 Options -Indexes
 <IfModule mod_rewrite.c>
 	RewriteEngine On

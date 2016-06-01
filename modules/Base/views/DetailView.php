@@ -14,13 +14,13 @@ class DetailView extends Index
 
 	public function process(Core\Request $request)
 	{
-		$module = $request->getModule();
+		$moduleName = $request->getModule();
 		$record = $request->get('record');
 		$api = Core\Api::getInstance();
-		$recordDetail = $api->call($module . '/GetRecordDetail/'.$record, [], 'get');
+		$recordDetail = $api->call($moduleName . '/GetRecordDetail/'.$record, [], 'get');
 		
 		$viewer = $this->getViewer($request);
 		$viewer->assign('DETAIL', $recordDetail['data']);
-		$viewer->view('DetailView.tpl', $module);
+		$viewer->view('DetailView.tpl', $moduleName);
 	}
 }
