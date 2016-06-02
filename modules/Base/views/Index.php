@@ -93,12 +93,13 @@ abstract class Index extends Core\Controller
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
-		$viewer->view('Footer.tpl');
+		
 		if (\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
 			Session::set('debugApi', false);
 		}
+		$viewer->view('Footer.tpl');
 	}
 
 	/**
