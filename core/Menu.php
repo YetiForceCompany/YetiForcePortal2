@@ -14,7 +14,8 @@ class Menu
 		$request = new Request($_REQUEST);
 		$moduleName = $request->get('module');
 		$view = $request->get('view');
-		$breadcrumbs[] = [ 'name' => Language::translate($moduleName)];
+		
+		$breadcrumbs[] = [ 'name' => Language::translateModule($moduleName)];
 		if ($view == 'EditView' && $request->get('record') == '') {
 			$breadcrumbs[] = [ 'name' => Language::translate('LBL_VIEW_CREATE', $moduleName)];
 		} elseif ($view != '' && $view != 'index' && $view != 'Index') {

@@ -14,7 +14,7 @@
 		<div class="listViewAction row marginLRZero">
 			<div class="col-md-4 paddingLRZero pull-left">
 				<div class="btn-group">
-					<a href="" class="btn btn-default">
+					<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-default">
 						<span class="glyphicon glyphicon-plus"></span>
 						&nbsp;
 						<strong>{FN::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
@@ -32,7 +32,7 @@
 						<tr class='listViewHeaders'>
 							{foreach item=HEADER from=$HEADERS}
 								<th>{$HEADER}</th>
-							{/foreach}
+								{/foreach}
 							<th></th>
 						</tr>
 					</thead>
@@ -56,4 +56,3 @@
 		</div>
 	</div>
 {/strip}
-

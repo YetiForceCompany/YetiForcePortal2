@@ -12,6 +12,7 @@ class Language
 
 	//Contains module language translations
 	protected static $languageContainer = [];
+	protected static $modules = false;
 
 	/**
 	 * Functions that gets translated string
@@ -158,5 +159,14 @@ class Language
 			$exportLangString += $commonStrings[$type];
 		}
 		return $exportLangString;
+	}
+
+	public static function translateModule($module)
+	{
+		if (!self::$modules) {
+			$userInstance = User::getUser();
+			self::$modules = $userInstance->getModulesList();
+		}
+		return self::$modules[$module];
 	}
 }

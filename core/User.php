@@ -76,9 +76,7 @@ class User extends BaseModel
 	{
 		$api = Api::getInstance();
 		$response = $api->call('Users/Logout', [], 'get');
-		if ($response) {
-			session_destroy();
-		}
+		session_destroy();
 	}
 
 	public function isPermitted($module)

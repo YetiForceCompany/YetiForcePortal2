@@ -10,17 +10,17 @@
 		</div>
 	</div>
 	<hr>
-	{foreach item=FIELDS key=BLOCK from=$DETAIL}
+	{foreach item=BLOCK from=$BLOCKS}
 		<div class="panel panel-default col-xs-12 paddingLRZero">
-			<div class="panel-heading">{$BLOCK}</div>
-				{foreach item=FIELD key=NAME from=$FIELDS}
-					<div class='editFields col-sm-12 col-md-6 paddingLRZero'>
-						<div class='editFieldName col-sm-6 col-md-6'>{$NAME}</div>
-						<div class='editFieldValue col-sm-6 col-md-6'>
-							<input class='form-control' type='text' name='{$NAME}' value='{$FIELD}'>
-						</div>
+			<div class="panel-heading">{$BLOCK['label']}</div>
+			{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
+				<div class='editFields col-sm-12 col-md-6 paddingLRZero'>
+					<div class='editFieldName col-sm-6 col-md-6'>{$FIELD['label']}</div>
+					<div class='editFieldValue col-sm-6 col-md-6'>
+						<input class='form-control' type='text' name="{$FIELD['name']}" value='{$FIELD['defaultvalue']}'>
 					</div>
-				{/foreach}
+				</div>
+			{/foreach}
 		</div>
 	{/foreach}
 {/strip}
