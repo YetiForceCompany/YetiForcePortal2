@@ -5,11 +5,6 @@
 			<img src="{Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-xs-10 userDetails">
-			<div class="pull-right">
-				<a href="index.php?module=Users&action=Logout" class="loadPage">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-				</a>
-			</div>
 			<p>{$USER->get('firstName')}</p>
 			<p>{$USER->get('lastName')}</p>
 			<p class="companyName">{$USER->get('company')}</p>
