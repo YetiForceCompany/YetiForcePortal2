@@ -16,11 +16,11 @@
 			{/if}
 			<div class="form-group">
 				<label for="inputEmail" class="sr-only">{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
-				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" required="" autofocus="">
+				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="demo@yetiforce.com" required="" autofocus="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
-				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{FN::translate('LBL_PASSWORD', $MODULE_NAME)}" required="">
+				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{FN::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo" required="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
