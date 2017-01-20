@@ -6,6 +6,7 @@ defined('_EXEC') or die;
 
 $config = [];
 $config['crmPath'] = 'http://yeti/';
+$config['portalPath'] = 'http://portal2/';
 $config['language'] = 'pl_pl';
 $config['theme'] = 'default';
 $config['defaultModule'] = 'HelpDesk';
@@ -16,11 +17,11 @@ $config['languages'] = [
 ];
 $config['minScripts'] = false;
 $config['debugApi'] = true;
-$config['logs'] = false;
+$config['logs'] = true;
 // Security
 $config['apiKey'] = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
-$config['serverName'] = 'test';
-$config['serverPass'] = 'test';
+$config['serverName'] = 'portal';
+$config['serverPass'] = 'portal';
 $config['encryptDataTransfer'] = false;
 $config['privateKey'] = 'config/private.key';
 $config['publicKey'] = 'config/public.key';
