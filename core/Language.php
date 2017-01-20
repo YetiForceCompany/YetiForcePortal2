@@ -167,6 +167,6 @@ class Language
 			$userInstance = User::getUser();
 			self::$modules = $userInstance->getModulesList();
 		}
-		return self::$modules[$module];
+		return isset(self::$modules[$module]) ? self::$modules[$module] : $module;
 	}
 }
