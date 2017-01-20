@@ -9,6 +9,7 @@ namespace Base\View;
 
 use Core;
 use Core\Session;
+
 abstract class Index extends Core\Controller
 {
 
@@ -39,7 +40,7 @@ abstract class Index extends Core\Controller
 	{
 		if (!$this->viewer) {
 			$moduleName = $request->getModule();
-			
+
 			$viewer = new Core\Viewer();
 			$viewer->assign('MODULE_NAME', $moduleName);
 			$viewer->assign('ACTION_NAME', $request->getAction());
@@ -93,7 +94,7 @@ abstract class Index extends Core\Controller
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
-		
+
 		if (\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
@@ -105,7 +106,7 @@ abstract class Index extends Core\Controller
 	/**
 	 * Retrieves css styles that need to loaded in the page
 	 * @param Core\Request $request - request model
-	 * @return <array> - array of Core\Script
+	 * @return Core\Script[]
 	 */
 	public function getHeaderCss(Core\Request $request)
 	{
@@ -117,6 +118,7 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/chosen/chosen.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
+			'libraries/FontAwesome/css/font-awesome.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');

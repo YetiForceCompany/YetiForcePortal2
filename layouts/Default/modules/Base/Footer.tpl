@@ -8,7 +8,7 @@
 </div>
 <footer class="footerContainer navbar-default navbar-fixed-bottom noprint">
 	<div class="footer">
-		<p>{sprintf(FN::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), '[0.00 s.]', 'open source project' )}</p>
+		<p>{sprintf(FN::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
 	</div>
 </footer>
 <div class="noprint">

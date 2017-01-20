@@ -1,211 +1,310 @@
-/* The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html */
 @font-face {
-	font-family: 'ModuleIcons';
+	font-family: 'UserIcons';
 	src:url('userIcons.eot?dfrtuf');
 	src:url('userIcons.eot?dfrtuf#iefix') format('embedded-opentype'),
 		url('userIcons.ttf?dfrtuf') format('truetype'),
 		url('userIcons.woff?dfrtuf') format('woff'),
 		url('userIcons.svg?dfrtuf#icons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-weight: normal;
+    font-style: normal;
 }
-[class^="moduleIcon-"], [class*=" moduleIcon-"] {
-	font-family: 'ModuleIcons';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+[class^="userIcon-"], [class*=" userIcon-"] {
+	font-family: 'UserIcons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.moduleIcon-my-home-page-1:before {
-	content: "\e804";
+.userIcon-FCorectingInvoice:before {
+    content: "\e954";
 }
-.moduleIcon-virtual-desk:before {
-	content: "\e675";
+.userIcon-ISTN:before {
+    content: "\e955";
 }
-.moduleIcon-my-home-page:before {
-	content: "\e800";
+.userIcon-ISTRN:before {
+    content: "\e956";
 }
-.moduleIcon-Calendar:before {
-	content: "\e801";
+.userIcon-ISTDN:before {
+    content: "\e957";
 }
-.moduleIcon-Emails:before {
-	content: "\e678";
+.userIcon-IGRNC:before {
+    content: "\e958";
 }
-.moduleIcon-compaines-and-contacts:before {
-	content: "\e679";
+.userIcon-IGDNC:before {
+    content: "\e959";
 }
-.moduleIcon-Leads:before {
-	content: "\e673";
+.userIcon-IGDN:before {
+    content: "\e94f";
 }
-.moduleIcon-Contacts:before {
-	content: "\e674";
+.userIcon-IGIN:before {
+    content: "\e950";
 }
-.moduleIcon-Vendors:before {
-	content: "\e802";
+.userIcon-IGRN:before {
+    content: "\e951";
 }
-.moduleIcon-Accounts:before {
-	content: "\e803";
+.userIcon-IIDN:before {
+    content: "\e952";
 }
-.moduleIcon-sales:before {
-	content: "\e806";
+.userIcon-IPreOrder:before {
+    content: "\e94d";
 }
-.moduleIcon-Campaigns:before {
-	content: "\e807";
+.userIcon-IStorages:before {
+    content: "\e94e";
 }
-.moduleIcon-Potentials:before {
-	content: "\e805";
+.userIcon-KnowledgeBase:before {
+    content: "\e953";
 }
-.moduleIcon-QuotesEnquires:before {
-	content: "\e82c";
+.userIcon-ShoppingCart:before {
+    content: "\e94a";
 }
-.moduleIcon-RequirementCards:before {
-	content: "\e808";
+.userIcon-Target:before {
+    content: "\e94b";
 }
-.moduleIcon-Calculations:before {
-	content: "\e809";
+.userIcon-Plane:before {
+    content: "\e94c";
 }
-.moduleIcon-Quotes:before {
-	content: "\e80a";
+.userIcon-WithoutOwnersAccounts:before {
+    content: "\e949";
 }
-.moduleIcon-SalesOrder:before {
-	content: "\e82d";
+.userIcon-VendorsAccounts:before {
+    content: "\e942";
 }
-.moduleIcon-PurchaseOrder:before {
-	content: "\e80b";
+.userIcon-CompanyAccounts:before {
+    content: "\e943";
 }
-.moduleIcon-PriceBooks:before {
-	content: "\e80c";
+.userIcon-ShutdownAccounts:before {
+    content: "\e944";
 }
-.moduleIcon-Project:before {
-	content: "\e80d";
+.userIcon-MyAccounts:before {
+    content: "\e945";
 }
-.moduleIcon-projects:before {
-	content: "\e6c5";
+.userIcon-UnassignedAccounts:before {
+    content: "\e946";
 }
-.moduleIcon-ProjectMilestone:before {
-	content: "\e813";
+.userIcon-AllAccounts:before {
+    content: "\e947";
 }
-.moduleIcon-ProjectTask:before {
-	content: "\e6c8";
+.userIcon-RecycleBin:before {
+    content: "\e948";
 }
-.moduleIcon-support:before {
-	content: "\e80e";
+.userIcon-FInvoice:before {
+    content: "\e93f";
 }
-.moduleIcon-HelpDesk:before {
-	content: "\e80f";
+.userIcon-FInvoiceProforma:before {
+    content: "\e940";
 }
-.moduleIcon-ServiceContracts:before {
-	content: "\e810";
+.userIcon-ModComments:before {
+    content: "\e941";
 }
-.moduleIcon-Faq:before {
-	content: "\e811";
+.userIcon-FBookkeeping:before {
+    content: "\e93c";
 }
-.moduleIcon-bookkeeping:before {
-	content: "\e812";
+.userIcon-Events:before {
+    content: "\e93d";
 }
-.moduleIcon-OSSCosts:before {
-	content: "\e814";
+.userIcon-Activity:before {
+    content: "\e93e";
 }
-.moduleIcon-Invoice:before {
-	content: "\e815";
+.userIcon-Marketing:before {
+    content: "\e93b";
 }
-.moduleIcon-PaymentsOut:before {
-	content: "\e816";
+.userIcon-SRecurringOrders:before {
+    content: "\e939";
 }
-.moduleIcon-PaymentsIn:before {
-	content: "\e817";
+.userIcon-Competition:before {
+    content: "\e93a";
 }
-.moduleIcon-human-resources:before {
-	content: "\e818";
+.userIcon-Accounts:before {
+    content: "\e900";
 }
-.moduleIcon-OSSEmployees:before {
-	content: "\e819";
+.userIcon-CompaniesAndContact:before {
+    content: "\e901";
 }
-.moduleIcon-OSSTimeControl:before {
-	content: "\e81a";
+.userIcon-HolidaysEntitlement:before {
+    content: "\e902";
 }
-.moduleIcon-HolidaysEntitlement:before {
-	content: "\e81b";
+.userIcon-Assets:before {
+    content: "\e903";
 }
-.moduleIcon-secretary:before {
-	content: "\e81c";
+.userIcon-Bookkeeping:before {
+    content: "\e904";
 }
-.moduleIcon-LettersIn:before {
-	content: "\e6a7";
+.userIcon-SCalculations:before {
+    content: "\e905";
 }
-.moduleIcon-LettersOut:before {
-	content: "\e6a8";
+.userIcon-Calendar:before {
+    content: "\e906";
 }
-.moduleIcon-Reservations:before {
-	content: "\e81d";
+.userIcon-CallHistory:before {
+    content: "\e907";
 }
-.moduleIcon-database:before {
-	content: "\e81e";
+.userIcon-Campaigns:before {
+    content: "\e908";
 }
-.moduleIcon-Products:before {
-	content: "\e81f";
+.userIcon-Contacts:before {
+    content: "\e909";
 }
-.moduleIcon-OutsourcedProducts:before {
-	content: "\e820";
+.userIcon-OSSMailView:before {
+    content: "\e90a";
 }
-.moduleIcon-Assets:before {
-	content: "\e821";
+.userIcon-Database:before {
+    content: "\e90b";
 }
-.moduleIcon-Services:before {
-	content: "\e822";
+.userIcon-Documents:before {
+    content: "\e90c";
 }
-.moduleIcon-OSSOutsourcedServices:before {
-	content: "\e823";
+.userIcon-OSSEmployees:before {
+    content: "\e90d";
 }
-.moduleIcon-OSSSoldServices:before {
-	content: "\e824";
+.userIcon-Faq:before {
+    content: "\e90e";
 }
-.moduleIcon-OSSMailView:before {
-	content: "\e825";
+.userIcon-Home:before {
+    content: "\e90f";
 }
-.moduleIcon-SMSNotifier:before {
-	content: "\e826";
+.userIcon-HumanResources:before {
+    content: "\e910";
 }
-.moduleIcon-list-of-calls:before {
-	content: "\e827";
+.userIcon-Ideas:before {
+    content: "\e911";
 }
-.moduleIcon-OSSMailTemplates:before {
-	content: "\e828";
+.userIcon-Leads:before {
+    content: "\e912";
 }
-.moduleIcon-Documents:before {
-	content: "\e829";
+.userIcon-LettersIn:before {
+    content: "\e913";
 }
-.moduleIcon-OSSPdf:before {
-	content: "\e82e";
+.userIcon-LettersOut:before {
+    content: "\e914";
 }
-.moduleIcon-OSSPasswords:before {
-	content: "\e832";
+.userIcon-PBXManager:before {
+    content: "\e915";
 }
-.moduleIcon-CallHistory:before {
-	content: "\e831";
+.userIcon-OSSMailTemplates:before {
+    content: "\e916";
 }
-.moduleIcon-rss:before {
-	content: "\e830";
+.userIcon-OSSMail:before {
+    content: "\e917";
 }
-.moduleIcon-our-sites:before {
-	content: "\e82b";
+.userIcon-Announcements:before {
+    content: "\e918";
 }
-.moduleIcon-reports:before {
-	content: "\e82f";
+.userIcon-SSalesProcesses:before {
+    content: "\e919";
 }
-.moduleIcon-NewOrders:before {
-	content: "\e82a";
+.userIcon-Portal:before {
+    content: "\e91a";
 }
-.moduleIcon-team-work:before {
-	content: "\e6ce";
+.userIcon-OutsourcedProducts:before {
+    content: "\e91b";
 }
-.moduleIcon-Ideas:before {
-	content: "\e6cf";
+.userIcon-OSSOutsourcedServices:before {
+    content: "\e91c";
+}
+.userIcon-Partners:before {
+    content: "\e91d";
+}
+.userIcon-OSSPasswords:before {
+    content: "\e91e";
+}
+.userIcon-PaymentsIn:before {
+    content: "\e91f";
+}
+.userIcon-PaymentsOut:before {
+    content: "\e920";
+}
+.userIcon-PriceBooks:before {
+    content: "\e921";
+}
+.userIcon-Products:before {
+    content: "\e922";
+}
+.userIcon-ProjectMilestone:before {
+    content: "\e923";
+}
+.userIcon-Project:before {
+    content: "\e924";
+}
+.userIcon-ProjectTask:before {
+    content: "\e925";
+}
+.userIcon-SQuotes:before {
+    content: "\e926";
+}
+.userIcon-Realization:before {
+    content: "\e927";
+}
+.userIcon-Reports:before {
+    content: "\e928";
+}
+.userIcon-Reservations:before {
+    content: "\e929";
+}
+.userIcon-Rss:before {
+    content: "\e92a";
+}
+.userIcon-Sales:before {
+    content: "\e92b";
+}
+.userIcon-SQuoteEnquiries:before {
+    content: "\e92c";
+}
+.userIcon-SSingleOrders:before {
+    content: "\e92d";
+}
+.userIcon-SRequirementsCards:before {
+    content: "\e92e";
+}
+.userIcon-Secretary:before {
+    content: "\e92f";
+}
+.userIcon-ServiceContracts:before {
+    content: "\e930";
+}
+.userIcon-Services:before {
+    content: "\e931";
+}
+.userIcon-OSSSoldServices:before {
+    content: "\e932";
+}
+.userIcon-Support:before {
+    content: "\e933";
+}
+.userIcon-SMSNotifier:before {
+    content: "\e934";
+}
+.userIcon-HelpDesk:before {
+    content: "\e933";
+}
+.userIcon-OSSTimeControl:before {
+    content: "\e936";
+}
+.userIcon-Vendors:before {
+    content: "\e937";
+}
+.userIcon-VirtualDesk:before {
+    content: "\e938";
+}
+.userIcon-EmailTemplates:before {
+    content: "\e916";
+}
+
+.userIcon-HelpDesk:before,.userIcon-Support:before {
+	content: "\f145";
+}
+.userIcon-HelpDesk,.userIcon-Support {
+    font: normal normal normal 14px/1 FontAwesome;
+	text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+	width: 32px;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 10px;
 }
