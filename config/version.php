@@ -7,7 +7,7 @@
  */
 defined('_EXEC') or die;
 
-$version = '0.0.0';
-$patchVersion = '20160602';
+$version = '0.0.1';
+$patchVersion = '20170120';
 
-define('VERSION',$version);
+define('VERSION', $version);
