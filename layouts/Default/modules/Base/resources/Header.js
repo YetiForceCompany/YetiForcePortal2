@@ -16,18 +16,19 @@ jQuery.Class("Base_Header_Js", {
 		var maxValues = 20;
 		var BtnText = '';
 		var BtnLink = 'javascript:void();';
-		var history = localStorage.history;
+		var key = 'yf_history_portal_';
+		var history = localStorage.getItem(key);
 		if (history != "" && history != null) {
-			var sp = history.toString().split(",");
+			var sp = history.toString().split("_|_");
 			var item = sp[sp.length - 1].toString().split("|");
 			BtnText = item[0];
-			BtnLink = item[1];			
-		}		
+			BtnLink = item[1];
+		}
 		var htmlContent = '<ul class="dropdown-menu pull-right historyList" role="menu">';
 		var date = new Date().getTime();
-		var howmanyDays = -1;
-		var writeSelector = true;		
-		if (sp != null) {			
+		var howManyDays = -1;
+		var writeSelector = true;
+		if (sp != null) {
 			for (var i = sp.length - 1; i >= 0; i--) {
 				item = sp[i].toString().split("|");
 				var d = new Date();
@@ -36,20 +37,18 @@ jQuery.Class("Base_Header_Js", {
 					d.setTime(item[2]);
 					var hours = app.formatDateZ(d.getHours());
 					var minutes = app.formatDateZ(d.getMinutes());
-					if(writeSelector && (howmanyDays != app.howManyDaysFromDate(d))){
-						howmanyDays = app.howManyDaysFromDate(d);
-						if(howmanyDays == 0){
+					if (writeSelector && (howManyDays != app.howManyDaysFromDate(d))) {
+						howManyDays = app.howManyDaysFromDate(d);
+						if (howManyDays == 0) {
 							htmlContent += '<li class="selectorHistory">' + app.translate('JS_TODAY') + '</li>';
-						}
-						else if(howmanyDays == 1){
+						} else if (howManyDays == 1) {
 							htmlContent += '<li class="selectorHistory">' + app.translate('JS_YESTERDAY') + '</li>';
-						}
-						else{
+						} else {
 							htmlContent += '<li class="selectorHistory">' + app.translate('JS_OLDER') + '</li>';
 							writeSelector = false;
 						}
 					}
-					if(writeSelector)
+					if (writeSelector)
 						t = '<span class="historyHour">' + hours + ":" + minutes + "</span> | ";
 					else
 						t = app.formatDate(d) + ' | ';
@@ -64,17 +63,15 @@ jQuery.Class("Base_Header_Js", {
 			if (sp.length >= maxValues) {
 				sp.splice(0, 1);
 			}
-			localStorage.history = sp.toString();
-			
+			localStorage.setItem(key, sp.join('_|_'));
 		} else {
 			var stack = new Array();
 			var Label = this.getHistoryLabel();
 			if (Label.length > 1) {
 				stack.push(this.getHistoryLabel() + '|' + document.URL + '|' + date);
-				localStorage.history = stack.toString();
+				localStorage.setItem(key, stack.join('_|_'));
 			}
 		}
-		
 		htmlContent += '<li class="divider"></li><li><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
 		htmlContent += '</ul>';
 		$(".showHistoryBtn").after(htmlContent);
@@ -89,7 +86,8 @@ jQuery.Class("Base_Header_Js", {
 	},
 	registerClearHistory: function () {
 		$(".historyBtn .clearHistory").click(function () {
-			localStorage.history = "";
+			var key = 'yf_history_portal_';
+			localStorage.removeItem(key);
 			var htmlContent = '<li class="divider"></li><li><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
 			$(".historyBtn .dropdown-menu").html(htmlContent);
 		});
