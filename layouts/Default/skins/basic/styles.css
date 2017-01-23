@@ -140,7 +140,6 @@ img{
 	height:100%;
 	top:0;
 	left: 0px;
-	width:calc(100% - 10px);
 	z-index:1100;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
@@ -256,9 +255,6 @@ img{
 hr{
 	margin-top:10px;
 	margin-bottom: 10px;
-}
-.widget_header{
-	padding-top: 5px;
 }
 .mobileLeftPanel{
 	position: fixed;
@@ -430,8 +426,7 @@ table tbody tr:hover  td .actions span{
 	text-align: center
 }
 .widget_header .breadCrumbs .breadcrumbsLinks{
-	margin:0;
-	font-size:19px;
+	font-size:15px;
 }
 .widget_header .breadCrumbs .breadcrumbsLinks a{
 	color: #000;
@@ -493,4 +488,15 @@ table tbody tr:hover  td .actions span{
 }
 .showSearchMenu{
 	right:0px;
+}
+.widget_header{
+	background:#eee;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	position: relative;
+}
+.widget_header h2 {
+	margin-bottom: 7px;
+	margin-top: 7px;
 }

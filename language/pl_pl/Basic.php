@@ -18,5 +18,16 @@ $jsLang = [
 	'JS_TODAY' => 'Dzisiaj',
 	'JS_CLEAR_HISTORY' => 'Wyczyść historię przeglądania',
 	'JS_YESTERDAY' => 'Wczoraj',
-	'JS_OLDER' => 'Starsze'
+	'JS_OLDER' => 'Starsze',
+	'JS_SEARCH' => 'Szukaj:',
+	'JS_S_LENGTH_MENU' => 'Pokaż _MENU_ pozycji',
+	'JS_S_INFO' => 'Pozycje od _START_ do _END_ z _TOTAL_ łącznie',
+	'JS_S_INFO_EMPTY' => 'Pozycji 0 z 0 dostępnych',
+	'JS_S_INFO_FILTERED' => '(filtrowanie spośród _MAX_ dostępnych pozycji)',
+	'JS_S_FIRST' => 'Pierwsza',
+	'JS_S_PREVIOUS' => 'Poprzednia',
+	'JS_S_NEXT' => 'Następna',
+	'JS_S_LAST' => 'Ostatnia',
+	'JS_S_SORT_ASCENDING' => ': aktywuj, by posortować kolumnę rosnąco',
+	'JS_S_SORT_DESCENDING' => ': aktywuj, by posortować kolumnę malejąco',
 ];

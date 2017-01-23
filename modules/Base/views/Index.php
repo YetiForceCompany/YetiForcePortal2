@@ -113,12 +113,13 @@ abstract class Index extends Core\Controller
 		$cssFileNames = [
 			'libraries/Scripts/pace/pace.css',
 			'libraries/Bootstrap/css/bootstrap.css',
-			'libraries/Bootstrap/css/bootstrap-responsive.css',
 			'libraries/Bootstrap/css/bootstrap-theme.css',
 			'libraries/Scripts/chosen/chosen.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 			'libraries/FontAwesome/css/font-awesome.css',
+			'libraries/Datatables/media/css/jquery.dataTables_themeroller.css',
+			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
@@ -149,6 +150,8 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/jquery-pjax/jquery.pjax.js',
 			'libraries/Bootstrap/js/bootstrap.js',
 			'libraries/Scripts/chosen/chosen.jquery.js',
+			'libraries/Datatables/media/js/jquery.dataTables.js',
+			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/App.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",

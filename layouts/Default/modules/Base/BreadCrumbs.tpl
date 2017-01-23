@@ -5,8 +5,8 @@
 		{assign var=HOMEICON value='userIcon-Home'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
-				<h2 class="breadcrumbsLinks">
-					<a href='/'>
+				<h2 class="breadcrumbsLinks textOverflowEllipsis">
+					<a href='{\Config::get('portalPath')}'>
 						<span class="{$HOMEICON}"></span>
 					</a>
 					&nbsp;|&nbsp;

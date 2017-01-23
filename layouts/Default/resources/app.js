@@ -1,6 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 var app = {
 	languageString: [],
+	cacheParams: [],
 	/**
 	 * Function to get the module name. This function will get the value from element which has id module
 	 * @return : string - module name
@@ -101,13 +102,71 @@ var app = {
 				}
 			}
 		}
-		return key;		
+		return key;
+	},
+	registerDataTables: function (table) {
+		if ($.fn.dataTable == undefined) {
+			return false;
+		}
+		if (table.length == 0) {
+			return false;
+		}
+		var params = {language: {
+				sLengthMenu: app.translate('JS_S_LENGTH_MENU'),
+				sZeroRecords: app.translate('JS_NO_RESULTS_FOUND'),
+				sInfo: app.translate('JS_S_INFO'),
+				sInfoEmpty: app.translate('JS_S_INFO_EMPTY'),
+				sSearch: app.translate('JS_SEARCH'),
+				sEmptyTable: app.translate('JS_NO_RESULTS_FOUND'),
+				sInfoFiltered: app.translate('JS_S_INFO_FILTERED'),
+				sLoadingRecords: app.translate('JS_LOADING_OF_RECORDS'),
+				sProcessing: app.translate('JS_LOADING_OF_RECORDS'),
+				oPaginate: {
+					sFirst: app.translate('JS_S_FIRST'),
+					sPrevious: app.translate('JS_S_PREVIOUS'),
+					sNext: app.translate('JS_S_NEXT'),
+					sLast: app.translate('JS_S_LAST')
+				},
+				oAria: {
+					sSortAscending: app.translate('JS_S_SORT_ASCENDING'),
+					sSortDescending: app.translate('JS_S_SORT_DESCENDING')
+				}
+			}
+		}
+		var lengthMenu = app.getMainParams('listEntriesPerPage', true);
+		if (lengthMenu) {
+			params.lengthMenu = lengthMenu;
+		}
+		$.extend($.fn.dataTable.defaults, params);
+		return table.DataTable();
+	},
+	getMainParams: function (param, json) {
+		if (app.cacheParams[param] == undefined) {
+			var value = $('#' + param).val();
+			app.cacheParams[param] = value;
+		}
+		var value = app.cacheParams[param];
+		if (json) {
+			if (value != '') {
+				value = $.parseJSON(value);
+			} else {
+				value = [];
+			}
+		}
+		return value;
+	},
+	setMainParams: function (param, value) {
+		app.cacheParams[param] = value;
+		$('#' + param).val(value);
 	},
 }
 
 jQuery(document).ready(function () {
 	app.showSelectElement(jQuery('body'));
 	app.registerSideLoading(jQuery('body'));
+	if (app.getViewName() === 'ListView') {
+		app.registerDataTables(jQuery('table.listViewEntries'));
+	}
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

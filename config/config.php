@@ -15,9 +15,12 @@ $config['languages'] = [
 	'en_us' => 'English',
 	'pl_pl' => 'Polski',
 ];
+$config['listMaxEntriesFromApi'] = 50;
+// Available record display options in listview for datatable element - [[values],[labels]]
+$config['listEntriesPerPage'] = [[10, 25, 50, 100], [10, 25, 50, 100]];
 $config['minScripts'] = false;
-$config['debugApi'] = true;
-$config['logs'] = true;
+$config['debugApi'] = false;
+$config['logs'] = false;
 // Security
 $config['apiKey'] = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
 $config['serverName'] = 'portal';
