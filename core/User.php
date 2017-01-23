@@ -69,7 +69,7 @@ class User extends BaseModel
 				$this->set($key, $value);
 			}
 		}
-		return $auth;
+		return true;
 	}
 
 	public function logout()
