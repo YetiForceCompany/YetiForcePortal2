@@ -2,18 +2,27 @@
 
 jQuery.Class("Base_ListView_Js", {
 }, {
-	registerSelectRecord: function () {
-		$('.actions').click(function(event){
-			event.stopPropagation();
-		});
-		$('.listViewEntries tbody tr').click('click', function (e) {
-			var url = 'index.php?module=' + app.getModuleName() + '&view=DetailView&record=' + $(this).data('record');
-			AppConnector.requestPjax(url).then(function (data) {
-				$('div.bodyContent').html(data);
+	registerDataTable: function () {
+		var params = {};
+		var lengthMenu = app.getMainParams('listEntriesPerPage', true);
+		if (lengthMenu) {
+			params.lengthMenu = lengthMenu;
+		}
+		params.columnDefs = [{"orderable": false, "targets": 0}];
+		params.order = [];
+		var table = app.registerDataTables(jQuery('table.listViewEntries'), params);
+		if (table) {
+			table.$('.listViewEntries tbody tr').on('click', function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)){
+					return;
+				}
+				jQuery(e.currentTarget).find('.detailLink').trigger('click');
 			});
-		});
+		}
 	},
 	registerEvents: function () {
-		this.registerSelectRecord();
+		this.registerDataTable();
 	}
 });

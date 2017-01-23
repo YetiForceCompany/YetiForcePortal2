@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Base\model;
+namespace Base\Model;
 
 use Core;
 

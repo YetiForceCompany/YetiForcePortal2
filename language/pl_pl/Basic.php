@@ -13,6 +13,9 @@ $phpLang = [
 	'LBL_ALL_RECORDS' => 'Wszystkie moduły',
 	'LBL_CHAT' => 'Czat',
 	'LBL_QUICK_CREATE' => 'Szybkie wybieranie',
+	'LBL_SHOW_COMPLETE_DETAILS' => 'Szczegóły',
+	'LBL_EDIT' => 'Edycja',
+	'LBL_DELETE' => 'Usuń',
 ];
 $jsLang = [
 	'JS_TODAY' => 'Dzisiaj',

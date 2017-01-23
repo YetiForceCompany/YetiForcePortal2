@@ -25,24 +25,21 @@
 				<table class="table listViewEntries">
 					<thead>
 						<tr class='listViewHeaders'>
+							<th></th>
 							{foreach item=HEADER from=$HEADERS}
 								<th>{$HEADER}</th>
-								{/foreach}
-							<th></th>
+							{/foreach}
 						</tr>
 					</thead>
 					<tbody>
 						{foreach item=RECORD key=ID from=$RECORDS}
 							<tr data-record="{$ID}">
-								{foreach item=COLUMN from=$RECORD}
-									<td>{$COLUMN}</td>
-								{/foreach}
-								<td>
-									<div class='actions'>
-										<a href="index.php?module={$MODULE_NAME}&view=DetailView&record={$ID}"><span class='glyphicon glyphicon-th-list alignMiddle'></span></a>
-										<a href="index.php?module={$MODULE_NAME}&view=EditView&record={$ID}"><span class='glyphicon glyphicon-pencil alignMiddle'></span></a>
-									</div>
+								<td class="leftRecordActions">
+									{include file=FN::templatePath("ListViewActions.tpl",$MODULE)}
 								</td>
+								{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
+									<td>{$RECORD->get($FIELD_NAME)}</td>
+								{/foreach}
 							</tr>
 						{/foreach}
 					</tbody>

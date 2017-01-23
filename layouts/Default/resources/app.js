@@ -104,7 +104,7 @@ var app = {
 		}
 		return key;
 	},
-	registerDataTables: function (table) {
+	registerDataTables: function (table, castomParams) {
 		if ($.fn.dataTable == undefined) {
 			return false;
 		}
@@ -133,9 +133,8 @@ var app = {
 				}
 			}
 		}
-		var lengthMenu = app.getMainParams('listEntriesPerPage', true);
-		if (lengthMenu) {
-			params.lengthMenu = lengthMenu;
+		if(castomParams != undefined){
+			params = jQuery.extend(params, castomParams);
 		}
 		$.extend($.fn.dataTable.defaults, params);
 		return table.DataTable();
@@ -164,9 +163,6 @@ var app = {
 jQuery(document).ready(function () {
 	app.showSelectElement(jQuery('body'));
 	app.registerSideLoading(jQuery('body'));
-	if (app.getViewName() === 'ListView') {
-		app.registerDataTables(jQuery('table.listViewEntries'));
-	}
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

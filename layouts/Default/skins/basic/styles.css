@@ -385,20 +385,6 @@ hr{
 table tbody tr:hover  td .actions span{
 	opacity:1
 } 
-.actions a{
-	color: #000;
-}
-.actions span{	
-	opacity:0;
-	cursor: pointer;
-	float: right;
-	padding-right:10px;
-}
-@media only screen and (max-width: 1240px) {
-	.actions span{
-		opacity:1;
-	}
-}
 .historyList{
 	overflow: auto;
 }
@@ -499,4 +485,34 @@ table tbody tr:hover  td .actions span{
 .widget_header h2 {
 	margin-bottom: 7px;
 	margin-top: 7px;
+}
+.leftRecordActions .actions:hover .toolsAction{
+	visibility: hidden;
+}
+.leftRecordActions .actions:hover .actionImages{
+	white-space: nowrap;
+	position: absolute;
+	z-index: 1;
+}
+.leftRecordActions > div,
+.leftRecordActions .actions:hover .actionImages{
+	display: inline-block !important;
+}
+.leftRecordActions .actions{
+	background: inherit;
+}
+.listViewEntries{
+	background: #fff;
+}
+.leftRecordActions{
+	background: inherit;
+}
+.leftRecordActions .actions .actionImages a{
+	color: inherit;
+}
+table.listViewEntries td{
+	vertical-align: middle !important;
+}
+table.dataTable.listViewEntries tbody td {
+    padding: 3px 10px !important;
 }
