@@ -61,12 +61,10 @@ class Api
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
 		}
 		$rawResponse = $request->body;
-		//var_dump($rawResponse);
 		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Core\Json::decode($rawResponse);
-
 		if (\Config::getBoolean('debugApi')) {
 			$debugApi = [
 				'date' => date('Y-m-d H:i:s', $startTime),
