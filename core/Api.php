@@ -51,19 +51,18 @@ class Api
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
 		$options = $this->getOptions();
-
-		if ($requestType == 'get') {
+		if ($requestType === 'get') {
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
 			$data = Core\Json::encode($data);
-			if (\Config::getBoolean('encryptDataTransfer') && $requestType != 'get') {
+			if (\Config::getBoolean('encryptDataTransfer') && $requestType !== 'get') {
 				$data = $this->encryptData($data);
 			}
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
 		}
 		$rawResponse = $request->body;
-
-		if ($request->headers->getValues('Encrypted')[0] == 1) {
+		//var_dump($rawResponse);
+		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Core\Json::decode($rawResponse);
@@ -80,17 +79,15 @@ class Api
 			];
 			$_SESSION['debugApi'][] = $debugApi;
 		}
-
 		if (\Config::getBoolean('logs')) {
 			$this->addLogs($method, $data, $response);
 		}
-
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
 		}
-
-		if (isset($response['result']))
+		if (isset($response['result'])) {
 			return $response['result'];
+		}
 	}
 
 	/**
@@ -101,10 +98,11 @@ class Api
 	{
 		$userInstance = User::getUser();
 		return [
-			'Apikey' => \Config::get('apiKey'),
-			'Encrypted' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
-			'Sessionid' => $userInstance->has('logged') ? $userInstance->get('sessionId') : '0',
 			'Content-Type' => 'application/json',
+			'X-ENCRYPTED' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
+			'X-API-KEY' => \Config::get('apiKey'),
+			'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('sessionId') : '0',
+			//'X-TOKEN' => '7652107c6c8636dc79cd17d350893b50',
 		];
 	}
 

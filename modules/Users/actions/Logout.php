@@ -1,15 +1,15 @@
 <?php
+namespace Users\Action;
+
+use Base\Action,
+	Core;
+
 /**
  * User Action Logout Class
  * @package YetiForce.Actions
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Users\Action;
-
-use Base\Action,
-	Core;
-
 class Logout extends Action\Base
 {
 
