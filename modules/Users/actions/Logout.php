@@ -18,6 +18,6 @@ class Logout extends Action\Base
 		$userInstance = Core\User::getUser();
 		$userInstance->logout();
 
-		header('Location: /');
+		header('Location: ' . \Config::get('portalPath'));
 	}
 }
