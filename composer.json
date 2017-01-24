@@ -18,7 +18,9 @@
 		}
 	],
 	"require": {
-		"php": ">=5.6.0"
+		"php": ">=5.6.0",
+		"rmccue/requests": ">=1.7",
+		"smarty/smarty": ">=3.1.30"
 	},
 	"autoload": {
 
