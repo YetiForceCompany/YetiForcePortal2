@@ -55,14 +55,13 @@ class User extends BaseModel
 
 	public function login($email, $password)
 	{
-		$api = Api::getInstance();
 		$params = [
 			'version' => VERSION,
 			'language' => Language::getLanguage(),
 			'ip' => \FN::getRemoteIP(),
 			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
 		];
-		$response = $api->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params]);
+		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params]);
 		if ($response) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
@@ -74,9 +73,10 @@ class User extends BaseModel
 
 	public function logout()
 	{
-		$api = Api::getInstance();
-		$response = $api->call('Users/Logout', [], 'get');
-		session_destroy();
+		$response = Api::getInstance()->call('Users/Logout', [], 'put');
+		if ($response) {
+			session_destroy();
+		}
 	}
 
 	public function isPermitted($module)
@@ -90,8 +90,7 @@ class User extends BaseModel
 		if (!empty($modules)) {
 			return $modules;
 		}
-		$api = Api::getInstance();
-		$modules = $api->call('Base/GetModulesList', [], 'get');
+		$modules = Api::getInstance()->call('Modules', [], 'get');
 		Session::set('modules', $modules);
 		return $modules;
 	}

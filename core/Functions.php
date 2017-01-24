@@ -2,10 +2,12 @@
 
 class FN
 {
+
 	public static function translate($label, $module)
 	{
 		return Core\Language::translate($label, $module);
 	}
+
 	public static function fileTemplate($name, $moduleName, $type = 'images')
 	{
 		$filePath = 'layouts' . DIRECTORY_SEPARATOR . Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
@@ -20,12 +22,14 @@ class FN
 		}
 		return $name;
 	}
+
 	public static function templatePath($templateName, $moduleName = '')
 	{
 		$viewer = new \Core\Viewer();
 		$args = func_get_args();
 		return call_user_func_array([$viewer, 'getTemplatePath'], $args);
 	}
+
 	public static function getRemoteIP($onlyIP = false)
 	{
 		$address = $_SERVER['REMOTE_ADDR'];
@@ -43,8 +47,48 @@ class FN
 		}
 		return $address;
 	}
+
 	public static function getTranslatedModuleName($moduleName)
 	{
 		return Session::get('modules')[$moduleName];
+	}
+
+	public static function getBacktrace($minLevel = 1, $maxLevel = 0, $sep = '#')
+	{
+		$trace = '';
+		foreach (debug_backtrace() as $k => $v) {
+			if ($k < $minLevel) {
+				continue;
+			}
+			$l = $k - $minLevel;
+			$args = '';
+			if (isset($v['args'])) {
+				foreach ($v['args'] as &$arg) {
+					if (!is_array($arg) && !is_object($arg) && !is_resource($arg)) {
+						$args .= var_export($arg, true);
+					} elseif (is_array($arg)) {
+						$args .= '[';
+						foreach ($arg as &$a) {
+							$val = $a;
+							if (is_array($a) || is_object($a) || is_resource($a)) {
+								$val = gettype($a);
+								if (is_object($a)) {
+									$val .= '(' . get_class($a) . ')';
+								}
+							}
+							$args .= $val . ',';
+						}
+						$args = rtrim($args, ',') . ']';
+					}
+					$args .= ',';
+				}
+				$args = rtrim($args, ',');
+			}
+			$trace .= "$sep$l {$v['file']} ({$v['line']})  >>  " . (isset($v['class']) ? $v['class'] . '->' : '') . "{$v['function']}($args)" . PHP_EOL;
+			if ($maxLevel !== 0 && $l >= $maxLevel) {
+				break;
+			}
+		}
+		return rtrim(str_replace(YF_ROOT . DIRECTORY_SEPARATOR, '', $trace), PHP_EOL);
 	}
 }

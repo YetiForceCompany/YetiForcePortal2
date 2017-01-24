@@ -9,6 +9,7 @@
 						Start time: {$ITEM['date']}<br/>
 						Execution time: {$ITEM['time']}<br/>
 						API method: {$ITEM['method']}<br/>
+						Request type: {$ITEM['requestType']}<br/>
 					</div>
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
@@ -20,6 +21,9 @@
 							</li>
 							<li role="presentation" class="active">
 								<a href="#response{$KEY}" aria-controls="response{$KEY}" role="tab" data-toggle="tab">Response</a>
+							</li>
+							<li role="presentation">
+								<a href="#trace{$KEY}" aria-controls="trace{$KEY}" role="tab" data-toggle="tab">Trace</a>
 							</li>
 						</ul>
 						<div class="tab-content">
@@ -34,6 +38,9 @@
 							</div>
 							<div role="tabpanel" class="tab-pane active" id="response{$KEY}">
 								<pre>{print_r($ITEM['response'],true)}</pre>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="trace{$KEY}">
+								<pre>{print_r($ITEM['trace'],true)}</pre>
 							</div>
 						</div>
 					</div>

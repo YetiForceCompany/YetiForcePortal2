@@ -27,7 +27,7 @@ class Api
 
 	/**
 	 * Initiate API instance
-	 * @return Core::Api instance
+	 * @return self instance
 	 */
 	public static function getInstance()
 	{
@@ -72,10 +72,12 @@ class Api
 				'date' => date('Y-m-d H:i:s', $startTime),
 				'time' => round(microtime(true) - $startTime, 4),
 				'method' => $method,
+				'requestType' => strtoupper($requestType),
 				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
 				'response' => $response,
 				'request' => $request->raw,
+				'trace' => \FN::getBacktrace()
 			];
 			$_SESSION['debugApi'][] = $debugApi;
 		}
@@ -84,6 +86,9 @@ class Api
 		}
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
+			if ($response['error']['code'] === 401) {
+				session_destroy();
+			}
 		}
 		if (isset($response['result'])) {
 			return $response['result'];
@@ -101,8 +106,7 @@ class Api
 			'Content-Type' => 'application/json',
 			'X-ENCRYPTED' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'X-API-KEY' => \Config::get('apiKey'),
-			'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('sessionId') : '0',
-			//'X-TOKEN' => '7652107c6c8636dc79cd17d350893b50',
+			'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
 		];
 	}
 

@@ -18,7 +18,7 @@ class ListView extends Index
 		$module = $request->getModule();
 		$api = Core\Api::getInstance();
 		$recordsListModel = [];
-		$recordsList = $api->call($module . '/GetRecordsList', [], 'get');
+		$recordsList = $api->call($module . '/RecordsList', [], 'get');
 		if (!empty($recordsList['records'])) {
 			foreach ($recordsList['records'] as $key => $value) {
 				$recordModel = \Base\Model\Record::getInstance($module);
