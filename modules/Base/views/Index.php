@@ -4,6 +4,7 @@
  * @package YetiForce.View
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 namespace Base\View;
 
@@ -87,6 +88,8 @@ abstract class Index extends Core\Controller
 			$viewer->assign('ERRORS', Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
+		$viewer->assign('VIEW', $request->get('view'));
+		$viewer->assign('MODULE', $request->get('module'));
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
@@ -156,8 +159,8 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'libraries/Datatables/media/js/jquery.dataTables.js',
 			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
-			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
+			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",

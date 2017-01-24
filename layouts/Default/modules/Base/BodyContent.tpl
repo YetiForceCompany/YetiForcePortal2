@@ -3,4 +3,6 @@
 	<div class="container-fluid bodyContent">
 		<div class="mainContent">
 			<div id="page">
+				<input type="hidden" id="view" value="{$VIEW}">
+				<input type="hidden" id="module" value="{$MODULE}">
 {/strip}

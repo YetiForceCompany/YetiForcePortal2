@@ -22,9 +22,9 @@
 		</div>
 		<div class="row">
 			<div class="table-responsive col-xs-12">
-				<table class="table listViewEntries">
+				<table class="table listViewEntries hide">
 					<thead>
-						<tr class='listViewHeaders'>
+						<tr class="listViewHeaders">
 							<th></th>
 							{foreach item=HEADER from=$HEADERS}
 								<th>{$HEADER}</th>

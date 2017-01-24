@@ -7,13 +7,13 @@ var app = {
 	 * @return : string - module name
 	 */
 	getModuleName: function () {
-		return this.getUrlParam('module');
+		return app.getMainParams('module');
 	},
 	/**
 	 * Function returns the current view name
 	 */
 	getViewName: function () {
-		return this.getUrlParam('view');
+		return app.getMainParams('view');
 	},
 	/**
 	 * Function returns the javascript controller based on the current view
