@@ -5,9 +5,7 @@
 			<img src="{Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-xs-10 userDetails">
-			<p>{$USER->get('firstName')}</p>
-			<p>{$USER->get('lastName')}</p>
-			<p class="companyName">{$USER->get('company')}</p>
+			<p class="userName">{$USER->get('name')}</p>
 		</div>	
 	</div>
 	<div class="menuContainer">

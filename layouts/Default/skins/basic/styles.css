@@ -71,8 +71,9 @@ img{
 	line-height: 14px;
 	font-size: 12px;
 }
-.userDetailsContainer .userDetails p.companyName{
-	font-size: 10px;
+.userDetailsContainer .userDetails p.userName{
+	font-size: 18px;
+    margin-top: 25px;
 }
 .mainPage{
 	height:100%;
@@ -229,7 +230,7 @@ img{
 	width: 100%;
 	background: #fff;
 	padding-bottom: 33px;
-	
+
 }
 .bodyHeader .leftSide{
 	padding-left:10px;
