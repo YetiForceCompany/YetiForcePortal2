@@ -12,15 +12,35 @@ jQuery.Class("Base_ListView_Js", {
 		params.order = [];
 		var table = app.registerDataTables(jQuery('table.listViewEntries'), params);
 		if (table) {
+			table.$('.deleteRecordButton').on('click', function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				var element = jQuery(e.currentTarget);
+				AppConnector.request(element.data('url')).then(function (data) {
+					table.row(element.closest('tr')).remove().draw();
+				}, function (e, err) {
+					console.log([e, err])
+				});
+			});
 			table.$('.listViewEntries tbody tr').on('click', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
-				if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)){
+				if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)) {
 					return;
 				}
 				jQuery(e.currentTarget).find('.detailLink').trigger('click');
 			});
 		}
+	},
+	registerDeleteRecordClickEvent: function () {
+		var thisInstance = this;
+		var listViewContentDiv = this.getListViewContentContainer();
+		listViewContentDiv.on('click', '.deleteRecordButton', function (e) {
+			var elem = jQuery(e.currentTarget);
+			var recordId = elem.closest('tr').data('id');
+			Vtiger_List_Js.deleteRecord(recordId);
+			e.stopPropagation();
+		});
 	},
 	registerEvents: function () {
 		this.registerDataTable();

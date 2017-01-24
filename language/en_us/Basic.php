@@ -22,4 +22,5 @@ $jsLang = [
 	'JS_S_LAST' => 'Previous',
 	'JS_S_SORT_ASCENDING' => ': activate to sort column ascending',
 	'JS_S_SORT_DESCENDING' => ': activate to sort column descending',
+	'JS_NO_RESULTS_FOUND' => 'No results found',
 ];

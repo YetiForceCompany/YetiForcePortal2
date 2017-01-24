@@ -33,4 +33,5 @@ $jsLang = [
 	'JS_S_LAST' => 'Ostatnia',
 	'JS_S_SORT_ASCENDING' => ': aktywuj, by posortować kolumnę rosnąco',
 	'JS_S_SORT_DESCENDING' => ': aktywuj, by posortować kolumnę malejąco',
+	'JS_NO_RESULTS_FOUND' => 'Nie znaleziono',
 ];

@@ -51,7 +51,7 @@ class Api
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
 		$options = $this->getOptions();
-		if ($requestType === 'get') {
+		if (in_array($requestType, ['get', 'delete'])) {
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
 			$data = Core\Json::encode($data);

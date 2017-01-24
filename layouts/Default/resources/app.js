@@ -104,7 +104,7 @@ var app = {
 		}
 		return key;
 	},
-	registerDataTables: function (table, castomParams) {
+	registerDataTables: function (table, customParams) {
 		if ($.fn.dataTable == undefined) {
 			return false;
 		}
@@ -133,8 +133,8 @@ var app = {
 				}
 			}
 		}
-		if(castomParams != undefined){
-			params = jQuery.extend(params, castomParams);
+		if(customParams != undefined){
+			params = jQuery.extend(params, customParams);
 		}
 		$.extend($.fn.dataTable.defaults, params);
 		return table.DataTable();

@@ -124,7 +124,7 @@ class Record extends \Core\BaseModel
 			$recordLinks[] = [
 				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
 				'linklabel' => 'LBL_DELETE',
-				'linkurl' => $this->getDeleteUrl(),
+				'linkdata' => ['url' => $this->getDeleteUrl()],
 				'linkicon' => 'glyphicon glyphicon-trash',
 				'linkclass' => 'btn-sm btn-default deleteRecordButton'
 			];
