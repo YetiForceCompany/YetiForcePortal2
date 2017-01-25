@@ -23,8 +23,8 @@ class Menu
 		$view = $request->get('view');
 		$basic = [];
 		$basic['name'] = Language::translateModule($moduleName);
-		if ($moduleName && $view) {
-			$basic['url'] = "index.php?module=$moduleName&view=$view";
+		if (Session::has('modules') && isset(Session::get('modules')[$moduleName])) {
+			$basic['url'] = "index.php?module=$moduleName&view=ListView";
 		}
 		$breadcrumbs[] = $basic;
 		if ($view === 'EditView' && empty($request->get('record'))) {
