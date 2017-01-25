@@ -13,8 +13,14 @@ use Base\Model,
 class WebUI
 {
 
+	/**
+	 * Process
+	 * @param \Core\Request $request
+	 * @throws \AppException
+	 */
 	public function process(Request $request)
 	{
+		$request = Request::setInstance($request);
 		$module = $request->getModule();
 		$view = $request->get('view');
 		$action = $request->get('action');

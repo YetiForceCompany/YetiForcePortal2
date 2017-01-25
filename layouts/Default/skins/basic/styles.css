@@ -515,5 +515,8 @@ table.listViewEntries td{
 	vertical-align: middle !important;
 }
 table.dataTable.listViewEntries tbody td {
-    padding: 3px 10px !important;
+	padding: 3px 10px !important;
+}
+.breadcrumbsLinks a {
+	font-weight: bold;
 }

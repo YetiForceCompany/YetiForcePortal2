@@ -4,6 +4,7 @@
  * @package YetiForce.Core
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 namespace Core;
 
@@ -13,6 +14,7 @@ class Request
 	// Datastore
 	private $valuemap;
 	private $defaultmap = [];
+	private static $request;
 
 	/**
 	 * Default constructor
@@ -23,6 +25,29 @@ class Request
 		if ($stripifgpc && !empty($this->valuemap) && get_magic_quotes_gpc()) {
 			$this->valuemap = $this->stripslashes_recursive($this->valuemap);
 		}
+	}
+
+	/**
+	 * Function gets Request object
+	 * @return \Core\Request
+	 */
+	public static function getInstance()
+	{
+		if (!static::$request) {
+			static::$request = new Request($_REQUEST, $_REQUEST);
+		}
+		return static::$request;
+	}
+
+	/**
+	 * Set Request instance
+	 * @param \Core\Request $request
+	 * @return \Core\Request
+	 */
+	public static function setInstance(Request $request)
+	{
+		static::$request = $request;
+		return static::$request;
 	}
 
 	/**

@@ -37,6 +37,11 @@ abstract class Index extends Core\Controller
 		return true;
 	}
 
+	/**
+	 * Get viewer
+	 * @param \Core\Request $request
+	 * @return \Core\Viewer
+	 */
 	public function getViewer(Core\Request $request)
 	{
 		if (!$this->viewer) {
@@ -44,6 +49,7 @@ abstract class Index extends Core\Controller
 
 			$viewer = new Core\Viewer();
 			$viewer->assign('MODULE_NAME', $moduleName);
+			$viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('ACTION_NAME', $request->getAction());
 			$this->viewer = $viewer;
 		}
@@ -88,8 +94,6 @@ abstract class Index extends Core\Controller
 			$viewer->assign('ERRORS', Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
-		$viewer->assign('VIEW', $request->get('view'));
-		$viewer->assign('MODULE', $request->get('module'));
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 

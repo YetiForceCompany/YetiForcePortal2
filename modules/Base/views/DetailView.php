@@ -20,6 +20,7 @@ class DetailView extends Index
 		$recordDetail = $api->call($moduleName . '/Record/' . $record, [], 'get');
 
 		$viewer = $this->getViewer($request);
+		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$viewer->assign('DETAIL', $recordDetail['data']);
 		$viewer->view('DetailView.tpl', $moduleName);
 	}
