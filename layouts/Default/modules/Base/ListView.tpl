@@ -11,11 +11,14 @@
 			<div class="col-sm-4 listViewAction">
 				<div class="pull-right">
 					<div class="btn-group">
-						<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
-							<span class="glyphicon glyphicon-plus"></span>
-							&nbsp;
-							<strong>{FN::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
-						</a>
+						{assign var=IS_CREATEVIEW value=\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+						{if $IS_CREATEVIEW}
+							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
+								<span class="glyphicon glyphicon-plus"></span>
+								&nbsp;
+								<strong>{FN::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+							</a>
+						{/if}
 					</div>
 				</div>
 			</div>
