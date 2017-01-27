@@ -10,14 +10,12 @@
 			<meta name="robots" content="noindex" />	
 			<title>{FN::translate($PAGETITLE, $MODULE_NAME)}</title>
 			<link rel="icon" href="{FN::fileTemplate("favicon.ico",$MODULE_NAME)}">
-
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 			<!--[if lt IE 9]>
 			  <script src="libraries/Scripts/html5shiv/html5shiv.min.js"></script>
 			  <script src="libraries/Scripts/respond/respond.min.js"></script>
 			<![endif]-->
-
 			{foreach item=SCRIPT from=$STYLES}
 				<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}" />
 			{/foreach}

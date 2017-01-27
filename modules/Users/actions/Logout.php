@@ -15,9 +15,8 @@ class Logout extends Action\Base
 
 	public function process(Core\Request $request)
 	{
-		$userInstance = Core\User::getUser();
-		$userInstance->logout();
-
+		$response = \Core\Api::getInstance()->call('Users/Logout', [], 'put');
+		session_destroy();
 		header('Location: ' . \Config::get('portalPath'));
 	}
 }

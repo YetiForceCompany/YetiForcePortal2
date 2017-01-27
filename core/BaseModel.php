@@ -28,7 +28,7 @@ class BaseModel
 	 */
 	public function get($key)
 	{
-		return $this->valueMap[$key];
+		return isset($this->valueMap[$key]) ? $this->valueMap[$key] : false;
 	}
 
 	/**

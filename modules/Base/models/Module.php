@@ -40,7 +40,7 @@ class Module
 		}
 		$data = \Core\Session::get('modulePermissions');
 		if (!isset($data[$module])) {
-			$permissions = \Core\Api::getInstance()->call($module . '/Privileges', [], 'get');
+			$permissions = \Core\Api::getInstance()->call($module . '/Privileges');
 			$data[$module] = $permissions['standardActions'];
 			\Core\Session::set('modulePermissions', $data);
 		}

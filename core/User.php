@@ -59,9 +59,9 @@ class User extends BaseModel
 			'version' => VERSION,
 			'language' => Language::getLanguage(),
 			'ip' => \FN::getRemoteIP(),
-			'fromUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'],
+			'fromUrl' => \Config::get('portalPath')
 		];
-		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params]);
+		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
 		if ($response) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
@@ -71,27 +71,41 @@ class User extends BaseModel
 		return true;
 	}
 
-	public function logout()
-	{
-		$response = Api::getInstance()->call('Users/Logout', [], 'put');
-		if ($response) {
-			session_destroy();
-		}
-	}
-
 	public function isPermitted($module)
 	{
 		return isset($this->getModulesList()[$module]);
 	}
 
+	/**
+	 * Get modules list
+	 * @return array
+	 */
 	public function getModulesList()
 	{
-		$modules = Session::get('modules');
+		$modules = Session::get('Modules');
 		if (!empty($modules)) {
 			return $modules;
 		}
-		$modules = Api::getInstance()->call('Modules', [], 'get');
-		Session::set('modules', $modules);
+		$modules = Api::getInstance()->call('Modules');
+		Session::set('Modules', $modules);
 		return $modules;
+	}
+
+	/**
+	 * Get companies
+	 * @return array
+	 */
+	public function getCompanies()
+	{
+		if ($this->isEmpty('type') || $this->get('type') < 3) {
+			return false;
+		}
+		$companies = Session::get('Companies');
+		if (!empty($companies)) {
+			return $companies;
+		}
+		$companies = Api::getInstance()->call('Accounts/Hierarchy');
+		Session::set('Companies', $companies);
+		return $companies;
 	}
 }

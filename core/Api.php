@@ -44,7 +44,7 @@ class Api
 	 * @param array $data
 	 * @return array
 	 */
-	public function call($method, $data, $requestType = 'post')
+	public function call($method, $data = [], $requestType = 'get')
 	{
 		$crmPath = $this->url . $method;
 		$rawRequest = $data;
@@ -61,6 +61,7 @@ class Api
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
 		}
 		$rawResponse = $request->body;
+		//echo $rawResponse;
 		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
@@ -80,13 +81,10 @@ class Api
 			$_SESSION['debugApi'][] = $debugApi;
 		}
 		if (\Config::getBoolean('logs')) {
-			$this->addLogs($method, $data, $response);
+			$this->addLogs($method, $data, $response, $rawResponse);
 		}
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
-			if ($response['error']['code'] === 401) {
-				session_destroy();
-			}
 		}
 		if (isset($response['result'])) {
 			return $response['result'];
@@ -100,12 +98,16 @@ class Api
 	public function getHeaders()
 	{
 		$userInstance = User::getUser();
-		return [
+		$return = [
 			'Content-Type' => 'application/json',
 			'X-ENCRYPTED' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
 			'X-API-KEY' => \Config::get('apiKey'),
 			'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
 		];
+		if ($userInstance->has('CompanyId')) {
+			$return['X-PARENT-ID'] = $userInstance->get('CompanyId');
+		}
+		return $return;
 	}
 
 	public function getOptions()
@@ -121,11 +123,14 @@ class Api
 	 * @param array $data
 	 * @param array $response
 	 */
-	public function addLogs($method, $data, $response)
+	public function addLogs($method, $data, $response, $rawResponse = false)
 	{
 		$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;
 		$content .= 'Metod: ' . $method . PHP_EOL;
 		$content .= 'Request: ' . print_r($data, true) . PHP_EOL;
+		if ($rawResponse) {
+			$content .= 'Response (raw): ' . print_r($rawResponse, true) . PHP_EOL;
+		}
 		$content .= 'Response: ' . print_r($response, true) . PHP_EOL;
 		file_put_contents($this->log, $content, FILE_APPEND);
 	}

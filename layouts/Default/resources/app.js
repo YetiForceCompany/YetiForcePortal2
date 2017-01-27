@@ -52,24 +52,44 @@ var app = {
 		var toTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 		return Math.floor(((toTime - fromTime) / (1000 * 60 * 60 * 24))) + 1;
 	},
-	showSelectElement: function (parent, view, params) {
+	showSelectElement: function (container) {
+		this.showChznSelectElement(container);
+		this.showSelect2Element(container);
+	},
+	showChznSelectElement: function (parent, view, params) {
 		var thisInstance = this;
-		var selectElement = jQuery();
 		if (typeof parent == 'undefined') {
 			parent = jQuery('body');
 		}
 		if (typeof params == 'undefined') {
 			params = {};
 		}
-		selectElement = jQuery('.chzn-select', parent);
-		// generate random ID
+		var selectElement = jQuery('.chzn-select', parent);
 		selectElement.each(function () {
 			if ($(this).prop("id").length == 0) {
 				$(this).attr('id', "sel" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
 		});
-
 		selectElement.chosen(params);
+	},
+	showSelect2Element: function (parent, params) {
+		var thisInstance = this;
+		if (typeof parent == 'undefined') {
+			parent = jQuery('body');
+		}
+		if (typeof params == 'undefined') {
+			params = {};
+		}
+		var selectElement = jQuery('.select2', parent);
+		params.language = {};
+		//params.theme = "bootstrap";
+		params.width = "100%";
+		selectElement.each(function () {
+			if ($(this).prop("id").length == 0) {
+				$(this).attr('id', "sel" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
+			}
+			$(this).select2(params);
+		});
 	},
 	getUrlParam: function (name) {
 		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -142,7 +162,7 @@ var app = {
 				}
 			}
 		}
-		if(customParams != undefined){
+		if (customParams != undefined) {
 			params = jQuery.extend(params, customParams);
 		}
 		$.extend($.fn.dataTable.defaults, params);
@@ -170,8 +190,9 @@ var app = {
 }
 
 jQuery(document).ready(function () {
-	app.showSelectElement(jQuery('body'));
-	app.registerSideLoading(jQuery('body'));
+	var container = jQuery('body');
+	app.showSelectElement(container);
+	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

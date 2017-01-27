@@ -10,7 +10,7 @@ jQuery.Class("Base_Header_Js", {
 		this.self = new Base_Header_Js();
 		return this.self;
 	}
-}, {	
+}, {
 	recentPageViews: function () {
 		var thisInstance = this;
 		var maxValues = 20;
@@ -91,25 +91,46 @@ jQuery.Class("Base_Header_Js", {
 			var htmlContent = '<li class="divider"></li><li><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
 			$(".historyBtn .dropdown-menu").html(htmlContent);
 		});
-	},	
+	},
+	registerChangeCompany: function () {
+		$(".selectCompanies").click(function () {
+			$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
+				var modal = $(relatedTarget.target);
+				modal.find('select').addClass('select2');
+				app.showSelect2Element(modal);
+				modal.find(".btn-primary").click(function () {
+					AppConnector.request({
+						module: app.getModuleName(),
+						action: 'ChangeCompany',
+						record: modal.find("#companyId").val()
+					}).then(function (data) {
+						 window.location.href = 'index.php'; 
+					}, function (e, err) {
+						console.log([e, err])
+					});
+				});
+			}).modal();
+		});
+	},
 	registerEvents: function () {
 		var thisInstance = this;
-		thisInstance.recentPageViews();		
+		thisInstance.recentPageViews();
 		thisInstance.registerMobileEvents();
+		thisInstance.registerChangeCompany();
 	},
-	registerMobileEvents: function(){
+	registerMobileEvents: function () {
 		var thisInstance = this;
-		$('.rightHeaderBtnMenu').click(function(){
+		$('.rightHeaderBtnMenu').click(function () {
 			$('.mobileLeftPanel').toggleClass('showMainMenu');
 			$('.actionMenu').removeClass('showActionMenu');
 			$('.searchMenu').removeClass('showSearchMenu');
 		});
-		$('.actionMenuBtn ').click(function(){
+		$('.actionMenuBtn ').click(function () {
 			$('.actionMenu').toggleClass('showActionMenu');
 			$('.mobileLeftPanel').removeClass('showMainMenu');
 			$('.searchMenu').removeClass('showSearchMenu');
 		});
-		$('.searchMenuBtn ').click(function(){
+		$('.searchMenuBtn ').click(function () {
 			$('.searchMenu').toggleClass('showSearchMenu');
 			$('.mobileLeftPanel').removeClass('showMainMenu');
 			$('.actionMenu').removeClass('showActionMenu');

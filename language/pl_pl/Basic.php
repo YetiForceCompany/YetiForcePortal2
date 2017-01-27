@@ -16,6 +16,9 @@ $phpLang = [
 	'LBL_SHOW_COMPLETE_DETAILS' => 'Szczegóły',
 	'LBL_EDIT' => 'Edycja',
 	'LBL_DELETE' => 'Usuń',
+	'LBL_CANCEL' => 'Anuluj',
+	'LBL_CHANGE' => 'Zmień',
+	'LBL_CHANGE_COMPANY' => 'Zmiana firmy',
 ];
 $jsLang = [
 	'JS_TODAY' => 'Dzisiaj',

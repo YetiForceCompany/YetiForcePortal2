@@ -18,7 +18,7 @@ class EditView extends Index
 		$module = $request->getModule();
 		$record = $request->get('record');
 		$api = Api::getInstance();
-		$response = $api->call($module . '/Fields', [], 'get');
+		$response = $api->call($module . '/Fields');
 
 		$blocks = $fields = [];
 		foreach ($response['blocks'] as &$block) {

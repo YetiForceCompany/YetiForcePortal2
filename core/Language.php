@@ -52,7 +52,7 @@ class Language
 	 * @param <String> $module - module name
 	 * @return <String> translated string or null if translation not found
 	 */
-	public static function getLanguageTranslatedString($language, $key, $module = '')
+	public static function getLanguageTranslatedString($language, $key, $module = 'Basic')
 	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
 		if (!empty($moduleStrings['phpLang'][$key])) {
@@ -72,7 +72,7 @@ class Language
 	 * @param <String> $module - module scope in which the translation need to be check
 	 * @return <String> - translated string
 	 */
-	public static function jstranslate($language, $key, $module = '')
+	public static function jstranslate($language, $key, $module = 'Basic')
 	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
 		if (!empty($moduleStrings['jsLang'][$key])) {

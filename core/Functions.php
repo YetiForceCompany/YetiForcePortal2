@@ -3,7 +3,7 @@
 class FN
 {
 
-	public static function translate($label, $module)
+	public static function translate($label, $module = 'Basic')
 	{
 		return Core\Language::translate($label, $module);
 	}

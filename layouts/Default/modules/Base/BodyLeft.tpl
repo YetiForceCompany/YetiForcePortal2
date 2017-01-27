@@ -5,8 +5,20 @@
 			<img src="{Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-xs-10 userDetails">
-			<p class="userName">{$USER->get('name')}</p>
-		</div>	
+			<div class="userName">
+				<span class="name">{$USER->get('name')}</span>
+			</div>
+			<div class="companyName">
+				<span class="name">{$USER->get('parentName')}</span>
+				{if $USER->getCompanies()}
+					<div class="pull-right">
+						<button type="button" class="btn btn-info btn-xs selectCompanies" data-toggle="modal">
+							<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+						</button>
+					</div>
+				{/if}
+			</div>
+		</div>
 	</div>
 	<div class="menuContainer">
 		<ul class="moduleList" style="padding-left:1px;">

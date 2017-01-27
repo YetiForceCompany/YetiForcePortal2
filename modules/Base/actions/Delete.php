@@ -21,7 +21,6 @@ class Delete extends Base
 	{
 		$module = $request->getModule();
 		$record = $request->get('record');
-		;
 		$result = false;
 		if ($record) {
 			$api = Core\Api::getInstance();

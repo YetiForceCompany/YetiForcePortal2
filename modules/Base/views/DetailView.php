@@ -17,7 +17,7 @@ class DetailView extends Index
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 		$api = Core\Api::getInstance();
-		$recordDetail = $api->call($moduleName . '/Record/' . $record, [], 'get');
+		$recordDetail = $api->call("$moduleName/Record/$record");
 
 		$viewer = $this->getViewer($request);
 		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
