@@ -34,6 +34,7 @@ jQuery.Class("Base_ListView_Js", {
 				jQuery(e.currentTarget).find('.detailLink').trigger('click');
 			});
 		}
+		return table;
 	},
 	registerDeleteRecordClickEvent: function () {
 		var thisInstance = this;

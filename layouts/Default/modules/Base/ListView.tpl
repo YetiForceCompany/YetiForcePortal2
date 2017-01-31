@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row listViewContents">
 			<div class="table-responsive col-xs-12">
 				<table class="table listViewEntries hide">
 					<thead>
@@ -36,7 +36,7 @@
 					</thead>
 					<tbody>
 						{foreach item=RECORD key=ID from=$RECORDS}
-							<tr data-record="{$ID}">
+							<tr data-record="{$ID}" data-name="{FN::toSafeHTML($RECORD->getName())}">
 								<td class="leftRecordActions">
 									{include file=FN::templatePath("ListViewActions.tpl",$MODULE)}
 								</td>

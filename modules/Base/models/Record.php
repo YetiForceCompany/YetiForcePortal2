@@ -19,6 +19,12 @@ class Record extends \Core\BaseModel
 	private $module;
 
 	/**
+	 * Raw data
+	 * @var array 
+	 */
+	private $rawData = [];
+
+	/**
 	 * Function to get the id of the record
 	 * @return int
 	 */
@@ -34,6 +40,17 @@ class Record extends \Core\BaseModel
 	public function setId($value)
 	{
 		return $this->set('id', $value);
+	}
+
+	/**
+	 * 
+	 * @param array $value
+	 * @return $this
+	 */
+	public function setRawData($value)
+	{
+		$this->rawData = $value;
+		return $this;
 	}
 
 	/**
@@ -54,6 +71,25 @@ class Record extends \Core\BaseModel
 	public function getModuleName()
 	{
 		return $this->module;
+	}
+
+	/**
+	 * Record name
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->get('recordLabel');
+	}
+
+	/**
+	 * Get raw value
+	 * @param string $key
+	 * @return mixed
+	 */
+	public function getRawValue($key)
+	{
+		return isset($this->rawData[$key]) ? $this->rawData[$key] : null;
 	}
 
 	/**
@@ -114,7 +150,7 @@ class Record extends \Core\BaseModel
 		if ($this->isEditable()) {
 			$recordLinks[] = [
 				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
-				'linklabel' => 'LBL_EDIT',
+				'linklabel' => 'BTN_EDIT',
 				'linkurl' => $this->getEditViewUrl(),
 				'linkicon' => 'glyphicon glyphicon-pencil',
 				'linkclass' => 'btn-sm btn-default'
@@ -157,5 +193,15 @@ class Record extends \Core\BaseModel
 	public function isDeletable()
 	{
 		return true;
+	}
+
+	/**
+	 * Function to retieve display value for a field
+	 * @param string $fieldName - field name for which values need to get
+	 * @return string
+	 */
+	public function getEditViewDisplayValue($fieldName)
+	{
+		return $this->get($fieldName);
 	}
 }

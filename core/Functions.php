@@ -91,4 +91,14 @@ class FN
 		}
 		return rtrim(str_replace(YF_ROOT . DIRECTORY_SEPARATOR, '', $trace), PHP_EOL);
 	}
+
+	/**
+	 * Function to make the input safe to be used as HTML
+	 * @param string $text
+	 * @return string
+	 */
+	public static function toSafeHTML($text)
+	{
+		return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+	}
 }

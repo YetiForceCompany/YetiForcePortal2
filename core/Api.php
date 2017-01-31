@@ -4,6 +4,7 @@
  * @package YetiForce.API
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 namespace Core;
 
@@ -15,6 +16,7 @@ class Api
 
 	protected static $_instance;
 	protected $url;
+	protected $header;
 	protected $log = 'cache/logs/api.log';
 
 	/**
@@ -61,7 +63,6 @@ class Api
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
 		}
 		$rawResponse = $request->body;
-		//echo $rawResponse;
 		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
@@ -92,22 +93,39 @@ class Api
 	}
 
 	/**
-	 * 
+	 * Headers
 	 * @return array
 	 */
 	public function getHeaders()
 	{
-		$userInstance = User::getUser();
-		$return = [
-			'Content-Type' => 'application/json',
-			'X-ENCRYPTED' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
-			'X-API-KEY' => \Config::get('apiKey'),
-			'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
-		];
-		if ($userInstance->has('CompanyId')) {
-			$return['X-PARENT-ID'] = $userInstance->get('CompanyId');
+		if (empty($this->header)) {
+			$userInstance = User::getUser();
+			$return = [
+				'Content-Type' => 'application/json',
+				'X-ENCRYPTED' => \Config::getBoolean('encryptDataTransfer') ? 1 : 0,
+				'X-API-KEY' => \Config::get('apiKey'),
+				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
+			];
+			if ($userInstance->has('CompanyId')) {
+				$return['X-PARENT-ID'] = $userInstance->get('CompanyId');
+			}
+			$this->header = $return;
 		}
-		return $return;
+		return $this->header;
+	}
+
+	/**
+	 * Set custom headers
+	 * @param array $headers
+	 * @return $this
+	 */
+	public function setCustomHeaders($headers)
+	{
+		$this->header = $this->getHeaders();
+		foreach ($headers as $key => $value) {
+			$this->header[$key] = $value;
+		}
+		return $this;
 	}
 
 	public function getOptions()

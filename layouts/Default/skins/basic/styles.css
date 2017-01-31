@@ -357,25 +357,61 @@ hr{
 .listViewEntries tbody tr{
 	cursor: pointer;
 }
-.panel .fieldName{
-	padding-bottom: 5px;
-	padding-top: 5px;
-	font-weight: bold;
-	height:35px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+.tableCell{
+	display: table-cell;
 }
-.panel .fieldValue{
-	padding-bottom: 5px;
-	padding-top: 5px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+.borderRight{
 	border-right: 1px solid #ddd;
-	height:35px;
+}
+.borderLeft{
+	border-left: 1px solid #ddd;
+}
+.borderTop{
+	border-top: 1px solid #ddd;
+}
+.noFloat{
+	float: none;
+}
+#detailView .fieldRow{
+	display: table;
+}
+.border{
+	border: 1px solid #ddd;
+}
+.chosen-container{
+	min-height: 32px;
+	line-height: 34px;
+}
+.chosen-container-multi .chosen-choices li.search-choice{
+	line-height: 20px;
+	margin: 3px 5px 3px;
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
+	top: 8px;
+}
+.referenceGroup .referenceModulesListGroup .chosen-container{
+	min-width: 100px !important;
+    text-align: left;
+	height: 32px;
+}
+.referenceGroup .referenceModulesListGroup .chosen-container .chosen-single{
+	border: 0;
+	height: 32px;
+	border-radius: 0;
+}
+.quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container{
+	min-width: 80px !important;
+}
+.chosen-container-single .chosen-single{
+	background: #fff;
+}
+.noSpaces{
+	padding: 0 !important;
+	margin: 0 !important;
 }
 table tbody tr:hover  td .actions span{
 	opacity:1
-} 
+}
 .historyList{
 	overflow: auto;
 }
@@ -509,4 +545,35 @@ table.dataTable.listViewEntries tbody td {
 }
 .breadcrumbsLinks a {
 	font-weight: bold;
+}
+.redColor {
+	color: red;
+}
+.blockContainer .panel-body.blockContent{
+	padding: 0;
+}
+.paddingLeft5px{
+	padding-left: 5px;
+}
+@media only screen and (max-width: 992px) {
+	.blockContainer .blockContent .fieldLabel{
+		text-align:left;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		min-height: 1px;
+	}
+	.blockContainer .blockContent .fieldValue{
+		min-height: 1px;
+	}
+}
+@media only screen and (min-width: 992px) {
+	.blockContainer .blockContent .fieldLabel{
+		text-align:right;
+	}
+}
+#EditView .blockContainer .blockContent .fieldLabel  label{
+	padding-top:8px;
+}
+.blockContainer .blockContent .fieldLabel  label{
+	font-size: 12px !important;
 }

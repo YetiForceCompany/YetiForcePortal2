@@ -3,7 +3,7 @@ $phpLang = [
 	'LBL_FOOTER_CONTENT' => 'Copyright 2014 YetiForce.com All rights reserved.<br/>Creating YetiForce software was possible thanks to the %s.',
 	'LBL_ALL_RECORDS' => 'All modules',
 	'LBL_SHOW_COMPLETE_DETAILS' => 'Complete details',
-	'LBL_EDIT' => 'Edit',
+	'BTN_EDIT' => 'Edit',
 	'LBL_DELETE' => 'Delete',
 ];
 $jsLang = [

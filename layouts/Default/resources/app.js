@@ -70,7 +70,64 @@ var app = {
 				$(this).attr('id', "sel" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
 		});
+		selectElement.filter('[multiple]').filter('[data-validation-engine*="validate"]').on('change', function (e) {
+			jQuery(e.currentTarget).trigger('focusout');
+		});
+
+		var params = {
+			no_results_text: app.translate('JS_NO_RESULTS_FOUND') + ':'
+		};
+
+		var moduleName = app.getModuleName();
+		if (selectElement.filter('[multiple]')) {
+			params.placeholder_text_multiple = ' ' + app.translate('JS_SELECT_SOME_OPTIONS');
+		}
+		params.placeholder_text_single = ' ' + app.translate('JS_SELECT_AN_OPTION');
 		selectElement.chosen(params);
+
+		selectElement.each(function () {
+			var select = $(this);
+			// hide selected items in the chosen instance when item is hidden.
+			if (select.hasClass('hideSelected')) {
+				var ns = [];
+				select.find('optgroup,option').each(function (n, e) {
+					if (jQuery(this).hasClass('hide')) {
+						ns.push(n);
+					}
+				});
+				if (ns.length) {
+					select.next().find('.search-choice-close').each(function (n, e) {
+						var element = jQuery(this);
+						var index = element.data('option-array-index');
+						if (jQuery.inArray(index, ns) != -1) {
+							element.closest('li').remove();
+						}
+					})
+				}
+			}
+			if (select.attr('readonly') == 'readonly') {
+				select.on('chosen:updated', function () {
+					if (select.attr('readonly')) {
+						var wasDisabled = select.is(':disabled');
+						var selectData = select.data('chosen');
+						select.attr('disabled', 'disabled');
+						if (typeof selectData == 'object') {
+							selectData.search_field_disabled();
+						}
+						if (wasDisabled) {
+							select.attr('disabled', 'disabled');
+						} else {
+							select.removeAttr('disabled');
+						}
+					}
+				});
+				select.trigger('chosen:updated');
+			}
+		});
+
+		// Improve the display of default text (placeholder)
+		var chosenSelectConainer = jQuery('.chosen-container-multi .default').css('width', '100%');
+		return chosenSelectConainer;
 	},
 	showSelect2Element: function (parent, params) {
 		var thisInstance = this;
@@ -186,6 +243,129 @@ var app = {
 	setMainParams: function (param, value) {
 		app.cacheParams[param] = value;
 		$('#' + param).val(value);
+	},
+	showModalWindow: function (data, url, cb, paramsObject) {
+		var thisInstance = this;
+		var id = 'globalmodal';
+		//null is also an object
+		if (typeof data == 'object' && data != null && !(data instanceof jQuery)) {
+			if (data.id != undefined) {
+				id = data.id;
+			}
+			paramsObject = data.css;
+			cb = data.cb;
+			url = data.url;
+			if (data.sendByAjaxCb != 'undefined') {
+				var sendByAjaxCb = data.sendByAjaxCb;
+			}
+			data = data.data;
+		}
+		if (typeof url == 'function') {
+			if (typeof cb == 'object') {
+				paramsObject = cb;
+			}
+			cb = url;
+			url = false;
+		} else if (typeof url == 'object') {
+			cb = function () {
+			};
+			paramsObject = url;
+			url = false;
+		}
+		if (typeof cb != 'function') {
+			cb = function () {
+			}
+		}
+		if (typeof sendByAjaxCb != 'function') {
+			var sendByAjaxCb = function () {
+			}
+		}
+
+		var container = jQuery('#' + id);
+		if (container.length) {
+			container.remove();
+		}
+		container = jQuery('<div></div>');
+		container.attr('id', id).addClass('modalContainer');
+
+		var showModalData = function (data) {
+			var params = {
+				'show': true,
+			};
+			if (jQuery('#backgroundClosingModal').val() != 1) {
+				params.backdrop = 'static';
+			}
+			if (typeof paramsObject == 'object') {
+				container.css(paramsObject);
+				params = jQuery.extend(params, paramsObject);
+			}
+			container.html(data);
+
+			// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog. 
+			$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
+				$(document).off('focusin.bs.modal') // guard against infinite focus loop
+						.on('focusin.bs.modal', $.proxy(function (e) {
+							if ($(e.target).hasClass('select2-search__field')) {
+								return true;
+							}
+						}, this))
+			};
+			var modalContainer = container.find('.modal:first');
+			modalContainer.modal(params);
+			jQuery('body').append(container);
+			app.showChznSelectElement(modalContainer.find('select.chzn-select'));
+			app.showSelect2Element(modalContainer.find('select.select2'));
+
+			thisInstance.registerDataTables(modalContainer.find('.dataTable'));
+			modalContainer.one('shown.bs.modal', function () {
+				var backdrop = jQuery('.modal-backdrop');
+				if (backdrop.length > 1) {
+					jQuery('.modal-backdrop:not(:first)').remove();
+				}
+				cb(modalContainer);
+			})
+		}
+		if (data) {
+			showModalData(data)
+
+		} else {
+			jQuery.get(url).then(function (response) {
+				showModalData(response);
+			});
+		}
+		container.one('hidden.bs.modal', function () {
+			container.remove();
+			var backdrop = jQuery('.modal-backdrop');
+			var modalContainers = jQuery('.modalContainer');
+			if (modalContainers.length == 0 && backdrop.length) {
+				backdrop.remove();
+			}
+			if (backdrop.length > 0) {
+				$('body').addClass('modal-open');
+			}
+		});
+		return container;
+	},
+	hideModalWindow: function (callback, id) {
+		if (id == undefined) {
+			id = 'globalmodal';
+		}
+		var container = jQuery('#' + id);
+		if (container.length <= 0) {
+			return;
+		}
+		if (typeof callback != 'function') {
+			callback = function () {
+			};
+		}
+		var modalContainer = container.find('.modal');
+		modalContainer.modal('hide');
+		var backdrop = jQuery('.modal-backdrop:last');
+		var modalContainers = jQuery('.modalContainer');
+		if (modalContainers.length == 0 && backdrop.length) {
+			backdrop.remove();
+		}
+		modalContainer.one('hidden.bs.modal', callback);
 	},
 }
 

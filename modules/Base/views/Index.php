@@ -121,6 +121,7 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/pace/pace.css',
 			'libraries/Bootstrap/css/bootstrap.css',
 			'libraries/Scripts/chosen/chosen.css',
+			'libraries/Scripts/chosen/chosen.bootstrap.css',
 			'libraries/Scripts/select2/select2.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',

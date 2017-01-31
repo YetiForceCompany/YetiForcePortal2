@@ -14,11 +14,15 @@ $phpLang = [
 	'LBL_CHAT' => 'Czat',
 	'LBL_QUICK_CREATE' => 'Szybkie wybieranie',
 	'LBL_SHOW_COMPLETE_DETAILS' => 'Szczegóły',
-	'LBL_EDIT' => 'Edycja',
 	'LBL_DELETE' => 'Usuń',
-	'LBL_CANCEL' => 'Anuluj',
 	'LBL_CHANGE' => 'Zmień',
 	'LBL_CHANGE_COMPANY' => 'Zmiana firmy',
+	'LBL_VIEW_CREATE' => 'Tworzenie',
+	'LBL_TYPE_SEARCH' => 'Wyszukaj rekord',
+	'BTN_CANCEL' => 'Anuluj',
+	'BTN_EDIT' => 'Edycja',
+	'BTN_SAVE' => 'Zapisz',
+	'PLL_SELECT_OPTION' => 'Wybierz',
 ];
 $jsLang = [
 	'JS_TODAY' => 'Dzisiaj',
@@ -37,4 +41,6 @@ $jsLang = [
 	'JS_S_SORT_ASCENDING' => ': aktywuj, by posortować kolumnę rosnąco',
 	'JS_S_SORT_DESCENDING' => ': aktywuj, by posortować kolumnę malejąco',
 	'JS_NO_RESULTS_FOUND' => 'Nie znaleziono',
+	'JS_SELECT_AN_OPTION' => 'Wybierz',
+	'JS_SELECT_SOME_OPTIONS' => 'Wybierz kilka wartości',
 ];

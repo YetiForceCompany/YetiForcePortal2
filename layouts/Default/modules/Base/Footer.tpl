@@ -25,7 +25,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary">{FN::translate('LBL_CHANGE')}</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">{FN::translate('LBL_CANCEL')}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{FN::translate('BTN_CANCEL')}</button>
 				</div>
 			</div>
 		</div>
