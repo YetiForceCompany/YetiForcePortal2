@@ -122,6 +122,7 @@ abstract class Index extends Core\Controller
 			'libraries/Bootstrap/css/bootstrap.css',
 			'libraries/Scripts/chosen/chosen.css',
 			'libraries/Scripts/chosen/chosen.bootstrap.css',
+			'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
 			'libraries/Scripts/select2/select2.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
@@ -157,6 +158,11 @@ abstract class Index extends Core\Controller
 	{
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
+		$shortLang = \Core\Language::getShortLanguageName();
+		$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
+		if (!file_exists($validLangScript)) {
+			$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
+		}
 		$jsFileNames = [
 			'libraries/Scripts/jquery/jquery.js',
 			'libraries/Scripts/jquery/jquery.class.js',
@@ -165,6 +171,8 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'libraries/Scripts/select2/select2.full.js',
 			'libraries/Datatables/media/js/jquery.dataTables.js',
+			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
+			$validLangScript,
 			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',

@@ -34,6 +34,16 @@ var app = {
 			return new window[moduleClassName]();
 		}
 	},
+	validationEngineOptions: {
+		// Avoid scroll decision and let it scroll up page when form is too big
+		// Reference: http://www.position-absolute.com/articles/jquery-form-validator-because-form-validation-is-a-mess/
+		scroll: false,
+		promptPosition: 'topLeft',
+		//to support validation for chosen select box
+		prettySelect: true,
+		useSuffix: "_chosen",
+		usePrefix: "s2id_",
+	},
 	formatDate: function (date) {
 		var y = date.getFullYear(),
 				m = date.getMonth() + 1,
@@ -372,7 +382,7 @@ var app = {
 jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.showSelectElement(container);
-	app.registerSideLoading(container);
+//	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController)

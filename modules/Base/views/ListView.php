@@ -29,7 +29,7 @@ class ListView extends Index
 		$viewer = $this->getViewer($request);
 		$viewer->assign('HEADERS', $recordsList['headers']);
 		$viewer->assign('RECORDS', $recordsListModel);
-		$viewer->assign('MODULE', $module);
+		$viewer->assign('MODULE_NAME', $module);
 		$viewer->assign('COUNT', $recordsList['count']);
 		$viewer->view('ListView.tpl', $module);
 	}

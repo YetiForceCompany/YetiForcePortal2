@@ -8,11 +8,11 @@
 		{else}
 			{assign var="LINK_URL" value=''}
 		{/if}
-		{assign var="BTN_MODULE" value=$MODULE}
+		{assign var="BTN_MODULE" value=$MODULE_NAME}
 	{if isset($LINK['linkhref'])}<a{else}<button type="button"{/if}{/strip} {strip}
 					title="{FN::translate($LABEL, $BTN_MODULE)}"{/strip} {strip}
 					{if isset($LINK['active']) && !$LINK['active']} disabled {/if}
-					id="{$MODULE}_{$BUTTON_VIEW}_action_{str_replace(' ', '_', $ACTION_NAME)}"{/strip} {strip}
+					id="{$MODULE_NAME}_{$BUTTON_VIEW}_action_{str_replace(' ', '_', $ACTION_NAME)}"{/strip} {strip}
 					class="btn {if $LINK['linkclass'] neq ''}{if $LINK['linkclass']|strrpos:"btn-" === false}btn-default {/if}{$LINK['linkclass']}{else}btn-default{/if} {if $LABEL neq '' && !isset($LINK['showLabel'])} popoverTooltip{/if} {if isset($LINK['modalView'])}showModal{/if}"{/strip} {strip}
 					{if isset($LINK['linkdata']) && is_array($LINK['linkdata'])}
 						{foreach from=$LINK['linkdata'] key=NAME item=DATA}

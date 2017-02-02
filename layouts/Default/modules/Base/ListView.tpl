@@ -38,7 +38,7 @@
 						{foreach item=RECORD key=ID from=$RECORDS}
 							<tr data-record="{$ID}" data-name="{FN::toSafeHTML($RECORD->getName())}">
 								<td class="leftRecordActions">
-									{include file=FN::templatePath("ListViewActions.tpl",$MODULE)}
+									{include file=FN::templatePath("ListViewActions.tpl",$MODULE_NAME)}
 								</td>
 								{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
 									<td>{$RECORD->get($FIELD_NAME)}</td>

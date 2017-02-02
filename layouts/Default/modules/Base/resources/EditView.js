@@ -106,8 +106,16 @@ jQuery.Class("Base_EditView_Js", {
 		fieldElement.val(id)
 		fieldDisplayElement.val(selectedName).attr('readonly', true);
 	},
+	registerValidationsFields: function (container) {
+		var thisInstance = this;
+		var params = app.validationEngineOptions;
+		container.validationEngine(params);
+	},
 	registerEvents: function () {
+		var container = this.getContainer();
 		this.referenceModulePopupRegisterEvent();
-		this.registerClearReferenceSelectionEvent(this.getContainer());
+		this.registerClearReferenceSelectionEvent(container);
+		this.registerValidationsFields(container);
+		
 	}
 });

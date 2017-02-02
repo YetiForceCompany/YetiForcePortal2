@@ -32,7 +32,7 @@
 			</div>
 		{/if}
 		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text" title="{FN::toSafeHTML($RECORD->getEditViewDisplayValue($FIELD_NAME))}" class="marginLeftZero form-control autoComplete" {if !empty($DISPLAYID)}readonly="true"{/if}
-			   value="{FN::toSafeHTML($RECORD->getEditViewDisplayValue($FIELD_NAME))}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+			   value="{FN::toSafeHTML($RECORD->getEditViewDisplayValue($FIELD_NAME))}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{FN::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if} 
 			   {if !empty($SPECIAL_VALIDATOR)}data-validator='{\Core\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
 		<span class="input-group-btn cursorPointer">
