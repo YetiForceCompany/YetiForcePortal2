@@ -26,8 +26,6 @@ class Save extends Base
 		foreach ($request->getAll() as $key => $value) {
 			if (!in_array($key, ['record', 'view', 'action', 'module'])) {
 				$recordData[$key] = $value;
-			} elseif ($key === 'record') {
-				$recordData['id'] = $value;
 			}
 		}
 		if ($recordData) {

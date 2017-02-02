@@ -111,11 +111,31 @@ jQuery.Class("Base_EditView_Js", {
 		var params = app.validationEngineOptions;
 		container.validationEngine(params);
 	},
+	registerRecordSave: function (container) {
+		var formElement = container.find('form');
+		formElement.on('submit', function (e) {
+			e.preventDefault();
+			var form = jQuery(e.currentTarget);
+			var formData = form.serializeFormData();
+			AppConnector.request(formData).then(function (data) {
+				var data = JSON.parse(data);
+				var response = data.result;
+				if (response.result && !response.message) {
+					window.location.href = 'index.php?module='+app.getModuleName()+'&view=DetailView&record='+response.id;
+				}else{
+					alert(response.message);
+				}
+			}, function (e, err) {
+				console.log([e, err])
+			});
+		})	
+	},
 	registerEvents: function () {
 		var container = this.getContainer();
 		this.referenceModulePopupRegisterEvent();
 		this.registerClearReferenceSelectionEvent(container);
 		this.registerValidationsFields(container);
-		
+		this.registerRecordSave(container);
+
 	}
 });

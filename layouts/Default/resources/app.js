@@ -377,11 +377,44 @@ var app = {
 		}
 		modalContainer.one('hidden.bs.modal', callback);
 	},
+	registerAdditions: function ($) {
+		$.fn.serializeFormData = function () {
+			var form = $(this);
+			var values = form.serializeArray();
+			var data = {};
+			if (values) {
+				$(values).each(function (k, v) {
+					if (v.name in data && (typeof data[v.name] != 'object')) {
+						var element = form.find('[name="' + v.name + '"]');
+						//Only for muti select element we need to send array of values
+						if (element.is('select') && element.attr('multiple') != undefined) {
+							var prevValue = data[v.name];
+							data[v.name] = new Array();
+							data[v.name].push(prevValue)
+						}
+					}
+					if (typeof data[v.name] == 'object') {
+						data[v.name].push(v.value);
+					} else {
+						data[v.name] = v.value;
+					}
+				});
+			}
+			// If data-type="autocomplete", pickup data-value="..." set
+			var autocompletes = $('[data-type="autocomplete"]', $(this));
+			$(autocompletes).each(function (i) {
+				var ac = $(autocompletes[i]);
+				data[ac.attr('name')] = ac.data('value');
+			});
+			return data;
+		}
+	},
 }
 
 jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.showSelectElement(container);
+	app.registerAdditions(jQuery);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
