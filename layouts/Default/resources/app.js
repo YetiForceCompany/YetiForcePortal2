@@ -409,6 +409,21 @@ var app = {
 			return data;
 		}
 	},
+	/**
+	 * Function to push down the error message size when validation is invoked
+	 * @params : form Element
+	 */
+	formAlignmentAfterValidation: function (form) {
+		// to avoid hiding of error message under the fixed nav bar
+		var formError = form.find(".formError:not('.greenPopup'):first")
+		if (formError.length > 0) {
+			var destination = formError.offset().top;
+			var resizedDestnation = destination - 105;
+			jQuery('html').animate({
+				scrollTop: resizedDestnation
+			}, 'slow');
+		}
+	},
 }
 
 jQuery(document).ready(function () {
