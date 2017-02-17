@@ -30,7 +30,7 @@ class Save extends Base
 		}
 		if ($recordData) {
 			$api = Core\Api::getInstance();
-			$result = $api->call($module . '/Record/' . $record, ['recordData' => $recordData], 'put');
+			$result = $api->call($module . '/Record/' . $record, ['recordData' => $recordData], $record ? 'put' : 'post');
 		}
 		if ($request->isAjax()) {
 			$response = new Core\Response();
