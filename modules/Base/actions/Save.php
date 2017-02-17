@@ -22,16 +22,8 @@ class Save extends Base
 		$module = $request->getModule();
 		$record = $request->get('record');
 		$view = $request->get('view');
-		$recordData = [];
-		foreach ($request->getAll() as $key => $value) {
-			if (!in_array($key, ['record', 'view', 'action', 'module'])) {
-				$recordData[$key] = $value;
-			}
-		}
-		if ($recordData) {
-			$api = Core\Api::getInstance();
-			$result = $api->call($module . '/Record/' . $record, ['recordData' => $recordData], $record ? 'put' : 'post');
-		}
+		$api = Core\Api::getInstance();
+		$result = $api->call($module . '/Record/' . $record, ['recordData' => $request->getAll()], $record ? 'put' : 'post');
 		if ($request->isAjax()) {
 			$response = new Core\Response();
 			$response->setResult($result);

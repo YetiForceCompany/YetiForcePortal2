@@ -85,7 +85,7 @@ class Api
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
 		if (isset($response['error'])) {
-			$_SESSION['systemError'][] = $response['error'];
+			return $_SESSION['systemError'][] = $response['error'];
 		}
 		if (isset($response['result'])) {
 			return $response['result'];

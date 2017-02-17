@@ -121,7 +121,7 @@ jQuery.Class("Base_EditView_Js", {
 				AppConnector.request(formData).then(function (data) {
 					var data = JSON.parse(data);
 					var response = data.result;
-					if (response.result && !response.message) {
+					if (response.id) {
 						window.location.href = 'index.php?module=' + app.getModuleName() + '&view=DetailView&record=' + response.id;
 					} else {
 						alert(response.message);
