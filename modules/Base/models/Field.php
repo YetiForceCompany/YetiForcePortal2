@@ -123,7 +123,7 @@ class Field extends \Core\BaseModel
 	public function getTemplate()
 	{
 		$type = ucfirst($this->get('type'));
-		if (!in_array($type, ['Reference', 'Picklist', 'Owner', 'Boolean', 'Text', 'Url', 'SharedOwner', 'Multipicklist'])) {
+		if (!in_array($type, ['Reference', 'Picklist', 'Owner', 'Boolean', 'Text', 'Url', 'SharedOwner', 'Multipicklist', 'Email', 'Percentage', 'Phone', 'Date', 'Time', 'Image'])) {
 			$type = 'String';
 		}
 		return "fieldtypes/$type.tpl";
