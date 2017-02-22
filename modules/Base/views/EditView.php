@@ -23,7 +23,7 @@ class EditView extends Index
 		$record = $request->get('record');
 		$api = Api::getInstance();
 		$moduleStructure = $api->call($module . '/Fields');
-		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record");
+		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], $record ? 'get' : 'post');
 		$recordModel = \Base\Model\Record::getInstance($module);
 		$recordModel->setData($recordDetail['data'])->setRawData($recordDetail['rawData'])->setId($recordDetail['id']);
 		$fields = [];
@@ -36,6 +36,7 @@ class EditView extends Index
 		$viewer = $this->getViewer($request);
 		$viewer->assign('RECORD', $recordModel);
 		$viewer->assign('FIELDS', $fields);
+		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$viewer->view('EditView.tpl', $module);
 	}
