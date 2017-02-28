@@ -40,11 +40,16 @@ class User extends BaseModel
 		return $this;
 	}
 
-	public function checkLogin(Core\Request $request)
+	/**
+	 * Checking login
+	 * @param \Core\Request $request
+	 * @throws \AppException
+	 */
+	public function checkLogin(\Core\Request $request)
 	{
 		if (!$this->hasLogin()) {
 			header('Location: index.php');
-			throw new AppException('Login is required');
+			throw new \AppException('Login is required');
 		}
 	}
 
@@ -107,5 +112,19 @@ class User extends BaseModel
 		$companies = Api::getInstance()->call('Accounts/Hierarchy');
 		Session::set('Companies', $companies);
 		return $companies;
+	}
+
+	/**
+	 * Get preferences
+	 * @return mixed
+	 * @throws \AppException
+	 */
+	public function getPreferences($key = false)
+	{
+		$preferences = $this->get('preferences');
+		if (empty($preferences)) {
+			throw new \AppException('lack of user preferences');
+		}
+		return $key ? $preferences[$key] : $preferences;
 	}
 }
