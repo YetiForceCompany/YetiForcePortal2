@@ -23,7 +23,7 @@ class EditView extends Index
 		$record = $request->get('record');
 		$api = Api::getInstance();
 		$moduleStructure = $api->call($module . '/Fields');
-		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], $record ? 'get' : 'post');
+		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], 'get');
 		$recordModel = \Base\Model\Record::getInstance($module);
 		$recordModel->setData($recordDetail['data'])->setRawData($recordDetail['rawData'])->setId($recordDetail['id']);
 		$fields = [];
