@@ -7,11 +7,11 @@
 					{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 				<div class="contentHeader">
-						<span class="pull-right">
-							<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary" title="{FN::translate('BTN_EDIT')}"><span class="glyphicon glyphicon-pencil"></span></a>
-						</span>
-						<div class="clearfix"></div>
-					</div>
+					<span class="pull-right">
+						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary" title="{FN::translate('BTN_EDIT')}"><span class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{FN::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+					</span>
+					<div class="clearfix"></div>
+				</div>
 			</div>
 		</div>
 		{foreach item=BLOCK from=$BLOCKS}
