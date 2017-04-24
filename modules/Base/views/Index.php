@@ -119,14 +119,14 @@ abstract class Index extends Core\Controller
 	{
 		$cssFileNames = [
 			'libraries/Scripts/pace/pace.css',
-			'libraries/Bootstrap/css/bootstrap.css',
+			'vendor/twbs/bootstrap/dist/css/bootstrap.css',
 			'libraries/Scripts/chosen/chosen.css',
 			'libraries/Scripts/chosen/chosen.bootstrap.css',
 			'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
 			'libraries/Scripts/select2/select2.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
-			'libraries/FontAwesome/css/font-awesome.css',
+			'vendor/fortawesome/font-awesome/css/font-awesome.css',
 			'libraries/Datatables/media/css/jquery.dataTables_themeroller.css',
 			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css',
 		];
@@ -164,10 +164,10 @@ abstract class Index extends Core\Controller
 			$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
 		}
 		$jsFileNames = [
-			'libraries/Scripts/jquery/jquery.js',
+			'vendor/components/jquery/jquery.js',
 			'libraries/Scripts/jquery/jquery.class.js',
 			'libraries/Scripts/jquery-pjax/jquery.pjax.js',
-			'libraries/Bootstrap/js/bootstrap.js',
+			'vendor/twbs/bootstrap/dist/js/bootstrap.js',
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'libraries/Scripts/select2/select2.full.js',
 			'libraries/Datatables/media/js/jquery.dataTables.js',

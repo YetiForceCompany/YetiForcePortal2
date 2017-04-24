@@ -5,6 +5,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-	'SmartyBC' => $baseDir . '/libraries/Smarty/SmartyBC.class.php',
+	//'SmartyBC' => $baseDir . '/libraries/Smarty/SmartyBC.class.php',
 	'AppException' => $baseDir . '/core/AppException.php',
 );
