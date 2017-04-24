@@ -25,6 +25,15 @@ class EditView extends Index
 		$moduleStructure = $api->call($module . '/Fields');
 		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], 'get');
 		$recordModel = \Base\Model\Record::getInstance($module);
+		if (!isset($recordDetail['data'])) {
+			$recordDetail['data'] = [];
+		}
+		if (!isset($recordDetail['rawData'])) {
+			$recordDetail['rawData'] = [];
+		}
+		if (!isset($recordDetail['id'])) {
+			$recordDetail['id'] = null;
+		}
 		$recordModel->setData($recordDetail['data'])->setRawData($recordDetail['rawData'])->setId($recordDetail['id']);
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
@@ -36,7 +45,7 @@ class EditView extends Index
 		$viewer = $this->getViewer($request);
 		$viewer->assign('RECORD', $recordModel);
 		$viewer->assign('FIELDS', $fields);
-		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
+		$viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
 		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$viewer->view('EditView.tpl', $module);
 	}
