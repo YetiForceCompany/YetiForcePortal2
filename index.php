@@ -10,6 +10,9 @@ define('YF_ROOT', __DIR__);
 define('_EXEC', 1);
 
 require_once('libraries/vendor/autoload.php');
+if (!file_exists('vendor/autoload.php')) {
+	throw new \AppException('Please install dependencies via composer install.');
+}
 require_once('vendor/autoload.php');
 
 session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
