@@ -66,6 +66,64 @@ var app = {
 		this.showChznSelectElement(container);
 		this.showSelect2Element(container);
 	},
+	showDateElement: function (container) {
+		var thisInstance = this;
+		if (typeof container == 'undefined') {
+			container = jQuery('body');
+		}
+		if (typeof params == 'undefined') {
+			params = {};
+		}
+		var dateFieldElement = jQuery('.dateField', container);
+		//params.theme = "bootstrap";
+		params.width = "100%";
+		params.singleDatePicker = true;
+		params.linkedCalendars = false;
+		params.autoApply = true;
+		params.autoUpdateInput = false;
+		params.locale = {};
+		params.locale.format = 'YYYY-MM-DD';
+		params.locale.daysOfWeek = [
+            app.translate('JS_DATE_WEEK_DAY_SHORT_SUNDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_MONDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_TUESDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_WEDNESDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_THURSDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_FRIDAY'),
+            app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY'),
+		];
+		params.locale.monthNames = [
+            app.translate('JS_DATE_MONTH_JANUARY'),
+            app.translate('JS_DATE_MONTH_FEBRUARY'),
+            app.translate('JS_DATE_MONTH_MARCH'),
+            app.translate('JS_DATE_MONTH_APRIL'),
+            app.translate('JS_DATE_MONTH_MAY'),
+            app.translate('JS_DATE_MONTH_JUNE'),
+            app.translate('JS_DATE_MONTH_JULY'),
+            app.translate('JS_DATE_MONTH_AUGUST'),
+            app.translate('JS_DATE_MONTH_SEPTEMBER'),
+            app.translate('JS_DATE_MONTH_OCTOBER'),
+            app.translate('JS_DATE_MONTH_NOVEMBER'),
+            app.translate('JS_DATE_MONTH_DECEMBER')
+        ];
+		
+		
+		
+		dateFieldElement.each(function () {
+			console.log(params);
+			if ($(this.children[0]).prop("id").length == 0) {
+				$(this.children[0]).attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
+			}
+			$(this.children[0]).daterangepicker(params);
+			var tmp_id = '#'+$(this.children[0]).prop("id");
+			$(this.children[1]).click(function(){
+				$(tmp_id).focus();
+			});
+			$(tmp_id).on('apply.daterangepicker', function(ev, picker) {
+				$(this).val(picker.startDate.format(params.locale.format));
+			});
+		});
+	},
 	showChznSelectElement: function (parent, view, params) {
 		var thisInstance = this;
 		if (typeof parent == 'undefined') {
@@ -429,6 +487,7 @@ var app = {
 jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.showSelectElement(container);
+	app.showDateElement(container);
 	app.registerAdditions(jQuery);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
