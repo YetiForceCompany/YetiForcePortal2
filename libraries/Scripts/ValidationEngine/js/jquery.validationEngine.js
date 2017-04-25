@@ -564,7 +564,7 @@
 			var fieldName = field.attr("name");
 			var promptText = "";
 			var promptType = "";
-			var required = false;
+			var required = true;
 			var limitErrors = false;
 			options.isError = false;
 			options.showArrow = options.showArrow ==true;
