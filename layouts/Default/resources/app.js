@@ -75,7 +75,6 @@ var app = {
 			params = {};
 		}
 		var dateFieldElement = jQuery('.dateField', container);
-		//params.theme = "bootstrap";
 		params.width = "100%";
 		params.singleDatePicker = true;
 		params.linkedCalendars = false;
@@ -110,7 +109,6 @@ var app = {
 		
 		
 		dateFieldElement.each(function () {
-			console.log(params);
 			if ($(this.children[0]).prop("id").length == 0) {
 				$(this.children[0]).attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
