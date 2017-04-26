@@ -129,6 +129,7 @@ abstract class Index extends Core\Controller
 			'vendor/fortawesome/font-awesome/css/font-awesome.css',
 			'libraries/Datatables/media/css/jquery.dataTables_themeroller.css',
 			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css',
+			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
@@ -170,6 +171,8 @@ abstract class Index extends Core\Controller
 			'vendor/twbs/bootstrap/dist/js/bootstrap.js',
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'libraries/Scripts/select2/select2.full.js',
+			'libraries/Scripts/moment.js/moment.js',
+			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
 			'libraries/Datatables/media/js/jquery.dataTables.js',
 			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
