@@ -60,8 +60,8 @@ class EditView extends Index
 		$headerScriptInstances = parent::getFooterScripts($request);
 		$moduleName = $request->getModule();
 		$jsFileNames = [
-			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/Base/resources/ListView.js",
-			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/ListView.js",
+			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/Base/resources/EditView.js",
+			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/EditView.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
