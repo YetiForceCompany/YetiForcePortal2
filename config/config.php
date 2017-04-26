@@ -2,8 +2,6 @@
 /**
  * Main configuration file
  */
-defined('_EXEC') or die;
-
 $config = [];
 $config['crmPath'] = 'http://yeti/';
 $config['portalPath'] = 'http://portal2/';
