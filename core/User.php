@@ -125,6 +125,12 @@ class User extends BaseModel
 		if (empty($preferences)) {
 			throw new \AppException('lack of user preferences');
 		}
-		return $key ? $preferences[$key] : $preferences;
+		if ($key && isset($preferences[$key])) {
+			return $preferences[$key];
+		} elseif ($key && !isset($preferences[$key])) {
+			return null;
+		} else {
+			return $preferences;
+		}
 	}
 }
