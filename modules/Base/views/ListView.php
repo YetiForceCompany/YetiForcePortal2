@@ -27,9 +27,15 @@ class ListView extends Index
 			}
 		}
 		$viewer = $this->getViewer($request);
+		if (!isset($recordsList['headers'])) {
+			$recordsList['headers'] = array();
+		}
 		$viewer->assign('HEADERS', $recordsList['headers']);
 		$viewer->assign('RECORDS', $recordsListModel);
 		$viewer->assign('MODULE_NAME', $module);
+		if (!isset($recordsList['count'])) {
+			$recordsList['count'] = 0;
+		}
 		$viewer->assign('COUNT', $recordsList['count']);
 		$viewer->view('ListView.tpl', $module);
 	}
