@@ -11,11 +11,14 @@ chdir(dirname(__FILE__) . '/../');
 $startTime = microtime(true);
 define('YF_ROOT', __DIR__);
 
+session_start();
+
 require_once('libraries/vendor/autoload.php');
 if (!file_exists('vendor/autoload.php')) {
 	throw new \AppException('Please install dependencies via composer install.');
 }
 require_once('vendor/autoload.php');
+
 
 $coreUI = new Core\WebUI();
 $coreUI->process(new Core\Request($_REQUEST));
