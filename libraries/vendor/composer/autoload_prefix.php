@@ -5,5 +5,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-	'Requests' => $baseDir . '/libraries/Requests',
 );
