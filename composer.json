@@ -27,6 +27,27 @@
         "datatables/datatables": ">=1.10.15"
 	},
 	"autoload": {
+		"classmap": [
+			"core/AppException.php"
+		],
+		"files": [
+			"config/version.php",
+			"config/config.php",
+			"core/Config.php",
+			"core/Loader.php",
+			"core/Functions.php"
+		],
+		"psr-4": {
+			"Core\\":"core/",
+			"Base\\View\\":"modules/Base/views/",
+			"Base\\Model\\":"modules/Base/models/",
+			"Base\\Action\\":"modules/Base/actions/",
+			"Install\\View\\":"modules/Install/views/",
+			"Install\\Model\\":"modules/Install/models/",
+			"Install\\Action\\":"modules/Install/actions/",
+			"Users\\View\\":"modules/Users/views/",
+			"Users\\Action\\":"modules/Users/actions/"
+		}
 	}
 
 }
