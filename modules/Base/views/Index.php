@@ -127,8 +127,8 @@ abstract class Index extends Core\Controller
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 			'vendor/fortawesome/font-awesome/css/font-awesome.css',
-			'libraries/Datatables/media/css/jquery.dataTables_themeroller.css',
-			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.css',
+			'vendor/datatables/datatables/media/css/jquery.dataTables_themeroller.css',
+			'vendor/datatables/datatables/media/css/dataTables.bootstrap.css',
 			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
 		];
 
@@ -173,10 +173,10 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/select2/select2.full.js',
 			'libraries/Scripts/moment.js/moment.js',
 			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
-			'libraries/Datatables/media/js/jquery.dataTables.js',
+			'vendor/datatables/datatables/media/js/jquery.dataTables.js',
 			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
-			'libraries/Datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
+			'vendor/datatables/datatables/media/js/dataTables.bootstrap.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
 			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
