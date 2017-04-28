@@ -19,7 +19,6 @@ if (!file_exists('vendor/autoload.php')) {
 }
 require_once('vendor/autoload.php');
 
-
 $coreUI = new Core\WebUI();
 $coreUI->process(new Core\Request($_REQUEST));
 
