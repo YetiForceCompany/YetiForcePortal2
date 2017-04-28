@@ -112,13 +112,19 @@ var app = {
 			if ($(this.children[0]).prop("id").length == 0) {
 				$(this.children[0]).attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
+			
+			var el_id = '#'+$(this.children[0]).prop("id");
+			var el_params = JSON.parse(($(this.children[0]).attr("data-fieldinfo")));
+			var params_custom = params;
+			if (typeof el_params["date-format"] !== 'undefined') {
+				params_custom.locale.format = el_params["date-format"].toUpperCase();
+			}
 			$(this.children[0]).daterangepicker(params);
-			var tmp_id = '#'+$(this.children[0]).prop("id");
 			$(this.children[1]).click(function(){
-				$(tmp_id).focus();
+				$(el_id).focus();
 			});
-			$(tmp_id).on('apply.daterangepicker', function(ev, picker) {
-				$(this).val(picker.startDate.format(params.locale.format));
+			$(el_id).on('apply.daterangepicker', function(ev, picker) {
+				$(this).val(picker.startDate.format(params_custom.locale.format));
 			});
 		});
 	},

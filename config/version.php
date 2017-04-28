@@ -5,9 +5,7 @@
  * @package YetiForce.Configuration
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-defined('_EXEC') or die;
-
-$version = '0.0.15';
-$patchVersion = '20170426';
+$version = '0.0.30';
+$patchVersion = '20170428';
 
 define('VERSION', $version);

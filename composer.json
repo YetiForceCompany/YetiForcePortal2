@@ -22,10 +22,27 @@
 		"smarty/smarty": ">=3.1.31",
 		"twbs/bootstrap": ">=3.3.7",
 		"components/jquery": ">=3.2.1",
-		"fortawesome/font-awesome": ">=4.7.0"
+		"fortawesome/font-awesome": ">=4.7.0",
+        "rmccue/requests": ">=1.0",
+        "datatables/datatables": ">=1.10.15"
 	},
 	"autoload": {
-
+		"classmap": [
+			"core/AppException.php"
+		],
+		"files": [
+			"config/version.php",
+			"config/config.php",
+			"core/Config.php",
+			"core/Loader.php",
+			"core/Functions.php"
+		],
+		"psr-4": {
+			"Core\\":"core/",
+			"Base\\":"modules/Base/",
+			"Install\\":"modules/Install/",
+			"Users\\":"modules/Users/"
+		}
 	}
 
 }

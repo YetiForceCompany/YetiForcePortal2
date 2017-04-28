@@ -7,11 +7,10 @@
  */
 error_reporting(E_ALL);
 define('YF_ROOT', __DIR__);
-define('_EXEC', 1);
 
-require_once('libraries/vendor/autoload.php');
 if (!file_exists('vendor/autoload.php')) {
-	throw new \AppException('Please install dependencies via composer install.');
+	echo ('Please install dependencies via composer install.');
+	die();
 }
 require_once('vendor/autoload.php');
 

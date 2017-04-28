@@ -67,13 +67,16 @@ class User extends BaseModel
 			'fromUrl' => \Config::get('portalPath')
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
-		if ($response) {
+		if ($response && !(isset($response['code']) && $response['code'] == 401)) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
 				$this->set($key, $value);
 			}
+
+			return true;
 		}
-		return true;
+
+		return false;
 	}
 
 	public function isPermitted($module)
@@ -125,6 +128,12 @@ class User extends BaseModel
 		if (empty($preferences)) {
 			throw new \AppException('lack of user preferences');
 		}
-		return $key ? $preferences[$key] : $preferences;
+		if ($key && isset($preferences[$key])) {
+			return $preferences[$key];
+		} elseif ($key && !isset($preferences[$key])) {
+			return null;
+		} else {
+			return $preferences;
+		}
 	}
 }

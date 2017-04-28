@@ -42,14 +42,14 @@ class Loader
 
 	public static function getModuleClassName($moduleName, $moduleType, $fieldName)
 	{
-		$filePath = 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
+		$filePath = 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . strtolower($moduleType) . DIRECTORY_SEPARATOR . $fieldName . '.php';
 		$className = $moduleName . '\\' . $moduleType . '\\' . $fieldName;
 		//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 		if (file_exists($filePath)) {
 			return $className;
 		}
 
-		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . strtolower($moduleType . 's') . DIRECTORY_SEPARATOR . $fieldName . '.php';
+		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . strtolower($moduleType) . DIRECTORY_SEPARATOR . $fieldName . '.php';
 		$className = 'Base' . '\\' . $moduleType . '\\' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
