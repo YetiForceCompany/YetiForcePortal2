@@ -4,7 +4,7 @@
  * @package YetiForce.Tests
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Micha≥ Lorencik <m.lorencik@yetiforce.com>
+ * @author Micha≈Ç Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
 

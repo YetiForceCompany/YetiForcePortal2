@@ -67,7 +67,7 @@ class User extends BaseModel
 			'fromUrl' => \Config::get('portalPath')
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
-		if ($response && !(isset($response['code']) && $response['code'] == 401)) {
+		if ($response && !(isset($response['code']) && $response['code'] === 401)) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
 				$this->set($key, $value);

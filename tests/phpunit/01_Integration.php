@@ -1,20 +1,23 @@
 <?php
 /**
- * Install test class
+ * Integration test class
  * @package YetiForce.Tests
  * @license licenses/License.html
- * @author Micha≥ Lorencik <m.lorencik@yetiforce.com>
+ * @author Micha≈Ç Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
 use YF\Core\Api;
 use YF\Core\User;
 
 /**
- * @covers API::<public>
+ * @covers Integration::<public>
  */
 class Integration extends TestCase
 {
 
+	/**
+	 * Test portal is integrated with crm
+	 */
 	public function testIntegration()
 	{
 		$response = (new Api)->call('');
@@ -22,6 +25,9 @@ class Integration extends TestCase
 		$this->assertTrue($result);
 	}
 
+	/**
+	 * Test login with default data
+	 */
 	public function testLogin()
 	{
 		$login = 'demo@yetiforce.com';
@@ -31,6 +37,9 @@ class Integration extends TestCase
 		$this->assertTrue($response);
 	}
 
+	/**
+	 * Test login with bad password
+	 */
 	public function testLoginBadData()
 	{
 		$login = 'demo@yetiforce.crm';

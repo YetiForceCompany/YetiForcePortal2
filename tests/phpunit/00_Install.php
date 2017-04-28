@@ -3,17 +3,20 @@
  * Install test class
  * @package YetiForce.Tests
  * @license licenses/License.html
- * @author Micha≥ Lorencik <m.lorencik@yetiforce.com>
+ * @author Micha≈Ç Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers API::<public>
+ * @covers Install::<public>
  */
 class Install extends TestCase
 {
 
-	public function testCmposerInstall()
+	/**
+	 * Checking Composer is instlled
+	 */
+	public function testComposerInstall()
 	{
 		$this->assertFileExists('vendor/autoload.php');
 	}
