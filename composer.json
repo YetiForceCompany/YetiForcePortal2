@@ -39,14 +39,9 @@
 		],
 		"psr-4": {
 			"Core\\":"core/",
-			"Base\\View\\":"modules/Base/views/",
-			"Base\\Model\\":"modules/Base/models/",
-			"Base\\Action\\":"modules/Base/actions/",
-			"Install\\View\\":"modules/Install/views/",
-			"Install\\Model\\":"modules/Install/models/",
-			"Install\\Action\\":"modules/Install/actions/",
-			"Users\\View\\":"modules/Users/views/",
-			"Users\\Action\\":"modules/Users/actions/"
+			"Base\\":"modules/Base/",
+			"Install\\":"modules/Install/",
+			"Users\\":"modules/Users/"
 		}
 	}
 
