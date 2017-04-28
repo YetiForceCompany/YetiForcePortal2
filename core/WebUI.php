@@ -68,6 +68,7 @@ class WebUI
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
+				echo ($module . $componentType . $componentName);
 				throw new \AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (AppException $e) {

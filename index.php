@@ -9,8 +9,7 @@ error_reporting(E_ALL);
 define('YF_ROOT', __DIR__);
 
 if (!file_exists('vendor/autoload.php')) {
-	echo ('Please install dependencies via composer install.');
-	die();
+	die('Please install dependencies via composer install.');
 }
 require_once('vendor/autoload.php');
 

@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Install\Model;
+namespace YF\Modules\Install\Model;
 
 use YF\Core;
 

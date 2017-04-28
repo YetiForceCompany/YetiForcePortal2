@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Install\View;
+namespace YF\Modules\Install\View;
 
 use YF\Modules\Base\View,
 	YF\Core;

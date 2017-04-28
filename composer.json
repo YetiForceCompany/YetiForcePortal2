@@ -34,7 +34,6 @@
 			"config/version.php",
 			"config/config.php",
 			"core/Config.php",
-			"core/Loader.php",
 			"core/Functions.php"
 		],
 		"psr-4": {
