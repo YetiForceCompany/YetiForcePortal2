@@ -58,7 +58,21 @@ abstract class Index extends \YF\Core\Controller
 
 	public function getPageTitle(\YF\Core\Request $request)
 	{
-		return $request->getAction();
+		$moduleName = $request->getModule(false);
+		$title = Core\Language::translateModule($moduleName);
+		$pageTitle = $this->getBreadcrumbTitle($request);
+		if ($pageTitle) {
+			$title .= ' - ' . $pageTitle;
+		}
+		return $title;
+	}
+
+	public function getBreadcrumbTitle(Core\Request $request)
+	{
+		if (!empty($this->pageTitle)) {
+			return $this->pageTitle;
+		}
+		return false;
 	}
 
 	public function preProcess(\YF\Core\Request $request, $display = true)

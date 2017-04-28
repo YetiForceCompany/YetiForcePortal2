@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Install test class
  * @package YetiForce.Tests
  * @license licenses/License.html
- * @author Michaï¿½ Lorencik <m.lorencik@yetiforce.com>
+ * @author Micha³ Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
 use YF\Core\Api;
