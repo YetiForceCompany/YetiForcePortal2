@@ -6,7 +6,7 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Request
 {
@@ -29,7 +29,7 @@ class Request
 
 	/**
 	 * Function gets Request object
-	 * @return \Core\Request
+	 * @return \YF\Core\Request
 	 */
 	public static function getInstance()
 	{
@@ -41,8 +41,8 @@ class Request
 
 	/**
 	 * Set Request instance
-	 * @param \Core\Request $request
-	 * @return \Core\Request
+	 * @param \YF\Core\Request $request
+	 * @return \YF\Core\Request
 	 */
 	public static function setInstance(Request $request)
 	{

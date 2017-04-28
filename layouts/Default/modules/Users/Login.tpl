@@ -25,7 +25,7 @@
 			<div class="form-group">
 				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<select name="language" class="form-control">
-					{foreach item=LANG key=PREFIX from=Core\Language::getAllLanguages()}
+					{foreach item=LANG key=PREFIX from=\YF\Core\Language::getAllLanguages()}
 						<option value="{$PREFIX}">{$LANG}</option>
 					{/foreach}
 				</select>

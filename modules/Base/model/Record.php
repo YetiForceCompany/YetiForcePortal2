@@ -5,22 +5,22 @@
  * @license licenses/License.html
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\Model;
+namespace YF\Modules\Base\Model;
 
-use Core;
+use YF\Core;
 
-class Record extends \Core\BaseModel
+class Record extends \YF\Core\BaseModel
 {
 
 	/**
 	 * Module name
-	 * @var string 
+	 * @var string
 	 */
 	private $module;
 
 	/**
 	 * Raw data
-	 * @var array 
+	 * @var array
 	 */
 	private $rawData = [];
 
@@ -43,7 +43,7 @@ class Record extends \Core\BaseModel
 	}
 
 	/**
-	 * 
+	 *
 	 * @param array $value
 	 * @return $this
 	 */
@@ -99,7 +99,7 @@ class Record extends \Core\BaseModel
 	 */
 	public static function getInstance($module)
 	{
-		$handlerModule = Core\Loader::getModuleClassName($module, 'Model', 'Record');
+		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Record');
 		$instance = new $handlerModule();
 		return $instance->setModuleName($module);
 	}

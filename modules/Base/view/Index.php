@@ -6,12 +6,12 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\View;
+namespace YF\Modules\Base\View;
 
-use Core;
-use Core\Session;
+use YF\Core;
+use YF\Core\Session;
 
-abstract class Index extends Core\Controller
+abstract class Index extends \YF\Core\Controller
 {
 
 	protected $viewer = false;
@@ -26,10 +26,10 @@ abstract class Index extends Core\Controller
 		return true;
 	}
 
-	function checkPermission(Core\Request $request)
+	function checkPermission(\YF\Core\Request $request)
 	{
 		$moduleName = $request->getModule();
-		$userInstance = Core\User::getUser();
+		$userInstance = \YF\Core\User::getUser();
 		$modulePermission = $userInstance->isPermitted($moduleName);
 		if (!$modulePermission) {
 			throw new \AppException('LBL_MODULE_PERMISSION_DENIED');
@@ -39,15 +39,15 @@ abstract class Index extends Core\Controller
 
 	/**
 	 * Get viewer
-	 * @param \Core\Request $request
-	 * @return \Core\Viewer
+	 * @param \YF\Core\Request $request
+	 * @return \YF\Core\Viewer
 	 */
-	public function getViewer(Core\Request $request)
+	public function getViewer(\YF\Core\Request $request)
 	{
 		if (!$this->viewer) {
 			$moduleName = $request->getModule();
 
-			$viewer = new Core\Viewer();
+			$viewer = new \YF\Core\Viewer();
 			$viewer->assign('MODULE_NAME', $moduleName);
 			$viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('ACTION_NAME', $request->getAction());
@@ -56,40 +56,26 @@ abstract class Index extends Core\Controller
 		return $this->viewer;
 	}
 
-	public function getPageTitle(Core\Request $request)
+	public function getPageTitle(\YF\Core\Request $request)
 	{
-		$moduleName = $request->getModule(false);
-		$title = Core\Language::translateModule($moduleName);
-		$pageTitle = $this->getBreadcrumbTitle($request);
-		if ($pageTitle) {
-			$title .= ' - ' . $pageTitle;
-		}
-		return $title;
+		return $request->getAction();
 	}
 
-	public function getBreadcrumbTitle(Core\Request $request)
-	{
-		if (!empty($this->pageTitle)) {
-			return $this->pageTitle;
-		}
-		return false;
-	}
-
-	public function preProcess(Core\Request $request, $display = true)
+	public function preProcess(\YF\Core\Request $request, $display = true)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
 		$viewer->assign('STYLES', $this->getHeaderCss($request));
-		$viewer->assign('LANGUAGE', Core\Language::getLanguage());
-		$viewer->assign('LANG', Core\Language::getShortLanguageName());
-		$viewer->assign('USER', Core\User::getUser());
+		$viewer->assign('LANGUAGE', \YF\Core\Language::getLanguage());
+		$viewer->assign('LANG', \YF\Core\Language::getShortLanguageName());
+		$viewer->assign('USER', \YF\Core\User::getUser());
 		if ($display) {
 			$this->preProcessDisplay($request);
 		}
 	}
 
-	protected function preProcessTplName(Core\Request $request)
+	protected function preProcessTplName(\YF\Core\Request $request)
 	{
 		return 'Header.tpl';
 	}
@@ -97,11 +83,11 @@ abstract class Index extends Core\Controller
 	//Note : To get the right hook for immediate parent in PHP,
 	// specially in case of deep hierarchy
 	//TODO: Need to revisit this.
-	/* function preProcessParentTplName(Core\Request $request) {
+	/* function preProcessParentTplName(YF\Core\Request $request) {
 	  return parent::preProcessTplName($request);
 	  } */
 
-	protected function preProcessDisplay(Core\Request $request)
+	protected function preProcessDisplay(\YF\Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		if (Session::has('systemError')) {
@@ -111,7 +97,7 @@ abstract class Index extends Core\Controller
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	public function postProcess(Core\Request $request)
+	public function postProcess(\YF\Core\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
@@ -126,10 +112,10 @@ abstract class Index extends Core\Controller
 
 	/**
 	 * Retrieves css styles that need to loaded in the page
-	 * @param Core\Request $request - request model
-	 * @return Core\Script[]
+	 * @param \YF\Core\Request $request - request model
+	 * @return \YF\Core\Script[]
 	 */
-	public function getHeaderCss(Core\Request $request)
+	public function getHeaderCss(\YF\Core\Request $request)
 	{
 		$cssFileNames = [
 			'libraries/Scripts/pace/pace.css',
@@ -138,8 +124,8 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/chosen/chosen.bootstrap.css',
 			'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
 			'libraries/Scripts/select2/select2.css',
-			'layouts/' . Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
-			'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 			'vendor/fortawesome/font-awesome/css/font-awesome.css',
 			'vendor/datatables/datatables/media/css/jquery.dataTables_themeroller.css',
 			'vendor/datatables/datatables/media/css/dataTables.bootstrap.css',
@@ -152,10 +138,10 @@ abstract class Index extends Core\Controller
 
 	/**
 	 * Retrieves headers scripts that need to loaded in the page
-	 * @param Core\Request $request - request model
-	 * @return <array> - array of Core\Script
+	 * @param \YF\Core\Request $request - request model
+	 * @return <array> - array of \YF\Core\Script
 	 */
-	public function getHeaderScripts(Core\Request $request)
+	public function getHeaderScripts(\YF\Core\Request $request)
 	{
 		$headerScriptInstances = [
 			'libraries/Scripts/pace/pace.js',
@@ -166,14 +152,14 @@ abstract class Index extends Core\Controller
 
 	/**
 	 * Scripts
-	 * @param \Core\Request $request
-	 * @return \Core\Script[]
+	 * @param \YF\Core\Request $request
+	 * @return \YF\Core\Script[]
 	 */
-	public function getFooterScripts(Core\Request $request)
+	public function getFooterScripts(\YF\Core\Request $request)
 	{
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
-		$shortLang = \Core\Language::getShortLanguageName();
+		$shortLang = \YF\Core\Language::getShortLanguageName();
 		$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
 		if (!file_exists($validLangScript)) {
 			$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
@@ -191,11 +177,11 @@ abstract class Index extends Core\Controller
 			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
 			'vendor/datatables/datatables/media/js/dataTables.bootstrap.js',
-			'layouts/' . Core\Viewer::getLayoutName() . '/resources/Connector.js',
-			'layouts/' . Core\Viewer::getLayoutName() . '/resources/app.js',
-			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
-			'layouts/' . Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
-			'layouts/' . Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
@@ -207,7 +193,7 @@ abstract class Index extends Core\Controller
 		$scriptsInstances = [];
 
 		foreach ($fileNames as $fileName) {
-			$script = new Core\Script();
+			$script = new \YF\Core\Script();
 			$script->set('type', $fileExtension);
 			// external javascript source file handling
 			if (strpos($fileName, 'http://') === 0 || strpos($fileName, 'https://') === 0) {

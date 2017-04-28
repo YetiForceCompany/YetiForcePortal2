@@ -5,9 +5,9 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
-use Base\Model,
+use YF\Modules\Base\Model,
 	Config;
 
 class WebUI
@@ -15,7 +15,7 @@ class WebUI
 
 	/**
 	 * Process
-	 * @param \Core\Request $request
+	 * @param \YF\Core\Request $request
 	 * @throws \AppException
 	 */
 	public function process(Request $request)

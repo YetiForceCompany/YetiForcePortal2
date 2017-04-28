@@ -8,8 +8,8 @@
 namespace Install\Action;
 
 use Install\Model,
-	Base\Action,
-	Core;
+	YF\Modules\Base\Action,
+	YF\Core;
 
 class Install extends Action\Base
 {
@@ -19,7 +19,7 @@ class Install extends Action\Base
 		return false;
 	}
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$install = Model\Install::getInstance($request->getModule());
 		$install->save($request);

@@ -5,11 +5,11 @@
  * @license licenses/License.html
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\Model;
+namespace YF\Modules\Base\Model;
 
-use Core;
+use YF\Core;
 
-class Field extends \Core\BaseModel
+class Field extends \YF\Core\BaseModel
 {
 
 	/**
@@ -48,7 +48,7 @@ class Field extends \Core\BaseModel
 	 */
 	public static function getInstance($module)
 	{
-		$handlerModule = Core\Loader::getModuleClassName($module, 'Model', 'Field');
+		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Field');
 		$instance = new $handlerModule();
 		return $instance->setModuleName($module);
 	}

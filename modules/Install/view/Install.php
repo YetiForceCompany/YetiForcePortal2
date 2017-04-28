@@ -7,8 +7,8 @@
  */
 namespace Install\View;
 
-use Base\View,
-	Core;
+use YF\Modules\Base\View,
+	YF\Core;
 
 class Install extends View\Index
 {
@@ -24,12 +24,12 @@ class Install extends View\Index
 		return false;
 	}
 
-	public function checkPermission(Core\Request $request)
+	public function checkPermission(\YF\Core\Request $request)
 	{
 		return true;
 	}
 
-	public function preProcess(Core\Request $request, $display = true)
+	public function preProcess(\YF\Core\Request $request, $display = true)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);
@@ -38,7 +38,7 @@ class Install extends View\Index
 		$viewer->view('InstallPreProcess.tpl', $module);
 	}
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
 		$mode = $request->getMode();
@@ -48,44 +48,45 @@ class Install extends View\Index
 		$this->Step1($request);
 	}
 
-	public function Step1(Core\Request $request)
+	public function Step1(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$viewer->view('InstallStep1.tpl', $module);
 	}
 
-	public function Step2(Core\Request $request)
+	public function Step2(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$viewer->view('InstallStep2.tpl', $module);
 	}
 
-	public function postProcess(Core\Request $request, $display = true)
+	public function postProcess(\YF\Core\Request $request, $display = true)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$viewer->view('InstallPostProcess.tpl', $module);
 		parent::postProcess($request, $display);
 	}
-	
-	public function setLanguage($request) {
+
+	public function setLanguage($request)
+	{
 		if ($request->get('lang')) {
-			$userInstance = \Core\User::getUser();
+			$userInstance = \YF\Core\User::getUser();
 			$userInstance->set('language', $request->get('lang'));
 		}
 		return $request;
 	}
 	/**
 
-	  public function getHeaderCss(Core\Request $request)
+	  public function getHeaderCss(\YF\Core\Request $request)
 	  {
 	  $parentScripts = parent::getHeaderCss($request);
 	  $cssFileNames = [
 	  'libraries/Bootstrap/css/bootstrap.css',
 	  'libraries/Bootstrap/css/bootstrap-theme.css',
-	  'layouts/' . Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
+	  'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
 	  ];
 
 	  $addScripts = $this->convertScripts($cssFileNames, 'css');
@@ -93,7 +94,7 @@ class Install extends View\Index
 	  return $parentScripts;
 	  }
 
-	  public function getFooterScripts(Core\Request $request)
+	  public function getFooterScripts(\YF\Core\Request $request)
 	  {
 	  $parentScripts = parent::getFooterScripts($request);
 	  $jsFileNames = [

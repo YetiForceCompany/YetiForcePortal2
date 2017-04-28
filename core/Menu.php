@@ -6,7 +6,7 @@
  * @author Tomasz Kur <t.kur@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Menu
 {

@@ -5,24 +5,24 @@
  * @license licenses/License.html
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\Action;
+namespace YF\Modules\Base\Action;
 
-use Core;
+use YF\Core;
 
 class ChangeCompany extends Base
 {
 
 	/**
 	 * Process
-	 * @param Core\Request $request
+	 * @param \YF\Core\Request $request
 	 * @return mixed
 	 */
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
-		$userInstance = Core\User::getUser();
+		$userInstance = \YF\Core\User::getUser();
 		$userInstance->set('CompanyId', $request->get('record'));
 
-		$response = new Core\Response();
+		$response = new \YF\Core\Response();
 		$response->setResult(true);
 		$response->emit();
 	}

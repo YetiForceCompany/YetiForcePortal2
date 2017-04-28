@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 abstract class Controller
 {
@@ -26,17 +26,17 @@ abstract class Controller
 
 	public function validateRequest(Request $request)
 	{
-		
+
 	}
 
 	public function preProcess(Request $request)
 	{
-		
+
 	}
 
 	public function postProcess(Request $request)
 	{
-		
+
 	}
 
 	// Control the exposure of methods to be invoked from client (kind-of RPC)

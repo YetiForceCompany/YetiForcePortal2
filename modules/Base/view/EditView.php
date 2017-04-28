@@ -5,10 +5,10 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Base\View;
+namespace YF\Modules\Base\View;
 
-use Core\Request;
-use Core\Api;
+use YF\Core\Request;
+use YF\Core\Api;
 
 class EditView extends Index
 {
@@ -24,7 +24,7 @@ class EditView extends Index
 		$api = Api::getInstance();
 		$moduleStructure = $api->call($module . '/Fields');
 		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], 'get');
-		$recordModel = \Base\Model\Record::getInstance($module);
+		$recordModel = \YF\Modules\Base\Model\Record::getInstance($module);
 		if (!isset($recordDetail['data'])) {
 			$recordDetail['data'] = [];
 		}
@@ -38,7 +38,7 @@ class EditView extends Index
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isEditable']) {
-				$fieldInstance = \Base\Model\Field::getInstance($module);
+				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($module);
 				$fields[$field['blockId']][] = $fieldInstance->setData($field);
 			}
 		}
@@ -52,16 +52,16 @@ class EditView extends Index
 
 	/**
 	 * Scripts
-	 * @param \Core\Request $request
-	 * @return \Core\Script[]
+	 * @param \YF\Core\Request $request
+	 * @return \YF\Core\Script[]
 	 */
-	public function getFooterScripts(\Core\Request $request)
+	public function getFooterScripts(\YF\Core\Request $request)
 	{
 		$headerScriptInstances = parent::getFooterScripts($request);
 		$moduleName = $request->getModule();
 		$jsFileNames = [
-			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/Base/resources/EditView.js",
-			'layouts/' . \Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/EditView.js",
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/EditView.js",
+			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/EditView.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');

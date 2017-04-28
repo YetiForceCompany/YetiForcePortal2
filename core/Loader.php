@@ -5,7 +5,7 @@
  * @package YetiForce.Core
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Loader
 {
@@ -50,7 +50,7 @@ class Loader
 		}
 
 		$filePath = 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . strtolower($moduleType) . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = 'Base' . '\\' . $moduleType . '\\' . $fieldName;
+		$className = '\YF\Modules\Base' . '\\' . $moduleType . '\\' . $fieldName;
 		if (file_exists($filePath)) {
 			return $className;
 		}

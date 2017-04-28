@@ -6,9 +6,9 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\Model;
+namespace YF\Modules\Base\Model;
 
-use Core;
+use YF\Core;
 
 class Module
 {
@@ -35,14 +35,14 @@ class Module
 	 */
 	public static function isPermitted($module, $action)
 	{
-		if (!\Core\Session::has('modulePermissions')) {
-			\Core\Session::set('modulePermissions', []);
+		if (!\YF\Core\Session::has('modulePermissions')) {
+			\YF\Core\Session::set('modulePermissions', []);
 		}
-		$data = \Core\Session::get('modulePermissions');
+		$data = \YF\Core\Session::get('modulePermissions');
 		if (!isset($data[$module])) {
-			$permissions = \Core\Api::getInstance()->call($module . '/Privileges');
+			$permissions = \YF\Core\Api::getInstance()->call($module . '/Privileges');
 			$data[$module] = $permissions['standardActions'];
-			\Core\Session::set('modulePermissions', $data);
+			\YF\Core\Session::set('modulePermissions', $data);
 		}
 		if (isset($data[$module][$action]) && !empty($data[$module][$action])) {
 			return true;

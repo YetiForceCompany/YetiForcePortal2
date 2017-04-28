@@ -6,32 +6,32 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\View;
+namespace YF\Modules\Base\View;
 
-use Core;
+use YF\Core;
 
 class DetailView extends Index
 {
 
 	/**
 	 * Process
-	 * @param \Core\Request $request
+	 * @param \YF\Core\Request $request
 	 */
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
-		$api = Core\Api::getInstance();
+		$api = \YF\Core\Api::getInstance();
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
-				$fieldInstance = \Base\Model\Field::getInstance($moduleName);
+				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName);
 				$fields[$field['blockId']][] = $fieldInstance->setData($field);
 			}
 		}
 		$recordDetail = $api->call("$moduleName/Record/$record");
-		$recordModel = \Base\Model\Record::getInstance($moduleName);
+		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data'])->setId($recordDetail['id']);
 		$viewer = $this->getViewer($request);
 		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);

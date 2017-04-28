@@ -2,11 +2,11 @@
 {strip}
 	<div class="breadCrumbs" >
 		{if isset($BREADCRUMB_TITLE)}
-			{assign var="BREADCRUMBS" value=Core\Menu::getBreadcrumbs($BREADCRUMB_TITLE)}
+			{assign var="BREADCRUMBS" value=\YF\Core\Menu::getBreadcrumbs($BREADCRUMB_TITLE)}
 		{else}
-			{assign var="BREADCRUMBS" value=Core\Menu::getBreadcrumbs()}
+			{assign var="BREADCRUMBS" value=\YF\Core\Menu::getBreadcrumbs()}
 		{/if}
-		
+
 		{assign var=HOMEICON value='userIcon-Home'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
@@ -30,6 +30,6 @@
 					{/foreach}
 				</h2>
 			</div>
-		{/if}			
+		{/if}
 	</div>
 {/strip}

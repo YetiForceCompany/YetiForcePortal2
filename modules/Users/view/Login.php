@@ -7,8 +7,8 @@
  */
 namespace Users\View;
 
-use Base\View,
-	Core;
+use YF\Modules\Base\View,
+	YF\Core;
 
 class Login extends View\Index
 {
@@ -18,12 +18,12 @@ class Login extends View\Index
 		return false;
 	}
 
-	public function checkPermission(Core\Request $request)
+	public function checkPermission(\YF\Core\Request $request)
 	{
 		return true;
 	}
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);

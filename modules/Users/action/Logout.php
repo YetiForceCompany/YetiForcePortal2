@@ -1,8 +1,8 @@
 <?php
 namespace Users\Action;
 
-use Base\Action,
-	Core;
+use YF\Modules\Base\Action,
+	YF\Core;
 
 /**
  * User Action Logout Class
@@ -13,9 +13,9 @@ use Base\Action,
 class Logout extends Action\Base
 {
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
-		$response = \Core\Api::getInstance()->call('Users/Logout', [], 'put');
+		$response = \YF\Core\Api::getInstance()->call('Users/Logout', [], 'put');
 		session_destroy();
 		header('Location: ' . \Config::get('portalPath'));
 	}

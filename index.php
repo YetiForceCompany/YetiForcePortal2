@@ -17,8 +17,8 @@ require_once('vendor/autoload.php');
 session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
 session_start();
 
-$coreUI = new Core\WebUI();
-$coreUI->process(new Core\Request($_REQUEST));
+$coreUI = new \YF\Core\WebUI();
+$coreUI->process(new \YF\Core\Request($_REQUEST));
 
 //debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 

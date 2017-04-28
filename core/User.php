@@ -5,9 +5,9 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
-use Core\Session;
+use YF\Core\Session;
 
 class User extends BaseModel
 {
@@ -31,7 +31,7 @@ class User extends BaseModel
 	 * Function to set the value for a given key
 	 * @param $key
 	 * @param $value
-	 * @return Core\BaseModel
+	 * @return \YF\Core\BaseModel
 	 */
 	public function set($key, $value)
 	{
@@ -42,10 +42,10 @@ class User extends BaseModel
 
 	/**
 	 * Checking login
-	 * @param \Core\Request $request
+	 * @param \YF\Core\Request $request
 	 * @throws \AppException
 	 */
-	public function checkLogin(\Core\Request $request)
+	public function checkLogin(\YF\Core\Request $request)
 	{
 		if (!$this->hasLogin()) {
 			header('Location: index.php');

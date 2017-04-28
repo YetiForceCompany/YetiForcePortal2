@@ -7,8 +7,8 @@
  */
 namespace Users\Action;
 
-use Base\Action,
-	Core;
+use YF\Modules\Base\Action,
+	YF\Core;
 
 class Login extends Action\Base
 {
@@ -23,11 +23,11 @@ class Login extends Action\Base
 		return false;
 	}
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$email = $request->get('email');
 		$password = $request->get('password');
-		$userInstance = Core\User::getUser();
+		$userInstance = \YF\Core\User::getUser();
 		$userInstance->set('language', $request->get('language'));
 		$userInstance->login($email, $password);
 

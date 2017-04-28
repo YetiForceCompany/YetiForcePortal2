@@ -7,7 +7,7 @@
  */
 namespace Install\Model;
 
-use Core;
+use YF\Core;
 
 class Install
 {
@@ -18,7 +18,7 @@ class Install
 		'apiKey' => '__API_KEY__',
 	];
 
-	public function save(Core\Request $request)
+	public function save(\YF\Core\Request $request)
 	{
 		$configFile = file_get_contents($this->configPath);
 		foreach ($this->config as $key => $value) {
@@ -66,7 +66,7 @@ class Install
 
 	public static function getInstance($module)
 	{
-		$handlerModule = Core\Loader::getModuleClassName($module, 'Model', 'Install');
+		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Install');
 		$instance = new $handlerModule();
 		return $instance;
 	}

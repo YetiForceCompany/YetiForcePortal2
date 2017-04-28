@@ -6,22 +6,22 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\View;
+namespace YF\Modules\Base\View;
 
-use Core;
+use YF\Core;
 
 class ListView extends Index
 {
 
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
-		$api = Core\Api::getInstance();
+		$api = \YF\Core\Api::getInstance();
 		$recordsListModel = [];
 		$recordsList = $api->call($module . '/RecordsList');
 		if (!empty($recordsList['records'])) {
 			foreach ($recordsList['records'] as $key => $value) {
-				$recordModel = \Base\Model\Record::getInstance($module);
+				$recordModel = \YF\Modules\Base\Model\Record::getInstance($module);
 				$recordModel->setData($value)->setId($key);
 				$recordsListModel[$key] = $recordModel;
 			}

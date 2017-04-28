@@ -6,10 +6,10 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 use Requests,
-	Core;
+	YF\Core;
 
 class Api
 {
@@ -41,8 +41,8 @@ class Api
 	}
 
 	/**
-	 * 
-	 * @param string $method 
+	 *
+	 * @param string $method
 	 * @param array $data
 	 * @return array
 	 */
@@ -56,7 +56,7 @@ class Api
 		if (in_array($requestType, ['get', 'delete'])) {
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
-			$data = Core\Json::encode($data);
+			$data = \YF\Core\Json::encode($data);
 			if (\Config::getBoolean('encryptDataTransfer') && $requestType !== 'get') {
 				$data = $this->encryptData($data);
 			}
@@ -66,7 +66,7 @@ class Api
 		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
-		$response = Core\Json::decode($rawResponse);
+		$response = \YF\Core\Json::decode($rawResponse);
 		if (\Config::getBoolean('debugApi')) {
 			$debugApi = [
 				'date' => date('Y-m-d H:i:s', $startTime),
@@ -136,7 +136,7 @@ class Api
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string $method
 	 * @param array $data
 	 * @param array $response
@@ -154,7 +154,7 @@ class Api
 	}
 
 	/**
-	 * 
+	 *
 	 * @param array $data
 	 * @return string Encrypted string
 	 */
@@ -162,12 +162,12 @@ class Api
 	{
 
 		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \Config::get('publicKey');
-		openssl_public_encrypt(Core\Json::encode($data), $encrypted, $publicKey);
+		openssl_public_encrypt(\YF\Core\Json::encode($data), $encrypted, $publicKey);
 		return $encrypted;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param array $data
 	 * @return array Decrypted string
 	 * @throws AppException

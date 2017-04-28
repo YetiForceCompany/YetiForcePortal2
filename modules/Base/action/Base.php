@@ -5,33 +5,33 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Base\Action;
+namespace YF\Modules\Base\Action;
 
-use Core;
+use YF\Core;
 
-abstract class Base extends Core\Controller
+abstract class Base extends \YF\Core\Controller
 {
 
-	public function getViewer(Core\Request $request)
+	public function getViewer(\YF\Core\Request $request)
 	{
 		throw new AppException('Action - implement getViewer - JSONViewer');
 	}
 
-	public function validateRequest(Core\Request $request)
+	public function validateRequest(\YF\Core\Request $request)
 	{
 		return $request->validateReadAccess();
 	}
 
-	public function preProcess(Core\Request $request)
+	public function preProcess(\YF\Core\Request $request)
 	{
 		return true;
 	}
 
-	public function postProcess(Core\Request $request)
+	public function postProcess(\YF\Core\Request $request)
 	{
 		return true;
 	}
-	
+
 	public function checkPermission()
 	{
 		return true;

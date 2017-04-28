@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Language
 {
@@ -25,7 +25,7 @@ class Language
 		if (empty($currentLanguage)) {
 			$currentLanguage = self::getLanguage();
 		}
-		//decoding for Start Date & Time and End Date & Time 
+		//decoding for Start Date & Time and End Date & Time
 		if (!is_array($key))
 			$key = html_entity_decode($key);
 		$translatedString = self::getLanguageTranslatedString($currentLanguage, $key, $module);

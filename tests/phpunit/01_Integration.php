@@ -1,13 +1,14 @@
 <?php
+
 /**
  * Install test class
  * @package YetiForce.Tests
  * @license licenses/License.html
- * @author Micha³ Lorencik <m.lorencik@yetiforce.com>
+ * @author Michaï¿½ Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
-use Core\Api;
-use Core\User;
+use YF\Core\Api;
+use YF\Core\User;
 
 /**
  * @covers API::<public>

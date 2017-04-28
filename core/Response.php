@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Response
 {
@@ -199,7 +199,7 @@ class Response
 	 */
 	protected function emitJSON()
 	{
-		echo \Core\Json::encode($this->prepareResponse());
+		echo \YF\Core\Json::encode($this->prepareResponse());
 	}
 
 	/**
@@ -211,12 +211,12 @@ class Response
 			if (is_string($this->error))
 				echo $this->error;
 			else
-				echo \Core\Json::encode($this->prepareResponse());
+				echo \YF\Core\Json::encode($this->prepareResponse());
 		} else {
 			if (is_string($this->result))
 				echo $this->result;
 			else
-				echo \Core\Json::encode($this->prepareResponse());
+				echo \YF\Core\Json::encode($this->prepareResponse());
 		}
 	}
 

@@ -5,27 +5,27 @@
  * @license licenses/License.html
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace Base\Action;
+namespace YF\Modules\Base\Action;
 
-use Core;
+use YF\Core;
 
 class Save extends Base
 {
 
 	/**
 	 * Process
-	 * @param Core\Request $request
+	 * @param \YF\Core\Request $request
 	 * @return mixed
 	 */
-	public function process(Core\Request $request)
+	public function process(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
 		$record = $request->get('record');
 		$view = $request->get('view');
-		$api = Core\Api::getInstance();
+		$api = \YF\Core\Api::getInstance();
 		$result = $api->call($module . '/Record/' . $record, $request->getAll(), $record ? 'put' : 'post');
 		if ($request->isAjax()) {
-			$response = new Core\Response();
+			$response = new \YF\Core\Response();
 			$response->setResult($result);
 			$response->emit();
 		} else {

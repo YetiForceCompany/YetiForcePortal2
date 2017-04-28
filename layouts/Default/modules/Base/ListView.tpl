@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} --!>*}
 {strip}
 	<div class="contentsDiv">
-		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value='{\Core\Json::encode(\Config::get('listEntriesPerPage'))}'>
+		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value='{\YF\Core\Json::encode(\Config::get('listEntriesPerPage'))}'>
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
@@ -11,7 +11,7 @@
 			<div class="col-sm-4 listViewAction">
 				<div class="pull-right">
 					<div class="btn-group">
-						{assign var=IS_CREATEVIEW value=\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
 							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -29,9 +29,9 @@
 					<thead>
 						<tr class="listViewHeaders">
 							<th></th>
-							{foreach item=HEADER from=$HEADERS}
+								{foreach item=HEADER from=$HEADERS}
 								<th>{$HEADER}</th>
-							{/foreach}
+								{/foreach}
 						</tr>
 					</thead>
 					<tbody>
@@ -46,7 +46,7 @@
 							</tr>
 						{/foreach}
 					</tbody>
-				</table>	
+				</table>
 			</div>
 		</div>
 	</div>

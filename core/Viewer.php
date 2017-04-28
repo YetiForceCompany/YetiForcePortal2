@@ -5,7 +5,7 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace Core;
+namespace YF\Core;
 
 class Viewer extends \SmartyBC
 {
@@ -89,7 +89,7 @@ class Viewer extends \SmartyBC
 	/**
 	 * Static function to get the Instance of the Class Object
 	 * @param <String> $media Layout/Media
-	 * @return Core\Viewer instance
+	 * @return \YF\Core\Viewer instance
 	 */
 	static function getInstance($media = '')
 	{

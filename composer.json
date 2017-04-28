@@ -38,11 +38,8 @@
 			"core/Functions.php"
 		],
 		"psr-4": {
-			"Core\\":"core/",
-			"Base\\":"modules/Base/",
-			"Install\\":"modules/Install/",
-			"Users\\":"modules/Users/"
+			"YF\\Core\\":"core/",
+			"YF\\Modules\\":"modules/"
 		}
 	}
-
 }
