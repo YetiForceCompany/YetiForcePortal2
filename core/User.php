@@ -63,7 +63,7 @@ class User extends BaseModel
 		$params = [
 			'version' => VERSION,
 			'language' => Language::getLanguage(),
-			'ip' => \FN::getRemoteIP(),
+			'ip' => \YF\Core\Functions::getRemoteIP(),
 			'fromUrl' => \YF\Core\Config::get('portalPath')
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');

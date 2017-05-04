@@ -5,7 +5,7 @@
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
-					{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\YF\Core\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 			</div>
 			<div class="col-sm-4 listViewAction">
@@ -16,7 +16,7 @@
 							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
 								<span class="glyphicon glyphicon-plus"></span>
 								&nbsp;
-								<strong>{FN::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+								<strong>{\YF\Core\Functions::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
 							</a>
 						{/if}
 					</div>
@@ -36,9 +36,9 @@
 					</thead>
 					<tbody>
 						{foreach item=RECORD key=ID from=$RECORDS}
-							<tr data-record="{$ID}" data-name="{FN::toSafeHTML($RECORD->getName())}">
+							<tr data-record="{$ID}" data-name="{\YF\Core\Functions::toSafeHTML($RECORD->getName())}">
 								<td class="leftRecordActions">
-									{include file=FN::templatePath("ListViewActions.tpl",$MODULE_NAME)}
+									{include file=\YF\Core\Functions::templatePath("ListViewActions.tpl",$MODULE_NAME)}
 								</td>
 								{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
 									<td>{$RECORD->get($FIELD_NAME)}</td>

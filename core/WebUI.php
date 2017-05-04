@@ -92,7 +92,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new \YF\Core\AppException(FN::translate('LBL_HANDLER_NOT_FOUND'));
+			throw new \YF\Core\AppException(\YF\Core\Functions::translate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -102,7 +102,7 @@ class WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new \YF\Core\AppException(FN::translate($moduleName) . ' ' . FN::translate('LBL_NOT_ACCESSIBLE'));
+		throw new \YF\Core\AppException(\YF\Core\Functions::translate($moduleName) . ' ' . \YF\Core\Functions::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	protected function triggerPreProcess($handler, $request)

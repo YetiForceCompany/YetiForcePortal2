@@ -9,7 +9,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="head pull-right">
-					<h3>{FN::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
+					<h3>{\YF\Core\Functions::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
 				</div>
 			</div>
 		</div>

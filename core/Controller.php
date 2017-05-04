@@ -73,7 +73,7 @@ abstract class Controller
 		if (!empty($name) && $this->isMethodExposed($name)) {
 			return call_user_func_array(array($this, $name), $parameters);
 		}
-		throw new \YF\Core\AppException(FN::translate('LBL_NOT_ACCESSIBLE'));
+		throw new \YF\Core\AppException(\YF\Core\Functions::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	public function setHeaders()

@@ -29,8 +29,7 @@
 	"autoload": {
 		"files": [
 			"config/version.php",
-			"config/config.php",
-			"core/Functions.php"
+			"config/config.php"
 		],
 		"psr-4": {
 			"YF\\Core\\":"core/",

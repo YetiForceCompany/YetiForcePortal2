@@ -2,7 +2,7 @@
 {strip}
 	<div class="col-sm-12">
 		<div class="panel panel-primary">
-			<div class="panel-heading">{FN::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</div>
+			<div class="panel-heading">{\YF\Core\Functions::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</div>
 			<div class="panel-body">
 				{foreach item=ITEM key=KEY from=$DEBUG_API}
 					<div>

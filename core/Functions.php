@@ -1,6 +1,12 @@
 <?php
+/**
+ * Functions class
+ * @package YetiForce.Core
+ * @license licenses/License.html
+ */
+namespace YF\Core;
 
-class FN
+class Functions
 {
 
 	public static function translate($label, $module = 'Basic')

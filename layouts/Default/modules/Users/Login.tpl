@@ -15,22 +15,22 @@
 				{/foreach}
 			{/if}
 			<div class="form-group">
-				<label for="inputEmail" class="sr-only">{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
-				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{FN::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="demo@yetiforce.com" required="" autofocus="">
+				<label for="inputEmail" class="sr-only">{\YF\Core\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+				<input name="email" type="email" id="inputEmail" class="form-control" placeholder="{\YF\Core\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="demo@yetiforce.com" required="" autofocus="">
 			</div>
 			<div class="form-group">
-				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
-				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{FN::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo" required="">
+				<label for="inputPassword" class="sr-only">{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo" required="">
 			</div>
 			<div class="form-group">
-				<label for="inputPassword" class="sr-only">{FN::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+				<label for="inputPassword" class="sr-only">{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=\YF\Core\Language::getAllLanguages()}
 						<option value="{$PREFIX}">{$LANG}</option>
 					{/foreach}
 				</select>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">{FN::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">{\YF\Core\Functions::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
 {/strip}

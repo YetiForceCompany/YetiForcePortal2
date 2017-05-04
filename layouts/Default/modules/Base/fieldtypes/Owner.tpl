@@ -7,7 +7,7 @@
 		{foreach item=PICKLIST_VALUES key=PICKLIST_GROUP from=$PICKLIST_VALUES_GROUP}
 			<optgroup label="{$PICKLIST_GROUP}">
 				{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
-					<option value="{FN::toSafeHTML($PICKLIST_NAME)}" title="{$PICKLIST_VALUE}" {if trim($FIELD_MODEL->get('fieldvalue')) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
+					<option value="{\YF\Core\Functions::toSafeHTML($PICKLIST_NAME)}" title="{$PICKLIST_VALUE}" {if trim($FIELD_MODEL->get('fieldvalue')) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
 				{/foreach}
 			</optgroup>
 		{/foreach}

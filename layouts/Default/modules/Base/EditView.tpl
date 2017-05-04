@@ -5,12 +5,12 @@
 			<div class="widget_header row">
 				<div class="col-sm-12">
 					<div class="pull-left">
-						{include file=FN::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+						{include file=\YF\Core\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
 						<span class="pull-right">
-							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{FN::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
-							<button class="btn btn-warning" type="reset" onclick="javascript:window.history.back();"><span class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{FN::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
+							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
+							<button class="btn btn-warning" type="reset" onclick="javascript:window.history.back();"><span class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
 						</span>
 						<div class="clearfix"></div>
 					</div>
@@ -35,7 +35,7 @@
 									</div>
 									<div class="fieldValue col-md-9">
 										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->get($FIELD->getName()))}
-										{include file=FN::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
+										{include file=\YF\Core\Functions::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
 							{/foreach}

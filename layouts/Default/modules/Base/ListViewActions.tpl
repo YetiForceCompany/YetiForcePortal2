@@ -6,7 +6,7 @@
 		<div class="actions">
 			<div class="{if !$ONLY_ONE}actionImages hide{/if}">
 				{foreach from=$LINKS item=LINK}
-					{include file=FN::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
+					{include file=\YF\Core\Functions::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
 				{/foreach}
 			</div>
 			{if !$ONLY_ONE}
