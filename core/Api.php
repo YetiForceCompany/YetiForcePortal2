@@ -170,13 +170,13 @@ class Api
 	 *
 	 * @param array $data
 	 * @return array Decrypted string
-	 * @throws AppException
+	 * @throws \YF\Core\AppException
 	 */
 	public function decryptData($data)
 	{
 		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \YF\Core\Config::get('privateKey');
 		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
-			throw new AppException('Private Key failed');
+			throw new \YF\Core\AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey);

@@ -27,9 +27,6 @@
         "datatables/datatables": ">=1.10.15"
 	},
 	"autoload": {
-		"classmap": [
-			"core/AppException.php"
-		],
 		"files": [
 			"config/version.php",
 			"config/config.php",

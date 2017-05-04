@@ -1,5 +1,4 @@
 <?php
-
 /**
  * <b>AppException</b> is the base class for
  * all Exceptions.
@@ -8,6 +7,8 @@
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+namespace YF\Core;
+
 class AppException extends \Exception
 {
 
@@ -30,10 +31,10 @@ class AppException extends \Exception
  * @param string $errfile
  * @param int $errline
  * @param array $errcontext
- * @throws \AppException
+ * @throws \YF\Core\AppException
  */
 function exceptionErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
 {
-	throw new \AppException($errstr, $errno);
+	throw new \YF\Core\AppException($errstr, $errno);
 }
 set_error_handler('exceptionErrorHandler');

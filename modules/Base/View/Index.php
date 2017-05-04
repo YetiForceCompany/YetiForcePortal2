@@ -32,7 +32,7 @@ abstract class Index extends \YF\Core\Controller
 		$userInstance = \YF\Core\User::getUser();
 		$modulePermission = $userInstance->isPermitted($moduleName);
 		if (!$modulePermission) {
-			throw new \AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \YF\Core\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 		return true;
 	}

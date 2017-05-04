@@ -43,13 +43,13 @@ class User extends BaseModel
 	/**
 	 * Checking login
 	 * @param \YF\Core\Request $request
-	 * @throws \AppException
+	 * @throws \YF\Core\AppException
 	 */
 	public function checkLogin(\YF\Core\Request $request)
 	{
 		if (!$this->hasLogin()) {
 			header('Location: index.php');
-			throw new \AppException('Login is required');
+			throw new \YF\Core\AppException('Login is required');
 		}
 	}
 
@@ -120,13 +120,13 @@ class User extends BaseModel
 	/**
 	 * Get preferences
 	 * @return mixed
-	 * @throws \AppException
+	 * @throws \YF\Core\AppException
 	 */
 	public function getPreferences($key = false)
 	{
 		$preferences = $this->get('preferences');
 		if (empty($preferences)) {
-			throw new \AppException('lack of user preferences');
+			throw new \YF\Core\AppException('lack of user preferences');
 		}
 		if ($key && isset($preferences[$key])) {
 			return $preferences[$key];

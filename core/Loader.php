@@ -20,7 +20,7 @@ class Loader
 		}
 
 		if (!file_exists($name)) {
-			throw new AppException('FILE_NOT_FOUND: ' . $name);
+			throw new \YF\Core\AppException('FILE_NOT_FOUND: ' . $name);
 			return false;
 		}
 
@@ -55,6 +55,6 @@ class Loader
 			return $className;
 		}
 
-		throw new \AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
+		throw new \YF\Core\AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }

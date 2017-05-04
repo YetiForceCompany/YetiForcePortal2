@@ -14,7 +14,7 @@ abstract class Base extends \YF\Core\Controller
 
 	public function getViewer(\YF\Core\Request $request)
 	{
-		throw new AppException('Action - implement getViewer - JSONViewer');
+		throw new \YF\Core\AppException('Action - implement getViewer - JSONViewer');
 	}
 
 	public function validateRequest(\YF\Core\Request $request)

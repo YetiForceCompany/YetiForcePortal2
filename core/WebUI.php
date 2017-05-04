@@ -16,7 +16,7 @@ class WebUI
 	/**
 	 * Process
 	 * @param \YF\Core\Request $request
-	 * @throws \AppException
+	 * @throws \YF\Core\AppException
 	 */
 	public function process(Request $request)
 	{
@@ -61,7 +61,7 @@ class WebUI
 				$handler = new $handlerClass();
 
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
-					throw new \AppException('Login is required');
+					throw new \YF\Core\AppException('Login is required');
 				}
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
@@ -69,9 +69,9 @@ class WebUI
 				$this->triggerPostProcess($handler, $request);
 			} else {
 				echo ($module . $componentType . $componentName);
-				throw new \AppException("HANDLER_NOT_FOUND: $handlerClass");
+				throw new \YF\Core\AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (AppException $e) {
+		} catch (\YF\Core\AppException $e) {
 			if (false) {
 				// Log for developement.
 				//error_log($e->getTraceAsString(), E_ERROR);
@@ -92,7 +92,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new AppException(FN::translate('LBL_HANDLER_NOT_FOUND'));
+			throw new \YF\Core\AppException(FN::translate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -102,7 +102,7 @@ class WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new AppException(FN::translate($moduleName) . ' ' . FN::translate('LBL_NOT_ACCESSIBLE'));
+		throw new \YF\Core\AppException(FN::translate($moduleName) . ' ' . FN::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	protected function triggerPreProcess($handler, $request)
