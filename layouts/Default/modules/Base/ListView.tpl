@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} --!>*}
 {strip}
 	<div class="contentsDiv">
-		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value='{\YF\Core\Json::encode(\Config::get('listEntriesPerPage'))}'>
+		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value='{\YF\Core\Json::encode(\YF\Core\Config::get('listEntriesPerPage'))}'>
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">

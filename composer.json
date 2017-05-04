@@ -33,7 +33,6 @@
 		"files": [
 			"config/version.php",
 			"config/config.php",
-			"core/Config.php",
 			"core/Functions.php"
 		],
 		"psr-4": {

@@ -32,7 +32,7 @@ class Language
 
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
 		if ($translatedString === null) {
-			$defaultLanguage = \Config::get('language');
+			$defaultLanguage = \YF\Core\Config::get('language');
 			if (!empty($defaultLanguage) && strcasecmp($defaultLanguage, $currentLanguage) !== 0) {
 				$translatedString = self::getLanguageTranslatedString($defaultLanguage, $key, $module);
 			}
@@ -114,7 +114,7 @@ class Language
 		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
 			$language = $userInstance->get('language');
 		} else {
-			$language = \Config::get('language');
+			$language = \YF\Core\Config::get('language');
 		}
 		return $language;
 	}
@@ -125,7 +125,7 @@ class Language
 	 */
 	public static function getAllLanguages()
 	{
-		return \Config::get('languages');
+		return \YF\Core\Config::get('languages');
 	}
 
 	/**

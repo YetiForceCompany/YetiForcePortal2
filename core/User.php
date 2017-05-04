@@ -64,7 +64,7 @@ class User extends BaseModel
 			'version' => VERSION,
 			'language' => Language::getLanguage(),
 			'ip' => \FN::getRemoteIP(),
-			'fromUrl' => \Config::get('portalPath')
+			'fromUrl' => \YF\Core\Config::get('portalPath')
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
 		if ($response && !(isset($response['code']) && $response['code'] === 401)) {

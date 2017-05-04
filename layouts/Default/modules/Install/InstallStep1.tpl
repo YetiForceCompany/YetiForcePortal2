@@ -8,7 +8,7 @@
 			</div>
 			<div class="col-md-3">
 				<select name="lang" class="chzn-select form-control" style="width: 250px;">
-					{foreach key=key item=item from=Config::get('languages')}
+					{foreach key=key item=item from=\YF\Core\Config::get('languages')}
 						<option value="{$key}" {if $LANGUAGE eq $key}selected{/if}>{$item}</option>
 					{/foreach}
 				</select>
@@ -25,7 +25,7 @@
 					<p>{FN::translate('LBL_SETUP_WIZARD_DESCRIPTION',$MODULE_NAME)}</p>
 				</div>
 			</div>
-		</div>	
+		</div>
 		<div class="row">
 			<div class="button-container pull-right">
 				<button class="btn btn-sm btn-primary" type="submit">{FN::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>

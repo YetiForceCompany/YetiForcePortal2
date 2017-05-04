@@ -2,7 +2,7 @@
 {strip}
 	<div class="container loginContainer">
 		<form action="index.php?module=Users&action=Login" method="POST">
-			<img src="{Config::get('logo')}" class="img-responsive logo" alt="Logo"title="Logo">
+			<img src="{\YF\Core\Config::get('logo')}" class="img-responsive logo" alt="Logo"title="Logo">
 			{if isset($ERRORS)}
 				<br />
 				{foreach item=ERROR key=KEY from=$ERRORS}

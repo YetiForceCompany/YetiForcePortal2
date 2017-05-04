@@ -11,7 +11,7 @@
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks textOverflowEllipsis">
-					<a href='{\Config::get('portalPath')}'>
+					<a href='{\YF\Core\Config::get('portalPath')}'>
 						<span class="{$HOMEICON}"></span>
 					</a>
 					&nbsp;|&nbsp;

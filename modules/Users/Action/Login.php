@@ -31,6 +31,6 @@ class Login extends Action\Base
 		$userInstance->set('language', $request->get('language'));
 		$userInstance->login($email, $password);
 
-		header('Location: ' . \Config::get('portalPath'));
+		header('Location: ' . \YF\Core\Config::get('portalPath'));
 	}
 }

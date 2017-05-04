@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Config class
  * @package YetiForce.Config
  * @license licenses/License.html
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+namespace YF\Core;
 
 class Config
 {

@@ -119,7 +119,7 @@ abstract class Index extends \YF\Core\Controller
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 
-		if (\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
+		if (\YF\Core\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
 			Session::set('debugApi', false);
@@ -218,7 +218,7 @@ abstract class Index extends \YF\Core\Controller
 				continue;
 			}
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			if (\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
+			if (\YF\Core\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));

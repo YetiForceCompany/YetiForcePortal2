@@ -34,7 +34,7 @@ class WebUI
 			$userInstance = User::getUser();
 			if (empty($module)) {
 				if ($userInstance && $userInstance->hasLogin()) {
-					$module = Config::get('defaultModule');
+					$module = \YF\Core\Config::get('defaultModule');
 					$moduleInstance = Model\Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
 				} else {
@@ -123,6 +123,6 @@ class WebUI
 
 	function isInstalled()
 	{
-		return Config::get('crmPath') != '__CRM_PATH__';
+		return \YF\Core\Config::get('crmPath') != '__CRM_PATH__';
 	}
 }
