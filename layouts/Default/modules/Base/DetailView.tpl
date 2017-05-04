@@ -8,7 +8,7 @@
 				</div>
 				<div class="contentHeader">
 					<span class="pull-right">
-						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary" title="{\YF\Core\Functions::translate('BTN_EDIT')}"><span class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\YF\Core\Functions::translate('BTN_EDIT', $MODULE_NAMFNE)}</strong> </a>
+						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary" title="{\YF\Core\Functions::translate('BTN_EDIT')}"><span class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\YF\Core\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
 					</span>
 					<div class="clearfix"></div>
 				</div>

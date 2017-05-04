@@ -62,11 +62,11 @@ var app = {
 		var toTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 		return Math.floor(((toTime - fromTime) / (1000 * 60 * 60 * 24))) + 1;
 	},
-	showSelectElement: function (container) {
-		this.showChznSelectElement(container);
-		this.showSelect2Element(container);
+	registerSelectElement: function (container) {
+		this.registerChznSelectElement(container);
+		this.registerSelect2Element(container);
 	},
-	showDateElement: function (container) {
+	registerDateElement: function (container) {
 		var thisInstance = this;
 		if (typeof container == 'undefined') {
 			container = jQuery('body');
@@ -83,52 +83,50 @@ var app = {
 		params.locale = {};
 		params.locale.format = 'YYYY-MM-DD';
 		params.locale.daysOfWeek = [
-            app.translate('JS_DATE_WEEK_DAY_SHORT_SUNDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_MONDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_TUESDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_WEDNESDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_THURSDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_FRIDAY'),
-            app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_SUNDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_MONDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_TUESDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_WEDNESDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_THURSDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_FRIDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY'),
 		];
 		params.locale.monthNames = [
-            app.translate('JS_DATE_MONTH_JANUARY'),
-            app.translate('JS_DATE_MONTH_FEBRUARY'),
-            app.translate('JS_DATE_MONTH_MARCH'),
-            app.translate('JS_DATE_MONTH_APRIL'),
-            app.translate('JS_DATE_MONTH_MAY'),
-            app.translate('JS_DATE_MONTH_JUNE'),
-            app.translate('JS_DATE_MONTH_JULY'),
-            app.translate('JS_DATE_MONTH_AUGUST'),
-            app.translate('JS_DATE_MONTH_SEPTEMBER'),
-            app.translate('JS_DATE_MONTH_OCTOBER'),
-            app.translate('JS_DATE_MONTH_NOVEMBER'),
-            app.translate('JS_DATE_MONTH_DECEMBER')
-        ];
-		
-		
-		
+			app.translate('JS_DATE_MONTH_JANUARY'),
+			app.translate('JS_DATE_MONTH_FEBRUARY'),
+			app.translate('JS_DATE_MONTH_MARCH'),
+			app.translate('JS_DATE_MONTH_APRIL'),
+			app.translate('JS_DATE_MONTH_MAY'),
+			app.translate('JS_DATE_MONTH_JUNE'),
+			app.translate('JS_DATE_MONTH_JULY'),
+			app.translate('JS_DATE_MONTH_AUGUST'),
+			app.translate('JS_DATE_MONTH_SEPTEMBER'),
+			app.translate('JS_DATE_MONTH_OCTOBER'),
+			app.translate('JS_DATE_MONTH_NOVEMBER'),
+			app.translate('JS_DATE_MONTH_DECEMBER')
+		];
+
 		dateFieldElement.each(function () {
 			if ($(this.children[0]).prop("id").length == 0) {
 				$(this.children[0]).attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
-			
-			var el_id = '#'+$(this.children[0]).prop("id");
+
+			var el_id = '#' + $(this.children[0]).prop("id");
 			var el_params = JSON.parse(($(this.children[0]).attr("data-fieldinfo")));
 			var params_custom = params;
 			if (typeof el_params["date-format"] !== 'undefined') {
 				params_custom.locale.format = el_params["date-format"].toUpperCase();
 			}
 			$(this.children[0]).daterangepicker(params);
-			$(this.children[1]).click(function(){
+			$(this.children[1]).click(function () {
 				$(el_id).focus();
 			});
-			$(el_id).on('apply.daterangepicker', function(ev, picker) {
+			$(el_id).on('apply.daterangepicker', function (ev, picker) {
 				$(this).val(picker.startDate.format(params_custom.locale.format));
 			});
 		});
 	},
-	showChznSelectElement: function (parent, view, params) {
+	registerChznSelectElement: function (parent, view, params) {
 		var thisInstance = this;
 		if (typeof parent == 'undefined') {
 			parent = jQuery('body');
@@ -201,7 +199,7 @@ var app = {
 		var chosenSelectConainer = jQuery('.chosen-container-multi .default').css('width', '100%');
 		return chosenSelectConainer;
 	},
-	showSelect2Element: function (parent, params) {
+	registerSelect2Element: function (parent, params) {
 		var thisInstance = this;
 		if (typeof parent == 'undefined') {
 			parent = jQuery('body');
@@ -373,7 +371,7 @@ var app = {
 			}
 			container.html(data);
 
-			// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog. 
+			// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog.
 			$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
 				$(document).off('focusin.bs.modal') // guard against infinite focus loop
 						.on('focusin.bs.modal', $.proxy(function (e) {
@@ -490,8 +488,8 @@ var app = {
 
 jQuery(document).ready(function () {
 	var container = jQuery('body');
-	app.showSelectElement(container);
-	app.showDateElement(container);
+	app.registerSelectElement(container);
+	app.registerDateElement(container);
 	app.registerAdditions(jQuery);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
