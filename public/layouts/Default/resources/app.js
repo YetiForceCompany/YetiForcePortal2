@@ -62,11 +62,11 @@ var app = {
 		var toTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 		return Math.floor(((toTime - fromTime) / (1000 * 60 * 60 * 24))) + 1;
 	},
-	registerSelectElement: function (container) {
-		this.registerChznSelectElement(container);
-		this.registerSelect2Element(container);
+	registerSelectField: function (container) {
+		this.registerChznSelectField(container);
+		this.registerSelect2Field(container);
 	},
-	registerDateElement: function (container) {
+	registerDateField: function (container) {
 		var thisInstance = this;
 		if (typeof container == 'undefined') {
 			container = jQuery('body');
@@ -126,7 +126,7 @@ var app = {
 			});
 		});
 	},
-	registerChznSelectElement: function (parent, view, params) {
+	registerChznSelectField: function (parent, view, params) {
 		var thisInstance = this;
 		if (typeof parent == 'undefined') {
 			parent = jQuery('body');
@@ -199,7 +199,7 @@ var app = {
 		var chosenSelectConainer = jQuery('.chosen-container-multi .default').css('width', '100%');
 		return chosenSelectConainer;
 	},
-	registerSelect2Element: function (parent, params) {
+	registerSelect2Field: function (parent, params) {
 		var thisInstance = this;
 		if (typeof parent == 'undefined') {
 			parent = jQuery('body');
@@ -488,8 +488,8 @@ var app = {
 
 jQuery(document).ready(function () {
 	var container = jQuery('body');
-	app.registerSelectElement(container);
-	app.registerDateElement(container);
+	app.registerSelectField(container);
+	app.registerDateField(container);
 	app.registerAdditions(jQuery);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
