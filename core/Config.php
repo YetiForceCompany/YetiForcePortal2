@@ -15,7 +15,7 @@ class Config
 	public static function get($key, $defvalue = '')
 	{
 		if (empty(self::$config)) {
-			require('config/config.php');
+			require('../config/config.php');
 			self::$config = $config;
 		}
 		if (isset(self::$config)) {

@@ -89,7 +89,7 @@ class Language
 	public static function getModuleStringsFromFile($language, $module = 'Basic')
 	{
 		if (empty(self::$languageContainer[$language][$module])) {
-			$file = 'language' . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $module . '.php';
+			$file = '..' . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $module . '.php';
 			$phpLang = $jsLang = [];
 			if (file_exists($file)) {
 				require $file;

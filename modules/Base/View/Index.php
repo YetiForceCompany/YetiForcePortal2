@@ -136,16 +136,16 @@ abstract class Index extends \YF\Core\Controller
 	{
 		$cssFileNames = [
 			'libraries/Scripts/pace/pace.css',
-			'vendor/twbs/bootstrap/dist/css/bootstrap.css',
+			'libraries/Scripts/bootstrap/dist/css/bootstrap.css',
 			'libraries/Scripts/chosen/chosen.css',
 			'libraries/Scripts/chosen/chosen.bootstrap.css',
 			'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
 			'libraries/Scripts/select2/select2.css',
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
-			'vendor/fortawesome/font-awesome/css/font-awesome.css',
-			'vendor/datatables/datatables/media/css/jquery.dataTables_themeroller.css',
-			'vendor/datatables/datatables/media/css/dataTables.bootstrap.css',
+			'libraries/Scripts/font-awesome/css/font-awesome.css',
+			'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
+			'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
 			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
 		];
 
@@ -182,18 +182,18 @@ abstract class Index extends \YF\Core\Controller
 			$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
 		}
 		$jsFileNames = [
-			'vendor/components/jquery/jquery.js',
+			'libraries/Scripts/jquery/jquery.js',
 			'libraries/Scripts/jquery/jquery.class.js',
 			'libraries/Scripts/jquery-pjax/jquery.pjax.js',
-			'vendor/twbs/bootstrap/dist/js/bootstrap.js',
+			'libraries/Scripts/bootstrap/dist/js/bootstrap.js',
 			'libraries/Scripts/chosen/chosen.jquery.js',
 			'libraries/Scripts/select2/select2.full.js',
 			'libraries/Scripts/moment.js/moment.js',
 			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
-			'vendor/datatables/datatables/media/js/jquery.dataTables.js',
+			'libraries/Scripts/datatables/media/js/jquery.dataTables.js',
 			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
-			'vendor/datatables/datatables/media/js/dataTables.bootstrap.js',
+			'libraries/Scripts/datatables/media/js/dataTables.bootstrap.js',
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
@@ -218,6 +218,7 @@ abstract class Index extends \YF\Core\Controller
 				continue;
 			}
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
+			//die($minFilePath);
 			if (\YF\Core\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
