@@ -30,7 +30,7 @@ class Field extends \YF\Core\BaseModel
 	 */
 	public function getDisplayValue()
 	{
-		return ($this->value !== null) ? $this->value : false;
+		return $this->value;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Field extends \YF\Core\BaseModel
 	 */
 	public function getRawValue()
 	{
-		return ($this->rawValue !== null) ? $this->rawValue : null;
+		return $this->rawValue;
 	}
 
 	/**
