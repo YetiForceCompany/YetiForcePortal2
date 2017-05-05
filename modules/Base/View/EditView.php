@@ -43,8 +43,12 @@ class EditView extends Index
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isEditable']) {
 				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
-				$fieldInstance->setViewValue($recordDetail['data'][$field['name']])
-					->setRawValue($recordDetail['rawData'][$field['name']]);
+				if (isset($recordDetail['data'][$field['name']])) {
+					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
+				}
+				if (isset($recordDetail['rawData'][$field['name']])) {
+					$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
+				}
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}

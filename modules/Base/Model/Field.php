@@ -7,22 +7,30 @@
  */
 namespace YF\Modules\Base\Model;
 
-use YF\Core;
+use \YF\Core\Loader;
 
 class Field extends \YF\Core\BaseModel
 {
 
-	protected $viewValue;
+	/**
+	 * Display value
+	 * @var string
+	 */
+	protected $value;
+
+	/**
+	 * Raw value
+	 * @var string
+	 */
 	protected $rawValue;
-	protected $id;
 
 	/**
 	 * Function to get the view value
 	 * @return string
 	 */
-	public function getViewValue()
+	public function getDisplayValue()
 	{
-		return isset($this->viewValue) ? $this->viewValue : false;
+		return ($this->value !== null) ? $this->value : false;
 	}
 
 	/**
@@ -30,9 +38,9 @@ class Field extends \YF\Core\BaseModel
 	 * @param string $value
 	 * @return Field
 	 */
-	public function setViewValue($value)
+	public function setDisplayValue($value)
 	{
-		$this->viewValue = $value;
+		$this->value = $value;
 		return $this;
 	}
 
@@ -42,7 +50,7 @@ class Field extends \YF\Core\BaseModel
 	 */
 	public function getRawValue()
 	{
-		return isset($this->rawValue) ? $this->rawValue : false;
+		return ($this->rawValue !== null) ? $this->rawValue : null;
 	}
 
 	/**
@@ -97,7 +105,7 @@ class Field extends \YF\Core\BaseModel
 		if (file_exists(YF_ROOT . "/modules/Base/FieldTypes/" . $type . "Field.php")) {
 			$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'FieldTypes', $type . 'Field');
 		} else {
-			$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Field');
+			$handlerModule = Loader::getModuleClassName($module, 'Model', 'Field');
 		}
 
 		$instance = new $handlerModule();

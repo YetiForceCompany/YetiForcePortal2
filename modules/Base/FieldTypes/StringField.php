@@ -7,7 +7,9 @@
  */
 namespace YF\Modules\Base\FieldTypes;
 
-class StringField extends \YF\Modules\Base\Model\Field
+use \YF\Modules\Base\Model\Field;
+
+class StringField extends Field
 {
 	
 }

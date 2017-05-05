@@ -8,7 +8,10 @@
  */
 namespace YF\Modules\Base\View;
 
-use YF\Core;
+use \YF\Core\Request;
+use \YF\Core\Api;
+use \YF\Modules\Base\Model\Field;
+use \YF\Modules\Base\Model\Record;
 
 class DetailView extends Index
 {
@@ -17,22 +20,24 @@ class DetailView extends Index
 	 * Process
 	 * @param \YF\Core\Request $request
 	 */
-	public function process(\YF\Core\Request $request)
+	public function process(Request $request)
 	{
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
-		$api = \YF\Core\Api::getInstance();
+		$api = Api::getInstance();
 
 		$recordDetail = $api->call("$moduleName/Record/$record");
-		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
+		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data'])->setId($recordDetail['id']);
 
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
-				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
-				$fieldInstance->setViewValue($recordDetail['data'][$field['name']]);
+				$fieldInstance = Field::getInstance($moduleName, $field);
+				if (isset($recordDetail['data'][$field['name']])) {
+					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
+				}
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
