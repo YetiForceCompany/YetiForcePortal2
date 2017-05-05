@@ -16,12 +16,12 @@ class Functions
 
 	public static function fileTemplate($name, $moduleName, $type = 'images')
 	{
-		$filePath = 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
 			return $filePath;
 		}
-		$filePath = 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'skins' . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'skins' . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
 			return $filePath;

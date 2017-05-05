@@ -135,18 +135,18 @@ abstract class Index extends \YF\Core\Controller
 	public function getHeaderCss(\YF\Core\Request $request)
 	{
 		$cssFileNames = [
-			'libraries/Scripts/pace/pace.css',
-			'libraries/Scripts/bootstrap/dist/css/bootstrap.css',
-			'libraries/Scripts/chosen/chosen.css',
-			'libraries/Scripts/chosen/chosen.bootstrap.css',
-			'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
-			'libraries/Scripts/select2/select2.css',
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
-			'libraries/Scripts/font-awesome/css/font-awesome.css',
-			'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
-			'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
-			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
+			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.css',
+			YF_ROOT_WWW . 'libraries/Scripts/bootstrap/dist/css/bootstrap.css',
+			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.css',
+			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.bootstrap.css',
+			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
+			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.css',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
+			YF_ROOT_WWW . 'libraries/Scripts/font-awesome/css/font-awesome.css',
+			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
+			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
+			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
@@ -161,7 +161,7 @@ abstract class Index extends \YF\Core\Controller
 	public function getHeaderScripts(\YF\Core\Request $request)
 	{
 		$headerScriptInstances = [
-			'libraries/Scripts/pace/pace.js',
+			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.js',
 		];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
@@ -177,28 +177,28 @@ abstract class Index extends \YF\Core\Controller
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
 		$shortLang = \YF\Core\Language::getShortLanguageName();
-		$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
+		$validLangScript = YF_ROOT_WWW . "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
 		if (!file_exists($validLangScript)) {
-			$validLangScript = "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
+			$validLangScript = YF_ROOT_WWW . "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
 		}
 		$jsFileNames = [
-			'libraries/Scripts/jquery/jquery.js',
-			'libraries/Scripts/jquery/jquery.class.js',
-			'libraries/Scripts/jquery-pjax/jquery.pjax.js',
-			'libraries/Scripts/bootstrap/dist/js/bootstrap.js',
-			'libraries/Scripts/chosen/chosen.jquery.js',
-			'libraries/Scripts/select2/select2.full.js',
-			'libraries/Scripts/moment.js/moment.js',
-			'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
-			'libraries/Scripts/datatables/media/js/jquery.dataTables.js',
-			'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
+			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.js',
+			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.class.js',
+			YF_ROOT_WWW . 'libraries/Scripts/jquery-pjax/jquery.pjax.js',
+			YF_ROOT_WWW . 'libraries/Scripts/bootstrap/dist/js/bootstrap.js',
+			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
+			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.full.js',
+			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
+			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
+			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/js/jquery.dataTables.js',
+			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
-			'libraries/Scripts/datatables/media/js/dataTables.bootstrap.js',
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
+			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/js/dataTables.bootstrap.js',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
@@ -223,6 +223,8 @@ abstract class Index extends \YF\Core\Controller
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
+			} elseif (\YF\Core\Config::getBoolean('debugApi')) {
+				throw new \YF\Core\AppException('Asset not found: ' . $fileName);
 			}
 		}
 		return $scriptsInstances;

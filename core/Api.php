@@ -17,7 +17,7 @@ class Api
 	protected static $_instance;
 	protected $url;
 	protected $header;
-	protected $log = 'cache/logs/api.log';
+	protected $log = YF_ROOT . DIRECTORY_SEPARATOR . 'cache/logs/api.log';
 
 	/**
 	 * Api class constructor
