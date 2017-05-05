@@ -19,12 +19,12 @@ class EditView extends Index
 	 */
 	public function process(Request $request)
 	{
-		$module = $request->getModule();
+		$moduleName = $request->getModule();
 		$record = $request->get('record');
 		$api = Api::getInstance();
-		$moduleStructure = $api->call($module . '/Fields');
-		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$module/Record/$record", [], 'get');
-		$recordModel = \YF\Modules\Base\Model\Record::getInstance($module);
+
+		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record", [], 'get');
+		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
 		if (!isset($recordDetail['data'])) {
 			$recordDetail['data'] = [];
 		}
@@ -34,12 +34,18 @@ class EditView extends Index
 		if (!isset($recordDetail['id'])) {
 			$recordDetail['id'] = null;
 		}
-		$recordModel->setData($recordDetail['data'])->setRawData($recordDetail['rawData'])->setId($recordDetail['id']);
+		$recordModel->setData($recordDetail['data'])
+			->setRawData($recordDetail['rawData'])
+			->setId($recordDetail['id']);
+
+		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isEditable']) {
-				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($module);
-				$fields[$field['blockId']][] = $fieldInstance->setData($field);
+				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
+				$fieldInstance->setViewValue($recordDetail['data'][$field['name']])
+					->setRawValue($recordDetail['rawData'][$field['name']]);
+				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
 		$viewer = $this->getViewer($request);
@@ -47,7 +53,7 @@ class EditView extends Index
 		$viewer->assign('FIELDS', $fields);
 		$viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
 		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->view('EditView.tpl', $module);
+		$viewer->view('EditView.tpl', $moduleName);
 	}
 
 	/**

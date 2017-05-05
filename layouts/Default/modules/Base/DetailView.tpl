@@ -35,7 +35,7 @@
 										</label>
 									</div>
 									<div class="fieldValue col-md-9 form-control-static">
-										{$RECORD->get($FIELD->getName())}
+										{$FIELD->getViewValue()}
 									</div>
 									{assign var=COUNTER value=$COUNTER+1}
 								</div>

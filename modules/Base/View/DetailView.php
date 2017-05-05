@@ -22,17 +22,21 @@ class DetailView extends Index
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
 		$api = \YF\Core\Api::getInstance();
+
+		$recordDetail = $api->call("$moduleName/Record/$record");
+		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
+		$recordModel->setData($recordDetail['data'])->setId($recordDetail['id']);
+
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
-				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName);
-				$fields[$field['blockId']][] = $fieldInstance->setData($field);
+				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
+				$fieldInstance->setViewValue($recordDetail['data'][$field['name']]);
+				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
-		$recordDetail = $api->call("$moduleName/Record/$record");
-		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
-		$recordModel->setData($recordDetail['data'])->setId($recordDetail['id']);
+
 		$viewer = $this->getViewer($request);
 		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$viewer->assign('RECORD', $recordModel);

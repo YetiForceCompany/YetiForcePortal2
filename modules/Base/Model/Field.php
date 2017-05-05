@@ -12,6 +12,50 @@ use YF\Core;
 class Field extends \YF\Core\BaseModel
 {
 
+	protected $viewValue;
+	protected $rawValue;
+	protected $id;
+
+	/**
+	 * Function to get the view value
+	 * @return string
+	 */
+	public function getViewValue()
+	{
+		return isset($this->viewValue) ? $this->viewValue : false;
+	}
+
+	/**
+	 * Function to set the view value
+	 * @param string $value
+	 * @return Field
+	 */
+	public function setViewValue($value)
+	{
+		$this->viewValue = $value;
+		return $this;
+	}
+
+	/**
+	 * Function to get the raw value
+	 * @return Value for the given key
+	 */
+	public function getRawValue()
+	{
+		return isset($this->rawValue) ? $this->rawValue : false;
+	}
+
+	/**
+	 * Function to set the raw value
+	 * @param string $value
+	 * @return Field
+	 */
+	public function setRawValue($value)
+	{
+		$this->rawValue = $value;
+		return $this;
+	}
+
 	/**
 	 * Function to set the name of the module to which the record belongs
 	 * @param string $value
@@ -43,14 +87,21 @@ class Field extends \YF\Core\BaseModel
 
 	/**
 	 * Static Function to get the instance of a clean Record for the given module name
-	 * @param type $module
+	 * @param string $module
+	 * @param [] $field
 	 * @return \self
 	 */
-	public static function getInstance($module)
+	public static function getInstance($module, $field)
 	{
-		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Field');
+		$type = ucfirst($field['type']);
+		if (file_exists(YF_ROOT . "/modules/Base/FieldTypes/" . $type . "Field.php")) {
+			$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'FieldTypes', $type . 'Field');
+		} else {
+			$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Field');
+		}
+
 		$instance = new $handlerModule();
-		return $instance->setModuleName($module);
+		return $instance->setModuleName($module)->setData($field);
 	}
 
 	/**
@@ -123,7 +174,7 @@ class Field extends \YF\Core\BaseModel
 	public function getTemplate()
 	{
 		$type = ucfirst($this->get('type'));
-		if (!in_array($type, ['Reference', 'ReferenceProcess', 'ReferenceSubProcess', 'ReferenceLink', 'Picklist', 'Owner', 'Boolean', 'Text', 'Url', 'SharedOwner', 'Multipicklist', 'Email', 'Percentage', 'Phone', 'Date', 'Time', 'Integer', 'Decimal'])) {
+		if (!file_exists(YF_ROOT . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
 			$type = 'String';
 		}
 		return "fieldtypes/$type.tpl";
