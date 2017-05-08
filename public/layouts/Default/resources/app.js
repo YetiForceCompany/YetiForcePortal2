@@ -74,7 +74,7 @@ var app = {
 		if (typeof params === 'undefined') {
 			params = {};
 		}
-		var dateFieldElement = jQuery('.dateField', container);
+		var dateFieldElements = jQuery('.dateField', container);
 		params.width = "100%";
 		params.singleDatePicker = true;
 		params.linkedCalendars = false;
@@ -106,10 +106,11 @@ var app = {
 			app.translate('JS_DATE_MONTH_DECEMBER')
 		];
 
-		dateFieldElement.each(function () {
-			var input = $(this.children[0]);
-			var button = $(this.children[1]);
-			if (input.prop("id").length === 0) {
+		dateFieldElements.each(function () {
+			var element = $(this);
+			var input = element.find(".dateFieldInput");
+			var button = element.find(".dateFieldButton");
+			if (!input.attr("id")) {
 				input.attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
 			var input_params = JSON.parse((input.attr("data-fieldinfo")));
