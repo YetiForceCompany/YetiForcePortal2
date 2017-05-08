@@ -1,3 +1,5 @@
+{*<!-- {[The file is published on the basis of YetiForce Public License 2.0 that can be found in the following directory: licenses/License.html or yetiforce.com]} --!>*}
+
 {if !\YF\Core\Log::isEmpty() && \YF\Core\Config::getBoolean('debugConsole')}
 	<script>
 		{foreach item=MESSAGE from=\YF\Core\Log::display()}
