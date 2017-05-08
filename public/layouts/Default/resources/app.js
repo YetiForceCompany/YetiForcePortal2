@@ -68,10 +68,10 @@ var app = {
 	},
 	registerDateField: function (container) {
 		var thisInstance = this;
-		if (typeof container == 'undefined') {
+		if (typeof container === 'undefined') {
 			container = jQuery('body');
 		}
-		if (typeof params == 'undefined') {
+		if (typeof params === 'undefined') {
 			params = {};
 		}
 		var dateFieldElement = jQuery('.dateField', container);
@@ -89,7 +89,7 @@ var app = {
 			app.translate('JS_DATE_WEEK_DAY_SHORT_WEDNESDAY'),
 			app.translate('JS_DATE_WEEK_DAY_SHORT_THURSDAY'),
 			app.translate('JS_DATE_WEEK_DAY_SHORT_FRIDAY'),
-			app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY'),
+			app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY')
 		];
 		params.locale.monthNames = [
 			app.translate('JS_DATE_MONTH_JANUARY'),
@@ -107,21 +107,21 @@ var app = {
 		];
 
 		dateFieldElement.each(function () {
-			if ($(this.children[0]).prop("id").length == 0) {
-				$(this.children[0]).attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
+			var input = $(this.children[0]);
+			var button = $(this.children[1]);
+			if (input.prop("id").length === 0) {
+				input.attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
-
-			var el_id = '#' + $(this.children[0]).prop("id");
-			var el_params = JSON.parse(($(this.children[0]).attr("data-fieldinfo")));
+			var input_params = JSON.parse((input.attr("data-fieldinfo")));
 			var params_custom = params;
-			if (typeof el_params["date-format"] !== 'undefined') {
-				params_custom.locale.format = el_params["date-format"].toUpperCase();
+			if (typeof input_params["date-format"] !== 'undefined') {
+				params_custom.locale.format = input_params["date-format"].toUpperCase();
 			}
-			$(this.children[0]).daterangepicker(params);
-			$(this.children[1]).click(function () {
-				$(el_id).focus();
+			input.daterangepicker(params_custom);
+			button.click(function () {
+				input.focus();
 			});
-			$(el_id).on('apply.daterangepicker', function (ev, picker) {
+			input.on('apply.daterangepicker', function (ev, picker) {
 				$(this).val(picker.startDate.format(params_custom.locale.format));
 			});
 		});
