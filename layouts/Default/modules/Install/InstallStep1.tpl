@@ -1,4 +1,4 @@
-{*<!-- {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} --!>*}
+{*<!-- {[The file is published on the basis of YetiForce Public License 2.0 that can be found in the following directory: licenses/License.html or yetiforce.com]} --!>*}
 {strip}
 	<form action="index.php?module=Install&view=Install" method="POST" name="step1">
 		<input type="hidden" name="mode" value="Step2" />

@@ -1,11 +1,12 @@
 <?php
 /**
  * System version
- * @license licenses/License.html
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 2.0 (licenses/License.html or yetiforce.com)
  * @package YetiForce.Configuration
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-$version = '0.0.50';
+$version = '0.0.51';
 $patchVersion = '20170508';
 
 define('VERSION', $version);
