@@ -31,6 +31,7 @@
 			</div>
 		</div>
 	{/if}
+
 </div>
 <footer class="footerContainer navbar-default navbar-fixed-bottom noprint">
 	<div class="footer">
@@ -42,6 +43,8 @@
 		<script src="{$SCRIPT->getSrc()}"></script>
 	{/foreach}
 </div>
+
+{include file=\YF\Core\Functions::templatePath("Log.tpl",$MODULE_NAME)}
 </body>
 </html>
 {/strip}

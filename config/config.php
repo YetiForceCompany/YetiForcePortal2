@@ -18,6 +18,7 @@ $config['listMaxEntriesFromApi'] = 50;
 $config['listEntriesPerPage'] = [[10, 25, 50, 100], [10, 25, 50, 100]];
 $config['minScripts'] = false;
 $config['debugApi'] = false;
+$config['debugConsole'] = true;
 $config['logs'] = false;
 // Security
 $config['apiKey'] = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';

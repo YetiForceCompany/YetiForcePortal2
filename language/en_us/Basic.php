@@ -1,6 +1,7 @@
 <?php
 $phpLang = [
 	'LBL_DEBUG_CONSOLE' => 'API Debugging Console',
+	'LBL_CORE_LOG' => 'Log',
 	'LBL_FIRST' => 'First',
 	'LBL_LAST' => 'Last',
 	'LBL_ADD_RECORD' => 'Add record',

@@ -71,7 +71,6 @@ class EditView extends Index
 		$moduleName = $request->getModule();
 		$jsFileNames = [
 			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/EditView.js",
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/EditView.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');

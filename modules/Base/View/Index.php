@@ -218,13 +218,12 @@ abstract class Index extends \YF\Core\Controller
 				continue;
 			}
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			//die($minFilePath);
 			if (\YF\Core\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} else if (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
-			} elseif (\YF\Core\Config::getBoolean('debugApi')) {
-				throw new \YF\Core\AppException('Asset not found: ' . $fileName);
+			} else {
+				\YF\Core\Log::message('Asset not found: ' . $fileName, 'WARNING');
 			}
 		}
 		return $scriptsInstances;
