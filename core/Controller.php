@@ -26,17 +26,17 @@ abstract class Controller
 
 	public function validateRequest(Request $request)
 	{
-
+		
 	}
 
 	public function preProcess(Request $request)
 	{
-
+		
 	}
 
 	public function postProcess(Request $request)
 	{
-
+		
 	}
 
 	// Control the exposure of methods to be invoked from client (kind-of RPC)
@@ -73,7 +73,7 @@ abstract class Controller
 		if (!empty($name) && $this->isMethodExposed($name)) {
 			return call_user_func_array(array($this, $name), $parameters);
 		}
-		throw new \YF\Core\AppException(\YF\Core\Functions::translate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(Functions::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	public function setHeaders()

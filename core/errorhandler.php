@@ -14,9 +14,9 @@
  * @param string $errfile
  * @param int $errline
  * @param array $errcontext
- * @throws \YF\Core\AppException
+ * @throws AppException
  */
 function exceptionErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
 {
-	throw new \YF\Core\AppException($errstr, $errno);
+	throw new AppException($errstr, $errno);
 }

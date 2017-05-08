@@ -199,7 +199,7 @@ class Response
 	 */
 	protected function emitJSON()
 	{
-		echo \YF\Core\Json::encode($this->prepareResponse());
+		echo Json::encode($this->prepareResponse());
 	}
 
 	/**
@@ -211,12 +211,12 @@ class Response
 			if (is_string($this->error))
 				echo $this->error;
 			else
-				echo \YF\Core\Json::encode($this->prepareResponse());
+				echo Json::encode($this->prepareResponse());
 		} else {
 			if (is_string($this->result))
 				echo $this->result;
 			else
-				echo \YF\Core\Json::encode($this->prepareResponse());
+				echo Json::encode($this->prepareResponse());
 		}
 	}
 

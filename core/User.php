@@ -31,7 +31,7 @@ class User extends BaseModel
 	 * Function to set the value for a given key
 	 * @param $key
 	 * @param $value
-	 * @return \YF\Core\BaseModel
+	 * @return BaseModel
 	 */
 	public function set($key, $value)
 	{
@@ -42,14 +42,14 @@ class User extends BaseModel
 
 	/**
 	 * Checking login
-	 * @param \YF\Core\Request $request
-	 * @throws \YF\Core\AppException
+	 * @param Request $request
+	 * @throws AppException
 	 */
-	public function checkLogin(\YF\Core\Request $request)
+	public function checkLogin(Request $request)
 	{
 		if (!$this->hasLogin()) {
 			header('Location: index.php');
-			throw new \YF\Core\AppException('Login is required');
+			throw new AppException('Login is required');
 		}
 	}
 
@@ -63,8 +63,8 @@ class User extends BaseModel
 		$params = [
 			'version' => VERSION,
 			'language' => Language::getLanguage(),
-			'ip' => \YF\Core\Functions::getRemoteIP(),
-			'fromUrl' => \YF\Core\Config::get('portalPath')
+			'ip' => Functions::getRemoteIP(),
+			'fromUrl' => Config::get('portalPath')
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
 		if ($response && !(isset($response['code']) && $response['code'] === 401)) {
@@ -120,13 +120,13 @@ class User extends BaseModel
 	/**
 	 * Get preferences
 	 * @return mixed
-	 * @throws \YF\Core\AppException
+	 * @throws AppException
 	 */
 	public function getPreferences($key = false)
 	{
 		$preferences = $this->get('preferences');
 		if (empty($preferences)) {
-			throw new \YF\Core\AppException('lack of user preferences');
+			throw new AppException('lack of user preferences');
 		}
 		if ($key && isset($preferences[$key])) {
 			return $preferences[$key];

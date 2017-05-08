@@ -24,7 +24,7 @@ class Api
 	 */
 	function __construct()
 	{
-		$this->url = \YF\Core\Config::get('crmPath') . 'api/webservice/';
+		$this->url = Config::get('crmPath') . 'api/webservice/';
 	}
 
 	/**
@@ -56,8 +56,8 @@ class Api
 		if (in_array($requestType, ['get', 'delete'])) {
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
-			$data = \YF\Core\Json::encode($data);
-			if (\YF\Core\Config::getBoolean('encryptDataTransfer') && $requestType !== 'get') {
+			$data = Json::encode($data);
+			if (Config::getBoolean('encryptDataTransfer') && $requestType !== 'get') {
 				$data = $this->encryptData($data);
 			}
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
@@ -66,8 +66,8 @@ class Api
 		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
-		$response = \YF\Core\Json::decode($rawResponse);
-		if (\YF\Core\Config::getBoolean('debugApi')) {
+		$response = Json::decode($rawResponse);
+		if (Config::getBoolean('debugApi')) {
 			$debugApi = [
 				'date' => date('Y-m-d H:i:s', $startTime),
 				'time' => round(microtime(true) - $startTime, 4),
@@ -77,11 +77,11 @@ class Api
 				'rawResponse' => $rawResponse,
 				'response' => $response,
 				'request' => $request->raw,
-				'trace' => \YF\Core\Functions::getBacktrace()
+				'trace' => Functions::getBacktrace()
 			];
 			$_SESSION['debugApi'][] = $debugApi;
 		}
-		if (\YF\Core\Config::getBoolean('logs')) {
+		if (Config::getBoolean('logs')) {
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
 		if (isset($response['error'])) {
@@ -102,8 +102,8 @@ class Api
 			$userInstance = User::getUser();
 			$return = [
 				'Content-Type' => 'application/json',
-				'X-ENCRYPTED' => \YF\Core\Config::getBoolean('encryptDataTransfer') ? 1 : 0,
-				'X-API-KEY' => \YF\Core\Config::get('apiKey'),
+				'X-ENCRYPTED' => Config::getBoolean('encryptDataTransfer') ? 1 : 0,
+				'X-API-KEY' => Config::get('apiKey'),
 				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
 			];
 			if ($userInstance->has('CompanyId')) {
@@ -131,7 +131,7 @@ class Api
 	public function getOptions()
 	{
 		return [
-			'auth' => [\YF\Core\Config::get('serverName'), \YF\Core\Config::get('serverPass')]
+			'auth' => [Config::get('serverName'), Config::get('serverPass')]
 		];
 	}
 
@@ -161,8 +161,8 @@ class Api
 	public function encryptData($data)
 	{
 
-		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \YF\Core\Config::get('publicKey');
-		openssl_public_encrypt(\YF\Core\Json::encode($data), $encrypted, $publicKey);
+		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('publicKey');
+		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey);
 		return $encrypted;
 	}
 
@@ -170,13 +170,13 @@ class Api
 	 *
 	 * @param array $data
 	 * @return array Decrypted string
-	 * @throws \YF\Core\AppException
+	 * @throws AppException
 	 */
 	public function decryptData($data)
 	{
-		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . \YF\Core\Config::get('privateKey');
+		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('privateKey');
 		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
-			throw new \YF\Core\AppException('Private Key failed');
+			throw new AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey);

@@ -89,7 +89,7 @@ class Viewer extends \SmartyBC
 	/**
 	 * Static function to get the Instance of the Class Object
 	 * @param <String> $media Layout/Media
-	 * @return \YF\Core\Viewer instance
+	 * @return Viewer instance
 	 */
 	static function getInstance($media = '')
 	{

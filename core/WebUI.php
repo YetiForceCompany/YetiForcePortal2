@@ -7,16 +7,15 @@
  */
 namespace YF\Core;
 
-use YF\Modules\Base\Model,
-	Config;
+use YF\Modules\Base\Model;
 
 class WebUI
 {
 
 	/**
 	 * Process
-	 * @param \YF\Core\Request $request
-	 * @throws \YF\Core\AppException
+	 * @param Request $request
+	 * @throws AppException
 	 */
 	public function process(Request $request)
 	{
@@ -34,7 +33,7 @@ class WebUI
 			$userInstance = User::getUser();
 			if (empty($module)) {
 				if ($userInstance && $userInstance->hasLogin()) {
-					$module = \YF\Core\Config::get('defaultModule');
+					$module = Config::get('defaultModule');
 					$moduleInstance = Model\Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
 				} else {
@@ -61,7 +60,7 @@ class WebUI
 				$handler = new $handlerClass();
 
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
-					throw new \YF\Core\AppException('Login is required');
+					throw new AppException('Login is required');
 				}
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
@@ -69,9 +68,9 @@ class WebUI
 				$this->triggerPostProcess($handler, $request);
 			} else {
 				echo ($module . $componentType . $componentName);
-				throw new \YF\Core\AppException("HANDLER_NOT_FOUND: $handlerClass");
+				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (\YF\Core\AppException $e) {
+		} catch (AppException $e) {
 			if (false) {
 				// Log for developement.
 				//error_log($e->getTraceAsString(), E_ERROR);
@@ -92,7 +91,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new \YF\Core\AppException(\YF\Core\Functions::translate('LBL_HANDLER_NOT_FOUND'));
+			throw new AppException(Functions::translate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -102,7 +101,7 @@ class WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new \YF\Core\AppException(\YF\Core\Functions::translate($moduleName) . ' ' . \YF\Core\Functions::translate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(Functions::translate($moduleName) . ' ' . Functions::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	protected function triggerPreProcess($handler, $request)
@@ -123,6 +122,6 @@ class WebUI
 
 	function isInstalled()
 	{
-		return \YF\Core\Config::get('crmPath') != '__CRM_PATH__';
+		return Config::get('crmPath') != '__CRM_PATH__';
 	}
 }

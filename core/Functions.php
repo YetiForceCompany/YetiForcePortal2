@@ -11,17 +11,17 @@ class Functions
 
 	public static function translate($label, $module = 'Basic')
 	{
-		return \YF\Core\Language::translate($label, $module);
+		return Language::translate($label, $module);
 	}
 
 	public static function fileTemplate($name, $moduleName, $type = 'images')
 	{
-		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
 			return $filePath;
 		}
-		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . \YF\Core\Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'skins' . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'skins' . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
 			return $filePath;
@@ -31,7 +31,7 @@ class Functions
 
 	public static function templatePath($templateName, $moduleName = '')
 	{
-		$viewer = new \YF\Core\Viewer();
+		$viewer = new Viewer();
 		$args = func_get_args();
 		return call_user_func_array([$viewer, 'getTemplatePath'], $args);
 	}

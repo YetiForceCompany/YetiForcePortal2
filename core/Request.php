@@ -29,7 +29,7 @@ class Request
 
 	/**
 	 * Function gets Request object
-	 * @return \YF\Core\Request
+	 * @return Request
 	 */
 	public static function getInstance()
 	{
@@ -41,8 +41,8 @@ class Request
 
 	/**
 	 * Set Request instance
-	 * @param \YF\Core\Request $request
-	 * @return \YF\Core\Request
+	 * @param Request $request
+	 * @return Request
 	 */
 	public static function setInstance(Request $request)
 	{
