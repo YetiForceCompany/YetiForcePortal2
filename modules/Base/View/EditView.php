@@ -2,7 +2,8 @@
 /**
  * Edit view class
  * @package YetiForce.View
- * @license licenses/License.html
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 2.0 (licenses/License.html or yetiforce.com)
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 namespace YF\Modules\Base\View;
@@ -34,9 +35,7 @@ class EditView extends Index
 		if (!isset($recordDetail['id'])) {
 			$recordDetail['id'] = null;
 		}
-		$recordModel->setData($recordDetail['data'])
-			->setRawData($recordDetail['rawData'])
-			->setId($recordDetail['id']);
+		$recordModel->setData($recordDetail);
 
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];

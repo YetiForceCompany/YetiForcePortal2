@@ -2,7 +2,8 @@
 /**
  * Basic Record Model Class
  * @package YetiForce.Model
- * @license licenses/License.html
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 2.0 (licenses/License.html or yetiforce.com)
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 namespace YF\Modules\Base\Model;
@@ -17,12 +18,6 @@ class Record extends \YF\Core\BaseModel
 	 * @var string
 	 */
 	private $module;
-
-	/**
-	 * Raw data
-	 * @var array
-	 */
-	private $rawData = [];
 
 	/**
 	 * Function to get the id of the record
@@ -43,14 +38,32 @@ class Record extends \YF\Core\BaseModel
 	}
 
 	/**
-	 *
-	 * @param array $value
-	 * @return $this
+	 * Function to get the raw value for a given key
+	 * @param $key
+	 * @return mixed
 	 */
-	public function setRawData($value)
+	public function getDisplayValue($key)
 	{
-		$this->rawData = $value;
-		return $this;
+		return isset($this->valueMap['data'][$key]) ? $this->valueMap['data'][$key] : null;
+	}
+
+	/**
+	 * Function to get the raw value
+	 * @return array
+	 */
+	public function getRawData()
+	{
+		return isset($this->valueMap['rawValue']) ? $this->valueMap['rawValue'] : [];
+	}
+
+	/**
+	 * Function to get the raw value for a given key
+	 * @param $key
+	 * @return mixed
+	 */
+	public function getRawValue($key)
+	{
+		return isset($this->valueMap['rawData'][$key]) ? $this->valueMap['rawData'][$key] : null;
 	}
 
 	/**
@@ -80,16 +93,6 @@ class Record extends \YF\Core\BaseModel
 	public function getName()
 	{
 		return $this->get('recordLabel');
-	}
-
-	/**
-	 * Get raw value
-	 * @param string $key
-	 * @return mixed
-	 */
-	public function getRawValue($key)
-	{
-		return isset($this->rawData[$key]) ? $this->rawData[$key] : null;
 	}
 
 	/**
@@ -193,15 +196,5 @@ class Record extends \YF\Core\BaseModel
 	public function isDeletable()
 	{
 		return true;
-	}
-
-	/**
-	 * Function to retieve display value for a field
-	 * @param string $fieldName - field name for which values need to get
-	 * @return string
-	 */
-	public function getEditViewDisplayValue($fieldName)
-	{
-		return $this->get($fieldName);
 	}
 }

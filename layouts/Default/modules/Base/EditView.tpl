@@ -34,7 +34,7 @@
 										</label>
 									</div>
 									<div class="fieldValue col-md-9">
-										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->get($FIELD->getName()))}
+										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->getRawValue($FIELD->getName()))}
 										{include file=\YF\Core\Functions::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
