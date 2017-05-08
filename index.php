@@ -14,7 +14,6 @@ if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
 	die('Please install dependencies via composer install.');
 }
 require_once(YF_ROOT . '/vendor/autoload.php');
-require_once(YF_ROOT . '/core/errorhandler.php');
 
 set_error_handler('exceptionErrorHandler');
 

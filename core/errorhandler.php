@@ -20,4 +20,3 @@ function exceptionErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
 {
 	throw new \YF\Core\AppException($errstr, $errno);
 }
-set_error_handler('exceptionErrorHandler');

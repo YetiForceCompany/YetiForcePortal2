@@ -25,7 +25,8 @@
 	"autoload": {
 		"files": [
 			"config/version.php",
-			"config/config.php"
+			"config/config.php",
+			"core/errorhandler.php"
 		],
 		"psr-4": {
 			"YF\\Core\\":"core/",
