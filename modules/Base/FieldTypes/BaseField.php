@@ -7,7 +7,7 @@
  */
 namespace YF\Modules\Base\FieldTypes;
 
-class BaseField extends \YF\Modules\Base\Model\Field
+class BaseField extends \YF\Core\BaseModel
 {
 
 	/**
