@@ -1,7 +1,8 @@
 <?php
 /**
  * Log class
- * @package YetiForce.Include
+ * @package YetiForce.Core
+ * @link http://php.net/manual/en/class.exception.php
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 2.0 (licenses/License.html or yetiforce.com)
  * @author Sławomir Kłos <s.klos@yetiforce.com>
