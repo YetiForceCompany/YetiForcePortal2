@@ -44,7 +44,7 @@ class Record extends \YF\Core\BaseModel
 	 */
 	public function getDisplayValue($key)
 	{
-		return isset($this->valueMap['data'][$key]) ? $this->valueMap['data'][$key] : null;
+		return isset($this->valueMap['data'][$key]) ? $this->valueMap['data'][$key] : '';
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Record extends \YF\Core\BaseModel
 	 */
 	public function getRawValue($key)
 	{
-		return isset($this->valueMap['rawData'][$key]) ? $this->valueMap['rawData'][$key] : null;
+		return isset($this->valueMap['rawData'][$key]) ? $this->valueMap['rawData'][$key] : '';
 	}
 
 	/**
