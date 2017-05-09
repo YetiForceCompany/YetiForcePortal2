@@ -49,8 +49,10 @@ abstract class Index extends \YF\Core\Controller
 			$moduleName = $request->getModule();
 
 			$viewer = new \YF\Core\Viewer();
+			$userInstance = \YF\Core\User::getUser();
 			$viewer->assign('MODULE_NAME', $moduleName);
 			$viewer->assign('VIEW', $request->get('view'));
+			$viewer->assign('USER', $userInstance);
 			$viewer->assign('ACTION_NAME', $request->getAction());
 			$this->viewer = $viewer;
 		}

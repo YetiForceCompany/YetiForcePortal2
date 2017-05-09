@@ -77,6 +77,7 @@ var app = {
 		var dateFieldElements = jQuery('.dateField', container);
 		params.width = "100%";
 		params.singleDatePicker = true;
+		params.showDropdowns = true;
 		params.linkedCalendars = false;
 		params.autoApply = true;
 		params.autoUpdateInput = false;
@@ -113,10 +114,65 @@ var app = {
 			if (!input.attr("id")) {
 				input.attr('id', "dateFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
 			}
-			var input_params = JSON.parse((input.attr("data-fieldinfo")));
 			var params_custom = params;
-			if (typeof input_params["date-format"] !== 'undefined') {
-				params_custom.locale.format = input_params["date-format"].toUpperCase();
+			if (input.attr("data-date-format")) {
+				params_custom.locale.format = input.attr("data-date-format");
+			}
+			switch (params_custom.locale.format) {
+				case 'd-m-Y':
+					params_custom.locale.format = 'DD-MM-YYYY';
+					break;
+				case 'm-d-Y':
+					params_custom.locale.format = 'MM-DD-YYYY';
+					break;
+				case 'Y-m-d':
+					params_custom.locale.format = 'YYYY-MM-DD';
+					break;
+				case 'd.m.Y':
+					params_custom.locale.format = 'DD.MM.YYYY';
+					break;
+				case 'm.d.Y':
+					params_custom.locale.format = 'MM.DD.YYYY';
+					break;
+				case 'Y.m.d':
+					params_custom.locale.format = 'YYYY.MM.DD';
+					break;
+				case 'd/m/Y':
+					params_custom.locale.format = 'DD/MM/YYYY';
+					break;
+				case 'm/d/Y':
+					params_custom.locale.format = 'MM/DD/YYYY';
+					break;
+				case 'Y/m/d':
+					params_custom.locale.format = 'YYYY/MM/DD';
+					break;
+			}
+			if (input.attr("data-day-of-the-week")) {
+				switch (input.attr("data-day-of-the-week")) {
+					case 'Sunday':
+						params_custom.locale.firstDay = 0;
+						break;
+					case 'Monday':
+						params_custom.locale.firstDay = 1;
+						break;
+					case 'Tuesday':
+						params_custom.locale.firstDay = 2;
+						break;
+					case 'Wednesday':
+						params_custom.locale.firstDay = 3;
+						break;
+					case 'Thursday':
+						params_custom.locale.firstDay = 4;
+						break;
+					case 'Friday':
+						params_custom.locale.firstDay = 5;
+						break;
+					case 'Saturday':
+						params_custom.locale.firstDay = 6;
+						break;
+					default:
+						params_custom.locale.firstDay = 1;
+				}
 			}
 			input.daterangepicker(params_custom);
 			button.click(function () {
