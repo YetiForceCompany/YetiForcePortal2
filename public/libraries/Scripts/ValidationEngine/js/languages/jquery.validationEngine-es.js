@@ -1,4 +1,4 @@
-﻿
+
 (function($){
     $.fn.validationEngineLanguage = function(){
     };
@@ -66,7 +66,7 @@
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
-                    "regex": /^([\+][0-9]{1,3}([ \.\-])?)?([\(][0-9]{1,6}[\)])?([0-9 \.\-]{1,32})(([A-Za-z \:]{1,11})?[0-9]{1,4}?)$/,
+                    "regex": /^([\+][0-9]{1,3}[ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/,
                     "alertText": "* Número de teléfono inválido"
                 },
                 "email": {
@@ -101,10 +101,6 @@
                 },
 			    "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
-                    "alertText": "* Sólo letras"
-                },
-				"onlyLetterAccentSp":{
-                    "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Sólo letras"
                 },
                 "onlyLetterNumber": {

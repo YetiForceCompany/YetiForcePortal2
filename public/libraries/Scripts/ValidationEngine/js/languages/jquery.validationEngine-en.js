@@ -37,11 +37,9 @@
                     "alertText": "* Maximum ",
                     "alertText2": " characters allowed"
                 },
-		"groupRequired": {
+				"groupRequired": {
                     "regex": "none",
-                    "alertText": "* You must fill one of the following fields",
-                    "alertTextCheckboxMultiple": "* Please select an option",
-                    "alertTextCheckboxe": "* This checkbox is required"
+                    "alertText": "* You must fill one of the following fields"
                 },
                 "min": {
                     "regex": "none",
@@ -79,21 +77,13 @@
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
-                    "regex": /^([\+][0-9]{1,3}([ \.\-])?)?([\(][0-9]{1,6}[\)])?([0-9 \.\-]{1,32})(([A-Za-z \:]{1,11})?[0-9]{1,4}?)$/,
+                    "regex": /^([\+][0-9]{1,3}[\ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9\ \.\-\/]{3,20})((x|ext|extension)[\ ]?[0-9]{1,4})?$/,
                     "alertText": "* Invalid phone number"
                 },
                 "email": {
                     // HTML5 compatible email regex ( http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#    e-mail-state-%28type=email%29 )
                     "regex": /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                     "alertText": "* Invalid email address"
-                },
-                "fullname": {
-                    "regex":/^([a-zA-Z]+[\'\,\.\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\'\,\.\-]?[a-zA-Z ]+)+$/,
-                    "alertText":"* Must be first and last name"
-                },
-                "zip": {
-                    "regex":/^\d{5}$|^\d{5}-\d{4}$/,
-                    "alertText":"* Invalid zip format"
                 },
                 "integer": {
                     "regex": /^[\-\+]?\d+$/,
@@ -136,10 +126,6 @@
                 "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Letters only"
-                },
-				"onlyLetterAccentSp":{
-                    "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
-                    "alertText": "* Letters only (accents allowed)"
                 },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,

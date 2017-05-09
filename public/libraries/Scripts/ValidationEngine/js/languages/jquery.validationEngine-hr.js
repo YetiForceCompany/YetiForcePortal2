@@ -77,7 +77,7 @@
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
-                    "regex": /^([\+][0-9]{1,3}([ \.\-])?)?([\(][0-9]{1,6}[\)])?([0-9 \.\-]{1,32})(([A-Za-z \:]{1,11})?[0-9]{1,4}?)$/,
+                    "regex": /^([\+][0-9]{1,3}[ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/,
                     "alertText": "* Pogrešan unos telefonskog broja"
                 },
                 "email": {
@@ -112,10 +112,6 @@
                 },
                 "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
-                    "alertText": "* Dozvoljena su samo slova"
-                },
-				"onlyLetterAccentSp":{
-                    "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Dozvoljena su samo slova"
                 },
                 "onlyLetterNumber": {

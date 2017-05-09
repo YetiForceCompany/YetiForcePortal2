@@ -1,9 +1,11 @@
 
+
+
 /* Z-INDEX */
  .formError { z-index: 990; }
     .formError .formErrorContent { z-index: 991; }
     .formError .formErrorArrow { z-index: 996; }
-
+    
     .ui-dialog .formError { z-index: 5000; }
     .ui-dialog .formError .formErrorContent { z-index: 5001; }
     .ui-dialog .formError .formErrorArrow { z-index: 5006; }
@@ -22,7 +24,6 @@
 	left: 300px;
 	display: block;
 	cursor: pointer;
-	text-align: left;
 }
 
 .formError.inline {
@@ -131,12 +132,12 @@ body.rtl .formError .formErrorArrow {
 }
 
 .formError .formErrorArrow .line10 {
-	width: 13px;
+	width: 15px;
 	border: none;
 }
 
 .formError .formErrorArrow .line9 {
-	width: 11px;
+	width: 13px;
 	border: none;
 }
 

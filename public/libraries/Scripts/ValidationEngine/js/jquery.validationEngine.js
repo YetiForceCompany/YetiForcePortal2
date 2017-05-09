@@ -758,8 +758,7 @@
 			//the 3rd condition is added so that even empty password fields should be equal
 			//otherwise if one is filled and another left empty, the "equal" condition would fail
 			//which does not make any sense
-
-			if(!required && !(field.val() && field.val().length < 1) && $.inArray('equals', rules) < 0) options.isError = false;
+			if(!required && !(field.val()) && field.val().length < 1 && $.inArray('equals', rules) < 0) options.isError = false;
 
 			// Hack for radio/checkbox group button, the validation go into the
 			// first radio/checkbox of the group
@@ -774,11 +773,7 @@
 				}
 				options.showArrow = options.showArrowOnRadioAndCheckbox;
 			}
-			// <--------   YetiForce.com - Fixed valid CKEditor element -------->
-			if (field.is('textarea') && field.hasClass('ckEditorSource') && CKEDITOR.instances[field.attr('id')] != undefined) {
-				field = field.next();
-			}
-			// <-------- End -------->
+
 			if(field.is(":hidden") && options.prettySelect) {
 				field = form.find("#" + options.usePrefix + methods._jqSelector(field.attr('id')) + options.useSuffix);
 			}
