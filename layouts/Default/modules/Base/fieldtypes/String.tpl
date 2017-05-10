@@ -10,10 +10,10 @@
 		class="form-control" 
 		data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true}required{/if}]" 
 		name="{$FIELD_NAME}" 
-		value="{\YF\Core\Functions::toSafeHTML($FIELD_MODEL->getRawValue())}" 
+		value="{$FIELD_MODEL->getSafeRawValue()}" 
 		data-fieldinfo="{$FIELD_INFO}" 
 		{if !empty($SPECIAL_VALIDATOR)}data-validator="{\YF\Core\Json::encode($SPECIAL_VALIDATOR)}" {/if}
-		{if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly" {/if}
+		{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
 		{if $FIELD_MODEL->get('fieldparams') != ''}data-inputmask="'mask': '{$FIELD_MODEL->get('fieldparams')}'" {/if}
 	/>
 {/strip}

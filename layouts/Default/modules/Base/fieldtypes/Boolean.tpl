@@ -14,7 +14,7 @@
 				value="1" 
 				data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true}required{/if}]"
 				data-fieldinfo="{$FIELD_INFO}" 
-				{if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly" {/if}
+				{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
 				{if $FIELD_MODEL->isChecked()}checked {/if} 
 				{if !empty($SPECIAL_VALIDATOR)}data-validator="{\Core\Json::encode($SPECIAL_VALIDATOR)}" {/if} 
 			/>

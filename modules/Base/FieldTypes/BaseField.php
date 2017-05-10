@@ -53,6 +53,15 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
+	 * Function to get the safe raw value
+	 * @return Value for the given key
+	 */
+	public function getSafeRawValue()
+	{
+		return \YF\Core\Functions::toSafeHTML($this->getRawValue());
+	}
+
+	/**
 	 * Function to set the raw value
 	 * @param string $value
 	 * @return Field
