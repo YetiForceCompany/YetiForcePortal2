@@ -8,6 +8,9 @@
  */
 namespace YF\Modules\Base\FieldTypes;
 
+use YF\Core\Json;
+use YF\Core\Functions;
+
 class BaseField extends \YF\Core\BaseModel
 {
 
@@ -129,6 +132,15 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
+	 * Function to get safe encoded field info
+	 * @return string
+	 */
+	public function getSafeFieldInfo()
+	{
+		return Functions::toSafeHTML(Json::encode($this->getFieldInfo()));
+	}
+
+	/**
 	 * Function to check if the current field is readonly or not
 	 * @return boolean - true/false
 	 */
@@ -148,11 +160,29 @@ class BaseField extends \YF\Core\BaseModel
 
 	/**
 	 * Reference module list
-	 * @return string[]
+	 * @return string
 	 */
 	public function getReferenceList()
 	{
 		return $this->get('referenceList');
+	}
+
+	/**
+	 * Field parameters
+	 * @return string
+	 */
+	public function getFieldParams()
+	{
+		return $this->get('fieldparams');
+	}
+
+	/**
+	 * Label
+	 * @return string
+	 */
+	public function getLabel()
+	{
+		return $this->get('label');
 	}
 
 	/**

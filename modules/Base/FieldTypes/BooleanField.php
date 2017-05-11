@@ -18,7 +18,7 @@ class BooleanField extends BaseField
 	public function isChecked()
 	{
 		$rawValue = $this->getRawValue();
-		if ($rawValue === true || $rawValue === 1 || $rawValue === 'yes') {
+		if ($rawValue === true || (int) $rawValue === 1 || $rawValue === 'yes') {
 			return true;
 		}
 		return false;

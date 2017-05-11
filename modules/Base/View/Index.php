@@ -192,6 +192,7 @@ abstract class Index extends \YF\Core\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.full.js',
 			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
+			YF_ROOT_WWW . 'libraries/Scripts/inputmask/jquery.inputmask.js',
 			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/js/jquery.dataTables.js',
 			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',

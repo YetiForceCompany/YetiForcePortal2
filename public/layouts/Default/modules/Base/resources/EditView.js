@@ -111,6 +111,10 @@ jQuery.Class("Base_EditView_Js", {
 		var params = app.validationEngineOptions;
 		container.validationEngine(params);
 	},
+	registerMaskFields: function (container) {
+		var thisInstance = this;
+		container.find(":input").inputmask();
+	},
 	registerRecordSave: function (container) {
 		var formElement = container.find('form');
 		formElement.on('submit', function (e) {
@@ -140,6 +144,7 @@ jQuery.Class("Base_EditView_Js", {
 		this.referenceModulePopupRegisterEvent();
 		this.registerClearReferenceSelectionEvent(container);
 		this.registerValidationsFields(container);
+		this.registerMaskFields(container);
 		this.registerRecordSave(container);
 
 	}

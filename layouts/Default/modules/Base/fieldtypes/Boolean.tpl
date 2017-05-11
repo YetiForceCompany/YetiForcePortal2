@@ -1,22 +1,18 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 2.0 that can be found in the following directory: licenses/License.html or yetiforce.com]} --!>*}
 {strip}
-	{assign var="FIELD_INFO" value=\YF\Core\Functions::toSafeHTML(\YF\Core\Json::encode($FIELD_MODEL->getFieldInfo()))}
-	{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
-	{assign var="FIELD_NAME" value=$FIELD_MODEL->get('name')}
 	<div class="checkbox">
 		<label>
-			<input type="hidden" name="{$FIELD_NAME}" value="0" />
+			<input type="hidden" name="{$FIELD_MODEL->getName()}" value="0" />
 			<input 
-				title="{$FIELD_MODEL->get('label')}" 
-				id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}" 
+				title="{$FIELD_MODEL->getLabel()}" 
+				id="{$MODULE_NAME}_editView_fieldName_{$FIELD_MODEL->getName()}" 
 				type="checkbox" 
-				name="{$FIELD_NAME}" 
+				name="{$FIELD_MODEL->getName()}" 
 				value="1" 
-				data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true}required{/if}]"
-				data-fieldinfo="{$FIELD_INFO}" 
+				data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()}required{/if}]"
 				{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
+				data-fieldinfo="{$FIELD_MODEL->getSafeFieldInfo()}" 
 				{if $FIELD_MODEL->isChecked()}checked {/if} 
-				{if !empty($SPECIAL_VALIDATOR)}data-validator="{\Core\Json::encode($SPECIAL_VALIDATOR)}" {/if} 
 			/>
 		</label>
 	</div>
