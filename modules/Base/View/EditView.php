@@ -44,10 +44,13 @@ class EditView extends Index
 				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
 				if (isset($recordDetail['data'][$field['name']])) {
 					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
+					if (isset($recordDetail['rawData'][$field['name']])) {
+						$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
+					}
+				} else {
+					$fieldInstance->setIsNewRecord();
 				}
-				if (isset($recordDetail['rawData'][$field['name']])) {
-					$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
-				}
+
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}

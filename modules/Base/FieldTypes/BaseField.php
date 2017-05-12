@@ -27,6 +27,21 @@ class BaseField extends \YF\Core\BaseModel
 	protected $rawValue;
 
 	/**
+	 * Is new record
+	 * @var string
+	 */
+	protected $isNewRecord = false;
+
+	/**
+	 * Function to get the view value
+	 * @return string
+	 */
+	public function setIsNewRecord()
+	{
+		return $this->isNewRecord = true;
+	}
+
+	/**
 	 * Function to get the view value
 	 * @return string
 	 */
@@ -52,7 +67,11 @@ class BaseField extends \YF\Core\BaseModel
 	 */
 	public function getRawValue()
 	{
-		return $this->rawValue;
+		if (!$this->isNewRecord) {
+			return $this->rawValue;
+		} else {
+			return $this->get('defaultvalue');
+		}
 	}
 
 	/**
