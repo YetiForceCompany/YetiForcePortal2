@@ -11,7 +11,7 @@
 				value="1" 
 				data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()}required{/if}]"
 				{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
-				data-fieldinfo="{$FIELD_MODEL->getSafeFieldInfo()}" 
+				data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" 
 				{if $FIELD_MODEL->isChecked()}checked {/if} 
 			/>
 		</label>

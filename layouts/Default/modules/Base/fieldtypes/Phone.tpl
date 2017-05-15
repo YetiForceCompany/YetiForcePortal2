@@ -8,7 +8,7 @@
 		data-validation-engine="validate[custom[phone]{if $FIELD_MODEL->isMandatory()},required{/if}]" 
 		name="{$FIELD_MODEL->getName()}" 
 		value="{$FIELD_MODEL->getEditViewDisplayValue()}"
-		data-fieldinfo="{$FIELD_MODEL->getSafeFieldInfo()}" 
+		data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" 
 		{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
 		{if $FIELD_MODEL->getFieldParams() != ''}data-inputmask="'mask': '{$FIELD_MODEL->getFieldParams()}'" {/if}
 	/>

@@ -142,15 +142,6 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get safe encoded field info
-	 * @return string
-	 */
-	public function getSafeFieldInfo()
-	{
-		return Functions::toSafeHTML(Json::encode($this->getFieldInfo()));
-	}
-
-	/**
 	 * Function to check if the current field is readonly or not
 	 * @return boolean - true/false
 	 */
@@ -161,11 +152,16 @@ class BaseField extends \YF\Core\BaseModel
 
 	/**
 	 * Field info
-	 * @return array
+	 * @param boolean $safe
+	 * @return array|string
 	 */
-	public function getFieldInfo()
+	public function getFieldInfo($safe = false)
 	{
-		return $this->getData();
+		if ($safe) {
+			return Functions::toSafeHTML(Json::encode($this->getFieldInfo()));
+		} else {
+			return $this->getData();
+		}
 	}
 
 	/**
