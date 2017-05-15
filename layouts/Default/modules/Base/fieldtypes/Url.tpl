@@ -6,7 +6,7 @@
 		title="{$FIELD_MODEL->getLabel()}" 
 		class="form-control" 
 		name="{$FIELD_MODEL->getName()}" 
-		value="{$FIELD_MODEL->getSafeRawValue()}"
+		value="{$FIELD_MODEL->getEditViewDisplayValue()}"
 		data-fieldinfo="{$FIELD_MODEL->getSafeFieldInfo()}" 
 		data-validation-engine="validate[custom[url]{if $FIELD_MODEL->isMandatory()},required{/if}]" 
 		{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
