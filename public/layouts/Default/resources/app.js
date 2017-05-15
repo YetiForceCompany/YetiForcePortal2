@@ -81,6 +81,37 @@ var app = {
 		this.registerChznSelectField(container);
 		this.registerSelect2Field(container);
 	},
+	registerTimeField: function (container) {
+		var thisInstance = this;
+		if (typeof container === 'undefined') {
+			container = jQuery('body');
+		}
+		if (typeof params === 'undefined') {
+			params = {};
+		}
+		var timeFieldElements = jQuery('.timeField', container);
+		params.autoclose = true;
+		timeFieldElements.each(function () {
+			var element = $(this);
+			var input = element.find(".timeFieldInput");
+			var button = element.find(".timeFieldButton");
+			if (!input.attr("id")) {
+				input.attr('id', "timeFieldInput" + thisInstance.generateRandomChar() + thisInstance.generateRandomChar() + thisInstance.generateRandomChar());
+			}
+			var params_custom = params;
+			var fieldInfo = app.parseFieldInfo(input.attr("data-fieldinfo"));
+			if (fieldInfo['time-format'] == 12) {
+				params_custom.twelvehour = true;
+			} else if (fieldInfo['time-format'] == 24) {
+				params_custom.twelvehour = false;
+			}
+			input.clockpicker(params_custom);
+			button.click(function (e) {
+				e.stopPropagation();
+				input.clockpicker('toggle');
+			});
+		});
+	},
 	registerDateField: function (container) {
 		var thisInstance = this;
 		if (typeof container === 'undefined') {
