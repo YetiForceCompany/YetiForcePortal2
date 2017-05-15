@@ -66,10 +66,9 @@ var app = {
 		return JSON.parse(fieldInfo);
 	},
 	parseNumberToFloat: function (val) {
-		var numberOfDecimal = parseInt(app.getMainParams('numberOfCurrencyDecimal'));
 		var groupSeparator = app.getMainParams('currencyGroupingSeparator');
 		var decimalSeparator = app.getMainParams('currencyDecimalSeparator');
-		if (val == undefined || val == '') {
+		if (val === undefined || val === '') {
 			val = 0;
 		}
 		val = val.toString();
