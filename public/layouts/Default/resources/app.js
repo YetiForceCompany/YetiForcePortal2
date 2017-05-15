@@ -165,7 +165,6 @@ var app = {
 			if (fieldInfo['date-format-js2']) {
 				params_custom.locale.format = fieldInfo['date-format-js2'];
 			}
-			console.log(fieldInfo);
 			if (fieldInfo['day-of-the-week-int']) {
 				params_custom.locale.firstDay = fieldInfo['day-of-the-week-int'];
 			}
@@ -542,6 +541,7 @@ jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
 	app.registerDateField(container);
+	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
