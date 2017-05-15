@@ -65,6 +65,18 @@ var app = {
 	parseFieldInfo: function (fieldInfo) {
 		return JSON.parse(fieldInfo);
 	},
+	parseNumberToFloat: function (val) {
+		var numberOfDecimal = parseInt(app.getMainParams('numberOfCurrencyDecimal'));
+		var groupSeparator = app.getMainParams('currencyGroupingSeparator');
+		var decimalSeparator = app.getMainParams('currencyDecimalSeparator');
+		if (val == undefined || val == '') {
+			val = 0;
+		}
+		val = val.toString();
+		val = val.split(groupSeparator).join("");
+		val = val.replace(/\s/g, "").replace(decimalSeparator, ".");
+		return parseFloat(val);
+	},
 	registerSelectField: function (container) {
 		this.registerChznSelectField(container);
 		this.registerSelect2Field(container);
