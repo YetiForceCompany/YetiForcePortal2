@@ -6,7 +6,7 @@
  * @package YetiForce.Configuration
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-$version = '0.0.62';
+$version = '0.0.63';
 $patchVersion = '20170515';
 
 define('VERSION', $version);
