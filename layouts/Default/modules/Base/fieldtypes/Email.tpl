@@ -8,7 +8,7 @@
 		data-validation-engine="validate[custom[email]{if $FIELD_MODEL->isMandatory()},required{/if}]" 
 		name="{$FIELD_MODEL->getName()}"
 		value="{$FIELD_MODEL->getEditViewDisplayValue()}"
-		data-fieldinfo="{$FIELD_MODEL->getFieldInfo(trues)}" 
+		data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" 
 		{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}
 	/>
 {/strip}
