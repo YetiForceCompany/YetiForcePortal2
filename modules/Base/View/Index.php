@@ -202,6 +202,7 @@ abstract class Index extends \YF\Core\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/clockpicker/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/helper.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Field.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
