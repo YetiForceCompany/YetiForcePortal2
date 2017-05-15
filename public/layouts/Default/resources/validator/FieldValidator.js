@@ -38,18 +38,18 @@ Vtiger_Base_Validator_Js("Vtiger_Email_Validator_Js", {
 		var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
 
 		if (!emailFilter.test(fieldValue)) {
-			this.setError(app.vtranslate('JS_PLEASE_ENTER_VALID_EMAIL_ADDRESS'));
+			this.setError(app.translate('JS_PLEASE_ENTER_VALID_EMAIL_ADDRESS'));
 			return false;
 
 		} else if (fieldValue.match(illegalChars)) {
-			this.setError(app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS'));
+			this.setError(app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS'));
 			return false;
 		}
 		var field = this.getElement();
 		var fieldData = field.data();
 		var fieldInfo = fieldData.fieldinfo;
 		if (fieldInfo && fieldInfo.restrictedDomains && fieldInfo.restrictedDomains.indexOf(fieldValue.split('@').pop()) != -1) {
-			this.setError(app.vtranslate('JS_EMAIL_RESTRICTED_DOMAINS'));
+			this.setError(app.translate('JS_EMAIL_RESTRICTED_DOMAINS'));
 			return false;
 		}
 		return true;
@@ -82,7 +82,7 @@ Vtiger_Base_Validator_Js("Vtiger_UserName_Validator_Js", {
 		var negativeRegex = /^[a-zA-Z0-9_.@]{3,32}$/;
 		var result = negativeRegex.test(fieldValue);
 		if (!result) {
-			var errorInfo = app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS');
+			var errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -116,7 +116,7 @@ Vtiger_Base_Validator_Js("Vtiger_PositiveNumber_Validator_Js", {
 		var negativeRegex = /(^[-]+\d+)$/;
 		parseFieldValue = app.parseNumberToFloat(this.getFieldValue())
 		if (isNaN(parseFieldValue) || fieldValue < 0 || fieldValue.match(negativeRegex)) {
-			var errorInfo = app.vtranslate('JS_ACCEPT_POSITIVE_NUMBER');
+			var errorInfo = app.translate('JS_ACCEPT_POSITIVE_NUMBER');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -150,7 +150,7 @@ Vtiger_Base_Validator_Js("Vtiger_Integer_Validator_Js", {
 		var decimalIntegerRegex = /(^[-+]?\d?).\d+$/;
 		if ((!fieldValue.match(integerRegex))) {
 			if (!fieldValue.match(decimalIntegerRegex)) {
-				var errorInfo = app.vtranslate("JS_PLEASE_ENTER_INTEGER_VALUE");
+				var errorInfo = app.translate("JS_PLEASE_ENTER_INTEGER_VALUE");
 				this.setError(errorInfo);
 				return false;
 			} else {
@@ -190,7 +190,7 @@ Vtiger_PositiveNumber_Validator_Js("Vtiger_Percentage_Validator_Js", {
 		} else {
 			var fieldValue = this.getFieldValue();
 			if (fieldValue > 100) {
-				var errorInfo = app.vtranslate('JS_PERCENTAGE_VALUE_SHOULD_BE_LESS_THAN_100');
+				var errorInfo = app.translate('JS_PERCENTAGE_VALUE_SHOULD_BE_LESS_THAN_100');
 				this.setError(errorInfo);
 				return false;
 			}
@@ -218,7 +218,7 @@ Vtiger_Base_Validator_Js('Vtiger_Url_Validator_Js', {}, {
 			}
 		}
 		if (!result) {
-			var errorInfo = app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS');//"Please enter valid url";
+			var errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS');//"Please enter valid url";
 			this.setError(errorInfo);
 			return false;
 		}
@@ -247,7 +247,7 @@ Vtiger_Base_Validator_Js("Vtiger_MultiSelect_Validator_Js", {
 		var fieldInstance = this.getElement();
 		var selectElementValue = fieldInstance.val();
 		if (selectElementValue == null) {
-			var errorInfo = app.vtranslate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION');
+			var errorInfo = app.translate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -320,7 +320,7 @@ Vtiger_PositiveNumber_Validator_Js("Vtiger_GreaterThanZero_Validator_Js", {
 		} else {
 			var fieldValue = this.getFieldValue();
 			if (fieldValue == 0) {
-				var errorInfo = app.vtranslate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
+				var errorInfo = app.translate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
 				this.setError(errorInfo);
 				return false;
 			}
@@ -360,9 +360,9 @@ Vtiger_PositiveNumber_Validator_Js("Vtiger_WholeNumber_Validator_Js", {
 		var fieldInfo = fieldData.fieldinfo;
 		if ((fieldValue % 1) != 0) {
 			if (!jQuery.isEmptyObject(fieldInfo)) {
-				var errorInfo = app.vtranslate('INVALID_NUMBER_OF') + " " + fieldInfo.label;
+				var errorInfo = app.translate('INVALID_NUMBER_OF') + " " + fieldInfo.label;
 			} else {
-				var errorInfo = app.vtranslate('INVALID_NUMBER');
+				var errorInfo = app.translate('INVALID_NUMBER');
 			}
 			this.setError(errorInfo);
 			return false;
@@ -394,7 +394,7 @@ Vtiger_Base_Validator_Js("Vtiger_lessThanToday_Validator_Js", {}, {
 		todayDateInstance.setHours(0, 0, 0, 0);
 		var comparedDateVal = todayDateInstance - fieldDateInstance;
 		if (comparedDateVal <= 0) {
-			var errorInfo = fieldInfo.label + " " + app.vtranslate('JS_SHOULD_BE_LESS_THAN_CURRENT_DATE');
+			var errorInfo = fieldInfo.label + " " + app.translate('JS_SHOULD_BE_LESS_THAN_CURRENT_DATE');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -425,7 +425,7 @@ Vtiger_Base_Validator_Js("Vtiger_lessThanOrEqualToToday_Validator_Js", {}, {
 		todayDateInstance.setHours(0, 0, 0, 0);
 		var comparedDateVal = todayDateInstance - fieldDateInstance;
 		if (comparedDateVal < 0) {
-			var errorInfo = fieldInfo.label + " " + app.vtranslate('JS_SHOULD_BE_LESS_THAN_OR_EQUAL_TO') + " " + app.vtranslate('JS_CURRENT_DATE');
+			var errorInfo = fieldInfo.label + " " + app.translate('JS_SHOULD_BE_LESS_THAN_OR_EQUAL_TO') + " " + app.translate('JS_CURRENT_DATE');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -456,7 +456,7 @@ Vtiger_Base_Validator_Js('Vtiger_greaterThanOrEqualToToday_Validator_Js', {}, {
 		todayDateInstance.setHours(0, 0, 0, 0);
 		var comparedDateVal = todayDateInstance - fieldDateInstance;
 		if (comparedDateVal > 0) {
-			var errorInfo = fieldInfo.label + " " + app.vtranslate('JS_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO') + " " + app.vtranslate('JS_CURRENT_DATE');
+			var errorInfo = fieldInfo.label + " " + app.translate('JS_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO') + " " + app.translate('JS_CURRENT_DATE');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -507,7 +507,7 @@ Vtiger_Base_Validator_Js("Vtiger_greaterThanDependentField_Validator_Js", {
 				var dependentFieldDateInstance = this.getDateTimeInstance(dependentFieldInContext);
 				var comparedDateVal = fieldDateInstance - dependentFieldDateInstance;
 				if (comparedDateVal < 0) {
-					var errorInfo = fieldLabel + ' ' + app.vtranslate('JS_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO') + ' ' + dependentFieldLabel + '';
+					var errorInfo = fieldLabel + ' ' + app.translate('JS_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO') + ' ' + dependentFieldLabel + '';
 					this.setError(errorInfo);
 					return false;
 				}
@@ -568,7 +568,7 @@ Vtiger_Base_Validator_Js("Vtiger_dateAndTimeGreaterThanDependentField_Validator_
 		if (fieldDateTimeInstance.length == 2) {
 			var comparedDateVal = fieldDateTimeInstance[1] - fieldDateTimeInstance[0];
 			if (comparedDateVal < 0) {
-				var errorInfo = app.vtranslate('JS_AN_INCORRECT_RANGE_OF_DATES_WAS_ENTERED');
+				var errorInfo = app.translate('JS_AN_INCORRECT_RANGE_OF_DATES_WAS_ENTERED');
 				this.setError(errorInfo);
 				return false;
 			}
@@ -600,7 +600,7 @@ Vtiger_Base_Validator_Js("Vtiger_futureEventCannotBeHeld_Validator_Js", {}, {
 				var dependentFieldDateInstance = Vtiger_Helper_Js.getDateInstance(fieldValue, dateFormat);
 				var comparedDateVal = todayDateInstance - dependentFieldDateInstance;
 				if (comparedDateVal < 0 && status == "Held") {
-					var errorInfo = fieldLabel + ' ' + app.vtranslate('JS_FUTURE_EVENT_CANNOT_BE_HELD') + ' ' + dependentFieldLabel + '';
+					var errorInfo = fieldLabel + ' ' + app.translate('JS_FUTURE_EVENT_CANNOT_BE_HELD') + ' ' + dependentFieldLabel + '';
 					this.setError(errorInfo);
 					return false;
 				}
@@ -637,7 +637,7 @@ Vtiger_Base_Validator_Js("Vtiger_lessThanDependentField_Validator_Js", {}, {
 				var dependentFieldDateInstance = this.getDateTimeInstance(dependentFieldInContext);
 				var comparedDateVal = fieldDateInstance - dependentFieldDateInstance;
 				if (comparedDateVal > 0) {
-					var errorInfo = fieldLabel + ' ' + app.vtranslate('JS_SHOULD_BE_LESS_THAN_OR_EQUAL_TO') + ' ' + dependentFieldLabel + '';
+					var errorInfo = fieldLabel + ' ' + app.translate('JS_SHOULD_BE_LESS_THAN_OR_EQUAL_TO') + ' ' + dependentFieldLabel + '';
 					this.setError(errorInfo);
 					return false;
 				}
@@ -706,12 +706,12 @@ Vtiger_Base_Validator_Js('Vtiger_Currency_Validator_Js', {
 		 return false;
 		 }*/
 		if (isNaN(strippedValue)) {
-			errorInfo = app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS');
+			errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS');
 			this.setError(errorInfo);
 			return false;
 		}
 		if (strippedValue < 0) {
-			errorInfo = app.vtranslate('JS_ACCEPT_POSITIVE_NUMBER');
+			errorInfo = app.translate('JS_ACCEPT_POSITIVE_NUMBER');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -757,18 +757,18 @@ Vtiger_Base_Validator_Js("Vtiger_NumberUserFormat_Validator_Js", {
 		var errorInfo;
 
 		if (isNaN(strippedValue)) {
-			errorInfo = app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS');
+			errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS');
 			this.setError(errorInfo);
 			return false;
 		}
 		if (strippedValue < 0) {
-			errorInfo = app.vtranslate('JS_ACCEPT_POSITIVE_NUMBER');
+			errorInfo = app.translate('JS_ACCEPT_POSITIVE_NUMBER');
 			this.setError(errorInfo);
 			return false;
 		}
 		strippedValue = parseFloat(strippedValue);
 		if (strippedValue != strippedValue.toString()) {
-			errorInfo = app.vtranslate('JS_CONTAINS_ILLEGAL_CHARACTERS');
+			errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -789,7 +789,7 @@ Vtiger_Base_Validator_Js("Vtiger_ReferenceField_Validator_Js", {}, {
 		var referenceFieldValue = referenceField.val();
 		var fieldInfo = referenceField.data().fieldinfo;
 		if (referenceFieldValue == "") {
-			var errorInfo = app.vtranslate('JS_REQUIRED_FIELD');
+			var errorInfo = app.translate('JS_REQUIRED_FIELD');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -809,7 +809,7 @@ Vtiger_Integer_Validator_Js("Vtiger_Double_Validator_Js", {}, {
 			var fieldValue = this.getFieldValue();
 			var doubleRegex = /(^[-+]?\d+)\.\d+$/;
 			if (!fieldValue.match(doubleRegex)) {
-				var errorInfo = app.vtranslate("JS_PLEASE_ENTER_DECIMAL_VALUE");
+				var errorInfo = app.translate("JS_PLEASE_ENTER_DECIMAL_VALUE");
 				this.setError(errorInfo);
 				return false;
 			}
@@ -849,7 +849,7 @@ Vtiger_Base_Validator_Js("Vtiger_Date_Validator_Js", {
 		try {
 			Vtiger_Helper_Js.getDateInstance(fieldValue, fieldDateFormat);
 		} catch (err) {
-			var errorInfo = app.vtranslate("JS_PLEASE_ENTER_VALID_DATE");
+			var errorInfo = app.translate("JS_PLEASE_ENTER_VALID_DATE");
 			this.setError(errorInfo);
 			return false;
 		}
@@ -885,7 +885,7 @@ Vtiger_Base_Validator_Js("Vtiger_Time_Validator_Js", {
 		var time = fieldValue.replace(fieldValue.match(/[AP]M/i), '');
 		var timeValue = time.split(":");
 		if (isNaN(timeValue[0]) && isNaN(timeValue[1])) {
-			var errorInfo = app.vtranslate("JS_PLEASE_ENTER_VALID_TIME");
+			var errorInfo = app.translate("JS_PLEASE_ENTER_VALID_TIME");
 			this.setError(errorInfo);
 			return false;
 		}
@@ -942,7 +942,7 @@ Vtiger_Base_Validator_Js('Calendar_greaterThanToday_Validator_Js', {}, {
 		todayDateInstance.setHours(0, 0, 0, 0);
 		var comparedDateVal = todayDateInstance - fieldDateInstance;
 		if (comparedDateVal >= 0) {
-			var errorInfo = fieldInfo.label + " " + app.vtranslate('JS_SHOULD_BE_GREATER_THAN_CURRENT_DATE');
+			var errorInfo = fieldInfo.label + " " + app.translate('JS_SHOULD_BE_GREATER_THAN_CURRENT_DATE');
 			this.setError(errorInfo);
 			return false;
 		}
@@ -975,7 +975,7 @@ Vtiger_Base_Validator_Js("Calendar_RepeatMonthDate_Validator_Js", {
 		var fieldValue = this.getFieldValue();
 
 		if ((parseInt(parseFloat(fieldValue))) != fieldValue || fieldValue == '' || parseInt(fieldValue) > '31' || parseInt(fieldValue) <= 0) {
-			var result = app.vtranslate('JS_NUMBER_SHOULD_BE_LESS_THAN_32');
+			var result = app.translate('JS_NUMBER_SHOULD_BE_LESS_THAN_32');
 			this.setError(result);
 			return false;
 		}
@@ -1013,7 +1013,7 @@ Vtiger_WholeNumber_Validator_Js("Vtiger_WholeNumberGreaterThanZero_Validator_Js"
 		} else {
 			var fieldValue = this.getFieldValue();
 			if (fieldValue == 0) {
-				var errorInfo = app.vtranslate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
+				var errorInfo = app.translate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
 				this.setError(errorInfo);
 				return false;
 			}
@@ -1047,7 +1047,7 @@ Vtiger_Base_Validator_Js("Vtiger_AlphaNumeric_Validator_Js", {
 		var fieldValue = field.val();
 		var alphaNumericRegex = /^[a-z0-9 _-]*$/i;
 		if (!fieldValue.match(alphaNumericRegex)) {
-			var errorInfo = app.vtranslate("JS_CONTAINS_ILLEGAL_CHARACTERS");
+			var errorInfo = app.translate("JS_CONTAINS_ILLEGAL_CHARACTERS");
 			this.setError(errorInfo);
 			return false;
 		}
@@ -1080,7 +1080,7 @@ Vtiger_Base_Validator_Js("Vtiger_AlphaNumericWithSlashesCurlyBraces_Validator_Js
 		var fieldValue = field.val();
 		var alphaNumericRegex = /^[\/a-z\\0-9{} _-]*$/i;
 		if (!fieldValue.match(alphaNumericRegex)) {
-			var errorInfo = app.vtranslate("JS_CONTAINS_ILLEGAL_CHARACTERS");
+			var errorInfo = app.translate("JS_CONTAINS_ILLEGAL_CHARACTERS");
 			this.setError(errorInfo);
 			return false;
 		}
@@ -1120,7 +1120,7 @@ Vtiger_Base_Validator_Js("Vtiger_InputMask_Validator_Js", {
 			var getmetadata = field.inputmask("getmetadata");
 			var maskLength = (getmetadata.match(/9/g) || []).length + (getmetadata.match(/A/g) || []).length + (getmetadata.match(/'*'/g) || []).length;
 			if (unMaskedValue.length != 0 && maskLength > unMaskedValue.length) {
-				var errorInfo = app.vtranslate("JS_INVALID_LENGTH");
+				var errorInfo = app.translate("JS_INVALID_LENGTH");
 				this.setError(errorInfo);
 				window.inputMaskValidation = true;
 				return false;
@@ -1129,7 +1129,7 @@ Vtiger_Base_Validator_Js("Vtiger_InputMask_Validator_Js", {
 			}
 		}
 		if (window.inputMaskValidation) {
-			var errorInfo = app.vtranslate("JS_INVALID_LENGTH");
+			var errorInfo = app.translate("JS_INVALID_LENGTH");
 			this.setError(errorInfo);
 			return false;
 		}
