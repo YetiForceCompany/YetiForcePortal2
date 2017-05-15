@@ -158,7 +158,7 @@ class BaseField extends \YF\Core\BaseModel
 	public function getFieldInfo($safe = false)
 	{
 		if ($safe) {
-			return Functions::toSafeHTML(Json::encode($this->getFieldInfo()));
+			return Functions::toSafeHTML(Json::encode($this->getData()));
 		} else {
 			return $this->getData();
 		}
