@@ -844,7 +844,7 @@ Vtiger_Base_Validator_Js("Vtiger_Date_Validator_Js", {
 	validate: function () {
 		var field = this.getElement();
 		var fieldData = field.data();
-		var fieldDateFormat = fieldData.dateFormat;
+		var fieldDateFormat = fieldData.fieldinfo['date-format'];
 		var fieldValue = this.getFieldValue();
 		try {
 			Vtiger_Helper_Js.getDateInstance(fieldValue, fieldDateFormat);
