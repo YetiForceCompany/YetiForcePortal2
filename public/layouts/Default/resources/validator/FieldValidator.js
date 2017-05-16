@@ -807,7 +807,7 @@ Vtiger_Integer_Validator_Js("Vtiger_Double_Validator_Js", {}, {
 		var response = this._super();
 		if (response == false) {
 			var fieldValue = this.getFieldValue();
-			var doubleRegex = /(^[-+]?\d+)\.\d+$/;
+			var doubleRegex = /(^[-+]?\d+)\(.,)\d+$/;
 			if (!fieldValue.match(doubleRegex)) {
 				var errorInfo = app.translate("JS_PLEASE_ENTER_DECIMAL_VALUE");
 				this.setError(errorInfo);
