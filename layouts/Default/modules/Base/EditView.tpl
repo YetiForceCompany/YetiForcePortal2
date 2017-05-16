@@ -29,8 +29,8 @@
 								<div class="editFields col-sm-12 col-md-6 paddingLRZero">
 									<div class="col-md-3 fieldLabel paddingLeft5px">
 										<label class="muted">
-											{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
-											{$FIELD->get('label')}
+											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}
+											{$FIELD->getLabel()}
 										</label>
 									</div>
 									<div class="fieldValue col-md-9">
