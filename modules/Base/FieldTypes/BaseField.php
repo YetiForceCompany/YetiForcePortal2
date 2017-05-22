@@ -242,9 +242,6 @@ class BaseField extends \YF\Core\BaseModel
 	 */
 	public function isEmptyPicklistOptionAllowed()
 	{
-		if ($this->isMandatory()) {
-			return false;
-		}
-		return true;
+		return $this->get('isEmptyPicklistOptionAllowed');
 	}
 }
