@@ -1,4 +1,10 @@
 <?php
+/**
+ * Basic polish translation
+ * @package YetiForce.Language
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ */
 $phpLang = [
 	'LBL_DEBUG_CONSOLE' => 'Konsola debugowania API',
 	'LBL_CORE_LOG' => 'Log',
