@@ -1,4 +1,4 @@
-{*<!-- {[The file is published on the basis of YetiForce Public License 2.0 that can be found in the following directory: licenses/License.html or yetiforce.com]} --!>*}
+{*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<input type="hidden" name="{$FIELD_MODEL->getName()}" value="" />
 	<select id="{$MODULE_NAME}_{$VIEW}_fieldName_{$FIELD_MODEL->getName()}" title="{$FIELD_MODEL->getLabel()}" multiple class="chzn-select form-control col-md-12 {if !empty($FIELD_MODEL->getNotDisplayValuesList())} hideSelected{/if}" name="{$FIELD_MODEL->getName()}[]" data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" {if $FIELD_MODEL->isMandatory()} data-validation-engine="validate[required]" {/if} {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
