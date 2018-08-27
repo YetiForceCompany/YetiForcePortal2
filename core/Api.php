@@ -7,6 +7,7 @@
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Core;
 
 use Requests,
@@ -25,7 +26,7 @@ class Api
 	 */
 	function __construct()
 	{
-		$this->url = Config::get('crmPath') . 'api/webservice/';
+		$this->url = Config::get('crmPath') . 'webservice/';
 	}
 
 	/**
