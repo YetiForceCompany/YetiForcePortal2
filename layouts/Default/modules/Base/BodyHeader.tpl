@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-    <div class="bodyHeader">
+	<div class="bodyHeader">
 		<div class="leftSide col-xs-3">
 		</div>
 		<div class="rightSide">
@@ -13,8 +13,11 @@
 			</div>
 			<div class="pull-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction historyBtn">
-					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn" aria-expanded="false" href="#">
-						<img src="{\YF\Core\Functions::fileTemplate("history.png",$MODULE_NAME)}" class="userIcon" title="{\YF\Core\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}" alt="{\YF\Core\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}">
+					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn"
+					   aria-expanded="false" href="#">
+						<img src="{\YF\Core\Functions::fileTemplate("history.png",$MODULE_NAME)}" class="userIcon"
+							 title="{\YF\Core\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}"
+							 alt="{\YF\Core\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}">
 					</a>
 				</div>
 			</div>
@@ -38,5 +41,5 @@
 				</div>*}
 			</div>
 		</div>
-    </div>
+	</div>
 {/strip}

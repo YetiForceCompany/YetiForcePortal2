@@ -1,18 +1,16 @@
 <?php
 /**
- * User class
- * @package YetiForce.Core
+ * User class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace YF\Core;
 
-use YF\Core\Session;
+namespace YF\Core;
 
 class User extends BaseModel
 {
-
 	protected static $user = false;
 
 	public static function getUser()
@@ -29,21 +27,10 @@ class User extends BaseModel
 	}
 
 	/**
-	 * Function to set the value for a given key
-	 * @param $key
-	 * @param $value
-	 * @return BaseModel
-	 */
-	public function set($key, $value)
-	{
-		$_SESSION['user'][$key] = $value;
-		$this->valueMap[$key] = $value;
-		return $this;
-	}
-
-	/**
-	 * Checking login
+	 * Checking login.
+	 *
 	 * @param Request $request
+	 *
 	 * @throws AppException
 	 */
 	public function checkLogin(Request $request)
@@ -80,13 +67,29 @@ class User extends BaseModel
 		return false;
 	}
 
+	/**
+	 * Function to set the value for a given key.
+	 *
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return BaseModel
+	 */
+	public function set($key, $value)
+	{
+		$_SESSION['user'][$key] = $value;
+		$this->valueMap[$key] = $value;
+		return $this;
+	}
+
 	public function isPermitted($module)
 	{
 		return isset($this->getModulesList()[$module]);
 	}
 
 	/**
-	 * Get modules list
+	 * Get modules list.
+	 *
 	 * @return array
 	 */
 	public function getModulesList()
@@ -101,7 +104,8 @@ class User extends BaseModel
 	}
 
 	/**
-	 * Get companies
+	 * Get companies.
+	 *
 	 * @return array
 	 */
 	public function getCompanies()
@@ -119,9 +123,11 @@ class User extends BaseModel
 	}
 
 	/**
-	 * Get preferences
-	 * @return mixed
+	 * Get preferences.
+	 *
 	 * @throws AppException
+	 *
+	 * @return mixed
 	 */
 	public function getPreferences($key = false)
 	{

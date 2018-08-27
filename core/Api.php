@@ -1,36 +1,35 @@
 <?php
 /**
- * Basic communication file
- * @package YetiForce.API
+ * Basic communication file.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com))
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com))
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Core;
 
-use Requests,
-	YF\Core;
+use Requests;
 
 class Api
 {
-
 	protected static $_instance;
 	protected $url;
 	protected $header;
 	protected $log = YF_ROOT . DIRECTORY_SEPARATOR . 'cache/logs/api.log';
 
 	/**
-	 * Api class constructor
+	 * Api class constructor.
 	 */
-	function __construct()
+	public function __construct()
 	{
 		$this->url = Config::get('crmPath') . 'webservice/';
 	}
 
 	/**
-	 * Initiate API instance
+	 * Initiate API instance.
+	 *
 	 * @return self instance
 	 */
 	public static function getInstance()
@@ -43,9 +42,9 @@ class Api
 	}
 
 	/**
-	 *
 	 * @param string $method
-	 * @param array $data
+	 * @param array  $data
+	 *
 	 * @return array
 	 */
 	public function call($method, $data = [], $requestType = 'get')
@@ -95,7 +94,8 @@ class Api
 	}
 
 	/**
-	 * Headers
+	 * Headers.
+	 *
 	 * @return array
 	 */
 	public function getHeaders()
@@ -116,20 +116,6 @@ class Api
 		return $this->header;
 	}
 
-	/**
-	 * Set custom headers
-	 * @param array $headers
-	 * @return $this
-	 */
-	public function setCustomHeaders($headers)
-	{
-		$this->header = $this->getHeaders();
-		foreach ($headers as $key => $value) {
-			$this->header[$key] = $value;
-		}
-		return $this;
-	}
-
 	public function getOptions()
 	{
 		return [
@@ -138,10 +124,39 @@ class Api
 	}
 
 	/**
-	 *
-	 * @param string $method
 	 * @param array $data
-	 * @param array $response
+	 *
+	 * @return string Encrypted string
+	 */
+	public function encryptData($data)
+	{
+		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('publicKey');
+		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey);
+		return $encrypted;
+	}
+
+	/**
+	 * @param array $data
+	 *
+	 * @throws AppException
+	 *
+	 * @return array Decrypted string
+	 */
+	public function decryptData($data)
+	{
+		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('privateKey');
+		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
+			throw new AppException('Private Key failed');
+		}
+		$privateKey = openssl_pkey_get_private($privateKey);
+		openssl_private_decrypt($data, $decrypted, $privateKey);
+		return $decrypted;
+	}
+
+	/**
+	 * @param string $method
+	 * @param array  $data
+	 * @param array  $response
 	 */
 	public function addLogs($method, $data, $response, $rawResponse = false)
 	{
@@ -156,32 +171,18 @@ class Api
 	}
 
 	/**
+	 * Set custom headers.
 	 *
-	 * @param array $data
-	 * @return string Encrypted string
-	 */
-	public function encryptData($data)
-	{
-
-		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('publicKey');
-		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey);
-		return $encrypted;
-	}
-
-	/**
+	 * @param array $headers
 	 *
-	 * @param array $data
-	 * @return array Decrypted string
-	 * @throws AppException
+	 * @return $this
 	 */
-	public function decryptData($data)
+	public function setCustomHeaders($headers)
 	{
-		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::get('privateKey');
-		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
-			throw new AppException('Private Key failed');
+		$this->header = $this->getHeaders();
+		foreach ($headers as $key => $value) {
+			$this->header[$key] = $value;
 		}
-		$privateKey = openssl_pkey_get_private($privateKey);
-		openssl_private_decrypt($data, $decrypted, $privateKey);
-		return $decrypted;
+		return $this;
 	}
 }

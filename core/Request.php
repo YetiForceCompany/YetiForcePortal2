@@ -1,24 +1,24 @@
 <?php
 /**
- * Request class
- * @package YetiForce.Core
+ * Request class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Core;
 
 class Request
 {
-
 	// Datastore
+	private static $request;
 	private $valuemap;
 	private $defaultmap = [];
-	private static $request;
 
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 */
 	public function __construct($values, $stripifgpc = true)
 	{
@@ -29,39 +29,67 @@ class Request
 	}
 
 	/**
-	 * Function gets Request object
+	 * Strip the slashes recursively on the values.
+	 */
+	public function stripslashes_recursive($value)
+	{
+		$value = is_array($value) ? array_map([$this, 'stripslashes_recursive'], $value) : stripslashes($value);
+		return $value;
+	}
+
+	/**
+	 * Function gets Request object.
+	 *
 	 * @return Request
 	 */
 	public static function getInstance()
 	{
 		if (!static::$request) {
-			static::$request = new Request($_REQUEST, $_REQUEST);
+			static::$request = new self($_REQUEST, $_REQUEST);
 		}
 		return static::$request;
 	}
 
 	/**
-	 * Set Request instance
+	 * Set Request instance.
+	 *
 	 * @param Request $request
+	 *
 	 * @return Request
 	 */
-	public static function setInstance(Request $request)
+	public static function setInstance(self $request)
 	{
 		static::$request = $request;
 		return static::$request;
 	}
 
 	/**
-	 * Strip the slashes recursively on the values.
+	 * Get data map.
 	 */
-	public function stripslashes_recursive($value)
+	public function getAll()
 	{
-		$value = is_array($value) ? array_map(array($this, 'stripslashes_recursive'), $value) : stripslashes($value);
-		return $value;
+		return $this->valuemap;
 	}
 
 	/**
-	 * Get key value (otherwise default value)
+	 * Check for existence of key.
+	 */
+	public function has($key)
+	{
+		return isset($this->valuemap[$key]);
+	}
+
+	/**
+	 * Is the value (linked to key) empty?
+	 */
+	public function isEmpty($key)
+	{
+		$value = $this->get($key);
+		return empty($value);
+	}
+
+	/**
+	 * Get key value (otherwise default value).
 	 */
 	public function get($key, $defvalue = '')
 	{
@@ -77,7 +105,7 @@ class Request
 		if (is_string($value)) {
 			// NOTE: Zend_Json or json_decode gets confused with big-integers (when passed as string)
 			// and convert them to ugly exponential format - to overcome this we are performin a pre-check
-			if (strpos($value, "[") === 0 || strpos($value, "{") === 0) {
+			if (strpos($value, '[') === 0 || strpos($value, '{') === 0) {
 				$isJSON = true;
 			}
 		}
@@ -95,33 +123,21 @@ class Request
 		return $value;
 	}
 
-	/**
-	 * Get data map
-	 */
-	public function getAll()
+	private function _cleanInputs($data)
 	{
-		return $this->valuemap;
+		$clean_input = [];
+		if (is_array($data)) {
+			foreach ($data as $k => $v) {
+				$clean_input[$k] = $this->_cleanInputs($v);
+			}
+		} else {
+			$clean_input = trim(strip_tags($data));
+		}
+		return $clean_input;
 	}
 
 	/**
-	 * Check for existence of key
-	 */
-	public function has($key)
-	{
-		return isset($this->valuemap[$key]);
-	}
-
-	/**
-	 * Is the value (linked to key) empty?
-	 */
-	public function isEmpty($key)
-	{
-		$value = $this->get($key);
-		return empty($value);
-	}
-
-	/**
-	 * Set the value for key
+	 * Set the value for key.
 	 */
 	public function set($key, $newvalue)
 	{
@@ -129,7 +145,7 @@ class Request
 	}
 
 	/**
-	 * Set default value for key
+	 * Set default value for key.
 	 */
 	public function setDefault($key, $defvalue)
 	{
@@ -137,7 +153,7 @@ class Request
 	}
 
 	/**
-	 * Shorthand function to get value for (key=mode)
+	 * Shorthand function to get value for (key=mode).
 	 */
 	public function getMode()
 	{
@@ -149,7 +165,7 @@ class Request
 		return $this->get('module');
 	}
 
-	function getAction()
+	public function getAction()
 	{
 		$view = $this->get('view');
 		$action = $this->get('action');
@@ -168,18 +184,5 @@ class Request
 			return true;
 		}
 		return false;
-	}
-
-	private function _cleanInputs($data)
-	{
-		$clean_input = [];
-		if (is_array($data)) {
-			foreach ($data as $k => $v) {
-				$clean_input[$k] = $this->_cleanInputs($v);
-			}
-		} else {
-			$clean_input = trim(strip_tags($data));
-		}
-		return $clean_input;
 	}
 }

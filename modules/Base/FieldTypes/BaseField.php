@@ -1,39 +1,43 @@
 <?php
 /**
- * Basic field model class
- * @package YetiForce.FieldTypes
+ * Basic field model class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Michał Lorencik <m.lorencik@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
+
 namespace YF\Modules\Base\FieldTypes;
 
-use YF\Core\Json;
 use YF\Core\Functions;
+use YF\Core\Json;
 
 class BaseField extends \YF\Core\BaseModel
 {
-
 	/**
-	 * Display value
+	 * Display value.
+	 *
 	 * @var string
 	 */
 	protected $value;
 
 	/**
-	 * Raw value
+	 * Raw value.
+	 *
 	 * @var string
 	 */
 	protected $rawValue;
 
 	/**
-	 * Is new record
+	 * Is new record.
+	 *
 	 * @var string
 	 */
 	protected $isNewRecord = false;
 
 	/**
-	 * Function to get the view value
+	 * Function to get the view value.
+	 *
 	 * @return string
 	 */
 	public function setIsNewRecord()
@@ -42,7 +46,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the view value
+	 * Function to get the view value.
+	 *
 	 * @return string
 	 */
 	public function getDisplayValue()
@@ -51,8 +56,10 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to set the view value
+	 * Function to set the view value.
+	 *
 	 * @param string $value
+	 *
 	 * @return Field
 	 */
 	public function setDisplayValue($value)
@@ -62,7 +69,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the raw value
+	 * Function to get the raw value.
+	 *
 	 * @return Value for the given key
 	 */
 	public function getRawValue()
@@ -75,8 +83,10 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to set the raw value
+	 * Function to set the raw value.
+	 *
 	 * @param string $value
+	 *
 	 * @return Field
 	 */
 	public function setRawValue($value)
@@ -86,8 +96,10 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to set the name of the module to which the record belongs
+	 * Function to set the name of the module to which the record belongs.
+	 *
 	 * @param string $value
+	 *
 	 * @return \self
 	 */
 	public function setModuleName($value)
@@ -97,7 +109,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the name of the module to which the record belongs
+	 * Function to get the name of the module to which the record belongs.
+	 *
 	 * @return string - Record Module Name
 	 */
 	public function getModuleName()
@@ -106,7 +119,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Field name
+	 * Field name.
+	 *
 	 * @return string
 	 */
 	public function getName()
@@ -115,8 +129,9 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to preview record
-	 * @return boolean
+	 * Function checks if there are permissions to preview record.
+	 *
+	 * @return bool
 	 */
 	public function isViewable()
 	{
@@ -124,8 +139,9 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record
-	 * @return boolean
+	 * Function checks if there are permissions to edit record.
+	 *
+	 * @return bool
 	 */
 	public function isEditable()
 	{
@@ -133,8 +149,9 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to check if the current field is mandatory or not
-	 * @return boolean - true/false
+	 * Function to check if the current field is mandatory or not.
+	 *
+	 * @return bool - true/false
 	 */
 	public function isMandatory()
 	{
@@ -142,8 +159,9 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to check if the current field is readonly or not
-	 * @return boolean - true/false
+	 * Function to check if the current field is readonly or not.
+	 *
+	 * @return bool - true/false
 	 */
 	public function isEditableReadOnly()
 	{
@@ -151,8 +169,10 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Field info
-	 * @param boolean $safe
+	 * Field info.
+	 *
+	 * @param bool $safe
+	 *
 	 * @return array|string
 	 */
 	public function getFieldInfo($safe = false)
@@ -165,7 +185,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Reference module list
+	 * Reference module list.
+	 *
 	 * @return string
 	 */
 	public function getReferenceList()
@@ -174,7 +195,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Field parameters
+	 * Field parameters.
+	 *
 	 * @return string
 	 */
 	public function getFieldParams()
@@ -183,7 +205,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Label
+	 * Label.
+	 *
 	 * @return string
 	 */
 	public function getLabel()
@@ -192,7 +215,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Picklist values
+	 * Picklist values.
+	 *
 	 * @return array
 	 */
 	public function getPicklistValues()
@@ -201,25 +225,28 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record
-	 * @return boolean
+	 * Function checks if there are permissions to edit record.
+	 *
+	 * @return bool
 	 */
 	public function getTemplate()
 	{
 		$type = ucfirst($this->get('type'));
 		$module = $this->getModuleName();
-		if (file_exists(YF_ROOT . "/layouts/Default/modules/" . $module . "/fieldtypes/$type.tpl")) {
+		if (file_exists(YF_ROOT . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
 			return "fieldtypes/$type.tpl";
 		} elseif (file_exists(YF_ROOT . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
 			return "fieldtypes/$type.tpl";
 		} else {
-			return "fieldtypes/String.tpl";
+			return 'fieldtypes/String.tpl';
 		}
 	}
 
 	/**
-	 * Gets value to edit
+	 * Gets value to edit.
+	 *
 	 * @param mixed $value
+	 *
 	 * @return mixed
 	 */
 	public function getEditViewDisplayValue()
@@ -228,7 +255,8 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Validator
+	 * Validator.
+	 *
 	 * @return mixed
 	 */
 	public function getValidator()
@@ -237,8 +265,9 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function which will check if empty piclist option should be given
-	 * @return boolean
+	 * Function which will check if empty piclist option should be given.
+	 *
+	 * @return bool
 	 */
 	public function isEmptyPicklistOptionAllowed()
 	{

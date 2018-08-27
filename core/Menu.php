@@ -1,23 +1,25 @@
 <?php
 /**
- * Menu class
- * @package YetiForce.Config
+ * Menu class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Tomasz Kur <t.kur@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Tomasz Kur <t.kur@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Core;
 
 class Menu
 {
-
 	/**
-	 * Get breadcrumbs
+	 * Get breadcrumbs.
+	 *
 	 * @param string $pageTitle
+	 *
 	 * @return array
 	 */
-	static public function getBreadcrumbs($pageTitle = false)
+	public static function getBreadcrumbs($pageTitle = false)
 	{
 		$request = Request::getInstance();
 		$moduleName = $request->get('module');

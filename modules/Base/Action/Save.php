@@ -1,21 +1,21 @@
 <?php
 /**
- * Save action class
- * @package YetiForce.Actions
+ * Save action class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
-namespace YF\Modules\Base\Action;
 
-use YF\Core;
+namespace YF\Modules\Base\Action;
 
 class Save extends Base
 {
-
 	/**
-	 * Process
+	 * Process.
+	 *
 	 * @param \YF\Core\Request $request
+	 *
 	 * @return mixed
 	 */
 	public function process(\YF\Core\Request $request)

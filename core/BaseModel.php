@@ -1,34 +1,38 @@
 <?php
 /**
- * Base class
- * @package YetiForce.Core
+ * Base class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
 namespace YF\Core;
 
 class BaseModel
 {
-
 	/**
-	 * Record data
+	 * Record data.
+	 *
 	 * @var array
 	 */
 	protected $valueMap = [];
 
 	/**
-	 * Constructor
-	 * @param Array $values
+	 * Constructor.
+	 *
+	 * @param array $values
 	 */
-	function __construct($values = [])
+	public function __construct($values = [])
 	{
 		$this->valueMap = $values;
 	}
 
 	/**
-	 * Function to get the value for a given key
+	 * Function to get the value for a given key.
+	 *
 	 * @param $key
+	 *
 	 * @return Value for the given key
 	 */
 	public function get($key)
@@ -37,9 +41,11 @@ class BaseModel
 	}
 
 	/**
-	 * Function to set the value for a given key
+	 * Function to set the value for a given key.
+	 *
 	 * @param $key
 	 * @param $value
+	 *
 	 * @return Core_BaseModel
 	 */
 	public function set($key, $value)
@@ -49,8 +55,10 @@ class BaseModel
 	}
 
 	/**
-	 * Function to set all the values for the Object
-	 * @param Array (key-value mapping) $values
+	 * Function to set all the values for the Object.
+	 *
+	 * @param array (key-value mapping) $values
+	 *
 	 * @return Core_BaseModel
 	 */
 	public function setData($values)
@@ -60,8 +68,9 @@ class BaseModel
 	}
 
 	/**
-	 * Function to get all the values of the Object
-	 * @return Array (key-value mapping)
+	 * Function to get all the values of the Object.
+	 *
+	 * @return array (key-value mapping)
 	 */
 	public function getData()
 	{
@@ -70,7 +79,8 @@ class BaseModel
 
 	/**
 	 * Function to check if the key exists.
-	 * @param String $key
+	 *
+	 * @param string $key
 	 */
 	public function has($key)
 	{
@@ -79,10 +89,11 @@ class BaseModel
 
 	/**
 	 * Function to check if the key is empty.
+	 *
 	 * @param type $key
 	 */
 	public function isEmpty($key)
 	{
-		return (!isset($this->valueMap[$key]) || empty($this->valueMap[$key]));
+		return !isset($this->valueMap[$key]) || empty($this->valueMap[$key]);
 	}
 }

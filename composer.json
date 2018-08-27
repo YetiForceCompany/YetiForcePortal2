@@ -1,37 +1,41 @@
 {
-	"name": "yetiforce/yetiforce-portal",
-	"description": "When you implement YetiForce CRM, then you will find yourself wanting to communicate with your customers through a professional customer portal. That is why we created for you YetiForcePortal that integrates with CRM and has a wide range of functionalities.",
-	"keywords": ["YetiForcePortal", "Customer portal", "open source customer portal", "best customer portal"],
-	"license": "YetiForce Public License 1.1",
-	"homepage": "https://yetiforce.com/",
-	"type": "project",
-	"support": {
-		"issues": "https://github.com/YetiForceCompany/YetiForceCRM/issues",
-		"wiki": "https://yetiforce.com/en/documentation.html",
-		"source": "https://github.com/YetiForceCompany/YetiForcePortal2"
-	},
-	"authors": [
-		{
-			"name": "YetiForce team",
-			"email": "info@yetiforce.com",
-			"homepage": "https://yetiforce.com/"
-		}
-	],
-	"require": {
-		"php": ">=5.6.0",
-		"smarty/smarty": ">=3.1.31",
-        "rmccue/requests": ">=1.0",
-        "guzzlehttp/guzzle": "^6.3.3"
-	},
-	"autoload": {
-		"files": [
-			"config/version.php",
-			"config/config.php",
-			"core/errorhandler.php"
-		],
-		"psr-4": {
-			"YF\\Core\\":"core/",
-			"YF\\Modules\\":"modules/"
-		}
-	}
+  "name": "yetiforce/yetiforce-portal",
+  "description": "When you implement YetiForce CRM, then you will find yourself wanting to communicate with your customers through a professional customer portal. That is why we created for you YetiForcePortal that integrates with CRM and has a wide range of functionalities.",
+  "keywords": [
+    "YetiForcePortal",
+    "Customer portal",
+    "open source customer portal",
+    "best customer portal"
+  ],
+  "homepage": "https://yetiforce.com/",
+  "type": "project",
+  "support": {
+    "issues": "https://github.com/YetiForceCompany/YetiForceCRM/issues",
+    "wiki": "https://yetiforce.com/en/documentation.html",
+    "source": "https://github.com/YetiForceCompany/YetiForcePortal2"
+  },
+  "authors": [
+    {
+      "name": "YetiForce team",
+      "email": "info@yetiforce.com",
+      "homepage": "https://yetiforce.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "smarty/smarty": ">=3.1.31",
+    "rmccue/requests": ">=1.0",
+    "guzzlehttp/guzzle": "^6.3.3"
+  },
+  "autoload": {
+    "files": [
+      "config/version.php",
+      "config/config.php",
+      "core/errorhandler.php"
+    ],
+    "psr-4": {
+      "YF\\Core\\": "core/",
+      "YF\\Modules\\": "modules/"
+    }
+  }
 }

@@ -1,24 +1,25 @@
 <?php
 /**
- * List view class
- * @package YetiForce.View
+ * List view class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Modules\Base\View;
 
-use \YF\Core\Request;
-use \YF\Core\Api;
-use \YF\Modules\Base\Model\Field;
-use \YF\Modules\Base\Model\Record;
+use YF\Core\Api;
+use YF\Core\Request;
+use YF\Modules\Base\Model\Field;
+use YF\Modules\Base\Model\Record;
 
 class DetailView extends Index
 {
-
 	/**
-	 * Process
+	 * Process.
+	 *
 	 * @param \YF\Core\Request $request
 	 */
 	public function process(Request $request)

@@ -1,25 +1,20 @@
 <?php
 /**
- * Basic module model class
- * @package YetiForce.Model
+ * Basic module model class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Modules\Base\Model;
 
 use YF\Core;
 
 class Module
 {
-
 	protected $defaultView = 'ListView';
-
-	public function getDefaultView()
-	{
-		return $this->defaultView;
-	}
 
 	public static function getInstance($module)
 	{
@@ -29,10 +24,12 @@ class Module
 	}
 
 	/**
-	 * Function to check permission for a Module/Action
+	 * Function to check permission for a Module/Action.
+	 *
 	 * @param string $module
 	 * @param string $action
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public static function isPermitted($module, $action)
 	{
@@ -49,5 +46,10 @@ class Module
 			return true;
 		}
 		return false;
+	}
+
+	public function getDefaultView()
+	{
+		return $this->defaultView;
 	}
 }
