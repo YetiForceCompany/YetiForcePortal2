@@ -1,19 +1,18 @@
 <?php
 /**
- * Users view class
- * @package YetiForce.View
+ * Users view class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
 namespace YF\Modules\Users\View;
 
-use YF\Modules\Base\View,
-	YF\Core;
+use YF\Modules\Base\View;
 
 class Login extends View\Index
 {
-
 	public function loginRequired()
 	{
 		return false;

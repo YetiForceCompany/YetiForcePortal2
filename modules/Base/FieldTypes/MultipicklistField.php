@@ -1,30 +1,33 @@
 <?php
 /**
- * Multipicklist field class
- * @package YetiForce.Field
+ * Multipicklist field class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Michał Lorencik <m.lorencik@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
+
 namespace YF\Modules\Base\FieldTypes;
 
 class MultipicklistField extends BaseField
 {
-
 	/**
-	 * values list
-	 * @var array 
+	 * values list.
+	 *
+	 * @var array
 	 */
 	public $fieldValuesList;
 
 	/**
-	 * not display values list
-	 * @var array 
+	 * not display values list.
+	 *
+	 * @var array
 	 */
 	public $notDisplayValuesList;
 
 	/**
-	 * Get field values 
+	 * Get field values.
+	 *
 	 * @return array
 	 */
 	public function getFieldValuesList()
@@ -40,7 +43,8 @@ class MultipicklistField extends BaseField
 	}
 
 	/**
-	 * Get not display values list
+	 * Get not display values list.
+	 *
 	 * @return array
 	 */
 	public function getNotDisplayValuesList()

@@ -1,19 +1,18 @@
 <?php
 /**
- * Install view class
- * @package YetiForce.View
+ * Install view class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
 namespace YF\Modules\Install\View;
 
-use YF\Modules\Base\View,
-	YF\Core;
+use YF\Modules\Base\View;
 
 class Install extends View\Index
 {
-
 	public function __construct()
 	{
 		$this->exposeMethod('Step1');
@@ -79,31 +78,31 @@ class Install extends View\Index
 		}
 		return $request;
 	}
+
 	/**
-
-	  public function getHeaderCss(\YF\Core\Request $request)
-	  {
-	  $parentScripts = parent::getHeaderCss($request);
-	  $cssFileNames = [
-	  'libraries/Bootstrap/css/bootstrap.css',
-	  'libraries/Bootstrap/css/bootstrap-theme.css',
-	  'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
-	  ];
-
-	  $addScripts = $this->convertScripts($cssFileNames, 'css');
-	  $parentScripts = array_merge($parentScripts, $addScripts);
-	  return $parentScripts;
-	  }
-
-	  public function getFooterScripts(\YF\Core\Request $request)
-	  {
-	  $parentScripts = parent::getFooterScripts($request);
-	  $jsFileNames = [
-	  'libraries/Scripts/jquery/jquery.js',
-	  ];
-	  $addScripts = $this->convertScripts($jsFileNames, 'js');
-	  $parentScripts = array_merge($parentScripts, $addScripts);
-	  return $parentScripts;
-	  }
+	 * public function getHeaderCss(\YF\Core\Request $request)
+	 * {
+	 * $parentScripts = parent::getHeaderCss($request);
+	 * $cssFileNames = [
+	 * 'libraries/Bootstrap/css/bootstrap.css',
+	 * 'libraries/Bootstrap/css/bootstrap-theme.css',
+	 * 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/skins/basic/styles.css',
+	 * ];.
+	 *
+	 * $addScripts = $this->convertScripts($cssFileNames, 'css');
+	 * $parentScripts = array_merge($parentScripts, $addScripts);
+	 * return $parentScripts;
+	 * }
+	 *
+	 * public function getFooterScripts(\YF\Core\Request $request)
+	 * {
+	 * $parentScripts = parent::getFooterScripts($request);
+	 * $jsFileNames = [
+	 * 'libraries/Scripts/jquery/jquery.js',
+	 * ];
+	 * $addScripts = $this->convertScripts($jsFileNames, 'js');
+	 * $parentScripts = array_merge($parentScripts, $addScripts);
+	 * return $parentScripts;
+	 * }
 	 */
 }

@@ -1,9 +1,9 @@
 <?php
 /**
- * Users english translation
- * @package YetiForce.Language
+ * Users english translation.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  */
 $phpLang = [
 	'Login' => 'Login',
@@ -11,4 +11,3 @@ $phpLang = [
 	'LBL_PASSWORD' => 'Password',
 	'LBL_SINGN_IN' => 'Sign in',
 ];
-

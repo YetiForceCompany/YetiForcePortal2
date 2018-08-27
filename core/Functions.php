@@ -1,15 +1,15 @@
 <?php
 /**
- * Functions class
- * @package YetiForce.Core
+ * Functions class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  */
+
 namespace YF\Core;
 
 class Functions
 {
-
 	public static function translate($label, $module = 'Basic')
 	{
 		return Language::translate($label, $module);
@@ -100,8 +100,10 @@ class Functions
 	}
 
 	/**
-	 * Function to make the input safe to be used as HTML
+	 * Function to make the input safe to be used as HTML.
+	 *
 	 * @param string $text
+	 *
 	 * @return string
 	 */
 	public static function toSafeHTML($text)

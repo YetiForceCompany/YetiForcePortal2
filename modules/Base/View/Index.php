@@ -1,12 +1,13 @@
 <?php
 /**
- * Users view class
- * @package YetiForce.View
+ * Users view class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
+
 namespace YF\Modules\Base\View;
 
 use YF\Core;
@@ -14,7 +15,6 @@ use YF\Core\Session;
 
 abstract class Index extends \YF\Core\Controller
 {
-
 	protected $viewer = false;
 
 	public function __construct()
@@ -27,7 +27,7 @@ abstract class Index extends \YF\Core\Controller
 		return true;
 	}
 
-	function checkPermission(\YF\Core\Request $request)
+	public function checkPermission(\YF\Core\Request $request)
 	{
 		$moduleName = $request->getModule();
 		$userInstance = \YF\Core\User::getUser();
@@ -38,9 +38,25 @@ abstract class Index extends \YF\Core\Controller
 		return true;
 	}
 
+	public function preProcess(\YF\Core\Request $request, $display = true)
+	{
+		$viewer = $this->getViewer($request);
+		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
+		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
+		$viewer->assign('STYLES', $this->getHeaderCss($request));
+		$viewer->assign('LANGUAGE', \YF\Core\Language::getLanguage());
+		$viewer->assign('LANG', \YF\Core\Language::getShortLanguageName());
+		$viewer->assign('USER', \YF\Core\User::getUser());
+		if ($display) {
+			$this->preProcessDisplay($request);
+		}
+	}
+
 	/**
-	 * Get viewer
+	 * Get viewer.
+	 *
 	 * @param \YF\Core\Request $request
+	 *
 	 * @return \YF\Core\Viewer
 	 */
 	public function getViewer(\YF\Core\Request $request)
@@ -81,23 +97,20 @@ abstract class Index extends \YF\Core\Controller
 		return false;
 	}
 
-	public function preProcess(\YF\Core\Request $request, $display = true)
+	/**
+	 * Retrieves headers scripts that need to loaded in the page.
+	 *
+	 * @param \YF\Core\Request $request - request model
+	 *
+	 * @return <array> - array of \YF\Core\Script
+	 */
+	public function getHeaderScripts(\YF\Core\Request $request)
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
-		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
-		$viewer->assign('STYLES', $this->getHeaderCss($request));
-		$viewer->assign('LANGUAGE', \YF\Core\Language::getLanguage());
-		$viewer->assign('LANG', \YF\Core\Language::getShortLanguageName());
-		$viewer->assign('USER', \YF\Core\User::getUser());
-		if ($display) {
-			$this->preProcessDisplay($request);
-		}
-	}
-
-	protected function preProcessTplName(\YF\Core\Request $request)
-	{
-		return 'Header.tpl';
+		$headerScriptInstances = [
+			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.js',
+		];
+		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
+		return $jsScriptInstances;
 	}
 
 	//Note : To get the right hook for immediate parent in PHP,
@@ -107,32 +120,43 @@ abstract class Index extends \YF\Core\Controller
 	  return parent::preProcessTplName($request);
 	  } */
 
-	protected function preProcessDisplay(\YF\Core\Request $request)
+	public function convertScripts($fileNames, $fileExtension)
 	{
-		$viewer = $this->getViewer($request);
-		if (Session::has('systemError')) {
-			$viewer->assign('ERRORS', Session::get('systemError'));
-			unset($_SESSION['systemError']);
+		$scriptsInstances = [];
+
+		foreach ($fileNames as $fileName) {
+			$script = new \YF\Core\Script();
+			$script->set('type', $fileExtension);
+			// external javascript source file handling
+			if (strpos($fileName, 'http://') === 0 || strpos($fileName, 'https://') === 0) {
+				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
+				continue;
+			}
+			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
+			if (\YF\Core\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
+				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
+			} elseif (file_exists($fileName)) {
+				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
+			} else {
+				\YF\Core\Log::message('Asset not found: ' . $fileName, 'WARNING');
+			}
 		}
-		$viewer->view($this->preProcessTplName($request), $request->getModule());
+		return $scriptsInstances;
 	}
 
-	public function postProcess(\YF\Core\Request $request)
+	public function resourceUrl($url)
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
-
-		if (\YF\Core\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
-			$viewer->assign('DEBUG_API', Session::get('debugApi'));
-			$viewer->view('DebugApi.tpl');
-			Session::set('debugApi', false);
+		if (stripos($url, '://') === false && $fs = @filemtime($url)) {
+			$url = $url . '?s=' . $fs;
 		}
-		$viewer->view('Footer.tpl');
+		return $url;
 	}
 
 	/**
-	 * Retrieves css styles that need to loaded in the page
+	 * Retrieves css styles that need to loaded in the page.
+	 *
 	 * @param \YF\Core\Request $request - request model
+	 *
 	 * @return \YF\Core\Script[]
 	 */
 	public function getHeaderCss(\YF\Core\Request $request)
@@ -157,23 +181,39 @@ abstract class Index extends \YF\Core\Controller
 		return $headerCssInstances;
 	}
 
-	/**
-	 * Retrieves headers scripts that need to loaded in the page
-	 * @param \YF\Core\Request $request - request model
-	 * @return <array> - array of \YF\Core\Script
-	 */
-	public function getHeaderScripts(\YF\Core\Request $request)
+	protected function preProcessDisplay(\YF\Core\Request $request)
 	{
-		$headerScriptInstances = [
-			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.js',
-		];
-		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
-		return $jsScriptInstances;
+		$viewer = $this->getViewer($request);
+		if (Session::has('systemError')) {
+			$viewer->assign('ERRORS', Session::get('systemError'));
+			unset($_SESSION['systemError']);
+		}
+		$viewer->view($this->preProcessTplName($request), $request->getModule());
+	}
+
+	protected function preProcessTplName(\YF\Core\Request $request)
+	{
+		return 'Header.tpl';
+	}
+
+	public function postProcess(\YF\Core\Request $request)
+	{
+		$viewer = $this->getViewer($request);
+		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
+
+		if (\YF\Core\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
+			$viewer->assign('DEBUG_API', Session::get('debugApi'));
+			$viewer->view('DebugApi.tpl');
+			Session::set('debugApi', false);
+		}
+		$viewer->view('Footer.tpl');
 	}
 
 	/**
-	 * Scripts
+	 * Scripts.
+	 *
 	 * @param \YF\Core\Request $request
+	 *
 	 * @return \YF\Core\Script[]
 	 */
 	public function getFooterScripts(\YF\Core\Request $request)
@@ -183,7 +223,7 @@ abstract class Index extends \YF\Core\Controller
 		$shortLang = \YF\Core\Language::getShortLanguageName();
 		$validLangScript = YF_ROOT_WWW . "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
 		if (!file_exists($validLangScript)) {
-			$validLangScript = YF_ROOT_WWW . "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js";
+			$validLangScript = YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js';
 		}
 		$jsFileNames = [
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.js',
@@ -206,44 +246,12 @@ abstract class Index extends \YF\Core\Controller
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Field.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/Connector.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/resources/app.js',
-			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/Header.js",
+			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			YF_ROOT_WWW . 'layouts/' . \YF\Core\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return $jsScriptInstances;
-	}
-
-	public function convertScripts($fileNames, $fileExtension)
-	{
-		$scriptsInstances = [];
-
-		foreach ($fileNames as $fileName) {
-			$script = new \YF\Core\Script();
-			$script->set('type', $fileExtension);
-			// external javascript source file handling
-			if (strpos($fileName, 'http://') === 0 || strpos($fileName, 'https://') === 0) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
-				continue;
-			}
-			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			if (\YF\Core\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
-			} else if (file_exists($fileName)) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
-			} else {
-				\YF\Core\Log::message('Asset not found: ' . $fileName, 'WARNING');
-			}
-		}
-		return $scriptsInstances;
-	}
-
-	public function resourceUrl($url)
-	{
-		if (stripos($url, '://') === false && $fs = @filemtime($url)) {
-			$url = $url . '?s=' . $fs;
-		}
-		return $url;
 	}
 }

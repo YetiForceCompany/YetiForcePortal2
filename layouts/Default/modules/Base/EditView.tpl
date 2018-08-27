@@ -1,7 +1,8 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="contentsDiv">
-		<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
+		<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php"
+			  enctype="multipart/form-data">
 			<div class="widget_header row">
 				<div class="col-sm-12">
 					<div class="pull-left">
@@ -10,7 +11,9 @@
 					<div class="contentHeader">
 						<span class="pull-right">
 							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
-							<button class="btn btn-warning" type="reset" onclick="javascript:window.history.back();"><span class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
+							<button class="btn btn-warning" type="reset"
+									onclick="javascript:window.history.back();"><span
+										class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
 						</span>
 						<div class="clearfix"></div>
 					</div>

@@ -1,21 +1,23 @@
 <?php
 /**
- * WebUI class
- * @package YetiForce.Core
+ * WebUI class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
 namespace YF\Core;
 
 use YF\Modules\Base\Model;
 
 class WebUI
 {
-
 	/**
-	 * Process
+	 * Process.
+	 *
 	 * @param Request $request
+	 *
 	 * @throws AppException
 	 */
 	public function process(Request $request)
@@ -68,7 +70,7 @@ class WebUI
 				$response = $handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				echo ($module . $componentType . $componentName);
+				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (AppException $e) {
@@ -84,6 +86,27 @@ class WebUI
 		if ($response) {
 			$response->emit();
 		}
+	}
+
+	public function isInstalled()
+	{
+		return Config::get('crmPath') != '__CRM_PATH__';
+	}
+
+	protected function triggerPreProcess($handler, $request)
+	{
+		if ($request->isAjax()) {
+			return true;
+		}
+		$handler->preProcess($request);
+	}
+
+	protected function triggerPostProcess($handler, $request)
+	{
+		if ($request->isAjax()) {
+			return true;
+		}
+		$handler->postProcess($request);
 	}
 
 	protected function triggerCheckPermission($handler, $request)
@@ -103,26 +126,5 @@ class WebUI
 			return;
 		}
 		throw new AppException(Functions::translate($moduleName) . ' ' . Functions::translate('LBL_NOT_ACCESSIBLE'));
-	}
-
-	protected function triggerPreProcess($handler, $request)
-	{
-		if ($request->isAjax()) {
-			return true;
-		}
-		$handler->preProcess($request);
-	}
-
-	protected function triggerPostProcess($handler, $request)
-	{
-		if ($request->isAjax()) {
-			return true;
-		}
-		$handler->postProcess($request);
-	}
-
-	function isInstalled()
-	{
-		return Config::get('crmPath') != '__CRM_PATH__';
 	}
 }

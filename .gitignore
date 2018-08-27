@@ -1,5 +1,17 @@
-/.settings
-/.project
+# dependencies COMPOSER
+/vendor
+
+# dependencies YARN
+yarn-error.log
+/node_modules/
+/public/libraries/*
+
+# IDEs and editors
 /.buildpath
-/vendor/
-/composer.lock
+.c9/
+.classpath
+.project
+*.launch
+.settings/
+*.sublime-workspace
+.babelrc

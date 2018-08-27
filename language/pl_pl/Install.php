@@ -1,9 +1,9 @@
 <?php
 /**
- * Install polish translation
- * @package YetiForce.Language
+ * Install polish translation.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  */
 $phpLang = [
 	'LBL_INSTALLATION_WIZARD' => 'Kreator instalacji',

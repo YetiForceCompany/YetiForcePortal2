@@ -14,16 +14,19 @@
 					<div>
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation">
-								<a href="#rawRequest{$KEY}" aria-controls="rawRequest{$KEY}" role="tab" data-toggle="tab">Request</a>
+								<a href="#rawRequest{$KEY}" aria-controls="rawRequest{$KEY}" role="tab"
+								   data-toggle="tab">Request</a>
 							</li>
 							<li role="presentation">
-								<a href="#rawResponse{$KEY}" aria-controls="rawResponse{$KEY}" role="tab" data-toggle="tab">Raw response</a>
+								<a href="#rawResponse{$KEY}" aria-controls="rawResponse{$KEY}" role="tab"
+								   data-toggle="tab">Raw response</a>
 							</li>
 							<li role="presentation" class="active">
 								<a href="#response{$KEY}" aria-controls="response{$KEY}" role="tab" data-toggle="tab">Response</a>
 							</li>
 							<li role="presentation">
-								<a href="#trace{$KEY}" aria-controls="trace{$KEY}" role="tab" data-toggle="tab">Trace</a>
+								<a href="#trace{$KEY}" aria-controls="trace{$KEY}" role="tab"
+								   data-toggle="tab">Trace</a>
 							</li>
 						</ul>
 						<div class="tab-content">

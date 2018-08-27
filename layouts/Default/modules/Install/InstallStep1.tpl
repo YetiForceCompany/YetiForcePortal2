@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<form action="index.php?module=Install&view=Install" method="POST" name="step1">
-		<input type="hidden" name="mode" value="Step2" />
+		<input type="hidden" name="mode" value="Step2"/>
 		<div class="row">
 			<div class="col-md-9">
 				<h4>{\YF\Core\Functions::translate('LBL_WELCOME', $MODULE_NAME)}</h4>
@@ -28,7 +28,8 @@
 		</div>
 		<div class="row">
 			<div class="button-container pull-right">
-				<button class="btn btn-sm btn-primary" type="submit">{\YF\Core\Functions::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
+				<button class="btn btn-sm btn-primary"
+						type="submit">{\YF\Core\Functions::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
 			</div>
 		</div>
 	</form>

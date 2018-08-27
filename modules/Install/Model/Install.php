@@ -1,23 +1,28 @@
 <?php
 /**
- * Basic module model class
- * @package YetiForce.Model
+ * Basic module model class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace YF\Modules\Install\Model;
 
-use YF\Core;
+namespace YF\Modules\Install\Model;
 
 class Install
 {
-
 	protected $configPath = 'config/config.php';
 	protected $config = [
 		'crmPath' => '__CRM_PATH__',
 		'apiKey' => '__API_KEY__',
 	];
+
+	public static function getInstance($module)
+	{
+		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Install');
+		$instance = new $handlerModule();
+		return $instance;
+	}
 
 	public function save(\YF\Core\Request $request)
 	{
@@ -41,11 +46,12 @@ class Install
 		$vendorDir = dirname(dirname(__FILE__));
 		$rootDir = dirname(dirname($vendorDir)) . DIRECTORY_SEPARATOR;
 
-		if (!file_exists($rootDir . $src))
+		if (!file_exists($rootDir . $src)) {
 			return;
+		}
 		$dirs = [];
 		if (is_dir($src)) {
-			$dirs [] = $rootDir . $src;
+			$dirs[] = $rootDir . $src;
 		}
 		@chmod($root_dir . $src, 0777);
 		if (is_dir($src)) {
@@ -63,12 +69,5 @@ class Install
 		} else {
 			unlink($rootDir . $src);
 		}
-	}
-
-	public static function getInstance($module)
-	{
-		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Install');
-		$instance = new $handlerModule();
-		return $instance;
 	}
 }

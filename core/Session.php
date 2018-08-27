@@ -1,19 +1,19 @@
 <?php
 /**
- * Sesion class
- * @package YetiForce.Core
+ * Sesion class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Tomasz Kur <t.kur@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Tomasz Kur <t.kur@yetiforce.com>
  */
+
 namespace YF\Core;
 
 class Session
 {
-
 	/**
-	 *
 	 * @param string $key Key in table
+	 *
 	 * @return Value for the key
 	 */
 	public static function get($key)
@@ -25,9 +25,9 @@ class Session
 	}
 
 	/**
-	 *
 	 * @param string $key Key in table
-	 * @return boolean if key is definied - return true
+	 *
+	 * @return bool if key is definied - return true
 	 */
 	public static function has($key)
 	{
@@ -35,8 +35,7 @@ class Session
 	}
 
 	/**
-	 *
-	 * @param $key Key in table
+	 * @param $key   Key in table
 	 * @param $value Value for the key
 	 */
 	public static function set($key, $value)

@@ -1,24 +1,26 @@
 <?php
 /**
- * Language controller class
- * @package YetiForce.Core
+ * Language controller class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
 namespace YF\Core;
 
 class Language
 {
-
 	//Contains module language translations
 	protected static $languageContainer = [];
 	protected static $modules = false;
 
 	/**
-	 * Functions that gets translated string
-	 * @param <String> $key - string which need to be translated
+	 * Functions that gets translated string.
+	 *
+	 * @param <String> $key    - string which need to be translated
 	 * @param <String> $module - module scope in which the translation need to be check
+	 *
 	 * @return <String> - translated string
 	 */
 	public static function translate($key, $module = '', $currentLanguage = '')
@@ -27,8 +29,9 @@ class Language
 			$currentLanguage = self::getLanguage();
 		}
 		//decoding for Start Date & Time and End Date & Time
-		if (!is_array($key))
+		if (!is_array($key)) {
 			$key = html_entity_decode($key);
+		}
 		$translatedString = self::getLanguageTranslatedString($currentLanguage, $key, $module);
 
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
@@ -47,10 +50,29 @@ class Language
 	}
 
 	/**
-	 * Function returns language specific translated string
+	 * Function that returns current language.
+	 *
+	 * @return <String> -
+	 */
+	public static function getLanguage()
+	{
+		$userInstance = User::getUser();
+		$language = '';
+		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
+			$language = $userInstance->get('language');
+		} else {
+			$language = Config::get('language');
+		}
+		return $language;
+	}
+
+	/**
+	 * Function returns language specific translated string.
+	 *
 	 * @param <String> $language - en_us etc
-	 * @param <String> $key - label
-	 * @param <String> $module - module name
+	 * @param <String> $key      - label
+	 * @param <String> $module   - module name
+	 *
 	 * @return <String> translated string or null if translation not found
 	 */
 	public static function getLanguageTranslatedString($language, $key, $module = 'Basic')
@@ -61,30 +83,10 @@ class Language
 		}
 
 		$commonStrings = self::getModuleStringsFromFile($language);
-		if (!empty($commonStrings['phpLang'][$key]))
+		if (!empty($commonStrings['phpLang'][$key])) {
 			return stripslashes($commonStrings['phpLang'][$key]);
-
-		return null;
-	}
-
-	/**
-	 * Functions that gets translated string for Client side
-	 * @param <String> $key - string which need to be translated
-	 * @param <String> $module - module scope in which the translation need to be check
-	 * @return <String> - translated string
-	 */
-	public static function jstranslate($language, $key, $module = 'Basic')
-	{
-		$moduleStrings = self::getModuleStringsFromFile($language, $module);
-		if (!empty($moduleStrings['jsLang'][$key])) {
-			return $moduleStrings['jsLang'][$key];
 		}
-
-		$commonStrings = self::getModuleStringsFromFile($language);
-		if (!empty($commonStrings['jsLang'][$key]))
-			return $commonStrings['jsLang'][$key];
-
-		return $key;
+		return null;
 	}
 
 	public static function getModuleStringsFromFile($language, $module = 'Basic')
@@ -105,23 +107,30 @@ class Language
 	}
 
 	/**
-	 * Function that returns current language
-	 * @return <String> -
+	 * Functions that gets translated string for Client side.
+	 *
+	 * @param <String> $key    - string which need to be translated
+	 * @param <String> $module - module scope in which the translation need to be check
+	 *
+	 * @return <String> - translated string
 	 */
-	public static function getLanguage()
+	public static function jstranslate($language, $key, $module = 'Basic')
 	{
-		$userInstance = User::getUser();
-		$language = '';
-		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
-			$language = $userInstance->get('language');
-		} else {
-			$language = Config::get('language');
+		$moduleStrings = self::getModuleStringsFromFile($language, $module);
+		if (!empty($moduleStrings['jsLang'][$key])) {
+			return $moduleStrings['jsLang'][$key];
 		}
-		return $language;
+
+		$commonStrings = self::getModuleStringsFromFile($language);
+		if (!empty($commonStrings['jsLang'][$key])) {
+			return $commonStrings['jsLang'][$key];
+		}
+		return $key;
 	}
 
 	/**
-	 * Function to returns all language information
+	 * Function to returns all language information.
+	 *
 	 * @return <Array>
 	 */
 	public static function getAllLanguages()
@@ -130,7 +139,8 @@ class Language
 	}
 
 	/**
-	 * Function that returns current language short name
+	 * Function that returns current language short name.
+	 *
 	 * @return <String> -
 	 */
 	public static function getShortLanguageName()
@@ -140,9 +150,11 @@ class Language
 	}
 
 	/**
-	 * Function returns module strings
+	 * Function returns module strings.
+	 *
 	 * @param <String> $module - module Name
-	 * @param <String> languageStrings or jsLanguageStrings
+	 * @param  <String> languageStrings or jsLanguageStrings
+	 *
 	 * @return <Array>
 	 */
 	public static function export($module, $type = 'phpLang')

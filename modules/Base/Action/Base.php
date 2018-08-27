@@ -1,18 +1,16 @@
 <?php
 /**
- * Abstract action controller class
- * @package YetiForce.Actions
+ * Abstract action controller class.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-namespace YF\Modules\Base\Action;
 
-use YF\Core;
+namespace YF\Modules\Base\Action;
 
 abstract class Base extends \YF\Core\Controller
 {
-
 	public function getViewer(\YF\Core\Request $request)
 	{
 		throw new \YF\Core\AppException('Action - implement getViewer - JSONViewer');
