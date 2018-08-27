@@ -7,7 +7,7 @@
  * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 class Response
 {

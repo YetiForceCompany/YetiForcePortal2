@@ -9,7 +9,7 @@
  * @author    Sławomir Kłos <s.klos@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 class Log extends \Exception
 {
@@ -31,7 +31,7 @@ class Log extends \Exception
 
 	public static function display()
 	{
-		if (!\YF\Core\Config::getBoolean('debugConsole')) {
+		if (!\App\Config::getBoolean('debugConsole')) {
 			return [];
 		}
 		$log = self::$Messages;

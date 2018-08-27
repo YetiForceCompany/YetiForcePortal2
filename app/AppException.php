@@ -10,7 +10,7 @@
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 class AppException extends \Exception
 {

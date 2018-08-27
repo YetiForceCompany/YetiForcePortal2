@@ -9,8 +9,8 @@
 
 namespace YF\Modules\Base\View;
 
-use YF\Core\Api;
-use YF\Core\Request;
+use App\Api;
+use App\Request;
 
 class EditView extends Index
 {
@@ -66,16 +66,16 @@ class EditView extends Index
 	/**
 	 * Scripts.
 	 *
-	 * @param \YF\Core\Request $request
+	 * @param \App\Request $request
 	 *
-	 * @return \YF\Core\Script[]
+	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(\YF\Core\Request $request)
+	public function getFooterScripts(\App\Request $request)
 	{
 		$headerScriptInstances = parent::getFooterScripts($request);
 		$moduleName = $request->getModule();
 		$jsFileNames = [
-			'layouts/' . \YF\Core\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');

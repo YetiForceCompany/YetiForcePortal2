@@ -6,14 +6,14 @@
 			<div class="widget_header row">
 				<div class="col-sm-12">
 					<div class="pull-left">
-						{include file=\YF\Core\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
 						<span class="pull-right">
-							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
+							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
 							<button class="btn btn-warning" type="reset"
 									onclick="javascript:window.history.back();"><span
-										class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\YF\Core\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
+										class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
 						</span>
 						<div class="clearfix"></div>
 					</div>
@@ -38,7 +38,7 @@
 									</div>
 									<div class="fieldValue col-md-9">
 										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->getRawValue($FIELD->getName()))}
-										{include file=\YF\Core\Functions::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
+										{include file=\App\Functions::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
 							{/foreach}
@@ -48,7 +48,7 @@
 			{/foreach}
 		</form>
 		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-			<div class="panel-heading">{\YF\Core\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 paddingLRZero panel-body">
 				<ol id="CoreLogList">
 

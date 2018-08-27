@@ -7,7 +7,7 @@
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 class Viewer extends \SmartyBC
 {

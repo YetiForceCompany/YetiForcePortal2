@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="robots" content="noindex"/>
 	<title>{$PAGETITLE}</title>
-	<link rel="icon" href="{\YF\Core\Functions::fileTemplate("favicon.ico",$MODULE_NAME)}">
+	<link rel="icon" href="{\App\Functions::fileTemplate("favicon.ico",$MODULE_NAME)}">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -24,6 +24,6 @@
 	{/foreach}
 </head>
 <body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
-{include file=\YF\Core\Functions::templatePath("Body.tpl",$MODULE_NAME)}
+{include file=\App\Functions::templatePath("Body.tpl",$MODULE_NAME)}
 {/strip}
 

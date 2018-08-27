@@ -9,8 +9,8 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
-use YF\Core\Functions;
-use YF\Core\Json;
+use App\Functions;
+use App\Json;
 
 class DateField extends BaseField
 {
@@ -25,7 +25,7 @@ class DateField extends BaseField
 	{
 		$data = $this->getData();
 
-		$userInstance = \YF\Core\User::getUser();
+		$userInstance = \App\User::getUser();
 		$data['date-format-js'] = $userInstance->getPreferences('date_format_js');
 
 		switch ($userInstance->getPreferences('date_format_js')) {

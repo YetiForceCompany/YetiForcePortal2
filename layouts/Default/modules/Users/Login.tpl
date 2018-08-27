@@ -2,7 +2,7 @@
 {strip}
 	<div class="container loginContainer">
 		<form action="index.php?module=Users&action=Login" method="POST">
-			<img src="{\YF\Core\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
+			<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 			{if isset($ERRORS)}
 				<br/>
 				{foreach item=ERROR key=KEY from=$ERRORS}
@@ -16,33 +16,33 @@
 			{/if}
 			<div class="form-group">
 				<label for="inputEmail"
-					   class="sr-only">{\YF\Core\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+					   class="sr-only">{\App\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 				<input name="email" type="email" id="inputEmail" class="form-control"
-					   placeholder="{\YF\Core\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
+					   placeholder="{\App\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
 					   value="demo@yetiforce.com" required="" autofocus="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword"
-					   class="sr-only">{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+					   class="sr-only">{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<input name="password" type="password" id="inputPassword" class="form-control"
-					   placeholder="{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo"
+					   placeholder="{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo"
 					   required="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword"
-					   class="sr-only">{\YF\Core\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+					   class="sr-only">{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<select name="language" class="form-control">
-					{foreach item=LANG key=PREFIX from=\YF\Core\Language::getAllLanguages()}
+					{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}
 						<option value="{$PREFIX}">{$LANG}</option>
 					{/foreach}
 				</select>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block"
-					type="submit">{\YF\Core\Functions::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+					type="submit">{\App\Functions::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
 	<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-		<div class="panel-heading">{\YF\Core\Functions::translate('LBL_CORE_LOG')}</div>
+		<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 		<div class="col-md-12 paddingLRZero panel-body">
 			<ol id="CoreLogList">
 

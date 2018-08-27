@@ -7,7 +7,7 @@
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 use YF\Modules\Base\Model;
 
