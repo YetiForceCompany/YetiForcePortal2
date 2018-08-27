@@ -19,12 +19,12 @@ class Install
 
 	public static function getInstance($module)
 	{
-		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Install');
+		$handlerModule = \App\Loader::getModuleClassName($module, 'Model', 'Install');
 		$instance = new $handlerModule();
 		return $instance;
 	}
 
-	public function save(\YF\Core\Request $request)
+	public function save(\App\Request $request)
 	{
 		$configFile = file_get_contents($this->configPath);
 		foreach ($this->config as $key => $value) {

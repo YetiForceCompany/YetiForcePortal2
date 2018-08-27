@@ -2,16 +2,16 @@
 {strip}
 	<div class="breadCrumbs">
 		{if isset($BREADCRUMB_TITLE)}
-			{assign var="BREADCRUMBS" value=\YF\Core\Menu::getBreadcrumbs($BREADCRUMB_TITLE)}
+			{assign var="BREADCRUMBS" value=\App\Menu::getBreadcrumbs($BREADCRUMB_TITLE)}
 		{else}
-			{assign var="BREADCRUMBS" value=\YF\Core\Menu::getBreadcrumbs()}
+			{assign var="BREADCRUMBS" value=\App\Menu::getBreadcrumbs()}
 		{/if}
 
 		{assign var=HOMEICON value='userIcon-Home'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks textOverflowEllipsis">
-					<a href='{\YF\Core\Config::get('portalPath')}'>
+					<a href='{\App\Config::get('portalPath')}'>
 						<span class="{$HOMEICON}"></span>
 					</a>
 					&nbsp;|&nbsp;

@@ -9,7 +9,7 @@
 
 namespace YF\Modules\Base\Model;
 
-class Record extends \YF\Core\BaseModel
+class Record extends \App\BaseModel
 {
 	/**
 	 * Module name.
@@ -27,7 +27,7 @@ class Record extends \YF\Core\BaseModel
 	 */
 	public static function getInstance($module)
 	{
-		$handlerModule = \YF\Core\Loader::getModuleClassName($module, 'Model', 'Record');
+		$handlerModule = \App\Loader::getModuleClassName($module, 'Model', 'Record');
 		$instance = new $handlerModule();
 		return $instance->setModuleName($module);
 	}

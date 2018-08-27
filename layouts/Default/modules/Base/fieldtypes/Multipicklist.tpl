@@ -6,11 +6,11 @@
 			name="{$FIELD_MODEL->getName()}[]"
 			data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" {if $FIELD_MODEL->isMandatory()} data-validation-engine="validate[required]" {/if} {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
 		{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$FIELD_MODEL->getPicklistValues()}
-			<option value="{\YF\Core\Functions::toSafeHTML($PICKLIST_NAME)}" {if in_array(\YF\Core\Functions::toSafeHTML($PICKLIST_NAME), $FIELD_MODEL->getFieldValuesList())} selected {/if}{if array_key_exists($PICKLIST_NAME, $FIELD_MODEL->getNotDisplayValuesList())} class="hide" {/if}>{$PICKLIST_VALUE}</option>
+			<option value="{\App\Functions::toSafeHTML($PICKLIST_NAME)}" {if in_array(\App\Functions::toSafeHTML($PICKLIST_NAME), $FIELD_MODEL->getFieldValuesList())} selected {/if}{if array_key_exists($PICKLIST_NAME, $FIELD_MODEL->getNotDisplayValuesList())} class="d-none" {/if}>{$PICKLIST_VALUE}</option>
 		{/foreach}
 		{foreach from=$FIELD_MODEL->getNotDisplayValuesList() key=PICKLIST_NAME item=ITERATION}
-			<option value="{\YF\Core\Functions::toSafeHTML($PICKLIST_NAME)}" {if in_array(\YF\Core\Functions::toSafeHTML($PICKLIST_NAME), $FIELD_MODEL->getPicklistValues())} selected {/if}
-					class="hide">{$PICKLIST_NAME}</option>
+			<option value="{\App\Functions::toSafeHTML($PICKLIST_NAME)}" {if in_array(\App\Functions::toSafeHTML($PICKLIST_NAME), $FIELD_MODEL->getPicklistValues())} selected {/if}
+					class="d-none">{$PICKLIST_NAME}</option>
 		{/foreach}
 	</select>
 {/strip}

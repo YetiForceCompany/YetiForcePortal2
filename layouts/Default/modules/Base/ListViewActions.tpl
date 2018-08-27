@@ -4,9 +4,9 @@
 	{if count($LINKS) > 0}
 		{assign var=ONLY_ONE value=count($LINKS) eq 1}
 		<div class="actions">
-			<div class="{if !$ONLY_ONE}actionImages hide{/if}">
+			<div class="{if !$ONLY_ONE}actionImages d-none{/if}">
 				{foreach from=$LINKS item=LINK}
-					{include file=\YF\Core\Functions::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
+					{include file=\App\Functions::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
 				{/foreach}
 			</div>
 			{if !$ONLY_ONE}

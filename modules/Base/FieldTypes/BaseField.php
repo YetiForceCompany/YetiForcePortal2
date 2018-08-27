@@ -9,10 +9,10 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
-use YF\Core\Functions;
-use YF\Core\Json;
+use App\Functions;
+use App\Json;
 
-class BaseField extends \YF\Core\BaseModel
+class BaseField extends \App\BaseModel
 {
 	/**
 	 * Display value.
@@ -224,7 +224,7 @@ class BaseField extends \YF\Core\BaseModel
 	 */
 	public function getEditViewDisplayValue()
 	{
-		return \YF\Core\Functions::toSafeHTML($this->getRawValue());
+		return \App\Functions::toSafeHTML($this->getRawValue());
 	}
 
 	/**

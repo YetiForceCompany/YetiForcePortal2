@@ -10,8 +10,8 @@
 
 namespace YF\Modules\Base\View;
 
-use YF\Core\Api;
-use YF\Core\Request;
+use App\Api;
+use App\Request;
 use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\Record;
 
@@ -20,7 +20,7 @@ class DetailView extends Index
 	/**
 	 * Process.
 	 *
-	 * @param \YF\Core\Request $request
+	 * @param \App\Request $request
 	 */
 	public function process(Request $request)
 	{

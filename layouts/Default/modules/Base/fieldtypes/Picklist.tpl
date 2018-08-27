@@ -7,9 +7,9 @@
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
 		{if $FIELD_MODEL->isEmptyPicklistOptionAllowed()}
 			<option
-			value="" {if $FIELD_MODEL->isMandatory() && $FIELD_MODEL->getEditViewDisplayValue() neq ''} disabled{/if}>{\YF\Core\Functions::translate('PLL_SELECT_OPTION',$MODULE_NAME)}</option>{/if}
+			value="" {if $FIELD_MODEL->isMandatory() && $FIELD_MODEL->getEditViewDisplayValue() neq ''} disabled{/if}>{\App\Functions::translate('PLL_SELECT_OPTION',$MODULE_NAME)}</option>{/if}
 		{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$FIELD_MODEL->getPicklistValues()}
-			<option value="{\YF\Core\Functions::toSafeHTML($PICKLIST_NAME)}"
+			<option value="{\App\Functions::toSafeHTML($PICKLIST_NAME)}"
 					title="{$PICKLIST_VALUE}" {if trim($FIELD_MODEL->getEditViewDisplayValue()) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
 		{/foreach}
 	</select>

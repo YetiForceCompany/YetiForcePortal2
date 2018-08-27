@@ -9,9 +9,11 @@
 		{assign var="LINK_URL" value=''}
 	{/if}
 	{assign var="BTN_MODULE" value=$MODULE_NAME}
-	{if isset($LINK['linkhref'])}<a{else}
+	{if isset($LINK['linkhref'])}
+	<a
+	{else}
 	<button type="button"{/if}{/strip} {strip}
-		title="{\YF\Core\Functions::translate($LABEL, $BTN_MODULE)}"{/strip} {strip}
+		title="{\App\Functions::translate($LABEL, $BTN_MODULE)}"{/strip} {strip}
 		{if isset($LINK['active']) && !$LINK['active']} disabled {/if}
 		id="{$MODULE_NAME}_{$BUTTON_VIEW}_action_{str_replace(' ', '_', $ACTION_NAME)}"{/strip} {strip}
 		class="btn {if $LINK['linkclass'] neq ''}{if $LINK['linkclass']|strrpos:"btn-" === false}btn-default {/if}{$LINK['linkclass']}{else}btn-default{/if} {if $LABEL neq '' && !isset($LINK['showLabel'])} popoverTooltip{/if} {if isset($LINK['modalView'])}showModal{/if}"{/strip} {strip}
@@ -23,7 +25,7 @@
 	{/strip} {strip}
 		{if $LABEL neq '' && !isset($LINK['showLabel'])}
 			data-placement="bottom"
-			data-content="{\YF\Core\Functions::translate($LABEL, $BTN_MODULE)}"
+			data-content="{\App\Functions::translate($LABEL, $BTN_MODULE)}"
 		{/if}
 	{/strip} {strip}
 		{if isset($LINK['linkhref'])}
@@ -52,13 +54,13 @@
 	>
 		{if isset($LINK['linkimg'])}
 			<img class="image-in-button" src="{$LINK['linkimg']}"
-				 title="{\YF\Core\Functions::translate($LABEL, $BTN_MODULE)}">
+				 title="{\App\Functions::translate($LABEL, $BTN_MODULE)}">
 		{elseif isset($LINK['linkicon'])}
 			<span class="{$LINK['linkicon']}"></span>
 		{/if}
 		{if $LABEL neq '' && isset($LINK['showLabel'])}
 			{if !isset($LINK['linkimg']) || isset($LINK['linkicon'])}&nbsp;&nbsp;{/if}
-			<strong>{\YF\Core\Functions::translate($LABEL, $BTN_MODULE)}</strong>
+			<strong>{\App\Functions::translate($LABEL, $BTN_MODULE)}</strong>
 		{/if}
 		{if isset($LINK['linkhref'])}</a>{else}</button>{/if}
 </div>

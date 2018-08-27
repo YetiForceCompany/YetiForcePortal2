@@ -19,8 +19,8 @@ if (!file_exists('vendor/autoload.php')) {
 }
 require_once 'vendor/autoload.php';
 
-$coreUI = new \YF\Core\WebUI();
-$coreUI->process(new \YF\Core\Request($_REQUEST));
+$coreUI = new \App\WebUI();
+$coreUI->process(new \App\Request($_REQUEST));
 
 //fix phpunit console for windows
 if (!getenv('ANSICON')) {

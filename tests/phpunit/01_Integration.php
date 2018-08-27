@@ -7,8 +7,8 @@
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
 use PHPUnit\Framework\TestCase;
-use YF\Core\Api;
-use YF\Core\User;
+use App\Api;
+use App\User;
 
 /**
  * @covers Integration::<public>

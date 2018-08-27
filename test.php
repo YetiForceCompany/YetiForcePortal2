@@ -17,7 +17,7 @@ echo "<pre>";
 
 
 
-$modules = \Core\Api::getInstance()->call('Modules', [], 'get');
+$modules = \App\Api::getInstance()->call('Modules', [], 'get');
 
 echo "<hr>";
 

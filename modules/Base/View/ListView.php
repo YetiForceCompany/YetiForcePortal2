@@ -12,10 +12,10 @@ namespace YF\Modules\Base\View;
 
 class ListView extends Index
 {
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
-		$api = \YF\Core\Api::getInstance();
+		$api = \App\Api::getInstance();
 		$recordsListModel = [];
 		$recordsList = $api->call($module . '/RecordsList');
 		if (!empty($recordsList['records'])) {
