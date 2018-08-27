@@ -13,10 +13,10 @@ use YF\Modules\Base\Action;
  */
 class Logout extends Action\Base
 {
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
-		$response = \YF\Core\Api::getInstance()->call('Users/Logout', [], 'put');
+		$response = \App\Api::getInstance()->call('Users/Logout', [], 'put');
 		session_destroy();
-		header('Location: ' . \YF\Core\Config::get('portalPath'));
+		header('Location: ' . \App\Config::get('portalPath'));
 	}
 }

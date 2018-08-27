@@ -9,24 +9,24 @@
 
 namespace YF\Modules\Base\Action;
 
-abstract class Base extends \YF\Core\Controller
+abstract class Base extends \App\Controller
 {
-	public function getViewer(\YF\Core\Request $request)
+	public function getViewer(\App\Request $request)
 	{
-		throw new \YF\Core\AppException('Action - implement getViewer - JSONViewer');
+		throw new \App\AppException('Action - implement getViewer - JSONViewer');
 	}
 
-	public function validateRequest(\YF\Core\Request $request)
+	public function validateRequest(\App\Request $request)
 	{
 		return $request->validateReadAccess();
 	}
 
-	public function preProcess(\YF\Core\Request $request)
+	public function preProcess(\App\Request $request)
 	{
 		return true;
 	}
 
-	public function postProcess(\YF\Core\Request $request)
+	public function postProcess(\App\Request $request)
 	{
 		return true;
 	}

@@ -18,12 +18,12 @@ class Login extends View\Index
 		return false;
 	}
 
-	public function checkPermission(\YF\Core\Request $request)
+	public function checkPermission(\App\Request $request)
 	{
 		return true;
 	}
 
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
 		$viewer = $this->getViewer($request);

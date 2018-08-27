@@ -14,21 +14,21 @@ class Delete extends Base
 	/**
 	 * Process.
 	 *
-	 * @param \YF\Core\Request $request
+	 * @param \App\Request $request
 	 *
 	 * @return mixed
 	 */
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
 		$record = $request->get('record');
 		$result = false;
 		if ($record) {
-			$api = \YF\Core\Api::getInstance();
+			$api = \App\Api::getInstance();
 			$result = $api->call($module . '/Record/' . $record, [], 'delete');
 		}
 		if ($request->isAjax()) {
-			$response = new \YF\Core\Response();
+			$response = new \App\Response();
 			$response->setResult($result);
 			$response->emit();
 		} else {

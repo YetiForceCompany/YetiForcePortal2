@@ -10,9 +10,9 @@
 
 namespace YF\Modules\Base\Model;
 
-use YF\Core\Loader;
+use App\Loader;
 
-class Field extends \YF\Core\BaseModel
+class Field extends \App\BaseModel
 {
 	/**
 	 * Static Function to get the instance of a clean Record for the given module name.

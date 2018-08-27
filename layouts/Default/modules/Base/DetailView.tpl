@@ -4,13 +4,13 @@
 		<div class="widget_header row">
 			<div class="col-sm-12">
 				<div class="pull-left">
-					{include file=\YF\Core\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 				<div class="contentHeader">
 					<span class="pull-right">
 						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
-						   title="{\YF\Core\Functions::translate('BTN_EDIT')}"><span
-									class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\YF\Core\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+						   title="{\App\Functions::translate('BTN_EDIT')}"><span
+									class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\App\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
 					</span>
 					<div class="clearfix"></div>
 				</div>
@@ -56,7 +56,7 @@
 			{/if}
 		{/foreach}
 		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-			<div class="panel-heading">{\YF\Core\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 paddingLRZero panel-body">
 				<ol id="CoreLogList">
 

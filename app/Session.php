@@ -7,7 +7,7 @@
  * @author    Tomasz Kur <t.kur@yetiforce.com>
  */
 
-namespace YF\Core;
+namespace App;
 
 class Session
 {

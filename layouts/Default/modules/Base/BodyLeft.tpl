@@ -2,7 +2,7 @@
 {strip}
 	<div class="userDetailsContainer">
 		<div class="col-xs-2 noPadding">
-			<img src="{\YF\Core\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
+			<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-xs-10 userDetails">
 			<div class="userName">

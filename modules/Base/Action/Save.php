@@ -14,19 +14,19 @@ class Save extends Base
 	/**
 	 * Process.
 	 *
-	 * @param \YF\Core\Request $request
+	 * @param \App\Request $request
 	 *
 	 * @return mixed
 	 */
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
 		$record = $request->get('record');
 		$view = $request->get('view');
-		$api = \YF\Core\Api::getInstance();
+		$api = \App\Api::getInstance();
 		$result = $api->call($module . '/Record/' . $record, $request->getAll(), $record ? 'put' : 'post');
 		if ($request->isAjax()) {
-			$response = new \YF\Core\Response();
+			$response = new \App\Response();
 			$response->setResult($result);
 			$response->emit();
 		} else {

@@ -14,16 +14,16 @@ class ChangeCompany extends Base
 	/**
 	 * Process.
 	 *
-	 * @param \YF\Core\Request $request
+	 * @param \App\Request $request
 	 *
 	 * @return mixed
 	 */
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
-		$userInstance = \YF\Core\User::getUser();
+		$userInstance = \App\User::getUser();
 		$userInstance->set('CompanyId', $request->get('record'));
 
-		$response = new \YF\Core\Response();
+		$response = new \App\Response();
 		$response->setResult(true);
 		$response->emit();
 	}

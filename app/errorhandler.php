@@ -22,5 +22,5 @@
  */
 function exceptionErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
 {
-	throw new \YF\Core\AppException($errstr, $errno);
+	throw new \App\AppException($errstr, $errno);
 }

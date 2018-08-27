@@ -4,12 +4,12 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="logoContainer">
-				<img src="{\YF\Core\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
+				<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="head pull-right">
-				<h3>{\YF\Core\Functions::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
+				<h3>{\App\Functions::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
 			</div>
 		</div>
 	</div>

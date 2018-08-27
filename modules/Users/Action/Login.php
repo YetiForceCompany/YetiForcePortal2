@@ -23,14 +23,14 @@ class Login extends Action\Base
 		return false;
 	}
 
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$email = $request->get('email');
 		$password = $request->get('password');
-		$userInstance = \YF\Core\User::getUser();
+		$userInstance = \App\User::getUser();
 		$userInstance->set('language', $request->get('language'));
 		$userInstance->login($email, $password);
 
-		header('Location: ' . \YF\Core\Config::get('portalPath'));
+		header('Location: ' . \App\Config::get('portalPath'));
 	}
 }

@@ -19,7 +19,7 @@ class Install extends Action\Base
 		return false;
 	}
 
-	public function process(\YF\Core\Request $request)
+	public function process(\App\Request $request)
 	{
 		$install = Model\Install::getInstance($request->getModule());
 		$install->save($request);
