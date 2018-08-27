@@ -31,7 +31,7 @@
 	"files": [
 	  "config/version.php",
 	  "config/config.php",
-	  "core/errorhandler.php"
+	  "app/errorhandler.php"
 	],
 	"psr-4": {
 	  "App\\": "app/",
