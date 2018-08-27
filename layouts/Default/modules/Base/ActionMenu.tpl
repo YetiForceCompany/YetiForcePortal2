@@ -3,7 +3,7 @@
 	<div class="actionMenu" aria-hidden="true">
 		<div class="row noMargin">
 			<div class="dropdown quickAction historyBtn">
-				<div class="labelContainer pull-left">
+				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}
 				</div>
 				<div class="iconContainer pull-right">
@@ -19,10 +19,10 @@
 		</div>
 		<div class='row noMargin'>
 			<div class="dropdown quickAction">
-				<div class='labelContainer pull-left'>
+				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}
 				</div>
-				<div class='iconContainer pull-right'>
+				<div class="iconContainer pull-right">
 					<a id="mobile_menubar_quickCreate" class="dropdown-toggle btn btn-default" data-toggle="dropdown"
 					   title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

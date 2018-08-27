@@ -5,7 +5,7 @@
 			  enctype="multipart/form-data">
 			<div class="widget_header row">
 				<div class="col-sm-12">
-					<div class="pull-left">
+					<div class="float-left">
 						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">

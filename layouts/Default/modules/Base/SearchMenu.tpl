@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="pull-left">
+		<div class="float-left">
 			<button class="btn btn-default" id="globalSearch"
 					title="{\App\Functions::translate('LBL_ADVANCE_SEARCH',$MODULE_NAME)}" type="button">
 				<span class="glyphicon glyphicon-th-large"></span>
