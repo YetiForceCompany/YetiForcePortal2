@@ -29,7 +29,7 @@
 				<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
 				<li id="quickCreateModules">
 				<div class="card">
-				<div class="panel-heading">
+				<div class="card-header">
 				<h4 class="panel-title"><strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 				</div>
 				<div class="panel-body paddingLRZero">
