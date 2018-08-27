@@ -11,7 +11,7 @@
 			<div class="companyName">
 				<span class="name">{$USER->get('parentName')}</span>
 				{if $USER->getCompanies()}
-					<div class="pull-right">
+					<div class="float-right">
 						<button type="button" class="btn btn-info btn-xs selectCompanies" data-toggle="modal">
 							<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
 						</button>

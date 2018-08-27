@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="head pull-right">
+			<div class="head float-right">
 				<h3>{\App\Functions::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
 			</div>
 		</div>

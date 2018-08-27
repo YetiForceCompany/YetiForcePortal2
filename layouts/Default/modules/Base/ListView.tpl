@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="col-sm-4 listViewAction">
-				<div class="pull-right">
+				<div class="float-right">
 					<div class="btn-group">
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
@@ -26,7 +26,7 @@
 		</div>
 		<div class="row listViewContents">
 			<div class="table-responsive col-xs-12">
-				<table class="table listViewEntries hide">
+				<table class="table listViewEntries d-none">
 					<thead>
 					<tr class="listViewHeaders">
 						<th></th>
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-			<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 paddingLRZero panel-body">
 				<ol id="CoreLogList">
 

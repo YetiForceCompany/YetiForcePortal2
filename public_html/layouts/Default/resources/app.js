@@ -211,7 +211,7 @@ var app = {
 			if (select.hasClass('hideSelected')) {
 				var ns = [];
 				select.find('optgroup,option').each(function (n, e) {
-					if (jQuery(this).hasClass('hide')) {
+					if (jQuery(this).hasClass('d-none')) {
 						ns.push(n);
 					}
 				});
@@ -479,7 +479,7 @@ var app = {
 			};
 		}
 		var modalContainer = container.find('.modal');
-		modalContainer.modal('hide');
+		modalContainer.modal('d-none');
 		var backdrop = jQuery('.modal-backdrop:last');
 		var modalContainers = jQuery('.modalContainer');
 		if (modalContainers.length == 0 && backdrop.length) {

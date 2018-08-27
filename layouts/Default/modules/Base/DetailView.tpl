@@ -3,11 +3,11 @@
 	<div class="contentsDiv" id="detailView">
 		<div class="widget_header row">
 			<div class="col-sm-12">
-				<div class="pull-left">
+				<div class="float-left">
 					{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 				<div class="contentHeader">
-					<span class="pull-right">
+					<span class="float-right">
 						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
 						   title="{\App\Functions::translate('BTN_EDIT')}"><span
 									class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\App\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
@@ -20,8 +20,8 @@
 			{if isset($FIELDS[$BLOCK['id']])}
 				{assign var=COUNTER value=0}
 				{assign var=COUNT value=0}
-				<div class="panel panel-default col-xs-12 paddingLRZero blockContainer">
-					<div class="panel-heading">{$BLOCK['name']}</div>
+				<div class="card col-xs-12 paddingLRZero blockContainer">
+					<div class="card-header">{$BLOCK['name']}</div>
 					<div class="col-md-12 paddingLRZero panel-body blockContent">
 						<div class="col-xs-12 paddingLRZero fieldRow">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
@@ -56,7 +56,7 @@
 			{/if}
 		{/foreach}
 		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-			<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 paddingLRZero panel-body">
 				<ol id="CoreLogList">
 

@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="button-container pull-right">
+			<div class="button-container float-right">
 				<button class="btn btn-sm btn-primary"
 						type="submit">{\App\Functions::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
 			</div>

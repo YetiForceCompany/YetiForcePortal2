@@ -5,11 +5,11 @@
 			  enctype="multipart/form-data">
 			<div class="widget_header row">
 				<div class="col-sm-12">
-					<div class="pull-left">
+					<div class="float-left">
 						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
-						<span class="pull-right">
+						<span class=float-right">
 							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
 							<button class="btn btn-warning" type="reset"
 									onclick="javascript:window.history.back();"><span
@@ -25,8 +25,8 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
-					<div class="panel panel-default col-xs-12 paddingLRZero blockContainer">
-						<div class="panel-heading">{$BLOCK['name']}</div>
+					<div class="card col-xs-12 paddingLRZero blockContainer">
+						<div class="card-header">{$BLOCK['name']}</div>
 						<div class="col-md-12 paddingLRZero panel-body blockContent">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 paddingLRZero">
@@ -48,7 +48,7 @@
 			{/foreach}
 		</form>
 		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-			<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 paddingLRZero panel-body">
 				<ol id="CoreLogList">
 

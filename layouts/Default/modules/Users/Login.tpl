@@ -42,7 +42,7 @@
 		</form>
 	</div>
 	<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
-		<div class="panel-heading">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+		<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 		<div class="col-md-12 paddingLRZero panel-body">
 			<ol id="CoreLogList">
 

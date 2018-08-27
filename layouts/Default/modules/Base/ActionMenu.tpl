@@ -3,10 +3,10 @@
 	<div class="actionMenu" aria-hidden="true">
 		<div class="row noMargin">
 			<div class="dropdown quickAction historyBtn">
-				<div class="labelContainer pull-left">
+				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}
 				</div>
-				<div class="iconContainer pull-right">
+				<div class="iconContainer float-right">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn"
 					   aria-expanded="false" href="#">
 						<img class='alignMiddle popoverTooltip dropdown-toggle'
@@ -19,18 +19,18 @@
 		</div>
 		<div class='row noMargin'>
 			<div class="dropdown quickAction">
-				<div class='labelContainer pull-left'>
+				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}
 				</div>
-				<div class='iconContainer pull-right'>
+				<div class="iconContainer float-right">
 					<a id="mobile_menubar_quickCreate" class="dropdown-toggle btn btn-default" data-toggle="dropdown"
 					   title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
 						<li>
-							<div class="panel-default">
-								<div class="panel-heading">
+							<div class="card">
+								<div class="card-header">
 									<h4 class="panel-title">
 										<strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong>
 									</h4>
