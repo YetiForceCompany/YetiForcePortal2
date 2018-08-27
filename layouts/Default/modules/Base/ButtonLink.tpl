@@ -9,7 +9,9 @@
 		{assign var="LINK_URL" value=''}
 	{/if}
 	{assign var="BTN_MODULE" value=$MODULE_NAME}
-	{if isset($LINK['linkhref'])}<a{else}
+	{if isset($LINK['linkhref'])}
+	<a
+	{else}
 	<button type="button"{/if}{/strip} {strip}
 		title="{\App\Functions::translate($LABEL, $BTN_MODULE)}"{/strip} {strip}
 		{if isset($LINK['active']) && !$LINK['active']} disabled {/if}
