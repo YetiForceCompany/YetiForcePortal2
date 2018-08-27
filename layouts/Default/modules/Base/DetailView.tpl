@@ -20,7 +20,7 @@
 			{if isset($FIELDS[$BLOCK['id']])}
 				{assign var=COUNTER value=0}
 				{assign var=COUNT value=0}
-				<div class="panel panel-default col-xs-12 paddingLRZero blockContainer">
+				<div class="card col-xs-12 paddingLRZero blockContainer">
 					<div class="panel-heading">{$BLOCK['name']}</div>
 					<div class="col-md-12 paddingLRZero panel-body blockContent">
 						<div class="col-xs-12 paddingLRZero fieldRow">

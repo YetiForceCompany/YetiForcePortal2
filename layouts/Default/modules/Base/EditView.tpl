@@ -25,7 +25,7 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
-					<div class="panel panel-default col-xs-12 paddingLRZero blockContainer">
+					<div class="card col-xs-12 paddingLRZero blockContainer">
 						<div class="panel-heading">{$BLOCK['name']}</div>
 						<div class="col-md-12 paddingLRZero panel-body blockContent">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
