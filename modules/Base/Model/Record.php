@@ -33,16 +33,6 @@ class Record extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the id of the record.
-	 *
-	 * @return int
-	 */
-	public function getId()
-	{
-		return $this->get('id');
-	}
-
-	/**
 	 * Function to set the id of the record.
 	 *
 	 * @param \self
@@ -100,16 +90,6 @@ class Record extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the name of the module to which the record belongs.
-	 *
-	 * @return string - Record Module Name
-	 */
-	public function getModuleName()
-	{
-		return $this->module;
-	}
-
-	/**
 	 * Record name.
 	 *
 	 * @return string
@@ -117,36 +97,6 @@ class Record extends \YF\Core\BaseModel
 	public function getName()
 	{
 		return $this->get('recordLabel');
-	}
-
-	/**
-	 * Function to get the Detail View url for the record.
-	 *
-	 * @return string - Record Detail View Url
-	 */
-	public function getDetailViewUrl()
-	{
-		return 'index.php?module=' . $this->getModuleName() . '&view=DetailView&record=' . $this->getId();
-	}
-
-	/**
-	 * Function to get the Edit View url for the record.
-	 *
-	 * @return string - Record Edit View Url
-	 */
-	public function getEditViewUrl()
-	{
-		return 'index.php?module=' . $this->getModuleName() . '&view=EditView&record=' . $this->getId();
-	}
-
-	/**
-	 * Function to get the delete action url for the record.
-	 *
-	 * @return string
-	 */
-	public function getDeleteUrl()
-	{
-		return 'index.php?module=' . $this->getModuleName() . '&action=Delete&record=' . $this->getId();
 	}
 
 	/**
@@ -198,6 +148,36 @@ class Record extends \YF\Core\BaseModel
 	}
 
 	/**
+	 * Function to get the Detail View url for the record.
+	 *
+	 * @return string - Record Detail View Url
+	 */
+	public function getDetailViewUrl()
+	{
+		return 'index.php?module=' . $this->getModuleName() . '&view=DetailView&record=' . $this->getId();
+	}
+
+	/**
+	 * Function to get the name of the module to which the record belongs.
+	 *
+	 * @return string - Record Module Name
+	 */
+	public function getModuleName()
+	{
+		return $this->module;
+	}
+
+	/**
+	 * Function to get the id of the record.
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->get('id');
+	}
+
+	/**
 	 * Function checks if there are permissions to edit record.
 	 *
 	 * @return bool
@@ -208,6 +188,16 @@ class Record extends \YF\Core\BaseModel
 	}
 
 	/**
+	 * Function to get the Edit View url for the record.
+	 *
+	 * @return string - Record Edit View Url
+	 */
+	public function getEditViewUrl()
+	{
+		return 'index.php?module=' . $this->getModuleName() . '&view=EditView&record=' . $this->getId();
+	}
+
+	/**
 	 * Function checks if there are permissions to delete record.
 	 *
 	 * @return bool
@@ -215,5 +205,15 @@ class Record extends \YF\Core\BaseModel
 	public function isDeletable()
 	{
 		return true;
+	}
+
+	/**
+	 * Function to get the delete action url for the record.
+	 *
+	 * @return string
+	 */
+	public function getDeleteUrl()
+	{
+		return 'index.php?module=' . $this->getModuleName() . '&action=Delete&record=' . $this->getId();
 	}
 }

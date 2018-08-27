@@ -26,23 +26,6 @@ class MultipicklistField extends BaseField
 	public $notDisplayValuesList;
 
 	/**
-	 * Get field values.
-	 *
-	 * @return array
-	 */
-	public function getFieldValuesList()
-	{
-		if (!is_array($this->fieldValuesList)) {
-			if (!$this->isNewRecord) {
-				$this->fieldValuesList = explode(' |##| ', $this->rawValue);
-			} else {
-				$this->fieldValuesList = [];
-			}
-		}
-		return $this->fieldValuesList;
-	}
-
-	/**
 	 * Get not display values list.
 	 *
 	 * @return array
@@ -57,5 +40,22 @@ class MultipicklistField extends BaseField
 			}
 		}
 		return $this->notDisplayValuesList;
+	}
+
+	/**
+	 * Get field values.
+	 *
+	 * @return array
+	 */
+	public function getFieldValuesList()
+	{
+		if (!is_array($this->fieldValuesList)) {
+			if (!$this->isNewRecord) {
+				$this->fieldValuesList = explode(' |##| ', $this->rawValue);
+			} else {
+				$this->fieldValuesList = [];
+			}
+		}
+		return $this->fieldValuesList;
 	}
 }

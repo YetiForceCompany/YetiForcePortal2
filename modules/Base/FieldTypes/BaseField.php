@@ -69,33 +69,6 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
-	 * Function to get the raw value.
-	 *
-	 * @return Value for the given key
-	 */
-	public function getRawValue()
-	{
-		if (!$this->isNewRecord) {
-			return $this->rawValue;
-		} else {
-			return $this->get('defaultvalue');
-		}
-	}
-
-	/**
-	 * Function to set the raw value.
-	 *
-	 * @param string $value
-	 *
-	 * @return Field
-	 */
-	public function setRawValue($value)
-	{
-		$this->rawValue = $value;
-		return $this;
-	}
-
-	/**
 	 * Function to set the name of the module to which the record belongs.
 	 *
 	 * @param string $value
@@ -106,16 +79,6 @@ class BaseField extends \YF\Core\BaseModel
 	{
 		$this->module = $value;
 		return $this;
-	}
-
-	/**
-	 * Function to get the name of the module to which the record belongs.
-	 *
-	 * @return string - Record Module Name
-	 */
-	public function getModuleName()
-	{
-		return $this->module;
 	}
 
 	/**
@@ -243,6 +206,16 @@ class BaseField extends \YF\Core\BaseModel
 	}
 
 	/**
+	 * Function to get the name of the module to which the record belongs.
+	 *
+	 * @return string - Record Module Name
+	 */
+	public function getModuleName()
+	{
+		return $this->module;
+	}
+
+	/**
 	 * Gets value to edit.
 	 *
 	 * @param mixed $value
@@ -252,6 +225,33 @@ class BaseField extends \YF\Core\BaseModel
 	public function getEditViewDisplayValue()
 	{
 		return \YF\Core\Functions::toSafeHTML($this->getRawValue());
+	}
+
+	/**
+	 * Function to get the raw value.
+	 *
+	 * @return Value for the given key
+	 */
+	public function getRawValue()
+	{
+		if (!$this->isNewRecord) {
+			return $this->rawValue;
+		} else {
+			return $this->get('defaultvalue');
+		}
+	}
+
+	/**
+	 * Function to set the raw value.
+	 *
+	 * @param string $value
+	 *
+	 * @return Field
+	 */
+	public function setRawValue($value)
+	{
+		$this->rawValue = $value;
+		return $this;
 	}
 
 	/**

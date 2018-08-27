@@ -1,6 +1,5 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-jQuery.Class("Base_EditView_Js", {
-}, {
+jQuery.Class("Base_EditView_Js", {}, {
 	container: false,
 	getContainer: function () {
 		if (this.container == false) {
@@ -133,7 +132,7 @@ jQuery.Class("Base_EditView_Js", {
 				}, function (e, err) {
 					console.log([e, err])
 				});
-			}else{
+			} else {
 				app.formAlignmentAfterValidation(formElement);
 			}
 		})

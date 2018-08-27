@@ -46,11 +46,11 @@ var app = {
 	},
 	formatDate: function (date) {
 		var y = date.getFullYear(),
-				m = date.getMonth() + 1,
-				d = date.getDate(),
-				h = date.getHours(),
-				i = date.getMinutes(),
-				s = date.getSeconds();
+			m = date.getMonth() + 1,
+			d = date.getDate(),
+			h = date.getHours(),
+			i = date.getMinutes(),
+			s = date.getSeconds();
 		return y + '-' + this.formatDateZ(m) + '-' + this.formatDateZ(d) + ' ' + this.formatDateZ(h) + ':' + this.formatDateZ(i) + ':' + this.formatDateZ(s);
 	},
 	formatDateZ: function (i) {
@@ -270,9 +270,9 @@ var app = {
 	},
 	getUrlParam: function (name) {
 		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-				sURLVariables = sPageURL.split('&'),
-				sParameterName,
-				i;
+			sURLVariables = sPageURL.split('&'),
+			sParameterName,
+			i;
 
 		for (i = 0; i < sURLVariables.length; i++) {
 			sParameterName = sURLVariables[i].split('=');
@@ -317,7 +317,8 @@ var app = {
 		if (table.length == 0) {
 			return false;
 		}
-		var params = {language: {
+		var params = {
+			language: {
 				sLengthMenu: app.translate('JS_S_LENGTH_MENU'),
 				sZeroRecords: app.translate('JS_NO_RESULTS_FOUND'),
 				sInfo: app.translate('JS_S_INFO'),
@@ -424,11 +425,11 @@ var app = {
 			// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog.
 			$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
 				$(document).off('focusin.bs.modal') // guard against infinite focus loop
-						.on('focusin.bs.modal', $.proxy(function (e) {
-							if ($(e.target).hasClass('select2-search__field')) {
-								return true;
-							}
-						}, this))
+					.on('focusin.bs.modal', $.proxy(function (e) {
+						if ($(e.target).hasClass('select2-search__field')) {
+							return true;
+						}
+					}, this))
 			};
 			var modalContainer = container.find('.modal:first');
 			modalContainer.modal(params);

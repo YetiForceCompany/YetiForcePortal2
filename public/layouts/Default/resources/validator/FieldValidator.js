@@ -210,10 +210,8 @@ Vtiger_Base_Validator_Js('Vtiger_Url_Validator_Js', {}, {
 		var regexp = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
 		var result = regexp.test(fieldValue);
 
-		if (!result)
-		{
-			if (fieldValue.indexOf('http://') === 0 || fieldValue.indexOf('https://') === 0 || fieldValue.indexOf('www.') === 0)
-			{
+		if (!result) {
+			if (fieldValue.indexOf('http://') === 0 || fieldValue.indexOf('https://') === 0 || fieldValue.indexOf('www.') === 0) {
 				result = true;
 			}
 		}
@@ -807,7 +805,7 @@ Vtiger_Integer_Validator_Js("Vtiger_Double_Validator_Js", {}, {
 		var response = this._super();
 		if (response == false) {
 			var fieldValue = this.getFieldValue();
-			if(fieldValue !== '') {
+			if (fieldValue !== '') {
 				var doubleRegex = /(^[-+]?\d+)[,.]\d+$/;
 				if (!fieldValue.match(doubleRegex)) {
 					var errorInfo = app.translate("JS_PLEASE_ENTER_DECIMAL_VALUE");

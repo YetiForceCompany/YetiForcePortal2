@@ -1,7 +1,6 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
-jQuery.Class("Base_ListView_Js", {
-}, {
+jQuery.Class("Base_ListView_Js", {}, {
 	registerDataTable: function () {
 		var params = {};
 		var lengthMenu = app.getMainParams('listEntriesPerPage', true);
@@ -18,7 +17,7 @@ jQuery.Class("Base_ListView_Js", {
 				e.preventDefault();
 				var element = jQuery(e.currentTarget);
 				AppConnector.request(element.data('url')).then(function (data) {
-					if(data.result){
+					if (data.result) {
 						table.row(element.closest('tr')).remove().draw();
 					}
 				}, function (e, err) {

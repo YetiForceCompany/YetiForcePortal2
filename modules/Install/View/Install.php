@@ -38,6 +38,15 @@ class Install extends View\Index
 		$viewer->view('InstallPreProcess.tpl', $module);
 	}
 
+	public function setLanguage($request)
+	{
+		if ($request->get('lang')) {
+			$userInstance = \YF\Core\User::getUser();
+			$userInstance->set('language', $request->get('lang'));
+		}
+		return $request;
+	}
+
 	public function process(\YF\Core\Request $request)
 	{
 		$module = $request->getModule();
@@ -68,15 +77,6 @@ class Install extends View\Index
 		$viewer = $this->getViewer($request);
 		$viewer->view('InstallPostProcess.tpl', $module);
 		parent::postProcess($request, $display);
-	}
-
-	public function setLanguage($request)
-	{
-		if ($request->get('lang')) {
-			$userInstance = \YF\Core\User::getUser();
-			$userInstance->set('language', $request->get('lang'));
-		}
-		return $request;
 	}
 
 	/**

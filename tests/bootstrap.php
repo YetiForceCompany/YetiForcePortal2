@@ -1,11 +1,11 @@
 <?php
 /**
- * Travis CI test script
- * @package YetiForce.Tests
+ * Travis CI test script.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Michał Lorencik <m.lorencik@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
 chdir(dirname(__FILE__) . '/../');
 
@@ -14,11 +14,10 @@ define('YF_ROOT', __DIR__);
 
 session_start();
 
-
 if (!file_exists('vendor/autoload.php')) {
 	die('Please install dependencies via composer install.');
 }
-require_once('vendor/autoload.php');
+require_once 'vendor/autoload.php';
 
 $coreUI = new \YF\Core\WebUI();
 $coreUI->process(new \YF\Core\Request($_REQUEST));

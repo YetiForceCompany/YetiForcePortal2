@@ -1,18 +1,16 @@
 <?php
 /**
- * Travis CI test script
- * @package YetiForce.Tests
+ * Travis CI test script.
+ *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author Michał Lorencik <m.lorencik@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
-use PHPUnit\Framework\TestCase;
 
 // @codeCoverageIgnoreStart
 class Times implements PHPUnit\Framework\TestListener
 {
-
 	public function startTest(PHPUnit\Framework\Test $test)
 	{
 		//printf("Test %s started.\n", $test->getName());
@@ -27,18 +25,18 @@ class Times implements PHPUnit\Framework\TestListener
 
 	public function addError(PHPUnit\Framework\Test $test, Exception $e, $time)
 	{
-		echo "Error in " . $test->getName() . " !!!\n";
+		echo 'Error in ' . $test->getName() . " !!!\n";
 	}
 
 	public function addWarning(PHPUnit\Framework\Test $test, PHPUnit\Framework\Warning $e, $time)
 	{
-		echo "Warning in " . $test->getName() . " !!!\n";
+		echo 'Warning in ' . $test->getName() . " !!!\n";
 	}
 
 	public function addFailure(PHPUnit\Framework\Test $test, PHPUnit\Framework\AssertionFailedError $e, $time)
 	{
-		echo "Test " . $test->getName() . " failed. $time\n";
-		echo "Exception Message: " . $e->getMessage() . "\n";
+		echo 'Test ' . $test->getName() . " failed. $time\n";
+		echo 'Exception Message: ' . $e->getMessage() . "\n";
 		//echo "Exception Trace: " . $e->getTraceAsString() . "\n";
 	}
 
@@ -51,16 +49,16 @@ class Times implements PHPUnit\Framework\TestListener
 	public function addRiskyTest(PHPUnit\Framework\Test $test, Exception $e, $time)
 	{
 		printf("Test %s is deemed risky.\n", $test->getName());
-		echo "Exception Message: " . $e->getMessage() . "\n";
-		echo "Exception Trace: " . $e->getTraceAsString() . "\n";
+		echo 'Exception Message: ' . $e->getMessage() . "\n";
+		echo 'Exception Trace: ' . $e->getTraceAsString() . "\n";
 	}
 
 	public function addSkippedTest(PHPUnit\Framework\Test $test, Exception $e, $time)
 	{
 		$time = round($time, 2);
 		printf("Test '%s' has been skipped. ($time second(s))\n", $test->getName());
-		echo "Exception Message: " . $e->getMessage() . "\n";
-		echo "Exception Trace: " . $e->getTraceAsString() . "\n";
+		echo 'Exception Message: ' . $e->getMessage() . "\n";
+		echo 'Exception Trace: ' . $e->getTraceAsString() . "\n";
 	}
 
 	public function startTestSuite(PHPUnit\Framework\TestSuite $suite)

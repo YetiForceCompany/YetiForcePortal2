@@ -104,7 +104,7 @@ jQuery.Class("Base_Header_Js", {
 						action: 'ChangeCompany',
 						record: modal.find("#companyId").val()
 					}).then(function (data) {
-						 window.location.href = 'index.php'; 
+						window.location.href = 'index.php';
 					}, function (e, err) {
 						console.log([e, err])
 					});
