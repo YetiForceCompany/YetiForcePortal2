@@ -12,7 +12,7 @@ jQuery.Class("Base_ListView_Js", {
 		params.order = [];
 		var table = app.registerDataTables(jQuery('table.listViewEntries'), params);
 		if (table) {
-			jQuery(table.table().container()).find('.listViewEntries').removeClass('hide')
+			jQuery(table.table().container()).find('.listViewEntries').removeClass('d-none')
 			table.$('.deleteRecordButton').on('click', function (e) {
 				e.stopPropagation();
 				e.preventDefault();

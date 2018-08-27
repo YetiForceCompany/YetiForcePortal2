@@ -26,7 +26,7 @@
 		</div>
 		<div class="row listViewContents">
 			<div class="table-responsive col-xs-12">
-				<table class="table listViewEntries hide">
+				<table class="table listViewEntries d-none">
 					<thead>
 					<tr class="listViewHeaders">
 						<th></th>

@@ -1,8 +1,8 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <div id="js_strings"
-	 class="hide noprint">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'jsLang'))}</div>
-<div id="pjaxContainer" class="hide noprint"></div>
+	 class="d-none noprint">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'jsLang'))}</div>
+<div id="pjaxContainer" class="d-none noprint"></div>
 <div class="mainPage">
 	{include file=\App\Functions::templatePath("SearchMenu.tpl",$MODULE_NAME)}
 	{include file=\App\Functions::templatePath("ActionMenu.tpl",$MODULE_NAME)}
