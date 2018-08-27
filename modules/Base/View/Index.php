@@ -163,7 +163,7 @@ abstract class Index extends \YF\Core\Controller
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.css',
-			YF_ROOT_WWW . 'libraries/Scripts/bootstrap/dist/css/bootstrap.css',
+			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.css',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.bootstrap.css',
 			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
@@ -229,7 +229,7 @@ abstract class Index extends \YF\Core\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.class.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery-pjax/jquery.pjax.js',
-			YF_ROOT_WWW . 'libraries/Scripts/bootstrap/dist/js/bootstrap.js',
+			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.full.js',
 			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
