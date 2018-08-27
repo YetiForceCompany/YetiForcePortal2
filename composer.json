@@ -20,7 +20,8 @@
 	"require": {
 		"php": ">=5.6.0",
 		"smarty/smarty": ">=3.1.31",
-        "rmccue/requests": ">=1.0"
+        "rmccue/requests": ">=1.0",
+        "guzzlehttp/guzzle": "^6.3.3"
 	},
 	"autoload": {
 		"files": [
