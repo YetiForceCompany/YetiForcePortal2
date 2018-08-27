@@ -9,7 +9,7 @@
 						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
-						<span class="pull-right">
+						<span class=float-right">
 							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
 							<button class="btn btn-warning" type="reset"
 									onclick="javascript:window.history.back();"><span

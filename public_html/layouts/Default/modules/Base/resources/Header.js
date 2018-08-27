@@ -24,7 +24,7 @@ jQuery.Class("Base_Header_Js", {
 			BtnText = item[0];
 			BtnLink = item[1];
 		}
-		var htmlContent = '<ul class="dropdown-menu pull-right historyList" role="menu">';
+		var htmlContent = '<ul class="dropdown-menu float-right historyList" role="menu">';
 		var date = new Date().getTime();
 		var howManyDays = -1;
 		var writeSelector = true;

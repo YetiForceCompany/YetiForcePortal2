@@ -17,7 +17,7 @@
 				   id="globalMobileSearchValue"
 				   placeholder="{\App\Functions::translate('LBL_GLOBAL_SEARCH',$MODULE_NAME)}" results="10"/>
 			<div class="input-group-btn">
-				<div class="pull-right">
+				<div class="float-right">
 					<button class="btn btn-default" id="searchMobileIcon" type="button">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>

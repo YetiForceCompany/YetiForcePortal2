@@ -6,7 +6,7 @@
 				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}
 				</div>
-				<div class="iconContainer pull-right">
+				<div class="iconContainer float-right">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn"
 					   aria-expanded="false" href="#">
 						<img class='alignMiddle popoverTooltip dropdown-toggle'
@@ -22,7 +22,7 @@
 				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}
 				</div>
-				<div class="iconContainer pull-right">
+				<div class="iconContainer float-right">
 					<a id="mobile_menubar_quickCreate" class="dropdown-toggle btn btn-default" data-toggle="dropdown"
 					   title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

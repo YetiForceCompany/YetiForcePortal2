@@ -4,14 +4,14 @@
 		<div class="leftSide col-xs-3">
 		</div>
 		<div class="rightSide">
-			<div class="pull-right rightHeaderBtn hidden-phone">
+			<div class="float-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction historyBtn">
 					<a href="index.php?module=Users&action=Logout" class="loadPage btn btn-danger">
 						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn hidden-phone">
+			<div class="float-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction historyBtn">
 					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn"
 					   aria-expanded="false" href="#">
@@ -21,7 +21,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="pull-right rightHeaderBtn hidden-phone">
+			<div class="float-right rightHeaderBtn hidden-phone">
 				{*<div class="dropdown quickAction">
 				<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

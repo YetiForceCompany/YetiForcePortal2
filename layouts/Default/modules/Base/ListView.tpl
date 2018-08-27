@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="col-sm-4 listViewAction">
-				<div class="pull-right">
+				<div class="float-right">
 					<div class="btn-group">
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
