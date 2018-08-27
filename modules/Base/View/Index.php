@@ -170,7 +170,6 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.css',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/styles.css',
-			YF_ROOT_WWW . 'libraries/Scripts/font-awesome/css/font-awesome.css',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
 			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
@@ -227,6 +226,10 @@ abstract class Index extends \App\Controller
 		}
 		$jsFileNames = [
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.js',
+			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome/index.js',
+			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
+			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
+			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.class.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery-pjax/jquery.pjax.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
