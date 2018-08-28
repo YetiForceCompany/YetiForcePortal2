@@ -38,12 +38,12 @@
 		{/if}
 
 	</div>
-	<footer class="footerContainer navbar-default navbar-fixed-bottom noprint">
+	<footer class="footerContainer navbar-default navbar-fixed-bottom d-print-none">
 		<div class="footer">
 			<p>{sprintf(\App\Functions::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
 		</div>
 	</footer>
-	<div class="noprint">
+	<div class="d-print-none">
 		{foreach item=SCRIPT from=$FOOTER_SCRIPTS}
 			<script src="{$SCRIPT->getSrc()}"></script>
 		{/foreach}

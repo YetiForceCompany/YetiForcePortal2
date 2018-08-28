@@ -112,7 +112,7 @@ class Record extends \App\BaseModel
 				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
 				'linklabel' => 'LBL_SHOW_COMPLETE_DETAILS',
 				'linkurl' => $this->getDetailViewUrl(),
-				'linkicon' => 'glyphicon glyphicon-th-list',
+				'linkicon' => 'fas fa-th-list',
 				'linkclass' => 'btn-sm btn-default detailLink'
 			];
 		}
@@ -121,7 +121,7 @@ class Record extends \App\BaseModel
 				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
 				'linklabel' => 'BTN_EDIT',
 				'linkurl' => $this->getEditViewUrl(),
-				'linkicon' => 'glyphicon glyphicon-pencil',
+				'linkicon' => 'fas fa-edit',
 				'linkclass' => 'btn-sm btn-default'
 			];
 		}
@@ -130,7 +130,7 @@ class Record extends \App\BaseModel
 				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
 				'linklabel' => 'LBL_DELETE',
 				'linkdata' => ['url' => $this->getDeleteUrl()],
-				'linkicon' => 'glyphicon glyphicon-trash',
+				'linkicon' => 'fas fa-trash-alt',
 				'linkclass' => 'btn-sm btn-default deleteRecordButton'
 			];
 		}
