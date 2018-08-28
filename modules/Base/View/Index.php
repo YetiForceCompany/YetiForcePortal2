@@ -161,7 +161,6 @@ abstract class Index extends \App\Controller
 	public function getHeaderCss(\App\Request $request)
 	{
 		$cssFileNames = [
-			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.css',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.css',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.bootstrap.css',
@@ -235,7 +234,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
-			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
+			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',
 			YF_ROOT_WWW . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/datatables.net/js/jquery.dataTables.js',
