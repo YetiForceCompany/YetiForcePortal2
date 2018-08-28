@@ -13,7 +13,7 @@
 				{if $USER->getCompanies()}
 					<div class="float-right">
 						<button type="button" class="btn btn-info btn-xs selectCompanies" data-toggle="modal">
-							<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+							<span class="fas fa-exchange-alt" aria-hidden="true"></span>
 						</button>
 					</div>
 				{/if}

@@ -7,7 +7,7 @@
 			<div class="float-right rightHeaderBtn hidden-phone">
 				<div class="dropdown quickAction historyBtn">
 					<a href="index.php?module=Users&action=Logout" class="loadPage btn btn-danger">
-						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+						<span class="fas fa-power-off" aria-hidden="true"></span>
 					</a>
 				</div>
 			</div>
