@@ -107,7 +107,6 @@ abstract class Index extends \App\Controller
 	public function getHeaderScripts(\App\Request $request)
 	{
 		$headerScriptInstances = [
-			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.js',
 		];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
