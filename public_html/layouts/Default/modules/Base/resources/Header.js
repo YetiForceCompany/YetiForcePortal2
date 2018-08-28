@@ -115,26 +115,7 @@ jQuery.Class("Base_Header_Js", {
 	registerEvents: function () {
 		var thisInstance = this;
 		thisInstance.recentPageViews();
-		thisInstance.registerMobileEvents();
 		thisInstance.registerChangeCompany();
-	},
-	registerMobileEvents: function () {
-		var thisInstance = this;
-		$('.rightHeaderBtnMenu').click(function () {
-			$('.mobileLeftPanel').toggleClass('showMainMenu');
-			$('.actionMenu').removeClass('showActionMenu');
-			$('.searchMenu').removeClass('showSearchMenu');
-		});
-		$('.actionMenuBtn ').click(function () {
-			$('.actionMenu').toggleClass('showActionMenu');
-			$('.mobileLeftPanel').removeClass('showMainMenu');
-			$('.searchMenu').removeClass('showSearchMenu');
-		});
-		$('.searchMenuBtn ').click(function () {
-			$('.searchMenu').toggleClass('showSearchMenu');
-			$('.mobileLeftPanel').removeClass('showMainMenu');
-			$('.actionMenu').removeClass('showActionMenu');
-		});
 	},
 });
 jQuery(document).ready(function () {
