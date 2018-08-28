@@ -1,10 +1,10 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="userDetailsContainer">
-		<div class="col-xs-2 noPadding">
+		<div class="col-sm-2 noPadding">
 			<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
-		<div class="col-xs-10 userDetails">
+		<div class="col-sm-10 userDetails">
 			<div class="userName">
 				<span class="name">{$USER->get('name')}</span>
 			</div>
@@ -12,7 +12,7 @@
 				<span class="name">{$USER->get('parentName')}</span>
 				{if $USER->getCompanies()}
 					<div class="float-right">
-						<button type="button" class="btn btn-info btn-xs selectCompanies" data-toggle="modal">
+						<button type="button" class="btn btn-info btn-sm selectCompanies" data-toggle="modal">
 							<span class="fas fa-exchange-alt" aria-hidden="true"></span>
 						</button>
 					</div>

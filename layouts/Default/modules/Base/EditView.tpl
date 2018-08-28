@@ -25,7 +25,7 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
-					<div class="card col-xs-12 px-0 blockContainer">
+					<div class="card col-sm-12 px-0 blockContainer">
 						<div class="card-header">{$BLOCK['name']}</div>
 						<div class="col-md-12 px-0 card-body blockContent">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
@@ -47,7 +47,7 @@
 				{/if}
 			{/foreach}
 		</form>
-		<div id="CoreLog" class="panel panel-primary col-xs-12 px-0 blockContainer">
+		<div id="CoreLog" class="panel panel-primary col-sm-12 px-0 blockContainer">
 			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
 				<ol id="CoreLogList">

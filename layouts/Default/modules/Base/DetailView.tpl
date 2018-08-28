@@ -20,17 +20,17 @@
 			{if isset($FIELDS[$BLOCK['id']])}
 				{assign var=COUNTER value=0}
 				{assign var=COUNT value=0}
-				<div class="card col-xs-12 px-0 blockContainer">
+				<div class="card col-sm-12 px-0 blockContainer">
 					<div class="card-header">{$BLOCK['name']}</div>
 					<div class="col-md-12 px-0 card-body blockContent">
-						<div class="col-xs-12 px-0 form-row">
+						<div class="col-sm-12 px-0 form-row">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
 						</div>
-						<div class="col-xs-12 px-0 form-row">
+						<div class="col-sm-12 px-0 form-row">
 							{assign var=COUNTER value=0}
 							{/if}
-							<div class="col-xs-12 col-md-6 px-0 tableCell borderTop">
+							<div class="col-sm-12 col-md-6 px-0 tableCell borderTop">
 								<div class="col-md-3 fieldLabel pl-2 form-control-plaintext">
 									<label class="control-label">
 										{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
@@ -45,7 +45,7 @@
 							{assign var=COUNT value=$COUNT+1}
 							{/foreach}
 							{if $COUNT % 2 == 1}
-								<div class="col-xs-12 col-md-6 px-0 tableCell borderTop">
+								<div class="col-sm-12 col-md-6 px-0 tableCell borderTop">
 									<div class="col-md-3 fieldLabel pl-2"></div>
 									<div class="fieldValue col-md-9 form-control-plaintext"></div>
 								</div>
@@ -55,7 +55,7 @@
 				</div>
 			{/if}
 		{/foreach}
-		<div id="CoreLog" class="card col-xs-12 px-0 blockContainer">
+		<div id="CoreLog" class="card col-sm-12 px-0 blockContainer">
 			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
 				<ol id="CoreLogList">
