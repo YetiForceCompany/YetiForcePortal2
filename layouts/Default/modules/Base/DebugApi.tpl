@@ -3,7 +3,7 @@
 	<div class="col-sm-12">
 		<div class="panel panel-primary">
 			<div class="card-header">{\App\Functions::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</div>
-			<div class="panel-body">
+			<div class="card-body">
 				{foreach item=ITEM key=KEY from=$DEBUG_API}
 					<div>
 						Start time: {$ITEM['date']}<br/>
