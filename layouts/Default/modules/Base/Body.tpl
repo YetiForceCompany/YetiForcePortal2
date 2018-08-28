@@ -6,10 +6,10 @@
 <div class="mainPage">
 	{include file=\App\Functions::templatePath("SearchMenu.tpl",$MODULE_NAME)}
 	{include file=\App\Functions::templatePath("ActionMenu.tpl",$MODULE_NAME)}
-	<div class="mobileLeftPanel noPadding visible-phone">
+	<div class="mobileLeftPanel p-0 visible-phone">
 		{include file=\App\Functions::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
-	<div class="leftPanel noPadding hidden-phone">
+	<div class="leftPanel p-0 hidden-phone">
 		{include file=\App\Functions::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
 	<div class="mainBody">

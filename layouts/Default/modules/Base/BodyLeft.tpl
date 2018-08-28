@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="userDetailsContainer">
-		<div class="col-sm-2 noPadding">
+		<div class="col-sm-2 p-0">
 			<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-sm-10 userDetails">
