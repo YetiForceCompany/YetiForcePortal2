@@ -1,44 +1,24 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="bodyHeader">
-		<div class="leftSide col-sm-3">
+	<div class="bodyHeader form-row p-0">
+		<div class="col-sm-3">
 		</div>
-		<div class="rightSide">
-			<div class="float-right rightHeaderBtn hidden-phone">
+		<div class="col-sm-9 d-flex justify-content-end align-items-center">
+			<div class="float-right rightHeaderBtn mr-2 d-none d-sm-block">
 				<div class="dropdown quickAction historyBtn">
-					<a href="index.php?module=Users&action=Logout" class="loadPage btn btn-danger">
+					<a href="index.php?module=Users&action=Logout" role="button" class="loadPage btn btn-danger btn-sm">
 						<span class="fas fa-power-off" aria-hidden="true"></span>
 					</a>
 				</div>
 			</div>
-			<div class="float-right rightHeaderBtn hidden-phone">
+			<div class="float-right rightHeaderBtn mr-2 d-none d-sm-block">
 				<div class="dropdown quickAction historyBtn">
-					<a data-placement="left" data-toggle="dropdown" class="btn btn-default btn-sm showHistoryBtn"
+					<a data-placement="left" role="button" data-toggle="dropdown"
+					   class="btn btn-light btn-sm showHistoryBtn"
 					   aria-expanded="false" href="#">
-						<img src="{\App\Functions::fileTemplate("history.png",$MODULE_NAME)}" class="userIcon"
-							 title="{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}"
-							 alt="{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}">
+						<span class="fas fa-history"></span>
 					</a>
 				</div>
-			</div>
-			<div class="float-right rightHeaderBtn hidden-phone">
-				{*<div class="dropdown quickAction">
-				<a id="menubar_quickCreate" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</a>
-				<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
-				<li id="quickCreateModules">
-				<div class="card">
-				<div class="card-header">
-				<h4 class="card-title"><strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
-				</div>
-				<div class="card-body px-0">
-
-				</div>
-				</div>
-				</li>
-				</ul>
-				</div>*}
 			</div>
 		</div>
 	</div>
