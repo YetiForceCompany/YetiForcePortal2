@@ -94,21 +94,21 @@ jQuery.Class("Base_Header_Js", {
 	},
 	registerChangeCompany: function () {
 		$(".selectCompanies").click(function () {
-			$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
-				var modal = $(relatedTarget.target);
-				modal.find('select').addClass('select2');
-				app.showSelect2Element(modal);
-				modal.find(".btn-primary").click(function () {
-					AppConnector.request({
-						module: app.getModuleName(),
-						action: 'ChangeCompany',
-						record: modal.find("#companyId").val()
-					}).then(function (data) {
-						window.location.href = 'index.php';
-					}, function (e, err) {
-						console.log([e, err])
-					});
+		$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
+			var modal = $(relatedTarget.target);
+			modal.find('select').addClass('select2');
+			app.showSelect2Element(modal);
+			modal.find(".btn-primary").click(function () {
+				AppConnector.request({
+					module: app.getModuleName(),
+					action: 'ChangeCompany',
+					record: modal.find("#companyId").val()
+				}).then(function (data) {
+					window.location.href = 'index.php';
+				}, function (e, err) {
+					console.log([e, err])
 				});
+			});
 			}).modal();
 		});
 	},
