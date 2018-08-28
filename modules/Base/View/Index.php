@@ -237,7 +237,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
 			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
-			YF_ROOT_WWW . 'libraries/Scripts/inputmask/jquery.inputmask.js',
+			YF_ROOT_WWW . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/datatables.net/js/jquery.dataTables.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
