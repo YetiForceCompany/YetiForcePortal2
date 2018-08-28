@@ -22,7 +22,7 @@
 				{assign var=COUNT value=0}
 				<div class="card col-xs-12 paddingLRZero blockContainer">
 					<div class="card-header">{$BLOCK['name']}</div>
-					<div class="col-md-12 paddingLRZero panel-body blockContent">
+					<div class="col-md-12 paddingLRZero card-body blockContent">
 						<div class="col-xs-12 paddingLRZero fieldRow">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
@@ -55,9 +55,9 @@
 				</div>
 			{/if}
 		{/foreach}
-		<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
+		<div id="CoreLog" class="card col-xs-12 paddingLRZero blockContainer">
 			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
-			<div class="col-md-12 paddingLRZero panel-body">
+			<div class="col-md-12 paddingLRZero card-body">
 				<ol id="CoreLogList">
 
 				</ol>
