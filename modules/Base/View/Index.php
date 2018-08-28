@@ -162,8 +162,8 @@ abstract class Index extends \App\Controller
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.css',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.bootstrap.css',
+			YF_ROOT_WWW . 'libraries/chosen-js/chosen.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-chosen/bootstrap-chosen.css',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
 			YF_ROOT_WWW . 'libraries/select2/dist/css/select2.css',
 			YF_ROOT_WWW . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
@@ -232,7 +232,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.class.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery-pjax/jquery.pjax.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
+			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
 			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',
 			YF_ROOT_WWW . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
