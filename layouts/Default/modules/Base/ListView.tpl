@@ -15,7 +15,7 @@
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
 							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
-								<span class="glyphicon glyphicon-plus"></span>
+								<span class="fas fa-plus"></span>
 								&nbsp;
 								<strong>{\App\Functions::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
 							</a>

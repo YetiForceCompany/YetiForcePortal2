@@ -19,7 +19,7 @@
 			<div class="input-group-btn">
 				<div class="float-right">
 					<button class="btn btn-default" id="searchMobileIcon" type="button">
-						<span class="glyphicon glyphicon-search"></span>
+						<span class="fas fa-search"></span>
 					</button>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 		<div class="float-left">
 			<button class="btn btn-default" id="globalSearch"
 					title="{\App\Functions::translate('LBL_ADVANCE_SEARCH',$MODULE_NAME)}" type="button">
-				<span class="glyphicon glyphicon-th-large"></span>
+				<span class="fas fa-th-large"></span>
 			</button>
 		</div>
 	</div>

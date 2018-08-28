@@ -13,7 +13,7 @@
 							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
 							<button class="btn btn-warning" type="reset"
 									onclick="javascript:window.history.back();"><span
-										class="glyphicon glyphicon-remove"></span> &nbsp;<strong>{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
+										class="fas fa-times"></span> &nbsp;<strong>{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
 						</span>
 						<div class="clearfix"></div>
 					</div>

@@ -25,7 +25,7 @@
 				<div class="iconContainer float-right">
 					<a id="mobile_menubar_quickCreate" class="dropdown-toggle btn btn-default" data-toggle="dropdown"
 					   title="{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}" href="#">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						<span class="fas fa-plus" aria-hidden="true"></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right commonActionsButtonDropDown">
 						<li>

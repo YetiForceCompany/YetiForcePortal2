@@ -50,12 +50,12 @@
 		<span class="input-group-btn cursorPointer">
 			<button class="btn btn-default clearReferenceSelection" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="glyphicon glyphicon-remove-sign"
+				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
 					  title="{\App\Functions::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
 			<button class="btn btn-default relatedPopup" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="glyphicon glyphicon-search"
+				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
 					  title="{\App\Functions::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
 		</span>

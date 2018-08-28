@@ -10,7 +10,7 @@
 					<span class="float-right">
 						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
 						   title="{\App\Functions::translate('BTN_EDIT')}"><span
-									class="glyphicon glyphicon-pencil"></span> &nbsp; <strong>{\App\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+									class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
 					</span>
 					<div class="clearfix"></div>
 				</div>
