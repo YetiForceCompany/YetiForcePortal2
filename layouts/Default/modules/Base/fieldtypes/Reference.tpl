@@ -28,7 +28,7 @@
 		   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}>
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
-			<div class="input-group-addon noSpaces referenceModulesListGroup">
+			<div class="input-group-append noSpaces referenceModulesListGroup">
 				<select id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_dropDown"
 						class="referenceModulesList chzn-select"
 						title="{\App\Functions::translate('LBL_RELATED_MODULE_TYPE')}" required="required">

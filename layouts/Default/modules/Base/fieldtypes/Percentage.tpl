@@ -6,7 +6,7 @@
 			   value="{$FIELD_MODEL->getEditViewDisplayValue()}" data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			   data-validation-engine="validate[min[0],max[100]{if $FIELD_MODEL->isMandatory()},required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			   {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if} />
-		<span class="input-group-addon">%</span>
+		<span class="input-group-append">%</span>
 	</div>
 {/strip}
 

@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="bodyHeader">
-		<div class="leftSide col-xs-3">
+		<div class="leftSide col-sm-3">
 		</div>
 		<div class="rightSide">
 			<div class="float-right rightHeaderBtn hidden-phone">
@@ -32,7 +32,7 @@
 				<div class="card-header">
 				<h4 class="card-title"><strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 				</div>
-				<div class="card-body paddingLRZero">
+				<div class="card-body px-0">
 
 				</div>
 				</div>

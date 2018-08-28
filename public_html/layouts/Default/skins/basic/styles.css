@@ -44,17 +44,9 @@ img {
 	margin-top: 10px;
 }
 
-.paddingLRZero {
-	padding-left: 0;
-	padding-right: 0;
-}
 
 .noPadding {
 	padding: 0;
-}
-
-.noMargin {
-	margin: 0;
 }
 
 .marginLRZero {
@@ -443,10 +435,6 @@ hr {
 
 .noFloat {
 	float: none;
-}
-
-#detailView .fieldRow {
-	display: table;
 }
 
 .border {

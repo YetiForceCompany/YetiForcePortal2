@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="actionMenu" aria-hidden="true">
-		<div class="row noMargin">
+		<div class="row m-0">
 			<div class="dropdown quickAction historyBtn">
 				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_PAGES_HISTORY',$MODULE_NAME)}
@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-		<div class='row noMargin'>
+		<div class='row m-0'>
 			<div class="dropdown quickAction">
 				<div class="labelContainer float-left">
 					{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}
@@ -35,7 +35,7 @@
 										<strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong>
 									</h4>
 								</div>
-								<div class="card-body paddingLRZero">
+								<div class="card-body px-0">
 								</div>
 							</div>
 						</li>
