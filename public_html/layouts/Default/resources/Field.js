@@ -257,7 +257,7 @@ Vtiger_Field_Js('Vtiger_Date_Field_Js', {}, {
 	getUi: function () {
 		var html = '<div class="date input-group">' +
 			'<input class="dateField form-control" type="text" name="' + this.getName() + '"  data-date-format="' + this.getDateFormat() + '"  value="' + this.getValue() + '" />' +
-				'<span class="input-group-addon"><i class="fas fa-calendar"></i></span>' +
+				'<span class="input-group-append"><i class="fas fa-calendar"></i></span>' +
 			'</div>';
 		var element = jQuery(html);
 		return this.addValidationToElement(element);
@@ -273,7 +273,7 @@ Vtiger_Field_Js('Vtiger_Currency_Field_Js', {}, {
 	},
 	getUi: function () {
 		var html = '<div class="input-group">' +
-			'<span class="input-group-addon">' + this.getCurrencySymbol() + '</span>' +
+			'<span class="input-group-append">' + this.getCurrencySymbol() + '</span>' +
 			'<input type="text" class="form-control" name="' + this.getName() + '" value="' + this.getValue() + '"  />' +
 			'</div>';
 		var element = jQuery(html);
@@ -343,7 +343,7 @@ Vtiger_Field_Js('Vtiger_Time_Field_Js', {}, {
 	getUi: function () {
 		var html = '<div class="input-group time">' +
 			'<input class="timepicker-default form-control" type="text" data-format="' + this.getTimeFormat() + '" name="' + this.getName() + '"  value="' + this.getValue() + '" />' +
-			'<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>' +
+			'<span class="input-group-append"><i class="glyphicon glyphicon-time"></i></span>' +
 			'</div>';
 		var element = jQuery(html);
 		return this.addValidationToElement(element);
@@ -370,7 +370,7 @@ Vtiger_Field_Js('Vtiger_Percentage_Field_Js', {}, {
 	getUi: function () {
 		var html = '<div class="input-group">' +
 			'<input type="number" class="form-control" min="0" max="100" name="' + this.getName() + '" value="' + this.getValue() + '" step="any"/>' +
-			'<span class="input-group-addon">%</span>' +
+			'<span class="input-group-append">%</span>' +
 			'</div>';
 		var element = jQuery(html);
 		return this.addValidationToElement(element);

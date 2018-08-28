@@ -6,6 +6,6 @@
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()},required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			   {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if} data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			   value="{$FIELD_MODEL->getEditViewDisplayValue()}"/>
-		<span class="input-group-addon timeFieldButton"><span class="fas fa-time"></span></span>
+		<span class="input-group-append timeFieldButton"><span class="fas fa-time"></span></span>
 	</div>
 {/strip}
