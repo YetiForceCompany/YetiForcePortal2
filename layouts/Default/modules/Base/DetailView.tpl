@@ -31,13 +31,13 @@
 							{assign var=COUNTER value=0}
 							{/if}
 							<div class="col-xs-12 col-md-6 px-0 tableCell borderTop">
-								<div class="col-md-3 fieldLabel pl-2 form-control-static">
+								<div class="col-md-3 fieldLabel pl-2 form-control-plaintext">
 									<label class="control-label">
 										{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 										{$FIELD->get('label')}
 									</label>
 								</div>
-								<div class="fieldValue col-md-9 form-control-static">
+								<div class="fieldValue col-md-9 form-control-plaintext">
 									{$FIELD->getDisplayValue()}
 								</div>
 								{assign var=COUNTER value=$COUNTER+1}
@@ -47,7 +47,7 @@
 							{if $COUNT % 2 == 1}
 								<div class="col-xs-12 col-md-6 px-0 tableCell borderTop">
 									<div class="col-md-3 fieldLabel pl-2"></div>
-									<div class="fieldValue col-md-9 form-control-static"></div>
+									<div class="fieldValue col-md-9 form-control-plaintext"></div>
 								</div>
 							{/if}
 						</div>

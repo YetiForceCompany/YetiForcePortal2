@@ -49,10 +49,6 @@ img {
 	padding: 0;
 }
 
-.noMargin {
-	margin: 0;
-}
-
 .marginLRZero {
 	margin-left: 0 !important;
 	margin-right: 0 !important;
