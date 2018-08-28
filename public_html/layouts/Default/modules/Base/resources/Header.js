@@ -93,11 +93,9 @@ jQuery.Class("Base_Header_Js", {
 		});
 	},
 	registerChangeCompany: function () {
-		$(".selectCompanies").click(function () {
 		$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
 			var modal = $(relatedTarget.target);
 			modal.find('select').addClass('select2');
-			app.showSelect2Element(modal);
 			modal.find(".btn-primary").click(function () {
 				AppConnector.request({
 					module: app.getModuleName(),
@@ -109,7 +107,6 @@ jQuery.Class("Base_Header_Js", {
 					console.log([e, err])
 				});
 			});
-			}).modal();
 		});
 	},
 	registerEvents: function () {
