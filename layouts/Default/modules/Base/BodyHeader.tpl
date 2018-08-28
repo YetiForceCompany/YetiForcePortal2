@@ -8,12 +8,12 @@
 				<span class="fas fa-history"></span>
 			</a>
 		</div>
-		{*{if $USER->getCompanies()}*}
+		{if $USER->getCompanies()}
 		<a class="btn btn-info btn-sm mr-2" role="button" href="#" data-toggle="modal"
 		   data-target="#modalSelectCompanies">
 			<span class="fas fa-exchange-alt" aria-hidden="true"></span>
 		</a>
-		{*{/if}*}
+		{/if}
 		<div class="dropdown quickAction historyBtn">
 			<a class="loadPage btn btn-danger btn-sm mr-2" role="button" href="index.php?module=Users&action=Logout">
 				<span class="fas fa-power-off" aria-hidden="true"></span>
