@@ -36,7 +36,6 @@
 				</div>
 			</div>
 		{/if}
-
 	</div>
 	<footer class="footerContainer navbar-default navbar-fixed-bottom d-print-none">
 		<div class="footer">

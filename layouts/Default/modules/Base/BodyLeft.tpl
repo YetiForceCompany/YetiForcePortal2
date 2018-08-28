@@ -10,13 +10,6 @@
 			</div>
 			<div class="companyName">
 				<span class="name">{$USER->get('parentName')}</span>
-				{if $USER->getCompanies()}
-					<div class="float-right">
-						<button type="button" class="btn btn-info btn-sm selectCompanies" data-toggle="modal">
-							<span class="fas fa-exchange-alt" aria-hidden="true"></span>
-						</button>
-					</div>
-				{/if}
 			</div>
 		</div>
 	</div>
