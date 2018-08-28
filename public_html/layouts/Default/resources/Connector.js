@@ -6,8 +6,9 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
+'use strict';
 
-var AppConnector = {
+AppConnector = {
 
 	/**
 	 * Sends a pjax request (push state +ajax)
@@ -31,27 +32,30 @@ var AppConnector = {
 	 *
 	 *  @return - deferred promise
 	 */
-	request: function (params) {
-		return AppConnector._request(params, false);
+	request: function (params, rawData) {
+		return AppConnector._request(params, false, rawData);
 	},
 
-
-	_request: function (params, pjaxMode) {
+	_request: function (params, pjaxMode, rawData) {
 		var aDeferred = jQuery.Deferred();
-
-		if (typeof pjaxMode == 'undefined') {
+		if (typeof rawData === "undefined") {
+			rawData = false;
+		}
+		if (typeof pjaxMode === "undefined") {
 			pjaxMode = false;
 		}
-
-		if (typeof params == 'undefined') params = {};
-
+		if (typeof params === "undefined") {
+			params = {};
+		}
+		var fullUrl = '';
 		//caller has send only data
-		if (typeof params.data == 'undefined') {
-			if (typeof params == 'string') {
-				var callerParams = params;
-				if (callerParams.indexOf('?') !== -1) {
-					var callerParamsParts = callerParams.split('?')
-					callerParams = callerParamsParts[1];
+		if (typeof params.data === "undefined" || rawData) {
+			if (typeof params === 'string') {
+				var callerParams = fullUrl = params;
+				var index = callerParams.indexOf('?');
+				if (index !== -1) {
+					var subStr = callerParams.substr(0, index + 1);//need to replace only "index.php?" or "?"
+					callerParams = callerParams.replace(subStr, '');
 				}
 			} else {
 				callerParams = jQuery.extend({}, params);
@@ -60,27 +64,28 @@ var AppConnector = {
 			params.data = callerParams;
 		}
 		//Make the request as post by default
-		if (typeof params.type == 'undefined') params.type = 'POST';
+		if (typeof params.type === "undefined" || rawData)
+			params.type = 'POST';
+		if (typeof params.jsonp === "undefined" || rawData)
+			params.jsonp = false;
 
 		//By default we expect json from the server
-		if (typeof params.dataType == 'undefined') {
+		if (typeof params.dataType === "undefined" || rawData) {
 			var data = params.data;
 			//view will return html
 			params.dataType = 'json';
 			if (data.hasOwnProperty('view')) {
 				params.dataType = 'html';
-			}
-			else if (typeof data == 'string' && data.indexOf('&view=') !== -1) {
+			} else if (typeof data === 'string' && data.indexOf('&view=') !== -1) {
 				params.dataType = 'html';
 			}
-
-			if (typeof params.url != 'undefined' && params.url.indexOf('&view=') !== -1) {
+			if (typeof params.url !== "undefined" && params.url.indexOf('&view=') !== -1) {
 				params.dataType = 'html';
 			}
 		}
-
 		//If url contains params then seperate them and make them as data
-		if (typeof params.url != 'undefined' && params.url.indexOf('?') !== -1) {
+		if (typeof params.url !== "undefined" && params.url.indexOf('?') !== -1) {
+			fullUrl = params.url;
 			var urlSplit = params.url.split('?');
 			var queryString = urlSplit[1];
 			params.url = urlSplit[0];
@@ -91,51 +96,69 @@ var AppConnector = {
 				params.data[queryParamComponents[0]] = queryParamComponents[1];
 			}
 		}
-
-		if (typeof params.url == 'undefined' || params.url.length <= 0) {
+		if (typeof params.url === "undefined" || params.url.length <= 0) {
 			params.url = 'index.php';
 		}
-
-
-		var success = function (data, status, jqXHR) {
+		params.success = function (data, status, jqXHR) {
+			if (data !== null && typeof data === 'object' && data.error) {
+				app.errorLog(data.error);
+				if (data.error.message) {
+					Vtiger_Helper_Js.showMessage({
+						text: data.error.message,
+						type: 'error'
+					});
+				}
+			}
 			aDeferred.resolve(data);
-		}
-
-		var error = function (jqXHR, textStatus, errorThrown) {
-			aDeferred.reject(textStatus, errorThrown);
-		}
-
-		if (pjaxMode) {
-			if (typeof params.container == 'undefined') params.container = '#pjaxContainer';
-
-			params.type = 'GET';
-
-			var pjaxContainer = jQuery('#pjaxContainer');
-			//Clear contents existing before
-			if (params.container == '#pjaxContainer') {
-				pjaxContainer.html('');
+		};
+		params.error = function (jqXHR, textStatus, errorThrown) {
+			let action = jqXHR.getResponseHeader('yf-action');
+			if (action === 'logout') {
+				window.location.href = 'index.php';
+			}
+			if (CONFIG.debug) {
+				if (jqXHR.status === 406) {
+					let sep = "-".repeat(150);
+					console.warn("%cYetiForce debug mode!!!", "color: red; font-family: sans-serif; font-size: 1.5em; font-weight: bolder; text-shadow: #000 1px 1px;");
+					console.error('Error: ' + errorThrown, '\n' + sep + '\nTrace:\n' + sep + '\n' + jqXHR.responseJSON.error.trace, '\n' + sep + '\nParams:\n' + sep + '\n' + JSON.stringify(params, null, '\t'));
+				} else {
+					app.errorLog(jqXHR, textStatus, errorThrown);
+				}
 			}
 
-			jQuery(document).on('pjax:success', function (event, data, status, jqXHR) {
-				pjaxContainer.html('');
-				success(data, status, jqXHR);
-			})
-
-			jQuery(document).on('pjax:error', function (event, jqXHR, textStatus, errorThrown) {
-				pjaxContainer.html('');
-				error(jqXHR, textStatus, errorThrown);
-			})
-			jQuery.pjax(params);
-
-		} else {
-			params.success = success;
-
-			params.error = error;
-			jQuery.ajax(params);
+			aDeferred.reject(textStatus, errorThrown);
+		};
+		jQuery.ajax(params);
+		if (pjaxMode) {
+			if (fullUrl === '') {
+				fullUrl = 'index.php?' + $.param(params.data);
+			} else if (fullUrl.indexOf('index.php?') === -1) {
+				fullUrl = 'index.php?' + fullUrl;
+			}
+			if (history.pushState && fullUrl !== '') {
+				const currentHref = window.location.href;
+				if (!history.state) {
+					history.replaceState(currentHref, "title 1", currentHref);
+				}
+				history.pushState(fullUrl, "title 2", fullUrl);
+			}
 		}
-
 		return aDeferred.promise();
-	}
+	},
 
+	requestForm: function (url, params) {
+		var newEle = '<form action=' + url + ' method="POST">';
+		if (typeof csrfMagicName !== "undefined") {
+			newEle += '<input type="hidden" name="' + csrfMagicName + '"  value=\'' + csrfMagicToken + '\'>';
+		}
+		if (typeof params !== "undefined") {
+			jQuery.each(params, function (index, value) {
+				newEle += '<input type="hidden" name="' + index + '"  value=\'' + value + '\'>';
+			});
+		}
+		newEle += '</form>';
+		var form = new jQuery(newEle);
+		form.appendTo('body').submit();
+	},
 }
 
