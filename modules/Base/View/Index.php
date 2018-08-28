@@ -202,10 +202,10 @@ abstract class Index extends \App\Controller
 	{
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
-		$shortLang = \App\Language::getShortLanguageName();
-		$validLangScript = YF_ROOT_WWW . "libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-$shortLang.js";
-		if (!file_exists($validLangScript)) {
-			$validLangScript = YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/languages/jquery.validationEngine-en.js';
+		$languageHandlerShortName = \App\Language::getShortLanguageName();
+		$fileName = "~libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
+		if (!file_exists($fileName)) {
+			$fileName = YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js';
 		}
 		$jsFileNames = [
 			YF_ROOT_WWW . 'libraries/jquery/dist/jquery.js',
@@ -225,7 +225,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive/js/dataTables.responsive.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
-			$validLangScript,
+			$fileName,
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',

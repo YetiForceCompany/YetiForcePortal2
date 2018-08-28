@@ -6,7 +6,6 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-'use strict';
 
 AppConnector = {
 
@@ -160,5 +159,5 @@ AppConnector = {
 		var form = new jQuery(newEle);
 		form.appendTo('body').submit();
 	},
-}
+};
 
