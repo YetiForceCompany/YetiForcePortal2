@@ -4,7 +4,7 @@
 # dependencies YARN
 yarn-error.log
 /node_modules/
-/public/libraries/*
+/public_html/libraries/*
 
 # IDEs and editors
 /.buildpath
