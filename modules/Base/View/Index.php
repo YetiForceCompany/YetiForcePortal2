@@ -107,7 +107,6 @@ abstract class Index extends \App\Controller
 	public function getHeaderScripts(\App\Request $request)
 	{
 		$headerScriptInstances = [
-			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.js',
 		];
 		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
 		return $jsScriptInstances;
@@ -162,11 +161,10 @@ abstract class Index extends \App\Controller
 	public function getHeaderCss(\App\Request $request)
 	{
 		$cssFileNames = [
-			YF_ROOT_WWW . 'libraries/Scripts/pace/pace.css',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.css',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.bootstrap.css',
-			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/css/validationEngine.jquery.css',
+			YF_ROOT_WWW . 'libraries/chosen-js/chosen.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-chosen/bootstrap-chosen.css',
+			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
 			YF_ROOT_WWW . 'libraries/select2/dist/css/select2.css',
 			YF_ROOT_WWW . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
@@ -234,16 +232,16 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/jquery/jquery.class.js',
 			YF_ROOT_WWW . 'libraries/Scripts/jquery-pjax/jquery.pjax.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
-			YF_ROOT_WWW . 'libraries/Scripts/chosen/chosen.jquery.js',
+			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
-			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
-			YF_ROOT_WWW . 'libraries/Scripts/inputmask/jquery.inputmask.js',
+			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',
+			YF_ROOT_WWW . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/datatables.net/js/jquery.dataTables.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive/js/dataTables.responsive.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
-			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
+			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
 			$validLangScript,
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
