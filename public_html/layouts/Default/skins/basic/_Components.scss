@@ -1,14 +1,17 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
 //blocks
 @media only screen and (max-width: 992px) {
-	.blockContainer .blockContent .fieldLabel {
-		text-align: left;
-		margin-bottom: 0;
-		padding-bottom: 0;
-		min-height: 1px;
-	}
-
-	.blockContainer .blockContent .fieldValue {
-		min-height: 1px;
+	.blockContainer .blockContent {
+		.fieldLabel {
+			text-align: left;
+			margin-bottom: 0;
+			padding-bottom: 0;
+			min-height: 1px;
+		}
+		.fieldValue {
+			min-height: 1px;
+		}
 	}
 }
 

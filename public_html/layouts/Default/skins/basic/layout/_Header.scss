@@ -1,22 +1,24 @@
-
-.bodyHeader .leftHeader {
-	background-color: #969696;
-	color: #fff;
-	height: 50px;
-}
-
-.bodyHeader .rightHeader {
-	background-color: #696969;
-	color: #fff;
-	height: 40px;
-}
-
-.bodyHeader .moduleIcon {
-	max-width: 30px;
-	margin: 5px 10px 0 0;
-}
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .bodyHeader {
+
+	.leftHeader {
+		background-color: #969696;
+		color: #fff;
+		height: 50px;
+	}
+
+	.rightHeader {
+		background-color: #696969;
+		color: #fff;
+		height: 40px;
+	}
+
+	.moduleIcon {
+		max-width: 30px;
+		margin: 5px 10px 0 0;
+	}
+
 	position: fixed;
 	height: 50px;
 	background: #4a5364;
@@ -27,40 +29,39 @@
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-}
 
-.bodyHeader .leftSide {
-	padding-left: 10px;
-	padding-top: 7px;
-	width: 450px;
-}
+	.leftSide {
+		padding-left: 10px;
+		padding-top: 7px;
+		width: 450px;
+	}
 
-.bodyHeader .rightSide {
-	position: relative;
-	min-height: 1px;
-	float: right;
-}
+	.rightSide {
+		position: relative;
+		min-height: 1px;
+		float: right;
 
-.bodyHeader .rightSide img {
-	height: 22px;
-	margin: 0;
-}
+		img {
+			height: 22px;
+			margin: 0;
+		}
 
-.bodyHeader .rightSide .rightHeaderBtn {
-	padding: 7px 5px;
-}
+		.rightHeaderBtn {
+			padding: 7px 5px;
 
-.bodyHeader .rightSide .rightHeaderBtn a {
-	line-height: 20px;
-	font-size: 18px;
+			a {
+				line-height: 20px;
+				font-size: 18px;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 768px) {
-	.bodyHeader .leftSide {
-		width: auto;
-	}
-
 	.bodyHeader {
+		.leftSide {
+			width: auto;
+		}
 		left: 0px;
 	}
 }
@@ -93,15 +94,15 @@
 
 .clearHistory {
 	font-weight: 900 !important;
-	text-align: center
+	text-align: center;
 }
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
 	font-size: 15px;
-}
 
-.widget_header .breadCrumbs .breadcrumbsLinks a {
-	color: #000;
+	a {
+		color: #000;
+	}
 }
 
 .actionMenu {
@@ -113,38 +114,37 @@
 	border-radius: 5px;
 	border: 1px solid #eee;
 	padding: 5px;
-	display: none
-}
+	display: none;
 
-.actionMenu > div {
-	position: relative;
-	width: 100%;
-	padding-bottom: 5px;
-}
+	> div {
+		position: relative;
+		width: 100%;
+		padding-bottom: 5px;
+	}
 
-.actionMenu img {
-	height: 19px;
-}
+	img {
+		height: 19px;
+	}
 
-.actionMenu .iconContainer {
-	padding-left: 15px;
-}
+	.iconContainer {
+		padding-left: 15px;
+	}
 
-.actionMenu .labelContainer {
-	padding-top: 5px;
+	.labelContainer {
+		padding-top: 5px;
+	}
+
+	.commonActionsButtonDropDown, .historyList {
+		position: fixed;
+		top: 50px;
+		left: 5px;
+		right: 5px;
+		bottom: 17px;
+	}
 }
 
 .showActionMenu {
 	display: block;
-}
-
-.actionMenu .commonActionsButtonDropDown,
-.actionMenu .historyList {
-	position: fixed;
-	top: 50px;
-	left: 5px;
-	right: 5px;
-	bottom: 17px;
 }
 
 .searchMenu {
@@ -173,11 +173,11 @@
 	padding-bottom: 5px;
 	margin-bottom: 10px;
 	position: relative;
-}
 
-.widget_header h2 {
-	margin-bottom: 7px;
-	margin-top: 7px;
+	h2 {
+		margin-bottom: 7px;
+		margin-top: 7px;
+	}
 }
 
 .breadcrumbsLinks a {

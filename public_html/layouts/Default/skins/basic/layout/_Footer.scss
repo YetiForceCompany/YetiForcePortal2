@@ -1,3 +1,5 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
 .footerContainer {
 	position: fixed;
 	height: 33px;
@@ -9,14 +11,14 @@
 
 .footer {
 	text-align: center;
-}
 
-.footer p {
-	color: #ffffff;
-	border-top: 1px solid #dddddd;
-	padding: 1px 0;
-	font-size: 0.8em;
-	margin-bottom: 0;
+	p {
+		color: #ffffff;
+		border-top: 1px solid #dddddd;
+		padding: 1px 0;
+		font-size: 0.8em;
+		margin-bottom: 0;
+	}
 }
 
 @media only screen and (max-width: 768px) {

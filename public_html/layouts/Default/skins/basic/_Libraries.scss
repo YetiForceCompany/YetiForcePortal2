@@ -1,3 +1,4 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .chosen-container {
 	min-height: 32px;
@@ -7,22 +8,20 @@
 .chosen-container-multi .chosen-choices li.search-choice {
 	line-height: 20px;
 	margin: 3px 5px 3px;
-}
-
-.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
-	top: 8px;
+	.search-choice-close {
+		top: 8px;
+	}
 }
 
 .referenceGroup .referenceModulesListGroup .chosen-container {
 	min-width: 100px !important;
 	text-align: left;
 	height: 32px;
-}
-
-.referenceGroup .referenceModulesListGroup .chosen-container .chosen-single {
-	border: 0;
-	height: 32px;
-	border-radius: 0;
+	.chosen-single {
+		border: 0;
+		height: 32px;
+		border-radius: 0;
+	}
 }
 
 .quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
