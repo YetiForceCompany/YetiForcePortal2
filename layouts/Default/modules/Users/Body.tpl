@@ -5,5 +5,5 @@
 		<div class="col-md-12">
 			<div id="page">
 				<!-- container which holds data temporarly for pjax calls -->
-				<div id="pjaxContainer" class="d-none noprint"></div>
+				<div id="pjaxContainer" class="d-none d-print-none"></div>
 				{/strip}
