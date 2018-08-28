@@ -152,7 +152,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/select2/dist/css/select2.css',
 			YF_ROOT_WWW . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/styles.css',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
