@@ -172,7 +172,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/styles.css',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
-			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
 			YF_ROOT_WWW . 'libraries/Scripts/clockpicker/bootstrap-clockpicker.css',
 		];
 
@@ -237,7 +237,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/select2/select2.full.js',
 			YF_ROOT_WWW . 'libraries/Scripts/moment.js/moment.js',
 			YF_ROOT_WWW . 'libraries/Scripts/inputmask/jquery.inputmask.js',
-			YF_ROOT_WWW . 'libraries/Scripts/bootstrap-daterangepicker/daterangepicker.js',
+			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/js/jquery.dataTables.js',
 			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
