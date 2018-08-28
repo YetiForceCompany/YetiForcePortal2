@@ -1,0 +1,26 @@
+.footerContainer {
+	position: fixed;
+	height: 33px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 1500;
+	background: #404952;
+}
+
+.footer {
+	text-align: center;
+}
+
+.footer p {
+	color: #ffffff;
+	border-top: 1px solid #dddddd;
+	padding: 1px 0;
+	font-size: 0.8em;
+	margin-bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+	.footerContainer {
+		height: 17px;
+	}
+}

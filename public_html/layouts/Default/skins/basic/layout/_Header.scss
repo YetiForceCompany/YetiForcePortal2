@@ -1,0 +1,185 @@
+
+.bodyHeader .leftHeader {
+	background-color: #969696;
+	color: #fff;
+	height: 50px;
+}
+
+.bodyHeader .rightHeader {
+	background-color: #696969;
+	color: #fff;
+	height: 40px;
+}
+
+.bodyHeader .moduleIcon {
+	max-width: 30px;
+	margin: 5px 10px 0 0;
+}
+
+.bodyHeader {
+	position: fixed;
+	height: 50px;
+	background: #4a5364;
+	right: 0;
+	left: 50px;
+	z-index: 1200;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+.bodyHeader .leftSide {
+	padding-left: 10px;
+	padding-top: 7px;
+	width: 450px;
+}
+
+.bodyHeader .rightSide {
+	position: relative;
+	min-height: 1px;
+	float: right;
+}
+
+.bodyHeader .rightSide img {
+	height: 22px;
+	margin: 0;
+}
+
+.bodyHeader .rightSide .rightHeaderBtn {
+	padding: 7px 5px;
+}
+
+.bodyHeader .rightSide .rightHeaderBtn a {
+	line-height: 20px;
+	font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+	.bodyHeader .leftSide {
+		width: auto;
+	}
+
+	.bodyHeader {
+		left: 0px;
+	}
+}
+
+.historyList {
+	overflow: auto;
+}
+
+.selectorHistory {
+	font-weight: 900 !important;
+	text-align: center;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #111;
+	white-space: nowrap;
+	cursor: default;
+}
+
+.historyHour {
+	font-weight: 600 !important;
+}
+
+.historyList a {
+	color: #222 !important;
+	font-size: 15px !important;
+}
+
+.clearHistory {
+	font-weight: 900 !important;
+	text-align: center
+}
+
+.widget_header .breadCrumbs .breadcrumbsLinks {
+	font-size: 15px;
+}
+
+.widget_header .breadCrumbs .breadcrumbsLinks a {
+	color: #000;
+}
+
+.actionMenu {
+	position: fixed;
+	top: 50px;
+	right: 0px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 5px;
+	display: none
+}
+
+.actionMenu > div {
+	position: relative;
+	width: 100%;
+	padding-bottom: 5px;
+}
+
+.actionMenu img {
+	height: 19px;
+}
+
+.actionMenu .iconContainer {
+	padding-left: 15px;
+}
+
+.actionMenu .labelContainer {
+	padding-top: 5px;
+}
+
+.showActionMenu {
+	display: block;
+}
+
+.actionMenu .commonActionsButtonDropDown,
+.actionMenu .historyList {
+	position: fixed;
+	top: 50px;
+	left: 5px;
+	right: 5px;
+	bottom: 17px;
+}
+
+.searchMenu {
+	position: fixed;
+	top: 50px;
+	right: -300px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 10px;
+	width: 300px;
+	-webkit-transition: right 0.5s ease;
+	-moz-transition: right 0.5s ease;
+	-o-transition: right 0.5s ease;
+	transition: right 0.5s ease;
+}
+
+.showSearchMenu {
+	right: 0px;
+}
+
+.widget_header {
+	background: #eee;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.widget_header h2 {
+	margin-bottom: 7px;
+	margin-top: 7px;
+}
+
+.breadcrumbsLinks a {
+	font-weight: bold;
+}

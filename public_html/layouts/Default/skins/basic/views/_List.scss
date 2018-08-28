@@ -1,0 +1,55 @@
+
+.listViewHeaders {
+	text-transform: capitalize;
+}
+
+.listViewEntries {
+	font-weight: 400 !important;
+}
+
+.listViewEntries tbody tr {
+	cursor: pointer;
+}
+
+table tbody tr:hover td .actions span {
+	opacity: 1
+}
+
+.leftRecordActions .actions:hover .toolsAction {
+	visibility: hidden;
+}
+
+.leftRecordActions .actions:hover .actionImages {
+	white-space: nowrap;
+	position: absolute;
+	z-index: 1;
+}
+
+.leftRecordActions > div,
+.leftRecordActions .actions:hover .actionImages {
+	display: inline-block !important;
+}
+
+.leftRecordActions .actions {
+	background: inherit;
+}
+
+.listViewEntries {
+	background: #fff;
+}
+
+.leftRecordActions {
+	background: inherit;
+}
+
+.leftRecordActions .actions .actionImages a {
+	color: inherit;
+}
+
+table.listViewEntries td {
+	vertical-align: middle !important;
+}
+
+table.dataTable.listViewEntries tbody td {
+	padding: 3px 10px !important;
+}

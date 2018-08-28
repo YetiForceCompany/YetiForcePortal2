@@ -1,0 +1,27 @@
+//blocks
+@media only screen and (max-width: 992px) {
+	.blockContainer .blockContent .fieldLabel {
+		text-align: left;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		min-height: 1px;
+	}
+
+	.blockContainer .blockContent .fieldValue {
+		min-height: 1px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.blockContainer .blockContent .fieldLabel {
+		text-align: right;
+	}
+}
+
+#EditView .blockContainer .blockContent .fieldLabel label {
+	padding-top: 8px;
+}
+
+.blockContainer .blockContent .fieldLabel label {
+	font-size: 12px !important;
+}
