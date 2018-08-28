@@ -173,7 +173,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/jquery.dataTables_themeroller.css',
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/css/dataTables.bootstrap.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
-			YF_ROOT_WWW . 'libraries/Scripts/clockpicker/bootstrap-clockpicker.css',
+			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
 		];
 
 		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
@@ -242,7 +242,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/Scripts/ValidationEngine/js/jquery.validationEngine.js',
 			$validLangScript,
 			YF_ROOT_WWW . 'libraries/Scripts/datatables/media/js/dataTables.bootstrap.js',
-			YF_ROOT_WWW . 'libraries/Scripts/clockpicker/bootstrap-clockpicker.js',
+			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/helper.js',
