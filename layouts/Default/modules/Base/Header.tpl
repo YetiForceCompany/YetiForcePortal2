@@ -19,9 +19,6 @@
 	{foreach item=SCRIPT from=$STYLES}
 		<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}"/>
 	{/foreach}
-	{foreach item=SCRIPT from=$HEADER_SCRIPTS}
-		<script src="{$SCRIPT->getSrc()}"></script>
-	{/foreach}
 </head>
 <body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
 {include file=\App\Functions::templatePath("Body.tpl",$MODULE_NAME)}

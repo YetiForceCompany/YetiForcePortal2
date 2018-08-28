@@ -42,7 +42,6 @@ abstract class Index extends \App\Controller
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
-		$viewer->assign('HEADER_SCRIPTS', $this->getHeaderScripts($request));
 		$viewer->assign('STYLES', $this->getHeaderCss($request));
 		$viewer->assign('LANGUAGE', \App\Language::getLanguage());
 		$viewer->assign('LANG', \App\Language::getShortLanguageName());
@@ -95,21 +94,6 @@ abstract class Index extends \App\Controller
 			return $this->pageTitle;
 		}
 		return false;
-	}
-
-	/**
-	 * Retrieves headers scripts that need to loaded in the page.
-	 *
-	 * @param \App\Request $request - request model
-	 *
-	 * @return <array> - array of \App\Script
-	 */
-	public function getHeaderScripts(\App\Request $request)
-	{
-		$headerScriptInstances = [
-		];
-		$jsScriptInstances = $this->convertScripts($headerScriptInstances, 'js');
-		return $jsScriptInstances;
 	}
 
 	//Note : To get the right hook for immediate parent in PHP,
