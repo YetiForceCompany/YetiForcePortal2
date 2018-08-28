@@ -441,10 +441,6 @@ hr {
 	float: none;
 }
 
-#detailView .fieldRow {
-	display: table;
-}
-
 .border {
 	border: 1px solid #ddd;
 }

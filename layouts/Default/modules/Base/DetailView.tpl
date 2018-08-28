@@ -23,11 +23,11 @@
 				<div class="card col-xs-12 px-0 blockContainer">
 					<div class="card-header">{$BLOCK['name']}</div>
 					<div class="col-md-12 px-0 card-body blockContent">
-						<div class="col-xs-12 px-0 fieldRow">
+						<div class="col-xs-12 px-0 form-row">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
 						</div>
-						<div class="col-xs-12 px-0 fieldRow">
+						<div class="col-xs-12 px-0 form-row">
 							{assign var=COUNTER value=0}
 							{/if}
 							<div class="col-xs-12 col-md-6 px-0 tableCell borderTop">
