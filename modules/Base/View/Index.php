@@ -214,6 +214,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
+			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
