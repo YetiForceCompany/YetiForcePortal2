@@ -1,0 +1,57 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+.listViewHeaders {
+	text-transform: capitalize;
+}
+
+.listViewEntries {
+	background: #fff;
+	font-weight: 400 !important;
+
+	tbody tr {
+		cursor: pointer;
+	}
+}
+
+table tbody tr:hover td .actions span {
+	opacity: 1;
+}
+
+.leftRecordActions {
+	background: inherit;
+
+	.actions {
+		background: inherit;
+
+		&:hover {
+			.toolsAction {
+				visibility: hidden;
+			}
+
+			.actionImages {
+				white-space: nowrap;
+				position: absolute;
+				z-index: 1;
+				display: inline-block !important;
+			}
+		}
+
+		.actionImages a {
+			color: inherit;
+		}
+	}
+
+	> div {
+		display: inline-block !important;
+	}
+}
+
+table {
+	&.listViewEntries td {
+		vertical-align: middle !important;
+	}
+
+	&.dataTable.listViewEntries tbody td {
+		padding: 3px 10px !important;
+	}
+}

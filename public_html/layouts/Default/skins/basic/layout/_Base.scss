@@ -1,0 +1,64 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+html, body {
+	height: 100%;
+	width: 100%;
+	display: block;
+	background: #fff;
+	padding: 0 !important;
+}
+
+.bodyContainer {
+	background-color: #eee;
+}
+
+img {
+	max-width: 100%
+}
+
+.mainPage {
+	height: 100%;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin-left: 50px;
+	background: #fff;
+}
+
+.mainBody {
+	background: #fff;
+	position: relative;
+	height: 100%;
+	top: 0;
+	left: 0px;
+	z-index: 1030;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+.bodyContent {
+	position: relative;
+	padding-top: 50px;
+	oveflow-x: hidden;
+	width: 100%;
+	background: #fff;
+	padding-bottom: 33px;
+
+}
+
+@media only screen and (max-width: 768px) {
+	.bodyContent {
+		padding-left: 10px;
+	}
+
+	.mainPage {
+		margin-left: 0px;
+	}
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

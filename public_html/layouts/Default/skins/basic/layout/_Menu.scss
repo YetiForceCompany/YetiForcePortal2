@@ -1,0 +1,200 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+.userDetailsContainer {
+	.row {
+		padding: 5px;
+	}
+
+	.logo {
+		margin: 5px;
+		height: 40px;
+	}
+
+	.userDetails {
+		.name {
+			color: #fff;
+		}
+
+		.userName {
+			margin-top: 5px;
+		}
+	}
+}
+
+.leftPanel {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 300px;
+	z-index: 1000;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	height: calc(100% - 50px);
+
+	&:hover {
+		left: 0px;
+
+		+ .mainBody {
+			left: 250px !important;
+
+			.bodyHeader {
+				left: 300px;
+			}
+		}
+	}
+
+	.userDetailsContainer {
+		height: 50px;
+		background: #4979aa;
+	}
+
+	.menuContainer {
+		background: #4a5364;
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		top: 50px;
+
+		.moduleList {
+			overflow: auto;
+			height: calc(100% - 33px);
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			> li {
+				width: 100%;
+				height: 40px;
+				list-style: none;
+				position: static;
+				color: #fff;
+
+				> a {
+					text-decoration: none;
+					width: 100%;
+					display: inline-flex;
+					color: #fff;
+
+					&:hover {
+						background: #fff;
+						color: #4a5364;
+					}
+
+					> {
+						.iconContainer {
+							width: 50px;
+							height: 40px;
+							margin: 0px;
+							padding: 0px;
+							display: table;
+
+							> .iconImage {
+								> span {
+									font-size: 20px;
+								}
+								padding-left: 15px;
+								display: table-cell;
+								vertical-align: middle;
+							}
+						}
+
+						.labelContainer {
+							width: 250px;
+							height: 40px;
+							margin: 0px;
+							padding: 0px;
+							display: table;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.labelContainer .labelValue {
+	display: table-cell;
+	vertical-align: middle;
+	line-height: 18px;
+}
+
+.mobileLeftPanel {
+	position: fixed;
+	top: 50px;
+	right: -300px;
+	width: 300px;
+	z-index: 1300;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	height: calc(100% - 50px);
+
+	.userDetailsContainer {
+		height: 50px;
+		background: #4979aa;
+	}
+
+	.menuContainer {
+		background: #3f3f3f;
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		top: 50px;
+
+		.moduleList {
+			overflow: auto;
+			height: calc(100% - 67px);
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			> li {
+				width: 100%;
+				height: 30px;
+				list-style: none;
+				position: static;
+				color: #fff;
+
+				> a {
+					text-decoration: none;
+					width: 100%;
+					display: inline-flex;
+					color: #fff;
+
+					> {
+						.iconContainer {
+							width: 50px;
+							height: 30px;
+							margin: 0px;
+							padding: 0px;
+							display: table;
+
+							> .iconImage {
+								> span {
+									font-size: 15px;
+								}
+
+								padding-left: 15px;
+								display: table-cell;
+								vertical-align: middle;
+							}
+						}
+
+						.labelContainer {
+							width: 250px;
+							height: 30px;
+							margin: 0px;
+							padding: 0px;
+							display: table;
+						}
+					}
+				}
+			}
+		}
+	}
+}
