@@ -41,9 +41,9 @@
 					type="submit">{\App\Functions::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
-	<div id="CoreLog" class="panel panel-primary col-xs-12 paddingLRZero blockContainer">
+	<div id="CoreLog" class="panel panel-primary col-xs-12 mx-0 blockContainer">
 		<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
-		<div class="col-md-12 paddingLRZero card-body">
+		<div class="col-md-12 mx-0 card-body">
 			<ol id="CoreLogList">
 
 			</ol>

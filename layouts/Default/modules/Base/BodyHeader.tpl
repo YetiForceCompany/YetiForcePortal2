@@ -32,7 +32,7 @@
 				<div class="card-header">
 				<h4 class="card-title"><strong>{\App\Functions::translate('LBL_QUICK_CREATE',$MODULE_NAME)}</strong></h4>
 				</div>
-				<div class="card-body paddingLRZero">
+				<div class="card-body mx-0">
 
 				</div>
 				</div>
