@@ -45,6 +45,10 @@ abstract class Controller
 	{
 	}
 
+	public function checkPermission(Request $request)
+	{
+	}
+
 	// Control the exposure of methods to be invoked from client (kind-of RPC)
 
 	public function preProcess(Request $request)

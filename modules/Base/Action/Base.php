@@ -31,7 +31,7 @@ abstract class Base extends \App\Controller
 		return true;
 	}
 
-	public function checkPermission()
+	public function checkPermission(\App\Request $request)
 	{
 		return true;
 	}
