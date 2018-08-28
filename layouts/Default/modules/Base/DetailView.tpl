@@ -32,7 +32,7 @@
 							{/if}
 							<div class="col-sm-12 col-md-6 px-0 tableCell borderTop">
 								<div class="col-md-3 fieldLabel pl-2 form-control-plaintext">
-									<label class="control-label">
+									<label class="col-form-label">
 										{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 										{$FIELD->get('label')}
 									</label>

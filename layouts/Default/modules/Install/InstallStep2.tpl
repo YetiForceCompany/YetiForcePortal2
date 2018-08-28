@@ -13,14 +13,14 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="inputEmail3"
-						   class="col-sm-4 control-label">{\App\Functions::translate('LBL_CRM_PATH', $MODULE_NAME)}</label>
+						   class="col-sm-4 col-form-label">{\App\Functions::translate('LBL_CRM_PATH', $MODULE_NAME)}</label>
 					<div class="col-sm-8">
 						<input type="url" name="crmPath" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputEmail3"
-						   class="col-sm-4 control-label">{\App\Functions::translate('LBL_API_KEY', $MODULE_NAME)}</label>
+						   class="col-sm-4 col-form-label">{\App\Functions::translate('LBL_API_KEY', $MODULE_NAME)}</label>
 					<div class="col-sm-8">
 						<input type="text" name="apiKey" class="form-control">
 					</div>
