@@ -31,3 +31,15 @@
 .chosen-container-single .chosen-single {
 	background: #fff;
 }
+
+.select2-selection--single {
+	@at-root .input-group > .input-group-prepend #{&} {
+		border-right: unset !important;
+		border-radius: 0.25rem 0 0 0.25rem !important;
+	}
+	// Border correction for select2 sm
+	@at-root .input-group #{&} {
+		border-top-right-radius: 0.25rem !important;
+		border-bottom-right-radius: 0.25rem !important;
+	}
+}

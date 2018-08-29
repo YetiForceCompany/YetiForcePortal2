@@ -28,9 +28,9 @@
 		   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}>
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
-			<div class="input-group-append noSpaces referenceModulesListGroup">
+			<div class="input-group-prepend referenceModulesListGroup">
 				<select id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_dropDown"
-						class="referenceModulesList chzn-select"
+						class="referenceModulesList select2"
 						title="{\App\Functions::translate('LBL_RELATED_MODULE_TYPE')}" required="required">
 					{foreach key=index item=REFERENCE from=$REFERENCE_LIST}
 						{assign var="REFERENCED_MODULE_TRANSLATE" value=\App\Language::translateModule($REFERENCE)}
@@ -47,17 +47,17 @@
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Functions::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
-		<span class="input-group-btn cursorPointer">
-			<button class="btn btn-default clearReferenceSelection" type="button"
+		<div class="input-group-append">
+			<button class="btn btn-secondary clearReferenceSelection" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
 					  title="{\App\Functions::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
-			<button class="btn btn-default relatedPopup" type="button"
+			<button class="btn btn-secondary relatedPopup" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
 					  title="{\App\Functions::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
-		</span>
+		</div>
 	</div>
 {/strip}

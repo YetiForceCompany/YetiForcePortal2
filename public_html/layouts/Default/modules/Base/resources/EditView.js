@@ -55,7 +55,7 @@ jQuery.Class("Base_EditView_Js", {}, {
 				console.log([e, err])
 			});
 		});
-		container.find('.referenceModulesList').chosen().change(function (e) {
+		container.find('.referenceModulesList').on('change', function (e) {
 			var element = jQuery(e.currentTarget);
 			var parentElem = element.closest('.fieldValue');
 			var popupReferenceModule = element.val();
