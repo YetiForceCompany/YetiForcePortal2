@@ -10,6 +10,9 @@
 
 namespace YF\Modules\YetiForce\View;
 
+/**
+ * Class to show more info about library.
+ */
 class LibraryMoreInfo
 {
 	/**

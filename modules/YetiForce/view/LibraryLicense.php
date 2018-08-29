@@ -10,6 +10,9 @@
 
 namespace YF\Modules\YetiForce\View;
 
+/**
+ * Class to show info about library license.
+ */
 class LibraryLicense
 {
 	/**

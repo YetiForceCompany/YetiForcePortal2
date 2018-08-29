@@ -10,14 +10,15 @@
 
 namespace YF\Modules\YetiForce\View;
 
-use App;
-
+/**
+ * Class show credits and licenses.
+ */
 class Credits extends \YF\Modules\Base\View\Index
 {
 	/**
 	 * Page title.
 	 *
-	 * @var type
+	 * @var string
 	 */
 	protected $pageTitle = 'LBL_VIEW_CREDITS';
 
@@ -25,7 +26,6 @@ class Credits extends \YF\Modules\Base\View\Index
 	 * Function process.
 	 *
 	 * @param \App\Request $request
-	 *
 	 */
 	public function process(\App\Request $request)
 	{
@@ -37,8 +37,10 @@ class Credits extends \YF\Modules\Base\View\Index
 
 	/**
 	 * @param \App\Request $request
-	 * @return bool
+	 *
 	 * @throws \App\AppException
+	 *
+	 * @return bool
 	 */
 	public function checkPermission(\App\Request $request)
 	{
