@@ -3,19 +3,21 @@
 	<div class="contentsDiv">
 		<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php"
 			  enctype="multipart/form-data">
-			<div class="widget_header row">
-				<div class="col-sm-12">
-					<div class="float-left">
+			<div class="widget_header u-remove-main-padding">
+				<div class="d-flex justify-content-between u-add-main-padding">
+					<div class="">
 						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
-						<span class=float-right">
-							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
-							<button class="btn btn-warning" type="reset"
-									onclick="javascript:window.history.back();"><span
-										class="fas fa-times"></span> &nbsp;<strong>{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
-						</span>
-						<div class="clearfix"></div>
+						<button class="btn btn-success mr-1" type="submit">
+							<span class="fas fa-check mr-1"></span>
+							{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}
+						</button>
+						<button class="btn btn-warning" type="reset"
+								onclick="javascript:window.history.back();">
+							<span class="fas fa-times mr-1"></span>
+							{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}
+						</button>
 					</div>
 				</div>
 			</div>
@@ -25,11 +27,11 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
-					<div class="card col-sm-12 px-0 blockContainer">
+					<div class="card mb-2 blockContainer">
 						<div class="card-header">{$BLOCK['name']}</div>
-						<div class="col-md-12 px-0 card-body blockContent">
+						<div class="card-body blockContent row">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
-								<div class="editFields col-sm-12 col-md-6 px-0">
+								<div class="editFields col-sm-12 col-md-6 row">
 									<div class="col-md-3 fieldLabel paddingLeft5px">
 										<label class="muted">
 											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}

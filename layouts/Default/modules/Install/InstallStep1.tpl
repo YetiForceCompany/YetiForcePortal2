@@ -7,7 +7,7 @@
 				<h4>{\App\Functions::translate('LBL_WELCOME', $MODULE_NAME)}</h4>
 			</div>
 			<div class="col-md-3">
-				<select name="lang" class="chzn-select form-control" style="width: 250px;">
+				<select name="lang" class="select2" style="width: 250px;">
 					{foreach key=key item=item from=\App\Config::get('languages')}
 						<option value="{$key}" {if $LANGUAGE eq $key}selected{/if}>{$item}</option>
 					{/foreach}

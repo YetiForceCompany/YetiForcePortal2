@@ -94,8 +94,9 @@ jQuery.Class("Base_Header_Js", {
 	},
 	registerChangeCompany: function () {
 		$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
-			var modal = $(relatedTarget.target);
-			modal.find('select').addClass('select2');
+			let modal = $(relatedTarget.target);
+			let select = modal.find('select').addClass('select2');
+			App.Fields.Picklist.showSelect2ElementView(select);
 			modal.find(".btn-primary").click(function () {
 				AppConnector.request({
 					module: app.getModuleName(),

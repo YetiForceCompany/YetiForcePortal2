@@ -1,5 +1,13 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.u-remove-main-padding {
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.u-add-main-padding {
+  padding-left: 15px;
+  padding-right: 15px; }
+
 .noPadding {
   padding: 0; }
 
@@ -67,6 +75,13 @@
 
 .chosen-container-single .chosen-single {
   background: #fff; }
+
+.input-group > .input-group-prepend .select2-selection--single {
+  border-right: unset !important;
+  border-radius: 0.25rem 0 0 0.25rem !important; }
+.input-group .select2-selection--single {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 @media only screen and (max-width: 992px) {
@@ -288,10 +303,8 @@ hr {
   text-align: center; }
   .footer p {
     color: #ffffff;
-    border-top: 1px solid #dddddd;
-    padding: 1px 0;
-    font-size: 0.8em;
-    margin-bottom: 0; }
+    padding: 0.0625rem 0;
+    font-size: 0.625rem; }
 
 @media only screen and (max-width: 768px) {
   .footerContainer {

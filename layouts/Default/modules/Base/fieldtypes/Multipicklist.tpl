@@ -2,7 +2,7 @@
 {strip}
 	<input type="hidden" name="{$FIELD_MODEL->getName()}" value=""/>
 	<select id="{$MODULE_NAME}_{$VIEW}_fieldName_{$FIELD_MODEL->getName()}" title="{$FIELD_MODEL->getLabel()}" multiple
-			class="chzn-select form-control col-md-12 {if !empty($FIELD_MODEL->getNotDisplayValuesList())} hideSelected{/if}"
+			class="select2 {if !empty($FIELD_MODEL->getNotDisplayValuesList())} hideSelected{/if}"
 			name="{$FIELD_MODEL->getName()}[]"
 			data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}" {if $FIELD_MODEL->isMandatory()} data-validation-engine="validate[required]" {/if} {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
 		{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$FIELD_MODEL->getPicklistValues()}
