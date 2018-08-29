@@ -6,7 +6,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 	 *
 	 * @returns {jQuery}
 	 */
-	getContainer: function () {
+	getContainer() {
 		if (!this.container) {
 			this.container = $('.js-table-container');
 		}
@@ -17,7 +17,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 	 * @param contentData
 	 * @returns {jQuery}
 	 */
-	registerDataTables: function (contentData) {
+	registerDataTables(contentData) {
 		$.extend($.fn.dataTable.defaults, {
 			bPaginate: false,
 			order: [],
@@ -42,7 +42,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 	 *
 	 * @param container
 	 */
-	showMore: function (container) {
+	showMore(container) {
 		container.find('.js-show-more').on('click', function (e) {
 			AppConnector.request({
 				module: app.getModuleName(),
@@ -51,10 +51,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 				type: $(this).attr('data-type'),
 				libraryName: $(this).attr('data-library-name')
 			}).done(function (data) {
-				let html = '<div class="modal fade modal' + name + '" id="modal' + name + '"><div class="modal-dialog modal-lg"><div class="modal-content">';
-				html += data;
-				html += '</div></div></div><div>';
-				app.showModalWindow(html);
+				app.showModalWindow(data);
 			});
 		});
 	},
@@ -62,7 +59,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 	 *
 	 * @param container
 	 */
-	showLicense: function (container) {
+	showLicense(container) {
 		container.find('.js-show-license').on('click', function (e) {
 			AppConnector.request({
 				module: app.getModuleName(),
@@ -71,15 +68,12 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 				license: $(this).attr('data-license'),
 			}).done(function (data) {
 				if (data) {
-					let html = '<div class="modal fade modal' + name + '" id="modal' + name + '"><div class="modal-dialog modal-lg"><div class="modal-content">';
-					html += data;
-					html += '</div></div></div><div>';
-					app.showModalWindow(html);
+					app.showModalWindow(data);
 				}
 			});
 		});
 	},
-	registerEvents: function () {
+	registerEvents() {
 		let container = this.getContainer();
 		this.registerDataTables(container);
 		this.showMore(container);
