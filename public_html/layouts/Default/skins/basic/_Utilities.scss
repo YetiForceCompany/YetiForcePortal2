@@ -5,6 +5,16 @@
 	@return #{$rem-size}rem;
 }
 
+.u-remove-main-padding {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+.u-add-main-padding {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
 .noPadding {
 	padding: 0;
 }

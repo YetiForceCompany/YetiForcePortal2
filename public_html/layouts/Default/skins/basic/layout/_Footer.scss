@@ -14,9 +14,8 @@
 
 	p {
 		color: #ffffff;
-		padding: 1px 0;
+		padding: calculate-rem(1px) 0;
 		font-size: calculate-rem(10px);
-		margin-bottom: 0;
 	}
 }
 

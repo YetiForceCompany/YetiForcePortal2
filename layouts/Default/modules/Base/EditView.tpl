@@ -3,19 +3,21 @@
 	<div class="contentsDiv">
 		<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php"
 			  enctype="multipart/form-data">
-			<div class="widget_header row">
-				<div class="col-sm-12">
-					<div class="float-left">
+			<div class="widget_header u-remove-main-padding">
+				<div class="d-flex justify-content-between u-add-main-padding">
+					<div class="">
 						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
-						<span class=float-right">
-							<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> &nbsp;<strong>{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}</strong></button>&nbsp;&nbsp;
-							<button class="btn btn-warning" type="reset"
-									onclick="javascript:window.history.back();"><span
-										class="fas fa-times"></span> &nbsp;<strong>{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}</strong></button>
-						</span>
-						<div class="clearfix"></div>
+						<button class="btn btn-success mr-1" type="submit">
+							<span class="fas fa-check mr-1"></span>
+							{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}
+						</button>
+						<button class="btn btn-warning" type="reset"
+								onclick="javascript:window.history.back();">
+							<span class="fas fa-times mr-1"></span>
+							{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}
+						</button>
 					</div>
 				</div>
 			</div>
