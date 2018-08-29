@@ -50,6 +50,24 @@ class Language
 	}
 
 	/**
+	 * Functions that gets translated string by $args.
+	 *
+	 * @param string $key - string which need to be translated
+	 * @param string $moduleName - module scope in which the translation need to be check
+	 *
+	 * @return string - translated string
+	 */
+	public static function translateArgs($key, $moduleName = 'Basic')
+	{
+		$formattedString = static::translate($key, $moduleName);
+		$args = array_slice(func_get_args(), 2);
+		if (is_array($args) && !empty($args)) {
+			$formattedString = call_user_func_array('vsprintf', [$formattedString, $args]);
+		}
+		return $formattedString;
+	}
+
+	/**
 	 * Function that returns current language.
 	 *
 	 * @return <String> -

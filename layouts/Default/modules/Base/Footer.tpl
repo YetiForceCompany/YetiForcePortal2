@@ -39,7 +39,8 @@
 	</div>
 	<footer class="footerContainer navbar-default navbar-fixed-bottom d-print-none">
 		<div class="footer">
-			<p>{sprintf(\App\Functions::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
+			{assign var=FOOTOSP value= '<em><a class="u-text-underline" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
+			<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', 'Basic', $FOOTOSP)}</p>
 		</div>
 	</footer>
 	<div class="d-print-none">

@@ -10,8 +10,17 @@
 
 namespace YF\Modules\YetiForce\View;
 
+use App;
+
 class Credits extends \YF\Modules\Base\View\Index
 {
+	/**
+	 * Page title.
+	 *
+	 * @var type
+	 */
+	protected $pageTitle = 'LBL_VIEW_CREDITS';
+
 	/**
 	 * Function process.
 	 *

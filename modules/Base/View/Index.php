@@ -79,8 +79,12 @@ abstract class Index extends \App\Controller
 		$title = '';
 		$moduleName = $request->getModule(false);
 		if ($request->get('view') !== 'Login' && $moduleName !== 'Users') {
-			$title = App\Language::translateModule($moduleName);
-			$pageTitle = $this->getBreadcrumbTitle($request);
+			$title = \App\Language::translateModule($moduleName);
+			if (isset($this->pageTitle)) {
+				$pageTitle = \App\Language::translate($this->pageTitle);
+			} else {
+				$pageTitle = $this->getBreadcrumbTitle($request);
+			}
 			if ($pageTitle) {
 				$title .= ' - ' . $pageTitle;
 			}
@@ -88,7 +92,7 @@ abstract class Index extends \App\Controller
 		return $title;
 	}
 
-	public function getBreadcrumbTitle(App\Request $request)
+	public function getBreadcrumbTitle(\App\Request $request)
 	{
 		if (!empty($this->pageTitle)) {
 			return $this->pageTitle;
