@@ -1,5 +1,6 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 var AppConnector,
+	App = {Fields: {Picklist: {}}},
 	app = {
 		languageString: [],
 		cacheParams: [],
@@ -86,7 +87,7 @@ var AppConnector,
 		},
 		registerSelectField: function (container) {
 			this.registerChznSelectField(container);
-			this.registerSelect2Field(container);
+			App.Fields.Picklist.changeSelectElementView(container);
 		},
 		registerTimeField: function (container) {
 			var thisInstance = this;
@@ -375,12 +376,12 @@ var AppConnector,
 		},
 		/**
 		 * Show modal
-		 * @param data
-		 * @param container
-		 * @param paramsObject
-		 * @param cb
-		 * @param url
-		 * @param sendByAjaxCb
+		 * @param {string} data
+		 * @param {object} container
+		 * @param {object} paramsObject
+		 * @param {function} cb
+		 * @param {string} url
+		 * @param {function} sendByAjaxCb
 		 */
 		showModalData(data, container, paramsObject, cb, url, sendByAjaxCb) {
 			const thisInstance = this;
@@ -513,8 +514,8 @@ var AppConnector,
 			container.attr('id', Window.lastModalId).addClass('modalContainer js-modal-container');
 			container.one('hidden.bs.modal', function () {
 				container.remove();
-				var backdrop = $('.modal-backdrop');
-				var modalContainers = $('.modalContainer');
+				let backdrop = $('.modal-backdrop');
+				let modalContainers = $('.modalContainer');
 				if (modalContainers.length == 0 && backdrop.length) {
 					backdrop.remove();
 				}

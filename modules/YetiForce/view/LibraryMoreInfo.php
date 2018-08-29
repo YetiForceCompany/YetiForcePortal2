@@ -45,7 +45,7 @@ class LibraryMoreInfo
 	 */
 	public function loginRequired()
 	{
-		return false;
+		return true;
 	}
 
 	/**

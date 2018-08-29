@@ -3,7 +3,7 @@
 
 jQuery.Class("YetiForce_Credits_Js", {}, {
 	/**
-	 *
+	 * Function to get the container
 	 * @returns {jQuery}
 	 */
 	getContainer() {
@@ -13,7 +13,7 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 		return this.container;
 	},
 	/**
-	 *
+	 * Register tables
 	 * @param contentData
 	 * @returns {jQuery}
 	 */
@@ -39,24 +39,25 @@ jQuery.Class("YetiForce_Credits_Js", {}, {
 		return contentData.find('.dataTableWithRecords').DataTable();
 	},
 	/**
-	 *
+	 * Show modal with more information
 	 * @param container
 	 */
 	showMore(container) {
 		container.find('.js-show-more').on('click', function (e) {
+			let element = $(this);
 			AppConnector.request({
 				module: app.getModuleName(),
 				parent: app.getParentModuleName(),
 				view: 'LibraryMoreInfo',
-				type: $(this).attr('data-type'),
-				libraryName: $(this).attr('data-library-name')
+				type: element.attr('data-type'),
+				libraryName: element.attr('data-library-name')
 			}).done(function (data) {
 				app.showModalWindow(data);
 			});
 		});
 	},
 	/**
-	 *
+	 * Show modal with information about license
 	 * @param container
 	 */
 	showLicense(container) {

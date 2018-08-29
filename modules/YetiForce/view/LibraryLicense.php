@@ -38,7 +38,7 @@ class LibraryLicense
 	 */
 	public function loginRequired()
 	{
-		return false;
+		return true;
 	}
 
 	/**
