@@ -14,9 +14,8 @@
 
 	p {
 		color: #ffffff;
-		border-top: 1px solid #dddddd;
 		padding: 1px 0;
-		font-size: 0.8em;
+		font-size: calculate-rem(10px);
 		margin-bottom: 0;
 	}
 }

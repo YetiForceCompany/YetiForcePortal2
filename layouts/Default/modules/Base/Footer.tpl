@@ -45,7 +45,7 @@
 			</div>
 		{/if}
 	</div>
-	<footer class="footerContainer navbar-default navbar-fixed-bottom d-print-none">
+	<footer class="footerContainer d-print-none w-100">
 		<div class="footer">
 			<p>{sprintf(\App\Functions::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
 		</div>

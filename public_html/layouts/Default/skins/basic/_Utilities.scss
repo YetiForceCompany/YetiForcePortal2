@@ -1,4 +1,9 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+@function calculate-rem($size) {
+	$rem-size: $size / 16px;
+
+	@return #{$rem-size}rem;
+}
 
 .noPadding {
 	padding: 0;
