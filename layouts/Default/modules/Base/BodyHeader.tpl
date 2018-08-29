@@ -11,7 +11,7 @@
 		{if $USER->getCompanies()}
 		<a class="btn btn-info btn-sm mr-2" role="button" href="#" data-toggle="modal"
 		   data-target="#modalSelectCompanies">
-			<span class="fas fa-exchange-alt" aria-hidden="true"></span>
+			<span class="fas fa-exchange-alt"></span>
 		</a>
 		{/if}
 		<div class="dropdown quickAction historyBtn">

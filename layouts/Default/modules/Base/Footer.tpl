@@ -14,10 +14,12 @@
 				<div class="modal-dialog modal-sm" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								<span class="fas fa-exchange-alt mr-1"></span>
+								{\App\Functions::translate('LBL_CHANGE_COMPANY')}
+							</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 										aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title"
-								id="myModalLabel">{\App\Functions::translate('LBL_CHANGE_COMPANY')}</h4>
 						</div>
 						<div class="modal-body">
 							<select class="form-control" id="companyId">
@@ -28,9 +30,15 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button"
-									class="btn btn-primary">{\App\Functions::translate('LBL_CHANGE')}</button>
-							<button type="button" class="btn btn-default"
-									data-dismiss="modal">{\App\Functions::translate('BTN_CANCEL')}</button>
+									class="btn btn-success">
+								<span class="fas fa-check mr-1"></span>
+								{\App\Functions::translate('LBL_CHANGE')}
+							</button>
+							<button type="button" class="btn btn-danger"
+									data-dismiss="modal">
+								<span class="fas fa-times mr-1"></span>
+								{\App\Functions::translate('BTN_CANCEL')}
+							</button>
 						</div>
 					</div>
 				</div>
