@@ -234,6 +234,7 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Field.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
