@@ -116,7 +116,7 @@ abstract class Index extends \App\Controller
 				continue;
 			}
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			if (\App\Config::getBoolean('minScripts') && file_exists($minFilePath)) {
+			if (\App\Config::$minScripts && file_exists($minFilePath)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
 			} elseif (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
@@ -183,7 +183,7 @@ abstract class Index extends \App\Controller
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 
-		if (\App\Config::getBoolean('debugApi') && Session::has('debugApi') && Session::get('debugApi')) {
+		if (\App\Config::$debugApi && Session::has('debugApi') && Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
 			Session::set('debugApi', false);

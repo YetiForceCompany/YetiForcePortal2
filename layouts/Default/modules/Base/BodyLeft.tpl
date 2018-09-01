@@ -2,7 +2,7 @@
 {strip}
 	<div class="userDetailsContainer">
 		<div class="col-sm-2 p-0">
-			<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
+			<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-sm-10 userDetails">
 			<div class="userName">

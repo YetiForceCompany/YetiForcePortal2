@@ -36,7 +36,7 @@ class WebUI
 			$userInstance = User::getUser();
 			if (empty($module)) {
 				if ($userInstance && $userInstance->hasLogin()) {
-					$module = Config::get('defaultModule');
+					$module = Config::$defaultModule;
 					$moduleInstance = Model\Module::getInstance($module);
 					$view = $moduleInstance->getDefaultView();
 				} else {
@@ -90,7 +90,7 @@ class WebUI
 
 	public function isInstalled()
 	{
-		return Config::get('crmPath') != '__CRM_PATH__';
+		return Config::$crmUrl != '__CRM_PATH__';
 	}
 
 	protected function triggerPreProcess($handler, $request)

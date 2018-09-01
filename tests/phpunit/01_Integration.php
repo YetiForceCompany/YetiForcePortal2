@@ -6,9 +6,9 @@
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
-use PHPUnit\Framework\TestCase;
 use App\Api;
 use App\User;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers Integration::<public>

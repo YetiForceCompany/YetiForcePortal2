@@ -42,7 +42,7 @@ class Viewer extends \SmartyBC
 	 */
 	public static function getLayoutName()
 	{
-		return self::DEFAULTLAYOUT;
+		return Config::$theme ?? self::DEFAULTLAYOUT;
 	}
 
 	/**
@@ -87,8 +87,8 @@ class Viewer extends \SmartyBC
 	/**
 	 * Function to get the module specific template path for a given template.
 	 *
-	 * @param <String> $templateName
-	 * @param <String> $moduleName
+	 * @param  <String> $templateName
+	 * @param  <String> $moduleName
 	 *
 	 * @return <String> - Module specific template path if exists, otherwise default template path for the given template name
 	 */

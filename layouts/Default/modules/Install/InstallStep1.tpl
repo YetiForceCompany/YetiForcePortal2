@@ -8,7 +8,7 @@
 			</div>
 			<div class="col-md-3">
 				<select name="lang" class="select2" style="width: 250px;">
-					{foreach key=key item=item from=\App\Config::get('languages')}
+					{foreach key=key item=item from=\App\Config::$languages}
 						<option value="{$key}" {if $LANGUAGE eq $key}selected{/if}>{$item}</option>
 					{/foreach}
 				</select>

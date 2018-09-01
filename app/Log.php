@@ -31,7 +31,7 @@ class Log extends \Exception
 
 	public static function display()
 	{
-		if (!\App\Config::getBoolean('debugConsole')) {
+		if (!\App\Config::$debugConsole) {
 			return [];
 		}
 		$log = self::$Messages;

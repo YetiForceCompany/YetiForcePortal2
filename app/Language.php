@@ -18,8 +18,8 @@ class Language
 	/**
 	 * Functions that gets translated string.
 	 *
-	 * @param <String> $key    - string which need to be translated
-	 * @param <String> $module - module scope in which the translation need to be check
+	 * @param  <String> $key    - string which need to be translated
+	 * @param  <String> $module - module scope in which the translation need to be check
 	 *
 	 * @return <String> - translated string
 	 */
@@ -69,9 +69,9 @@ class Language
 	/**
 	 * Function returns language specific translated string.
 	 *
-	 * @param <String> $language - en_us etc
-	 * @param <String> $key      - label
-	 * @param <String> $module   - module name
+	 * @param  <String> $language - en_us etc
+	 * @param  <String> $key      - label
+	 * @param  <String> $module   - module name
 	 *
 	 * @return <String> translated string or null if translation not found
 	 */
@@ -109,8 +109,8 @@ class Language
 	/**
 	 * Functions that gets translated string for Client side.
 	 *
-	 * @param <String> $key    - string which need to be translated
-	 * @param <String> $module - module scope in which the translation need to be check
+	 * @param  <String> $key    - string which need to be translated
+	 * @param  <String> $module - module scope in which the translation need to be check
 	 *
 	 * @return <String> - translated string
 	 */
@@ -128,14 +128,14 @@ class Language
 		return $key;
 	}
 
+
 	/**
 	 * Function to returns all language information.
-	 *
-	 * @return <Array>
+	 * @return string[]
 	 */
 	public static function getAllLanguages()
 	{
-		return Config::get('languages');
+		return Config::$languages;
 	}
 
 	/**
@@ -152,7 +152,7 @@ class Language
 	/**
 	 * Function returns module strings.
 	 *
-	 * @param <String> $module - module Name
+	 * @param  <String> $module - module Name
 	 * @param  <String> languageStrings or jsLanguageStrings
 	 *
 	 * @return <Array>

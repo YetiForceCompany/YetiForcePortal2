@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="logoContainer">
-				<img src="{\App\Config::get('logo')}" class="img-responsive logo" alt="Logo" title="Logo">
+				<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
 			</div>
 		</div>
 		<div class="col-md-6">

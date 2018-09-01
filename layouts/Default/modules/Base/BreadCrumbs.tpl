@@ -11,7 +11,7 @@
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks textOverflowEllipsis">
-					<a href='{\App\Config::get('portalPath')}'>
+					<a href='{\App\Config::$portalUrl}'>
 						<span class="{$HOMEICON}"></span>
 					</a>
 					&nbsp;|&nbsp;

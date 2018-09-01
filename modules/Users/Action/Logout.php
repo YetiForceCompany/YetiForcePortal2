@@ -17,6 +17,6 @@ class Logout extends Action\Base
 	{
 		$response = \App\Api::getInstance()->call('Users/Logout', [], 'put');
 		session_destroy();
-		header('Location: ' . \App\Config::get('portalPath'));
+		header('Location: ' . \App\Config::$portalUrl);
 	}
 }

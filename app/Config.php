@@ -9,27 +9,61 @@
 
 namespace App;
 
-class Config
+class Config extends \Conf\Config
 {
-	protected static $config;
+	/**
+	 * Requesrt start time.
+	 *
+	 * @var int
+	 */
+	public static $startTime;
 
-	/** Get boolean value */
-	public static function getBoolean($key, $defvalue = false)
+	/**
+	 * CRM root directory.
+	 *
+	 * @var string
+	 */
+	public static $rootDirectory;
+
+	/**
+	 * Request process type.
+	 *
+	 * @var string
+	 */
+	public static $processType;
+
+	/**
+	 * Request process name.
+	 *
+	 * @var string
+	 */
+	public static $processName;
+
+	/**
+	 * Js environment variables.
+	 *
+	 * @var array
+	 */
+	private static $jsEnv = [];
+
+	/**
+	 * Get all js configuratin in json.
+	 *
+	 * @return type
+	 */
+	public static function getJsEnv()
 	{
-		return self::get($key, $defvalue);
+		return Json::encode(static::$jsEnv);
 	}
 
-	public static function get($key, $defvalue = '')
+	/**
+	 * Set js environment variables.
+	 *
+	 * @param string $key
+	 * @param mixed  $value
+	 */
+	public static function setJsEnv($key, $value)
 	{
-		if (empty(self::$config)) {
-			require YF_ROOT . DIRECTORY_SEPARATOR . 'config/config.php';
-			self::$config = $config;
-		}
-		if (isset(self::$config)) {
-			if (isset(self::$config[$key])) {
-				return self::$config[$key];
-			}
-		}
-		return $defvalue;
+		static::$jsEnv[$key] = $value;
 	}
 }

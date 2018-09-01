@@ -3,8 +3,8 @@
  * Main file.
  *
  * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 error_reporting(E_ALL);
 define('YF_ROOT', __DIR__);
@@ -21,7 +21,7 @@ set_error_handler('exceptionErrorHandler');
 session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
 session_start();
 
+\App\Config::$startTime = microtime(true);
+
 $coreUI = new \App\WebUI();
 $coreUI->process(new \App\Request($_REQUEST));
-
-//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);

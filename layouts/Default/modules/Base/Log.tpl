@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 
-{if !\App\Log::isEmpty() && \App\Config::getBoolean('debugConsole')}
+{if !\App\Log::isEmpty() && \App\Config::$debugConsole}
 	<script>
 		{foreach item=MESSAGE from=\App\Log::display()}
 		$('#CoreLogList').append('<li>{$MESSAGE.message}</li>');

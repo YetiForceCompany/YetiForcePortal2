@@ -2,7 +2,7 @@
 {strip}
 	<div class="contentsDiv">
 		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage"
-			   value='{\App\Json::encode(\App\Config::get('listEntriesPerPage'))}'>
+			   value='{\App\Json::encode(\App\Config::$listEntriesPerPage)}'>
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
