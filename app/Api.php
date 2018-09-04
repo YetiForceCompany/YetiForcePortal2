@@ -131,7 +131,7 @@ class Api
 	public function encryptData($data)
 	{
 		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::$publicKey;
-		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey);
+		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey, \OPENSSL_PKCS1_OAEP_PADDING);
 		return $encrypted;
 	}
 
@@ -149,7 +149,7 @@ class Api
 			throw new AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
-		openssl_private_decrypt($data, $decrypted, $privateKey);
+		openssl_private_decrypt($data, $decrypted, $privateKey, \OPENSSL_PKCS1_OAEP_PADDING);
 		return $decrypted;
 	}
 
