@@ -11,6 +11,11 @@ namespace App;
 
 class Language
 {
+	/**
+	 * Language files format.
+	 */
+	const FORMAT = 'json';
+
 	//Contains module language translations
 	protected static $languageContainer = [];
 	protected static $modules = false;
@@ -24,22 +29,21 @@ class Language
 	 *
 	 * @return <String> - translated string
 	 */
-	public static function translate($key, $module = '', $currentLanguage = '')
+	public static function translate(string $key, string $module = 'Basic', string $currentLanguage = ''): string
 	{
 		if (empty($currentLanguage)) {
-			$currentLanguage = self::getLanguage();
+			$currentLanguage = static::getLanguage();
 		}
 		//decoding for Start Date & Time and End Date & Time
 		if (!is_array($key)) {
 			$key = html_entity_decode($key);
 		}
-		$translatedString = self::getLanguageTranslatedString($currentLanguage, $key, $module);
-
+		$translatedString = static::getLanguageTranslatedString($currentLanguage, $key, $module);
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
 		if (null === $translatedString) {
 			$defaultLanguage = Config::get('language');
 			if (!empty($defaultLanguage) && 0 !== strcasecmp($defaultLanguage, $currentLanguage)) {
-				$translatedString = self::getLanguageTranslatedString($defaultLanguage, $key, $module);
+				$translatedString = static::getLanguageTranslatedString($defaultLanguage, $key, $module);
 			}
 		}
 
@@ -70,41 +74,58 @@ class Language
 	/**
 	 * Function returns language specific translated string.
 	 *
-	 * @param <String> $language - en_us etc
-	 * @param <String> $key      - label
-	 * @param <String> $module   - module name
+	 * @param string $language - en_us etc
+	 * @param string $key      - label
+	 * @param string $module   - module name
 	 *
-	 * @return <String> translated string or null if translation not found
+	 * @return string translated string or null if translation not found
 	 */
 	public static function getLanguageTranslatedString($language, $key, $module = 'Basic')
 	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
-		if (!empty($moduleStrings['phpLang'][$key])) {
-			return stripslashes($moduleStrings['phpLang'][$key]);
+		if (!empty($moduleStrings['php'][$key])) {
+			return stripslashes($moduleStrings['php'][$key]);
 		}
 
 		$commonStrings = self::getModuleStringsFromFile($language);
-		if (!empty($commonStrings['phpLang'][$key])) {
-			return stripslashes($commonStrings['phpLang'][$key]);
+		if (!empty($commonStrings['php'][$key])) {
+			return stripslashes($commonStrings['php'][$key]);
 		}
 		return null;
 	}
 
-	public static function getModuleStringsFromFile($language, $module = 'Basic')
+	public static function getModuleStringsFromFile(string $language, string $module = 'Basic')
 	{
 		if (empty(self::$languageContainer[$language][$module])) {
-			$file = YF_ROOT . \DIRECTORY_SEPARATOR . 'language' . \DIRECTORY_SEPARATOR . $language . \DIRECTORY_SEPARATOR . $module . '.php';
-			$phpLang = $jsLang = [];
-			if (file_exists($file)) {
-				require $file;
-				self::$languageContainer[$language][$module]['phpLang'] = $phpLang;
-				self::$languageContainer[$language][$module]['jsLang'] = $jsLang;
-			}
+			static::loadLanguageFile($language, $module);
 		}
 		if (isset(self::$languageContainer[$language][$module])) {
 			return self::$languageContainer[$language][$module];
 		}
 		return [];
+	}
+
+	/**
+	 * Load language file from JSON.
+	 *
+	 * @param string $language
+	 * @param string $moduleName
+	 *
+	 * @return void
+	 */
+	public static function loadLanguageFile(string $language, string $moduleName = 'Basic')
+	{
+		if (!isset(static::$languageContainer[$language][$moduleName])) {
+			static::$languageContainer[$language][$moduleName] = [];
+			$file = \DIRECTORY_SEPARATOR . 'language' . \DIRECTORY_SEPARATOR . $language . \DIRECTORY_SEPARATOR . $moduleName . '.' . static::FORMAT;
+			$langFile = YF_ROOT . $file;
+			if (file_exists($langFile)) {
+				static::$languageContainer[$language][$moduleName] = Json::decode(file_get_contents($langFile), true) ?? [];
+				Cache::save('LanguageFiles', $language . $moduleName, static::$languageContainer[$language][$moduleName], Cache::LONG);
+			}
+		} elseif (Cache::has('LanguageFiles', $language . $moduleName)) {
+			static::$languageContainer[$language][$moduleName] = Cache::get('LanguageFiles', $language . $moduleName);
+		}
 	}
 
 	/**
@@ -119,13 +140,13 @@ class Language
 	public static function jstranslate($language, $key, $module = 'Basic')
 	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
-		if (!empty($moduleStrings['jsLang'][$key])) {
-			return $moduleStrings['jsLang'][$key];
+		if (!empty($moduleStrings['js'][$key])) {
+			return $moduleStrings['js'][$key];
 		}
 
 		$commonStrings = self::getModuleStringsFromFile($language);
-		if (!empty($commonStrings['jsLang'][$key])) {
-			return $commonStrings['jsLang'][$key];
+		if (!empty($commonStrings['js'][$key])) {
+			return $commonStrings['js'][$key];
 		}
 		return $key;
 	}
@@ -160,7 +181,7 @@ class Language
 	 *
 	 * @return <Array>
 	 */
-	public static function export($module, $type = 'phpLang')
+	public static function export($module, $type = 'php')
 	{
 		$language = self::getLanguage();
 		$exportLangString = [];

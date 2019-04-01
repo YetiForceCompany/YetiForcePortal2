@@ -44,15 +44,15 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $language = 'pl_pl';
+	public static $language = 'en-US';
 	/**
 	 * Languages.
 	 *
 	 * @var array
 	 */
 	public static $languages = [
-		'en_us' => 'English',
-		'pl_pl' => 'Polski',
+		'en-US' => 'English',
+		'pl-PL' => 'Polski',
 	];
 	/**
 	 * Available record display options in listview for datatable element - [[values],[labels]].
@@ -72,4 +72,5 @@ class Config
 	public static $publicKey = 'config/public.key';
 	public static $logo = 'layouts/Default/skins/images/logo.png';
 	public static $version = '1.0';
+	public static $cachingDriver = 'Base';
 }

@@ -46,9 +46,9 @@ class Api
 	 * @param array  $data
 	 * @param mixed  $requestType
 	 *
-	 * @return array
+	 * @return array|false
 	 */
-	public function call(string $method, array $data = [], $requestType = 'get'): array
+	public function call(string $method, array $data = [], $requestType = 'get')
 	{
 		$crmPath = $this->url . $method;
 		$rawRequest = $data;

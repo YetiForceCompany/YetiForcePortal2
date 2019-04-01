@@ -13,7 +13,12 @@ class User extends BaseModel
 {
 	protected static $user = false;
 
-	public static function getUser()
+	/**
+	 * Get User objec.
+	 *
+	 * @return self
+	 */
+	public static function getUser(): self
 	{
 		if (!self::$user) {
 			$user = Session::has('user') ? Session::get('user') : false;
