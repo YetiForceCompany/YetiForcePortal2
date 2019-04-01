@@ -46,24 +46,30 @@ class User extends BaseModel
 		return $this->has('logged') ? $this->get('logged') : false;
 	}
 
-	public function login($email, $password)
+	/**
+	 * Login to portal.
+	 *
+	 * @param string $email
+	 * @param string $password
+	 *
+	 * @return bool
+	 */
+	public function login(string $email, string $password): bool
 	{
 		$params = [
-			'version' => VERSION,
+			'version' => Config::$version,
 			'language' => Language::getLanguage(),
 			'ip' => Functions::getRemoteIP(),
 			'fromUrl' => Config::$portalUrl
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
-		if ($response && !(isset($response['code']) && $response['code'] === 401)) {
+		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {
 				$this->set($key, $value);
 			}
-
 			return true;
 		}
-
 		return false;
 	}
 
@@ -125,6 +131,8 @@ class User extends BaseModel
 	/**
 	 * Get preferences.
 	 *
+	 * @param mixed $key
+	 *
 	 * @throws AppException
 	 *
 	 * @return mixed
@@ -137,10 +145,10 @@ class User extends BaseModel
 		}
 		if ($key && isset($preferences[$key])) {
 			return $preferences[$key];
-		} elseif ($key && !isset($preferences[$key])) {
-			return null;
-		} else {
-			return $preferences;
 		}
+		if ($key && !isset($preferences[$key])) {
+			return null;
+		}
+		return $preferences;
 	}
 }

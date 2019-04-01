@@ -66,4 +66,30 @@ class Config extends \Conf\Config
 	{
 		static::$jsEnv[$key] = $value;
 	}
+
+	/**
+	 * Get bool config value.
+	 *
+	 * @param string $key
+	 * @param bool   $default
+	 *
+	 * @return bool
+	 */
+	public static function getBoolean(string $key, bool $default = false): bool
+	{
+		return static::get($key, $default);
+	}
+
+	/**
+	 * Get config value.
+	 *
+	 * @param string $key
+	 * @param mixed  $default
+	 *
+	 * @return mixed
+	 */
+	public static function get(string $key, $default = null)
+	{
+		return property_exists(static::class, $key) ? static::${$key} : $default;
+	}
 }

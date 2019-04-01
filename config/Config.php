@@ -20,6 +20,7 @@ class Config
 	 * @var string
 	 */
 	public static $crmUrl = 'http://yeti/';
+
 	/**
 	 * Portal URL.
 	 *
@@ -70,4 +71,5 @@ class Config
 	public static $privateKey = 'config/private.key';
 	public static $publicKey = 'config/public.key';
 	public static $logo = 'layouts/Default/skins/images/logo.png';
+	public static $version = '1.0';
 }

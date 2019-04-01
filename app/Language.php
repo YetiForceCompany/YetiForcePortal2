@@ -18,8 +18,9 @@ class Language
 	/**
 	 * Functions that gets translated string.
 	 *
-	 * @param  <String> $key    - string which need to be translated
-	 * @param  <String> $module - module scope in which the translation need to be check
+	 * @param <String> $key             - string which need to be translated
+	 * @param <String> $module          - module scope in which the translation need to be check
+	 * @param mixed    $currentLanguage
 	 *
 	 * @return <String> - translated string
 	 */
@@ -35,15 +36,15 @@ class Language
 		$translatedString = self::getLanguageTranslatedString($currentLanguage, $key, $module);
 
 		// label not found in users language pack, then check in the default language pack(config.inc.php)
-		if ($translatedString === null) {
+		if (null === $translatedString) {
 			$defaultLanguage = Config::get('language');
-			if (!empty($defaultLanguage) && strcasecmp($defaultLanguage, $currentLanguage) !== 0) {
+			if (!empty($defaultLanguage) && 0 !== strcasecmp($defaultLanguage, $currentLanguage)) {
 				$translatedString = self::getLanguageTranslatedString($defaultLanguage, $key, $module);
 			}
 		}
 
 		// If translation is not found then return label
-		if ($translatedString === null) {
+		if (null === $translatedString) {
 			$translatedString = $key;
 		}
 		return $translatedString;
@@ -69,9 +70,9 @@ class Language
 	/**
 	 * Function returns language specific translated string.
 	 *
-	 * @param  <String> $language - en_us etc
-	 * @param  <String> $key      - label
-	 * @param  <String> $module   - module name
+	 * @param <String> $language - en_us etc
+	 * @param <String> $key      - label
+	 * @param <String> $module   - module name
 	 *
 	 * @return <String> translated string or null if translation not found
 	 */
@@ -92,7 +93,7 @@ class Language
 	public static function getModuleStringsFromFile($language, $module = 'Basic')
 	{
 		if (empty(self::$languageContainer[$language][$module])) {
-			$file = YF_ROOT . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . $module . '.php';
+			$file = YF_ROOT . \DIRECTORY_SEPARATOR . 'language' . \DIRECTORY_SEPARATOR . $language . \DIRECTORY_SEPARATOR . $module . '.php';
 			$phpLang = $jsLang = [];
 			if (file_exists($file)) {
 				require $file;
@@ -109,8 +110,9 @@ class Language
 	/**
 	 * Functions that gets translated string for Client side.
 	 *
-	 * @param  <String> $key    - string which need to be translated
-	 * @param  <String> $module - module scope in which the translation need to be check
+	 * @param <String> $key      - string which need to be translated
+	 * @param <String> $module   - module scope in which the translation need to be check
+	 * @param mixed    $language
 	 *
 	 * @return <String> - translated string
 	 */
@@ -128,9 +130,9 @@ class Language
 		return $key;
 	}
 
-
 	/**
 	 * Function to returns all language information.
+	 *
 	 * @return string[]
 	 */
 	public static function getAllLanguages()
@@ -152,8 +154,9 @@ class Language
 	/**
 	 * Function returns module strings.
 	 *
-	 * @param  <String> $module - module Name
+	 * @param <String> $module - module Name
 	 * @param  <String> languageStrings or jsLanguageStrings
+	 * @param mixed $type
 	 *
 	 * @return <Array>
 	 */
