@@ -17,7 +17,7 @@ class Api
 	protected static $_instance;
 	protected $url;
 	protected $header;
-	protected $log = YF_ROOT . DIRECTORY_SEPARATOR . 'cache/logs/api.log';
+	protected $log = YF_ROOT . \DIRECTORY_SEPARATOR . 'cache/logs/api.log';
 
 	/**
 	 * Api class constructor.
@@ -44,10 +44,11 @@ class Api
 	/**
 	 * @param string $method
 	 * @param array  $data
+	 * @param mixed  $requestType
 	 *
 	 * @return array
 	 */
-	public function call($method, $data = [], $requestType = 'get')
+	public function call(string $method, array $data = [], $requestType = 'get'): array
 	{
 		$crmPath = $this->url . $method;
 		$rawRequest = $data;
@@ -58,13 +59,13 @@ class Api
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
 			$data = Json::encode($data);
-			if (Config::$encryptDataTransfer && $requestType !== 'get') {
+			if (Config::$encryptDataTransfer && 'get' !== $requestType) {
 				$data = $this->encryptData($data);
 			}
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);
 		}
 		$rawResponse = $request->body;
-		if ($request->headers->getValues('X-ENCRYPTED')[0] == 1) {
+		if (1 == $request->headers->getValues('X-ENCRYPTED')[0]) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Json::decode($rawResponse);
@@ -130,7 +131,7 @@ class Api
 	 */
 	public function encryptData($data)
 	{
-		$publicKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::$publicKey;
+		$publicKey = 'file://' . YF_ROOT . \DIRECTORY_SEPARATOR . Config::$publicKey;
 		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey, \OPENSSL_PKCS1_OAEP_PADDING);
 		return $encrypted;
 	}
@@ -144,7 +145,7 @@ class Api
 	 */
 	public function decryptData($data)
 	{
-		$privateKey = 'file://' . YF_ROOT . DIRECTORY_SEPARATOR . Config::$privateKey;
+		$privateKey = 'file://' . YF_ROOT . \DIRECTORY_SEPARATOR . Config::$privateKey;
 		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
 			throw new AppException('Private Key failed');
 		}
@@ -157,6 +158,7 @@ class Api
 	 * @param string $method
 	 * @param array  $data
 	 * @param array  $response
+	 * @param mixed  $rawResponse
 	 */
 	public function addLogs($method, $data, $response, $rawResponse = false)
 	{
