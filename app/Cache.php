@@ -11,6 +11,10 @@ namespace App;
  */
 class Cache
 {
+	/**
+	 * The prefix for cache keys.
+	 */
+	const PREFIX = 'portal';
 	const LONG = 3600;
 	const MEDIUM = 300;
 	const SHORT = 60;
@@ -49,7 +53,7 @@ class Cache
 	 */
 	public static function get($nameSpace, $key)
 	{
-		return static::$pool->get("$nameSpace-$key");
+		return static::$pool->get(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -62,7 +66,7 @@ class Cache
 	 */
 	public static function has($nameSpace, $key): bool
 	{
-		return static::$pool->has("$nameSpace-$key");
+		return static::$pool->has(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -77,7 +81,7 @@ class Cache
 	 */
 	public static function save($nameSpace, $key, $value = null, $duration = self::MEDIUM)
 	{
-		if (!static::$pool->save("$nameSpace-$key", $value, $duration)) {
+		if (!static::$pool->save(static::PREFIX . "{$nameSpace}-{$key}", $value, $duration)) {
 			Log::warning("Error writing to cache. Key: $nameSpace-$key | Value: " . var_export($value, true));
 		}
 		return $value;
@@ -93,7 +97,7 @@ class Cache
 	 */
 	public static function delete($nameSpace, $key)
 	{
-		static::$pool->delete("$nameSpace-$key");
+		static::$pool->delete(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -116,7 +120,7 @@ class Cache
 	 */
 	public static function staticGet($nameSpace, $key)
 	{
-		return static::$staticPool->get("$nameSpace-$key");
+		return static::$staticPool->get(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -129,7 +133,7 @@ class Cache
 	 */
 	public static function staticHas($nameSpace, $key)
 	{
-		return static::$staticPool->has("$nameSpace-$key");
+		return static::$staticPool->has(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -144,7 +148,7 @@ class Cache
 	 */
 	public static function staticSave($nameSpace, $key, $value = null)
 	{
-		return static::$staticPool->save("$nameSpace-$key", $value);
+		return static::$staticPool->save(static::PREFIX . "{$nameSpace}-{$key}", $value);
 	}
 
 	/**
@@ -157,7 +161,7 @@ class Cache
 	 */
 	public static function staticDelete($nameSpace, $key)
 	{
-		static::$staticPool->delete("$nameSpace-$key");
+		static::$staticPool->delete(static::PREFIX . "{$nameSpace}-{$key}");
 	}
 
 	/**
