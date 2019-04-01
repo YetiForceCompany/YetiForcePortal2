@@ -31,9 +31,9 @@ class Menu
 			$basic['url'] = "index.php?module=$moduleName&view=ListView";
 		}
 		$breadcrumbs[] = $basic;
-		if ($view === 'EditView' && empty($request->get('record'))) {
+		if ('EditView' === $view && empty($request->get('record'))) {
 			$breadcrumbs[] = ['name' => Language::translate('LBL_VIEW_CREATE', $moduleName)];
-		} elseif (!empty($view) && $view !== 'index' && $view !== 'Index') {
+		} elseif (!empty($view) && 'index' !== $view && 'Index' !== $view) {
 			$breadcrumbs[] = ['name' => Language::translate('LBL_VIEW_' . strtoupper($view), $moduleName)];
 		} elseif (empty($view)) {
 			$breadcrumbs[] = ['name' => Language::translate('LBL_HOME', $moduleName)];

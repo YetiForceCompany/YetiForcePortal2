@@ -22,6 +22,7 @@ session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR 
 session_start();
 
 \App\Config::$startTime = microtime(true);
+\App\Cache::init();
 
 $coreUI = new \App\WebUI();
 $coreUI->process(new \App\Request($_REQUEST));
