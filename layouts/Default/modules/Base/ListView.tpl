@@ -6,7 +6,7 @@
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
-					{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 			</div>
 			<div class="col-sm-4 listViewAction">
@@ -17,7 +17,7 @@
 							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
 								<span class="fas fa-plus"></span>
 								&nbsp;
-								<strong>{\App\Functions::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+								<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
 							</a>
 						{/if}
 					</div>
@@ -37,9 +37,9 @@
 					</thead>
 					<tbody>
 					{foreach item=RECORD key=ID from=$RECORDS}
-						<tr data-record="{$ID}" data-name="{\App\Functions::toSafeHTML($RECORD->getName())}">
+						<tr data-record="{$ID}" data-name="{\App\Purifier::encodeHtml($RECORD->getName())}">
 							<td class="leftRecordActions">
-								{include file=\App\Functions::templatePath("ListViewActions.tpl",$MODULE_NAME)}
+								{include file=\App\Resources::templatePath("ListViewActions.tpl",$MODULE_NAME)}
 							</td>
 							{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
 								<td>{$RECORD->get($FIELD_NAME)}</td>
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<div id="CoreLog" class="panel panel-primary col-sm-12 px-0 blockContainer">
-			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
 				<ol id="CoreLogList">
 

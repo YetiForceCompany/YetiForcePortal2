@@ -115,7 +115,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new AppException(Functions::translate('LBL_HANDLER_NOT_FOUND'));
+			throw new AppException(Language::translate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -125,6 +125,6 @@ class WebUI
 			$handler->checkPermission($request);
 			return;
 		}
-		throw new AppException(Functions::translate($moduleName) . ' ' . Functions::translate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(Language::translate($moduleName) . ' ' . Language::translate('LBL_NOT_ACCESSIBLE'));
 	}
 }

@@ -141,7 +141,7 @@ class BaseField extends \App\BaseModel
 	public function getFieldInfo($safe = false)
 	{
 		if ($safe) {
-			return Functions::toSafeHTML(Json::encode($this->getData()));
+			return Purifier::encodeHtml(Json::encode($this->getData()));
 		} else {
 			return $this->getData();
 		}
@@ -224,7 +224,7 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getEditViewDisplayValue()
 	{
-		return \App\Functions::toSafeHTML($this->getRawValue());
+		return \App\Purifier::encodeHtml($this->getRawValue());
 	}
 
 	/**

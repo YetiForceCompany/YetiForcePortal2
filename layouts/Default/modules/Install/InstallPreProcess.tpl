@@ -9,7 +9,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="head float-right">
-				<h3>{\App\Functions::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
+				<h3>{\App\Language::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
 			</div>
 		</div>
 	</div>

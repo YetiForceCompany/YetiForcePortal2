@@ -82,7 +82,7 @@ class DateField extends BaseField
 				break;
 		}
 		if ($safe) {
-			return Functions::toSafeHTML(Json::encode($data));
+			return Purifier::encodeHtml(Json::encode($data));
 		} else {
 			return $data;
 		}

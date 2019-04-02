@@ -7,11 +7,11 @@
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
 		{if $FIELD_MODEL->isEmptyPicklistOptionAllowed() && !($FIELD_MODEL->isMandatory() && $FIELD_MODEL->getEditViewDisplayValue() neq '')}
 			<optgroup>
-				<option value="">{\App\Functions::translate('PLL_SELECT_OPTION',$MODULE_NAME)}</option>
+				<option value="">{\App\Language::translate('PLL_SELECT_OPTION',$MODULE_NAME)}</option>
 			</optgroup>
 		{/if}
 		{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$FIELD_MODEL->getPicklistValues()}
-			<option value="{\App\Functions::toSafeHTML($PICKLIST_NAME)}"
+			<option value="{\App\Purifier::encodeHtml($PICKLIST_NAME)}"
 					title="{$PICKLIST_VALUE}" {if trim($FIELD_MODEL->getEditViewDisplayValue()) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
 		{/foreach}
 	</select>

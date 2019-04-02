@@ -8,7 +8,7 @@
 		{foreach item=PICKLIST_VALUES key=PICKLIST_GROUP from=$FIELD_MODEL->getPicklistValues()}
 			<optgroup label="{$PICKLIST_GROUP}">
 				{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
-					<option value="{\App\Functions::toSafeHTML($PICKLIST_NAME)}"
+					<option value="{\App\Purifier::encodeHtml($PICKLIST_NAME)}"
 							title="{$PICKLIST_VALUE}" {if trim($FIELD_MODEL->getEditViewDisplayValue()) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
 				{/foreach}
 			</optgroup>
