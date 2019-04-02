@@ -17,15 +17,13 @@ class Functions
 
 	public static function fileTemplate($name, $moduleName, $type = 'images')
 	{
-		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
-			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
-			return $filePath;
+			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
 		}
-		$filePath = YF_ROOT_WWW . 'layouts' . DIRECTORY_SEPARATOR . Viewer::getLayoutName() . DIRECTORY_SEPARATOR . 'skins' . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $name;
+		$filePath = YF_ROOT_WWW . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'skins' . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
-			$filePath = str_replace(DIRECTORY_SEPARATOR, '/', $filePath);
-			return $filePath;
+			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
 		}
 		return $name;
 	}
@@ -49,7 +47,7 @@ class Functions
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 			$remote_ip[] = 'X-Forwarded-For: ' . $_SERVER['HTTP_X_FORWARDED_FOR'];
 		}
-		if (!empty($remote_ip) && $onlyIP == false) {
+		if (!empty($remote_ip) && false == $onlyIP) {
 			$address .= '(' . implode(',', $remote_ip) . ')';
 		}
 		return $address;
@@ -92,11 +90,11 @@ class Functions
 				$args = rtrim($args, ',');
 			}
 			$trace .= "$sep$l {$v['file']} ({$v['line']})  >>  " . (isset($v['class']) ? $v['class'] . '->' : '') . "{$v['function']}($args)" . PHP_EOL;
-			if ($maxLevel !== 0 && $l >= $maxLevel) {
+			if (0 !== $maxLevel && $l >= $maxLevel) {
 				break;
 			}
 		}
-		return rtrim(str_replace(YF_ROOT . DIRECTORY_SEPARATOR, '', $trace), PHP_EOL);
+		return rtrim(str_replace(YF_ROOT . \DIRECTORY_SEPARATOR, '', $trace), PHP_EOL);
 	}
 
 	/**
