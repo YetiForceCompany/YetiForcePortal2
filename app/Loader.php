@@ -13,48 +13,46 @@ class Loader
 {
 	protected static $includeCache = [];
 
-	public static function import($name, $supressWarning = false)
+	public static function import($name, $supressWarning = false): bool
 	{
 		if (isset(self::$includeCache[$name])) {
 			return true;
 		}
-
 		if (!file_exists($name)) {
 			throw new AppException('FILE_NOT_FOUND: ' . $name);
-			return false;
 		}
-
 		$status = -1;
 		if ($supressWarning) {
 			$status = @include_once $name;
 		} else {
 			$status = include_once $name;
 		}
-
-		$success = ($status === 0) ? false : true;
-
+		$success = (0 === $status) ? false : true;
 		if ($success) {
 			self::$includeCache[$name] = $name;
 		}
-
 		return $success;
 	}
 
-	public static function getModuleClassName($moduleName, $moduleType, $fieldName)
+	/**
+	 * Get the class name for the module.
+	 *
+	 * @param string $moduleName
+	 * @param string $moduleType
+	 * @param string $fieldName
+	 *
+	 * @return string
+	 */
+	public static function getModuleClassName(string $moduleName, string $moduleType, string $fieldName): string
 	{
-		$filePath = YF_ROOT . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . $moduleType . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = '\\YF\\Modules' . '\\' . $moduleName . '\\' . $moduleType . '\\' . $fieldName;
-		//debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+		$filePath = YF_ROOT . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
 		if (file_exists($filePath)) {
-			return $className;
+			return '\\YF\\Modules' . '\\' . $moduleName . '\\' . $moduleType . '\\' . $fieldName;
 		}
-
-		$filePath = YF_ROOT . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'Base' . DIRECTORY_SEPARATOR . $moduleType . DIRECTORY_SEPARATOR . $fieldName . '.php';
-		$className = '\\YF\\Modules\\Base' . '\\' . $moduleType . '\\' . $fieldName;
+		$filePath = YF_ROOT . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . 'Base' . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
 		if (file_exists($filePath)) {
-			return $className;
+			return '\\YF\\Modules\\Base' . '\\' . $moduleType . '\\' . $fieldName;
 		}
-
 		throw new AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }
