@@ -9,8 +9,8 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
-use App\Functions;
 use App\Json;
+use App\Purifier;
 
 class DateField extends BaseField
 {
@@ -83,8 +83,7 @@ class DateField extends BaseField
 		}
 		if ($safe) {
 			return Purifier::encodeHtml(Json::encode($data));
-		} else {
-			return $data;
 		}
+		return $data;
 	}
 }
