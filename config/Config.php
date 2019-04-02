@@ -27,24 +27,28 @@ class Config
 	 * @var string
 	 */
 	public static $portalUrl = 'http://portal2/';
+
 	/**
 	 * Theme.
 	 *
 	 * @var string
 	 */
 	public static $theme = 'Default';
+
 	/**
 	 * Default module.
 	 *
 	 * @var string
 	 */
 	public static $defaultModule = 'HelpDesk';
+
 	/**
 	 * Default language.
 	 *
 	 * @var string
 	 */
 	public static $language = 'en-US';
+
 	/**
 	 * Languages.
 	 *
@@ -54,6 +58,14 @@ class Config
 		'en-US' => 'English',
 		'pl-PL' => 'Polski',
 	];
+
+	/**
+	 * Allow the user to choose a language.
+	 *
+	 * @var bool
+	 */
+	public static $allowLanguageSelection = false;
+
 	/**
 	 * Available record display options in listview for datatable element - [[values],[labels]].
 	 *

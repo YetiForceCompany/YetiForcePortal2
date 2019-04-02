@@ -59,7 +59,7 @@ class Api
 			$request = Requests::$requestType($crmPath, $headers, $options);
 		} else {
 			$data = Json::encode($data);
-			if (Config::$encryptDataTransfer && 'get' !== $requestType) {
+			if (Config::$encryptDataTransfer) {
 				$data = $this->encryptData($data);
 			}
 			$request = Requests::$requestType($crmPath, $headers, $data, $options);

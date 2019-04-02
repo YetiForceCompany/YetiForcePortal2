@@ -75,7 +75,7 @@ class Config extends \Conf\Config
 	 *
 	 * @return bool
 	 */
-	public static function getBoolean(string $key, bool $default = false): bool
+	public static function getBool(string $key, bool $default = false): bool
 	{
 		return static::get($key, $default);
 	}
