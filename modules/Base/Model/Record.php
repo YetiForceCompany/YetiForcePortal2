@@ -75,13 +75,13 @@ class Record extends \App\BaseModel
 	/**
 	 * Function to get the raw value for a given key.
 	 *
-	 * @param $key
+	 * @param string $key
 	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public function getDisplayValue($key)
+	public function getDisplayValue(string $key): string
 	{
-		return isset($this->valueMap['data'][$key]) ? $this->valueMap['data'][$key] : '';
+		return \App\Purifier::encodeHtml($this->valueMap['data'][$key] ?? '');
 	}
 
 	/**

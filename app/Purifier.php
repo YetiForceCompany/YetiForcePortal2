@@ -26,11 +26,10 @@ class Purifier
 	 * Function to convert the given string to html.
 	 *
 	 * @param string $string
-	 * @param bool   $encode
 	 *
 	 * @return string
 	 */
-	public static function encodeHtml($string)
+	public static function encodeHtml(string $string): string
 	{
 		return htmlspecialchars($string, ENT_QUOTES, static::$defaultCharset);
 	}
@@ -42,7 +41,7 @@ class Purifier
 	 *
 	 * @return string
 	 */
-	public static function decodeHtml($string)
+	public static function decodeHtml(string $string): string
 	{
 		return html_entity_decode($string, ENT_QUOTES, static::$defaultCharset);
 	}

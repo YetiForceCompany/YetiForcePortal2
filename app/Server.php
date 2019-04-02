@@ -16,31 +16,20 @@ namespace App;
  */
 class Server
 {
-	/**
-	 * Get remote IP.
-	 *
-	 * @return string
-	 */
-	public static function getRemoteIp(): string
+	public static function getRemoteIP(bool $onlyIP = false): string
 	{
-		return $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
-	}
-
-	/**
-	 * Get all remote IPs.
-	 *
-	 * @return array
-	 */
-	public static function getAllRemoteIps(): array
-	{
-		$ipAddresses = [
-			'REMOTE_ADDR' => static::getRemoteIp()
-		];
-		foreach (['HTTP_X_REAL_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP'] as $ipKey) {
-			if (!empty($_SERVER[$ipKey])) {
-				$ipAddresses[$ipKey] = $_SERVER[$ipKey];
-			}
+		$address = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+		// append the NGINX X-Real-IP header, if set
+		if (!empty($_SERVER['HTTP_X_REAL_IP'])) {
+			$remote_ip[] = 'X-Real-IP: ' . $_SERVER['HTTP_X_REAL_IP'];
 		}
-		return $ipAddresses;
+		// append the X-Forwarded-For header, if set
+		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$remote_ip[] = 'X-Forwarded-For: ' . $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+		if (!empty($remote_ip) && false === $onlyIP) {
+			$address .= '(' . implode(',', $remote_ip) . ')';
+		}
+		return $address;
 	}
 }

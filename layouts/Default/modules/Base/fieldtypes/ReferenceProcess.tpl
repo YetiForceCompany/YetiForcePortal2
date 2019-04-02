@@ -22,9 +22,9 @@
 		{/if}
 	{/if}
 	<input name="{$FIELD_NAME}" type="hidden" value="{$RECORD->getRawValue($FIELD_NAME)}"
-		   title="{\App\Purifier::encodeHtml($RECORD->getDisplayValue($FIELD_NAME))}" class="sourceField"
+		   title="{$RECORD->getDisplayValue($FIELD_NAME)}" class="sourceField"
 		   data-fieldtype="{$FIELD_MODEL->get('type')}" data-field-label="{$FIELD_MODEL->get('label')}"
-		   data-displayvalue="{\App\Purifier::encodeHtml($RECORD->getDisplayValue($FIELD_NAME))}"
+		   data-displayvalue="{$RECORD->getDisplayValue($FIELD_NAME)}"
 		   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}>
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
@@ -41,9 +41,9 @@
 			</div>
 		{/if}
 		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"
-			   title="{\App\Purifier::encodeHtml($RECORD->getDisplayValue($FIELD_NAME))}"
+			   title="{$RECORD->getDisplayValue($FIELD_NAME)}"
 			   class="marginLeftZero form-control autoComplete" {if !empty($DISPLAYID)}readonly="true"{/if}
-			   value="{\App\Purifier::encodeHtml($RECORD->getDisplayValue($FIELD_NAME))}"
+			   value="{$RECORD->getDisplayValue($FIELD_NAME)}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
