@@ -19,6 +19,13 @@ class Record extends \App\BaseModel
 	private $module;
 
 	/**
+	 * 	Information about inventory.
+	 *
+	 * @var array
+	 */
+	private $inventoryData = [];
+
+	/**
 	 * Static Function to get the instance of a clean Record for the given module name.
 	 *
 	 * @param type $module
@@ -33,9 +40,32 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Sets information about inventory.
+	 *
+	 * @param array $values
+	 *
+	 * @return void
+	 */
+	public function setInventoryData(array $values)
+	{
+		$this->inventoryData = $values;
+	}
+
+	/**
+	 * Returns information about inventory.
+	 *
+	 * @return void
+	 */
+	public function getInventoryData()
+	{
+		return $this->inventoryData;
+	}
+
+	/**
 	 * Function to set the id of the record.
 	 *
 	 * @param \self
+	 * @param mixed $value
 	 */
 	public function setId($value)
 	{

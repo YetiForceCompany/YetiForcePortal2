@@ -13,6 +13,7 @@ namespace YF\Modules\Base\View;
 use App\Api;
 use App\Request;
 use YF\Modules\Base\Model\Field;
+use YF\Modules\Base\Model\InventoryField;
 use YF\Modules\Base\Model\Record;
 
 class DetailView extends Index
@@ -30,8 +31,8 @@ class DetailView extends Index
 
 		$recordDetail = $api->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
-		$recordModel->setData($recordDetail);
-
+		$recordModel->setData($recordDetail['data']);
+		$recordModel->setInventoryData($recordDetail['inventory']);
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
@@ -43,12 +44,24 @@ class DetailView extends Index
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
-
+		$inventoryFields = [];
+		foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
+			if (1 === $fieldType) {
+				foreach ($fieldsInventory as $field) {
+					if ($field['isVisibleInDetail']) {
+						$inventoryFields[] = InventoryField::getInstance($moduleName, $field);
+					}
+				}
+			}
+		}
 		$viewer = $this->getViewer($request);
 		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$viewer->assign('RECORD', $recordModel);
 		$viewer->assign('FIELDS', $fields);
 		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->view('DetailView.tpl', $moduleName);
+		$viewer->assign('INVENTORY_FIELDS', $inventoryFields);
+		$viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory']);
+
+		$viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }
