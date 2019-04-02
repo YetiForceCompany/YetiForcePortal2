@@ -20,7 +20,7 @@ use App\User;
  */
 class Menu
 {
-	protected $allowedMenuItems = [];
+	protected $allowedModulesInMenu = [];
 	protected $additionalMenuItems = [];
 
 	/**
@@ -41,7 +41,7 @@ class Menu
 	 */
 	public function __construct()
 	{
-		$this->allowedMenuItems = Config::get('allowedMenuItems');
+		$this->allowedModulesInMenu = Config::get('allowedModulesInMenu');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Menu
 	{
 		$items = [];
 		foreach (User::getUser()->getModulesList() as $key => $module) {
-			if (empty($this->allowedMenuItems) || in_array($key, $this->allowedMenuItems)) {
+			if (empty($this->allowedModulesInMenu) || in_array($key, $this->allowedModulesInMenu)) {
 				$items[$key] = [
 					'icon' => "userIcon-{$key}",
 					'link' => "index.php?module={$key}&view=ListView",
