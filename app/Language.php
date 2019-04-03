@@ -117,7 +117,7 @@ class Language
 	{
 		if (!isset(static::$languageContainer[$language][$moduleName])) {
 			static::$languageContainer[$language][$moduleName] = [];
-			$file = \DIRECTORY_SEPARATOR . 'language' . \DIRECTORY_SEPARATOR . $language . \DIRECTORY_SEPARATOR . $moduleName . '.' . static::FORMAT;
+			$file = \DIRECTORY_SEPARATOR . 'languages' . \DIRECTORY_SEPARATOR . $language . \DIRECTORY_SEPARATOR . $moduleName . '.' . static::FORMAT;
 			$langFile = YF_ROOT . $file;
 			if (file_exists($langFile)) {
 				static::$languageContainer[$language][$moduleName] = Json::decode(file_get_contents($langFile), true) ?? [];
