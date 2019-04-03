@@ -12,7 +12,7 @@ namespace YF\Modules\Base\View;
 use App\Api;
 use App\Request;
 
-class EditView extends Index
+class EditView extends \App\Controller\View
 {
 	/**
 	 * {@inheritdoc}

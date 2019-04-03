@@ -29,7 +29,7 @@ class WebUI
 		$response = false;
 
 		try {
-			if ($this->isInstalled() === false && $module != 'Install') {
+			if (false === $this->isInstalled() && 'Install' != $module) {
 				header('Location:index.php?module=Install&view=Install');
 				exit;
 			}
@@ -61,10 +61,11 @@ class WebUI
 
 			if (class_exists($handlerClass)) {
 				$handler = new $handlerClass();
-
+				$handler->validateRequest($request);
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					throw new AppException('Login is required');
 				}
+
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
 				$response = $handler->process($request);
@@ -73,14 +74,13 @@ class WebUI
 				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (AppException $e) {
-			if (false) {
+		} catch (\Thowable $e) {
+			if (true) {
 				// Log for developement.
-				//error_log($e->getTraceAsString(), E_ERROR);
+				echo $e->getTraceAsString();
 				die($e->getMessage());
-			} else {
-				die(Json::encode($e->getMessage()));
 			}
+			die(Json::encode($e->getMessage()));
 		}
 
 		if ($response) {
@@ -90,7 +90,7 @@ class WebUI
 
 	public function isInstalled()
 	{
-		return Config::$crmUrl != '__CRM_PATH__';
+		return '__CRM_PATH__' != Config::$crmUrl;
 	}
 
 	protected function triggerPreProcess($handler, $request)

@@ -9,7 +9,7 @@
 
 namespace YF\Modules\Base\Action;
 
-class Save extends Base
+class Save extends \App\Controller\Action
 {
 	/**
 	 * {@inheritdoc}

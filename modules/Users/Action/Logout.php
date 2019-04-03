@@ -2,8 +2,6 @@
 
 namespace YF\Modules\Users\Action;
 
-use YF\Modules\Base\Action;
-
 /**
  * User action logout class.
  *
@@ -11,7 +9,7 @@ use YF\Modules\Base\Action;
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-class Logout extends Action\Base
+class Logout extends \App\Controller\Action
 {
 	public function process(\App\Request $request)
 	{

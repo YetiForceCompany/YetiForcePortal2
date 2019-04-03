@@ -10,7 +10,7 @@
 
 namespace YF\Modules\Base\View;
 
-class ListView extends Index
+class ListView extends \App\Controller\View
 {
 	public function process(\App\Request $request)
 	{

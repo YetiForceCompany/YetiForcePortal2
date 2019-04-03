@@ -9,9 +9,7 @@
 
 namespace YF\Modules\Install\View;
 
-use YF\Modules\Base\View;
-
-class Install extends View\Index
+class Install extends \App\Controller\View
 {
 	public function __construct()
 	{
@@ -43,7 +41,7 @@ class Install extends View\Index
 		$module = $request->getModule();
 		$mode = $request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
-			return $this->$mode($request);
+			return $this->{$mode}($request);
 		}
 		$this->Step1($request);
 	}
@@ -79,7 +77,7 @@ class Install extends View\Index
 		return $request;
 	}
 
-	/**
+	/*
 	 * public function getHeaderCss(\App\Request $request)
 	 * {
 	 * $parentScripts = parent::getHeaderCss($request);

@@ -51,6 +51,9 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getDisplayValue(): string
 	{
+		if (empty($this->value)) {
+			return '';
+		}
 		return \App\Purifier::encodeHtml($this->value);
 	}
 
@@ -140,7 +143,7 @@ class BaseField extends \App\BaseModel
 	public function getFieldInfo($safe = false)
 	{
 		if ($safe) {
-			return Purifier::encodeHtml(Json::encode($this->getData()));
+			return \App\Purifier::encodeHtml(Json::encode($this->getData()));
 		}
 		return $this->getData();
 	}

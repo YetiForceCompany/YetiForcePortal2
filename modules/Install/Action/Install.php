@@ -10,9 +10,8 @@
 namespace YF\Modules\Install\Action;
 
 use Install\Model;
-use YF\Modules\Base\Action;
 
-class Install extends Action\Base
+class Install extends \App\Controller\Action
 {
 	public function loginRequired()
 	{

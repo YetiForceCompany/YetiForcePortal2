@@ -9,9 +9,7 @@
 
 namespace YF\Modules\Users\Action;
 
-use YF\Modules\Base\Action;
-
-class Login extends Action\Base
+class Login extends \App\Controller\Action
 {
 	public function checkPermission(\App\Request $request)
 	{

@@ -9,7 +9,7 @@
 
 namespace YF\Modules\Base\Action;
 
-class Delete extends Base
+class Delete extends \App\Controller\Action
 {
 	/**
 	 * {@inheritdoc}

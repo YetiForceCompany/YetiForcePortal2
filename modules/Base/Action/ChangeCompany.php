@@ -9,7 +9,7 @@
 
 namespace YF\Modules\Base\Action;
 
-class ChangeCompany extends Base
+class ChangeCompany extends \App\Controller\Action
 {
 	/**
 	 * Process.

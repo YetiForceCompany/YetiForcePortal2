@@ -56,10 +56,11 @@ AppConnector = {
 					var subStr = callerParams.substr(0, index + 1);//need to replace only "index.php?" or "?"
 					callerParams = callerParams.replace(subStr, '');
 				}
+				params = {type: 'GET'};
 			} else {
 				callerParams = jQuery.extend({}, params);
+				params = {};
 			}
-			params = {};
 			params.data = callerParams;
 		}
 		//Make the request as post by default
@@ -160,4 +161,3 @@ AppConnector = {
 		form.appendTo('body').submit();
 	},
 };
-

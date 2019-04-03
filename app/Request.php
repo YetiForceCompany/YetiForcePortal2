@@ -19,6 +19,9 @@ class Request
 
 	/**
 	 * Default constructor.
+	 *
+	 * @param mixed $values
+	 * @param mixed $stripifgpc
 	 */
 	public function __construct($values, $stripifgpc = true)
 	{
@@ -30,11 +33,12 @@ class Request
 
 	/**
 	 * Strip the slashes recursively on the values.
+	 *
+	 * @param mixed $value
 	 */
 	public function stripslashes_recursive($value)
 	{
-		$value = is_array($value) ? array_map([$this, 'stripslashes_recursive'], $value) : stripslashes($value);
-		return $value;
+		return is_array($value) ? array_map([$this, 'stripslashes_recursive'], $value) : stripslashes($value);
 	}
 
 	/**
@@ -73,6 +77,8 @@ class Request
 
 	/**
 	 * Check for existence of key.
+	 *
+	 * @param mixed $key
 	 */
 	public function has($key)
 	{
@@ -81,6 +87,8 @@ class Request
 
 	/**
 	 * Is the value (linked to key) empty?
+	 *
+	 * @param mixed $key
 	 */
 	public function isEmpty($key)
 	{
@@ -90,6 +98,9 @@ class Request
 
 	/**
 	 * Get key value (otherwise default value).
+	 *
+	 * @param mixed $key
+	 * @param mixed $defvalue
 	 */
 	public function get($key, $defvalue = '')
 	{
@@ -97,7 +108,7 @@ class Request
 		if (isset($this->valuemap[$key])) {
 			$value = $this->valuemap[$key];
 		}
-		if ($value === '' && isset($this->defaultmap[$key])) {
+		if ('' === $value && isset($this->defaultmap[$key])) {
 			$value = $this->defaultmap[$key];
 		}
 
@@ -105,7 +116,7 @@ class Request
 		if (is_string($value)) {
 			// NOTE: Zend_Json or json_decode gets confused with big-integers (when passed as string)
 			// and convert them to ugly exponential format - to overcome this we are performin a pre-check
-			if (strpos($value, '[') === 0 || strpos($value, '{') === 0) {
+			if (0 === strpos($value, '[') || 0 === strpos($value, '{')) {
 				$isJSON = true;
 			}
 		}
@@ -138,6 +149,9 @@ class Request
 
 	/**
 	 * Set the value for key.
+	 *
+	 * @param mixed $key
+	 * @param mixed $newvalue
 	 */
 	public function set($key, $newvalue)
 	{
@@ -146,6 +160,9 @@ class Request
 
 	/**
 	 * Set default value for key.
+	 *
+	 * @param mixed $key
+	 * @param mixed $defvalue
 	 */
 	public function setDefault($key, $defvalue)
 	{
@@ -171,18 +188,32 @@ class Request
 		$action = $this->get('action');
 		if (!empty($action)) {
 			return $action;
-		} else {
-			return $view;
 		}
+		return $view;
 	}
 
 	public function isAjax()
 	{
-		if (!empty($_SERVER['HTTP_X_PJAX']) && $_SERVER['HTTP_X_PJAX'] == true) {
+		if (!empty($_SERVER['HTTP_X_PJAX']) && true == $_SERVER['HTTP_X_PJAX']) {
 			return true;
-		} elseif (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+		}
+		if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			return true;
 		}
 		return false;
+	}
+
+	public function validateWriteAccess()
+	{
+		if ('POST' !== $_SERVER['REQUEST_METHOD']) {
+			throw new \App\Exception\BadRequest();
+		}
+	}
+
+	public function validateReadAccess()
+	{
+		if ('GET' !== $_SERVER['REQUEST_METHOD']) {
+			throw new \App\Exception\BadRequest();
+		}
 	}
 }

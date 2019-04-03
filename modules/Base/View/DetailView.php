@@ -16,7 +16,7 @@ use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\InventoryField;
 use YF\Modules\Base\Model\Record;
 
-class DetailView extends Index
+class DetailView extends \App\Controller\View
 {
 	/**
 	 * Process.

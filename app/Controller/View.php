@@ -1,33 +1,21 @@
 <?php
 /**
- * Users view class.
+ * Controller class for views.
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
- * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @author    Tomasz Kur <t.kur@yetiforce.com>
  */
 
-namespace YF\Modules\Base\View;
+namespace App\Controller;
 
-use App;
-use App\Session;
+use App\Request;
 
-abstract class Index extends \App\Controller
+abstract class View extends Base
 {
 	protected $viewer = false;
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	public function loginRequired()
-	{
-		return true;
-	}
-
-	public function checkPermission(App\Request $request)
+	public function checkPermission(Request $request)
 	{
 		$moduleName = $request->getModule();
 		$userInstance = \App\User::getUser();
@@ -38,7 +26,7 @@ abstract class Index extends \App\Controller
 		return true;
 	}
 
-	public function preProcess(App\Request $request, $display = true)
+	public function preProcess(Request $request, $display = true)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
@@ -58,7 +46,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Viewer
 	 */
-	public function getViewer(App\Request $request)
+	public function getViewer(Request $request)
 	{
 		if (!$this->viewer) {
 			$moduleName = $request->getModule();
@@ -74,12 +62,12 @@ abstract class Index extends \App\Controller
 		return $this->viewer;
 	}
 
-	public function getPageTitle(App\Request $request)
+	public function getPageTitle(Request $request)
 	{
 		$title = '';
 		$moduleName = $request->getModule(false);
 		if ('Login' !== $request->get('view') && 'Users' !== $moduleName) {
-			$title = App\Language::translateModule($moduleName);
+			$title = \App\Language::translateModule($moduleName);
 			$pageTitle = $this->getBreadcrumbTitle($request);
 			if ($pageTitle) {
 				$title .= ' - ' . $pageTitle;
@@ -88,20 +76,13 @@ abstract class Index extends \App\Controller
 		return $title;
 	}
 
-	public function getBreadcrumbTitle(App\Request $request)
+	public function getBreadcrumbTitle(Request $request)
 	{
 		if (!empty($this->pageTitle)) {
 			return $this->pageTitle;
 		}
 		return false;
 	}
-
-	//Note : To get the right hook for immediate parent in PHP,
-	// specially in case of deep hierarchy
-	//TODO: Need to revisit this.
-	/* function preProcessParentTplName(App\Request $request) {
-	  return parent::preProcessTplName($request);
-	  } */
 
 	public function convertScripts($fileNames, $fileExtension)
 	{
@@ -142,7 +123,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getHeaderCss(App\Request $request)
+	public function getHeaderCss(Request $request)
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
@@ -162,30 +143,30 @@ abstract class Index extends \App\Controller
 		return $this->convertScripts($cssFileNames, 'css');
 	}
 
-	protected function preProcessDisplay(App\Request $request)
+	protected function preProcessDisplay(Request $request)
 	{
 		$viewer = $this->getViewer($request);
-		if (Session::has('systemError')) {
-			$viewer->assign('ERRORS', Session::get('systemError'));
+		if (\App\Session::has('systemError')) {
+			$viewer->assign('ERRORS', \App\Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	protected function preProcessTplName(App\Request $request)
+	protected function preProcessTplName(Request $request)
 	{
 		return 'Header.tpl';
 	}
 
-	public function postProcess(App\Request $request)
+	public function postProcess(Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 
-		if (\App\Config::$debugApi && Session::has('debugApi') && Session::get('debugApi')) {
-			$viewer->assign('DEBUG_API', Session::get('debugApi'));
+		if (\App\Config::$debugApi && \App\Session::has('debugApi') && Session::get('debugApi')) {
+			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
-			Session::set('debugApi', false);
+			\App\Session::set('debugApi', false);
 		}
 		$viewer->view('Footer.tpl');
 	}
@@ -197,7 +178,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(App\Request $request)
+	public function getFooterScripts(Request $request)
 	{
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
@@ -240,5 +221,10 @@ abstract class Index extends \App\Controller
 		];
 
 		return $this->convertScripts($jsFileNames, 'js');
+	}
+
+	public function validateRequest(Request $request)
+	{
+		$request->validateReadAccess();
 	}
 }
