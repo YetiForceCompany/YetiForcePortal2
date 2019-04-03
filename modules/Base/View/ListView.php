@@ -10,32 +10,62 @@
 
 namespace YF\Modules\Base\View;
 
+use App\Request;
+use YF\Modules\Base\Model\ListView as ListViewModel;
+
 class ListView extends \App\Controller\View
 {
-	public function process(\App\Request $request)
+	/**
+	 * List view model.
+	 *
+	 * @var ListViewModel
+	 */
+	protected $listViewModel;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function preProcess(Request $request, $display = true)
 	{
-		$module = $request->getModule();
-		$api = \App\Api::getInstance();
-		$recordsListModel = [];
-		$recordsList = $api->call($module . '/RecordsList');
-		if (!empty($recordsList['records'])) {
-			foreach ($recordsList['records'] as $key => $value) {
-				$recordModel = \YF\Modules\Base\Model\Record::getInstance($module);
-				$recordModel->setData($value)->setId($key);
-				$recordsListModel[$key] = $recordModel;
-			}
-		}
+		parent::preProcess($request, $display);
+		$this->getListViewModel($request->getModule());
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function process(Request $request)
+	{
+		$this->listViewModel->loadRecordsList();
+		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
-		if (!isset($recordsList['headers'])) {
-			$recordsList['headers'] = [];
+		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());
+		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
+		$viewer->assign('MODULE_NAME', $moduleName);
+		$viewer->assign('COUNT', $this->listViewModel->getCount());
+		$viewer->view($this->processTplName($request), $moduleName);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function processTplName(Request $request = null): string
+	{
+		return 'ListView.tpl';
+	}
+
+	/**
+	 * Get list view model.
+	 *
+	 * @param string $moduleName
+	 *
+	 * @return ListViewModel
+	 */
+	protected function getListViewModel(string $moduleName): ListViewModel
+	{
+		if (empty($this->listViewModel)) {
+			$this->listViewModel = ListViewModel::getInstance($moduleName);
 		}
-		$viewer->assign('HEADERS', $recordsList['headers']);
-		$viewer->assign('RECORDS', $recordsListModel);
-		$viewer->assign('MODULE_NAME', $module);
-		if (!isset($recordsList['count'])) {
-			$recordsList['count'] = 0;
-		}
-		$viewer->assign('COUNT', $recordsList['count']);
-		$viewer->view('ListView.tpl', $module);
+		return $this->listViewModel;
 	}
 }
