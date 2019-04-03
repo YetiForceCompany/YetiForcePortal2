@@ -158,12 +158,24 @@ abstract class View extends Base
 		return 'Header.tpl';
 	}
 
+	/**
+	 * Get process tpl name.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return string
+	 */
+	public function processTplName(Request $request = null): string
+	{
+		return $request->getAction() . '/Index.tpl';
+	}
+
 	public function postProcess(Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
 
-		if (\App\Config::$debugApi && \App\Session::has('debugApi') && Session::get('debugApi')) {
+		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl');
 			\App\Session::set('debugApi', false);

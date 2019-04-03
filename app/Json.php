@@ -24,7 +24,7 @@ class Json
 		return json_decode($encodedValue, $objectDecodeType);
 	}
 
-	public static function encode($valueToEncode, $cycleCheck = false)
+	public static function encode($valueToEncode, $cycleCheck = false): string
 	{
 		return json_encode($valueToEncode);
 	}
