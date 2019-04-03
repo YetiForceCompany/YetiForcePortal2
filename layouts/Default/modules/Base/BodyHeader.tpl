@@ -15,9 +15,11 @@
 		</a>
 		{/if}
 		<div class="dropdown quickAction historyBtn">
-			<a class="loadPage btn btn-danger btn-sm mr-2" role="button" href="index.php?module=Users&action=Logout">
-				<span class="fas fa-power-off" aria-hidden="true"></span>
-			</a>
+			<form method="POST" action="index.php?module=Users&action=Logout">
+				<button type="submit" class="loadPage btn btn-danger btn-sm mr-2" role="button">
+					<span class="fas fa-power-off" aria-hidden="true"></span>
+				</button>
+			</form>
 		</div>
 	</header>
 {/strip}

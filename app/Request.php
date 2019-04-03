@@ -206,14 +206,14 @@ class Request
 	public function validateWriteAccess()
 	{
 		if ('POST' !== $_SERVER['REQUEST_METHOD']) {
-			throw new \App\Exception\BadRequest();
+			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
 		}
 	}
 
 	public function validateReadAccess()
 	{
 		if ('GET' !== $_SERVER['REQUEST_METHOD']) {
-			throw new \App\Exception\BadRequest();
+			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
 		}
 	}
 }

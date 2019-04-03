@@ -11,6 +11,11 @@ namespace YF\Modules\Users\Action;
  */
 class Logout extends \App\Controller\Action
 {
+	public function checkPermission(\App\Request $request)
+	{
+		return true;
+	}
+
 	public function process(\App\Request $request)
 	{
 		$response = \App\Api::getInstance()->call('Users/Logout', [], 'put');
