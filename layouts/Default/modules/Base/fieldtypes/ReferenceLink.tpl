@@ -3,7 +3,7 @@
 	{assign var=FIELD_NAME value=$FIELD_MODEL->get('name')}
 	{assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
 	{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
-	{assign var="FIELD_INFO" value=\App\Functions::toSafeHTML(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}
+	{assign var="FIELD_INFO" value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}
 	{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 	{if {$REFERENCE_LIST_COUNT} eq 1}
 		{assign var="REFERENCED_MODULE_NAME" value=reset($REFERENCE_LIST)}
@@ -22,16 +22,16 @@
 		{/if}
 	{/if}
 	<input name="{$FIELD_NAME}" type="hidden" value="{$RECORD->getRawValue($FIELD_NAME)}"
-		   title="{\App\Functions::toSafeHTML($RECORD->getDisplayValue($FIELD_NAME))}" class="sourceField"
+		   title="{$RECORD->getDisplayValue($FIELD_NAME)}" class="sourceField"
 		   data-fieldtype="{$FIELD_MODEL->get('type')}" data-field-label="{$FIELD_MODEL->get('label')}"
-		   data-displayvalue="{\App\Functions::toSafeHTML($RECORD->getDisplayValue($FIELD_NAME))}"
+		   data-displayvalue="{$RECORD->getDisplayValue($FIELD_NAME)}"
 		   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}>
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
 			<div class="input-group-append noSpaces referenceModulesListGroup">
 				<select id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_dropDown"
 						class="referenceModulesList chzn-select"
-						title="{\App\Functions::translate('LBL_RELATED_MODULE_TYPE')}" required="required">
+						title="{\App\Language::translate('LBL_RELATED_MODULE_TYPE')}" required="required">
 					{foreach key=index item=REFERENCE from=$REFERENCE_LIST}
 						{assign var="REFERENCED_MODULE_TRANSLATE" value=\App\Language::translateModule($REFERENCE)}
 						<option value="{$REFERENCE}"
@@ -41,22 +41,22 @@
 			</div>
 		{/if}
 		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"
-			   title="{\App\Functions::toSafeHTML($RECORD->getDisplayValue($FIELD_NAME))}"
+			   title="{$RECORD->getDisplayValue($FIELD_NAME)}"
 			   class="marginLeftZero form-control autoComplete" {if !empty($DISPLAYID)}readonly="true"{/if}
-			   value="{\App\Functions::toSafeHTML($RECORD->getDisplayValue($FIELD_NAME))}"
+			   value="{$RECORD->getDisplayValue($FIELD_NAME)}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]"
-			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Functions::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
+			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
 		<span class="input-group-btn cursorPointer">
 			<button class="btn btn-default clearReferenceSelection" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
-					  title="{\App\Functions::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
+					  title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
 			<button class="btn btn-default relatedPopup" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
-					  title="{\App\Functions::translate('LBL_SELECT', $MODULE_NAME)}"></span>
+					  title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
 		</span>
 	</div>

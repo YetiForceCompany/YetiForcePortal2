@@ -9,7 +9,6 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
-use App\Functions;
 use App\Json;
 
 class BaseField extends \App\BaseModel
@@ -50,9 +49,9 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return string
 	 */
-	public function getDisplayValue()
+	public function getDisplayValue(): string
 	{
-		return $this->value;
+		return \App\Purifier::encodeHtml($this->value);
 	}
 
 	/**
@@ -62,7 +61,7 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return Field
 	 */
-	public function setDisplayValue($value)
+	public function setDisplayValue(string $value): self
 	{
 		$this->value = $value;
 		return $this;
@@ -141,10 +140,9 @@ class BaseField extends \App\BaseModel
 	public function getFieldInfo($safe = false)
 	{
 		if ($safe) {
-			return Functions::toSafeHTML(Json::encode($this->getData()));
-		} else {
-			return $this->getData();
+			return Purifier::encodeHtml(Json::encode($this->getData()));
 		}
+		return $this->getData();
 	}
 
 	/**
@@ -198,11 +196,11 @@ class BaseField extends \App\BaseModel
 		$module = $this->getModuleName();
 		if (file_exists(YF_ROOT . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
 			return "fieldtypes/$type.tpl";
-		} elseif (file_exists(YF_ROOT . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
-			return "fieldtypes/$type.tpl";
-		} else {
-			return 'fieldtypes/String.tpl';
 		}
+		if (file_exists(YF_ROOT . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
+			return "fieldtypes/$type.tpl";
+		}
+		return 'fieldtypes/String.tpl';
 	}
 
 	/**
@@ -224,7 +222,7 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getEditViewDisplayValue()
 	{
-		return \App\Functions::toSafeHTML($this->getRawValue());
+		return \App\Purifier::encodeHtml($this->getRawValue());
 	}
 
 	/**
@@ -236,9 +234,8 @@ class BaseField extends \App\BaseModel
 	{
 		if (!$this->isNewRecord) {
 			return $this->rawValue;
-		} else {
-			return $this->get('defaultvalue');
 		}
+		return $this->get('defaultvalue');
 	}
 
 	/**

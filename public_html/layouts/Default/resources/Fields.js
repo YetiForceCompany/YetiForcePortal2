@@ -1,7 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
-App.Fields.Picklist =
-	{
+window.App.Fields = {
+	'Picklist':	{
 		/**
 		 * Function which will convert ui of select boxes.
 		 * @params parent - select element
@@ -261,4 +261,4 @@ App.Fields.Picklist =
 			});
 		}
 	}
-;
+};

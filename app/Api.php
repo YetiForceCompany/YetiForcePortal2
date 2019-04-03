@@ -79,7 +79,7 @@ class Api
 				'rawResponse' => $rawResponse,
 				'response' => $response,
 				'request' => $request->raw,
-				'trace' => Functions::getBacktrace()
+				'trace' => Debug::getBacktrace()
 			];
 			$_SESSION['debugApi'][] = $debugApi;
 		}

@@ -92,4 +92,7 @@ class Config
 	 * @var array
 	 */
 	public static $allowedModulesInMenu = [];
+
+	public static $defaultCharset = 'UTF-8';
+
 }

@@ -6,17 +6,17 @@
 			<div class="widget_header u-remove-main-padding">
 				<div class="d-flex justify-content-between u-add-main-padding">
 					<div class="">
-						{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+						{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
 						<button class="btn btn-success mr-1" type="submit">
 							<span class="fas fa-check mr-1"></span>
-							{\App\Functions::translate('BTN_SAVE', $MODULE_NAME)}
+							{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
 						</button>
 						<button class="btn btn-warning" type="reset"
 								onclick="javascript:window.history.back();">
 							<span class="fas fa-times mr-1"></span>
-							{\App\Functions::translate('BTN_CANCEL', $MODULE_NAME)}
+							{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}
 						</button>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 									</div>
 									<div class="fieldValue col-md-9">
 										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->getRawValue($FIELD->getName()))}
-										{include file=\App\Functions::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
+										{include file=\App\Resources::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
 							{/foreach}
@@ -50,7 +50,7 @@
 			{/foreach}
 		</form>
 		<div id="CoreLog" class="panel panel-primary col-sm-12 px-0 blockContainer">
-			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
 				<ol id="CoreLogList">
 
@@ -59,4 +59,3 @@
 		</div>
 	</div>
 {/strip}
-

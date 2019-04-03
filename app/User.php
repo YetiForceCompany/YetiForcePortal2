@@ -64,7 +64,7 @@ class User extends BaseModel
 		$params = [
 			'version' => Config::$version,
 			'language' => Language::getLanguage(),
-			'ip' => Functions::getRemoteIP(),
+			'ip' => Server::getRemoteIp(),
 			'fromUrl' => Config::$portalUrl
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
