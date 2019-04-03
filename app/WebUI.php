@@ -26,8 +26,6 @@ class WebUI
 		$module = $request->getModule();
 		$view = $request->get('view');
 		$action = $request->get('action');
-		$response = false;
-
 		try {
 			if (false === $this->isInstalled() && 'Install' != $module) {
 				header('Location:index.php?module=Install&view=Install');
@@ -68,23 +66,17 @@ class WebUI
 
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
-				$response = $handler->process($request);
+				$handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
 				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (\Thowable $e) {
-			if (true) {
-				// Log for developement.
-				echo $e->getTraceAsString();
-				die($e->getMessage());
+		} catch (\Exception $e) {
+			if ($request->isAjax()) {
+			} else {
+				\App\AppException::view($e);
 			}
-			die(Json::encode($e->getMessage()));
-		}
-
-		if ($response) {
-			$response->emit();
 		}
 	}
 

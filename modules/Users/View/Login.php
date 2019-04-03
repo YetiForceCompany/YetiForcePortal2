@@ -9,9 +9,7 @@
 
 namespace YF\Modules\Users\View;
 
-use YF\Modules\Base\View;
-
-class Login extends View\Index
+class Login extends \App\Controller\View
 {
 	public function loginRequired()
 	{

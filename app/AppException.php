@@ -14,13 +14,26 @@ namespace App;
 
 class AppException extends \Exception
 {
+	public $tplName = 'Exception.tpl';
+
+	private $backtrace;
+
 	public function __construct($message, $code = 200, Exception $previous = null)
 	{
-		if (Config::getBool('debugApi')) {
-			echo '<pre>';
-			debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-			echo '</pre>';
+		parent::__construct($message, $code, $previous);
+		$this->backtrace = \App\Debug::getBacktrace(3);
+	}
+
+	public static function view(\Exception $e)
+	{
+		$tplName = 'Exception.tpl';
+		if (!empty($e->tplName)) {
+			$tplName = $e->tplName;
 		}
-		die($message);
+		$viewer = new \App\Viewer();
+		$viewer->assign('MESSAGE', $e->getMessage());
+		$viewer->assign('CODE', $e->getCode());
+		$viewer->assign('BACKTRACE', nl2br($e->backtrace));
+		$viewer->view($tplName);
 	}
 }

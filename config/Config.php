@@ -19,7 +19,7 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $crmUrl = 'http://yeti/';
+	public static $crmUrl = 'http://yeti2/';
 
 	/**
 	 * Portal URL.
@@ -94,5 +94,4 @@ class Config
 	public static $allowedModulesInMenu = [];
 
 	public static $defaultCharset = 'UTF-8';
-
 }

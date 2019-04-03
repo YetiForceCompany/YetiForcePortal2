@@ -11,7 +11,15 @@ namespace App\Controller;
 
 abstract class Action extends Base
 {
-	public function validateRequest(Request $request)
+	public function preProcess(\App\Request $request)
+	{
+	}
+
+	public function postProcess(\App\Request $request)
+	{
+	}
+
+	public function validateRequest(\App\Request $request)
 	{
 		$request->validateWriteAccess();
 	}
