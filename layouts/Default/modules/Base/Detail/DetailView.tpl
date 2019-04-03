@@ -58,13 +58,6 @@
 			{/if}
 		{/foreach}
 		{include file=\App\Resources::templatePath("Detail\Inventory.tpl",$MODULE_NAME)}
-		<div id="CoreLog" class="card col-sm-12 px-0 blockContainer">
-			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
-			<div class="col-md-12 px-0 card-body">
-				<ol id="CoreLogList">
-
-				</ol>
-			</div>
-		</div>
+		{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
 	</div>
 {/strip}
