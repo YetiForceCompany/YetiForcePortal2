@@ -93,7 +93,14 @@ class User extends BaseModel
 		return $this;
 	}
 
-	public function isPermitted($module)
+	/**
+	 * Is permitted to module.
+	 *
+	 * @param string $module
+	 *
+	 * @return bool
+	 */
+	public function isPermitted(string $module): bool
 	{
 		return isset($this->getModulesList()[$module]);
 	}
@@ -103,7 +110,7 @@ class User extends BaseModel
 	 *
 	 * @return array
 	 */
-	public function getModulesList()
+	public function getModulesList(): array
 	{
 		$modules = Session::get('Modules');
 		if (!empty($modules)) {
