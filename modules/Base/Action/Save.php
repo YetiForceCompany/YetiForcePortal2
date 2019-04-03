@@ -12,6 +12,20 @@ namespace YF\Modules\Base\Action;
 class Save extends Base
 {
 	/**
+	 * {@inheritdoc}
+	 */
+	public function checkPermission(Request $request)
+	{
+		$actionName = 'EditView';
+		if ($request->isEmpty('record')) {
+			$actionName = 'CreateView';
+		}
+		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), $actionName)) {
+			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+		}
+	}
+
+	/**
 	 * Process.
 	 *
 	 * @param \App\Request $request

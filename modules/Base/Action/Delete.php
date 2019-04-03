@@ -12,6 +12,16 @@ namespace YF\Modules\Base\Action;
 class Delete extends Base
 {
 	/**
+	 * {@inheritdoc}
+	 */
+	public function checkPermission(\App\Request $request)
+	{
+		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), 'Delete')) {
+			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+		}
+	}
+
+	/**
 	 * Process.
 	 *
 	 * @param \App\Request $request

@@ -15,6 +15,21 @@ use App\Request;
 class EditView extends Index
 {
 	/**
+	 * {@inheritdoc}
+	 */
+	public function checkPermission(Request $request)
+	{
+		parent::checkPermission($request);
+		$actionName = 'EditView';
+		if ($request->isEmpty('record')) {
+			$actionName = 'CreateView';
+		}
+		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), $actionName)) {
+			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+		}
+	}
+
+	/**
 	 * Process.
 	 *
 	 * @param \Request $request
@@ -70,7 +85,7 @@ class EditView extends Index
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(\App\Request $request)
+	public function getFooterScripts(Request $request)
 	{
 		$headerScriptInstances = parent::getFooterScripts($request);
 		$moduleName = $request->getModule();
@@ -79,7 +94,6 @@ class EditView extends Index
 		];
 
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
-		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
-		return $headerScriptInstances;
+		return array_merge($headerScriptInstances, $jsScriptInstances);
 	}
 }

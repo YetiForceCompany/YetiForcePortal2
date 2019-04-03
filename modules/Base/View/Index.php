@@ -27,7 +27,7 @@ abstract class Index extends \App\Controller
 		return true;
 	}
 
-	public function checkPermission(\App\Request $request)
+	public function checkPermission(App\Request $request)
 	{
 		$moduleName = $request->getModule();
 		$userInstance = \App\User::getUser();
@@ -38,7 +38,7 @@ abstract class Index extends \App\Controller
 		return true;
 	}
 
-	public function preProcess(\App\Request $request, $display = true)
+	public function preProcess(App\Request $request, $display = true)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
@@ -58,7 +58,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Viewer
 	 */
-	public function getViewer(\App\Request $request)
+	public function getViewer(App\Request $request)
 	{
 		if (!$this->viewer) {
 			$moduleName = $request->getModule();
@@ -74,11 +74,11 @@ abstract class Index extends \App\Controller
 		return $this->viewer;
 	}
 
-	public function getPageTitle(\App\Request $request)
+	public function getPageTitle(App\Request $request)
 	{
 		$title = '';
 		$moduleName = $request->getModule(false);
-		if ($request->get('view') !== 'Login' && $moduleName !== 'Users') {
+		if ('Login' !== $request->get('view') && 'Users' !== $moduleName) {
 			$title = App\Language::translateModule($moduleName);
 			$pageTitle = $this->getBreadcrumbTitle($request);
 			if ($pageTitle) {
@@ -111,7 +111,7 @@ abstract class Index extends \App\Controller
 			$script = new \App\Script();
 			$script->set('type', $fileExtension);
 			// external javascript source file handling
-			if (strpos($fileName, 'http://') === 0 || strpos($fileName, 'https://') === 0) {
+			if (0 === strpos($fileName, 'http://') || 0 === strpos($fileName, 'https://')) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
 				continue;
 			}
@@ -129,7 +129,7 @@ abstract class Index extends \App\Controller
 
 	public function resourceUrl($url)
 	{
-		if (stripos($url, '://') === false && $fs = @filemtime($url)) {
+		if (false === stripos($url, '://') && $fs = @filemtime($url)) {
 			$url = $url . '?s=' . $fs;
 		}
 		return $url;
@@ -142,7 +142,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getHeaderCss(\App\Request $request)
+	public function getHeaderCss(App\Request $request)
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
@@ -159,11 +159,10 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
 		];
 
-		$headerCssInstances = $this->convertScripts($cssFileNames, 'css');
-		return $headerCssInstances;
+		return $this->convertScripts($cssFileNames, 'css');
 	}
 
-	protected function preProcessDisplay(\App\Request $request)
+	protected function preProcessDisplay(App\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		if (Session::has('systemError')) {
@@ -173,12 +172,12 @@ abstract class Index extends \App\Controller
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	protected function preProcessTplName(\App\Request $request)
+	protected function preProcessTplName(App\Request $request)
 	{
 		return 'Header.tpl';
 	}
 
-	public function postProcess(\App\Request $request)
+	public function postProcess(App\Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
@@ -198,7 +197,7 @@ abstract class Index extends \App\Controller
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(\App\Request $request)
+	public function getFooterScripts(App\Request $request)
 	{
 		$moduleName = $request->getModule();
 		$action = $request->getAction();
@@ -240,7 +239,6 @@ abstract class Index extends \App\Controller
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
 		];
 
-		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
-		return $jsScriptInstances;
+		return $this->convertScripts($jsFileNames, 'js');
 	}
 }

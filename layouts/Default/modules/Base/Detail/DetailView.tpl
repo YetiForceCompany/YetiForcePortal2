@@ -8,9 +8,11 @@
 				</div>
 				<div class="contentHeader">
 					<span class="float-right">
-						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
-						   title="{\App\Language::translate('BTN_EDIT')}"><span
-									class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Language::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+						{if YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'EditView')}
+							<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
+							title="{\App\Language::translate('BTN_EDIT')}"><span
+										class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Language::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+						{/if}
 					</span>
 					<div class="clearfix"></div>
 				</div>

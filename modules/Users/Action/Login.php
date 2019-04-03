@@ -13,7 +13,7 @@ use YF\Modules\Base\Action;
 
 class Login extends Action\Base
 {
-	public function checkPermission()
+	public function checkPermission(\App\Request $request)
 	{
 		return true;
 	}

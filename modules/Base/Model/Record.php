@@ -214,7 +214,7 @@ class Record extends \App\BaseModel
 	 */
 	public function isEditable()
 	{
-		return true;
+		return \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'EditView');
 	}
 
 	/**
@@ -234,7 +234,7 @@ class Record extends \App\BaseModel
 	 */
 	public function isDeletable()
 	{
-		return true;
+		return \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'Delete');
 	}
 
 	/**

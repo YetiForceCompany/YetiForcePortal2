@@ -32,7 +32,7 @@ class DetailView extends Index
 		$recordDetail = $api->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);
-		$recordModel->setInventoryData($recordDetail['inventory']);
+
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
@@ -45,11 +45,15 @@ class DetailView extends Index
 			}
 		}
 		$inventoryFields = [];
-		foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
-			if (1 === $fieldType) {
-				foreach ($fieldsInventory as $field) {
-					if ($field['isVisibleInDetail']) {
-						$inventoryFields[] = InventoryField::getInstance($moduleName, $field);
+		if (!empty($moduleStructure['inventory'])) {
+			$recordModel->setInventoryData($recordDetail['inventory']);
+			foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
+				$recordModel->setInventoryData($recordDetail['inventory']);
+				if (1 === $fieldType) {
+					foreach ($fieldsInventory as $field) {
+						if ($field['isVisibleInDetail']) {
+							$inventoryFields[] = InventoryField::getInstance($moduleName, $field);
+						}
 					}
 				}
 			}
