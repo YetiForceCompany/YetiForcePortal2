@@ -5,16 +5,16 @@
 	 class="d-none d-print-none">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'js'))}</div>
 <div id="pjaxContainer" class="d-none d-print-none"></div>
 <div class="mainPage">
-	{include file=\App\Functions::templatePath("SearchMenu.tpl",$MODULE_NAME)}
-	{include file=\App\Functions::templatePath("ActionMenu.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("SearchMenu.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("ActionMenu.tpl",$MODULE_NAME)}
 	<div class="mobileLeftPanel p-0 visible-phone">
-		{include file=\App\Functions::templatePath("BodyLeft.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
 	<div class="leftPanel p-0 hidden-phone">
-		{include file=\App\Functions::templatePath("BodyLeft.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
 	<div class="mainBody">
-		{include file=\App\Functions::templatePath("BodyHeader.tpl",$MODULE_NAME)}
-		{include file=\App\Functions::templatePath("BodyContent.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("BodyHeader.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("BodyContent.tpl",$MODULE_NAME)}
 		<!-- /tpl-Base-Body -->
 		{/strip}

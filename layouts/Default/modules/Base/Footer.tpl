@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	{include file=\App\Functions::templatePath("BodyRight.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("BodyRight.tpl",$MODULE_NAME)}
 	</div>
 	</div>
 	</div>
@@ -16,7 +16,7 @@
 						<div class="modal-header">
 							<h5 class="modal-title" id="myModalLabel">
 								<span class="fas fa-exchange-alt mr-1"></span>
-								{\App\Functions::translate('LBL_CHANGE_COMPANY')}
+								{\App\Language::translate('LBL_CHANGE_COMPANY')}
 							</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 										aria-hidden="true">&times;</span></button>
@@ -32,12 +32,12 @@
 							<button type="button"
 									class="btn btn-success">
 								<span class="fas fa-check mr-1"></span>
-								{\App\Functions::translate('LBL_CHANGE')}
+								{\App\Language::translate('LBL_CHANGE')}
 							</button>
 							<button type="button" class="btn btn-danger"
 									data-dismiss="modal">
 								<span class="fas fa-times mr-1"></span>
-								{\App\Functions::translate('BTN_CANCEL')}
+								{\App\Language::translate('BTN_CANCEL')}
 							</button>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 	</div>
 	<footer class="footerContainer d-print-none w-100">
 		<div class="footer">
-			<p>{sprintf(\App\Functions::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
+			<p>{sprintf(\App\Language::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
 		</div>
 	</footer>
 	<div class="d-print-none">
@@ -55,7 +55,7 @@
 			<script src="{$SCRIPT->getSrc()}"></script>
 		{/foreach}
 	</div>
-	{include file=\App\Functions::templatePath("Log.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("Log.tpl",$MODULE_NAME)}
 	</body>
 	</html>
 {/strip}

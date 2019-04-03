@@ -17,21 +17,21 @@
 			{/if}
 			<div class="form-group">
 				<label for="inputEmail"
-					   class="sr-only">{\App\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+					   class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 				<input name="email" type="email" id="inputEmail" class="form-control"
-					   placeholder="{\App\Functions::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
+					   placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
 					   value="demo@yetiforce.com" required="" autofocus="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword"
-					   class="sr-only">{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+					   class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<input name="password" type="password" id="inputPassword" class="form-control"
-					   placeholder="{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo"
+					   placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo"
 					   required="">
 			</div>
 			{if \App\Config::getBool('allowLanguageSelection') }
 				<div class="form-group">
-					<label for="inputPassword" class="sr-only">{\App\Functions::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+					<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 					<select name="language" class="form-control">
 						{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}
 							<option value="{$PREFIX}">{$LANG}</option>
@@ -41,11 +41,11 @@
 			{else}
 				<input type="hidden" name="language" value="{\App\Config::get('language')}" />
 			{/if}
-			<button class="btn btn-lg btn-primary btn-block" type="submit">{\App\Functions::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
 	<div id="CoreLog" class="card col-sm-12 px-0 blockContainer">
-		<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+		<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
 		<div class="col-md-12 px-0 card-body">
 			<ol id="CoreLogList">
 

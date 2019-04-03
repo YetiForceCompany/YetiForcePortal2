@@ -62,7 +62,7 @@ abstract class Controller
 		if (!empty($name) && $this->isMethodExposed($name)) {
 			return call_user_func_array([$this, $name], $parameters);
 		}
-		throw new AppException(Functions::translate('LBL_NOT_ACCESSIBLE'));
+		throw new AppException(Language::translate('LBL_NOT_ACCESSIBLE'));
 	}
 
 	/**

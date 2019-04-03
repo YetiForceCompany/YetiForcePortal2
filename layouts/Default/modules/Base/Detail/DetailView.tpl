@@ -4,13 +4,13 @@
 		<div class="widget_header row">
 			<div class="col-sm-12">
 				<div class="float-left">
-					{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
 				</div>
 				<div class="contentHeader">
 					<span class="float-right">
 						<a href="{$RECORD->getEditViewUrl()}" class="btn btn-sm btn-primary"
-						   title="{\App\Functions::translate('BTN_EDIT')}"><span
-									class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Functions::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
+						   title="{\App\Language::translate('BTN_EDIT')}"><span
+									class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Language::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
 					</span>
 					<div class="clearfix"></div>
 				</div>
@@ -55,9 +55,9 @@
 				</div>
 			{/if}
 		{/foreach}
-		{include file=\App\Functions::templatePath("Detail\Inventory.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("Detail\Inventory.tpl",$MODULE_NAME)}
 		<div id="CoreLog" class="card col-sm-12 px-0 blockContainer">
-			<div class="card-header">{\App\Functions::translate('LBL_CORE_LOG')}</div>
+			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
 				<ol id="CoreLogList">
 

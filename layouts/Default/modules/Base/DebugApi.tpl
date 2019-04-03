@@ -2,7 +2,7 @@
 {strip}
 	<div class="col-sm-12">
 		<div class="panel panel-primary">
-			<div class="card-header">{\App\Functions::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</div>
+			<div class="card-header">{\App\Language::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</div>
 			<div class="card-body">
 				{foreach item=ITEM key=KEY from=$DEBUG_API}
 					<div>
@@ -53,4 +53,3 @@
 		</div>
 	</div>
 {/strip}
-
