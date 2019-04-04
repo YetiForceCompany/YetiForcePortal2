@@ -272,7 +272,9 @@ window.App.Fields = {
 			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
 		}
 		generateTree(treeData) {
-			this.treeInstance.jstree({ 'core' : {
+			this.treeInstance.on('select_node.jstree', (e, data)=>{
+
+			}).jstree({ 'core' : {
 				data: treeData
 			} });
 		}

@@ -1,6 +1,7 @@
 {
     "php": {
-        "LBL_ADD_TO_CART": "Add to cart"
+        "LBL_ADD_TO_CART": "Add to cart",
+        "LBL_SEARCH_PRODUCT": "Search for the product"
     },
     "js": {
     }

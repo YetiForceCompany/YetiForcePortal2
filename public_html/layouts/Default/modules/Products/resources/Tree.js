@@ -1,51 +1,51 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
-jQuery.Class("Products_Tree_Js", {}, {
-	registerDataTable: function () {
-		var params = {};
-		var lengthMenu = app.getMainParams('listEntriesPerPage', true);
-		if (lengthMenu) {
-			params.lengthMenu = lengthMenu;
-		}
-		params.columnDefs = [{"orderable": false, "targets": 0}];
-		params.order = [];
-		var table = app.registerDataTables(jQuery('table.listViewEntries'), params);
-		if (table) {
-			jQuery(table.table().container()).find('.listViewEntries').removeClass('d-none')
-			table.$('.deleteRecordButton').on('click', function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				var element = jQuery(e.currentTarget);
-				AppConnector.request(element.data('url')).then(function (data) {
-					if (data.result) {
-						table.row(element.closest('tr')).remove().draw();
-					}
-				}, function (e, err) {
-					console.log([e, err])
-				});
-			});
-			table.$('.listViewEntries tbody tr').on('click', function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)) {
-					return;
-				}
-				jQuery(e.currentTarget).find('.detailLink').trigger('click');
-			});
-		}
-		return table;
-	},
-	registerDeleteRecordClickEvent: function () {
-		var thisInstance = this;
-		var listViewContentDiv = this.getListViewContentContainer();
-		listViewContentDiv.on('click', '.deleteRecordButton', function (e) {
-			var elem = jQuery(e.currentTarget);
-			var recordId = elem.closest('tr').data('id');
-			Vtiger_List_Js.deleteRecord(recordId);
-			e.stopPropagation();
-		});
-	},
-	registerEvents: function () {
-		this.registerDataTable();
+window.Products_Tree_Js = class {
+	constructor(container = $('.js-products-container')) {
+		console.log('Products_Tree_Js: ' + container.length);
+		this.container = container;
 	}
-});
+	registerEvents() {
+		this.registerAmountChange();
+		this.registerButtonAddToCart();
+	}
+
+	registerAmountChange(){
+		this.container.find('.js-amount-inc').on('click', (e)=>{
+			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
+			let amountVal = amount.val();
+			amountVal++;
+			amount.val(amountVal);
+		});
+		this.container.find('.js-amount-dec').on('click', (e)=>{
+			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
+			let amountVal = amount.val();
+			amountVal--;
+			if(amountVal >= 0){
+				amount.val(amountVal);
+			}
+		});
+	}
+
+	registerButtonAddToCart(){
+		this.container.find('.js-add-to-cart').on('click', (e)=>{
+			console.log('add to cart');
+			let product = this.getCartItem(e.currentTarget);
+			this.addToCart(product.data('id'));
+		});
+	}
+	addToCart(recordId){
+		AppConnector.request({
+			module: app.getModuleName(),
+			action: 'AddToCart',
+			record: recordId
+		}).then( (data) =>{
+			console.log('DATA:' + JSON.stringify(data));
+		}, (e, err) => {
+
+		});
+	}
+	getCartItem(element){
+		return  $(element).closest('.js-cart-item');
+	}
+}

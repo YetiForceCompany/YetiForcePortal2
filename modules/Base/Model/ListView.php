@@ -38,6 +38,27 @@ class ListView
 	private $recordsList = [];
 
 	/**
+	 * Limit.
+	 *
+	 * @var int
+	 */
+	private $limit = 0;
+
+	/**
+	 * Offset.
+	 *
+	 * @var int
+	 */
+	private $offset = 0;
+
+	/**
+	 * Conditions.
+	 *
+	 * @var array
+	 */
+	private $conditions = [];
+
+	/**
 	 * Construct.
 	 *
 	 * @param string $moduleName
@@ -96,6 +117,18 @@ class ListView
 		return $this;
 	}
 
+	public function setLimit(int $limit): self
+	{
+		$this->limit = $limit;
+		return $this;
+	}
+
+	public function setOffsett(int $offset): self
+	{
+		$this->offset = $offset;
+		return $this;
+	}
+
 	/**
 	 * Load a list of records from the API.
 	 *
@@ -104,10 +137,21 @@ class ListView
 	public function loadRecordsList(): self
 	{
 		$api = \App\Api::getInstance();
+		$headers = [];
 		if (!empty($this->fields)) {
-			$api->setCustomHeaders([
-				'x-fields' => \App\Json::encode($this->fields)
-			]);
+			$headers['x-fields'] = \App\Json::encode($this->fields);
+		}
+		if (!empty($this->limit)) {
+			$headers['x-row-limit'] = $this->limit;
+		}
+		if (!empty($this->offset)) {
+			$headers['x-row-offset'] = $this->offset;
+		}
+		if (!empty($this->conditions)) {
+			$headers['x-condition'] = \App\Json::encode($this->conditions);
+		}
+		if (!empty($headers)) {
+			$api->setCustomHeaders($headers);
 		}
 		$this->recordsList = $api->call($this->getModuleName() . '/RecordsList');
 		return $this;
@@ -149,5 +193,10 @@ class ListView
 	public function getCount(): int
 	{
 		return $this->recordsList['count'] ?? 0;
+	}
+
+	public function isMorePages(): bool
+	{
+		return $this->recordsList['isMorePages'];
 	}
 }

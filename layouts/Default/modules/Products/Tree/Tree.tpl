@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="tpl-Products-Tree-Tree contentsDiv">
+	<div class="tpl-Products-Tree-Tree contentsDiv js-products-container" data-js="container">
 		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 		<div class="widget_header row">
 			<div class="col-sm-8">
@@ -10,27 +10,33 @@
 			</div>
 			<div class="col-sm-4 listViewAction">
 				<div class="float-right">
-					<div class="btn-group">
-						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
-						{if $IS_CREATEVIEW}
-							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
-								<span class="fas fa-plus"></span>
-								&nbsp;
-								<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
-							</a>
-						{/if}
+					<div class="input-group js-search-group" data-js="change|keyup">
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-white hide js-search-cancel border-bottom">
+								<span class="u-cursor-pointer" data-js="click" aria-hidden="true">&times;</span>
+							</span>
+						</div>
+						<input type="text" class="form-control u-font-size-13px js-search border-bottom rounded-0 o-chat__form-control"{' '}
+							autocomplete="off"{' '}
+							placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}"
+							data-js="keydown"/>
+						<div class="input-group-append">
+							<span class="input-group-text bg-white border-bottom u-cursor-pointer js-icon-search-message">
+								<span class="fas fa-search"></span>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-4">
+			<div class="col-3">
 				{include file=\App\Resources::templatePath("Tree/Category.tpl", $MODULE_NAME)}
 			</div>
-			<div class="col-8">
+			<div class="col-9">
 				<div class="row listViewContents">
-					{foreach item=RECORD key=ID from=$RECORDS}
+					{foreach item=RECORD key=CRM_ID from=$RECORDS}
 						{include file=\App\Resources::templatePath("Tree/Product.tpl", $MODULE_NAME)}
 					{/foreach}
 				</div>

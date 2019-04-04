@@ -34,9 +34,10 @@ class Tree extends View\ListView
 			'pscategory',
 			'productcode',
 			'unit_price',
+			'taxes',
 			'imagename',
 			'description'
-		]);
+		])->setLimit(20);
 	}
 
 	/**
