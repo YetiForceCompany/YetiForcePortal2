@@ -260,5 +260,21 @@ window.App.Fields = {
 				}
 			});
 		}
+	},
+	'Tree':	class {
+		constructor(treeContainer = $('.js-tree-container')) {
+			if( treeContainer.length > 0 ){
+				this.treeInstance = treeContainer;
+				this.loadTree();
+			}
+		}
+		loadTree() {
+			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
+		}
+		generateTree(treeData) {
+			this.treeInstance.jstree({ 'core' : {
+				data: treeData
+			} });
+		}
 	}
 };
