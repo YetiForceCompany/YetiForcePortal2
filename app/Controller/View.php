@@ -219,6 +219,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
 			$fileName,
+			YF_ROOT_WWW . 'libraries/jstree/dist/jstree.js',
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
