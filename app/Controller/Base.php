@@ -90,4 +90,20 @@ abstract class Base
 	 * @return void
 	 */
 	abstract public function postProcessAjax(Request $request);
+
+	/**
+	 * Error handler.
+	 *
+	 * @param string $errno
+	 * @param string $errstr
+	 * @param string $errfile
+	 * @param string $errline
+	 * @param string $errcontext
+	 *
+	 * @return void
+	 */
+	public static function exceptionErrorHandler(int $errno, string $errstr, $errfile, $errline, $errcontext)
+	{
+		throw new \App\AppException($errstr, $errno);
+	}
 }
