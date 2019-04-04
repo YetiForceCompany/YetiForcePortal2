@@ -36,4 +36,14 @@ class Script extends BaseModel
 		$script = self::$types;
 		return $script[$type]['rel'];
 	}
+
+	/**
+	 * Returns type of scripts.
+	 *
+	 * @return string
+	 */
+	public function getType(): string
+	{
+		return static::$types[$this->get('type')]['type'];
+	}
 }

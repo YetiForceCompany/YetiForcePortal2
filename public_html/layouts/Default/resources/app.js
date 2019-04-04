@@ -4,6 +4,24 @@ window.App = {
 };
 var AppConnector,
 	app = {
+		/**
+		 * Events in application
+		 */
+		event: new function () {
+			this.el = $({});
+			this.trigger = function () {
+				this.el.trigger(arguments[0], Array.prototype.slice.call(arguments, 1));
+			}
+			this.on = function () {
+				this.el.on.apply(this.el, arguments);
+			}
+			this.one = function () {
+				this.el.one.apply(this.el, arguments);
+			}
+			this.off = function () {
+				this.el.off.apply(this.el, arguments);
+			}
+		},
 		languageString: [],
 		cacheParams: [],
 		/**
@@ -436,11 +454,6 @@ var AppConnector,
 						}, this))
 				};
 				var modalContainer = container.find('.modal:first');
-				modalContainer.modal(params);
-				jQuery('body').append(container);
-				app.showChznSelectElement(modalContainer.find('select.chzn-select'));
-				app.showSelect2Element(modalContainer.find('select.select2'));
-
 				thisInstance.registerDataTables(modalContainer.find('.dataTable'));
 				modalContainer.one('shown.bs.modal', function () {
 					var backdrop = jQuery('.modal-backdrop');
@@ -448,7 +461,10 @@ var AppConnector,
 						jQuery('.modal-backdrop:not(:first)').remove();
 					}
 					cb(modalContainer);
+
 				})
+				jQuery('body').append(container);
+				modalContainer.modal(params);
 			}
 			if (data) {
 				showModalData(data)
@@ -484,7 +500,7 @@ var AppConnector,
 				};
 			}
 			var modalContainer = container.find('.modal');
-			modalContainer.modal('d-none');
+			modalContainer.modal('hide');
 			var backdrop = jQuery('.modal-backdrop:last');
 			var modalContainers = jQuery('.modalContainer');
 			if (modalContainers.length == 0 && backdrop.length) {
@@ -537,6 +553,21 @@ var AppConnector,
 				jQuery('html').animate({
 					scrollTop: resizedDestnation
 				}, 'slow');
+			}
+		},
+		getRecordList: function(params, callback) {
+			app.showModalWindow(null, params, function(){
+				app.event.one('AfterSelectedRecordList', function(event, item) {
+					callback(item);
+				});
+			});
+		},
+		registerModalController: function () {
+			let modalContainer = $('#globalmodal .js-modal-data');
+			let modalClass = 'Base_' + modalContainer.data('view') + '_Js';
+			if (typeof window[modalClass] !== "undefined") {
+				let instance = new window[modalClass]();
+				instance.registerEvents(modalContainer);
 			}
 		},
 	}

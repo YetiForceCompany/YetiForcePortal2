@@ -24,16 +24,21 @@ class AppException extends \Exception
 		$this->backtrace = \App\Debug::getBacktrace(3);
 	}
 
-	public static function view(\Exception $e)
+	public static function view(\Throwable $e)
 	{
 		$tplName = 'Exception.tpl';
 		if (!empty($e->tplName)) {
 			$tplName = $e->tplName;
 		}
+		if (empty($e->backtrace)) {
+			$backtrace = $e->getTraceAsString();
+		} else {
+			$backtrace = $e->backtrace;
+		}
 		$viewer = new \App\Viewer();
 		$viewer->assign('MESSAGE', $e->getMessage());
 		$viewer->assign('CODE', $e->getCode());
-		$viewer->assign('BACKTRACE', nl2br($e->backtrace));
+		$viewer->assign('BACKTRACE', nl2br($backtrace));
 		$viewer->view($tplName);
 	}
 }

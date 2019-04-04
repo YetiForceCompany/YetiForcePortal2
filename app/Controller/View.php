@@ -235,8 +235,25 @@ abstract class View extends Base
 		return $this->convertScripts($jsFileNames, 'js');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function validateRequest(Request $request)
 	{
 		$request->validateReadAccess();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function postProcessAjax(Request $request)
+	{
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function preProcessAjax(Request $request)
+	{
 	}
 }
