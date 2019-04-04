@@ -63,17 +63,21 @@ class WebUI
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					throw new AppException('Login is required');
 				}
-
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
 				$handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
 			if ($request->isAjax() && $request->isEmpty('view')) {
+				$response = new \App\Response();
+				$response->setResult([
+					'message' => $e->getMessage(),
+					'trace' => $e->getTraceAsString()
+				]);
+				$response->emit();
 			} else {
 				\App\AppException::view($e);
 			}

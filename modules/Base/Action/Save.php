@@ -14,7 +14,7 @@ class Save extends \App\Controller\Action
 	/**
 	 * {@inheritdoc}
 	 */
-	public function checkPermission(Request $request)
+	public function checkPermission(\App\Request $request)
 	{
 		$actionName = 'EditView';
 		if ($request->isEmpty('record')) {

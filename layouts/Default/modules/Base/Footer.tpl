@@ -30,7 +30,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button"
-									class="btn btn-success">
+									class="btn btn-success js-change-company" data-js="click">
 								<span class="fas fa-check mr-1"></span>
 								{\App\Language::translate('LBL_CHANGE')}
 							</button>

@@ -38,9 +38,6 @@
     ]
   },
   "autoload": {
-    "files": [
-      "app/errorhandler.php"
-    ],
     "psr-4": {
       "App\\": "app/",
       "Conf\\": "config/",

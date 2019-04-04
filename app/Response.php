@@ -57,6 +57,8 @@ class Response
 
 	/**
 	 * Set headers to send.
+	 *
+	 * @param mixed $header
 	 */
 	public function setHeader($header)
 	{
@@ -65,6 +67,8 @@ class Response
 
 	/**
 	 * Set padding method name for JSONP emit type.
+	 *
+	 * @param mixed $fn
 	 */
 	public function setEmitJSONP($fn)
 	{
@@ -74,6 +78,8 @@ class Response
 
 	/**
 	 * Set emit type.
+	 *
+	 * @param mixed $type
 	 */
 	public function setEmitType($type)
 	{
@@ -98,10 +104,14 @@ class Response
 
 	/**
 	 * Set error data to send.
+	 *
+	 * @param mixed      $code
+	 * @param null|mixed $message
+	 * @param mixed      $trace
 	 */
 	public function setError($code, $message = null, $trace = false)
 	{
-		if ($message === null) {
+		if (null === $message) {
 			$message = $code;
 		}
 		$error = ['code' => $code, 'message' => $message, 'trace' => $trace];
@@ -113,11 +123,14 @@ class Response
 	 */
 	public function hasError()
 	{
-		return !is_null($this->error);
+		return null !== $this->error;
 	}
 
 	/**
 	 * Update the result data.
+	 *
+	 * @param mixed $key
+	 * @param mixed $value
 	 */
 	public function updateResult($key, $value)
 	{
@@ -134,6 +147,8 @@ class Response
 
 	/**
 	 * Set the result data.
+	 *
+	 * @param mixed $result
 	 */
 	public function setResult($result)
 	{
@@ -147,7 +162,7 @@ class Response
 	{
 		$contentTypeSent = false;
 		foreach ($this->headers as $header) {
-			if (!$contentTypeSent && stripos($header, 'content-type') === 0) {
+			if (!$contentTypeSent && 0 === stripos($header, 'content-type')) {
 				$contentTypeSent = true;
 			}
 			header($header);
@@ -198,7 +213,7 @@ class Response
 	protected function prepareResponse()
 	{
 		$response = [];
-		if ($this->error !== null) {
+		if (null !== $this->error) {
 			$response['success'] = false;
 			$response['error'] = $this->error;
 		} else {
@@ -213,7 +228,7 @@ class Response
 	 */
 	protected function emitText()
 	{
-		if ($this->result === null) {
+		if (null === $this->result) {
 			if (is_string($this->error)) {
 				echo $this->error;
 			} else {
@@ -233,7 +248,7 @@ class Response
 	 */
 	protected function emitRaw()
 	{
-		if ($this->result === null) {
+		if (null === $this->result) {
 			echo (is_string($this->error)) ? $this->error : var_export($this->error, true);
 		}
 		echo $this->result;

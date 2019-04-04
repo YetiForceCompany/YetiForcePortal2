@@ -11,6 +11,17 @@ namespace App\Controller;
 
 abstract class Action extends Base
 {
+	public function checkPermission(\App\Request $request)
+	{
+		$moduleName = $request->getModule();
+		$userInstance = \App\User::getUser();
+		$modulePermission = $userInstance->isPermitted($moduleName);
+		if (!$modulePermission) {
+			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+		}
+		return true;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
