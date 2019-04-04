@@ -20,10 +20,8 @@ class ChangeCompany extends \App\Controller\Action
 	 */
 	public function process(\App\Request $request)
 	{
-		//	$userInstance = \App\User::getUser();
-		//	$userInstance->set('CompanyId', $request->get('record'));
-
-		file_put_contents('xxx.txt', 'dsfs');
+		$userInstance = \App\User::getUser();
+		$userInstance->set('CompanyId', $request->get('record'));
 		$response = new \App\Response();
 		$response->setResult(true);
 		$response->emit();

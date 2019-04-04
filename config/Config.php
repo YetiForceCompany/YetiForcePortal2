@@ -19,7 +19,7 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $crmUrl = 'http://yeti2/';
+	public static $crmUrl = 'http://yeti/';
 
 	/**
 	 * Portal URL.
@@ -73,7 +73,7 @@ class Config
 	 */
 	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
 	public static $minScripts = false;
-	public static $debugApi = true;
+	public static $debugApi = false;
 	public static $debugConsole = false;
 	public static $logs = false;
 	public static $apiKey = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
