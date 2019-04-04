@@ -43,6 +43,7 @@ class ListView extends \App\Controller\View
 		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $this->listViewModel->getCount());
+		$viewer->assign('USER', \App\User::getUser());
 		$viewer->view($this->processTplName($request), $moduleName);
 	}
 

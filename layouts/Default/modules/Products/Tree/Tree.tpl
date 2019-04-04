@@ -1,8 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<div class="tpl-Products-Tree-Tree contentsDiv">
-		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage"
-			   value='{\App\Json::encode(\App\Config::$listEntriesPerPage)}'>
+		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
@@ -25,10 +24,18 @@
 			</div>
 		</div>
 
-        <div class="row listViewContents">
-        {foreach item=RECORD key=ID from=$RECORDS}
-            {include file=\App\Resources::templatePath("Tree/Product.tpl", $MODULE_NAME)}
-        {/foreach}
+		<div class="row">
+			<div class="col-4">
+				{include file=\App\Resources::templatePath("Tree/Category.tpl", $MODULE_NAME)}
+			</div>
+			<div class="col-8">
+				<div class="row listViewContents">
+					{foreach item=RECORD key=ID from=$RECORDS}
+						{include file=\App\Resources::templatePath("Tree/Product.tpl", $MODULE_NAME)}
+					{/foreach}
+				</div>
+			</div>
+		</div>
 
 		<div id="CoreLog" class="panel panel-primary col-sm-12 px-0 blockContainer">
 			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>

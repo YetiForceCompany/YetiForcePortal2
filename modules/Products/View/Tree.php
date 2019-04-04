@@ -14,6 +14,7 @@ namespace YF\Modules\Products\View;
 
 use App\Request;
 use YF\Modules\Base\View;
+use YF\Modules\Products\Model\Tree as TreeModel;
 
 /**
  * Class Tree.
@@ -28,10 +29,24 @@ class Tree extends View\ListView
 		parent::preProcess($request, $display);
 		$this->listViewModel->setCustomFields([
 			'productname',
+			'product_no',
+			'ean',
+			'pscategory',
+			'productcode',
 			'unit_price',
 			'imagename',
 			'description'
 		]);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function process(Request $request)
+	{
+		$viewer = $this->getViewer($request);
+		$viewer->assign('TREE', TreeModel::getInstance()->getTree());
+		parent::process($request);
 	}
 
 	/**

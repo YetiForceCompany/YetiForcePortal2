@@ -31,13 +31,14 @@ class BaseModel
 	/**
 	 * Function to get the value for a given key.
 	 *
-	 * @param $key
+	 * @param string $key
+	 * @param mixed  $defaultValue
 	 *
-	 * @return Value for the given key
+	 * @return mixed for the given key
 	 */
-	public function get($key)
+	public function get(string $key, $defaultValue = false)
 	{
-		return isset($this->valueMap[$key]) ? $this->valueMap[$key] : false;
+		return $this->valueMap[$key] ?? $defaultValue;
 	}
 
 	/**
