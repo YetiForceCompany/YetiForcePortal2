@@ -37,11 +37,73 @@ abstract class Base
 		return true;
 	}
 
+	/**
+	 * Main action.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
 	abstract public function process(Request $request);
 
+	/**
+	 * Validates request. Checks type of request.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
 	abstract public function validateRequest(Request $request);
 
+	/**
+	 * Action invoke before process.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
 	abstract public function preProcess(Request $request);
 
+	/**
+	 * Action invoke after process.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
 	abstract public function postProcess(Request $request);
+
+	/**
+	 * Action invoke before process for AJAX.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
+	abstract public function preProcessAjax(Request $request);
+
+	/**
+	 * Action invoke after process for AJAX.
+	 *
+	 * @param Request $request
+	 *
+	 * @return void
+	 */
+	abstract public function postProcessAjax(Request $request);
+
+	/**
+	 * Error handler.
+	 *
+	 * @param string $errno
+	 * @param string $errstr
+	 * @param string $errfile
+	 * @param string $errline
+	 * @param string $errcontext
+	 *
+	 * @return void
+	 */
+	public static function exceptionErrorHandler(int $errno, string $errstr, $errfile, $errline, $errcontext)
+	{
+		throw new \App\AppException($errstr, $errno);
+	}
 }

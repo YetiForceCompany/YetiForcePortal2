@@ -18,7 +18,7 @@ if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
 }
 require_once YF_ROOT . '/vendor/autoload.php';
 
-set_error_handler('exceptionErrorHandler');
+set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
 
 session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
 session_start();

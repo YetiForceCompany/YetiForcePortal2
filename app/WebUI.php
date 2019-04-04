@@ -72,8 +72,8 @@ class WebUI
 				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
-		} catch (\Exception $e) {
-			if ($request->isAjax()) {
+		} catch (\Throwable $e) {
+			if ($request->isAjax() && $request->isEmpty('view')) {
 			} else {
 				\App\AppException::view($e);
 			}
@@ -88,7 +88,8 @@ class WebUI
 	protected function triggerPreProcess($handler, $request)
 	{
 		if ($request->isAjax()) {
-			return true;
+			$handler->preProcessAjax($request);
+			return;
 		}
 		$handler->preProcess($request);
 	}
@@ -96,7 +97,8 @@ class WebUI
 	protected function triggerPostProcess($handler, $request)
 	{
 		if ($request->isAjax()) {
-			return true;
+			$handler->postProcessAjax($request);
+			return;
 		}
 		$handler->postProcess($request);
 	}

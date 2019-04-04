@@ -15,44 +15,9 @@ jQuery.Class("Base_EditView_Js", {}, {
 		container.on('click', '.relatedPopup', function (e) {
 			var element = jQuery(e.currentTarget);
 			var containerField = element.closest('.fieldValue');
-			var sourceField = containerField.find('.sourceField');
-			var name = sourceField.attr('name');
-			var label = sourceField.data('fieldLabel');
-
-			var url = 'index.php?module=' + thisInstance.getReferencedModuleName(containerField) + '&view=ListView';
-			var callbackFunction = function (data) {
-				var list = new Base_ListView_Js();
-				var table = list.registerDataTable();
-				table.$('.listViewEntries tbody tr').off('click').on('click', function (e) {
-					e.stopPropagation();
-					e.preventDefault();
-					if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)) {
-						return;
-					}
-					var tr = jQuery(e.currentTarget).closest('tr');
-					var params = {
-						id: tr.data('record'),
-						name: tr.data('name')
-					}
-					thisInstance.setReferenceFieldValue(containerField, params);
-					app.hideModalWindow();
-				});
-			}
-			AppConnector.request(url).then(function (data) {
-				if (data) {
-					data = jQuery(data)//
-					data.find('.widget_header').remove();
-					var html = '<div class="modal fade modal' + name + '" id="modal' + name + '"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header">\
-				<button class="close" data-dismiss="modal" title="' + app.translate('LBL_CLOSE') + '">x</button>\
-				<h3 class="modal-title">' + label + ' </h3>\
-			</div>\
-			<div class="modal-body">';
-					html += data.html();
-					html += '</div></div></div><div>';
-					app.showModalWindow(html, callbackFunction);
-				}
-			}, function (e, err) {
-				console.log([e, err])
+			var url = 'index.php?module=' + thisInstance.getReferencedModuleName(containerField) + '&view=RecordList';
+			app.getRecordList(url, function(selectedItems) {
+				thisInstance.setReferenceFieldValue(containerField, selectedItems);
 			});
 		});
 		container.find('.referenceModulesList').on('change', function (e) {
