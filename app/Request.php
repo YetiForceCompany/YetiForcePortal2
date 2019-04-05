@@ -12,33 +12,33 @@ namespace App;
 
 class Request
 {
-	// Datastore
-	private static $request;
-	private $valuemap;
-	private $defaultmap = [];
+	/**
+	 * Raw values.
+	 *
+	 * @var array
+	 */
+	private $rawValues = [];
+
+	/**
+	 * Instance of class.
+	 *
+	 * @var [type]
+	 */
+	public static $request;
+
+	private $purifiedValuesByType = [];
+	private $purifiedValuesByArray = [];
+	private $purifiedValuesByGet = [];
 
 	/**
 	 * Default constructor.
 	 *
-	 * @param mixed $values
-	 * @param mixed $stripifgpc
+	 * @param array $values
 	 */
-	public function __construct($values, $stripifgpc = true)
+	public function __construct(array $values)
 	{
-		$this->valuemap = $values;
-		if ($stripifgpc && !empty($this->valuemap) && get_magic_quotes_gpc()) {
-			$this->valuemap = $this->stripslashes_recursive($this->valuemap);
-		}
-	}
-
-	/**
-	 * Strip the slashes recursively on the values.
-	 *
-	 * @param mixed $value
-	 */
-	public function stripslashes_recursive($value)
-	{
-		return is_array($value) ? array_map([$this, 'stripslashes_recursive'], $value) : stripslashes($value);
+		$this->rawValues = $values;
+		static::$request = $this;
 	}
 
 	/**
@@ -46,33 +46,20 @@ class Request
 	 *
 	 * @return Request
 	 */
-	public static function getInstance()
+	public static function getInstance(): self
 	{
 		if (!static::$request) {
-			static::$request = new self($_REQUEST, $_REQUEST);
+			static::$request = new self($_REQUEST);
 		}
-		return static::$request;
-	}
-
-	/**
-	 * Set Request instance.
-	 *
-	 * @param Request $request
-	 *
-	 * @return Request
-	 */
-	public static function setInstance(self $request)
-	{
-		static::$request = $request;
 		return static::$request;
 	}
 
 	/**
 	 * Get data map.
 	 */
-	public function getAll()
+	public function getAllRaw()
 	{
-		return $this->valuemap;
+		return $this->rawValues;
 	}
 
 	/**
@@ -82,7 +69,7 @@ class Request
 	 */
 	public function has($key)
 	{
-		return isset($this->valuemap[$key]);
+		return isset($this->rawValues[$key]);
 	}
 
 	/**
@@ -92,8 +79,62 @@ class Request
 	 */
 	public function isEmpty($key)
 	{
-		$value = $this->get($key);
-		return empty($value);
+		return empty($this->rawValues[$key]);
+	}
+
+	/**
+	 * Purify by data type.
+	 *
+	 * @param string     $key  Key name
+	 * @param int|string $type Data type that is only acceptable, default only words 'Standard'
+	 *
+	 * @return bool|mixed
+	 */
+	public function getByType($key, $type = 'Standard')
+	{
+		if (isset($this->purifiedValuesByType[$key][$type])) {
+			return $this->purifiedValuesByType[$key][$type];
+		}
+		if (isset($this->rawValues[$key])) {
+			return $this->purifiedValuesByType[$key][$type] = Purifier::purifyByType($this->rawValues[$key], $type);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Function to get the array values for a given key.
+	 *
+	 * @param string $key
+	 * @param string $type
+	 * @param array  $value
+	 *
+	 * @return array
+	 */
+	public function getArray(string $key, string $type = 'Text', $value = []): array
+	{
+		if (isset($this->purifiedValuesByArray[$key])) {
+			return $this->purifiedValuesByArray[$key];
+		}
+		if (isset($this->rawValues[$key])) {
+			$value = $this->rawValues[$key];
+			if (!$value) {
+				return [];
+			}
+			if (is_string($value) && (0 === strpos($value, '[') || 0 === strpos($value, '{'))) {
+				$decodeValue = Json::decode($value);
+				if (isset($decodeValue)) {
+					$value = $decodeValue;
+				}
+			}
+			if ($value) {
+				$value = Purifier::purifyByType($value, $type);
+			}
+
+			return $this->purifiedValuesByArray[$key] = (array) $value;
+		}
+
+		return $value;
 	}
 
 	/**
@@ -104,18 +145,15 @@ class Request
 	 */
 	public function get($key, $defvalue = '')
 	{
-		$value = $defvalue;
-		if (isset($this->valuemap[$key])) {
-			$value = $this->valuemap[$key];
+		if (isset($this->purifiedValuesByGet[$key])) {
+			return $this->purifiedValuesByGet[$key];
 		}
-		if ('' === $value && isset($this->defaultmap[$key])) {
-			$value = $this->defaultmap[$key];
+		if (!isset($this->rawValues[$key])) {
+			return $defvalue;
 		}
-
+		$value = $this->rawValues[$key];
 		$isJSON = false;
 		if (is_string($value)) {
-			// NOTE: Zend_Json or json_decode gets confused with big-integers (when passed as string)
-			// and convert them to ugly exponential format - to overcome this we are performin a pre-check
 			if (0 === strpos($value, '[') || 0 === strpos($value, '{')) {
 				$isJSON = true;
 			}
@@ -126,25 +164,11 @@ class Request
 				$value = $decodeValue;
 			}
 		}
-
-		//Handled for null because vtlib_purify returns empty string
 		if (!empty($value)) {
-			$value = $this->_cleanInputs($value);
+			$value = Purifier::purifyByType($value, Purifier::TEXT);
 		}
+		$this->purifiedValuesByGet[$key] = $value;
 		return $value;
-	}
-
-	private function _cleanInputs($data)
-	{
-		$clean_input = [];
-		if (is_array($data)) {
-			foreach ($data as $k => $v) {
-				$clean_input[$k] = $this->_cleanInputs($v);
-			}
-		} else {
-			$clean_input = trim(strip_tags($data));
-		}
-		return $clean_input;
 	}
 
 	/**
@@ -155,18 +179,10 @@ class Request
 	 */
 	public function set($key, $newvalue)
 	{
-		$this->valuemap[$key] = $newvalue;
-	}
-
-	/**
-	 * Set default value for key.
-	 *
-	 * @param mixed $key
-	 * @param mixed $defvalue
-	 */
-	public function setDefault($key, $defvalue)
-	{
-		$this->defaultmap[$key] = $defvalue;
+		$this->rawValues[$key] = $newvalue;
+		$this->purifiedValuesByType[$key] = null;
+		$this->purifiedValuesByArray[$key] = null;
+		$this->purifiedValuesByGet[$key] = null;
 	}
 
 	/**
@@ -174,22 +190,20 @@ class Request
 	 */
 	public function getMode()
 	{
-		return $this->get('mode');
+		return $this->getByType('mode', Purifier::ALNUM);
 	}
 
 	public function getModule()
 	{
-		return $this->get('module');
+		return  $this->getByType('module', Purifier::ALNUM);
 	}
 
 	public function getAction()
 	{
-		$view = $this->get('view');
-		$action = $this->get('action');
-		if (!empty($action)) {
-			return $action;
+		if ($this->isEmpty('action')) {
+			return $this->getByType('view', Purifier::ALNUM);
 		}
-		return $view;
+		return  $this->getByType('action', Purifier::ALNUM);
 	}
 
 	public function isAjax()

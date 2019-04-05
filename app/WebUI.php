@@ -22,14 +22,13 @@ class WebUI
 	 */
 	public function process(Request $request)
 	{
-		$request = Request::setInstance($request);
-		$module = $request->getModule();
-		$view = $request->get('view');
-		$action = $request->get('action');
 		try {
+			$module = $request->getModule();
+			$view = $request->getByType('view', Purifier::ALNUM);
+			$action = $request->getByType('action', Purifier::ALNUM);
 			if (false === $this->isInstalled() && 'Install' != $module) {
 				header('Location:index.php?module=Install&view=Install');
-				exit;
+				return;
 			}
 			$userInstance = User::getUser();
 			if (empty($module)) {

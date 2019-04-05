@@ -38,7 +38,7 @@ class Save extends \App\Controller\Action
 		$record = $request->get('record');
 		$view = $request->get('view');
 		$api = \App\Api::getInstance();
-		$result = $api->call($module . '/Record/' . $record, $request->getAll(), $record ? 'put' : 'post');
+		$result = $api->call($module . '/Record/' . $record, $request->getAllRaw(), $record ? 'put' : 'post');
 		if ($request->isAjax()) {
 			$response = new \App\Response();
 			$response->setResult($result);
