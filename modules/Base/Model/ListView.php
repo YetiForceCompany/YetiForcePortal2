@@ -141,8 +141,8 @@ class ListView
 
 	public function setPage(int $page): self
 	{
-		$this->page = $page;
-		$this->offset = $this->limit * ($page - 1);
+		$this->page = $page < 1 ? 1 : $page;
+		$this->offset = $this->limit * ($this->page - 1);
 		return $this;
 	}
 
@@ -162,6 +162,11 @@ class ListView
 	public function getPage(): int
 	{
 		return $this->page;
+	}
+
+	public function setConditions(array $conditions)
+	{
+		$this->conditions = $conditions;
 	}
 
 	/**

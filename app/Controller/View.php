@@ -138,6 +138,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
+			YF_ROOT_WWW . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
 		];
 
 		return $this->convertScripts($cssFileNames, 'css');
@@ -243,7 +244,7 @@ abstract class View extends Base
 	 */
 	public function validateRequest(Request $request)
 	{
-		//$request->validateReadAccess();
+		$request->validateReadAccess();
 	}
 
 	/**

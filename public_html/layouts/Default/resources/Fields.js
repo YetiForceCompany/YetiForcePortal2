@@ -265,6 +265,7 @@ window.App.Fields = {
 		constructor(treeContainer = $('.js-tree-container')) {
 			if( treeContainer.length > 0 ){
 				this.treeInstance = treeContainer;
+				this.onSelectNode = this.treeInstance.data('onSelectNode');
 				this.loadTree();
 			}
 		}
@@ -283,9 +284,19 @@ window.App.Fields = {
 		}
 		generateTree(treeData) {
 			this.treeInstance.on('select_node.jstree', (e, data)=>{
-				console.log('select_node.jstree');
+				(new Function('return ' + this.onSelectNode)())(e, data, this.treeInstance);
+			}).on('ready.jstree', ()=>{
+
 			}).jstree({ 'core' : {
-				data: treeData
+				data: treeData,
+				themes: {
+					name: 'proton',
+					responsive: true
+				},
+				checkbox: {
+					three_state: true,
+				},
+				multiple: true,
 			} });
 		}
 	}

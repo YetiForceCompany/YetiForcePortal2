@@ -21,6 +21,8 @@ use YF\Modules\Products\Model\Tree as TreeModel;
  */
 class Tree extends View\ListView
 {
+	private $pscategory = [];
+
 	public function preProcessAjax(Request $request)
 	{
 		$this->preProcess($request);
@@ -45,7 +47,12 @@ class Tree extends View\ListView
 				'description'
 			])->setLimit(10)
 			->setPage($request->get('page', 1));
-		//if( $request->get('page', 1) )
+		if ($request->has('search') && !$request->isEmpty('search')) {
+			$serach = $request->get('search');
+			$this->pscategory = [$serach['value']];
+			//TODO - validation
+			$this->listViewModel->setConditions($serach);
+		}
 	}
 
 	/**
@@ -54,7 +61,12 @@ class Tree extends View\ListView
 	public function process(Request $request)
 	{
 		$viewer = $this->getViewer($request);
-		$viewer->assign('TREE', TreeModel::getInstance()->getTree());
+		$viewer->assign(
+			'TREE',
+			TreeModel::getInstance()
+				->setSelectedItems($this->pscategory)
+				->getTree()
+		);
 		parent::process($request);
 	}
 

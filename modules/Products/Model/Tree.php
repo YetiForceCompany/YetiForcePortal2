@@ -17,6 +17,8 @@ namespace YF\Modules\Products\Model;
  */
 class Tree extends \App\BaseModel
 {
+	private $selectedItems = [];
+
 	/**
 	 * Get instance.
 	 *
@@ -25,6 +27,12 @@ class Tree extends \App\BaseModel
 	public static function getInstance(): self
 	{
 		return new static();
+	}
+
+	public function setSelectedItems(array $selectedItems)
+	{
+		$this->selectedItems = $selectedItems;
+		return $this;
 	}
 
 	/**
@@ -49,13 +57,18 @@ class Tree extends \App\BaseModel
 	/**
 	 * Prepare tree data for jstree.
 	 *
+	 * @param mixed $cat
+	 *
 	 * @return array
 	 */
 	public function getTree(): array
 	{
 		$tree = $this->getTreeFromApi();
 		foreach ($tree as &$item) {
-			$item['state'] = ['opened' => true];
+			$item['state'] = [
+				'opened' => true,
+				'selected' => \in_array($item['tree'], $this->selectedItems)
+			];
 		}
 		return $tree;
 	}

@@ -4,7 +4,33 @@ window.Products_Tree_Js = class {
 	constructor(container = $('.js-products-container')) {
 		console.log('Products_Tree_Js: ' + container.length);
 		this.container = container;
-		//this.init(container);
+		this.page = this.container.find('.js-pagination-list').data('page');
+		this.searchValue = '';
+		window.Products_Tree_Js.instance = this;
+	}
+	/**
+	 * Get instance of Tree.
+	 * @returns {Tree}
+	 */
+	static getInstance(container = $('.js-products-container')) {
+		if (typeof window.Products_Tree_Js.instance === 'undefined') {
+			window.Products_Tree_Js.instance = new window.Products_Tree_Js(container);
+		}
+		return window.Products_Tree_Js.instance;
+	}
+
+	static onSelectNode(e, data, treeInstance){
+		let selectedNode = treeInstance.jstree("get_selected", true)[0];
+		window.Products_Tree_Js.getInstance().searchCategories(selectedNode['original']['tree']);
+	}
+	searchCategories(cat){
+		this.page = 1;
+		this.searchValue = {
+			fieldName: 'pscategory',
+			value: cat,
+			operator: 'e'
+		};
+		this.loadPage();
 	}
 	init(container = $('.js-products-container')){
 		this.container = container;
@@ -14,6 +40,7 @@ window.Products_Tree_Js = class {
 		this.registerAmountChange();
 		this.registerButtonAddToCart();
 		this.registerPagination();
+		this.registerSearch();
 	}
 
 	registerAmountChange(){
@@ -34,31 +61,50 @@ window.Products_Tree_Js = class {
 	}
 	registerPagination(){
 		this.container.find('.js-page-item').on('click', (e)=>{
-			this.loadPage($(e.currentTarget).data('page'));
+			this.page = parseInt($(e.currentTarget).data('page'));
+			this.loadPage();
 		});
 		this.container.find('.js-page-next').on('click', (e)=>{
-			let page = this.container.find('.js-pagination-list').data('page');
-			this.loadPage(++page);
+			this.page = parseInt(this.container.find('.js-pagination-list').data('page')) + 1;
+			this.loadPage();
 		});
 		this.container.find('.js-page-previous').on('click', (e)=>{
-			let page = this.container.find('.js-pagination-list').data('page');
-			this.loadPage(--page);
+			this.page = parseInt(this.container.find('.js-pagination-list').data('page')) - 1;
+			this.loadPage();
 		});
 	}
 
-	loadPage(page){
+	loadPage(){
 		const progressInstance = $.progressIndicatorShow();
 		AppConnector.request({
-			module: app.getModuleName(),
-			view: 'Tree',
-			page: page
+			data: {
+				module: app.getModuleName(),
+				view: 'Tree',
+				page: this.page,
+				search: this.searchValue
+			},
+			type: 'GET'
 		}).then((data) =>{
 			progressInstance.progressIndicator({'mode': 'hide'});
 			//progressInstance.progressIndicatorHide();
 			$('.js-main-container').html(data);
 			this.init();
+			window.App.Fields.Tree.instance = new window.App.Fields.Tree();
 		}, (e, err) => {
 
+		});
+	}
+
+	registerSearch(){
+		this.container.find('.js-search-button').on('click', (e)=>{
+			console.log('Search');
+			this.page = 1;
+			this.searchValue = {
+				fieldName: 'productname',
+				value: this.container.find('.js-search').val(),
+				operator: 'c'
+			};
+			this.loadPage();
 		});
 	}
 

@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-    <div class="tpl-Products-Tree-Product m-3 p-1 box-shadow product js-cart-item" data-id="{\App\Purifier::encodeHTML($CRM_ID)}">
+    <div class="tpl-Products-Tree-Product m-3 p-1 box-shadow border border-secondary rounded product js-cart-item" data-id="{\App\Purifier::encodeHTML($CRM_ID)}">
         <div class="row">
             <div class="col-7">{$RECORD->getDisplayValue('productname')}</div>
             <div class="col-5">netto: {$RECORD->getDisplayValue('unit_price')}&nbsp;{$USER->getPreferences('currency_code')}</div>
