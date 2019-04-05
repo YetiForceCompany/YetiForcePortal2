@@ -268,12 +268,22 @@ window.App.Fields = {
 				this.loadTree();
 			}
 		}
+		/**
+		 * Get instance of Tree.
+		 * @returns {Tree}
+		 */
+		static getInstance(container = $('.js-tree-container')) {
+			if (typeof window.App.Fields.Tree.instance === 'undefined') {
+				window.App.Fields.Tree.instance = new window.App.Fields.Tree(container);
+			}
+			return window.App.Fields.Tree.instance;
+		}
 		loadTree() {
 			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
 		}
 		generateTree(treeData) {
 			this.treeInstance.on('select_node.jstree', (e, data)=>{
-
+				console.log('select_node.jstree');
 			}).jstree({ 'core' : {
 				data: treeData
 			} });

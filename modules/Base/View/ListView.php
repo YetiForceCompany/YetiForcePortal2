@@ -25,9 +25,18 @@ class ListView extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
+	public function preProcessAjax(Request $request)
+	{
+		parent::preProcessAjax($request);
+		$this->getListViewModel($request->getModule());
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function preProcess(Request $request, $display = true)
 	{
-		parent::preProcess($request, $display);
+		parent::preProcess($request, !$request->isAjax());
 		$this->getListViewModel($request->getModule());
 	}
 
@@ -43,8 +52,16 @@ class ListView extends \App\Controller\View
 		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $this->listViewModel->getCount());
+		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
 		$viewer->assign('USER', \App\User::getUser());
 		$viewer->view($this->processTplName($request), $moduleName);
+	}
+
+	public function postProcess(Request $request)
+	{
+		if (!$request->isAjax()) {
+			parent::postProcess($request);
+		}
 	}
 
 	/**

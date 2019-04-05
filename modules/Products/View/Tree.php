@@ -21,23 +21,31 @@ use YF\Modules\Products\Model\Tree as TreeModel;
  */
 class Tree extends View\ListView
 {
+	public function preProcessAjax(Request $request)
+	{
+		$this->preProcess($request);
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
 	public function preProcess(Request $request, $display = true)
 	{
 		parent::preProcess($request, $display);
-		$this->listViewModel->setCustomFields([
-			'productname',
-			'product_no',
-			'ean',
-			'pscategory',
-			'productcode',
-			'unit_price',
-			'taxes',
-			'imagename',
-			'description'
-		])->setLimit(20);
+		$this->listViewModel
+			->setCustomFields([
+				'productname',
+				'product_no',
+				'ean',
+				'pscategory',
+				'productcode',
+				'unit_price',
+				'taxes',
+				'imagename',
+				'description'
+			])->setLimit(10)
+			->setPage($request->get('page', 1));
+		//if( $request->get('page', 1) )
 	}
 
 	/**
@@ -55,6 +63,7 @@ class Tree extends View\ListView
 	 */
 	public function processTplName(Request $request = null): string
 	{
-		return $request->getAction() . '/Tree.tpl';
+		return $request->getAction() . '/' .
+			($request->isAjax() ? 'TreeItems.tpl' : 'Tree.tpl');
 	}
 }

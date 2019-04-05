@@ -52,6 +52,15 @@ class ListView
 	private $offset = 0;
 
 	/**
+	 * Undocumented variable.
+	 *
+	 * @var int
+	 */
+	private $page = 0;
+
+	private $itemsPrePage = 10;
+
+	/**
 	 * Conditions.
 	 *
 	 * @var array
@@ -117,16 +126,42 @@ class ListView
 		return $this;
 	}
 
+	/**
+	 * Set limit.
+	 *
+	 * @param int $limit
+	 *
+	 * @return self
+	 */
 	public function setLimit(int $limit): self
 	{
 		$this->limit = $limit;
 		return $this;
 	}
 
+	public function setPage(int $page): self
+	{
+		$this->page = $page;
+		$this->offset = $this->limit * ($page - 1);
+		return $this;
+	}
+
+	/**
+	 * Set offsett.
+	 *
+	 * @param int $offset
+	 *
+	 * @return self
+	 */
 	public function setOffsett(int $offset): self
 	{
 		$this->offset = $offset;
 		return $this;
+	}
+
+	public function getPage(): int
+	{
+		return $this->page;
 	}
 
 	/**
@@ -195,6 +230,16 @@ class ListView
 		return $this->recordsList['count'] ?? 0;
 	}
 
+	public function getNumberOfPages(): int
+	{
+		return (int) \ceil($this->getCount() / $this->itemsPrePage);
+	}
+
+	/**
+	 * Is there more pages.
+	 *
+	 * @return bool
+	 */
 	public function isMorePages(): bool
 	{
 		return $this->recordsList['isMorePages'];

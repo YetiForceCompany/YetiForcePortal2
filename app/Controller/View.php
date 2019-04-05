@@ -202,6 +202,7 @@ abstract class View extends Base
 		$jsFileNames = [
 			YF_ROOT_WWW . 'libraries/jquery/dist/jquery.js',
 			YF_ROOT_WWW . 'libraries/jquery.class.js/jquery.class.js',
+			YF_ROOT_WWW . 'libraries/block-ui/jquery.blockUI.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
@@ -228,6 +229,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/ProgressIndicator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
@@ -241,7 +243,7 @@ abstract class View extends Base
 	 */
 	public function validateRequest(Request $request)
 	{
-		$request->validateReadAccess();
+		//$request->validateReadAccess();
 	}
 
 	/**
