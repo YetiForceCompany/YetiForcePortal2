@@ -55,6 +55,18 @@ class Request
 	}
 
 	/**
+	 * Returns raw value from request.
+	 *
+	 * @param string $key
+	 *
+	 * @return mixed
+	 */
+	public function getRaw(string $key)
+	{
+		return $this->rawValues[$key] ?? false;
+	}
+
+	/**
 	 * Get data map.
 	 */
 	public function getAllRaw()

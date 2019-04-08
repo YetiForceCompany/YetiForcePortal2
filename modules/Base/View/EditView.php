@@ -37,7 +37,7 @@ class EditView extends \App\Controller\View
 	public function process(Request $request)
 	{
 		$moduleName = $request->getModule();
-		$record = $request->get('record');
+		$record = $request->isEmpty('record') ? '' : $request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
 
 		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record", [], 'get');
