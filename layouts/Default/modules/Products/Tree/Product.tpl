@@ -32,7 +32,7 @@
 
         <div class="row mb-1">
             <div class="col-5">
-                <button type="button" class="btn btn-sm btn-block add-to-cart js-add-to-cart">
+                <button type="button" class="btn btn-sm btn-block add-to-cart js-add-to-cart" data-js="click">
                     <i class="fas fa-cart-plus mr-1"></i>
                     {\App\Language::translate('LBL_ADD_TO_CART', $MODULE_NAME)}
                 </button>

@@ -97,12 +97,13 @@ class Request
 	/**
 	 * Purify by data type.
 	 *
-	 * @param string     $key  Key name
-	 * @param int|string $type Data type that is only acceptable, default only words 'Standard'
+	 * @param string     $key          Key name
+	 * @param int|string $type         Data type that is only acceptable, default only words 'Standard'
+	 * @param mixed      $defaultValue
 	 *
-	 * @return bool|mixed
+	 * @return mixed
 	 */
-	public function getByType($key, $type = 'Standard')
+	public function getByType(string $key, $type = 'Standard', $defaultValue = false)
 	{
 		if (isset($this->purifiedValuesByType[$key][$type])) {
 			return $this->purifiedValuesByType[$key][$type];
@@ -111,7 +112,12 @@ class Request
 			return $this->purifiedValuesByType[$key][$type] = Purifier::purifyByType($this->rawValues[$key], $type);
 		}
 
-		return false;
+		return $defaultValue;
+	}
+
+	public function getInteger(string $key, int $value = 0): int
+	{
+		return $this->getByType($key, Purifier::INTEGER, $value);
 	}
 
 	/**
@@ -152,10 +158,12 @@ class Request
 	/**
 	 * Get key value (otherwise default value).
 	 *
-	 * @param mixed $key
-	 * @param mixed $defvalue
+	 * @param string $key
+	 * @param mixed  $defvalue
+	 *
+	 * @return mixed
 	 */
-	public function get($key, $defvalue = '')
+	public function get(string $key, $defvalue = '')
 	{
 		if (isset($this->purifiedValuesByGet[$key])) {
 			return $this->purifiedValuesByGet[$key];

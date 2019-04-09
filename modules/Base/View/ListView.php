@@ -27,7 +27,7 @@ class ListView extends \App\Controller\View
 	 */
 	public function process(Request $request)
 	{
-		$this->listViewModel->loadRecordsList();
+		$this->getListViewModel()->loadRecordsList();
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());

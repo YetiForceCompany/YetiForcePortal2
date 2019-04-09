@@ -21,6 +21,12 @@ abstract class View extends Base
 	 */
 	protected $moduleName;
 
+	public function __construct(Request $request)
+	{
+		parent::__construct($request);
+		$this->moduleName = $request->getModule();
+	}
+
 	public function checkPermission(Request $request)
 	{
 		$this->getModuleNameFromRequest($request);
@@ -69,9 +75,8 @@ abstract class View extends Base
 	public function getPageTitle(Request $request)
 	{
 		$title = '';
-		$moduleName = $request->getModule();
-		if ('Login' !== $request->get('view') && 'Users' !== $moduleName) {
-			$title = \App\Language::translateModule($moduleName);
+		if ('Login' !== $request->get('view') && 'Users' !== $this->moduleName) {
+			$title = \App\Language::translateModule($this->moduleName);
 			$pageTitle = $this->getBreadcrumbTitle($request);
 			if ($pageTitle) {
 				$title .= ' - ' . $pageTitle;
@@ -156,7 +161,7 @@ abstract class View extends Base
 			$viewer->assign('ERRORS', \App\Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
-		$viewer->view($this->preProcessTplName($request), $request->getModule());
+		$viewer->view($this->preProcessTplName($request), $this->moduleName);
 	}
 
 	/**
@@ -195,17 +200,19 @@ abstract class View extends Base
 		return 'Footer.tpl';
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function postProcess(Request $request)
 	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
-
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
-			$viewer->view('DebugApi.tpl');
+			$viewer->view('DebugApi.tpl', $this->moduleName);
 			\App\Session::set('debugApi', false);
 		}
-		$viewer->view($this->postProcessTplName($request));
+		$viewer->view($this->postProcessTplName($request), $this->moduleName);
 	}
 
 	/**
@@ -266,9 +273,9 @@ abstract class View extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function validateRequest(Request $request)
+	public function validateRequest()
 	{
-		$request->validateReadAccess();
+		$this->request->validateReadAccess();
 	}
 
 	/**
