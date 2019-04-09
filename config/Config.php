@@ -19,7 +19,7 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $crmUrl = 'http://yeti2/';
+	public static $crmUrl = 'http://yeti/';
 
 	/**
 	 * Portal URL.

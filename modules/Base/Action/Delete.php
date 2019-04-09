@@ -9,6 +9,8 @@
 
 namespace YF\Modules\Base\Action;
 
+use App\Purifier;
+
 class Delete extends \App\Controller\Action
 {
 	/**
@@ -31,7 +33,7 @@ class Delete extends \App\Controller\Action
 	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
-		$record = $request->get('record');
+		$record = $request->getByType('record', Purifier::INTEGER);
 		$result = false;
 		if ($record) {
 			$api = \App\Api::getInstance();

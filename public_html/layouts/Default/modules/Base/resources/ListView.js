@@ -16,7 +16,10 @@ jQuery.Class("Base_ListView_Js", {}, {
 				e.stopPropagation();
 				e.preventDefault();
 				var element = jQuery(e.currentTarget);
-				AppConnector.request(element.data('url')).then(function (data) {
+				AppConnector.request({
+					data: {},
+					url: element.data('url')
+				}).then(function (data) {
 					if (data.result) {
 						table.row(element.closest('tr')).remove().draw();
 					}

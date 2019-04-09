@@ -9,12 +9,14 @@
 
 namespace YF\Modules\Base\Action;
 
+use App\Purifier;
+
 class Save extends \App\Controller\Action
 {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function checkPermission(Request $request)
+	public function checkPermission(\App\Request $request)
 	{
 		$actionName = 'EditView';
 		if ($request->isEmpty('record')) {
@@ -35,10 +37,9 @@ class Save extends \App\Controller\Action
 	public function process(\App\Request $request)
 	{
 		$module = $request->getModule();
-		$record = $request->get('record');
-		$view = $request->get('view');
-		$api = \App\Api::getInstance();
-		$result = $api->call($module . '/Record/' . $record, $request->getAll(), $record ? 'put' : 'post');
+		$record = $request->isEmpty('record') ? '' : $request->getByType('record', Purifier::INTEGER);
+		$view = $request->getByType('view', Purifier::ALNUM);
+		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $request->getAllRaw(), $record ? 'put' : 'post');
 		if ($request->isAjax()) {
 			$response = new \App\Response();
 			$response->setResult($result);

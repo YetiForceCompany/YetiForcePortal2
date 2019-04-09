@@ -11,6 +11,7 @@
 namespace YF\Modules\Base\View;
 
 use App\Api;
+use App\Purifier;
 use App\Request;
 use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\InventoryField;
@@ -26,7 +27,7 @@ class DetailView extends \App\Controller\View
 	public function process(Request $request)
 	{
 		$moduleName = $request->getModule();
-		$record = $request->get('record');
+		$record = $request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
 
 		$recordDetail = $api->call("$moduleName/Record/$record");
@@ -64,7 +65,7 @@ class DetailView extends \App\Controller\View
 		$viewer->assign('FIELDS', $fields);
 		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$viewer->assign('INVENTORY_FIELDS', $inventoryFields);
-		$viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory']);
+		$viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
 
 		$viewer->view('Detail/DetailView.tpl', $moduleName);
 	}

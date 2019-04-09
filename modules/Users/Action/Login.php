@@ -9,6 +9,8 @@
 
 namespace YF\Modules\Users\Action;
 
+use App\Purifier;
+
 class Login extends \App\Controller\Action
 {
 	public function checkPermission(\App\Request $request)
@@ -23,12 +25,11 @@ class Login extends \App\Controller\Action
 
 	public function process(\App\Request $request)
 	{
-		$email = $request->get('email');
-		$password = $request->get('password');
+		$email = $request->getByType('email', Purifier::TEXT);
+		$password = $request->getRaw('password');
 		$userInstance = \App\User::getUser();
-		$userInstance->set('language', $request->get('language'));
+		$userInstance->set('language', $request->getByType('language', Purifier::STANDARD));
 		$userInstance->login($email, $password);
-
 		header('Location: ' . \App\Config::$portalUrl);
 	}
 }

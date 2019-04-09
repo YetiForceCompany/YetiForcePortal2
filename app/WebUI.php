@@ -22,14 +22,13 @@ class WebUI
 	 */
 	public function process(Request $request)
 	{
-		$request = Request::setInstance($request);
-		$module = $request->getModule();
-		$view = $request->get('view');
-		$action = $request->get('action');
 		try {
+			$module = $request->getModule();
+			$view = $request->getByType('view', Purifier::ALNUM);
+			$action = $request->getByType('action', Purifier::ALNUM);
 			if (false === $this->isInstalled() && 'Install' != $module) {
 				header('Location:index.php?module=Install&view=Install');
-				exit;
+				return;
 			}
 			$userInstance = User::getUser();
 			if (empty($module)) {
@@ -63,17 +62,21 @@ class WebUI
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					throw new AppException('Login is required');
 				}
-
 				$handler->checkPermission($request);
 				$this->triggerPreProcess($handler, $request);
 				$handler->process($request);
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				echo $module . $componentType . $componentName;
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
 			if ($request->isAjax() && $request->isEmpty('view')) {
+				$response = new \App\Response();
+				$response->setResult([
+					'message' => $e->getMessage(),
+					'trace' => $e->getTraceAsString()
+				]);
+				$response->emit();
 			} else {
 				\App\AppException::view($e);
 			}
