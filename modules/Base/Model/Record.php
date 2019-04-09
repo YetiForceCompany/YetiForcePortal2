@@ -81,7 +81,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getDisplayValue(string $key): string
 	{
-		return \App\Purifier::encodeHtml($this->valueMap['data'][$key] ?? '');
+		return \App\Purifier::encodeHtml((string) $this->get($key));
 	}
 
 	/**

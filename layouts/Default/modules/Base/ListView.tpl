@@ -1,8 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="contentsDiv">
-		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage"
-			   value='{\App\Json::encode(\App\Config::$listEntriesPerPage)}'>
+	<div class="tpl-Base-ListView contentsDiv">
+		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
@@ -42,7 +41,7 @@
 								{include file=\App\Resources::templatePath("ListViewActions.tpl",$MODULE_NAME)}
 							</td>
 							{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
-								<td>{$RECORD->get($FIELD_NAME)}</td>
+								<td>{$RECORD->getDisplayValue($FIELD_NAME)}</td>
 							{/foreach}
 						</tr>
 					{/foreach}

@@ -14,12 +14,18 @@ use App\Request;
 abstract class View extends Base
 {
 	protected $viewer = false;
+	/**
+	 * Module name.
+	 *
+	 * @var string
+	 */
+	protected $moduleName;
 
 	public function checkPermission(Request $request)
 	{
-		$moduleName = $request->getModule();
+		$this->getModuleNameFromRequest($request);
 		$userInstance = \App\User::getUser();
-		$modulePermission = $userInstance->isPermitted($moduleName);
+		$modulePermission = $userInstance->isPermitted($this->moduleName);
 		if (!$modulePermission) {
 			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
@@ -49,11 +55,9 @@ abstract class View extends Base
 	public function getViewer(Request $request)
 	{
 		if (!$this->viewer) {
-			$moduleName = $request->getModule();
-
 			$viewer = new \App\Viewer();
 			$userInstance = \App\User::getUser();
-			$viewer->assign('MODULE_NAME', $moduleName);
+			$viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($request));
 			$viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('USER', $userInstance);
 			$viewer->assign('ACTION_NAME', $request->getAction());
@@ -65,7 +69,7 @@ abstract class View extends Base
 	public function getPageTitle(Request $request)
 	{
 		$title = '';
-		$moduleName = $request->getModule(false);
+		$moduleName = $request->getModule();
 		if ('Login' !== $request->get('view') && 'Users' !== $moduleName) {
 			$title = \App\Language::translateModule($moduleName);
 			$pageTitle = $this->getBreadcrumbTitle($request);
@@ -138,6 +142,8 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
+			YF_ROOT_WWW . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
+			YF_ROOT_WWW . 'libraries/jstree/dist/themes/default/style.css',
 		];
 
 		return $this->convertScripts($cssFileNames, 'css');
@@ -153,7 +159,14 @@ abstract class View extends Base
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	protected function preProcessTplName(Request $request)
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return string
+	 */
+	protected function preProcessTplName(Request $request): string
 	{
 		return 'Header.tpl';
 	}
@@ -165,9 +178,21 @@ abstract class View extends Base
 	 *
 	 * @return string
 	 */
-	public function processTplName(Request $request = null): string
+	protected function processTplName(Request $request = null): string
 	{
 		return $request->getAction() . '/Index.tpl';
+	}
+
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return string
+	 */
+	protected function postProcessTplName(Request $request): string
+	{
+		return 'Footer.tpl';
 	}
 
 	public function postProcess(Request $request)
@@ -180,7 +205,7 @@ abstract class View extends Base
 			$viewer->view('DebugApi.tpl');
 			\App\Session::set('debugApi', false);
 		}
-		$viewer->view('Footer.tpl');
+		$viewer->view($this->postProcessTplName($request));
 	}
 
 	/**
@@ -192,7 +217,7 @@ abstract class View extends Base
 	 */
 	public function getFooterScripts(Request $request)
 	{
-		$moduleName = $request->getModule();
+		$moduleName = $this->getModuleNameFromRequest($request);
 		$action = $request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
 		$fileName = "~libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
@@ -202,6 +227,7 @@ abstract class View extends Base
 		$jsFileNames = [
 			YF_ROOT_WWW . 'libraries/jquery/dist/jquery.js',
 			YF_ROOT_WWW . 'libraries/jquery.class.js/jquery.class.js',
+			YF_ROOT_WWW . 'libraries/block-ui/jquery.blockUI.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
@@ -219,6 +245,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
 			$fileName,
+			YF_ROOT_WWW . 'libraries/jstree/dist/jstree.js',
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
@@ -227,9 +254,10 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/ProgressIndicator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/$moduleName/resources/$action.js",
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",
 		];
 
 		return $this->convertScripts($jsFileNames, 'js');
@@ -255,5 +283,20 @@ abstract class View extends Base
 	 */
 	public function preProcessAjax(Request $request)
 	{
+	}
+
+	/**
+	 * Get module name from request.
+	 *
+	 * @param Request $request
+	 *
+	 * @return string
+	 */
+	private function getModuleNameFromRequest(Request $request): string
+	{
+		if (empty($this->moduleName)) {
+			$this->moduleName = $request->getModule();
+		}
+		return $this->moduleName;
 	}
 }

@@ -114,6 +114,7 @@ jQuery.Class("Base_Header_Js", {
 		var thisInstance = this;
 		thisInstance.recentPageViews();
 		thisInstance.registerChangeCompany();
+		App.Fields.Tree.getInstance();
 	},
 });
 jQuery(document).ready(function () {

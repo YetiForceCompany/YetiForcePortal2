@@ -260,5 +260,42 @@ window.App.Fields = {
 				}
 			});
 		}
+	},
+	'Tree':	class {
+		constructor(treeContainer = $('.js-tree-container')) {
+			if( treeContainer.length > 0 ){
+				this.treeInstance = treeContainer;
+				this.loadTree();
+			}
+		}
+		/**
+		 * Get instance of Tree.
+		 * @returns {Tree}
+		 */
+		static getInstance(container = $('.js-tree-container')) {
+			if (typeof window.App.Fields.Tree.instance === 'undefined') {
+				window.App.Fields.Tree.instance = new window.App.Fields.Tree(container);
+			}
+			return window.App.Fields.Tree.instance;
+		}
+		loadTree() {
+			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
+		}
+		generateTree(treeData) {
+			this.treeInstance.jstree({
+				'core' : {
+					data: treeData,
+					themes: {
+						name: 'proton',
+						responsive: true
+					},
+				},
+				/*'checkbox': {
+					three_state: false,
+					cascade: 'up'
+				},
+				'plugins': ["checkbox"]*/
+			});
+		}
 	}
 };

@@ -25,15 +25,6 @@ class ListView extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
-	public function preProcess(Request $request, $display = true)
-	{
-		parent::preProcess($request, $display);
-		$this->getListViewModel($request->getModule());
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
 	public function process(Request $request)
 	{
 		$this->listViewModel->loadRecordsList();
@@ -43,13 +34,15 @@ class ListView extends \App\Controller\View
 		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $this->listViewModel->getCount());
+		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
+		$viewer->assign('USER', \App\User::getUser());
 		$viewer->view($this->processTplName($request), $moduleName);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function processTplName(Request $request = null): string
+	protected function processTplName(Request $request = null): string
 	{
 		return 'ListView.tpl';
 	}
@@ -61,10 +54,10 @@ class ListView extends \App\Controller\View
 	 *
 	 * @return ListViewModel
 	 */
-	protected function getListViewModel(string $moduleName): ListViewModel
+	protected function getListViewModel(): ListViewModel
 	{
 		if (empty($this->listViewModel)) {
-			$this->listViewModel = ListViewModel::getInstance($moduleName);
+			$this->listViewModel = ListViewModel::getInstance($this->moduleName);
 		}
 		return $this->listViewModel;
 	}
