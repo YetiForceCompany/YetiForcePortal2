@@ -139,6 +139,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
 			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
 			YF_ROOT_WWW . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
+			YF_ROOT_WWW . 'libraries/jstree/dist/themes/default/style.css',
 		];
 
 		return $this->convertScripts($cssFileNames, 'css');

@@ -4,6 +4,6 @@
         {include file=\App\Resources::templatePath("Tree/Search.tpl", $MODULE_NAME)}
     </div>
     <div class="tpl-Products-Tree-Category border border-secondary rounded p-2">
-        {include file=\App\Resources::templatePath("Tree.tpl", $MODULE_NAME) ON_SELECT_NODE='window.Products_Tree_Js.onSelectNode'}
+        {include file=\App\Resources::templatePath("Tree.tpl", $MODULE_NAME)}
     </div>
 {/strip}

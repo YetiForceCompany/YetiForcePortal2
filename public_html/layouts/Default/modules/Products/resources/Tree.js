@@ -2,10 +2,11 @@
 
 window.Products_Tree_Js = class {
 	constructor(container = $('.js-products-container')) {
-		console.log('Products_Tree_Js: ' + container.length);
 		this.container = container;
 		this.page = this.container.find('.js-pagination-list').data('page');
-		this.searchValue = '';
+		this.treeInstance = $('.js-tree-container');
+		this.searchValue = container.data('search');
+		this.isTreeLoaded = false;
 		window.Products_Tree_Js.instance = this;
 	}
 	/**
@@ -18,18 +19,13 @@ window.Products_Tree_Js = class {
 		}
 		return window.Products_Tree_Js.instance;
 	}
-
-	static onSelectNode(e, data, treeInstance){
-		let selectedNode = treeInstance.jstree("get_selected", true)[0];
-		window.Products_Tree_Js.getInstance().searchCategories(selectedNode['original']['tree']);
-	}
-	searchCategories(cat){
+	searchCategories(categories){
 		this.page = 1;
-		this.searchValue = {
+		this.searchValue = [{
 			fieldName: 'pscategory',
-			value: cat,
+			value: categories,
 			operator: 'e'
-		};
+		}];
 		this.loadPage();
 	}
 	init(container = $('.js-products-container')){
@@ -41,6 +37,15 @@ window.Products_Tree_Js = class {
 		this.registerButtonAddToCart();
 		this.registerPagination();
 		this.registerSearch();
+		this.registerTreeEvents();
+	}
+
+	registerTreeEvents(){
+		this.treeInstance.on('ready.jstree', (e, data)=>{
+			this.onTreeReady(e, data);
+		}).on('changed.jstree', (e, data)=>{
+			this.onTreeChanged(e, data);
+		});
 	}
 
 	registerAmountChange(){
@@ -74,9 +79,23 @@ window.Products_Tree_Js = class {
 		});
 	}
 
+	onTreeReady(e, data){
+		this.isTreeLoaded = true;
+	}
+
+	onTreeChanged(e, data){
+		if( this.isTreeLoaded ){
+			let selectedCategories = [];
+			$.each(this.treeInstance.jstree("get_selected", true), (index, value)=>{
+				selectedCategories.push(value['original']['tree']);
+			});
+			this.searchCategories(selectedCategories[0]);
+		}
+	}
+
 	loadPage(){
 		const progressInstance = $.progressIndicatorShow();
-		AppConnector.request({
+		AppConnector.requestPjax({
 			data: {
 				module: app.getModuleName(),
 				view: 'Tree',
@@ -86,9 +105,9 @@ window.Products_Tree_Js = class {
 			type: 'GET'
 		}).then((data) =>{
 			progressInstance.progressIndicator({'mode': 'hide'});
-			//progressInstance.progressIndicatorHide();
 			$('.js-main-container').html(data);
 			this.init();
+			this.registerEvents();
 			window.App.Fields.Tree.instance = new window.App.Fields.Tree();
 		}, (e, err) => {
 
@@ -97,20 +116,18 @@ window.Products_Tree_Js = class {
 
 	registerSearch(){
 		this.container.find('.js-search-button').on('click', (e)=>{
-			console.log('Search');
 			this.page = 1;
-			this.searchValue = {
+			this.searchValue = [{
 				fieldName: 'productname',
 				value: this.container.find('.js-search').val(),
 				operator: 'c'
-			};
+			}];
 			this.loadPage();
 		});
 	}
 
 	registerButtonAddToCart(){
 		this.container.find('.js-add-to-cart').on('click', (e)=>{
-			console.log('add to cart');
 			let product = this.getCartItem(e.currentTarget);
 			this.addToCart(product.data('id'));
 		});
@@ -121,7 +138,7 @@ window.Products_Tree_Js = class {
 			action: 'AddToCart',
 			record: recordId
 		}).then( (data) =>{
-			console.log('DATA:' + JSON.stringify(data));
+
 		}, (e, err) => {
 
 		});

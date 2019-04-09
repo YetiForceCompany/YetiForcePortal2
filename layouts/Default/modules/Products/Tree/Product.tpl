@@ -3,21 +3,21 @@
     <div class="tpl-Products-Tree-Product m-3 p-1 box-shadow border border-secondary rounded product js-cart-item" data-id="{\App\Purifier::encodeHTML($CRM_ID)}">
         <div class="row">
             <div class="col-7">{$RECORD->getDisplayValue('productname')}</div>
-            <div class="col-5">netto: {$RECORD->getDisplayValue('unit_price')}&nbsp;{$USER->getPreferences('currency_code')}</div>
+            <div class="col-5">netto: {$RECORD->getDisplayValue('unit_price')}</div>
         </div>
         <div class="row">
             <div class="col-7">{$RECORD->getDisplayValue('ean')}</div>
-            <div class="col-5">brutto: {$RECORD->getDisplayValue('unit_price')}&nbsp;{$USER->getPreferences('currency_code')}</div>
+            <div class="col-5">brutto: {$RECORD->getDisplayValue('unit_price')}</div>
         </div>
         <div class="row">
             <div class="product-image-contener mb-4 ml-4">
                 {assign var="IMAGES" value=$RECORD->get('imagename')}
                 {if empty($IMAGES) }
                     <div class="product-no-image">
-                        <img src="{\App\Config::$logo}" class="product-image" alt="Logo" title="Logo">
+                        <img src="{\App\Config::$logo}" class="img-responsive" alt="Logo" title="Logo">
                     </div>
                 {else}
-                    <img class="product-image" src="data:image/jpeg;base64,{$IMAGES[0]}" alt="" title="" />
+                    <img class="product-image" src="data:image/jpeg;base64,{$IMAGES[0]}" alt="{$RECORD->getDisplayValue('productname')}" title="{$RECORD->getDisplayValue('productname')}" />
                 {/if}
             </div>
         </div>

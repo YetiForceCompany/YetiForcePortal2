@@ -265,7 +265,6 @@ window.App.Fields = {
 		constructor(treeContainer = $('.js-tree-container')) {
 			if( treeContainer.length > 0 ){
 				this.treeInstance = treeContainer;
-				this.onSelectNode = this.treeInstance.data('onSelectNode');
 				this.loadTree();
 			}
 		}
@@ -283,21 +282,20 @@ window.App.Fields = {
 			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
 		}
 		generateTree(treeData) {
-			this.treeInstance.on('select_node.jstree', (e, data)=>{
-				(new Function('return ' + this.onSelectNode)())(e, data, this.treeInstance);
-			}).on('ready.jstree', ()=>{
-
-			}).jstree({ 'core' : {
-				data: treeData,
-				themes: {
-					name: 'proton',
-					responsive: true
+			this.treeInstance.jstree({
+				'core' : {
+					data: treeData,
+					themes: {
+						name: 'proton',
+						responsive: true
+					},
 				},
-				checkbox: {
-					three_state: true,
+				/*'checkbox': {
+					three_state: false,
+					cascade: 'up'
 				},
-				multiple: true,
-			} });
+				'plugins': ["checkbox"]*/
+			});
 		}
 	}
 };
