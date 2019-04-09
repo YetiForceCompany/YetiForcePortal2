@@ -42,17 +42,7 @@ class ListView extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
-	public function postProcess(Request $request)
-	{
-		if (!$request->isAjax()) {
-			parent::postProcess($request);
-		}
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function processTplName(Request $request = null): string
+	protected function processTplName(Request $request = null): string
 	{
 		return 'ListView.tpl';
 	}

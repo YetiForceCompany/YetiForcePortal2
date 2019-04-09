@@ -63,9 +63,24 @@ class Tree extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	public function processTplName(Request $request = null): string
+	protected function processTplName(Request $request = null): string
 	{
-		return $request->getAction() . '/' .
-			($request->isAjax() ? 'TreeItems.tpl' : 'Tree.tpl');
+		return $request->getAction() . '/Tree.tpl';
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function preProcessTplName(Request $request): string
+	{
+		return $request->getAction() . '/TreePreProcess.tpl';
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function postProcessTplName(Request $request): string
+	{
+		return $request->getAction() . '/TreePostProcess.tpl';
 	}
 }

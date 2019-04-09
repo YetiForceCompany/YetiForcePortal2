@@ -100,7 +100,7 @@ window.Products_Tree_Js = class {
 				module: app.getModuleName(),
 				view: 'Tree',
 				page: this.page,
-				search: this.searchValue
+				//search: this.searchValue
 			},
 			type: 'GET'
 		}).then((data) =>{

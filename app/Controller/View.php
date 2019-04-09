@@ -159,7 +159,14 @@ abstract class View extends Base
 		$viewer->view($this->preProcessTplName($request), $request->getModule());
 	}
 
-	protected function preProcessTplName(Request $request)
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return string
+	 */
+	protected function preProcessTplName(Request $request): string
 	{
 		return 'Header.tpl';
 	}
@@ -171,9 +178,21 @@ abstract class View extends Base
 	 *
 	 * @return string
 	 */
-	public function processTplName(Request $request = null): string
+	protected function processTplName(Request $request = null): string
 	{
 		return $request->getAction() . '/Index.tpl';
+	}
+
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return string
+	 */
+	protected function postProcessTplName(Request $request): string
+	{
+		return 'Footer.tpl';
 	}
 
 	public function postProcess(Request $request)
@@ -186,7 +205,7 @@ abstract class View extends Base
 			$viewer->view('DebugApi.tpl');
 			\App\Session::set('debugApi', false);
 		}
-		$viewer->view('Footer.tpl');
+		$viewer->view($this->postProcessTplName($request));
 	}
 
 	/**
