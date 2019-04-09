@@ -23,18 +23,12 @@ class Tree extends View\ListView
 {
 	private $pscategory = [];
 
-	public function preProcessAjax(Request $request)
-	{
-		$this->preProcess($request);
-	}
-
 	/**
 	 * {@inheritdoc}
 	 */
-	public function preProcess(Request $request, $display = true)
+	public function process(Request $request)
 	{
-		parent::preProcess($request, $display);
-		$this->listViewModel
+		$this->getListViewModel()
 			->setCustomFields([
 				'productname',
 				'product_no',
@@ -45,21 +39,15 @@ class Tree extends View\ListView
 				'taxes',
 				'imagename',
 				'description'
-			])->setLimit(10)
+			])
+			->setLimit(10)
 			->setPage($request->get('page', 1));
 		if ($request->has('search') && !$request->isEmpty('search')) {
 			$serach = $request->get('search');
 
 			//TODO - validation
-			$this->listViewModel->setConditions($serach);
+			$this->getListViewModel()->setConditions($serach);
 		}
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function process(Request $request)
-	{
 		$viewer = $this->getViewer($request);
 		$viewer->assign('SEARCH_TEXT', '');
 		$viewer->assign('SEARCH', $request->get('search'));
