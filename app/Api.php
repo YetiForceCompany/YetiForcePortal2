@@ -86,8 +86,12 @@ class Api
 		if (Config::$logs) {
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
+		if (empty($response)) {
+			throw new \App\AppException($rawResponse, 500);
+		}
 		if (isset($response['error'])) {
-			return $_SESSION['systemError'][] = $response['error'];
+			$_SESSION['systemError'][] = $response['error'];
+			throw new \App\AppException($response['error']['message'], $response['error']['code']);
 		}
 		if (isset($response['result'])) {
 			return $response['result'];
