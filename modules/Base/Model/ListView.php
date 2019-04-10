@@ -58,6 +58,11 @@ class ListView
 	 */
 	private $page = 0;
 
+	/**
+	 * Items pre page.
+	 *
+	 * @var int
+	 */
 	private $itemsPrePage = 10;
 
 	/**
@@ -139,6 +144,12 @@ class ListView
 		return $this;
 	}
 
+	/**
+	 * Set current page.
+	 *
+	 * @param int $page
+	 * @return self
+	 */
 	public function setPage(int $page): self
 	{
 		$this->page = $page < 1 ? 1 : $page;
@@ -159,11 +170,22 @@ class ListView
 		return $this;
 	}
 
+	/**
+	 * Get current page.
+	 *
+	 * @return int
+	 */
 	public function getPage(): int
 	{
 		return $this->page;
 	}
 
+	/**
+	 * Set conditions
+	 *
+	 * @param array $conditions
+	 * @return void
+	 */
 	public function setConditions(array $conditions)
 	{
 		$this->conditions = $conditions;
@@ -235,6 +257,11 @@ class ListView
 		return $this->recordsList['count'] ?? 0;
 	}
 
+	/**
+	 * Get number of pages.
+	 *
+	 * @return int
+	 */
 	public function getNumberOfPages(): int
 	{
 		return (int) \ceil($this->getCount() / $this->itemsPrePage);

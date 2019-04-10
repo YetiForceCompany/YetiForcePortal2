@@ -39,7 +39,6 @@ window.Products_Tree_Js = class {
 		this.registerSearch();
 		this.registerTreeEvents();
 	}
-
 	registerTreeEvents(){
 		this.treeInstance.on('ready.jstree', (e, data)=>{
 			this.onTreeReady(e, data);
@@ -47,7 +46,6 @@ window.Products_Tree_Js = class {
 			this.onTreeChanged(e, data);
 		});
 	}
-
 	registerAmountChange(){
 		this.container.find('.js-amount-inc').on('click', (e)=>{
 			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
@@ -78,11 +76,9 @@ window.Products_Tree_Js = class {
 			this.loadPage();
 		});
 	}
-
 	onTreeReady(e, data){
 		this.isTreeLoaded = true;
 	}
-
 	onTreeChanged(e, data){
 		if( this.isTreeLoaded ){
 			let selectedCategories = [];
@@ -92,7 +88,6 @@ window.Products_Tree_Js = class {
 			this.searchCategories(selectedCategories[0]);
 		}
 	}
-
 	loadPage(){
 		const progressInstance = $.progressIndicatorShow();
 		AppConnector.requestPjax({
@@ -100,7 +95,6 @@ window.Products_Tree_Js = class {
 				module: app.getModuleName(),
 				view: 'Tree',
 				page: this.page,
-				//search: this.searchValue
 			},
 			type: 'GET'
 		}).then((data) =>{
@@ -109,11 +103,8 @@ window.Products_Tree_Js = class {
 			this.init();
 			this.registerEvents();
 			window.App.Fields.Tree.instance = new window.App.Fields.Tree();
-		}, (e, err) => {
-
 		});
 	}
-
 	registerSearch(){
 		this.container.find('.js-search-button').on('click', (e)=>{
 			this.page = 1;
@@ -125,7 +116,6 @@ window.Products_Tree_Js = class {
 			this.loadPage();
 		});
 	}
-
 	registerButtonAddToCart(){
 		this.container.find('.js-add-to-cart').on('click', (e)=>{
 			let product = this.getCartItem(e.currentTarget);
@@ -138,8 +128,6 @@ window.Products_Tree_Js = class {
 			action: 'AddToCart',
 			record: recordId
 		}).then( (data) =>{
-
-		}, (e, err) => {
 
 		});
 	}

@@ -51,6 +51,7 @@ class Tree extends View\ListView
 		$viewer = $this->getViewer($request);
 		$viewer->assign('SEARCH_TEXT', '');
 		$viewer->assign('SEARCH', $request->get('search'));
+		$viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$viewer->assign(
 			'TREE',
 			TreeModel::getInstance()

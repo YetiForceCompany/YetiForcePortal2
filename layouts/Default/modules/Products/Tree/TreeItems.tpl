@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="tpl-Products-Tree-Tree contentsDiv js-products-container" data-search="{\App\Purifier::encodeHtml(\App\Json::encode($SEARCH))}" data-js="container">
+	<div class="tpl-Products-Tree-TreeItems contentsDiv js-products-container" data-search="{\App\Purifier::encodeHtml(\App\Json::encode($SEARCH))}" data-js="container">
 		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Purifier::encodeHtml(\App\Json::encode(\App\Config::$listEntriesPerPage))}">
 		<div class="widget_header row">
 			<div class="col-sm-8">
@@ -14,7 +14,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="float-right">
@@ -22,7 +21,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-3">
 				{include file=\App\Resources::templatePath("Tree/Category.tpl", $MODULE_NAME)}
@@ -35,7 +33,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="float-right">
@@ -43,7 +40,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div id="CoreLog" class="panel panel-primary col-sm-12 px-0 blockContainer">
 			<div class="card-header">{\App\Language::translate('LBL_CORE_LOG')}</div>
 			<div class="col-md-12 px-0 card-body">
@@ -52,6 +48,5 @@
 				</ol>
 			</div>
 		</div>
-
 	</div>
 {/strip}
