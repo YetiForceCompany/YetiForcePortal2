@@ -35,7 +35,7 @@ class ListView
 	 *
 	 * @var array
 	 */
-	private $recordsList = [];
+	protected $recordsList = [];
 
 	/**
 	 * Limit.
@@ -63,7 +63,7 @@ class ListView
 	 *
 	 * @var int
 	 */
-	private $itemsPrePage = 10;
+	private $itemsPrePage = 12;
 
 	/**
 	 * Conditions.
@@ -89,7 +89,7 @@ class ListView
 	 *
 	 * @return self
 	 */
-	public static function getInstance(string $moduleName): self
+	public static function getInstance(string $moduleName)
 	{
 		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', 'ListView');
 		return new $handlerModule($moduleName);

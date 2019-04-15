@@ -1,11 +1,10 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<header class="tpl-Base-BodyHeader bodyHeader d-flex justify-content-end align-items-center js-header" data-js="container">
-		<div class="dropdown js-cart">
-			<a class="btn btn-light btn-sm mr-2" role="button" href="#" data-placement="left"
-			   data-toggle="dropdown"
-			   aria-expanded="false">
+	<header class="tpl-Base-BodyHeader bodyHeader d-flex justify-content-end align-items-center js-body-header" data-js="container">
+		<div class="dropdown js-shopping-cart">
+			<a class="btn btn-light btn-sm mr-2" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
 				<span class="fas fa-shopping-cart"></span>
+				<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
 			</a>
 		</div>
 		<div class="dropdown historyBtn">

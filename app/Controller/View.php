@@ -266,7 +266,6 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",
 		];
-
 		return $this->convertScripts($jsFileNames, 'js');
 	}
 

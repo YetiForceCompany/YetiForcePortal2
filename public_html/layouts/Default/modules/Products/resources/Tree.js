@@ -1,10 +1,12 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+'use strict';
 
 window.Products_Tree_Js = class {
 	constructor(container = $('.js-products-container')) {
 		this.container = container;
 		this.page = this.container.find('.js-pagination-list').data('page');
 		this.treeInstance = $('.js-tree-container');
+		this.shoppingCartBadge = $('.js-body-header .js-shopping-cart .js-badge');
 		this.searchValue = container.data('search');
 		this.isTreeLoaded = false;
 		window.Products_Tree_Js.instance = this;
@@ -119,17 +121,24 @@ window.Products_Tree_Js = class {
 	registerButtonAddToCart(){
 		this.container.find('.js-add-to-cart').on('click', (e)=>{
 			let product = this.getCartItem(e.currentTarget);
-			this.addToCart(product.data('id'));
+			this.cartMethod('addToCart', product.data('id'), {amount: product.find('.js-amount').val()}).done((data) => {
+				this.shoppingCartBadge.text(data['result']['numberOfItems']);
+            });
 		});
 	}
-	addToCart(recordId){
-		AppConnector.request({
-			module: app.getModuleName(),
-			action: 'AddToCart',
-			record: recordId
-		}).then( (data) =>{
-
+	cartMethod(mode, recordId, params={}){
+		const deferred = $.Deferred();
+		AppConnector.request(
+			$.extend({
+				module: app.getModuleName(),
+				action: 'ShoppingCart',
+				mode: mode,
+				record: recordId
+			}, params)
+		).done((data)=>{
+			deferred.resolve(data);
 		});
+		return deferred.promise();
 	}
 	getCartItem(element){
 		return  $(element).closest('.js-cart-item');
