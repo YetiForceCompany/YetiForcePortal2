@@ -13,7 +13,6 @@ namespace YF\Modules\Products\View;
 
 use App\Request;
 use YF\Modules\Base\View;
-use YF\Modules\Base\Model\ListView as ListViewModel;
 use YF\Modules\Products\Model\CartView;
 
 /**
@@ -21,11 +20,11 @@ use YF\Modules\Products\Model\CartView;
  */
 class ShoppingCart extends View\ListView
 {
-    /**
+	/**
 	 * {@inheritdoc}
 	 */
-    public function process(Request $request)
-    {
+	public function process(Request $request)
+	{
 		$moduleName = $request->getModule();
 		$this->getListViewModel()->loadRecordsList();
 		$viewer = $this->getViewer($request);
@@ -41,18 +40,18 @@ class ShoppingCart extends View\ListView
 		$viewer->assign('USER', \App\User::getUser());
 		$viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
 		$viewer->view($this->processTplName($request), $moduleName);
-    }
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-    public function getFooterScripts(Request $request)
-    {
-        return array_merge(
-            $this->convertScripts([YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Products/resources/Tree.js"], 'js'),
-            parent::getFooterScripts($request)
-        );
-    }
+	public function getFooterScripts(Request $request)
+	{
+		return array_merge(
+			$this->convertScripts([YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
+			parent::getFooterScripts($request)
+		);
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -65,7 +64,7 @@ class ShoppingCart extends View\ListView
 		return $this->listViewModel;
 	}
 
-    /**
+	/**
 	 * {@inheritdoc}
 	 */
 	protected function processTplName(Request $request = null): string

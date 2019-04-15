@@ -48,19 +48,19 @@ class CartView extends ListViewModel
 	public function __construct(string $moduleName)
 	{
 		$this->setModuleName($moduleName);
-        $this->cart = new Cart();
+		$this->cart = new Cart();
 	}
 
-    /**
+	/**
 	 * {@inheritdoc}
 	 */
-	public function loadRecordsList(): \YF\Modules\Base\Model\ListView
+	public function loadRecordsList(): ListViewModel
 	{
 		$this->setConditions([
-            'fieldName'=>'id',
-            'value'=> array_keys($this->cart->getAll()),
-            'operator'=>'e'
-        ]);
+			'fieldName' => 'id',
+			'value' => array_keys($this->cart->getAll()),
+			'operator' => 'e'
+		]);
 		return parent::loadRecordsList();
 	}
 
@@ -72,20 +72,20 @@ class CartView extends ListViewModel
 		$this->recordsListModel = [];
 		if (!empty($this->recordsList['records'])) {
 			foreach ($this->recordsList['records'] as $key => $value) {
-                $recordModel = Record::getInstance($this->getModuleName());
-                $recordModel->setData($value)->setId($key);
-                $recordModel->set('amountInShoppingCart', $this->cart->get($key));
-                $this->recordsListModel[$key] = $recordModel;
+				$recordModel = Record::getInstance($this->getModuleName());
+				$recordModel->setData($value)->setId($key);
+				$recordModel->set('amountInShoppingCart', $this->cart->get($key));
+				$this->recordsListModel[$key] = $recordModel;
 			}
 		}
 		return $this->recordsListModel;
 	}
 
-    /**
-     * Calculate total price netto.
-     *
-     * @return float
-     */
+	/**
+	 * Calculate total price netto.
+	 *
+	 * @return float
+	 */
 	public function calculateTotalPriceNetto(): float
 	{
 		$totalPrice = 0;

@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-7">{$RECORD->getDisplayValue('ean')}</div>
             <div class="col-5">brutto: {$RECORD->getDisplayValue('unit_price')}</div>
-    </div>
+        </div>
         <div class="row">
             <div class="product-image-contener mb-4 ml-4">
                 {assign var="IMAGES" value=$RECORD->get('imagename')}
