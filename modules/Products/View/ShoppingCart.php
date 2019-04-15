@@ -27,19 +27,19 @@ class ShoppingCart extends View\ListView
     public function process(Request $request)
     {
 		$moduleName = $request->getModule();
-        $this->getListViewModel()->loadRecordsList();
+		$this->getListViewModel()->loadRecordsList();
 		$viewer = $this->getViewer($request);
 		$viewer->assign('SEARCH_TEXT', '');
 		$viewer->assign('SEARCH', $request->get('search'));
-        $viewer->assign('LEFT_SIDE_TEMPLATE', 'ShoppingCart/Summary.tpl');
-        $viewer->assign('SHOPPING_CART_VIEW', true);
+		$viewer->assign('LEFT_SIDE_TEMPLATE', 'ShoppingCart/Summary.tpl');
+		$viewer->assign('SHOPPING_CART_VIEW', true);
 		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());
 		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $this->listViewModel->getCount());
 		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
-        $viewer->assign('USER', \App\User::getUser());
-        $viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
+		$viewer->assign('USER', \App\User::getUser());
+		$viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
 		$viewer->view($this->processTplName($request), $moduleName);
     }
 

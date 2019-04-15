@@ -148,6 +148,7 @@ class ListView
 	 * Set current page.
 	 *
 	 * @param int $page
+	 *
 	 * @return self
 	 */
 	public function setPage(int $page): self
@@ -181,9 +182,10 @@ class ListView
 	}
 
 	/**
-	 * Set conditions
+	 * Set conditions.
 	 *
 	 * @param array $conditions
+	 *
 	 * @return void
 	 */
 	public function setConditions(array $conditions)

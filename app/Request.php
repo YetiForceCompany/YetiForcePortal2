@@ -115,6 +115,14 @@ class Request
 		return $defaultValue;
 	}
 
+	/**
+	 * Get integer.
+	 *
+	 * @param string $key
+	 * @param int    $value
+	 *
+	 * @return int
+	 */
 	public function getInteger(string $key, int $value = 0): int
 	{
 		return $this->getByType($key, Purifier::INTEGER, $value);
