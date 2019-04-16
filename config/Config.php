@@ -86,12 +86,5 @@ class Config
 	public static $version = '1.0';
 	public static $cachingDriver = 'Base';
 
-	/**
-	 * Allowed modules in menu. If empty then all are allowed.
-	 *
-	 * @var array
-	 */
-	public static $allowedModulesInMenu = [];
-
 	public static $defaultCharset = 'UTF-8';
 }

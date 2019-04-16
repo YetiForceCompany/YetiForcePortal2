@@ -12,8 +12,8 @@
 namespace YF\Modules\Base\Model;
 
 use App\Config;
+use App\Language;
 use App\Loader;
-use App\User;
 
 /**
  * Menu class.
@@ -45,22 +45,70 @@ class Menu
 	}
 
 	/**
+	 * Get menu list.
+	 *
+	 * @return array
+	 */
+	public function getItemsFromSystem(): array
+	{
+		if (\App\Cache::has('Menu', 'Items')) {
+			return \App\Cache::get('MenuItems', 'Items');
+		}
+		$menus = \App\Api::getInstance()->call('Menu')['items'];
+		\App\Cache::save('MenuItems', 'Items', $menus, \App\Cache::LONG);
+		return $menus;
+	}
+
+	private function getItemModule(array $row)
+	{
+		return [
+			'type' => $row['type'],
+			'childs' => array_map([$this, 'getItemModule'], $row['childs']),
+			'name' => $row['name'],
+			'icon' => 'userIcon-' . $row['mod'],
+			'link' => "index.php?module={$row['mod']}&view=ListView"
+		];
+	}
+
+	private function getItem(array $row)
+	{
+		$methodName = 'getItem' . ucfirst($row['type']);
+		if (method_exists($this, $methodName)) {
+			return  $this->{$methodName}($row);
+		}
+		return [
+			'type' => $row['type'],
+			'childs' => array_map([$this, 'getItem'], $row['childs']),
+			'name' => $row['name'],
+			'icon' => $row['icon'],
+			'link' => $row['dataurl']
+		];
+	}
+
+	/**
 	 * Get allowed items.
 	 *
 	 * @return array
 	 */
-	public function getAllowedItems(): array
+	public function getMenu(): array
 	{
 		$items = [];
-		foreach (User::getUser()->getModulesList() as $key => $module) {
-			if (empty($this->allowedModulesInMenu) || in_array($key, $this->allowedModulesInMenu)) {
-				$items[$key] = [
-					'icon' => "userIcon-{$key}",
-					'link' => "index.php?module={$key}&view=ListView",
-					'name' => $module,
-				];
-			}
+		$menu = $this->getItemsFromSystem();
+		if (empty($menu)) {
+			$defaultModule = Config::get('defaultModule');
+			return [
+				[
+					'type' => 'Module',
+					'childs' => [],
+					'name' => Language::translateModule($defaultModule),
+					'icon' => 'userIcon-' . $defaultModule,
+					'link' => "index.php?module={$defaultModule}&view=ListView"
+				]
+			];
 		}
-		return \array_merge($items, $this->additionalMenuItems);
+		foreach ($menu as $key => $values) {
+			$items[] = $this->getItem($values);
+		}
+		return $items;
 	}
 }
