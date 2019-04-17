@@ -4,7 +4,9 @@
     {if !isset($SHOPPING_CART_VIEW)}
         {assign var="SHOPPING_CART_VIEW" value=false}
     {/if}
-    <div class="m-3 p-1 box-shadow border border-secondary rounded product js-cart-item" data-id="{\App\Purifier::encodeHTML($CRM_ID)}">
+    <div class="m-3 p-1 box-shadow border border-secondary rounded product js-cart-item"
+            data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
+            data-price-netto="{$RECORD->getDisplayValue('unit_price')}">
         <div class="row">
             <div class="col-7">{$RECORD->getDisplayValue('productname')}</div>
             <div class="col-5">netto: {$RECORD->getDisplayValue('unit_price')}</div>

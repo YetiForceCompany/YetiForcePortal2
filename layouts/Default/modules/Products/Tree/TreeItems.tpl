@@ -26,7 +26,7 @@
 				{include file=\App\Resources::templatePath("Tree/Category.tpl", $MODULE_NAME)}
 			</div>
 			<div class="col-9">
-				<div class="row listViewContents">
+				<div class="row">
 					{foreach item=RECORD key=CRM_ID from=$RECORDS}
 						{include file=\App\Resources::templatePath("Tree/Product.tpl", $MODULE_NAME)}
 					{/foreach}

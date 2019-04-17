@@ -62,8 +62,8 @@ class Cart
 	public function count(): int
 	{
 		$numberOfItems = 0;
-		foreach ($this->cart as $amount) {
-			$numberOfItems += $amount;
+		foreach ($this->cart as $item) {
+			$numberOfItems += $item['amount'];
 		}
 		return $numberOfItems;
 	}
@@ -79,7 +79,7 @@ class Cart
 	public function add(int $recordId, int $amount)
 	{
 		$this->check($amount);
-		$this->set($recordId, $this->get($recordId) + $amount);
+		$this->set($recordId, $this->getAmount($recordId) + $amount);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Cart
 			throw new AppException('Acting on a non-existent element');
 		}
 		$this->check($amount);
-		$currentAmount = $this->get($recordId) - $amount;
+		$currentAmount = $this->getAmount($recordId) - $amount;
 		if ($currentAmount <= 0) {
 			$this->remove($recordId);
 		} else {
@@ -111,9 +111,21 @@ class Cart
 	 *
 	 * @return int
 	 */
-	public function get(int $recordId): int
+	public function get(int $recordId): array
 	{
-		return $this->cart[$recordId] ?? 0;
+		return $this->cart[$recordId] ?? [];
+	}
+
+	/**
+	 * Get amount.
+	 *
+	 * @param int $recordId
+	 *
+	 * @return int
+	 */
+	public function getAmount(int $recordId): int
+	{
+		return $this->cart[$recordId]['amount'] ?? 0;
 	}
 
 	/**
@@ -124,10 +136,13 @@ class Cart
 	 *
 	 * @return void
 	 */
-	public function set(int $recordId, int $amount)
+	public function set(int $recordId, int $amount, array $param = [])
 	{
 		$this->check($amount);
-		$this->cart[$recordId] = $amount;
+		$this->cart[$recordId] = [
+			'amount' => $amount,
+			'param' => $param,
+		];
 	}
 
 	/**

@@ -11,6 +11,8 @@
 
 namespace YF\Modules\Base\Model;
 
+use App\Config;
+
 /**
  * ListView class.
  */
@@ -57,13 +59,6 @@ class ListView
 	 * @var int
 	 */
 	private $page = 0;
-
-	/**
-	 * Items pre page.
-	 *
-	 * @var int
-	 */
-	private $itemsPrePage = 12;
 
 	/**
 	 * Conditions.
@@ -266,7 +261,7 @@ class ListView
 	 */
 	public function getNumberOfPages(): int
 	{
-		return (int) \ceil($this->getCount() / $this->itemsPrePage);
+		return (int) \ceil($this->getCount() / Config::getInt('itemsPrePage'));
 	}
 
 	/**

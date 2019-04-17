@@ -1,6 +1,6 @@
 <?php
 /**
- * Base controller class.
+ * The file contains: Base controller class.
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -9,6 +9,9 @@
 
 namespace App;
 
+/**
+ * Base controller class.
+ */
 class Viewer extends \SmartyBC
 {
 	const DEFAULTLAYOUT = 'Default';
@@ -38,9 +41,9 @@ class Viewer extends \SmartyBC
 	/**
 	 * Function to return for default layout name.
 	 *
-	 * @return <String> - Default Layout Name
+	 * @return string - Default Layout Name
 	 */
-	public static function getLayoutName()
+	public static function getLayoutName(): string
 	{
 		return Config::$theme ?? self::DEFAULTLAYOUT;
 	}
@@ -52,7 +55,7 @@ class Viewer extends \SmartyBC
 	 *
 	 * @return Viewer instance
 	 */
-	public static function getInstance($media = '')
+	public static function getInstance(string $media = '')
 	{
 		return new self($media);
 	}
@@ -64,9 +67,9 @@ class Viewer extends \SmartyBC
 	 * @param string $moduleName
 	 * @param bool   $fetch
 	 *
-	 * @return html data
+	 * @return string|true - html data
 	 */
-	public function view(string $templateName, string $moduleName = '', $fetch = false)
+	public function view(string $templateName, string $moduleName = '', bool $fetch = false)
 	{
 		$templatePath = $this->getTemplatePath($templateName, $moduleName);
 		$templateFound = $this->templateExists($templatePath);
@@ -77,18 +80,18 @@ class Viewer extends \SmartyBC
 			$this->display($templatePath);
 			return true;
 		}
-		throw new \App\AppException("LBL_FILE_TEMPLATE_NOT_FOUND||{$templatePath}");
+		throw new AppException("LBL_FILE_TEMPLATE_NOT_FOUND||{$templatePath}");
 	}
 
 	/**
 	 * Function to get the module specific template path for a given template.
 	 *
-	 * @param <String> $templateName
-	 * @param <String> $moduleName
+	 * @param string $templateName
+	 * @param string $moduleName
 	 *
-	 * @return <String> - Module specific template path if exists, otherwise default template path for the given template name
+	 * @return string - Module specific template path if exists, otherwise default template path for the given template name
 	 */
-	public function getTemplatePath($templateName, $moduleName = '')
+	public function getTemplatePath(string $templateName, string $moduleName = ''): string
 	{
 		foreach ($this->getTemplateDir() as $templateDir) {
 			$tpl = 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $templateName;

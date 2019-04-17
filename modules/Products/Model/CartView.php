@@ -74,7 +74,7 @@ class CartView extends ListViewModel
 			foreach ($this->recordsList['records'] as $key => $value) {
 				$recordModel = Record::getInstance($this->getModuleName());
 				$recordModel->setData($value)->setId($key);
-				$recordModel->set('amountInShoppingCart', $this->cart->get($key));
+				$recordModel->set('amountInShoppingCart', $this->cart->getAmount($key));
 				$this->recordsListModel[$key] = $recordModel;
 			}
 		}
@@ -89,8 +89,8 @@ class CartView extends ListViewModel
 	public function calculateTotalPriceNetto(): float
 	{
 		$totalPrice = 0;
-		foreach ($this->recordsListModel as $recordModel) {
-			$totalPrice += ((float) $recordModel->get('unit_price')) * $recordModel->get('amountInShoppingCart');
+		foreach ($this->cart->getAll() as $item) {
+			$totalPrice += ((float) $item['param']['priceNetto']) * $item['amount'];
 		}
 		return $totalPrice;
 	}

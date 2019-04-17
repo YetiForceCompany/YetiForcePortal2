@@ -1,6 +1,6 @@
 <?php
 /**
- * Config class.
+ * The file contains: Config class.
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -9,6 +9,9 @@
 
 namespace App;
 
+/**
+ * Config class.
+ */
 class Config extends \Conf\Config
 {
 	/**
@@ -76,6 +79,19 @@ class Config extends \Conf\Config
 	 * @return bool
 	 */
 	public static function getBool(string $key, bool $default = false): bool
+	{
+		return static::get($key, $default);
+	}
+
+	/**
+	 * Get integer config value.
+	 *
+	 * @param string $key
+	 * @param bool   $default
+	 *
+	 * @return int
+	 */
+	public static function getInt(string $key, int $default = 0): int
 	{
 		return static::get($key, $default);
 	}
