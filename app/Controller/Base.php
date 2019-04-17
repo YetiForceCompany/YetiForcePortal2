@@ -13,8 +13,16 @@ use App\Request;
 
 abstract class Base
 {
-	public function __construct()
+	/**
+	 * Request object.
+	 *
+	 * @var Request
+	 */
+	protected $request;
+
+	public function __construct(Request $request)
 	{
+		$this->request = $request;
 		self::setHeaders();
 	}
 
@@ -49,11 +57,9 @@ abstract class Base
 	/**
 	 * Validates request. Checks type of request.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function validateRequest(Request $request);
+	abstract public function validateRequest();
 
 	/**
 	 * Action invoke before process.

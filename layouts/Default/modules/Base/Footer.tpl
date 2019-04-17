@@ -1,5 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
+	<!-- tpl-Base-Footer -->
 	{include file=\App\Resources::templatePath("BodyRight.tpl",$MODULE_NAME)}
 	</div>
 	</div>
@@ -58,4 +59,5 @@
 	{include file=\App\Resources::templatePath("Log.tpl",$MODULE_NAME)}
 	</body>
 	</html>
+	<!-- /tpl-Base-Footer -->
 {/strip}

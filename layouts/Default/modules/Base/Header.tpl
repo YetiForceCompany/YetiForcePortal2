@@ -1,5 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
+<!-- tpl-Base-Header -->
 <!DOCTYPE html>
 <html lang="{$LANG}">
 <head>
@@ -22,4 +23,5 @@
 </head>
 <body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
 {include file=\App\Resources::templatePath("Body.tpl",$MODULE_NAME)}
+<!-- /tpl-Base-Header -->
 {/strip}

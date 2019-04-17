@@ -12,16 +12,19 @@ namespace App;
 class Session
 {
 	/**
-	 * @param string $key Key in table
+	 * Get value from session.
 	 *
-	 * @return Value for the key
+	 * @param string $key
+	 * @param mixed  $defaultValue
+	 *
+	 * @return mixed for the key
 	 */
-	public static function get($key)
+	public static function get($key, $defaultValue = false)
 	{
 		if (isset($_SESSION[$key])) {
 			return $_SESSION[$key];
 		}
-		return false;
+		return $defaultValue;
 	}
 
 	/**
@@ -29,7 +32,7 @@ class Session
 	 *
 	 * @return bool if key is definied - return true
 	 */
-	public static function has($key)
+	public static function has($key): bool
 	{
 		return isset($_SESSION[$key]);
 	}

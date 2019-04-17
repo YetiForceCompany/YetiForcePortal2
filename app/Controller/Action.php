@@ -53,8 +53,8 @@ abstract class Action extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function validateRequest(\App\Request $request)
+	public function validateRequest()
 	{
-		$request->validateWriteAccess();
+		$this->request->validateWriteAccess();
 	}
 }

@@ -17,6 +17,11 @@ namespace YF\Modules\Products\Model;
  */
 class Tree extends \App\BaseModel
 {
+	/**
+	 * Selected items.
+	 *
+	 * @var array
+	 */
 	private $selectedItems = [];
 
 	/**
@@ -29,6 +34,12 @@ class Tree extends \App\BaseModel
 		return new static();
 	}
 
+	/**
+	 * Set selected items.
+	 *
+	 * @param array $selectedItems
+	 * @return void
+	 */
 	public function setSelectedItems(array $selectedItems)
 	{
 		$this->selectedItems = $selectedItems;

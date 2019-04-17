@@ -289,12 +289,7 @@ window.App.Fields = {
 						name: 'proton',
 						responsive: true
 					},
-				},
-				/*'checkbox': {
-					three_state: false,
-					cascade: 'up'
-				},
-				'plugins': ["checkbox"]*/
+				}
 			});
 		}
 	}

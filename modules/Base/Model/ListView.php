@@ -11,6 +11,8 @@
 
 namespace YF\Modules\Base\Model;
 
+use App\Config;
+
 /**
  * ListView class.
  */
@@ -35,7 +37,7 @@ class ListView
 	 *
 	 * @var array
 	 */
-	private $recordsList = [];
+	protected $recordsList = [];
 
 	/**
 	 * Limit.
@@ -57,8 +59,6 @@ class ListView
 	 * @var int
 	 */
 	private $page = 0;
-
-	private $itemsPrePage = 10;
 
 	/**
 	 * Conditions.
@@ -84,7 +84,7 @@ class ListView
 	 *
 	 * @return self
 	 */
-	public static function getInstance(string $moduleName): self
+	public static function getInstance(string $moduleName)
 	{
 		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', 'ListView');
 		return new $handlerModule($moduleName);
@@ -139,6 +139,13 @@ class ListView
 		return $this;
 	}
 
+	/**
+	 * Set current page.
+	 *
+	 * @param int $page
+	 *
+	 * @return self
+	 */
 	public function setPage(int $page): self
 	{
 		$this->page = $page < 1 ? 1 : $page;
@@ -159,11 +166,23 @@ class ListView
 		return $this;
 	}
 
+	/**
+	 * Get current page.
+	 *
+	 * @return int
+	 */
 	public function getPage(): int
 	{
 		return $this->page;
 	}
 
+	/**
+	 * Set conditions.
+	 *
+	 * @param array $conditions
+	 *
+	 * @return void
+	 */
 	public function setConditions(array $conditions)
 	{
 		$this->conditions = $conditions;
@@ -235,9 +254,14 @@ class ListView
 		return $this->recordsList['count'] ?? 0;
 	}
 
+	/**
+	 * Get number of pages.
+	 *
+	 * @return int
+	 */
 	public function getNumberOfPages(): int
 	{
-		return (int) \ceil($this->getCount() / $this->itemsPrePage);
+		return (int) \ceil($this->getCount() / Config::getInt('itemsPrePage'));
 	}
 
 	/**

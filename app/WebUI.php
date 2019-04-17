@@ -57,8 +57,8 @@ class WebUI
 			$handlerClass = Loader::getModuleClassName($module, $componentType, $componentName);
 
 			if (class_exists($handlerClass)) {
-				$handler = new $handlerClass();
-				$handler->validateRequest($request);
+				$handler = new $handlerClass($request);
+				$handler->validateRequest();
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					throw new AppException('Login is required');
 				}
