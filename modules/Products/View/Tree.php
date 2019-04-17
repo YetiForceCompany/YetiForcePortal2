@@ -12,7 +12,6 @@
 
 namespace YF\Modules\Products\View;
 
-use App\Request;
 use YF\Modules\Base\View;
 use YF\Modules\Products\Model\Tree as TreeModel;
 
@@ -26,7 +25,7 @@ class Tree extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
 		$this->getListViewModel()
 			->setCustomFields([
@@ -41,16 +40,16 @@ class Tree extends View\ListView
 				'description'
 			])
 			->setLimit(10)
-			->setPage($request->get('page', 1));
-		if ($request->has('search') && !$request->isEmpty('search')) {
-			$serach = $request->get('search');
+			->setPage($this->request->get('page', 1));
+		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
+			$serach = $this->request->get('search');
 
 			//TODO - validation
 			$this->getListViewModel()->setConditions($serach);
 		}
-		$viewer = $this->getViewer($request);
+		$viewer = $this->getViewer();
 		$viewer->assign('SEARCH_TEXT', '');
-		$viewer->assign('SEARCH', $request->get('search'));
+		$viewer->assign('SEARCH', $this->request->get('search'));
 		$viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$viewer->assign(
 			'TREE',
@@ -58,30 +57,30 @@ class Tree extends View\ListView
 				->setSelectedItems($this->pscategory)
 				->getTree()
 		);
-		parent::process($request);
+		parent::process();
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function processTplName(Request $request = null): string
+	protected function processTplName(): string
 	{
-		return $request->getAction() . '/Tree.tpl';
+		return $this->request->getAction() . '/Tree.tpl';
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function preProcessTplName(Request $request): string
+	protected function preProcessTplName(): string
 	{
-		return $request->getAction() . '/TreePreProcess.tpl';
+		return $this->request->getAction() . '/TreePreProcess.tpl';
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function postProcessTplName(Request $request): string
+	protected function postProcessTplName(): string
 	{
-		return $request->getAction() . '/TreePostProcess.tpl';
+		return $this->request->getAction() . '/TreePostProcess.tpl';
 	}
 }

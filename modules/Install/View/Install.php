@@ -22,59 +22,58 @@ class Install extends \App\Controller\View
 		return false;
 	}
 
-	public function checkPermission(\App\Request $request)
+	public function checkPermission()
 	{
 		return true;
 	}
 
-	public function preProcess(\App\Request $request, $display = true)
+	public function preProcess($display = true)
 	{
-		$module = $request->getModule();
-		$viewer = $this->getViewer($request);
-		$request = $this->setLanguage($request);
-		parent::preProcess($request, $display);
+		$module = $this->request->getModule();
+		$viewer = $this->getViewer();
+		$this->setLanguage();
+		parent::preProcess($display);
 		$viewer->view('InstallPreProcess.tpl', $module);
 	}
 
-	public function process(\App\Request $request)
+	public function process()
 	{
-		$module = $request->getModule();
-		$mode = $request->getMode();
+		$module = $this->request->getModule();
+		$mode = $this->request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
-			return $this->{$mode}($request);
+			return $this->{$mode}();
 		}
-		$this->Step1($request);
+		$this->Step1($this->request);
 	}
 
-	public function Step1(\App\Request $request)
+	public function Step1()
 	{
-		$module = $request->getModule();
-		$viewer = $this->getViewer($request);
+		$module = $this->request->getModule();
+		$viewer = $this->getViewer($this->request);
 		$viewer->view('InstallStep1.tpl', $module);
 	}
 
-	public function Step2(\App\Request $request)
+	public function Step2()
 	{
-		$module = $request->getModule();
-		$viewer = $this->getViewer($request);
+		$module = $this->request->getModule();
+		$viewer = $this->getViewer();
 		$viewer->view('InstallStep2.tpl', $module);
 	}
 
-	public function postProcess(\App\Request $request, $display = true)
+	public function postProcess($display = true)
 	{
-		$module = $request->getModule();
-		$viewer = $this->getViewer($request);
+		$module = $this->request->getModule();
+		$viewer = $this->getViewer();
 		$viewer->view('InstallPostProcess.tpl', $module);
-		parent::postProcess($request, $display);
+		parent::postProcess($display);
 	}
 
-	public function setLanguage($request)
+	public function setLanguage()
 	{
-		if ($request->get('lang')) {
+		if ($this->request->get('lang')) {
 			$userInstance = \App\User::getUser();
-			$userInstance->set('language', $request->get('lang'));
+			$userInstance->set('language', $this->request->get('lang'));
 		}
-		return $request;
 	}
 
 	/*

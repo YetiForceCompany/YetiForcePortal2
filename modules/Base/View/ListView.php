@@ -10,7 +10,6 @@
 
 namespace YF\Modules\Base\View;
 
-use App\Request;
 use YF\Modules\Base\Model\ListView as ListViewModel;
 
 class ListView extends \App\Controller\View
@@ -25,24 +24,24 @@ class ListView extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
 		$this->getListViewModel()->loadRecordsList();
-		$moduleName = $request->getModule();
-		$viewer = $this->getViewer($request);
+		$moduleName = $this->request->getModule();
+		$viewer = $this->getViewer($this->request);
 		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());
 		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $this->listViewModel->getCount());
 		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
 		$viewer->assign('USER', \App\User::getUser());
-		$viewer->view($this->processTplName($request), $moduleName);
+		$viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function processTplName(Request $request = null): string
+	protected function processTplName(): string
 	{
 		return 'ListView.tpl';
 	}

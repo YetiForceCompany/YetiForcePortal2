@@ -16,31 +16,27 @@ class Save extends \App\Controller\Action
 	/**
 	 * {@inheritdoc}
 	 */
-	public function checkPermission(\App\Request $request)
+	public function checkPermission()
 	{
 		$actionName = 'EditView';
-		if ($request->isEmpty('record')) {
+		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';
 		}
-		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), $actionName)) {
+		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
 			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 	}
 
 	/**
-	 * Process.
-	 *
-	 * @param \App\Request $request
-	 *
-	 * @return mixed
+	 * {@inheritdoc}
 	 */
-	public function process(\App\Request $request)
+	public function process()
 	{
-		$module = $request->getModule();
-		$record = $request->isEmpty('record') ? '' : $request->getByType('record', Purifier::INTEGER);
-		$view = $request->getByType('view', Purifier::ALNUM);
-		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $request->getAllRaw(), $record ? 'put' : 'post');
-		if ($request->isAjax()) {
+		$module = $this->request->getModule();
+		$record = $this->request->isEmpty('record') ? '' : $this->request->getByType('record', Purifier::INTEGER);
+		$view = $this->request->getByType('view', Purifier::ALNUM);
+		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $this->request->getAllRaw(), $record ? 'put' : 'post');
+		if ($this->request->isAjax()) {
 			$response = new \App\Response();
 			$response->setResult($result);
 			$response->emit();

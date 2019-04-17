@@ -62,9 +62,9 @@ class WebUI
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					throw new AppException('Login is required');
 				}
-				$handler->checkPermission($request);
+				$handler->checkPermission();
 				$this->triggerPreProcess($handler, $request);
-				$handler->process($request);
+				$handler->process();
 				$this->triggerPostProcess($handler, $request);
 			} else {
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
@@ -91,19 +91,19 @@ class WebUI
 	protected function triggerPreProcess($handler, $request)
 	{
 		if ($request->isAjax()) {
-			$handler->preProcessAjax($request);
+			$handler->preProcessAjax();
 			return;
 		}
-		$handler->preProcess($request);
+		$handler->preProcess();
 	}
 
 	protected function triggerPostProcess($handler, $request)
 	{
 		if ($request->isAjax()) {
-			$handler->postProcessAjax($request);
+			$handler->postProcessAjax();
 			return;
 		}
-		$handler->postProcess($request);
+		$handler->postProcess();
 	}
 
 	protected function triggerCheckPermission($handler, $request)
@@ -119,7 +119,7 @@ class WebUI
 		$permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
 
 		if ($permission) {
-			$handler->checkPermission($request);
+			$handler->checkPermission();
 			return;
 		}
 		throw new AppException(Language::translate($moduleName) . ' ' . Language::translate('LBL_NOT_ACCESSIBLE'));

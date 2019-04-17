@@ -20,8 +20,7 @@ class Install
 	public static function getInstance($module)
 	{
 		$handlerModule = \App\Loader::getModuleClassName($module, 'Model', 'Install');
-		$instance = new $handlerModule();
-		return $instance;
+		return new $handlerModule();
 	}
 
 	public function save(\App\Request $request)
@@ -44,7 +43,7 @@ class Install
 	public function recurseDelete($src)
 	{
 		$vendorDir = dirname(dirname(__FILE__));
-		$rootDir = dirname(dirname($vendorDir)) . DIRECTORY_SEPARATOR;
+		$rootDir = dirname(dirname($vendorDir)) . \DIRECTORY_SEPARATOR;
 
 		if (!file_exists($rootDir . $src)) {
 			return;
@@ -57,9 +56,9 @@ class Install
 		if (is_dir($src)) {
 			foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
 				if ($item->isDir()) {
-					$dirs[] = $rootDir . $src . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
+					$dirs[] = $rootDir . $src . \DIRECTORY_SEPARATOR . $iterator->getSubPathName();
 				} else {
-					unlink($rootDir . $src . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+					unlink($rootDir . $src . \DIRECTORY_SEPARATOR . $iterator->getSubPathName());
 				}
 			}
 			arsort($dirs);

@@ -14,16 +14,12 @@ use App\Purifier;
 class ChangeCompany extends \App\Controller\Action
 {
 	/**
-	 * Process.
-	 *
-	 * @param \App\Request $request
-	 *
-	 * @return mixed
+	 * {@inheritdoc}
 	 */
-	public function process(\App\Request $request)
+	public function process()
 	{
 		$userInstance = \App\User::getUser();
-		$userInstance->set('CompanyId', $request->getByType('record', Purifier::INTEGER));
+		$userInstance->set('CompanyId', $this->request->getByType('record', Purifier::INTEGER));
 		$response = new \App\Response();
 		$response->setResult(true);
 		$response->emit();

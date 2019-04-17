@@ -9,7 +9,6 @@
 
 namespace YF\Modules\Base\View;
 
-use App\Request;
 use YF\Modules\Base\Model\ListView as ListViewModel;
 
 class RecordList extends \App\Controller\Modal
@@ -17,22 +16,22 @@ class RecordList extends \App\Controller\Modal
 	/**
 	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
-		$moduleName = $request->getModule();
+		$moduleName = $this->request->getModule();
 		$listViewModel = ListViewModel::getInstance($moduleName)->loadRecordsList();
-		$viewer = $this->getViewer($request);
+		$viewer = $this->getViewer($this->request);
 		$viewer->assign('HEADERS', $listViewModel->getHeaders());
 		$viewer->assign('RECORDS', $listViewModel->getRecordsListModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('COUNT', $listViewModel->getCount());
-		$viewer->view($this->processTplName($request), $moduleName);
+		$viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function processTplName(Request $request = null): string
+	public function processTplName(): string
 	{
 		return 'RecordList/RecordList.tpl';
 	}

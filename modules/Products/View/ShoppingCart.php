@@ -11,7 +11,6 @@
 
 namespace YF\Modules\Products\View;
 
-use App\Request;
 use YF\Modules\Base\View;
 use YF\Modules\Products\Model\CartView;
 
@@ -23,13 +22,13 @@ class ShoppingCart extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
-		$moduleName = $request->getModule();
+		$moduleName = $this->request->getModule();
 		$this->getListViewModel()->loadRecordsList();
-		$viewer = $this->getViewer($request);
+		$viewer = $this->getViewer();
 		$viewer->assign('SEARCH_TEXT', '');
-		$viewer->assign('SEARCH', $request->get('search'));
+		$viewer->assign('SEARCH', $this->request->get('search'));
 		$viewer->assign('LEFT_SIDE_TEMPLATE', 'ShoppingCart/Summary.tpl');
 		$viewer->assign('SHOPPING_CART_VIEW', true);
 		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());
@@ -39,17 +38,17 @@ class ShoppingCart extends View\ListView
 		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
 		$viewer->assign('USER', \App\User::getUser());
 		$viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
-		$viewer->view($this->processTplName($request), $moduleName);
+		$viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getFooterScripts(Request $request)
+	public function getFooterScripts()
 	{
 		return array_merge(
 			$this->convertScripts([YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
-			parent::getFooterScripts($request)
+			parent::getFooterScripts()
 		);
 	}
 
@@ -67,7 +66,7 @@ class ShoppingCart extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function processTplName(Request $request = null): string
+	protected function processTplName(): string
 	{
 		return 'Tree/Tree.tpl';
 	}
@@ -75,7 +74,7 @@ class ShoppingCart extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function preProcessTplName(Request $request): string
+	protected function preProcessTplName(): string
 	{
 		return 'Tree/TreePreProcess.tpl';
 	}
@@ -83,7 +82,7 @@ class ShoppingCart extends View\ListView
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function postProcessTplName(Request $request): string
+	protected function postProcessTplName(): string
 	{
 		return 'Tree/TreePostProcess.tpl';
 	}

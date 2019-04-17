@@ -27,9 +27,9 @@ abstract class View extends Base
 		$this->moduleName = $request->getModule();
 	}
 
-	public function checkPermission(Request $request)
+	public function checkPermission()
 	{
-		$this->getModuleNameFromRequest($request);
+		$this->getModuleNameFromRequest($this->request);
 		$userInstance = \App\User::getUser();
 		$modulePermission = $userInstance->isPermitted($this->moduleName);
 		if (!$modulePermission) {
@@ -38,46 +38,43 @@ abstract class View extends Base
 		return true;
 	}
 
-	public function preProcess(Request $request, $display = true)
+	public function preProcess($display = true)
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
-		$viewer->assign('STYLES', $this->getHeaderCss($request));
+		$viewer = $this->getViewer();
+		$viewer->assign('PAGETITLE', $this->getPageTitle());
+		$viewer->assign('STYLES', $this->getHeaderCss());
 		$viewer->assign('LANGUAGE', \App\Language::getLanguage());
 		$viewer->assign('LANG', \App\Language::getShortLanguageName());
 		$viewer->assign('USER', \App\User::getUser());
 		if ($display) {
-			$this->preProcessDisplay($request);
+			$this->preProcessDisplay();
 		}
 	}
 
 	/**
 	 * Get viewer.
 	 *
-	 * @param \App\Request $request
-	 *
 	 * @return \App\Viewer
 	 */
-	public function getViewer(Request $request)
+	public function getViewer()
 	{
 		if (!$this->viewer) {
-			$viewer = new \App\Viewer();
+			$this->viewer = new \App\Viewer();
 			$userInstance = \App\User::getUser();
-			$viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($request));
-			$viewer->assign('VIEW', $request->get('view'));
-			$viewer->assign('USER', $userInstance);
-			$viewer->assign('ACTION_NAME', $request->getAction());
-			$this->viewer = $viewer;
+			$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
+			$this->viewer->assign('VIEW', $this->request->get('view'));
+			$this->viewer->assign('USER', $userInstance);
+			$this->viewer->assign('ACTION_NAME', $this->request->getAction());
 		}
 		return $this->viewer;
 	}
 
-	public function getPageTitle(Request $request)
+	public function getPageTitle()
 	{
 		$title = '';
-		if ('Login' !== $request->get('view') && 'Users' !== $this->moduleName) {
+		if ('Login' !== $this->request->get('view') && 'Users' !== $this->moduleName) {
 			$title = \App\Language::translateModule($this->moduleName);
-			$pageTitle = $this->getBreadcrumbTitle($request);
+			$pageTitle = $this->getBreadcrumbTitle();
 			if ($pageTitle) {
 				$title .= ' - ' . $pageTitle;
 			}
@@ -85,7 +82,7 @@ abstract class View extends Base
 		return $title;
 	}
 
-	public function getBreadcrumbTitle(Request $request)
+	public function getBreadcrumbTitle()
 	{
 		if (!empty($this->pageTitle)) {
 			return $this->pageTitle;
@@ -128,11 +125,9 @@ abstract class View extends Base
 	/**
 	 * Retrieves css styles that need to loaded in the page.
 	 *
-	 * @param \App\Request $request - request model
-	 *
 	 * @return \App\Script[]
 	 */
-	public function getHeaderCss(Request $request)
+	public function getHeaderCss()
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
@@ -154,24 +149,22 @@ abstract class View extends Base
 		return $this->convertScripts($cssFileNames, 'css');
 	}
 
-	protected function preProcessDisplay(Request $request)
+	protected function preProcessDisplay()
 	{
-		$viewer = $this->getViewer($request);
+		$viewer = $this->getViewer();
 		if (\App\Session::has('systemError')) {
 			$viewer->assign('ERRORS', \App\Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
-		$viewer->view($this->preProcessTplName($request), $this->moduleName);
+		$viewer->view($this->preProcessTplName(), $this->moduleName);
 	}
 
 	/**
 	 * Get preprocess tpl name.
 	 *
-	 * @param \App\Request $request
-	 *
 	 * @return string
 	 */
-	protected function preProcessTplName(Request $request): string
+	protected function preProcessTplName(): string
 	{
 		return 'Header.tpl';
 	}
@@ -179,23 +172,19 @@ abstract class View extends Base
 	/**
 	 * Get process tpl name.
 	 *
-	 * @param \App\Request $request
-	 *
 	 * @return string
 	 */
-	protected function processTplName(Request $request = null): string
+	protected function processTplName(): string
 	{
-		return $request->getAction() . '/Index.tpl';
+		return $this->request->getAction() . '/Index.tpl';
 	}
 
 	/**
 	 * Get preprocess tpl name.
 	 *
-	 * @param \App\Request $request
-	 *
 	 * @return string
 	 */
-	protected function postProcessTplName(Request $request): string
+	protected function postProcessTplName(): string
 	{
 		return 'Footer.tpl';
 	}
@@ -203,29 +192,27 @@ abstract class View extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function postProcess(Request $request)
+	public function postProcess()
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts($request));
+		$viewer = $this->getViewer();
+		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$viewer->view('DebugApi.tpl', $this->moduleName);
 			\App\Session::set('debugApi', false);
 		}
-		$viewer->view($this->postProcessTplName($request), $this->moduleName);
+		$viewer->view($this->postProcessTplName(), $this->moduleName);
 	}
 
 	/**
 	 * Scripts.
 	 *
-	 * @param \App\Request $request
-	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(Request $request)
+	public function getFooterScripts()
 	{
-		$moduleName = $this->getModuleNameFromRequest($request);
-		$action = $request->getAction();
+		$moduleName = $this->getModuleNameFromRequest();
+		$action = $this->request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
 		$fileName = "~libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
 		if (!file_exists($fileName)) {
@@ -280,28 +267,26 @@ abstract class View extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function postProcessAjax(Request $request)
+	public function postProcessAjax()
 	{
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function preProcessAjax(Request $request)
+	public function preProcessAjax()
 	{
 	}
 
 	/**
 	 * Get module name from request.
 	 *
-	 * @param Request $request
-	 *
 	 * @return string
 	 */
-	private function getModuleNameFromRequest(Request $request): string
+	private function getModuleNameFromRequest(): string
 	{
 		if (empty($this->moduleName)) {
-			$this->moduleName = $request->getModule();
+			$this->moduleName = $this->request->getModule();
 		}
 		return $this->moduleName;
 	}
