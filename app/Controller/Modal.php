@@ -23,19 +23,17 @@ abstract class Modal extends View
 
 	public function preProcessAjax()
 	{
-		$viewer = $this->getViewer();
-		$viewer->assign('MODAL_SIZE', $this->getModalSize());
-		$viewer->assign('MODAL_CSS', $this->getModalCss());
-		$viewer->assign('MODAL_JS', $this->getModalJs());
-		$viewer->assign('MODAL_TITLE', $this->getTitle());
-		$viewer->assign('VIEW', $this->request->getAction());
-		$viewer->view('Modal/Header.tpl');
+		$this->viewer->assign('MODAL_SIZE', $this->getModalSize());
+		$this->viewer->assign('MODAL_CSS', $this->getModalCss());
+		$this->viewer->assign('MODAL_JS', $this->getModalJs());
+		$this->viewer->assign('MODAL_TITLE', $this->getTitle());
+		$this->viewer->assign('VIEW', $this->request->getAction());
+		$this->viewer->view('Modal/Header.tpl');
 	}
 
 	public function postProcessAjax()
 	{
-		$viewer = $this->getViewer();
-		$viewer->view('Modal/Footer.tpl');
+		$this->viewer->view('Modal/Footer.tpl');
 	}
 
 	protected function getModalCss()

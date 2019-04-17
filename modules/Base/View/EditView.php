@@ -71,12 +71,11 @@ class EditView extends \App\Controller\View
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
-		$viewer = $this->getViewer();
-		$viewer->assign('RECORD', $recordModel);
-		$viewer->assign('FIELDS', $fields);
-		$viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
-		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->view('EditView.tpl', $moduleName);
+		$this->viewer->assign('RECORD', $recordModel);
+		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
+		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->view('EditView.tpl', $moduleName);
 	}
 
 	/**

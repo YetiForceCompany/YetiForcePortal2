@@ -28,14 +28,13 @@ class ListView extends \App\Controller\View
 	{
 		$this->getListViewModel()->loadRecordsList();
 		$moduleName = $this->request->getModule();
-		$viewer = $this->getViewer($this->request);
-		$viewer->assign('HEADERS', $this->listViewModel->getHeaders());
-		$viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
-		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('COUNT', $this->listViewModel->getCount());
-		$viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
-		$viewer->assign('USER', \App\User::getUser());
-		$viewer->view($this->processTplName(), $moduleName);
+		$this->viewer->assign('HEADERS', $this->listViewModel->getHeaders());
+		$this->viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
+		$this->viewer->assign('MODULE_NAME', $moduleName);
+		$this->viewer->assign('COUNT', $this->listViewModel->getCount());
+		$this->viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
+		$this->viewer->assign('USER', \App\User::getUser());
+		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/**

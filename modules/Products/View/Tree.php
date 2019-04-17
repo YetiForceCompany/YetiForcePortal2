@@ -47,11 +47,10 @@ class Tree extends View\ListView
 			//TODO - validation
 			$this->getListViewModel()->setConditions($serach);
 		}
-		$viewer = $this->getViewer();
-		$viewer->assign('SEARCH_TEXT', '');
-		$viewer->assign('SEARCH', $this->request->get('search'));
-		$viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
-		$viewer->assign(
+		$this->viewer->assign('SEARCH_TEXT', '');
+		$this->viewer->assign('SEARCH', $this->request->get('search'));
+		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
+		$this->viewer->assign(
 			'TREE',
 			TreeModel::getInstance()
 				->setSelectedItems($this->pscategory)

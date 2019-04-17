@@ -9,12 +9,17 @@
 
 namespace YF\Modules\Install\View;
 
+use App\Request;
+
 class Install extends \App\Controller\View
 {
-	public function __construct()
+	use \App\Controller\ExposeMethodTrait;
+
+	public function __construct(Request $request)
 	{
-		$this->exposeMethod('Step1');
-		$this->exposeMethod('Step2');
+		parent::__construct($request);
+		$this->exposeMethod('step1');
+		$this->exposeMethod('step2');
 	}
 
 	public function loginRequired()
@@ -30,41 +35,36 @@ class Install extends \App\Controller\View
 	public function preProcess($display = true)
 	{
 		$module = $this->request->getModule();
-		$viewer = $this->getViewer();
 		$this->setLanguage();
 		parent::preProcess($display);
-		$viewer->view('InstallPreProcess.tpl', $module);
+		$this->viewer->view('InstallPreProcess.tpl', $module);
 	}
 
 	public function process()
 	{
-		$module = $this->request->getModule();
 		$mode = $this->request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
 			return $this->{$mode}();
 		}
-		$this->Step1($this->request);
+		$this->step1($this->request);
 	}
 
-	public function Step1()
+	public function step1()
 	{
 		$module = $this->request->getModule();
-		$viewer = $this->getViewer($this->request);
-		$viewer->view('InstallStep1.tpl', $module);
+		$this->viewer->view('InstallStep1.tpl', $module);
 	}
 
-	public function Step2()
+	public function step2()
 	{
 		$module = $this->request->getModule();
-		$viewer = $this->getViewer();
-		$viewer->view('InstallStep2.tpl', $module);
+		$this->viewer->view('InstallStep2.tpl', $module);
 	}
 
 	public function postProcess($display = true)
 	{
 		$module = $this->request->getModule();
-		$viewer = $this->getViewer();
-		$viewer->view('InstallPostProcess.tpl', $module);
+		$this->viewer->view('InstallPostProcess.tpl', $module);
 		parent::postProcess($display);
 	}
 
@@ -75,31 +75,4 @@ class Install extends \App\Controller\View
 			$userInstance->set('language', $this->request->get('lang'));
 		}
 	}
-
-	/*
-	 * public function getHeaderCss(\App\Request $request)
-	 * {
-	 * $parentScripts = parent::getHeaderCss($request);
-	 * $cssFileNames = [
-	 * 'libraries/Bootstrap/css/bootstrap.css',
-	 * 'libraries/Bootstrap/css/bootstrap-theme.css',
-	 * 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/styles.css',
-	 * ];.
-	 *
-	 * $addScripts = $this->convertScripts($cssFileNames, 'css');
-	 * $parentScripts = array_merge($parentScripts, $addScripts);
-	 * return $parentScripts;
-	 * }
-	 *
-	 * public function getFooterScripts(\App\Request $request)
-	 * {
-	 * $parentScripts = parent::getFooterScripts($request);
-	 * $jsFileNames = [
-	 * 'libraries/Scripts/jquery/jquery.js',
-	 * ];
-	 * $addScripts = $this->convertScripts($jsFileNames, 'js');
-	 * $parentScripts = array_merge($parentScripts, $addScripts);
-	 * return $parentScripts;
-	 * }
-	 */
 }

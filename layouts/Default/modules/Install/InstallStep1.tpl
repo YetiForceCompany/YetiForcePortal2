@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<form action="index.php?module=Install&view=Install" method="POST" name="step1">
-		<input type="hidden" name="mode" value="Step2"/>
+		<input type="hidden" name="mode" value="step2"/>
 		<div class="row">
 			<div class="col-md-9">
 				<h4>{\App\Language::translate('LBL_WELCOME', $MODULE_NAME)}</h4>

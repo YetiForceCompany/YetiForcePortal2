@@ -33,7 +33,6 @@ class Login extends \App\Controller\View
 	public function process()
 	{
 		$module = $this->request->getModule();
-		$viewer = $this->getViewer($this->request);
-		$viewer->view('Login.tpl', $module);
+		$this->viewer->view('Login.tpl', $module);
 	}
 }

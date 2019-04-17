@@ -25,6 +25,11 @@ abstract class View extends Base
 	{
 		parent::__construct($request);
 		$this->moduleName = $request->getModule();
+		$this->viewer = new \App\Viewer();
+		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
+		$this->viewer->assign('VIEW', $this->request->get('view'));
+		$this->viewer->assign('USER', \App\User::getUser());
+		$this->viewer->assign('ACTION_NAME', $this->request->getAction());
 	}
 
 	public function checkPermission()
@@ -40,33 +45,14 @@ abstract class View extends Base
 
 	public function preProcess($display = true)
 	{
-		$viewer = $this->getViewer();
-		$viewer->assign('PAGETITLE', $this->getPageTitle());
-		$viewer->assign('STYLES', $this->getHeaderCss());
-		$viewer->assign('LANGUAGE', \App\Language::getLanguage());
-		$viewer->assign('LANG', \App\Language::getShortLanguageName());
-		$viewer->assign('USER', \App\User::getUser());
+		$this->viewer->assign('PAGETITLE', $this->getPageTitle());
+		$this->viewer->assign('STYLES', $this->getHeaderCss());
+		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
+		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());
+		$this->viewer->assign('USER', \App\User::getUser());
 		if ($display) {
 			$this->preProcessDisplay();
 		}
-	}
-
-	/**
-	 * Get viewer.
-	 *
-	 * @return \App\Viewer
-	 */
-	public function getViewer()
-	{
-		if (!$this->viewer) {
-			$this->viewer = new \App\Viewer();
-			$userInstance = \App\User::getUser();
-			$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
-			$this->viewer->assign('VIEW', $this->request->get('view'));
-			$this->viewer->assign('USER', $userInstance);
-			$this->viewer->assign('ACTION_NAME', $this->request->getAction());
-		}
-		return $this->viewer;
 	}
 
 	public function getPageTitle()
@@ -151,12 +137,11 @@ abstract class View extends Base
 
 	protected function preProcessDisplay()
 	{
-		$viewer = $this->getViewer();
 		if (\App\Session::has('systemError')) {
-			$viewer->assign('ERRORS', \App\Session::get('systemError'));
+			$this->viewer->assign('ERRORS', \App\Session::get('systemError'));
 			unset($_SESSION['systemError']);
 		}
-		$viewer->view($this->preProcessTplName(), $this->moduleName);
+		$this->viewer->view($this->preProcessTplName(), $this->moduleName);
 	}
 
 	/**
@@ -194,14 +179,13 @@ abstract class View extends Base
 	 */
 	public function postProcess()
 	{
-		$viewer = $this->getViewer();
-		$viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
+		$this->viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
-			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
-			$viewer->view('DebugApi.tpl', $this->moduleName);
+			$this->viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
+			$this->viewer->view('DebugApi.tpl', $this->moduleName);
 			\App\Session::set('debugApi', false);
 		}
-		$viewer->view($this->postProcessTplName(), $this->moduleName);
+		$this->viewer->view($this->postProcessTplName(), $this->moduleName);
 	}
 
 	/**

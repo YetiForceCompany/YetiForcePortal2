@@ -56,13 +56,12 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-		$viewer = $this->getViewer();
-		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
-		$viewer->assign('RECORD', $recordModel);
-		$viewer->assign('FIELDS', $fields);
-		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->assign('INVENTORY_FIELDS', $inventoryFields);
-		$viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
-		$viewer->view('Detail/DetailView.tpl', $moduleName);
+		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
+		$this->viewer->assign('RECORD', $recordModel);
+		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
+		$this->viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
+		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }
