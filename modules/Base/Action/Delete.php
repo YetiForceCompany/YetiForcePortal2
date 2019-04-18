@@ -16,30 +16,26 @@ class Delete extends \App\Controller\Action
 	/**
 	 * {@inheritdoc}
 	 */
-	public function checkPermission(\App\Request $request)
+	public function checkPermission()
 	{
-		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), 'Delete')) {
+		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'Delete')) {
 			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 	}
 
 	/**
-	 * Process.
-	 *
-	 * @param \App\Request $request
-	 *
-	 * @return mixed
+	 * {@inheritdoc}
 	 */
-	public function process(\App\Request $request)
+	public function process()
 	{
-		$module = $request->getModule();
-		$record = $request->getByType('record', Purifier::INTEGER);
+		$module = $this->request->getModule();
+		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$result = false;
 		if ($record) {
 			$api = \App\Api::getInstance();
 			$result = $api->call($module . '/Record/' . $record, [], 'delete');
 		}
-		if ($request->isAjax()) {
+		if ($this->request->isAjax()) {
 			$response = new \App\Response();
 			$response->setResult($result);
 			$response->emit();

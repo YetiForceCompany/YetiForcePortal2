@@ -48,11 +48,9 @@ abstract class Base
 	/**
 	 * Main action.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function process(Request $request);
+	abstract public function process();
 
 	/**
 	 * Validates request. Checks type of request.
@@ -64,38 +62,30 @@ abstract class Base
 	/**
 	 * Action invoke before process.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function preProcess(Request $request);
+	abstract public function preProcess();
 
 	/**
 	 * Action invoke after process.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function postProcess(Request $request);
+	abstract public function postProcess();
 
 	/**
 	 * Action invoke before process for AJAX.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function preProcessAjax(Request $request);
+	abstract public function preProcessAjax();
 
 	/**
 	 * Action invoke after process for AJAX.
 	 *
-	 * @param Request $request
-	 *
 	 * @return void
 	 */
-	abstract public function postProcessAjax(Request $request);
+	abstract public function postProcessAjax();
 
 	/**
 	 * Error handler.

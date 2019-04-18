@@ -11,9 +11,9 @@ namespace App\Controller;
 
 abstract class Modal extends View
 {
-	protected function getTitle(\App\Request $request)
+	protected function getTitle()
 	{
-		return \App\Language::translateModule($request->getModule());
+		return \App\Language::translateModule($this->request->getModule());
 	}
 
 	protected function getModalSize()
@@ -21,38 +21,33 @@ abstract class Modal extends View
 		return 'modal-lg';
 	}
 
-	public function preProcessAjax(\App\Request $request)
+	public function preProcessAjax()
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->assign('MODAL_SIZE', $this->getModalSize($request));
-		$viewer->assign('MODAL_CSS', $this->getModalCss($request));
-		$viewer->assign('MODAL_JS', $this->getModalJs($request));
-		$viewer->assign('MODAL_TITLE', $this->getTitle($request));
-		$viewer->assign('VIEW', $request->getAction());
-		$viewer->view('Modal/Header.tpl');
+		$this->viewer->assign('MODAL_SIZE', $this->getModalSize());
+		$this->viewer->assign('MODAL_CSS', $this->getModalCss());
+		$this->viewer->assign('MODAL_JS', $this->getModalJs());
+		$this->viewer->assign('MODAL_TITLE', $this->getTitle());
+		$this->viewer->assign('VIEW', $this->request->getAction());
+		$this->viewer->view('Modal/Header.tpl');
 	}
 
-	public function postProcessAjax(\App\Request $request)
+	public function postProcessAjax()
 	{
-		$viewer = $this->getViewer($request);
-		$viewer->view('Modal/Footer.tpl');
+		$this->viewer->view('Modal/Footer.tpl');
 	}
 
-	protected function getModalCss(\App\Request $request)
+	protected function getModalCss()
 	{
-		$cssFileNames = [
-		];
-
+		$cssFileNames = [];
 		return $this->convertScripts($cssFileNames, 'css');
 	}
 
-	protected function getModalJs(\App\Request $request)
+	protected function getModalJs()
 	{
-		$action = $request->getAction();
+		$action = $this->request->getAction();
 		$jsFileNames = [
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 		];
-
 		return $this->convertScripts($jsFileNames, 'js');
 	}
 }

@@ -13,7 +13,7 @@ use App\Purifier;
 
 class Login extends \App\Controller\Action
 {
-	public function checkPermission(\App\Request $request)
+	public function checkPermission()
 	{
 		return true;
 	}
@@ -23,12 +23,12 @@ class Login extends \App\Controller\Action
 		return false;
 	}
 
-	public function process(\App\Request $request)
+	public function process()
 	{
-		$email = $request->getByType('email', Purifier::TEXT);
-		$password = $request->getRaw('password');
+		$email = $this->request->getByType('email', Purifier::TEXT);
+		$password = $this->request->getRaw('password');
 		$userInstance = \App\User::getUser();
-		$userInstance->set('language', $request->getByType('language', Purifier::STANDARD));
+		$userInstance->set('language', $this->request->getByType('language', Purifier::STANDARD));
 		$userInstance->login($email, $password);
 		header('Location: ' . \App\Config::$portalUrl);
 	}

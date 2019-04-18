@@ -67,6 +67,13 @@ class Config
 	public static $allowLanguageSelection = false;
 
 	/**
+	 * The number of items on the pageUndocumented variable.
+	 *
+	 * @var int
+	 */
+	public static $itemsPrePage = 12;
+
+	/**
 	 * Available record display options in listview for datatable element - [[values],[labels]].
 	 *
 	 * @var array

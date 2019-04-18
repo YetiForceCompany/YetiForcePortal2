@@ -13,14 +13,20 @@ use Install\Model;
 
 class Install extends \App\Controller\Action
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function loginRequired()
 	{
 		return false;
 	}
 
-	public function process(\App\Request $request)
+	/**
+	 * {@inheritdoc}
+	 */
+	public function process()
 	{
-		$install = Model\Install::getInstance($request->getModule());
-		$install->save($request);
+		$install = Model\Install::getInstance($this->request->getModule());
+		$install->save($this->request);
 	}
 }

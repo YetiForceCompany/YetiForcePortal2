@@ -11,9 +11,9 @@ namespace App\Controller;
 
 abstract class Action extends Base
 {
-	public function checkPermission(\App\Request $request)
+	public function checkPermission()
 	{
-		$moduleName = $request->getModule();
+		$moduleName = $this->request->getModule();
 		$userInstance = \App\User::getUser();
 		$modulePermission = $userInstance->isPermitted($moduleName);
 		if (!$modulePermission) {
@@ -25,28 +25,28 @@ abstract class Action extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function preProcess(\App\Request $request)
+	public function preProcess()
 	{
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function postProcess(\App\Request $request)
+	public function postProcess()
 	{
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function postProcessAjax(\App\Request $request)
+	public function postProcessAjax()
 	{
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function preProcessAjax(\App\Request $request)
+	public function preProcessAjax()
 	{
 	}
 

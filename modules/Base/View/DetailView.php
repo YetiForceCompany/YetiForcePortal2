@@ -12,7 +12,6 @@ namespace YF\Modules\Base\View;
 
 use App\Api;
 use App\Purifier;
-use App\Request;
 use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\InventoryField;
 use YF\Modules\Base\Model\Record;
@@ -20,14 +19,12 @@ use YF\Modules\Base\Model\Record;
 class DetailView extends \App\Controller\View
 {
 	/**
-	 * Process.
-	 *
-	 * @param \App\Request $request
+	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
-		$moduleName = $request->getModule();
-		$record = $request->getByType('record', Purifier::INTEGER);
+		$moduleName = $this->request->getModule();
+		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
 
 		$recordDetail = $api->call("$moduleName/Record/$record");
@@ -59,14 +56,12 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-		$viewer = $this->getViewer($request);
-		$viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
-		$viewer->assign('RECORD', $recordModel);
-		$viewer->assign('FIELDS', $fields);
-		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->assign('INVENTORY_FIELDS', $inventoryFields);
-		$viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
-
-		$viewer->view('Detail/DetailView.tpl', $moduleName);
+		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
+		$this->viewer->assign('RECORD', $recordModel);
+		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
+		$this->viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
+		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }

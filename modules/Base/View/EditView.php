@@ -10,7 +10,6 @@
 namespace YF\Modules\Base\View;
 
 use App\Api;
-use App\Request;
 use App\Purifier;
 
 class EditView extends \App\Controller\View
@@ -18,31 +17,29 @@ class EditView extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
-	public function checkPermission(Request $request)
+	public function checkPermission()
 	{
-		parent::checkPermission($request);
+		parent::checkPermission($this->request);
 		$actionName = 'EditView';
-		if ($request->isEmpty('record')) {
+		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';
 		}
-		if (!\YF\Modules\Base\Model\Module::isPermitted($request->getModule(), $actionName)) {
+		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
 			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 	}
 
 	/**
-	 * Process.
-	 *
-	 * @param \Request $request
+	 * {@inheritdoc}
 	 */
-	public function process(Request $request)
+	public function process()
 	{
-		$moduleName = $request->getModule();
+		$moduleName = $this->request->getModule();
 		$api = Api::getInstance();
 
 		$recordDetail = [];
-		if (!$request->isEmpty('record')) {
-			$record = $request->getByType('record', Purifier::INTEGER);
+		if (!$this->request->isEmpty('record')) {
+			$record = $this->request->getByType('record', Purifier::INTEGER);
 			$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record", [], 'get');
 		}
 		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
@@ -74,25 +71,19 @@ class EditView extends \App\Controller\View
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
-		$viewer = $this->getViewer($request);
-		$viewer->assign('RECORD', $recordModel);
-		$viewer->assign('FIELDS', $fields);
-		$viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
-		$viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$viewer->view('EditView.tpl', $moduleName);
+		$this->viewer->assign('RECORD', $recordModel);
+		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
+		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->view('EditView.tpl', $moduleName);
 	}
 
 	/**
-	 * Scripts.
-	 *
-	 * @param \App\Request $request
-	 *
-	 * @return \App\Script[]
+	 * {@inheritdoc}
 	 */
-	public function getFooterScripts(Request $request)
+	public function getFooterScripts()
 	{
-		$headerScriptInstances = parent::getFooterScripts($request);
-		$moduleName = $request->getModule();
+		$headerScriptInstances = parent::getFooterScripts();
 		$jsFileNames = [
 			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
 		];
