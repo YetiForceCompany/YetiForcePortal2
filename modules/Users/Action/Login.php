@@ -13,16 +13,25 @@ use App\Purifier;
 
 class Login extends \App\Controller\Action
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function checkPermission()
 	{
 		return true;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function loginRequired()
 	{
 		return false;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function process()
 	{
 		$email = $this->request->getByType('email', Purifier::TEXT);

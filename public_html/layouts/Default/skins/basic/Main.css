@@ -1,87 +1,175 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.imageHolder {
+  margin: 0 auto;
+  background-position: center;
+  padding: 10px 0;
+  width: 70%;
+}
+
+.blockProgressContainer.imageHolder {
+  padding: 40px 0;
+  background: radial-gradient(#fff 55%, transparent 70%);
+}
+
+.sk-cube-grid {
+  width: 45px;
+  height: 45px;
+  margin: 10px auto;
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #007bff;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .u-remove-main-padding {
   margin-left: -15px;
-  margin-right: -15px; }
+  margin-right: -15px;
+}
 
 .u-add-main-padding {
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+}
 
 .noPadding {
-  padding: 0; }
+  padding: 0;
+}
 
 .marginLRZero {
   margin-left: 0 !important;
-  margin-right: 0 !important; }
+  margin-right: 0 !important;
+}
 
 .showMainMenu {
-  right: 0px; }
+  right: 0px;
+}
 
 .table-responsive {
   overflow-x: auto;
-  display: block; }
+  display: block;
+}
 
 .tableCell {
-  display: table-cell; }
+  display: table-cell;
+}
 
 .borderRight {
-  border-right: 1px solid #ddd; }
+  border-right: 1px solid #ddd;
+}
 
 .borderLeft {
-  border-left: 1px solid #ddd; }
+  border-left: 1px solid #ddd;
+}
 
 .borderTop {
-  border-top: 1px solid #ddd; }
+  border-top: 1px solid #ddd;
+}
 
 .noFloat {
-  float: none; }
+  float: none;
+}
 
 .border {
-  border: 1px solid #ddd; }
+  border: 1px solid #ddd;
+}
 
 .noSpaces {
   padding: 0 !important;
-  margin: 0 !important; }
+  margin: 0 !important;
+}
 
 .redColor {
-  color: red; }
+  color: red;
+}
 
 .paddingLeft5px {
-  padding-left: 5px; }
+  padding-left: 5px;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
-  line-height: 34px; }
+  line-height: 34px;
+}
 
 .chosen-container-multi .chosen-choices li.search-choice {
   line-height: 20px;
-  margin: 3px 5px 3px; }
-  .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
-    top: 8px; }
+  margin: 3px 5px 3px;
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+  top: 8px;
+}
 
 .referenceGroup .referenceModulesListGroup .chosen-container {
   min-width: 100px !important;
   text-align: left;
-  height: 32px; }
-  .referenceGroup .referenceModulesListGroup .chosen-container .chosen-single {
-    border: 0;
-    height: 32px;
-    border-radius: 0; }
+  height: 32px;
+}
+.referenceGroup .referenceModulesListGroup .chosen-container .chosen-single {
+  border: 0;
+  height: 32px;
+  border-radius: 0;
+}
 
 .quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
-  min-width: 80px !important; }
+  min-width: 80px !important;
+}
 
 .chosen-container-single .chosen-single {
-  background: #fff; }
+  background: #fff;
+}
 
 .input-group > .input-group-prepend .select2-selection--single {
   border-right: unset !important;
-  border-radius: 0.25rem 0 0 0.25rem !important; }
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
 .input-group .select2-selection--single {
   border-top-right-radius: 0.25rem !important;
-  border-bottom-right-radius: 0.25rem !important; }
+  border-bottom-right-radius: 0.25rem !important;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 @media only screen and (max-width: 992px) {
@@ -89,17 +177,24 @@
     text-align: left;
     margin-bottom: 0;
     padding-bottom: 0;
-    min-height: 1px; }
+    min-height: 1px;
+  }
   .blockContainer .blockContent .fieldValue {
-    min-height: 1px; } }
+    min-height: 1px;
+  }
+}
 @media only screen and (min-width: 992px) {
   .blockContainer .blockContent .fieldLabel {
-    text-align: right; } }
+    text-align: right;
+  }
+}
 #EditView .blockContainer .blockContent .fieldLabel label {
-  padding-top: 8px; }
+  padding-top: 8px;
+}
 
 .blockContainer .blockContent .fieldLabel label {
-  font-size: 12px !important; }
+  font-size: 12px !important;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 html, body {
@@ -107,13 +202,16 @@ html, body {
   width: 100%;
   display: block;
   background: #fff;
-  padding: 0 !important; }
+  padding: 0 !important;
+}
 
 .bodyContainer {
-  background-color: #eee; }
+  background-color: #eee;
+}
 
 img {
-  max-width: 100%; }
+  max-width: 100%;
+}
 
 .mainPage {
   height: 100%;
@@ -121,7 +219,8 @@ img {
   left: 0;
   right: 0;
   margin-left: 50px;
-  background: #fff; }
+  background: #fff;
+}
 
 .mainBody {
   background: #fff;
@@ -133,7 +232,8 @@ img {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
+  transition: all 0.5s ease;
+}
 
 .bodyContent {
   position: relative;
@@ -141,17 +241,22 @@ img {
   oveflow-x: hidden;
   width: 100%;
   background: #fff;
-  padding-bottom: 33px; }
+  padding-bottom: 33px;
+}
 
 @media only screen and (max-width: 768px) {
   .bodyContent {
-    padding-left: 10px; }
+    padding-left: 10px;
+  }
 
   .mainPage {
-    margin-left: 0px; } }
+    margin-left: 0px;
+  }
+}
 hr {
   margin-top: 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .bodyHeader {
@@ -164,42 +269,55 @@ hr {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
-  .bodyHeader .leftHeader {
-    background-color: #969696;
-    color: #fff;
-    height: 50px; }
-  .bodyHeader .rightHeader {
-    background-color: #696969;
-    color: #fff;
-    height: 40px; }
-  .bodyHeader .moduleIcon {
-    max-width: 30px;
-    margin: 5px 10px 0 0; }
-  .bodyHeader .leftSide {
-    padding-left: 10px;
-    padding-top: 7px;
-    width: 450px; }
-  .bodyHeader .rightSide {
-    position: relative;
-    min-height: 1px;
-    float: right; }
-    .bodyHeader .rightSide img {
-      height: 22px;
-      margin: 0; }
-    .bodyHeader .rightSide .rightHeaderBtn {
-      padding: 7px 5px; }
-      .bodyHeader .rightSide .rightHeaderBtn a {
-        line-height: 20px;
-        font-size: 18px; }
+  transition: all 0.5s ease;
+}
+.bodyHeader .leftHeader {
+  background-color: #969696;
+  color: #fff;
+  height: 50px;
+}
+.bodyHeader .rightHeader {
+  background-color: #696969;
+  color: #fff;
+  height: 40px;
+}
+.bodyHeader .moduleIcon {
+  max-width: 30px;
+  margin: 5px 10px 0 0;
+}
+.bodyHeader .leftSide {
+  padding-left: 10px;
+  padding-top: 7px;
+  width: 450px;
+}
+.bodyHeader .rightSide {
+  position: relative;
+  min-height: 1px;
+  float: right;
+}
+.bodyHeader .rightSide img {
+  height: 22px;
+  margin: 0;
+}
+.bodyHeader .rightSide .rightHeaderBtn {
+  padding: 7px 5px;
+}
+.bodyHeader .rightSide .rightHeaderBtn a {
+  line-height: 20px;
+  font-size: 18px;
+}
 
 @media only screen and (max-width: 768px) {
   .bodyHeader {
-    left: 0px; }
-    .bodyHeader .leftSide {
-      width: auto; } }
+    left: 0px;
+  }
+  .bodyHeader .leftSide {
+    width: auto;
+  }
+}
 .historyList {
-  overflow: auto; }
+  overflow: auto;
+}
 
 .selectorHistory {
   font-weight: 900 !important;
@@ -211,23 +329,29 @@ hr {
   line-height: 1.5;
   color: #111;
   white-space: nowrap;
-  cursor: default; }
+  cursor: default;
+}
 
 .historyHour {
-  font-weight: 600 !important; }
+  font-weight: 600 !important;
+}
 
 .historyList a {
   color: #222 !important;
-  font-size: 15px !important; }
+  font-size: 15px !important;
+}
 
 .clearHistory {
   font-weight: 900 !important;
-  text-align: center; }
+  text-align: center;
+}
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
-  font-size: 15px; }
-  .widget_header .breadCrumbs .breadcrumbsLinks a {
-    color: #000; }
+  font-size: 15px;
+}
+.widget_header .breadCrumbs .breadcrumbsLinks a {
+  color: #000;
+}
 
 .actionMenu {
   position: fixed;
@@ -238,26 +362,33 @@ hr {
   border-radius: 5px;
   border: 1px solid #eee;
   padding: 5px;
-  display: none; }
-  .actionMenu > div {
-    position: relative;
-    width: 100%;
-    padding-bottom: 5px; }
-  .actionMenu img {
-    height: 19px; }
-  .actionMenu .iconContainer {
-    padding-left: 15px; }
-  .actionMenu .labelContainer {
-    padding-top: 5px; }
-  .actionMenu .commonActionsButtonDropDown, .actionMenu .historyList {
-    position: fixed;
-    top: 50px;
-    left: 5px;
-    right: 5px;
-    bottom: 17px; }
+  display: none;
+}
+.actionMenu > div {
+  position: relative;
+  width: 100%;
+  padding-bottom: 5px;
+}
+.actionMenu img {
+  height: 19px;
+}
+.actionMenu .iconContainer {
+  padding-left: 15px;
+}
+.actionMenu .labelContainer {
+  padding-top: 5px;
+}
+.actionMenu .commonActionsButtonDropDown, .actionMenu .historyList {
+  position: fixed;
+  top: 50px;
+  left: 5px;
+  right: 5px;
+  bottom: 17px;
+}
 
 .showActionMenu {
-  display: block; }
+  display: block;
+}
 
 .searchMenu {
   position: fixed;
@@ -272,23 +403,28 @@ hr {
   -webkit-transition: right 0.5s ease;
   -moz-transition: right 0.5s ease;
   -o-transition: right 0.5s ease;
-  transition: right 0.5s ease; }
+  transition: right 0.5s ease;
+}
 
 .showSearchMenu {
-  right: 0px; }
+  right: 0px;
+}
 
 .widget_header {
   background: #eee;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-bottom: 10px;
-  position: relative; }
-  .widget_header h2 {
-    margin-bottom: 7px;
-    margin-top: 7px; }
+  position: relative;
+}
+.widget_header h2 {
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
 
 .breadcrumbsLinks a {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .footerContainer {
@@ -297,28 +433,37 @@ hr {
   bottom: 0px;
   left: 0px;
   z-index: 1500;
-  background: #404952; }
+  background: #404952;
+}
 
 .footer {
-  text-align: center; }
-  .footer p {
-    color: #ffffff;
-    padding: 0.0625rem 0;
-    font-size: 0.625rem; }
+  text-align: center;
+}
+.footer p {
+  color: #ffffff;
+  padding: 0.0625rem 0;
+  font-size: 0.625rem;
+}
 
 @media only screen and (max-width: 768px) {
   .footerContainer {
-    height: 17px; } }
+    height: 17px;
+  }
+}
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .userDetailsContainer .row {
-  padding: 5px; }
+  padding: 5px;
+}
 .userDetailsContainer .logo {
   margin: 5px;
-  height: 40px; }
+  height: 40px;
+}
 .userDetailsContainer .userDetails .name {
-  color: #fff; }
+  color: #fff;
+}
 .userDetailsContainer .userDetails .userName {
-  margin-top: 5px; }
+  margin-top: 5px;
+}
 
 .leftPanel {
   position: fixed;
@@ -330,64 +475,79 @@ hr {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  height: calc(100% - 50px); }
-  .leftPanel:hover {
-    left: 0px; }
-    .leftPanel:hover + .mainBody {
-      left: 250px !important; }
-      .leftPanel:hover + .mainBody .bodyHeader {
-        left: 300px; }
-  .leftPanel .userDetailsContainer {
-    height: 50px;
-    background: #4979aa; }
-  .leftPanel .menuContainer {
-    background: #4a5364;
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    top: 50px; }
-    .leftPanel .menuContainer .moduleList {
-      overflow: auto;
-      height: calc(100% - 33px); }
-      .leftPanel .menuContainer .moduleList::-webkit-scrollbar {
-        display: none; }
-      .leftPanel .menuContainer .moduleList > li {
-        width: 100%;
-        height: 40px;
-        list-style: none;
-        position: static;
-        color: #fff; }
-        .leftPanel .menuContainer .moduleList > li > a {
-          text-decoration: none;
-          width: 100%;
-          display: inline-flex;
-          color: #fff; }
-          .leftPanel .menuContainer .moduleList > li > a:hover {
-            background: #fff;
-            color: #4a5364; }
-          .leftPanel .menuContainer .moduleList > li > a > .iconContainer {
-            width: 50px;
-            height: 40px;
-            margin: 0px;
-            padding: 0px;
-            display: table; }
-            .leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
-              padding-left: 15px;
-              display: table-cell;
-              vertical-align: middle; }
-              .leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
-                font-size: 20px; }
-          .leftPanel .menuContainer .moduleList > li > a > .labelContainer {
-            width: 250px;
-            height: 40px;
-            margin: 0px;
-            padding: 0px;
-            display: table; }
+  height: calc(100% - 50px);
+}
+.leftPanel:hover {
+  left: 0px;
+}
+.leftPanel:hover + .mainBody {
+  left: 250px !important;
+}
+.leftPanel:hover + .mainBody .bodyHeader {
+  left: 300px;
+}
+.leftPanel .userDetailsContainer {
+  height: 50px;
+  background: #4979aa;
+}
+.leftPanel .menuContainer {
+  background: #4a5364;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+.leftPanel .menuContainer .moduleList {
+  overflow: auto;
+  height: calc(100% - 33px);
+}
+.leftPanel .menuContainer .moduleList::-webkit-scrollbar {
+  display: none;
+}
+.leftPanel .menuContainer .moduleList > li {
+  width: 100%;
+  list-style: none;
+  position: static;
+  color: #fff;
+}
+.leftPanel .menuContainer .moduleList > li > a {
+  text-decoration: none;
+  width: 100%;
+  display: inline-flex;
+  color: #fff;
+}
+.leftPanel .menuContainer .moduleList > li > a:hover {
+  background: #fff;
+  color: #4a5364;
+}
+.leftPanel .menuContainer .moduleList > li > a > .iconContainer {
+  width: 50px;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+  display: table;
+}
+.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
+  padding-left: 15px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
+  font-size: 20px;
+}
+.leftPanel .menuContainer .moduleList > li > a > .labelContainer {
+  width: 250px;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+  display: table;
+}
 
 .labelContainer .labelValue {
   display: table-cell;
   vertical-align: middle;
-  line-height: 18px; }
+  line-height: 18px;
+}
 
 .mobileLeftPanel {
   position: fixed;
@@ -399,110 +559,164 @@ hr {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  height: calc(100% - 50px); }
-  .mobileLeftPanel .userDetailsContainer {
-    height: 50px;
-    background: #4979aa; }
-  .mobileLeftPanel .menuContainer {
-    background: #3f3f3f;
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    top: 50px; }
-    .mobileLeftPanel .menuContainer .moduleList {
-      overflow: auto;
-      height: calc(100% - 67px); }
-      .mobileLeftPanel .menuContainer .moduleList::-webkit-scrollbar {
-        display: none; }
-      .mobileLeftPanel .menuContainer .moduleList > li {
-        width: 100%;
-        height: 30px;
-        list-style: none;
-        position: static;
-        color: #fff; }
-        .mobileLeftPanel .menuContainer .moduleList > li > a {
-          text-decoration: none;
-          width: 100%;
-          display: inline-flex;
-          color: #fff; }
-          .mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer {
-            width: 50px;
-            height: 30px;
-            margin: 0px;
-            padding: 0px;
-            display: table; }
-            .mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
-              padding-left: 15px;
-              display: table-cell;
-              vertical-align: middle; }
-              .mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
-                font-size: 15px; }
-          .mobileLeftPanel .menuContainer .moduleList > li > a > .labelContainer {
-            width: 250px;
-            height: 30px;
-            margin: 0px;
-            padding: 0px;
-            display: table; }
+  height: calc(100% - 50px);
+}
+.mobileLeftPanel .userDetailsContainer {
+  height: 50px;
+  background: #4979aa;
+}
+.mobileLeftPanel .menuContainer {
+  background: #3f3f3f;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+.mobileLeftPanel .menuContainer .moduleList {
+  overflow: auto;
+  height: calc(100% - 67px);
+}
+.mobileLeftPanel .menuContainer .moduleList::-webkit-scrollbar {
+  display: none;
+}
+.mobileLeftPanel .menuContainer .moduleList > li {
+  width: 100%;
+  height: 30px;
+  list-style: none;
+  position: static;
+  color: #fff;
+}
+.mobileLeftPanel .menuContainer .moduleList > li > a {
+  text-decoration: none;
+  width: 100%;
+  display: inline-flex;
+  color: #fff;
+}
+.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer {
+  width: 50px;
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+  display: table;
+}
+.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
+  padding-left: 15px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
+  font-size: 15px;
+}
+.mobileLeftPanel .menuContainer .moduleList > li > a > .labelContainer {
+  width: 250px;
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+  display: table;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .editFields {
   padding-bottom: 5px;
-  padding-top: 5px; }
+  padding-top: 5px;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .listViewHeaders {
-  text-transform: capitalize; }
+  text-transform: capitalize;
+}
 
 .listViewEntries {
   background: #fff;
-  font-weight: 400 !important; }
-  .listViewEntries tbody tr {
-    cursor: pointer; }
+  font-weight: 400 !important;
+}
+.listViewEntries tbody tr {
+  cursor: pointer;
+}
 
 table tbody tr:hover td .actions span {
-  opacity: 1; }
+  opacity: 1;
+}
 
 .leftRecordActions {
-  background: inherit; }
-  .leftRecordActions .actions {
-    background: inherit; }
-    .leftRecordActions .actions:hover .toolsAction {
-      visibility: hidden; }
-    .leftRecordActions .actions:hover .actionImages {
-      white-space: nowrap;
-      position: absolute;
-      z-index: 1;
-      display: inline-block !important; }
-    .leftRecordActions .actions .actionImages a {
-      color: inherit; }
-  .leftRecordActions > div {
-    display: inline-block !important; }
+  background: inherit;
+}
+.leftRecordActions .actions {
+  background: inherit;
+}
+.leftRecordActions .actions:hover .toolsAction {
+  visibility: hidden;
+}
+.leftRecordActions .actions:hover .actionImages {
+  white-space: nowrap;
+  position: absolute;
+  z-index: 1;
+  display: inline-block !important;
+}
+.leftRecordActions .actions .actionImages a {
+  color: inherit;
+}
+.leftRecordActions > div {
+  display: inline-block !important;
+}
 
 table.listViewEntries td {
-  vertical-align: middle !important; }
+  vertical-align: middle !important;
+}
 table.dataTable.listViewEntries tbody td {
-  padding: 3px 10px !important; }
+  padding: 3px 10px !important;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .Users_Login img.logo {
   margin: 10px auto;
-  max-height: 200px; }
+  max-height: 200px;
+}
 .Users_Login .loginContainer {
   width: 400px;
   margin-top: 6%;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+}
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .Install_Install .logo {
-  max-height: 100px; }
+  max-height: 100px;
+}
 .Install_Install .container-fluid {
-  margin: 20px; }
+  margin: 20px;
+}
 .Install_Install .main-container {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: 0 0 5px #ccc;
   min-height: 375px;
-  margin-top: 10px; }
+  margin-top: 10px;
+}
+
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.product {
+  height: 300px;
+  width: 400px;
+  border: 1px #eeeeee solid;
+}
+
+.product-image-contener {
+  width: 100px;
+  height: 100px;
+}
+
+.product-image {
+  object-fit: cover;
+}
+.product-image .product-no-image {
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+}
+
+.add-to-cart {
+  background-color: pink;
+}
 
 /*# sourceMappingURL=Main.css.map */

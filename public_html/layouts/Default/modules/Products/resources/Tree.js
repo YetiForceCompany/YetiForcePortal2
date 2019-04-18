@@ -33,6 +33,7 @@ window.Products_Tree_Js = class {
 	}
 	init(container = $(".js-products-container")) {
 		this.container = container;
+		this.treeInstance = $(".js-tree-container");
 		this.registerEvents();
 	}
 	registerEvents() {
