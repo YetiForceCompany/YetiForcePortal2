@@ -11,9 +11,18 @@ namespace App\Controller;
 
 use App\Request;
 
+/**
+ * Controller class for views.
+ */
 abstract class View extends Base
 {
-	protected $viewer = false;
+	/**
+	 * Viewer object.
+	 *
+	 * @var \App\Viewer
+	 */
+	protected $viewer;
+
 	/**
 	 * Module name.
 	 *
@@ -21,6 +30,11 @@ abstract class View extends Base
 	 */
 	protected $moduleName;
 
+	/**
+	 * Construct.
+	 *
+	 * @param Request $request
+	 */
 	public function __construct(Request $request)
 	{
 		parent::__construct($request);
@@ -55,7 +69,12 @@ abstract class View extends Base
 		}
 	}
 
-	public function getPageTitle()
+	/**
+	 * Get page title.
+	 *
+	 * @return string
+	 */
+	public function getPageTitle(): string
 	{
 		$title = '';
 		if ('Login' !== $this->request->get('view') && 'Users' !== $this->moduleName) {
@@ -117,6 +136,7 @@ abstract class View extends Base
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
+			YF_ROOT_WWW . 'libraries/mdbootstrap/css/mdb.min.css',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-chosen/bootstrap-chosen.css',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
@@ -212,11 +232,12 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
 			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
+			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
+			YF_ROOT_WWW . 'libraries/mdbootstrap/js/mdb.min.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
 			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',
 			YF_ROOT_WWW . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
-			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/datatables.net/js/jquery.dataTables.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive/js/dataTables.responsive.js',

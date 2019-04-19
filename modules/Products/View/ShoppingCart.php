@@ -19,22 +19,37 @@ use YF\Modules\Products\Model\CartView;
  */
 class ShoppingCart extends View\ListView
 {
+	const CUSTOM_FIELDS = [
+		'productname',
+		'product_no',
+		'ean',
+		'pscategory',
+		'productcode',
+		'unit_price',
+		'taxes',
+		'imagename',
+		'description'
+	];
+
 	/**
 	 * {@inheritdoc}
 	 */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
-		$this->getListViewModel()->loadRecordsList();
+		$this->getListViewModel()
+			->setRawData(true)
+			->setCustomFields(static::CUSTOM_FIELDS)
+			->loadRecordsList();
 		$this->viewer->assign('SEARCH_TEXT', '');
 		$this->viewer->assign('SEARCH', $this->request->get('search'));
 		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'ShoppingCart/Summary.tpl');
 		$this->viewer->assign('SHOPPING_CART_VIEW', true);
-		$this->viewer->assign('HEADERS', $this->listViewModel->getHeaders());
-		$this->viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
+		$this->viewer->assign('HEADERS', $this->getListViewModel()->getHeaders());
+		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
 		$this->viewer->assign('MODULE_NAME', $moduleName);
-		$this->viewer->assign('COUNT', $this->listViewModel->getCount());
-		$this->viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
+		$this->viewer->assign('COUNT', $this->getListViewModel()->getCount());
+		$this->viewer->assign('LIST_VIEW_MODEL', $this->getListViewModel());
 		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
 		$this->viewer->view($this->processTplName(), $moduleName);
@@ -67,7 +82,7 @@ class ShoppingCart extends View\ListView
 	 */
 	protected function processTplName(): string
 	{
-		return 'Tree/Tree.tpl';
+		return 'ShoppingCart/ShoppingCart.tpl';
 	}
 
 	/**

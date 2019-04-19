@@ -48,7 +48,7 @@ class ListView extends \App\Controller\View
 	/**
 	 * Get list view model.
 	 *
-	 * @return self
+	 * @return \YF\Modules\Base\Model\ListView
 	 */
 	protected function getListViewModel()
 	{

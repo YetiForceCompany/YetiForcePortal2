@@ -1,13 +1,15 @@
 {
-    "php": {
-        "LBL_ADD_TO_CART": "Add to cart",
-        "LBL_SEARCH_PRODUCT": "Search for the product",
-        "LBL_REMOVE_FROM_CART": "Remove from the cart",
-        "LBL_TOTAL_PRICE": "Total price",
-        "LBL_SHIPPING": "Shipping",
-        "LBL_PROCEED_TO_CHECKOUT": "Proceed to checkout",
-        "LBL_INCLUDING_VAT": "including VAT"
-    },
-    "js": {
-    }
-  }
+	"php": {
+		"LBL_ADD_TO_CART": "Add to cart",
+		"LBL_SEARCH_PRODUCT": "Search for the product",
+		"LBL_REMOVE_FROM_CART": "Remove from the cart",
+		"LBL_TOTAL_PRICE": "Total price",
+		"LBL_SHIPPING": "Shipping",
+		"LBL_PROCEED_TO_CHECKOUT": "Proceed to checkout",
+		"LBL_INCLUDING_VAT": "including VAT",
+		"LBL_VIEW_TREE": "Products",
+		"LBL_SHIPPING_CART": "Shipping cart",
+		"LBL_VIEW_SHOPPINGCART": "Shipping cart"
+	},
+	"js": {}
+}
