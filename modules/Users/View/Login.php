@@ -14,7 +14,7 @@ class Login extends \App\Controller\View
 	/**
 	 * {@inheritdoc}
 	 */
-	public function loginRequired()
+	public function loginRequired(): bool
 	{
 		return false;
 	}

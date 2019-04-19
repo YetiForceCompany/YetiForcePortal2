@@ -3,7 +3,7 @@
     <div class="mb-3">
         {include file=\App\Resources::templatePath("Tree/Search.tpl", $MODULE_NAME)}
     </div>
-    <div class="tpl-Products-Tree-Category border border-secondary rounded p-2">
+    <div class="tpl-Products-Tree-Category product-border p-2">
         {include file=\App\Resources::templatePath("Tree.tpl", $MODULE_NAME)}
     </div>
 {/strip}

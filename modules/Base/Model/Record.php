@@ -89,19 +89,32 @@ class Record extends \App\BaseModel
 	 *
 	 * @return array
 	 */
-	public function getRawData()
+	public function getRawData(): array
 	{
-		return isset($this->valueMap['rawValue']) ? $this->valueMap['rawValue'] : [];
+		return isset($this->valueMap['rawData']) ? $this->valueMap['rawData'] : [];
+	}
+
+	/**
+	 * Set raw data.
+	 *
+	 * @param array $rawData
+	 *
+	 * @return void
+	 */
+	public function setRawData(array $rawData)
+	{
+		$this->valueMap['rawData'] = $rawData;
+		return $this;
 	}
 
 	/**
 	 * Function to get the raw value for a given key.
 	 *
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @return mixed
 	 */
-	public function getRawValue($key)
+	public function getRawValue(string $key)
 	{
 		return isset($this->valueMap['rawData'][$key]) ? $this->valueMap['rawData'][$key] : '';
 	}

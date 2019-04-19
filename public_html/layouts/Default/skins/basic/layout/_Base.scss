@@ -1,6 +1,9 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
-html, body {
+$bgPrimary: #f0f0f0 !default;
+
+html,
+body {
 	height: 100%;
 	width: 100%;
 	display: block;
@@ -13,7 +16,7 @@ html, body {
 }
 
 img {
-	max-width: 100%
+	max-width: 100%;
 }
 
 .mainPage {
@@ -22,11 +25,11 @@ img {
 	left: 0;
 	right: 0;
 	margin-left: 50px;
-	background: #fff;
+	background: $bgPrimary;
 }
 
 .mainBody {
-	background: #fff;
+	background: $bgPrimary;
 	position: relative;
 	height: 100%;
 	top: 0;
@@ -43,9 +46,8 @@ img {
 	padding-top: 50px;
 	oveflow-x: hidden;
 	width: 100%;
-	background: #fff;
+	background: $bgPrimary;
 	padding-bottom: 33px;
-
 }
 
 @media only screen and (max-width: 768px) {

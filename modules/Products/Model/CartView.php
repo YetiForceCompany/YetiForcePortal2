@@ -69,14 +69,9 @@ class CartView extends ListViewModel
 	 */
 	public function getRecordsListModel(): array
 	{
-		$this->recordsListModel = [];
-		if (!empty($this->recordsList['records'])) {
-			foreach ($this->recordsList['records'] as $key => $value) {
-				$recordModel = Record::getInstance($this->getModuleName());
-				$recordModel->setData($value)->setId($key);
-				$recordModel->set('amountInShoppingCart', $this->cart->getAmount($key));
-				$this->recordsListModel[$key] = $recordModel;
-			}
+		$this->recordsListModel = parent::getRecordsListModel();
+		foreach ($this->recordsListModel as $key => $recordModel) {
+			$recordModel->set('amountInShoppingCart', $this->cart->getAmount($key));
 		}
 		return $this->recordsListModel;
 	}

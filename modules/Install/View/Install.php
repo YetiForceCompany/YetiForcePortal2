@@ -22,7 +22,7 @@ class Install extends \App\Controller\View
 		$this->exposeMethod('step2');
 	}
 
-	public function loginRequired()
+	public function loginRequired(): bool
 	{
 		return false;
 	}

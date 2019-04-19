@@ -20,6 +20,18 @@ use YF\Modules\Products\Model\Tree as TreeModel;
  */
 class Tree extends View\ListView
 {
+	const CUSTOM_FIELDS = [
+		'productname',
+		'product_no',
+		'ean',
+		'pscategory',
+		'productcode',
+		'unit_price',
+		'taxes',
+		'imagename',
+		'description'
+	];
+
 	private $pscategory = [];
 
 	/**
@@ -28,18 +40,9 @@ class Tree extends View\ListView
 	public function process()
 	{
 		$this->getListViewModel()
-			->setCustomFields([
-				'productname',
-				'product_no',
-				'ean',
-				'pscategory',
-				'productcode',
-				'unit_price',
-				'taxes',
-				'imagename',
-				'description'
-			])
-			->setLimit(10)
+			->setRawData(true)
+			->setCustomFields(static::CUSTOM_FIELDS)
+			->setLimit(\App\Config::get('itemsPrePage'))
 			->setPage($this->request->get('page', 1));
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
 			$serach = $this->request->get('search');

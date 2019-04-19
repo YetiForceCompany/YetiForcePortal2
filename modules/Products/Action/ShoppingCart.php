@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file contains: shopping cart action class.
  *

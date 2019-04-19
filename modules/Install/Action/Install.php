@@ -16,7 +16,7 @@ class Install extends \App\Controller\Action
 	/**
 	 * {@inheritdoc}
 	 */
-	public function loginRequired()
+	public function loginRequired(): bool
 	{
 		return false;
 	}
