@@ -23,7 +23,7 @@ class BaseModel
 	 *
 	 * @param array $values
 	 */
-	public function __construct($values = [])
+	public function __construct(array $values = [])
 	{
 		$this->valueMap = $values;
 	}
@@ -47,9 +47,9 @@ class BaseModel
 	 * @param $key
 	 * @param $value
 	 *
-	 * @return Core_BaseModel
+	 * @return self
 	 */
-	public function set($key, $value)
+	public function set(string $key, $value)
 	{
 		$this->valueMap[$key] = $value;
 		return $this;
@@ -60,9 +60,9 @@ class BaseModel
 	 *
 	 * @param array (key-value mapping) $values
 	 *
-	 * @return Core_BaseModel
+	 * @return self
 	 */
-	public function setData($values)
+	public function setData(array $values)
 	{
 		$this->valueMap = $values;
 		return $this;
@@ -73,7 +73,7 @@ class BaseModel
 	 *
 	 * @return array (key-value mapping)
 	 */
-	public function getData()
+	public function getData(): array
 	{
 		return $this->valueMap;
 	}
@@ -83,7 +83,7 @@ class BaseModel
 	 *
 	 * @param string $key
 	 */
-	public function has($key)
+	public function has(string $key): bool
 	{
 		return array_key_exists($key, $this->valueMap);
 	}
@@ -91,10 +91,10 @@ class BaseModel
 	/**
 	 * Function to check if the key is empty.
 	 *
-	 * @param type $key
+	 * @param string $key
 	 */
-	public function isEmpty($key)
+	public function isEmpty(string $key): bool
 	{
-		return !isset($this->valueMap[$key]) || empty($this->valueMap[$key]);
+		return empty($this->valueMap[$key]);
 	}
 }
