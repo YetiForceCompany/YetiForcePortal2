@@ -40,7 +40,7 @@ abstract class Base
 		}
 	}
 
-	public function loginRequired()
+	public function loginRequired(): bool
 	{
 		return true;
 	}

@@ -14,20 +14,11 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="float-right">
-					{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
+		<div class="row mb-4">
 			{assign var="COL_WIDTH" value=12}
 			{if !empty($LEFT_SIDE_TEMPLATE)}
 				{assign var="COL_WIDTH" value=9}
-				<div class="col-3">
+				<div class="col-3 product-category">
 					{include file=\App\Resources::templatePath($LEFT_SIDE_TEMPLATE, $MODULE_NAME)}
 				</div>
 			{/if}
@@ -39,7 +30,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="float-right">

@@ -54,11 +54,11 @@ class ListView
 	private $offset = 0;
 
 	/**
-	 * Undocumented variable.
+	 * Current page.
 	 *
 	 * @var int
 	 */
-	private $page = 0;
+	private $page = 1;
 
 	/**
 	 * Conditions.
@@ -66,6 +66,13 @@ class ListView
 	 * @var array
 	 */
 	private $conditions = [];
+
+	/**
+	 * Use raw data.
+	 *
+	 * @var bool
+	 */
+	private $rawData = false;
 
 	/**
 	 * Construct.
@@ -111,6 +118,19 @@ class ListView
 	public function getModuleName(): string
 	{
 		return $this->moduleName;
+	}
+
+	/**
+	 * Function to set raw data.
+	 *
+	 * @param bool $rawData
+	 *
+	 * @return self
+	 */
+	public function setRawData(bool $rawData): self
+	{
+		$this->rawData = $rawData;
+		return $this;
 	}
 
 	/**
@@ -209,6 +229,9 @@ class ListView
 		if (!empty($this->conditions)) {
 			$headers['x-condition'] = \App\Json::encode($this->conditions);
 		}
+		if ($this->rawData) {
+			$headers['x-raw-data'] = 1;
+		}
 		if (!empty($headers)) {
 			$api->setCustomHeaders($headers);
 		}
@@ -229,6 +252,11 @@ class ListView
 				$recordModel = Record::getInstance($this->getModuleName());
 				$recordModel->setData($value)->setId($key);
 				$recordsListModel[$key] = $recordModel;
+			}
+		}
+		if (!empty($this->recordsList['rawData'])) {
+			foreach ($this->recordsList['rawData'] as $key => $value) {
+				$recordsListModel[$key]->setRawData($value);
 			}
 		}
 		return $recordsListModel;
