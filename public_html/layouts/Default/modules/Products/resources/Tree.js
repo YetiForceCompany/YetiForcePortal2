@@ -102,6 +102,7 @@ window.Products_Tree_Js = class {
 			data: {
 				module: app.getModuleName(),
 				view: "Tree",
+				search: this.searchValue,
 				page: this.page
 			},
 			type: "GET"
@@ -109,7 +110,6 @@ window.Products_Tree_Js = class {
 			progressInstance.progressIndicator({ mode: "hide" });
 			$(".js-main-container").html(data);
 			this.init();
-			this.registerEvents();
 			window.App.Fields.Tree.instance = new window.App.Fields.Tree();
 		});
 	}

@@ -2,6 +2,23 @@
 {strip}
     <!-- tpl-Products-Tree-TreePreProcess -->
     {include file=\App\Resources::templatePath("Header.tpl", $MODULE_NAME)}
-	<div class="tpl-Products-Tree-Tree js-main-container" data-js="container">
+    <div>
+        <input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Purifier::encodeHtml(\App\Json::encode(\App\Config::$listEntriesPerPage))}">
+        <div class="widget_header row">
+			<div class="col-sm-8">
+				<div class="pull-left">
+					{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
+				</div>
+			</div>
+		</div>
+        <div class="row mb-4">
+            {assign var="COL_WIDTH" value=12}
+            {if !empty($LEFT_SIDE_TEMPLATE)}
+                {assign var="COL_WIDTH" value=9}
+                <div class="col-3 product-category">
+                    {include file=\App\Resources::templatePath($LEFT_SIDE_TEMPLATE, $MODULE_NAME)}
+                </div>
+            {/if}
+	        <div class="col-{$COL_WIDTH} js-main-container" data-js="container">
     <!-- /tpl-Products-Tree-TreePreProcess -->
 {/strip}
