@@ -570,6 +570,13 @@ var AppConnector,
 				instance.registerEvents(modalContainer);
 			}
 		},
+		registerSubMenu: function(){
+			$('.js-submenu-toggler').on('click', e => {
+				if (!$(e.currentTarget).hasClass('collapsed') && !$(e.target).closest('.toggler').length) {
+					window.location = $(e.currentTarget).attr('href');
+				}
+			});
+		}
 	}
 
 jQuery(document).ready(function () {
@@ -578,6 +585,7 @@ jQuery(document).ready(function () {
 	app.registerDateField(container);
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
+	app.registerSubMenu();
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

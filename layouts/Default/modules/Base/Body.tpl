@@ -10,7 +10,7 @@
 	<div class="mobileLeftPanel p-0 visible-phone">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
-	<div class="leftPanel p-0 hidden-phone">
+	<div class="leftPanel c-menu__container p-0 hidden-phone ">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>
 	<div class="mainBody">
