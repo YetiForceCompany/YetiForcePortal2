@@ -72,6 +72,7 @@ class CartView extends ListViewModel
 		$this->recordsListModel = parent::getRecordsListModel();
 		foreach ($this->recordsListModel as $key => $recordModel) {
 			$recordModel->set('amountInShoppingCart', $this->cart->getAmount($key));
+			$recordModel->set('totalPriceNetto', $this->cart->getAmount($key) * (float) $recordModel->get('unit_price'));
 		}
 		return $this->recordsListModel;
 	}

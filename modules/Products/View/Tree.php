@@ -52,6 +52,14 @@ class Tree extends View\ListView
 		}
 		$this->viewer->assign('SEARCH_TEXT', '');
 		$this->viewer->assign('SEARCH', $this->request->get('search'));
+		parent::process();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function preProcess($display = true)
+	{
 		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$this->viewer->assign(
 			'TREE',
@@ -59,7 +67,7 @@ class Tree extends View\ListView
 				->setSelectedItems($this->pscategory)
 				->getTree()
 		);
-		parent::process();
+		parent::preProcess($display);
 	}
 
 	/**

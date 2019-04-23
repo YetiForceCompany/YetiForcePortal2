@@ -1,6 +1,6 @@
 <?php
 /**
- * Tree view class.
+ * The file contains a class: ShoppingCart.
  *
  * @package   View
  *
@@ -15,7 +15,7 @@ use YF\Modules\Base\View;
 use YF\Modules\Products\Model\CartView;
 
 /**
- * Class Tree.
+ * Class ShoppingCart.
  */
 class ShoppingCart extends View\ListView
 {

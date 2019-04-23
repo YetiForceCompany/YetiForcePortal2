@@ -18,7 +18,7 @@
         </div>
         <div class="row p-2 mb-4">
             <button class="btn btn-success m-auto product-btn-buy js-buy" type="button">
-                <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_PROCEED_TO_CHECKOUT', $MODULE_NAME)}
+                <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_BUY', $MODULE_NAME)}
             </button>
         </div>
     </div>
