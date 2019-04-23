@@ -14,7 +14,8 @@
 		"LBL_PRICE": "Price",
 		"LBL_SUMMARY": "Summary",
 		"LBL_BUY": "Buy",
-		"LBL_VIEW_SHOPPINGCART": "Shipping cart"
+		"LBL_VIEW_SHOPPINGCART": "Shipping cart",
+		"LBL_CATEGORIES": "Categories"
 	},
 	"js": {}
 }

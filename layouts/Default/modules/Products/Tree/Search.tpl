@@ -2,16 +2,16 @@
 {strip}
     <div class="tpl-Products-Tree-Search input-group js-search-group" data-js="change|keyup">
         <div class="input-group-prepend">
-            <span class="input-group-text bg-white hide js-search-cancel border-bottom">
-                <span class="u-cursor-pointer" data-js="click" aria-hidden="true">&times;</span>
-            </span>
+             <button class="btn btn-outline-secondary js-search-cancel mr-2 bmd-btn-icon" type="button">
+                    <span class="u-cursor-pointer" data-js="click" aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <input type="text" class="form-control u-font-size-13px js-search border-bottom rounded-0 o-chat__form-control"
-            value="" autocomplete="off" placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}" data-js="keydown"/>
+        <input type="text" class="form-control u-font-size-13px js-search  rounded-0 o-chat__form-control"
+            value="{$SEARCH_TEXT}" autocomplete="off" placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}" data-js="keydown"/>
         <div class="input-group-append">
-            <span class="input-group-text bg-white border-bottom u-cursor-pointer js-search-button">
-                <span class="fas fa-search"></span>
-            </span>
+         <button class="btn btn-outline-secondary js-search-button ml-2 bmd-btn-icon" type="button">
+                    <span class="fas fa-search"></span>
+            </button>
         </div>
     </div>
 {/strip}

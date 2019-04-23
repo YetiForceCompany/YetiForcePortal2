@@ -136,7 +136,7 @@ abstract class View extends Base
 	{
 		$cssFileNames = [
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
-			YF_ROOT_WWW . 'libraries/mdbootstrap/css/mdb.min.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-chosen/bootstrap-chosen.css',
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
@@ -233,7 +233,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
-			YF_ROOT_WWW . 'libraries/mdbootstrap/js/mdb.min.js',
+			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
 			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',

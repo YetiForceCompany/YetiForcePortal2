@@ -1,8 +1,8 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<!-- tpl-Base-BodyLeft -->
-	<div class="userDetailsContainer d-flex">
-		<div class="col-sm-2 p-0">
+	<div class="container-fluid c-menu__header row px-2">
+		<div class="col-sm-2 p-0 pt-2">
 			<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		<div class="col-sm-10 userDetails">
@@ -14,12 +14,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="menuContainer">
-		<ul class="moduleList" style="padding-left:1px;">
-			{foreach item=ITEM_MENU key=KEY from=YF\Modules\Base\Model\Menu::getInstance($MODULE_NAME)->getMenu()}
-				{include file=\App\Resources::templatePath('Menu/'|cat:$ITEM_MENU.type|cat:'.tpl', $MODULE_NAME)}
-			{/foreach}
-		</ul>
+	<div class="menuContainer c-menu__body ps ps--active-y">
+		<nav class="tpl-Menu js-menu__content c-menu__content" id="submenu-0">
+			<ul class="nav flex-column modulesList"   >
+				{foreach item=ITEM_MENU key=KEY from=YF\Modules\Base\Model\Menu::getInstance($MODULE_NAME)->getMenu()}
+					{include file=\App\Resources::templatePath('Menu/'|cat:$ITEM_MENU.type|cat:'.tpl', $MODULE_NAME)}
+				{/foreach}
+			</ul>
+		</nav>
 	</div>
 	<!-- /tpl-Base-BodyLeft -->
 {/strip}
