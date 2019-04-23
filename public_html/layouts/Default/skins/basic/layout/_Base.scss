@@ -12,7 +12,7 @@ body {
 }
 
 .bodyContainer {
-	background-color: #eee;
+	background-color: #fff;
 }
 
 img {
@@ -44,9 +44,9 @@ img {
 .bodyContent {
 	position: relative;
 	padding-top: 50px;
-	oveflow-x: hidden;
+	overflow-x: hidden;
 	width: 100%;
-	background: $bgPrimary;
+	background: #fff;
 	padding-bottom: 33px;
 }
 

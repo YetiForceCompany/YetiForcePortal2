@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mb-4">
+		<div class="row mb-4 mt-2">
 			{assign var="COL_WIDTH" value=12}
 			{if !empty($LEFT_SIDE_TEMPLATE)}
 				{assign var="COL_WIDTH" value=9}

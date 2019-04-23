@@ -62,6 +62,7 @@ class Menu
 	private function getItemModule(array $row)
 	{
 		return [
+			'id' => $row['id'],
 			'type' => $row['type'],
 			'childs' => array_map([$this, 'getItemModule'], $row['childs']),
 			'name' => $row['name'],
@@ -77,6 +78,7 @@ class Menu
 			return  $this->{$methodName}($row);
 		}
 		return [
+			'id' => $row['id'],
 			'type' => $row['type'],
 			'childs' => array_map([$this, 'getItem'], $row['childs']),
 			'name' => $row['name'],
