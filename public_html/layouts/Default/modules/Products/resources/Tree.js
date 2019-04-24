@@ -106,11 +106,14 @@ window.Products_Tree_Js = class {
 				page: this.page
 			},
 			type: "GET"
-		}).then(data => {
+		}).done(data => {
 			progressInstance.progressIndicator({ mode: "hide" });
-			$(".js-main-container").html(data);
-			this.init();
-			window.App.Fields.Tree.instance = new window.App.Fields.Tree();
+			let container = $(".js-main-container");
+			container.html(data);
+			this.container = container;
+			this.registerAmountChange();
+			this.registerButtonAddToCart();
+			this.registerPagination();
 		});
 	}
 	registerSearch() {

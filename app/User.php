@@ -86,7 +86,7 @@ class User extends BaseModel
 	 *
 	 * @return BaseModel
 	 */
-	public function set($key, $value)
+	public function set(string $key, $value)
 	{
 		$_SESSION['user'][$key] = $value;
 		$this->valueMap[$key] = $value;
