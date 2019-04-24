@@ -156,7 +156,7 @@ class Record extends \App\BaseModel
 				'linklabel' => 'LBL_SHOW_COMPLETE_DETAILS',
 				'linkurl' => $this->getDetailViewUrl(),
 				'linkicon' => 'fas fa-th-list',
-				'linkclass' => 'btn-sm btn-default detailLink'
+				'linkclass' => 'btn-sm btn-outline-info active detailLink'
 			];
 		}
 		if ($this->isEditable()) {
@@ -165,7 +165,7 @@ class Record extends \App\BaseModel
 				'linklabel' => 'BTN_EDIT',
 				'linkurl' => $this->getEditViewUrl(),
 				'linkicon' => 'fas fa-edit',
-				'linkclass' => 'btn-sm btn-default'
+				'linkclass' => 'btn-sm btn-outline-success active'
 			];
 		}
 		if ($this->isDeletable()) {
@@ -174,7 +174,7 @@ class Record extends \App\BaseModel
 				'linklabel' => 'LBL_DELETE',
 				'linkdata' => ['url' => $this->getDeleteUrl()],
 				'linkicon' => 'fas fa-trash-alt',
-				'linkclass' => 'btn-sm btn-default deleteRecordButton'
+				'linkclass' => 'btn-sm btn-outline-danger active deleteRecordButton'
 			];
 		}
 		return $recordLinks;

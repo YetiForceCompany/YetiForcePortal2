@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-<div class="btn-group">
+<div class="btn-group noSpaces">
 	{assign var="LABEL" value=$LINK['linklabel']}
 	{assign var="ACTION_NAME" value=$LABEL}
 	{if isset($LINK['linkurl'])}

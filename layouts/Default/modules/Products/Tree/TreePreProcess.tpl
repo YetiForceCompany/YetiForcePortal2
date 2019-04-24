@@ -19,6 +19,6 @@
                     {include file=\App\Resources::templatePath($LEFT_SIDE_TEMPLATE, $MODULE_NAME)}
                 </div>
             {/if}
-	        <div class="col-{$COL_WIDTH} js-main-container" data-js="container">
+	        <div class="col-{$COL_WIDTH}  c-main-container js-main-container" data-js="container">
     <!-- /tpl-Products-Tree-TreePreProcess -->
 {/strip}

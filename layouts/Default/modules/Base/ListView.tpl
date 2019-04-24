@@ -10,16 +10,14 @@
 			</div>
 			<div class="col-sm-4 listViewAction">
 				<div class="float-right">
-					<div class="btn-group">
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
-							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success">
+							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-outline-success btn-sm">
 								<span class="fas fa-plus"></span>
 								&nbsp;
 								<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
 							</a>
 						{/if}
-					</div>
 				</div>
 			</div>
 		</div>

@@ -24,7 +24,7 @@
             <div class="row fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
             <div class="row mt-5">
                 <div class="col-3 p-0 m-0">
-                    <button type="button" class="btn btn-sm btn-block btn-light js-remove-from-cart" data-js="click">
+                    <button type="button" class="btn btn-sm btn-block btn-outline-danger js-remove-from-cart" data-js="click">
                         <i class="fas fa-trash mr-1"></i>
                         {\App\Language::translate('LBL_REMOVE_FROM_CART', $MODULE_NAME)}
                     </button>
@@ -35,11 +35,11 @@
             <div class="row mt-5">
                 <div class="input-group input-group-sm mb-3 col-8">
                     <div class="input-group-prepend">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-dec" type="button">-</button>
+                        <button class="btn btn-sm btn-outline-secondary js-amount-dec bmd-btn-icon mr-2 o-btn-circle" type="button">-</button>
                     </div>
                     <input class="form-control js-amount" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-inc" type="button">+</button>
+                        <button class="btn btn-sm btn-outline-secondary js-amount-inc bmd-btn-icon mr-2 o-btn-circle" type="button">+</button>
                     </div>
                 </div>
             </div>

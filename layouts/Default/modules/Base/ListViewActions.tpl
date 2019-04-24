@@ -10,7 +10,7 @@
 				{/foreach}
 			</div>
 			{if !$ONLY_ONE}
-				<button type="button" class="btn btn-sm btn-default toolsAction">
+				<button type="button" class="btn btn-sm btn-outline-info toolsAction">
 					<span class="fas fa-wrench"></span>
 				</button>
 			{/if}

@@ -3,7 +3,9 @@
 	<!-- tpl-Users-Login -->
 	<div class="container loginContainer">
 		<form action="index.php?module=Users&action=Login" method="POST">
-			<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
+			<div class="text-center">
+				<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
+			</div>
 			{if isset($ERRORS)}
 				<br/>
 				{foreach item=ERROR key=KEY from=$ERRORS}
@@ -41,7 +43,7 @@
 			{else}
 				<input type="hidden" name="language" value="{\App\Config::get('language')}" />
 			{/if}
-			<button class="btn btn-lg btn-primary btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+			<button class="btn btn-lg btn-outline-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
 		</form>
 	</div>
 	<div id="CoreLog" class="card col-sm-12 px-0 blockContainer">
