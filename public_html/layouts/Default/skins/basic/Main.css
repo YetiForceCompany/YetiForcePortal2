@@ -223,7 +223,7 @@ html, body {
 }
 
 .bodyContainer {
-  background-color: #fff;
+  background-color: #eee;
 }
 
 img {
@@ -451,6 +451,10 @@ hr {
 
 .breadcrumbsLinks a {
   font-weight: bold;
+}
+
+.c-main-container {
+  padding: 0;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -787,7 +791,7 @@ table.dataTable.listViewEntries tbody td {
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .product-container {
-  background-color: #f3f3f3;
+  background-color: #eee;
   padding: 12px;
 }
 
@@ -875,11 +879,6 @@ table.dataTable.listViewEntries tbody td {
 
 .add-to-cart {
   background-color: pink;
-}
-
-.product-btn-buy {
-  height: 48px;
-  width: 300px;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
