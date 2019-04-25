@@ -139,6 +139,9 @@ class Cart
 	public function set(int $recordId, int $amount, array $param = [])
 	{
 		$this->check($amount);
+		if ($this->has($recordId) && empty($param)) {
+			$param = $this->cart[$recordId]['param'];
+		}
 		$this->cart[$recordId] = [
 			'amount' => $amount,
 			'param' => $param,

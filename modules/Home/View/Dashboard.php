@@ -75,7 +75,7 @@ class Dashboard extends \App\Controller\View
 			YF_ROOT_WWW . 'libraries/chart.js/dist/Chart.js',
 			YF_ROOT_WWW . 'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
 			YF_ROOT_WWW . 'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
 		];
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return array_merge($headerScriptInstances, $jsScriptInstances);

@@ -6,7 +6,6 @@ window.Products_Tree_Js = class {
 		this.page = this.container.find(".js-pagination-list").data("page");
 		this.treeInstance = $(".js-tree-container");
 		this.shoppingCartBadge = $(".js-body-header .js-shopping-cart .js-badge");
-		this.searchValue = container.data("search");
 		this.isTreeLoaded = false;
 		window.Products_Tree_Js.instance = this;
 	}
@@ -19,17 +18,6 @@ window.Products_Tree_Js = class {
 			window.Products_Tree_Js.instance = new window.Products_Tree_Js(container);
 		}
 		return window.Products_Tree_Js.instance;
-	}
-	searchCategories(categories) {
-		this.page = 1;
-		this.searchValue = [
-			{
-				fieldName: "pscategory",
-				value: categories,
-				operator: "e"
-			}
-		];
-		this.loadPage();
 	}
 	init(container = $(".js-products-container")) {
 		this.container = container;
@@ -45,11 +33,8 @@ window.Products_Tree_Js = class {
 	}
 	registerTreeEvents() {
 		this.treeInstance
-			.on("ready.jstree", (e, data) => {
-				this.onTreeReady(e, data);
-			})
 			.on("changed.jstree", (e, data) => {
-				this.onTreeChanged(e, data);
+				this.loadPage();
 			});
 	}
 	registerAmountChange() {
@@ -84,17 +69,30 @@ window.Products_Tree_Js = class {
 			this.loadPage();
 		});
 	}
-	onTreeReady(e, data) {
-		this.isTreeLoaded = true;
-	}
-	onTreeChanged(e, data) {
-		if (this.isTreeLoaded) {
-			let selectedCategories = [];
-			$.each(this.treeInstance.jstree("get_selected", true), (index, value) => {
-				selectedCategories.push(value["original"]["tree"]);
+
+	getSearchParams() {
+		let search = [];
+		let searchValue = $('.js-search').val();
+		if (searchValue) {
+			search.push({
+				fieldName: "productname",
+				value: searchValue,
+				operator: "c"
 			});
-			this.searchCategories(selectedCategories[0]);
 		}
+		let selectedCategories = [];
+		$.each(this.treeInstance.jstree("get_selected", true), (index, value) => {
+			selectedCategories.push(value["original"]["tree"]);
+		});
+		if (selectedCategories[0]) {
+			search.push({
+				fieldName: "pscategory",
+				value: selectedCategories[0],
+				operator: "e"
+			});
+		}
+
+		return search;
 	}
 	loadPage() {
 		const progressInstance = $.progressIndicatorShow();
@@ -102,7 +100,7 @@ window.Products_Tree_Js = class {
 			data: {
 				module: app.getModuleName(),
 				view: "Tree",
-				search: this.searchValue,
+				search: this.getSearchParams(),
 				page: this.page
 			},
 			type: "GET"
@@ -117,16 +115,18 @@ window.Products_Tree_Js = class {
 		});
 	}
 	registerSearch() {
-		this.container.find(".js-search-button").on("click", e => {
+		$('.js-search-button').on('click', e => {
 			this.page = 1;
-			this.searchValue = [
-				{
-					fieldName: "productname",
-					value: this.container.find(".js-search").val(),
-					operator: "c"
-				}
-			];
 			this.loadPage();
+		});
+		$('.js-search').on('keypress', e => {
+			if (e.keyCode == 13) {
+				this.page = 1;
+				this.loadPage();
+			}
+		});
+		$('.js-search-cancel').on('click', e => {
+			$('.js-search').val('');
 		});
 	}
 	registerButtonAddToCart() {

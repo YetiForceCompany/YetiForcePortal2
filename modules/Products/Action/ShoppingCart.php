@@ -90,7 +90,7 @@ class ShoppingCart extends \App\Controller\Action
 		$response = new \App\Response();
 		$response->setResult([
 			'numberOfItems' => $this->cart->count(),
-			'totalPriceNetto' => $cartViewModel->calculateTotalPriceNetto()
+			'totalPriceNetto' => \App\Fields\Currency::formatToDisplay($cartViewModel->calculateTotalPriceNetto())
 		]);
 		$response->emit();
 	}

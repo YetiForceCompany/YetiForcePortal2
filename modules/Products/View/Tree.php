@@ -45,10 +45,8 @@ class Tree extends View\ListView
 			->setLimit(\App\Config::get('itemsPrePage'))
 			->setPage($this->request->get('page', 1));
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
-			$serach = $this->request->get('search');
-
-			//TODO - validation
-			$this->getListViewModel()->setConditions($serach);
+			$search = $this->request->get('search');
+			$this->getListViewModel()->setConditions($search);
 		}
 		$this->viewer->assign('SEARCH_TEXT', '');
 		$this->viewer->assign('SEARCH', $this->request->get('search'));
