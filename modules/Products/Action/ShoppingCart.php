@@ -35,6 +35,7 @@ class ShoppingCart extends \App\Controller\Action
 		$this->exposeMethod('setToCart');
 		$this->exposeMethod('addToCart');
 		$this->exposeMethod('removeFromCart');
+		$this->exposeMethod('changeAddress');
 	}
 
 	/**
@@ -76,6 +77,32 @@ class ShoppingCart extends \App\Controller\Action
 	{
 		$this->cart->remove($this->request->getInteger('record'));
 		$this->saveCart();
+	}
+
+	/**
+	 * Change address.
+	 *
+	 * @return void
+	 */
+	public function changeAddress()
+	{
+		$this->cart->setAddress([
+			'addresslevel1' => $this->request->getByType('addresslevel1', 'Text'),
+			'addresslevel2' => $this->request->getByType('addresslevel2', 'Text'),
+			'addresslevel3' => $this->request->getByType('addresslevel3', 'Text'),
+			'addresslevel4' => $this->request->getByType('addresslevel4', 'Text'),
+			'addresslevel5' => $this->request->getByType('addresslevel5', 'Text'),
+			'addresslevel6' => $this->request->getByType('addresslevel6', 'Text'),
+			'addresslevel7' => $this->request->getByType('addresslevel7', 'Text'),
+			'addresslevel8' => $this->request->getByType('addresslevel8', 'Text'),
+			'localnumber' => $this->request->getByType('localnumber', 'Text'),
+			'buildingnumber' => $this->request->getByType('buildingnumber', 'Text'),
+			'pobox' => $this->request->getByType('pobox', 'Text'),
+		]);
+		$this->cart->save();
+		$response = new \App\Response();
+		$response->setResult(true);
+		$response->emit();
 	}
 
 	/**

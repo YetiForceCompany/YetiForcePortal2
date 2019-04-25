@@ -1,7 +1,17 @@
 <?php
+/**
+ * Integer class.
+ *
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @copyright YetiForce Sp. z o.o
+ * @author    Tomasz Kur <t.kur@yetiforce.com>
+ */
 
 namespace App\Fields;
 
+/**
+ * Class to display integers.
+ */
 class Integer
 {
 	public static function formatToDisplay($value)

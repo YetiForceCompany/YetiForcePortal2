@@ -15,7 +15,8 @@
 		"LBL_SUMMARY": "Summary",
 		"LBL_BUY": "Buy",
 		"LBL_VIEW_SHOPPINGCART": "Shipping cart",
-		"LBL_CATEGORIES": "Categories"
+		"LBL_CATEGORIES": "Categories",
+		"LBL_ADDRESS": "Address"
 	},
 	"js": {}
 }

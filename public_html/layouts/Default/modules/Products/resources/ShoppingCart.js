@@ -16,10 +16,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 			this.totalPriceNetto.text(data["result"]["totalPriceNetto"]);
 		});
 	}
-	registerEvents() {
-		super.registerEvents();
-		this.registerButtonRemoveFromCart();
-	}
+
 	registerButtonRemoveFromCart() {
 		this.container.find(".js-remove-from-cart").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
@@ -46,5 +43,46 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 				this.updateProduct(product);
 			}
 		});
+	}
+	registerChangeAddress() {
+		let addresses = JSON.parse(this.container.find('.js-addresses').val());
+		let self = this;
+		this.container.find('.js-select-address').on('change', (e) => {
+			const type = $(e.currentTarget).val();
+			const data = addresses['data'][type];
+			Object.keys(data).forEach(function (fieldname) {
+				let value = data[fieldname];
+				fieldname = fieldname.substring(0, fieldname.length - 1);
+				self.container.find('[name="' + fieldname + '"]').val(value);
+			});
+			let form = this.container.find('.js-form-address');
+			AppConnector.request(
+				{
+					module: app.getModuleName(),
+					action: "ShoppingCart",
+					mode: 'changeAddress',
+					addresslevel1: form.find('[name="addresslevel1"]').val(),
+					addresslevel2: form.find('[name="addresslevel2"]').val(),
+					addresslevel3: form.find('[name="addresslevel3"]').val(),
+					addresslevel4: form.find('[name="addresslevel4"]').val(),
+					addresslevel5: form.find('[name="addresslevel5"]').val(),
+					addresslevel6: form.find('[name="addresslevel6"]').val(),
+					addresslevel7: form.find('[name="addresslevel7"]').val(),
+					addresslevel8: form.find('[name="addresslevel8"]').val(),
+					localnumber: form.find('[name="localnumber"]').val(),
+					buildingnumber: form.find('[name="buildingnumber"]').val(),
+					pobox: form.find('[name="pobox"]').val(),
+
+				}
+			);
+		});
+		this.container.find('.js-select-address').trigger('change');
+	}
+
+
+	registerEvents() {
+		super.registerEvents();
+		this.registerButtonRemoveFromCart();
+		this.registerChangeAddress();
 	}
 };

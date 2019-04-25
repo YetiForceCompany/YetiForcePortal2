@@ -17,9 +17,11 @@
             <div class="col-4 js-total-price-brutto">0</div>
         </div>
         <div class="row p-2 mb-4">
-            <a href="index.php?module=Products&view=ProceedToCheckout" class="btn btn-raised btn-success m-auto">
-                <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_PROCEED_TO_CHECKOUT', $MODULE_NAME)}
-            </a>
+            {if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
+                <a href="index.php?module=Products&view=ProceedToCheckout" class="btn btn-raised btn-success m-auto">
+                    <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_PROCEED_TO_CHECKOUT', $MODULE_NAME)}
+                </a>
+            {/if}
         </div>
     </div>
 {/strip}

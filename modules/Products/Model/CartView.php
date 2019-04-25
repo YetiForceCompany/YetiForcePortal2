@@ -11,6 +11,7 @@
 
 namespace YF\Modules\Products\Model;
 
+use App\Api;
 use YF\Modules\Base\Model\ListView as ListViewModel;
 use YF\Modules\Base\Model\Record;
 
@@ -19,6 +20,7 @@ use YF\Modules\Base\Model\Record;
  */
 class CartView extends ListViewModel
 {
+	const ADDRESS_FIELDS = ['addresslevel1', 'addresslevel2', 'addresslevel3', 'addresslevel4', 'addresslevel5', 'addresslevel6',  'addresslevel7', 'addresslevel8',  'buildingnumber', 'localnumber', 'pobox'];
 	/**
 	 * Shopping cart.
 	 *
@@ -89,5 +91,46 @@ class CartView extends ListViewModel
 			$totalPrice += ((float) $item['param']['priceNetto']) * $item['amount'];
 		}
 		return $totalPrice;
+	}
+
+	/**
+	 * Returns addresses for account.
+	 *
+	 * @return array
+	 */
+	public function getAddresses(): array
+	{
+		$userModel = \App\User::getUser();
+		if (empty($userModel->get('CompanyId'))) {
+			return [];
+		}
+		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['X-RAW-DATA' => 1])->call("Accounts/Record/{$userModel->get('CompanyId')}", [], 'get');
+		$address = [];
+
+		foreach (['a', 'b', 'c'] as $typeAddress) {
+			if (empty($accountRecordDetail['data']['addresslevel5' . $typeAddress])) {
+				continue;
+			}
+			$address[$typeAddress]= array_intersect_key($accountRecordDetail['data'], array_flip(
+				array_map(function ($val) use ($typeAddress) {
+					return $val . $typeAddress;
+				}, static::ADDRESS_FIELDS)
+			));
+		}
+		$fields = [];
+		foreach (static::ADDRESS_FIELDS as $field) {
+			$fields[$field . 'a'] = $accountRecordDetail['fields'][$field . 'a'];
+		}
+		return ['data' => $address, 'fields' => $fields];
+	}
+
+	/**
+	 * Returns selected address.
+	 *
+	 * @return array
+	 */
+	public function getSelectedAddress(): array
+	{
+		return $this->cart->getAddress();
 	}
 }

@@ -22,13 +22,13 @@
 					   class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 				<input name="email" type="email" id="inputEmail" class="form-control"
 					   placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
-					   value="demo@yetiforce.com" required="" autofocus="">
+					   value="portal@yetiforce.com" required="" autofocus="">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword"
 					   class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 				<input name="password" type="password" id="inputPassword" class="form-control"
-					   placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="demo"
+					   placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="portal"
 					   required="">
 			</div>
 			{if \App\Config::getBool('allowLanguageSelection') }

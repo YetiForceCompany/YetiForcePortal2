@@ -1,7 +1,17 @@
 <?php
+/**
+ * Currency class.
+ *
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @copyright YetiForce Sp. z o.o
+ * @author    Tomasz Kur <t.kur@yetiforce.com>
+ */
 
 namespace App\Fields;
 
+/**
+ * Class to manage currencies.
+ */
 class Currency
 {
 	public static function formatToDisplay($value)
@@ -21,6 +31,6 @@ class Currency
 		} elseif ($decimal) {
 			$display .= $decimalSeperator . $decimal;
 		}
-		return $display;
+		return $display . ' ' . $userModel->getPreferences('currency_symbol');
 	}
 }
