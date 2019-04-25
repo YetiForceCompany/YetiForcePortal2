@@ -4,11 +4,18 @@ $config = PhpCsFixer\Config::create()
         ->setIndent("\t")
         ->setUsingCache(false)
         ->setRules([
+			'@PHP56Migration' => true,
+			'@PHPUnit60Migration:risky' => true,
+			'@PhpCsFixer' => true,
+			'@PhpCsFixer:risky' => true,
+			'list_syntax' => ['syntax' => 'short'],
             '@PSR2' => true,
             'align_multiline_comment' => true,
             'array_syntax' => ['syntax' => 'short'],
             'blank_line_after_namespace' => true,
             'blank_line_after_opening_tag' => true,
+            'blank_line_before_statement' => false,
+            'binary_operator_spaces' => true,
             'cast_spaces' => true,
             'class_keyword_remove' => false,
             'combine_consecutive_issets' => true,
@@ -17,6 +24,7 @@ $config = PhpCsFixer\Config::create()
             'concat_space' => [
                 'spacing' => 'one',
             ],
+            'explicit_string_variable' => false,
             'declare_equal_normalize' => true,
             'dir_constant' => false,
             'doctrine_annotation_braces' => true,
@@ -97,8 +105,8 @@ $config = PhpCsFixer\Config::create()
             'phpdoc_indent' => true,
             'phpdoc_inline_tag' => true,
             'phpdoc_no_access' => true,
-            'phpdoc_no_empty_return' => true,
-            'phpdoc_no_package' => true,
+            'phpdoc_no_empty_return' => false,
+            'phpdoc_no_package' => false,
             'phpdoc_no_useless_inheritdoc' => true,
             'phpdoc_order' => true,
             'phpdoc_return_self_reference' => true,
