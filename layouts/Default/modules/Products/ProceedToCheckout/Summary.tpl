@@ -6,7 +6,7 @@
         </div>
         <div class="row mb-2 pl-4">
             <div class="col-8">{\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)}</div>
-            <div class="col-4 js-total-price-netto">{$TOTAL_PRICE}</div>
+            <div class="col-4 js-total-price-netto">{\App\Fields\Currency::formatToDisplay($TOTAL_PRICE)}</div>
         </div>
         <div class="row mb-2 product-line pl-4 pb-2">
             <div class="col-8">{\App\Language::translate('LBL_SHIPPING', $MODULE_NAME)}</div>
