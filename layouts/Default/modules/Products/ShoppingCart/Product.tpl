@@ -33,13 +33,13 @@
         </div>
         <div class="col-2">
             <div class="row mt-5">
-                <div class="input-group input-group-sm mb-3 col-8">
+                <div class="input-group input-group-sm mb-3 col-8 c-cart-quantity">
                     <div class="input-group-prepend">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-dec bmd-btn-icon mr-2 o-btn-circle" type="button">-</button>
+                        <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-dec mr-2" type="button">-</button>
                     </div>
-                    <input class="form-control js-amount" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
+                    <input class="form-control js-amount c-cart-quantity__input border text-center" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-inc bmd-btn-icon mr-2 o-btn-circle" type="button">+</button>
+                        <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-inc ml-2" type="button">+</button>
                     </div>
                 </div>
             </div>
