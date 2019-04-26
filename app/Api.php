@@ -14,7 +14,12 @@ use Requests;
 
 class Api
 {
-	protected static $_instance;
+	/**
+	 * Instance.
+	 *
+	 * @var self
+	 */
+	protected static $instance;
 	protected $url;
 	protected $header;
 	protected $log = YF_ROOT . \DIRECTORY_SEPARATOR . 'cache/logs/api.log';
@@ -34,21 +39,23 @@ class Api
 	 */
 	public static function getInstance()
 	{
-		if (!isset(self::$_instance)) {
-			self::$_instance = new self();
+		if (!isset(self::$instance)) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
+	 * Call API method.
+	 *
 	 * @param string $method
 	 * @param array  $data
-	 * @param mixed  $requestType
+	 * @param string $requestType
 	 *
 	 * @return array|false
 	 */
-	public function call(string $method, array $data = [], $requestType = 'get')
+	public function call(string $method, array $data = [], string $requestType = 'get')
 	{
 		$crmPath = $this->url . $method;
 		$rawRequest = $data;

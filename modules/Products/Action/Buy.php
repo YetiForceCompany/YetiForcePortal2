@@ -11,12 +11,46 @@
 
 namespace YF\Modules\Products\Action;
 
+use YF\Modules\Products\Model\Cart;
+
 /**
  * Buy action class.
  */
 class Buy extends \App\Controller\Action
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function process()
 	{
+		$response = new \App\Response();
+		try {
+			$response->setResult($this->createSingleOrder());
+		} catch (\App\AppException $e) {
+			$response->setError($e->getCode(), $e->getMessage());
+		}
+		$response->emit();
+	}
+
+	/**
+	 * Create single order.
+	 *
+	 * @return array
+	 */
+	private function createSingleOrder()
+	{
+		$cart = new Cart();
+		$data = [];
+		foreach ($cart->getAll() as $key => $item) {
+			$data[$key] = [
+				'id' => $key,
+				'amount' => $item['amount']
+			];
+		}
+		return \App\Api::getInstance()->call(
+			'Products/SaveInventory/',
+			['sourceModule' => 'SSingleOrders', 'inventory' => $data],
+			'post'
+		);
 	}
 }
