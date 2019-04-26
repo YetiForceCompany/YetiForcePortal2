@@ -57,20 +57,22 @@ $borderColor: #eeeeee;
 }
 
 .product {
-	height: 300px;
-	width: 400px;
+	width: 33%;
 	border-right: 1px $borderColor solid;
-	border-bottom: 1px $borderColor solid;
+	border-top: 1px $borderColor solid;
 	background-color: white;
 }
 
-.product-image-contener {
-	width: 120px;
-	height: 120px;
-	border: 1px $borderColor solid;
+.product-image-contener img {
+	width: 260px;
+	height: 225px;
 	padding: 5px;
 }
-
+.product-image-contener .product-no-image {
+	width: 260px;
+	height: 225px;
+	padding: 5px;
+}
 .product-shopping-cart-image-contener {
 	width: 100px;
 	height: 100px;
@@ -90,4 +92,13 @@ $borderColor: #eeeeee;
 
 .add-to-cart {
 	background-color: pink;
+}
+
+.product-btn-buy {
+	height: 48px;
+	width: 300px;
+}
+
+.btn-change-value {
+	width: calc(1.8125rem + 2px) !important;
 }

@@ -12,7 +12,7 @@
 		{assign var=HASCHILDS value='false'}
 	{/if}
 	<li role="presentation" class="tpl-menu-Module c-menu__item js-menu__item nav-item" data-id="{$ITEM_MENU['id']}">
-		<a class="nav-link {if $ACTIVE == 'true'} active {else} collapsed {/if} hasIcon js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-{$ITEM_MENU['id']}">
+		<a class="nav-link {if $ACTIVE == 'true'} active {else} collapsed {/if} {if !empty($ITEM_MENU['icon'])} hasIcon {/if} js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="{$ACTIVE}" aria-controls="submenu-{$ITEM_MENU['id']}">
 			<span class="c-menu__item__icon {$ITEM_MENU['icon']}" aria-hidden="true"></span>
   			<span class="c-menu__item__text" title="{$ITEM_MENU['name']}">
     			{$ITEM_MENU['name']}
