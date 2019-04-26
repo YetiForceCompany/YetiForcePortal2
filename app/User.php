@@ -11,6 +11,23 @@ namespace App;
 
 class User extends BaseModel
 {
+	/**
+	 * Permissions based on user.
+	 */
+	const USER_PERMISSIONS = 1;
+	/**
+	 * All records of account assigned directly to contact.
+	 */
+	const ACCOUNTS_RELATED_RECORDS = 2;
+	/**
+	 * All related records of account assigned directly to contact and accounts lower in hierarchy.
+	 */
+	const ACCOUNTS_RELATED_RECORDS_AND_LOWER_IN_HIERARCHY = 3;
+	/**
+	 * All related records of account assigned directly to contact and accounts from hierarchy.
+	 */
+	const ACCOUNTS_RELATED_RECORDS_IN_HIERARCHY = 4;
+
 	protected static $user = false;
 
 	/**
@@ -86,7 +103,7 @@ class User extends BaseModel
 	 *
 	 * @return BaseModel
 	 */
-	public function set($key, $value)
+	public function set(string $key, $value)
 	{
 		$_SESSION['user'][$key] = $value;
 		$this->valueMap[$key] = $value;

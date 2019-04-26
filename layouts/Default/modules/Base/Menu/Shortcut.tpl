@@ -2,17 +2,11 @@
 {strip}
 	<!-- tpl-Base-Menu-Shortcut -->
 	<li role="presentation" class="active">
-		<a href="{$ITEM_MENU['link']}">
-			<div class="iconContainer">
-				<div class="iconImage">
-					<span class="{$ITEM_MENU['icon']}"></span>
-				</div>
-			</div>
-			<div class="labelContainer">
-				<div class="labelValue">
-					{$ITEM_MENU['name']}
-				</div>
-			</div>
+		<a class="nav-link" href="{$ITEM_MENU['link']}">
+			<span class="c-menu__item__icon {$ITEM_MENU['icon']}"></span>
+			<span class="c-menu__item__text" title="{$ITEM_MENU['name']}">
+    			{$ITEM_MENU['name']}
+  			</span>
 		</a>
 		{include file=\App\Resources::templatePath('Menu/SubMenu.tpl', $MODULE_NAME)}
 	</li>

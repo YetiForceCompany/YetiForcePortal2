@@ -26,7 +26,18 @@
 		"BTN_CANCEL": "Cancel",
 		"BTN_EDIT": "Edit",
 		"BTN_SAVE": "Save",
-		"PLL_SELECT_OPTION": "Select"
+		"PLL_SELECT_OPTION": "Select",
+		"LBL_ADDRESS_ADDRESSLEVEL1": "Country",
+		"LBL_ADDRESS_ADDRESSLEVEL2": "State",
+		"LBL_ADDRESS_ADDRESSLEVEL3": "County",
+		"LBL_ADDRESS_ADDRESSLEVEL4": "Township",
+		"LBL_ADDRESS_ADDRESSLEVEL5": "City/Village",
+		"LBL_ADDRESS_ADDRESSLEVEL6": "Locality Region",
+		"LBL_ADDRESS_ADDRESSLEVEL7": "Post Code",
+		"LBL_ADDRESS_ADDRESSLEVEL8": "Street",
+		"LBL_ADDRESS_BUILDINGNUMBER": "Building number",
+		"LBL_ADDRESS_LOCALNUMBER": "Office number",
+		"LBL_ADDRESS_POBOX": "PO box"
 	},
 	"js": {
 		"JS_TODAY": "Today",

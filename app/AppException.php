@@ -21,7 +21,7 @@ class AppException extends \Exception
 	public function __construct($message, $code = 200, Exception $previous = null)
 	{
 		parent::__construct($message, $code, $previous);
-		$this->backtrace = \App\Debug::getBacktrace(3);
+		$this->backtrace = \App\Debug::getBacktrace();
 	}
 
 	public static function view(\Throwable $e)
@@ -39,6 +39,7 @@ class AppException extends \Exception
 		$viewer->assign('MESSAGE', $e->getMessage());
 		$viewer->assign('CODE', $e->getCode());
 		$viewer->assign('BACKTRACE', nl2br($backtrace));
+		$viewer->assign('SESSION', $_SESSION);
 		$viewer->view($tplName);
 	}
 }

@@ -19,4 +19,5 @@
 			<input type="hidden" id="truncateTrailingZeros" value="{$USER->getPreferences('truncate_trailing_zeros')}"/>
 			<input type="hidden" id="view" value="{$VIEW}">
 			<input type="hidden" id="module" value="{$MODULE_NAME}">
+			<div class="mainContainer">
 			{/strip}

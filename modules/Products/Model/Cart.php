@@ -20,6 +20,12 @@ use App\Session;
 class Cart
 {
 	/**
+	 * Address.
+	 *
+	 * @var array
+	 */
+	private $address = [];
+	/**
 	 * List of items in the cart.
 	 *
 	 * @var array
@@ -42,6 +48,7 @@ class Cart
 	public function __construct()
 	{
 		$this->cart = Session::get('Products.Cart', []);
+		$this->address = Session::get('Products.Address', []);
 	}
 
 	/**
@@ -52,6 +59,28 @@ class Cart
 	public function getAll(): array
 	{
 		return $this->cart;
+	}
+
+	/**
+	 * Returns address.
+	 *
+	 * @return array
+	 */
+	public function getAddress(): array
+	{
+		return $this->address;
+	}
+
+	/**
+	 * Sets address.
+	 *
+	 * @param array $address
+	 *
+	 * @return void
+	 */
+	public function setAddress(array $address)
+	{
+		$this->address = $address;
 	}
 
 	/**
@@ -139,6 +168,9 @@ class Cart
 	public function set(int $recordId, int $amount, array $param = [])
 	{
 		$this->check($amount);
+		if ($this->has($recordId) && empty($param)) {
+			$param = $this->cart[$recordId]['param'];
+		}
 		$this->cart[$recordId] = [
 			'amount' => $amount,
 			'param' => $param,
@@ -189,6 +221,7 @@ class Cart
 	public function save()
 	{
 		Session::set('Products.Cart', $this->cart);
+		Session::set('Products.Address', $this->address);
 	}
 
 	/**

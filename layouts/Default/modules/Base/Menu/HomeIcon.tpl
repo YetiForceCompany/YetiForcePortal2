@@ -2,17 +2,11 @@
 {strip}
 	<!-- tpl-Base-Menu-HomeIcon -->
 	<li role="presentation" class="active">
-		<a href="index.php?module=Home&view=Dashboard">
-			<div class="iconContainer">
-				<div class="iconImage">
-					<span class="userIcon-Home"></span>
-				</div>
-			</div>
-			<div class="labelContainer">
-				<div class="labelValue">
-					{$ITEM_MENU['name']}
-				</div>
-			</div>
+		<a class="nav-link" href="index.php?module=Home&view=Dashboard">
+			<span class="c-menu__item__icon userIcon-Home"></span>
+			<span class="c-menu__item__text" title="{$ITEM_MENU['name']}">
+    			{$ITEM_MENU['name']}
+			</span>
 		</a>
 		{include file=\App\Resources::templatePath('Menu/SubMenu.tpl', $MODULE_NAME)}
 	</li>

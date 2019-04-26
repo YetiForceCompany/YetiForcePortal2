@@ -1,7 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 window.App.Fields = {
-	'Picklist':	{
+	'Picklist': {
 		/**
 		 * Function which will convert ui of select boxes.
 		 * @params parent - select element
@@ -225,8 +225,8 @@ window.App.Fields = {
 						var instance = element.data('select2');
 						instance.$dropdown.css('z-index', 1000002);
 					}).on("select2:unselect", function (e) {
-					select.data('unselecting', true);
-				});
+						select.data('unselecting', true);
+					});
 
 				if (select.hasClass('js-select2-sortable')) {
 					self.registerSelect2Sortable(select, params.sortableCb);
@@ -261,9 +261,9 @@ window.App.Fields = {
 			});
 		}
 	},
-	'Tree':	class {
+	'Tree': class {
 		constructor(treeContainer = $('.js-tree-container')) {
-			if( treeContainer.length > 0 ){
+			if (treeContainer.length > 0) {
 				this.treeInstance = treeContainer;
 				this.loadTree();
 			}
@@ -283,7 +283,7 @@ window.App.Fields = {
 		}
 		generateTree(treeData) {
 			this.treeInstance.jstree({
-				'core' : {
+				'core': {
 					data: treeData,
 					themes: {
 						name: 'proton',
@@ -291,6 +291,71 @@ window.App.Fields = {
 					},
 				}
 			});
+		}
+	},
+	Integer: {
+		/**
+		 * Function returns the integer in user specified format.
+		 * @param {number} value
+		 * @param {int} numberOfDecimal
+		 * @returns {string}
+		 */
+		formatToDisplay(value) {
+			if (!value) {
+				value = 0;
+			}
+			let groupSeparator = app.getMainParams('currencyGroupingSeparator');
+			let groupingPattern = app.getMainParams('currencyGroupingPattern');
+			value = parseFloat(value).toFixed(1);
+			let integer = value.toString().split('.')[0];
+			if (integer.length > 3) {
+				if (groupingPattern === '123,456,789') {
+					integer = integer.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + groupSeparator);
+				} else if (groupingPattern === '123456,789') {
+					integer = integer.slice(0, -3) + groupSeparator + integer.slice(-3);
+				} else if (groupingPattern === '12,34,56,789') {
+					integer = integer.slice(0, -3).replace(/(\d)(?=(\d\d)+(?!\d))/g, "$1" + groupSeparator) + groupSeparator + integer.slice(-3);
+				}
+			}
+			return integer;
+		},
+	},
+	Double: {
+		/**
+		 * Function returns the currency in user specified format.
+		 * @param {number} value
+		 * @param {boolean} numberOfDecimal
+		 * @param {int} numberOfDecimal
+		 * @returns {string}
+		 */
+		formatToDisplay(value, fixed = true, numberOfDecimal = app.getMainParams('numberOfCurrencyDecimal')) {
+			if (!value) {
+				value = 0;
+			}
+			value = parseFloat(value);
+			if (fixed) {
+				value = value.toFixed(numberOfDecimal);
+			}
+			let a = value.toString().split('.');
+			let integer = App.Fields.Integer.formatToDisplay(a[0]);
+			let decimal = a[1];
+			if (numberOfDecimal) {
+				if (app.getMainParams('truncateTrailingZeros')) {
+					if (decimal) {
+						let d = '';
+						for (var i = 0; i < decimal.length; i++) {
+							if (decimal[decimal.length - i - 1] !== '0') {
+								d = decimal[decimal.length - i - 1] + d;
+							}
+						}
+						decimal = d;
+					}
+				}
+				if (decimal) {
+					return integer + app.getMainParams('currencyDecimalSeparator') + decimal;
+				}
+			}
+			return integer;
 		}
 	}
 };

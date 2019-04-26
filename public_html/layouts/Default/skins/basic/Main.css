@@ -25,38 +25,47 @@
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
   animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
 }
+
 .sk-cube-grid .sk-cube1 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+
 .sk-cube-grid .sk-cube2 {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+
 .sk-cube-grid .sk-cube3 {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+
 .sk-cube-grid .sk-cube4 {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+
 .sk-cube-grid .sk-cube5 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+
 .sk-cube-grid .sk-cube6 {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+
 .sk-cube-grid .sk-cube7 {
   -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
+
 .sk-cube-grid .sk-cube8 {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+
 .sk-cube-grid .sk-cube9 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
@@ -128,6 +137,10 @@
   padding-left: 5px;
 }
 
+.o-btn-circle {
+  border-radius: 100% !important;
+}
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
@@ -138,6 +151,7 @@
   line-height: 20px;
   margin: 3px 5px 3px;
 }
+
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
   top: 8px;
 }
@@ -147,6 +161,7 @@
   text-align: left;
   height: 32px;
 }
+
 .referenceGroup .referenceModulesListGroup .chosen-container .chosen-single {
   border: 0;
   height: 32px;
@@ -183,11 +198,13 @@
     min-height: 1px;
   }
 }
+
 @media only screen and (min-width: 992px) {
   .blockContainer .blockContent .fieldLabel {
     text-align: right;
   }
 }
+
 #EditView .blockContainer .blockContent .fieldLabel label {
   padding-top: 8px;
 }
@@ -220,6 +237,7 @@ img {
   right: 0;
   margin-left: 50px;
   background: #fff;
+  overflow-y: auto;
 }
 
 .mainBody {
@@ -230,15 +248,13 @@ img {
   left: 0px;
   z-index: 1000;
   -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
 .bodyContent {
   position: relative;
   padding-top: 50px;
-  oveflow-x: hidden;
+  overflow-x: hidden;
   width: 100%;
   background: #fff;
   padding-bottom: 33px;
@@ -248,11 +264,11 @@ img {
   .bodyContent {
     padding-left: 10px;
   }
-
   .mainPage {
     margin-left: 0px;
   }
 }
+
 hr {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -267,41 +283,47 @@ hr {
   left: 50px;
   z-index: 1200;
   -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .bodyHeader .leftHeader {
   background-color: #969696;
   color: #fff;
   height: 50px;
 }
+
 .bodyHeader .rightHeader {
   background-color: #696969;
   color: #fff;
   height: 40px;
 }
+
 .bodyHeader .moduleIcon {
   max-width: 30px;
   margin: 5px 10px 0 0;
 }
+
 .bodyHeader .leftSide {
   padding-left: 10px;
   padding-top: 7px;
   width: 450px;
 }
+
 .bodyHeader .rightSide {
   position: relative;
   min-height: 1px;
   float: right;
 }
+
 .bodyHeader .rightSide img {
   height: 22px;
   margin: 0;
 }
+
 .bodyHeader .rightSide .rightHeaderBtn {
   padding: 7px 5px;
 }
+
 .bodyHeader .rightSide .rightHeaderBtn a {
   line-height: 20px;
   font-size: 18px;
@@ -315,6 +337,7 @@ hr {
     width: auto;
   }
 }
+
 .historyList {
   overflow: auto;
 }
@@ -349,6 +372,7 @@ hr {
 .widget_header .breadCrumbs .breadcrumbsLinks {
   font-size: 15px;
 }
+
 .widget_header .breadCrumbs .breadcrumbsLinks a {
   color: #000;
 }
@@ -364,20 +388,25 @@ hr {
   padding: 5px;
   display: none;
 }
+
 .actionMenu > div {
   position: relative;
   width: 100%;
   padding-bottom: 5px;
 }
+
 .actionMenu img {
   height: 19px;
 }
+
 .actionMenu .iconContainer {
   padding-left: 15px;
 }
+
 .actionMenu .labelContainer {
   padding-top: 5px;
 }
+
 .actionMenu .commonActionsButtonDropDown, .actionMenu .historyList {
   position: fixed;
   top: 50px;
@@ -401,8 +430,6 @@ hr {
   padding: 10px;
   width: 300px;
   -webkit-transition: right 0.5s ease;
-  -moz-transition: right 0.5s ease;
-  -o-transition: right 0.5s ease;
   transition: right 0.5s ease;
 }
 
@@ -414,9 +441,9 @@ hr {
   background: #eee;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin-bottom: 10px;
   position: relative;
 }
+
 .widget_header h2 {
   margin-bottom: 7px;
   margin-top: 7px;
@@ -424,6 +451,10 @@ hr {
 
 .breadcrumbsLinks a {
   font-weight: bold;
+}
+
+.c-main-container {
+  padding: 0;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -439,6 +470,7 @@ hr {
 .footer {
   text-align: center;
 }
+
 .footer p {
   color: #ffffff;
   padding: 0.0625rem 0;
@@ -450,97 +482,23 @@ hr {
     height: 17px;
   }
 }
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .userDetailsContainer .row {
   padding: 5px;
 }
+
 .userDetailsContainer .logo {
   margin: 5px;
   height: 40px;
 }
+
 .userDetailsContainer .userDetails .name {
   color: #fff;
 }
+
 .userDetailsContainer .userDetails .userName {
   margin-top: 5px;
-}
-
-.leftPanel {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 300px;
-  z-index: 900;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  height: calc(100% - 50px);
-}
-.leftPanel:hover {
-  left: 0px;
-}
-.leftPanel:hover + .mainBody {
-  left: 250px !important;
-}
-.leftPanel:hover + .mainBody .bodyHeader {
-  left: 300px;
-}
-.leftPanel .userDetailsContainer {
-  height: 50px;
-  background: #4979aa;
-}
-.leftPanel .menuContainer {
-  background: #4a5364;
-  height: 100%;
-  position: absolute;
-  left: 0px;
-  top: 50px;
-}
-.leftPanel .menuContainer .moduleList {
-  overflow: auto;
-  height: calc(100% - 33px);
-}
-.leftPanel .menuContainer .moduleList::-webkit-scrollbar {
-  display: none;
-}
-.leftPanel .menuContainer .moduleList > li {
-  width: 100%;
-  list-style: none;
-  position: static;
-  color: #fff;
-}
-.leftPanel .menuContainer .moduleList > li > a {
-  text-decoration: none;
-  width: 100%;
-  display: inline-flex;
-  color: #fff;
-}
-.leftPanel .menuContainer .moduleList > li > a:hover {
-  background: #fff;
-  color: #4a5364;
-}
-.leftPanel .menuContainer .moduleList > li > a > .iconContainer {
-  width: 50px;
-  height: 40px;
-  margin: 0px;
-  padding: 0px;
-  display: table;
-}
-.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
-  padding-left: 15px;
-  display: table-cell;
-  vertical-align: middle;
-}
-.leftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
-  font-size: 20px;
-}
-.leftPanel .menuContainer .moduleList > li > a > .labelContainer {
-  width: 250px;
-  height: 40px;
-  margin: 0px;
-  padding: 0px;
-  display: table;
 }
 
 .labelContainer .labelValue {
@@ -556,63 +514,189 @@ hr {
   width: 300px;
   z-index: 1000;
   -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   height: calc(100% - 50px);
 }
+
 .mobileLeftPanel .userDetailsContainer {
   height: 50px;
   background: #4979aa;
 }
-.mobileLeftPanel .menuContainer {
-  background: #3f3f3f;
-  height: 100%;
-  position: absolute;
-  left: 0px;
-  top: 50px;
+
+@media (min-width: 768px) {
+  .visible-phone {
+    visibility: hidden;
+  }
+  .hidden-phone {
+    visibility: visible;
+  }
 }
-.mobileLeftPanel .menuContainer .moduleList {
-  overflow: auto;
-  height: calc(100% - 67px);
+
+@media (max-width: 767px) {
+  .visible-phone {
+    visibility: visible;
+  }
+  .hidden-phone {
+    visibility: hidden;
+  }
 }
-.mobileLeftPanel .menuContainer .moduleList::-webkit-scrollbar {
-  display: none;
+
+.c-menu__container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 2rem;
+  width: 230px;
+  color: #f8f9fa;
+  z-index: 900;
+  background: #4a5364;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  height: calc(100% - 32px);
 }
-.mobileLeftPanel .menuContainer .moduleList > li {
-  width: 100%;
-  height: 30px;
-  list-style: none;
-  position: static;
-  color: #fff;
+
+.c-menu__container a {
+  color: #f8f9fa;
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a {
+
+.c-menu__container a:hover {
   text-decoration: none;
-  width: 100%;
+  cursor: pointer;
+}
+
+.c-menu__container:hover + .mainBody {
+  left: 180px !important;
+}
+
+.c-menu__container:hover + .mainBody .bodyHeader {
+  left: 230px;
+}
+
+.c-menu__item {
+  width: -webkit-fill-available;
+  width: -moz-available;
+}
+
+.c-menu__item a {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  width: 100%;
+  border-radius: 0;
+  vertical-align: text-top;
+  padding: 0.5rem 1.875rem 0.5rem 3.4375rem;
+  word-wrap: break-word;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  background: #4a5364;
+  position: relative;
+}
+
+.c-menu__item a:hover, .c-menu__item a:focus {
+  background: #555f73;
+}
+
+.c-menu__item a.hasIcon {
+  padding: 0.5rem 1.875rem 0.5rem 0.75rem;
+}
+
+.c-menu__item a:active {
+  background: #343b47;
+}
+
+.c-menu__item a .c-menu__item__text {
+  padding: 0.125rem 0;
+  position: relative;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-rendering: optimizeLegibility;
+}
+
+.c-menu__item a.hasIcon img {
+  height: 1.25rem;
+}
+
+.c-menu__item a .fa, .c-menu__item a.hasIcon img {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  padding-right: 0.4375rem;
+  padding-left: 0.1875rem;
+}
+
+.c-menu__item .c-submenu {
+  background: #202c40;
   color: #fff;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer {
-  width: 50px;
-  height: 30px;
-  margin: 0px;
-  padding: 0px;
-  display: table;
+
+.c-menu__item .c-submenu a {
+  font-size: 0.875rem;
+  color: #fff;
+  background: #202c40;
+  padding: 0.375rem 1.875rem 0.375rem 0.8rem;
+  padding-right: 1.875rem;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage {
+
+.c-menu__item .c-submenu a:hover, .c-menu__item .c-submenu a:focus {
+  background: #293851;
+}
+
+.c-menu__body {
+  height: calc(100% - 50px);
+  width: 100%;
+  position: relative;
+}
+
+.c-menu__item__icon {
+  padding-right: 1.125rem;
+  font-size: 1.6em;
+  min-width: 2.625rem;
+}
+
+.c-menu__header {
+  height: 3.125rem;
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #406a95;
+}
+
+a {
+  color: #006cdf;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.nav-link:hover, .nav-link:focus {
+  text-decoration: none;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
   padding-left: 15px;
-  display: table-cell;
-  vertical-align: middle;
+  margin-right: auto;
+  margin-left: auto;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a > .iconContainer > .iconImage > span {
-  font-size: 15px;
+
+.ps {
+  overflow: hidden !important;
+  overflow-anchor: none;
+  -ms-overflow-style: none;
+  touch-action: auto;
+  -ms-touch-action: auto;
 }
-.mobileLeftPanel .menuContainer .moduleList > li > a > .labelContainer {
-  width: 250px;
-  height: 30px;
-  margin: 0px;
-  padding: 0px;
-  display: table;
+
+.companyLogoContainer {
+  display: block;
+  width: 48px;
+  padding: 5px;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -630,6 +714,7 @@ hr {
   background: #fff;
   font-weight: 400 !important;
 }
+
 .listViewEntries tbody tr {
   cursor: pointer;
 }
@@ -641,21 +726,26 @@ table tbody tr:hover td .actions span {
 .leftRecordActions {
   background: inherit;
 }
+
 .leftRecordActions .actions {
   background: inherit;
 }
+
 .leftRecordActions .actions:hover .toolsAction {
   visibility: hidden;
 }
+
 .leftRecordActions .actions:hover .actionImages {
   white-space: nowrap;
   position: absolute;
   z-index: 1;
   display: inline-block !important;
 }
+
 .leftRecordActions .actions .actionImages a {
   color: inherit;
 }
+
 .leftRecordActions > div {
   display: inline-block !important;
 }
@@ -663,6 +753,7 @@ table tbody tr:hover td .actions span {
 table.listViewEntries td {
   vertical-align: middle !important;
 }
+
 table.dataTable.listViewEntries tbody td {
   padding: 3px 10px !important;
 }
@@ -672,6 +763,7 @@ table.dataTable.listViewEntries tbody td {
   margin: 10px auto;
   max-height: 200px;
 }
+
 .Users_Login .loginContainer {
   width: 400px;
   margin-top: 6%;
@@ -682,41 +774,151 @@ table.dataTable.listViewEntries tbody td {
 .Install_Install .logo {
   max-height: 100px;
 }
+
 .Install_Install .container-fluid {
   margin: 20px;
 }
+
 .Install_Install .main-container {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 3px;
-  box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+          box-shadow: 0 0 5px #ccc;
   min-height: 375px;
   margin-top: 10px;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-.product {
-  height: 300px;
-  width: 400px;
+.product-container {
+  background-color: #eee;
+  padding: 12px;
+}
+
+.product-border-l {
+  border-left: 1px #eeeeee solid;
+}
+
+.product-border-r {
+  border-right: 1px #eeeeee solid;
+}
+
+.product-border-b {
+  border-bottom: 1px #eeeeee solid;
+}
+
+.product-border {
   border: 1px #eeeeee solid;
 }
 
+.product-line {
+  border-bottom: 1px #eeeeee solid;
+}
+
+.product-category {
+  background-color: white;
+}
+
+.shopping-cart {
+  background-color: white;
+  border: 1px #eeeeee solid;
+  padding: 5px;
+}
+
+.product-summary {
+  background-color: white;
+  border: 1px #eeeeee solid;
+  padding: 5px;
+}
+
+.product-shopping-cart {
+  /*border-bottom: 1px $borderColor solid;*/
+  background-color: white;
+}
+
+.fs-80 {
+  font-size: 80%;
+}
+
+.fs-120 {
+  font-size: 120%;
+}
+
+.product {
+  height: 300px;
+  width: 400px;
+  border-right: 1px #eeeeee solid;
+  border-bottom: 1px #eeeeee solid;
+  background-color: white;
+}
+
 .product-image-contener {
+  width: 120px;
+  height: 120px;
+  border: 1px #eeeeee solid;
+  padding: 5px;
+}
+
+.product-shopping-cart-image-contener {
   width: 100px;
   height: 100px;
+  border: 1px #eeeeee solid;
+  padding: 5px;
+}
+
+.product-no-image {
+  width: 100%;
+  height: 100%;
+  color: #eeeeee;
 }
 
 .product-image {
-  object-fit: cover;
-}
-.product-image .product-no-image {
-  background-color: grey;
-  width: 100%;
-  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .add-to-cart {
   background-color: pink;
 }
 
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.o-dashboard-container {
+  list-style: none;
+  padding-left: 0;
+}
+
+.o-dashboard-container .o-dashboard-widget {
+  width: 32%;
+  float: left;
+  height: 300px;
+  border: 1px #ddd solid;
+  margin: 5px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.o-dashboard-container .o-dashboard-widget-header {
+  float: left;
+  width: 100%;
+  padding: 5px 15px;
+  border-bottom: 1px #eee solid;
+  background-color: #eee;
+  height: 35px;
+}
+
+.o-dashboard-container .o-dashboard-widget-content {
+  float: left;
+  width: 100%;
+  font-size: 10px;
+  overflow: auto;
+  height: calc(100% - 35px);
+}
+
+.o-dashboard-container .o-dashboard-widget-content .table {
+  cursor: pointer;
+}
+
+.o-dashboard-container .o-chartfilter-container {
+  height: 100%;
+}
 /*# sourceMappingURL=Main.css.map */

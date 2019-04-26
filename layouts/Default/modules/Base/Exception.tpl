@@ -3,4 +3,5 @@
 Code: {$CODE}<br>
 Message: {App\Purifier::encodeHTML($MESSAGE)}<br>
 Backtrace: {App\Purifier::encodeHTML($BACKTRACE)}<br>
+SESSION: <pre>{App\Purifier::encodeHTML(print_r($SESSION, true))}</pre>
 {/strip}

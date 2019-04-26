@@ -171,9 +171,7 @@
 	background: #eee;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	margin-bottom: 10px;
 	position: relative;
-
 	h2 {
 		margin-bottom: 7px;
 		margin-top: 7px;
@@ -182,4 +180,8 @@
 
 .breadcrumbsLinks a {
 	font-weight: bold;
+}
+
+.c-main-container {
+	padding:0;
 }
