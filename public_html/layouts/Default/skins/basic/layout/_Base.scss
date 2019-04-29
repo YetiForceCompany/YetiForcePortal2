@@ -64,3 +64,30 @@ hr {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.c-card {
+  &__header {
+    background-color: #f7f7f7 !important;
+    cursor: pointer;
+  }
+  &__icon-right {
+    display: none;
+  }
+  &__icon-down {
+    display: inline;
+  }
+  &__accordion {
+    background-color: #f7f7f7 !important;
+  }
+}
+
+.collapsed {
+  .c-card {
+    &__icon-right {
+      display: inline !important;
+    }
+    &__icon-down {
+      display: none !important;
+    }
+  }
+}
