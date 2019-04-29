@@ -43,12 +43,12 @@ class Buy extends \App\Controller\Action
 		$data = [];
 		foreach ($cart->getAll() as $key => $item) {
 			$data[$key] = [
-				'id' => $key,
-				'amount' => $item['amount']
+				'name' => $key,
+				'qty' => $item['amount']
 			];
 		}
 		return \App\Api::getInstance()->call(
-			'Products/SaveInventory/',
+			'SSingleOrders/SaveInventory/',
 			['sourceModule' => 'SSingleOrders', 'inventory' => $data],
 			'post'
 		);
