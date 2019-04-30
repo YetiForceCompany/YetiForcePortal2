@@ -74,7 +74,7 @@ class ShoppingCart extends View\ListView
 	protected function getListViewModel()
 	{
 		if (empty($this->listViewModel)) {
-			$this->listViewModel = CartView::getInstance($this->moduleName);
+			$this->listViewModel = CartView::getInstance($this->moduleName, 'CartView');
 		}
 		return $this->listViewModel;
 	}

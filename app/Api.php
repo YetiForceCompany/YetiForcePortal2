@@ -190,7 +190,7 @@ class Api
 	 *
 	 * @return $this
 	 */
-	public function setCustomHeaders($headers)
+	public function setCustomHeaders(array $headers): self
 	{
 		$this->header = $this->getHeaders();
 		foreach ($headers as $key => $value) {

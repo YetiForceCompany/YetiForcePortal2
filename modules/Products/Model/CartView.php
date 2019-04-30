@@ -12,6 +12,7 @@
 namespace YF\Modules\Products\Model;
 
 use App\Api;
+use YF\Modules\Base\Model\AbstractListView;
 use YF\Modules\Base\Model\ListView as ListViewModel;
 use YF\Modules\Base\Model\Record;
 
@@ -38,15 +39,6 @@ class CartView extends ListViewModel
 	/**
 	 * {@inheritdoc}
 	 */
-	public static function getInstance(string $moduleName)
-	{
-		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', 'CartView');
-		return new $handlerModule($moduleName);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
 	public function __construct(string $moduleName)
 	{
 		$this->setModuleName($moduleName);
@@ -56,7 +48,7 @@ class CartView extends ListViewModel
 	/**
 	 * {@inheritdoc}
 	 */
-	public function loadRecordsList(): ListViewModel
+	public function loadRecordsList(): AbstractListView
 	{
 		$this->setConditions([
 			'fieldName' => 'id',
@@ -111,7 +103,7 @@ class CartView extends ListViewModel
 			if (empty($accountRecordDetail['data']['addresslevel5' . $typeAddress])) {
 				continue;
 			}
-			$address[$typeAddress]= array_intersect_key($accountRecordDetail['data'], array_flip(
+			$address[$typeAddress] = array_intersect_key($accountRecordDetail['data'], array_flip(
 				array_map(function ($val) use ($typeAddress) {
 					return $val . $typeAddress;
 				}, static::ADDRESS_FIELDS)

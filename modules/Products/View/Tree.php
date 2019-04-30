@@ -12,6 +12,7 @@
 
 namespace YF\Modules\Products\View;
 
+use YF\Modules\Base\Model\ListView as ListViewModel;
 use YF\Modules\Base\View;
 use YF\Modules\Products\Model\Tree as TreeModel;
 
@@ -90,5 +91,16 @@ class Tree extends View\ListView
 	protected function postProcessTplName(): string
 	{
 		return $this->request->getAction() . '/TreePostProcess.tpl';
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getListViewModel()
+	{
+		if (empty($this->listViewModel)) {
+			$this->listViewModel = ListViewModel::getInstance($this->moduleName, 'TreeView');
+		}
+		return $this->listViewModel;
 	}
 }

@@ -147,7 +147,7 @@ class Request
 			if (!$value) {
 				return [];
 			}
-			if (is_string($value) && (0 === strpos($value, '[') || 0 === strpos($value, '{'))) {
+			if ($this->isJSON($value)) {
 				$decodeValue = Json::decode($value);
 				if (isset($decodeValue)) {
 					$value = $decodeValue;
@@ -180,14 +180,8 @@ class Request
 			return $defvalue;
 		}
 		$value = $this->rawValues[$key];
-		$isJSON = false;
-		if (is_string($value)) {
-			if (0 === strpos($value, '[') || 0 === strpos($value, '{')) {
-				$isJSON = true;
-			}
-		}
-		if ($isJSON) {
-			$decodeValue = Json::json_decode($value);
+		if ($this->isJSON($value)) {
+			$decodeValue = Json::decode($value);
 			if (isset($decodeValue)) {
 				$value = $decodeValue;
 			}
@@ -197,6 +191,18 @@ class Request
 		}
 		$this->purifiedValuesByGet[$key] = $value;
 		return $value;
+	}
+
+	/**
+	 * Check is json.
+	 *
+	 * @param mixed $value
+	 *
+	 * @return bool
+	 */
+	private function isJSON($value): bool
+	{
+		return is_string($value) && (0 === strpos($value, '[') || 0 === strpos($value, '{'));
 	}
 
 	/**
@@ -234,7 +240,7 @@ class Request
 		return  $this->getByType('action', Purifier::ALNUM);
 	}
 
-	public function isAjax()
+	public function isAjax(): bool
 	{
 		if (!empty($_SERVER['HTTP_X_PJAX']) && true == $_SERVER['HTTP_X_PJAX']) {
 			return true;
