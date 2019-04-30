@@ -69,6 +69,9 @@ hr {
   &__header {
     background-color: #f7f7f7 !important;
     cursor: pointer;
+    .btn-link {
+      color: #006cdf;
+    }
   }
   &__icon-right {
     display: none;
@@ -89,5 +92,28 @@ hr {
     &__icon-down {
       display: none !important;
     }
+  }
+}
+
+.c-nav {
+  border-bottom: 1px solid #dee2e6;
+  &__item {
+    margin-bottom: -1px;
+  }
+
+  &__link {
+    border: 1px solid transparent !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    color: #006cdf !important;
+    &:hover {
+      color: #004793 !important;
+      border: 1px solid #dee2e6 !important;
+    }
+  }
+
+  &__link.active {
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
   }
 }

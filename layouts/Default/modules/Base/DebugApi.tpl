@@ -23,10 +23,10 @@
 											<table class="table">
 												<thead>
 													<tr>
-														<th scope="col"><span class="font-weight-bold u-fs-12px">Start time:</span></th>
-														<th scope="col"><span class="font-weight-bold u-fs-12px">Execution time:</span></th>
-														<th scope="col"><span class="font-weight-bold u-fs-12px">API method:</span></th>
-														<th scope="col"><span class="font-weight-bold u-fs-12px">Request type:</span></th>
+														<th scope="col"><span class="u-fs-12px"><strong>Start time:</strong></span></th>
+														<th scope="col"><span class="u-fs-12px"><strong>Execution time:</strong></span></th>
+														<th scope="col"><span class="u-fs-12px"><strong>API method:</strong></span></th>
+														<th scope="col"><span class="u-fs-12px"><strong>Request type:</strong></span></th>
 													</tr>
 												</thead>
 												<tbody>
@@ -39,24 +39,24 @@
 												</tbody>
 											</table>
 										</div>
-										<ul class="nav nav-tabs" role="tablist">
-											<li role="nav-item">
-												<a class="nav-link active" href="#rawRequest{$KEY}" aria-controls="rawRequest{$KEY}" role="tab"
-													data-toggle="tab">Request</a>
+										<ul class="nav nav-tabs c-nav" role="tablist">
+											<li role="nav-item c-nav__item">
+												<a class="nav-link c-nav__link active" href="#rawRequest{$KEY}" aria-controls="rawRequest{$KEY}" role="tab"
+													data-toggle="tab"><strong>Request</strong></a>
 											</li>
-											<li role="nav-item">
-												<a class="nav-link" href="#rawResponse{$KEY}" aria-controls="rawResponse{$KEY}" role="tab"
-													data-toggle="tab">Raw response</a>
+											<li role="nav-item c-nav__item">
+												<a class="nav-link c-nav__link" href="#rawResponse{$KEY}" aria-controls="rawResponse{$KEY}" role="tab"
+													data-toggle="tab"><strong>Raw response</strong></a>
 											</li>
-											<li role="nav-item " >
-												<a class="nav-link " href="#response{$KEY}" aria-controls="response{$KEY}" role="tab" data-toggle="tab">Response</a>
+											<li role="nav-item c-nav__item" >
+												<a class="nav-link c-nav__link" href="#response{$KEY}" aria-controls="response{$KEY}" role="tab" data-toggle="tab"><strong>Response</strong></a>
 											</li>
-											<li role="nav-item">
-												<a class="nav-link" href="#trace{$KEY}" aria-controls="trace{$KEY}" role="tab"
-													data-toggle="tab">Trace</a>
+											<li role="nav-item c-nav__item">
+												<a class="nav-link c-nav__link" href="#trace{$KEY}" aria-controls="trace{$KEY}" role="tab"
+													data-toggle="tab"><strong>Trace</strong></a>
 											</li>
 										</ul>
-										<div class="tab-content">
+										<div class="tab-content mt-3">
 											<div role="tabpanel" class="tab-pane active" id="rawRequest{$KEY}">
 												Headers:<br/>
 												<pre>{App\Purifier::encodeHTML(print_r($ITEM['rawRequest'][0],true))}</pre>
@@ -70,7 +70,7 @@
 												<pre>{App\Purifier::encodeHTML(print_r($ITEM['response'],true))}</pre>
 											</div>
 											<div role="tabpanel" class="tab-pane" id="trace{$KEY}">
-												<pre>{App\Purifier::encodeHTML(print_r($ITEM['trace'],true))}</pre>
+												<pre class="bg-light p-3">{App\Purifier::encodeHTML(print_r($ITEM['trace'],true))}</pre>
 											</div>
 										</div>
 									</div>
