@@ -126,8 +126,8 @@ hr {
     background-color: #ffebee !important;
   }
   &__card-body {
-    overflow-y: scroll;
-    height: 650px !important;
+    overflow-y: auto;
+    height: 300px !important;
     background-color: #fafafa;
   }
   &__card-footer {

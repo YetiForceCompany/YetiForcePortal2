@@ -24,7 +24,6 @@
                     <p class="card-text">
                         Message: <br> {\App\Purifier::encodeHtml($MESSAGE)}<br><br>
                         Backtrace: <br> {$BACKTRACE}<br><br>
-                        SESSION: <pre>{\App\Purifier::encodeHtml(print_r($SESSION, true))}</pre>
                     </p>
                 </div>
                 <div class="card-footer c-exception__card-footer d-flex flex-wrap flex-sm-nowrap">
@@ -38,6 +37,20 @@
                     </a>
                 </div>
             </div>
+            {if $SESSION}
+                <div class="card mx-auto shadow mt-4" role="alert">
+                    <div class="card-header text-white bg-info u-cursor-default d-flex justify-content-center flex-wrap">
+                        <h3 class="card-title d-flex align-items-center justify-content-center">
+                            <strong>SESSION</strong>
+                        </h3>
+                    </div>
+                    <div class="card-body c-exception__card-body">
+                        <p class="card-text">
+                            <pre>{\App\Purifier::encodeHtml(print_r($SESSION, true))}</pre>
+                        </p>
+                    </div>
+                </div>
+            {/if}
         </div>
         <script type="text/javascript" src="libraries/@fortawesome/fontawesome/index.js"></script>
         <script type="text/javascript" src="libraries/@fortawesome/fontawesome-free-solid/index.js"></script>
