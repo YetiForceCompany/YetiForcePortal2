@@ -2,7 +2,7 @@
 {strip}
 	<div class="tpl-Base-ListView contentsDiv">
 		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
-		<div class="widget_header row">
+		<div class="widget_header row py-1">
 			<div class="col-sm-8">
 				<div class="pull-left">
 					{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
@@ -12,7 +12,7 @@
 				<div class="float-right">
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}
-							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-outline-success btn-sm">
+							<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-outline-success btn-sm mb-0">
 								<span class="fas fa-plus"></span>
 								&nbsp;
 								<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
