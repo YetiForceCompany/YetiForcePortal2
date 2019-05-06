@@ -117,3 +117,30 @@ hr {
     color: #495057 !important;
   }
 }
+
+.c-exception {
+  background-color: #fff8e1;
+
+  &__card-header {
+    color: #ff5252;
+    background-color: #ffebee !important;
+  }
+  &__card-body {
+    overflow-y: scroll;
+    height: 650px !important;
+    background-color: #fafafa;
+  }
+  &__card-footer {
+    a {
+      color: #212529;
+      background-color: #ddd;
+      border-color: #ddd;
+
+      &:hover {
+        color: #212529;
+        background-color: #cacaca;
+        border-color: #c4c4c4;
+      }
+    }
+  }
+}
