@@ -20,9 +20,9 @@
             </div>
         </div>
         <div class="col-8 pl-5">
-            <div class="row fs-120 font-weight-bold">{$RECORD->getDisplayValue('productname')}</div>
-            <div class="row fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
-            <div class="row mt-5">
+            <div class="fs-120 font-weight-bold">{$RECORD->getDisplayValue('productname')}</div>
+            <div class="fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
+            <div class="mt-5">
                 <div class="col-3 p-0 m-0">
                     <button type="button" class="btn btn-sm btn-block btn-outline-danger js-remove-from-cart" data-js="click">
                         <i class="fas fa-trash mr-1"></i>
@@ -32,19 +32,21 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="row mt-5">
-                <div class="input-group input-group-sm mb-3 col-8">
+            <div class="col-12 mt-2 mb-5 d-flex justify-content-end">
+                <div class="input-group input-group-sm col-10 c-cart-quantity d-flex align-items-center">
                     <div class="input-group-prepend">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-dec bmd-btn-icon mr-2 o-btn-circle" type="button">-</button>
+                        <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-dec mr-2 mb-0" type="button">-</button>
                     </div>
-                    <input class="form-control js-amount" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
+                    <input class="form-control js-amount c-cart-quantity__input border text-center" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-inc bmd-btn-icon mr-2 o-btn-circle" type="button">+</button>
+                        <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-inc ml-2 mb-0" type="button">+</button>
                     </div>
                 </div>
             </div>
-            <div class="row">netto: {$RECORD->getDisplayValue('unit_price')}</div>
-            <div class="row">brutto: {$RECORD->getDisplayValue('unit_price')}</div>
+            <div class="col-12 text-secondary">
+                <div class="col-12 text-right fs-80"><span class="font-weight-bold">netto:</span> {$RECORD->getDisplayValue('unit_price')}</div>
+                <div class="col-12 text-right fs-80"><span class="font-weight-bold">brutto:</span> {$RECORD->getDisplayValue('unit_price')}</div>
+            </div>
         </div>
     </div>
     <!--/tpl-Products-ShoppingCart-Product-->
