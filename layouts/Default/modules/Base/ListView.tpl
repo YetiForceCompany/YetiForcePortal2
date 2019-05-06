@@ -47,6 +47,6 @@
 				</table>
 			</div>
 		</div>
-		{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
 	</div>
+	{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
 {/strip}
