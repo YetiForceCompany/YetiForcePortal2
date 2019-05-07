@@ -53,6 +53,11 @@ class CartView extends ListViewModel
 		$this->cart = new Cart();
 	}
 
+	public function setCart($cart)
+	{
+		$this->cart = $cart;
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -72,9 +77,11 @@ class CartView extends ListViewModel
 	public function getRecordsListModel(): array
 	{
 		$this->recordsListModel = parent::getRecordsListModel();
-		foreach ($this->recordsListModel as $key => $recordModel) {
-			$recordModel->set('amountInShoppingCart', $this->cart->getAmount($key));
-			$recordModel->set('totalPriceNetto', $this->cart->getAmount($key) * (float) $recordModel->get('unit_price'));
+		foreach ($this->recordsListModel as $recordId => $recordModel) {
+			$recordDetail = $this->cart->get($recordId);
+			$recordModel->set('amountInShoppingCart', $this->cart->getAmount($recordId));
+			$recordModel->set('totalPriceNetto', $this->cart->getAmount($recordId) * (float) $recordDetail['param']['priceNetto']);
+			$recordModel->set('priceNetto', $recordDetail['param']['priceNetto']);
 		}
 		return $this->recordsListModel;
 	}

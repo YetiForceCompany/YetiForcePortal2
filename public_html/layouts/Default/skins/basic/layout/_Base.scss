@@ -118,14 +118,44 @@ hr {
   }
 }
 
+.c-exception {
+  background-color: #fff8e1;
+
+  &__card-header {
+    color: #ff5252;
+    background-color: #ffebee !important;
+  }
+  &__card-body {
+    overflow-y: auto;
+    height: 300px !important;
+    background-color: #fafafa;
+  }
+  &__card-footer {
+    a {
+      color: #212529;
+      background-color: #ddd;
+      border-color: #ddd;
+
+      &:hover {
+        color: #212529;
+        background-color: #cacaca;
+        border-color: #c4c4c4;
+      }
+    }
+  }
+}
+
 .hideBlock.show {
   display: flex !important;
 }
+
 .select2-selection--single {
   height: auto !important;
+  
   .select2-selection__rendered {
     line-height: 40px !important;
   }
+  
   .select2-selection__arrow {
     top: 7px !important;
   }
@@ -133,14 +163,18 @@ hr {
 
 .select2-selection--multiple {
   height: auto !important;
+  
   .select2-selection__rendered {
     line-height: 28px !important;
   }
 }
+
 .form-control:focus {
   box-shadow: none !important;
 }
+
 .dropdown-menu {
   opacity: 1 !important;
   transform: none !important;
 }
+

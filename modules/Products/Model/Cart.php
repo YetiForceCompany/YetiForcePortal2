@@ -24,13 +24,13 @@ class Cart
 	 *
 	 * @var array
 	 */
-	private $address = [];
+	protected $address = [];
 	/**
 	 * List of items in the cart.
 	 *
 	 * @var array
 	 */
-	private $cart = [];
+	protected $cart = [];
 
 	/**
 	 * Get the number of items in the cart.
