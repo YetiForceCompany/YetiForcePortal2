@@ -12,6 +12,7 @@ namespace YF\Modules\Base\View;
 
 use App\Api;
 use App\Purifier;
+use YF\Modules\Base\Model\DetailView as DetailViewModel;
 use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\InventoryField;
 use YF\Modules\Base\Model\Record;
@@ -46,7 +47,6 @@ class DetailView extends \App\Controller\View
 		if (!empty($moduleStructure['inventory'])) {
 			$recordModel->setInventoryData($recordDetail['inventory']);
 			foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
-				$recordModel->setInventoryData($recordDetail['inventory']);
 				if (1 === $fieldType) {
 					foreach ($fieldsInventory as $field) {
 						if ($field['isVisibleInDetail']) {
@@ -56,12 +56,16 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
+		$recordModel->setId($record);
+		$detailViewModel = DetailViewModel::getInstance($moduleName);
+		$detailViewModel->setRecordModel($recordModel);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
+		$this->viewer->assign('LINKS', $detailViewModel->getLinksHeader());
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }

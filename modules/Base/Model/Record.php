@@ -61,6 +61,11 @@ class Record extends \App\BaseModel
 		return $this->inventoryData;
 	}
 
+	public function isInventory()
+	{
+		return !empty($this->inventoryData);
+	}
+
 	/**
 	 * Function to set the id of the record.
 	 *
