@@ -41,9 +41,9 @@
 			</div>
 		{/if}
 		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"
-			   title="{$RECORD->getDisplayValue($FIELD_NAME)}"
+			   title="{$FIELD_MODEL->getDisplayValue()}"
 			   class="marginLeftZero form-control autoComplete" {if !empty($DISPLAYID)}readonly="true"{/if}
-			   value="{$RECORD->getDisplayValue($FIELD_NAME)}"
+			   value="{$FIELD_MODEL->getDisplayValue()}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
