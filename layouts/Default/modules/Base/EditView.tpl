@@ -36,8 +36,8 @@
 						<div class="card-body blockContent row collapse hideBlock" id="{strtolower($BLOCK['name'])}" aria-labelledby="{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 row">
-									<div class="col-md-3 fieldLabel paddingLeft5px">
-										<label class="muted">
+									<div class="col-md-3 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-end">
+										<label class="muted mb-0 pt-0">
 											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}
 											{$FIELD->getLabel()}
 										</label>
