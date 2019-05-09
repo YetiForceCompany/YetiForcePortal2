@@ -3,7 +3,7 @@
 {strip}
 	<div class="input-group date">
 		<input id="{$MODULE_NAME}_editView_fieldName_{$FIELD_MODEL->getName()}" type="text"
-			   title="{$FIELD_MODEL->get('label')}" class="form-control datepicker" data-date-format="yyyy-mm-dd" name="{$FIELD_MODEL->getName()}"
+			   title="{$FIELD_MODEL->get('label')}" class="form-control datepicker" data-date-format="{$FIELD_MODEL->get('date-format')}" name="{$FIELD_MODEL->getName()}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()},required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			   {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if} data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			   value="{$FIELD_MODEL->getEditViewDisplayValue()}"/>
