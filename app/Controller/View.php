@@ -234,6 +234,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
@@ -274,15 +275,13 @@ abstract class View extends Base
 	 * {@inheritdoc}
 	 */
 	public function postProcessAjax()
-	{
-	}
+	{ }
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function preProcessAjax()
-	{
-	}
+	{ }
 
 	/**
 	 * Get module name from request.
