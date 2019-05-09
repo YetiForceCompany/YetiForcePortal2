@@ -27,9 +27,13 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
-					<div class="card mb-2 blockContainer">
-						<div class="card-header">{$BLOCK['name']}</div>
-						<div class="card-body blockContent row">
+					<div class="c-card card card my-3 blockContainer">
+						<div class="card-header c-card__header collapsed" id="{$BLOCK['id']}" data-toggle="collapse" data-target="#{strtolower($BLOCK['name'])}" aria-expanded="true">
+							<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
+							<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
+							{$BLOCK['name']}
+						</div>
+						<div class="card-body blockContent row collapse hideBlock" id="{strtolower($BLOCK['name'])}" aria-labelledby="{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 row">
 									<div class="col-md-3 fieldLabel paddingLeft5px">

@@ -146,8 +146,9 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
-			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.css',
+			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap4-clockpicker.css',
 			YF_ROOT_WWW . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
 			YF_ROOT_WWW . 'libraries/jstree/dist/themes/default/style.css',
 		];
@@ -232,6 +233,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
 			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
+			YF_ROOT_WWW . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
@@ -245,7 +247,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
 			$fileName,
 			YF_ROOT_WWW . 'libraries/jstree/dist/jstree.js',
-			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap-clockpicker.js',
+			YF_ROOT_WWW . 'libraries/clockpicker/dist/bootstrap4-clockpicker.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/helper.js',
@@ -273,15 +275,13 @@ abstract class View extends Base
 	 * {@inheritdoc}
 	 */
 	public function postProcessAjax()
-	{
-	}
+	{ }
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function preProcessAjax()
-	{
-	}
+	{ }
 
 	/**
 	 * Get module name from request.
