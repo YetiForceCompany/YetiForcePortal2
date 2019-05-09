@@ -23,14 +23,37 @@
         </div>
         <div class="col-8">
             <h4>{$RECORD->get('productname')}</h4>
-            <button class="btn btn-outline-success u-border-radius js-add-to-cart" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
-            <div class="input-group input-group-sm col-3 d-flex align-items-center px-0 c-cart-quantity">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
+            <div class="col-12 row">
+                <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
+                <div class="input-group input-group-sm col-2 d-flex align-items-center px-0 c-cart-quantity">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
+                    </div>
+                    <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="1">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+                    </div>
                 </div>
-                <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="1">
-                <div class="input-group-append">
-                    <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+            </div>
+            <hr>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active text-capitalize" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">
+                        {\App\Language::translate('LBL_DESCRIPTION', $MODULE_NAME)}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-capitalize" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
+                        {\App\Language::translate('LBL_DETAILS', $MODULE_NAME)}
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    {$RECORD->get('description')}
+                </div>
+                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+
                 </div>
             </div>
         </div>

@@ -42,6 +42,8 @@
 		"LBL_ADDRESS_BUILDINGNUMBER": "Building number",
 		"LBL_ADDRESS_LOCALNUMBER": "Office number",
 		"LBL_ADDRESS_POBOX": "PO box"
+		"LBL_DETAILS": "Details",
+    	"LBL_DESCRIPTION": "Description",
 	},
 	"js": {
 		"JS_TODAY": "Today",
