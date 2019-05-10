@@ -16,7 +16,9 @@
 		"LBL_BUY": "Buy",
 		"LBL_VIEW_SHOPPINGCART": "Shipping cart",
 		"LBL_CATEGORIES": "Categories",
-		"LBL_ADDRESS": "Address"
+		"LBL_ADDRESS": "Address",
+		"LBL_NET_PRICE": "Net price",
+		"LBL_GROSS_PRICE": "Gross price"
 	},
 	"js": {}
 }
