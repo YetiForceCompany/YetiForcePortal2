@@ -3,26 +3,55 @@
     <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview" data-js="container">
         <input type="hidden" class="js-preview-record" value="{$RECORD->getId()}" data-js="val">
         <div class="col-4">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    {foreach from=$RECORD->get('imagename') item=IMAGE name=images}
-                        <div class="carousel-item {if $smarty.foreach.images.index eq 0}active{/if}" >
-                            <img class="d-block w-100" src="data:image/jpeg;base64,{$IMAGE}" alt="First slide">
-                        </div>
-                    {/foreach}
+            {assign var="IMAGES" value=$RECORD->get('imagename')}
+            {if empty($IMAGES) }
+                <div class="product-image-contener text-center">
+                     <div class="product-no-image m-auto">
+                        <span class="fa-stack fa-2x product-no-image">
+                            <i class="fas fa-camera fa-stack-1x"></i>
+                            <i class="fas fa-ban fa-stack-2x"></i>
+                        </span>
+                    </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            {else}
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {foreach from=$IMAGES item=IMAGE name=images}
+                             <div class="carousel-item {if $smarty.foreach.images.index eq 0}active{/if}" >
+                                <img class="d-block w-100" src="data:image/jpeg;base64,{$IMAGE}" alt="First slide">
+                            </div>
+                        {/foreach}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            {/if}
         </div>
         <div class="col-8">
-            <h4>{$RECORD->get('productname')}</h4>
+            <div class="w-100 d-flex align-items-center">
+                <h4 class="mr-3">{$RECORD->get('productname')}</h4>
+                <table class="u-fs-12px">
+                    <tbody>
+                        <tr>
+                            <th class="px-1">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</th>
+                            <td class="px-1">{$RECORD->get('unit_price')}</td>
+                        </tr>
+                        <tr>
+                            <th class="px-1">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</th>
+                            <td class="px-1">{$RECORD->get('unit_price')}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="w-100 my-2 u-fs-12px">
+                <span class="text-muted">EAN-13:</span> {$RECORD->get('ean')}
+            </div>
             <div class="col-12 row">
                 <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
                 <div class="input-group input-group-sm col-2 d-flex align-items-center px-0 c-cart-quantity">
