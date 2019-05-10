@@ -39,7 +39,7 @@
                 <table class="u-fs-12px">
                     <tbody>
                         <tr>
-                            <th class="px-1">{\App\Language::translate('LBL_NEXT', $MODULE_NAME)}:</th>
+                            <th class="px-1">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</th>
                             <td class="px-1">{$RECORD->getDisplayValue('unit_price')}</td>
                         </tr>
                         <tr>
