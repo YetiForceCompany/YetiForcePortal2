@@ -49,11 +49,26 @@
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <div class="tab-pane fade show active p-3" id="description" role="tabpanel" aria-labelledby="description-tab">
                     {$RECORD->get('description')}
                 </div>
-                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
-
+                <div class="tab-pane fade p-3" id="details" role="tabpanel" aria-labelledby="details-tab">
+                   {foreach item=BLOCK from=$BLOCKS}
+                        {foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
+                            <div class="col-12 row">
+                                {if $FIELD->getLabel() !== 'Description' && $FIELD->getLabel() !== 'Product image'}
+                                    <div class="col-md-2 px-0">
+                                        <label class="muted font-weight-bold">
+                                            {$FIELD->getLabel()}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9 px-0"">
+                                        {$FIELD->getDisplayValue()}
+                                    </div>
+                                 {/if}
+                            </div>
+                       {/foreach}
+                    {/foreach}
                 </div>
             </div>
         </div>
