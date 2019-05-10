@@ -46,6 +46,7 @@ class Preview extends \App\Controller\View
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('FIELDS_LABEL', $recordDetail['fields']);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->view('Preview/Preview.tpl', $moduleName);
 	}

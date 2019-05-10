@@ -24,33 +24,33 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">{\App\Language::translate('LBL_PREVIOUS', $MODULE_NAME)}</span>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">{\App\Language::translate('LBL_NEXT', $MODULE_NAME)}</span>
                     </a>
                 </div>
             {/if}
         </div>
         <div class="col-8">
             <div class="w-100 d-flex align-items-center">
-                <h4 class="mr-3">{$RECORD->get('productname')}</h4>
+                <h4 class="mr-3">{$RECORD->getDisplayValue('productname')}</h4>
                 <table class="u-fs-12px">
                     <tbody>
                         <tr>
-                            <th class="px-1">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</th>
-                            <td class="px-1">{$RECORD->get('unit_price')}</td>
+                            <th class="px-1">{\App\Language::translate('LBL_NEXT', $MODULE_NAME)}:</th>
+                            <td class="px-1">{$RECORD->getDisplayValue('unit_price')}</td>
                         </tr>
                         <tr>
                             <th class="px-1">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</th>
-                            <td class="px-1">{$RECORD->get('unit_price')}</td>
+                            <td class="px-1">{$RECORD->getDisplayValue('unit_price')}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="w-100 my-2 u-fs-12px">
-                <span class="text-muted">EAN-13:</span> {$RECORD->get('ean')}
+                <span class="text-muted">{$FIELDS_LABEL['ean']}:</span> {$RECORD->getDisplayValue('ean')}
             </div>
             <div class="col-12 row">
                 <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
@@ -79,7 +79,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active p-3" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    {$RECORD->get('description')}
+                    {$RECORD->getDisplayValue('description')}
                 </div>
                 <div class="tab-pane fade p-3" id="details" role="tabpanel" aria-labelledby="details-tab">
                    {foreach item=BLOCK from=$BLOCKS}
@@ -91,7 +91,7 @@
                                             {$FIELD->getLabel()}
                                         </label>
                                     </div>
-                                    <div class="col-md-9 px-0"">
+                                    <div class="col-md-9 px-0">
                                         {$FIELD->getDisplayValue()}
                                     </div>
                                  {/if}
