@@ -178,3 +178,33 @@ hr {
   transform: none !important;
 }
 
+.c-page {  
+  &__item {
+    &.active {
+
+      .c-page__link {
+        background-color: #fff;
+        color: #404952;
+        font-size: 22px;
+        font-weight: bold;
+      }
+    }
+
+    .c-page__link {
+      padding: 0px;
+      min-width: 1.6em;
+      border-radius: 0px;
+      color: #404952;
+      margin-right: 0px;
+
+      &:hover {
+        background-color: #fff;
+        color: #404952;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
