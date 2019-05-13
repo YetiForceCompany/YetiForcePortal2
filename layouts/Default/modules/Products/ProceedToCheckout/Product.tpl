@@ -8,7 +8,7 @@
             <div class="product-shopping-cart-image-contener align-items-center m-auto">
                 {assign var="IMAGES" value=$RECORD->get('imagename')}
                 {if empty($IMAGES) }
-                    <div class="product-no-image">
+                    <div class="product-no-image m-auto">
                         <span class="fa-stack fa-2x product-no-image">
                             <i class="fas fa-camera fa-stack-1x"></i>
                             <i class="fas fa-ban fa-stack-2x"></i>

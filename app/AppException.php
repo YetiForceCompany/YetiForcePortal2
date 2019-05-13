@@ -35,11 +35,17 @@ class AppException extends \Exception
 		} else {
 			$backtrace = $e->backtrace;
 		}
+		$cssFileNames = [
+			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
+			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
+		];
 		$viewer = new \App\Viewer();
 		$viewer->assign('MESSAGE', $e->getMessage());
 		$viewer->assign('CODE', $e->getCode());
 		$viewer->assign('BACKTRACE', nl2br($backtrace));
 		$viewer->assign('SESSION', $_SESSION);
+		$viewer->assign('CSS_FILE', $cssFileNames);
 		$viewer->view($tplName);
 	}
 }

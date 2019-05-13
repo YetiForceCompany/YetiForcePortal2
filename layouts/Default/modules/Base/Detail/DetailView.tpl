@@ -8,11 +8,9 @@
 				</div>
 				<div class="contentHeader">
 					<span class="float-right">
-						{if YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'EditView')}
-							<a href="{$RECORD->getEditViewUrl()}" class="btn btn-outline-success btn-sm"
-							title="{\App\Language::translate('BTN_EDIT')}"><span
-										class="fas fa-pencil-alt"></span> &nbsp; <strong>{\App\Language::translate('BTN_EDIT', $MODULE_NAME)}</strong> </a>
-						{/if}
+						{foreach from=$LINKS item=LINK}
+							{include file=\App\Resources::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
+						{/foreach}
 					</span>
 					<div class="clearfix"></div>
 				</div>
@@ -22,9 +20,13 @@
 			{if isset($FIELDS[$BLOCK['id']])}
 				{assign var=COUNTER value=0}
 				{assign var=COUNT value=0}
-				<div class="card col-sm-12 px-0 blockContainer my-2">
-					<div class="card-header">{$BLOCK['name']}</div>
-					<div class="col-md-12 px-0 card-body py-0 blockContent">
+				<div class="card c-card col-sm-12 px-0 blockContainer my-3">
+					<div class="card-header c-card__header collapsed" id="{$BLOCK['id']}" data-toggle="collapse" data-target="#{strtolower($BLOCK['name'])}" aria-expanded="true">
+						<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
+						<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
+						{$BLOCK['name']}
+					</div>
+					<div class="col-md-12 px-0 card-body py-0 blockContent collapse" id="{strtolower($BLOCK['name'])}" aria-labelledby="{$BLOCK['id']}">
 						<div class="col-sm-12 px-0 d-flex">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
@@ -34,12 +36,12 @@
 							{/if}
 							<div class="col-sm-12 col-md-6 px-0 borderTop d-flex">
 								<div class="col-md-3 fieldLabel pl-2 form-control-plaintext">
-									<label class="col-form-label">
+									<label class="col-form-label font-weight-bold">
 										{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 										{$FIELD->get('label')}
 									</label>
 								</div>
-								<div class="fieldValue col-md-9 form-control-plaintext">
+								<div class="fieldValue col-md-9 form-control-plaintext d-flex align-items-center">
 									{$FIELD->getDisplayValue()}
 								</div>
 								{assign var=COUNTER value=$COUNTER+1}

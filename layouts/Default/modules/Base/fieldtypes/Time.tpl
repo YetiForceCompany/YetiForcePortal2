@@ -2,10 +2,14 @@
 {strip}
 	<div class="input-group timeField">
 		<input id="{$MODULE_NAME}_editView_fieldName_{$FIELD_MODEL->getName()}" type="text"
-			   title="{$FIELD_MODEL->get('label')}" class="form-control timeFieldInput" name="{$FIELD_MODEL->getName()}"
+			   title="{$FIELD_MODEL->get('label')}" class="form-control timeFieldInput clockPicker" name="{$FIELD_MODEL->getName()}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()},required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			   {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if} data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			   value="{$FIELD_MODEL->getEditViewDisplayValue()}"/>
-		<span class="input-group-append timeFieldButton"><span class="fas fa-time"></span></span>
+		<span class="input-group-append timeFieldButton border border-dark px-3">
+			<span class="input-group-text py-1">
+				<span class="far fa-clock"></span>
+			</span>
+		</span>
 	</div>
 {/strip}
