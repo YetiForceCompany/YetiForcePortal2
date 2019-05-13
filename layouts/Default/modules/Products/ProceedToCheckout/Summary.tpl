@@ -14,7 +14,7 @@
         </div>
         <div class="row mb-2 font-weight-bold">
             <div class="col-8">{\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)} ({\App\Language::translate('LBL_INCLUDING_VAT', $MODULE_NAME)})</div>
-            <div class="col-4 js-total-price-brutto">0</div>
+            <div class="col-4 pl-4 js-total-price-brutto">0</div>
         </div>
         <div class="row p-2 mb-4">
             <button class="btn btn-raised btn-success m-auto" type="button">

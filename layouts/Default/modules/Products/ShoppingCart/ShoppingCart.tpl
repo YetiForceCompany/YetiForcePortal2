@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="tpl-Products-ShoppingCart-ShoppingCart product-container js-products-container" data-search="{\App\Purifier::encodeHtml(\App\Json::encode($SEARCH))}" data-js="container">
+	<div class="tpl-Products-ShoppingCart-ShoppingCart product-container js-products-container" data-js="container">
 		<div class="row">
 			<div class="col-9">
 				<div class="box-shadow border rounded shopping-cart p-0">
@@ -50,11 +50,7 @@
 			</div>
 			<div class="col-3">
 				{include file=\App\Resources::templatePath("ShoppingCart/Summary.tpl", $MODULE_NAME)}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="float-right">
+				<div class="d-flex align-items-end justify-content-end u-h-79per">
 					{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
 				</div>
 			</div>

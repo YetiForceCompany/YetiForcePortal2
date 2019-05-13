@@ -7,9 +7,6 @@
 <div class="mainPage">
 	{include file=\App\Resources::templatePath("SearchMenu.tpl",$MODULE_NAME)}
 	{include file=\App\Resources::templatePath("ActionMenu.tpl",$MODULE_NAME)}
-	<div class="mobileLeftPanel p-0 visible-phone">
-		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
-	</div>
 	<div class="leftPanel c-menu__container p-0 hidden-phone ">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl",$MODULE_NAME)}
 	</div>

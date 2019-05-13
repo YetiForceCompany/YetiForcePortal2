@@ -2,7 +2,7 @@
 {strip}
 	<!-- tpl-Base-Menu-Label -->
 	<li role="presentation" class="tpl-menu-Label nav-item c-menu__item menuLabel" data-id="{($ITEM_MENU['id'])}">
-		<a class="nav-link {if !empty($ITEM_MENU['icon'])} hasIcon {/if} js-submenu-toggler collapsed"
+		<a class="{if !empty($ITEM_MENU['icon'])} hasIcon {/if} js-submenu-toggler collapsed"
 				href="#"
 				data-toggle="collapse"
 				data-target="#submenu-{$ITEM_MENU['id']}"

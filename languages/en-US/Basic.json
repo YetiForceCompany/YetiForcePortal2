@@ -20,6 +20,10 @@
 		"LBL_CHANGE_COMPANY": "Change company",
 		"LBL_VIEW_CREATE": "Create",
 		"LBL_TYPE_SEARCH": "Find record",
+ 		"LBL_STEP_BACK": "Step back",
+    	"LBL_BACKTRACE": "Backtrace",
+    	"LBL_MESSAGE": "Message",
+    	"LBL_ERROR_CODE": "Error!!! Code:",
 		"LBL_SELECT": "Search",
 		"LBL_CLEAR": "Clear",
 		"LBL_RELATED_MODULE_TYPE": "Select module",
@@ -37,7 +41,11 @@
 		"LBL_ADDRESS_ADDRESSLEVEL8": "Street",
 		"LBL_ADDRESS_BUILDINGNUMBER": "Building number",
 		"LBL_ADDRESS_LOCALNUMBER": "Office number",
-		"LBL_ADDRESS_POBOX": "PO box"
+		"LBL_ADDRESS_POBOX": "PO box",
+		"LBL_DETAILS": "Details",
+		"LBL_DESCRIPTION": "Description",
+		"LBL_NEXT": "Next",
+		"LBL_PREVIOUS": "Previous"
 	},
 	"js": {
 		"JS_TODAY": "Today",

@@ -11,8 +11,10 @@
 
 namespace YF\Modules\Products\View;
 
+use App\Purifier;
 use YF\Modules\Base\View;
 use YF\Modules\Products\Model\CartView;
+use YF\Modules\Products\Model\ReferenceCart;
 
 /**
  * Class ShoppingCart.
@@ -37,15 +39,17 @@ class ShoppingCart extends View\ListView
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
-		$this->getListViewModel()
+		$listViewModel = $this->getListViewModel()
 			->setRawData(true)
-			->setCustomFields(static::CUSTOM_FIELDS)
-			->loadRecordsList();
-		$this->viewer->assign('SEARCH_TEXT', '');
-		$this->viewer->assign('SEARCH', $this->request->get('search'));
-		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'ShoppingCart/Summary.tpl');
-		$this->viewer->assign('SHOPPING_CART_VIEW', true);
-		$this->viewer->assign('HEADERS', $this->getListViewModel()->getHeaders());
+			->setCustomFields(static::CUSTOM_FIELDS);
+		$proceedUrl = 'index.php?module=Products&view=ProceedToCheckout';
+		$readonly = false;
+		if (!$this->request->isEmpty('reference_id')) {
+			$readonly = true;
+			$listViewModel->setCart(new ReferenceCart($this->request->getInteger('reference_id'), $this->request->getByType('reference_module', Purifier::ALNUM)));
+			$proceedUrl .= '&reference_id=' . $this->request->getInteger('reference_id') . '&reference_module=' . $this->request->getByType('reference_module', Purifier::ALNUM);
+		}
+		$listViewModel->loadRecordsList();
 		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
 		$this->viewer->assign('MODULE_NAME', $moduleName);
 		$this->viewer->assign('COUNT', $this->getListViewModel()->getCount());
@@ -54,6 +58,8 @@ class ShoppingCart extends View\ListView
 		$this->viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
 		$this->viewer->assign('ADDRESSES', $this->getListViewModel()->getAddresses());
 		$this->viewer->assign('SELECTED_ADDRESS', $this->getListViewModel()->getSelectedAddress());
+		$this->viewer->assign('PROCCED_URL', $proceedUrl);
+		$this->viewer->assign('READONLY', $readonly);
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 

@@ -137,8 +137,28 @@
   padding-left: 5px;
 }
 
-.o-btn-circle {
-  border-radius: 100% !important;
+.u-border-radius {
+  border-radius: 0.5rem;
+}
+
+.u-h-79per {
+  height: 79%;
+}
+
+.u-fs-10px {
+  font-size: 10px;
+}
+
+.u-fs-12px {
+  font-size: 12px;
+}
+
+.u-word-break {
+  word-break: break-word !important;
+}
+
+.u-cursor-default {
+  cursor: default !important;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -272,6 +292,87 @@ img {
 hr {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.c-card__header {
+  background-color: #f7f7f7 !important;
+  cursor: pointer;
+}
+
+.c-card__header .btn-link {
+  color: #006cdf;
+}
+
+.c-card__icon-right {
+  display: none;
+}
+
+.c-card__icon-down {
+  display: inline;
+}
+
+.c-card__accordion {
+  background-color: #f7f7f7 !important;
+}
+
+.collapsed .c-card__icon-right {
+  display: inline !important;
+}
+
+.collapsed .c-card__icon-down {
+  display: none !important;
+}
+
+.c-nav {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.c-nav__item {
+  margin-bottom: -1px;
+}
+
+.c-nav__link {
+  border: 1px solid transparent !important;
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  color: #006cdf !important;
+}
+
+.c-nav__link:hover {
+  color: #004793 !important;
+  border: 1px solid #dee2e6 !important;
+}
+
+.c-nav__link.active {
+  background-color: #f8f9fa !important;
+  color: #495057 !important;
+}
+
+.c-exception {
+  background-color: #fff8e1;
+}
+
+.c-exception__card-header {
+  color: #ff5252;
+  background-color: #ffebee !important;
+}
+
+.c-exception__card-body {
+  overflow-y: auto;
+  height: 300px !important;
+  background-color: #fafafa;
+}
+
+.c-exception__card-footer a {
+  color: #212529;
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+.c-exception__card-footer a:hover {
+  color: #212529;
+  background-color: #cacaca;
+  border-color: #c4c4c4;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -845,18 +946,23 @@ table.dataTable.listViewEntries tbody td {
 }
 
 .product {
-  height: 300px;
-  width: 400px;
+  width: 33.33%;
   border-right: 1px #eeeeee solid;
-  border-bottom: 1px #eeeeee solid;
+  border-top: 1px #eeeeee solid;
   background-color: white;
 }
 
-.product-image-contener {
-  width: 120px;
-  height: 120px;
-  border: 1px #eeeeee solid;
+.product-image-contener img {
+  width: 260px;
+  height: 225px;
   padding: 5px;
+}
+
+.product-image-contener .product-no-image {
+  width: 260px;
+  height: 225px;
+  padding: 5px;
+  font-size: 6rem;
 }
 
 .product-shopping-cart-image-contener {
@@ -879,6 +985,37 @@ table.dataTable.listViewEntries tbody td {
 
 .add-to-cart {
   background-color: pink;
+}
+
+.product-btn-buy {
+  height: 48px;
+  width: 300px;
+}
+
+.o-category__button-search {
+  border-color: #cee2e6 !important;
+  height: 2.33rem !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem;
+}
+
+.o-category__input-search {
+  background-image: none;
+}
+
+.c-cart-quantity__btn-circle {
+  border-radius: 100% !important;
+  width: calc(1.5rem + 2px) !important;
+  height: calc(1.5rem + 2px) !important;
+  line-height: normal !important;
+  font-family: initial !important;
+  padding: 0px !important;
+  min-width: 0px !important;
+}
+
+.c-cart-quantity__input {
+  border-radius: 0.5rem !important;
+  background-image: none;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */

@@ -133,6 +133,15 @@ var AppConnector,
 				});
 			});
 		},
+		registerDatePicker: function() {
+		      $('input.datepicker').datepicker({
+		        todayBtn: 'linked',
+		        clearBtn: true,
+		        autoclose: true,
+		        todayHighlight: false,
+		        enableOnReadonly: false
+		      })
+		    },
 		registerDateField: function (container) {
 			var thisInstance = this;
 			if (typeof container === 'undefined') {
@@ -582,6 +591,7 @@ var AppConnector,
 jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
+	app.registerDatePicker();
 	app.registerDateField(container);
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);

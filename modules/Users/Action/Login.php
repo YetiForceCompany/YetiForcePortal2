@@ -38,7 +38,10 @@ class Login extends \App\Controller\Action
 		$password = $this->request->getRaw('password');
 		$userInstance = \App\User::getUser();
 		$userInstance->set('language', $this->request->getByType('language', Purifier::STANDARD));
-		$userInstance->login($email, $password);
-		header('Location: ' . \App\Config::$portalUrl);
+		try {
+			$userInstance->login($email, $password);
+		} finally {
+			header('Location: ' . \App\Config::$portalUrl);
+		}
 	}
 }

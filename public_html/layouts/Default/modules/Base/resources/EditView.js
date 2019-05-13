@@ -16,7 +16,7 @@ jQuery.Class("Base_EditView_Js", {}, {
 			var element = jQuery(e.currentTarget);
 			var containerField = element.closest('.fieldValue');
 			var url = 'index.php?module=' + thisInstance.getReferencedModuleName(containerField) + '&view=RecordList';
-			app.getRecordList(url, function(selectedItems) {
+			app.getRecordList(url, function (selectedItems) {
 				thisInstance.setReferenceFieldValue(containerField, selectedItems);
 			});
 		});
@@ -46,37 +46,27 @@ jQuery.Class("Base_EditView_Js", {}, {
 		})
 	},
 	clearFieldValue: function (element) {
-		var thisInstance = this;
 		var fieldValueContener = element.closest('.fieldValue');
 		var fieldNameElement = fieldValueContener.find('.sourceField');
 		var fieldName = fieldNameElement.attr('name');
-		var referenceModule = fieldValueContener.find('input[name="popupReferenceModule"]').val();
-		var formElement = fieldValueContener.closest('form');
-
 		fieldNameElement.val('');
 		fieldValueContener.find('#' + fieldName + '_display').removeAttr('readonly').val('');
 	},
 	setReferenceFieldValue: function (container, params) {
-		var thisInstance = this;
 		var sourceField = container.find('input.sourceField').attr('name');
 		var fieldElement = container.find('input[name="' + sourceField + '"]');
 		var sourceFieldDisplay = sourceField + "_display";
 		var fieldDisplayElement = container.find('input[name="' + sourceFieldDisplay + '"]');
-		var popupReferenceModule = container.find('input[name="popupReferenceModule"]').val();
-
 		var selectedName = params.name;
 		var id = params.id;
-
 		fieldElement.val(id)
 		fieldDisplayElement.val(selectedName).attr('readonly', true);
 	},
 	registerValidationsFields: function (container) {
-		var thisInstance = this;
 		var params = app.validationEngineOptions;
 		container.validationEngine(params);
 	},
 	registerMaskFields: function (container) {
-		var thisInstance = this;
 		container.find(":input").inputmask();
 	},
 	registerRecordSave: function (container) {
@@ -102,6 +92,29 @@ jQuery.Class("Base_EditView_Js", {}, {
 			}
 		})
 	},
+	registerTree: function () {
+		let container = this.getContainer();
+		container.find('.js-tree-select').on('click', function () {
+			let containerField = $(this).closest('.js-tree-content');
+			app.showModalWindow(containerField.find('.js-tree-modal-window').clone(), function (modalContainer) {
+				let jstreeInstance = modalContainer.find('.js-tree-jstree');
+				new window.App.Fields.Tree(jstreeInstance);
+				modalContainer.find('.js-tree-modal-select').on('click', function () {
+					let selectedCategories = [];
+					$.each(jstreeInstance.jstree("get_selected", true), (index, value) => {
+						selectedCategories.push(value);
+					});
+					container.find('.js-tree-text').val(selectedCategories[0]['text']);
+					container.find('.js-tree-value').val(selectedCategories[0]['original']['tree']);
+					app.hideModalWindow(modalContainer);
+				});
+			});
+		});
+		container.find('.js-tree-clear').on('click', function (e) {
+			container.find('.js-tree-text').val('');
+			container.find('.js-tree-value').val('');
+		});
+	},
 	registerEvents: function () {
 		var container = this.getContainer();
 		container.find('form').validationEngine(app.validationEngineOptions);
@@ -110,6 +123,6 @@ jQuery.Class("Base_EditView_Js", {}, {
 		this.registerValidationsFields(container);
 		this.registerMaskFields(container);
 		this.registerRecordSave(container);
-
+		this.registerTree();
 	}
 });
