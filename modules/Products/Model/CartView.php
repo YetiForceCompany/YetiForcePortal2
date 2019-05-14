@@ -39,6 +39,11 @@ class CartView extends ListViewModel
 	/**
 	 * {@inheritdoc}
 	 */
+	protected $actionName = 'RecordsTree';
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function __construct(string $moduleName)
 	{
 		$this->setModuleName($moduleName);
@@ -70,10 +75,12 @@ class CartView extends ListViewModel
 	{
 		$this->recordsListModel = parent::getRecordsListModel();
 		foreach ($this->recordsListModel as $recordId => $recordModel) {
+			$amount = $this->cart->getAmount($recordId);
 			$recordDetail = $this->cart->get($recordId);
-			$recordModel->set('amountInShoppingCart', $this->cart->getAmount($recordId));
-			$recordModel->set('totalPriceNetto', $this->cart->getAmount($recordId) * (float) $recordDetail['param']['priceNetto']);
+			$recordModel->set('amountInShoppingCart', $amount);
+			$recordModel->set('totalPriceNetto', $amount * (float) $recordDetail['param']['priceNetto']);
 			$recordModel->set('priceNetto', $recordDetail['param']['priceNetto']);
+			$recordModel->setRawValue('qtyinstock', (float) $recordModel->getRawValue('qtyinstock') - $amount);
 		}
 		return $this->recordsListModel;
 	}

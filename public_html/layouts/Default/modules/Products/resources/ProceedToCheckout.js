@@ -14,7 +14,7 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 			this.order();
 		});
 	}
-	order() {
+	order(params = []) {
 		AppConnector.request(
 			$.extend(
 				{
@@ -26,7 +26,7 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 		).done(data => {
 			if (data["success"] === true) {
 				app.openUrl(
-					"http://portal2/index.php?module=SSingleOrders&view=DetailView&record=" +
+					"index.php?module=SSingleOrders&view=DetailView&record=" +
 						data["result"]["id"]
 				);
 			}

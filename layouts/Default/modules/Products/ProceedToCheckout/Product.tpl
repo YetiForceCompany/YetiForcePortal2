@@ -27,7 +27,7 @@
             <div class="row mt-5">
                 {\App\Language::translate('LBL_QUANTITY', $MODULE_NAME)}: {$RECORD->getDisplayValue('amountInShoppingCart')}
             </div>
-            <div class="row">{\App\Language::translate('LBL_PRICE', $MODULE_NAME)}: {$RECORD->getDisplayValue('totalPriceNetto')}</div>
+            <div class="row">{\App\Language::translate('LBL_PRICE', $MODULE_NAME)}: {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceNetto'))}</div>
         </div>
     </div>
     <!--/tpl-Products-ProceedToCheckout-Product-->

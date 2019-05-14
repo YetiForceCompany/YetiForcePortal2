@@ -25,7 +25,7 @@ class Buy extends \App\Controller\Action
 	{
 		$response = new \App\Response();
 		try {
-			$response->setResult($this->createSingleOrder());
+			$response->setResult($this->createSingleOrderFromCart());
 		} catch (\App\AppException $e) {
 			$response->setError($e->getCode(), $e->getMessage());
 		}
@@ -37,7 +37,7 @@ class Buy extends \App\Controller\Action
 	 *
 	 * @return array
 	 */
-	private function createSingleOrder()
+	private function createSingleOrderFromCart()
 	{
 		$cart = new Cart();
 		$data = [];
@@ -47,10 +47,14 @@ class Buy extends \App\Controller\Action
 				'qty' => $item['amount']
 			];
 		}
-		return \App\Api::getInstance()->call(
+		$response = \App\Api::getInstance()->call(
 			'SSingleOrders/SaveInventory/',
-			['sourceModule' => 'SSingleOrders', 'inventory' => $data],
+			['inventory' => $data],
 			'post'
 		);
+		if (!empty($response['id'])) {
+			$cart->removeAll();
+		}
+		return $response;
 	}
 }

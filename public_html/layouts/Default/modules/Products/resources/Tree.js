@@ -5,7 +5,9 @@ window.Products_Tree_Js = class {
 		this.container = container;
 		this.page = this.container.find(".js-pagination-list").data("page");
 		this.treeInstance = $(".js-tree-container");
-		this.shoppingCartBadge = $(".js-body-header .js-shopping-cart .js-badge");
+		this.shoppingCartBadge = $(
+			".js-body-header .js-shopping-cart .js-badge"
+		);
 		this.isTreeLoaded = false;
 		window.Products_Tree_Js.instance = this;
 	}
@@ -15,7 +17,9 @@ window.Products_Tree_Js = class {
 	 */
 	static getInstance(container = $(".js-products-container")) {
 		if (typeof window.Products_Tree_Js.instance === "undefined") {
-			window.Products_Tree_Js.instance = new window.Products_Tree_Js(container);
+			window.Products_Tree_Js.instance = new window.Products_Tree_Js(
+				container
+			);
 		}
 		return window.Products_Tree_Js.instance;
 	}
@@ -32,10 +36,9 @@ window.Products_Tree_Js = class {
 		this.registerTreeEvents();
 	}
 	registerTreeEvents() {
-		this.treeInstance
-			.on("changed.jstree", (e, data) => {
-				this.loadPage();
-			});
+		this.treeInstance.on("changed.jstree", (e, data) => {
+			this.loadPage();
+		});
 	}
 	registerAmountChange() {
 		this.container.find(".js-amount-inc").on("click", e => {
@@ -60,19 +63,23 @@ window.Products_Tree_Js = class {
 		});
 		this.container.find(".js-page-next").on("click", e => {
 			this.page =
-				parseInt(this.container.find(".js-pagination-list").data("page")) + 1;
+				parseInt(
+					this.container.find(".js-pagination-list").data("page")
+				) + 1;
 			this.loadPage();
 		});
 		this.container.find(".js-page-previous").on("click", e => {
 			this.page =
-				parseInt(this.container.find(".js-pagination-list").data("page")) - 1;
+				parseInt(
+					this.container.find(".js-pagination-list").data("page")
+				) - 1;
 			this.loadPage();
 		});
 	}
 
 	getSearchParams() {
 		let search = [];
-		let searchValue = $('.js-search').val();
+		let searchValue = $(".js-search").val();
 		if (searchValue) {
 			search.push({
 				fieldName: "productname",
@@ -81,9 +88,12 @@ window.Products_Tree_Js = class {
 			});
 		}
 		let selectedCategories = [];
-		$.each(this.treeInstance.jstree("get_selected", true), (index, value) => {
-			selectedCategories.push(value["original"]["tree"]);
-		});
+		$.each(
+			this.treeInstance.jstree("get_selected", true),
+			(index, value) => {
+				selectedCategories.push(value["original"]["tree"]);
+			}
+		);
 		if (selectedCategories[0]) {
 			search.push({
 				fieldName: "pscategory",
@@ -115,29 +125,41 @@ window.Products_Tree_Js = class {
 		});
 	}
 	registerSearch() {
-		$('.js-search-button').on('click', e => {
+		$(".js-search-button").on("click", e => {
 			this.page = 1;
 			this.loadPage();
 		});
-		$('.js-search').on('keypress', e => {
+		$(".js-search").on("keypress", e => {
 			if (e.keyCode == 13) {
 				this.page = 1;
 				this.loadPage();
 			}
 		});
-		$('.js-search-cancel').on('click', e => {
-			$('.js-search').val('');
+		$(".js-search-cancel").on("click", e => {
+			$(".js-search").val("");
 		});
 	}
 	registerButtonAddToCart() {
 		this.container.find(".js-add-to-cart").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
-			this.cartMethod("addToCart", product.data("id"), {
-				amount: product.find(".js-amount").val(),
-				priceNetto: product.data("priceNetto")
-			}).done(data => {
-				this.shoppingCartBadge.text(data["result"]["numberOfItems"]);
-			});
+			let amount = product.find(".js-amount").val();
+			let quantityAfterBuy = product.data("qtyinstock") - amount;
+			if (quantityAfterBuy < 0) {
+				Vtiger_Helper_Js.showPnotify({
+					text: app.translate("JS_NO_SUCH_QUANTITY"),
+					type: "error"
+				});
+			} else {
+				this.cartMethod("addToCart", product.data("id"), {
+					amount: product.find(".js-amount").val(),
+					priceNetto: product.data("priceNetto")
+				}).done(data => {
+					this.shoppingCartBadge.text(
+						data["result"]["numberOfItems"]
+					);
+					product.data("qtyinstock", quantityAfterBuy);
+				});
+			}
 		});
 	}
 	cartMethod(mode, recordId, params = {}) {

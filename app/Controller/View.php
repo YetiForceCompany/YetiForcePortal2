@@ -231,6 +231,12 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
 			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotify.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotifyButtons.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotifyAnimate.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotifyMobile.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotifyConfirm.js',
+			YF_ROOT_WWW . 'libraries/pnotify/dist/iife/PNotifyDesktop.js',
 			YF_ROOT_WWW . 'libraries/popper.js/dist/umd/popper.js',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/js/bootstrap.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
@@ -275,13 +281,15 @@ abstract class View extends Base
 	 * {@inheritdoc}
 	 */
 	public function postProcessAjax()
-	{ }
+	{
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function preProcessAjax()
-	{ }
+	{
+	}
 
 	/**
 	 * Get module name from request.
