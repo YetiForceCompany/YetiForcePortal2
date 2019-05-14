@@ -99,7 +99,7 @@ window.Products_Tree_Js = class {
 		AppConnector.requestPjax({
 			data: {
 				module: app.getModuleName(),
-				view: "Tree",
+				view: app.getViewName(),
 				search: this.getSearchParams(),
 				page: this.page
 			},
