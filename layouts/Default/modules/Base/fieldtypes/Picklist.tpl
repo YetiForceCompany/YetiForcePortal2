@@ -7,7 +7,7 @@
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>
 		{if $FIELD_MODEL->isEmptyPicklistOptionAllowed() && !($FIELD_MODEL->isMandatory() && $FIELD_MODEL->getEditViewDisplayValue() neq '')}
 			<optgroup>
-				<option value="">{\App\Language::translate('PLL_SELECT_OPTION',$MODULE_NAME)}</option>
+				<option value="">{\App\Language::translate('PLL_SELECT_OPTION', $MODULE_NAME)}</option>
 			</optgroup>
 		{/if}
 		{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$FIELD_MODEL->getPicklistValues()}

@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<!-- tpl-Base-Footer -->
-	{include file=\App\Resources::templatePath("BodyRight.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("BodyRight.tpl", $MODULE_NAME)}
 	</div>
 	</div>
 	</div>
@@ -48,7 +48,7 @@
 	</div>
 	<footer class="footerContainer d-print-none w-100">
 		<div class="footer">
-			<p>{sprintf(\App\Language::translate('LBL_FOOTER_CONTENT',$MODULE_NAME), 'open source project' )}</p>
+			<p>{sprintf(\App\Language::translate('LBL_FOOTER_CONTENT', $MODULE_NAME), 'open source project' )}</p>
 		</div>
 	</footer>
 	<div class="d-print-none">
@@ -56,7 +56,7 @@
 			<script src="{$SCRIPT->getSrc()}"></script>
 		{/foreach}
 	</div>
-	{include file=\App\Resources::templatePath("Log.tpl",$MODULE_NAME)}
+	{include file=\App\Resources::templatePath("Log.tpl", $MODULE_NAME)}
 	</body>
 	</html>
 	<!-- /tpl-Base-Footer -->

@@ -5,7 +5,7 @@
 		<div class="widget_header row">
 			<div class="col-sm-8">
 				<div class="pull-left">
-					{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 				</div>
 			</div>
 			<div class="col-sm-4 listViewAction">

@@ -6,7 +6,7 @@
 			<div class="widget_header u-remove-main-padding">
 				<div class="d-flex justify-content-between u-add-main-padding">
 					<div class="">
-						{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+						{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
 						<button class="btn btn-outline-success btn-sm mr-1" type="submit">
@@ -44,7 +44,7 @@
 									</div>
 									<div class="fieldValue col-md-9">
 										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->getRawValue($FIELD->getName()))}
-										{include file=\App\Resources::templatePath($FIELD->getTemplate(),$MODULE_NAME) FIELD_MODEL=$FIELD}
+										{include file=\App\Resources::templatePath($FIELD->getTemplate(), $MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
 							{/foreach}
