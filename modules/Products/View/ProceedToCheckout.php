@@ -11,11 +11,28 @@
 
 namespace YF\Modules\Products\View;
 
+use App\Purifier;
+
 /**
  * Class ProceedToCheckout.
  */
 class ProceedToCheckout extends ShoppingCart
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	public function process()
+	{
+		if ($this->request->isEmpty('reference_id')) {
+			$this->viewer->assign('REFERENCE_ID', null);
+			$this->viewer->assign('REFERENCE_MODULE', null);
+		} else {
+			$this->viewer->assign('REFERENCE_ID', $this->request->getInteger('reference_id'));
+			$this->viewer->assign('REFERENCE_MODULE', $this->request->getByType('reference_module', Purifier::ALNUM));
+		}
+		parent::process();
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */

@@ -1,6 +1,9 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="tpl-Products-ProceedToCheckout-ProceedToCheckout product-container js-products-container" data-js="container">
+	<div class="tpl-Products-ProceedToCheckout-ProceedToCheckout product-container js-products-container"
+	data-reference-id="{{$REFERENCE_ID}}"
+	data-reference-module="{{$REFERENCE_MODULE}}"
+	data-js="container">
 		<div class="row">
 			<div class="col-9">
 				<div class="box-shadow border rounded shopping-cart p-0">

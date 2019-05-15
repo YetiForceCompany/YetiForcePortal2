@@ -11,10 +11,13 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 	}
 	registerButtonBuy() {
 		this.container.find(".js-buy").on("click", e => {
-			this.order();
+			this.order({
+				reference_id: this.container.data("referenceId"),
+				reference_module: this.container.data("referenceModule")
+			});
 		});
 	}
-	order(params = []) {
+	order(params = {}) {
 		AppConnector.request(
 			$.extend(
 				{

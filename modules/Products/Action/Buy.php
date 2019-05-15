@@ -11,7 +11,9 @@
 
 namespace YF\Modules\Products\Action;
 
+use App\Purifier;
 use YF\Modules\Products\Model\Cart;
+use YF\Modules\Products\Model\ReferenceCart;
 
 /**
  * Buy action class.
@@ -23,9 +25,20 @@ class Buy extends \App\Controller\Action
 	 */
 	public function process()
 	{
-		$response = new \App\Response();
 		try {
-			$response->setResult($this->createSingleOrderFromCart());
+			$response = new \App\Response();
+			if ($this->request->isEmpty('reference_id')) {
+				$cart = new Cart();
+				$responseFromApi = $this->createSingleOrderFromCart($cart);
+				$response->setResult($responseFromApi);
+				if (!empty($responseFromApi['id'])) {
+					$cart->removeAll();
+					$cart->save();
+				}
+			} else {
+				$cart = new ReferenceCart($this->request->getInteger('reference_id'), $this->request->getByType('reference_module', Purifier::ALNUM));
+				$response->setResult($this->createSingleOrderFromCart($cart));
+			}
 		} catch (\App\AppException $e) {
 			$response->setError($e->getCode(), $e->getMessage());
 		}
@@ -35,11 +48,12 @@ class Buy extends \App\Controller\Action
 	/**
 	 * Create single order.
 	 *
+	 * @param Cart $cart
+	 *
 	 * @return array
 	 */
-	private function createSingleOrderFromCart()
+	private function createSingleOrderFromCart(Cart $cart)
 	{
-		$cart = new Cart();
 		$data = [];
 		foreach ($cart->getAll() as $key => $item) {
 			$data[$key] = [
@@ -47,7 +61,7 @@ class Buy extends \App\Controller\Action
 				'qty' => $item['amount']
 			];
 		}
-		$response = \App\Api::getInstance()->call(
+		return \App\Api::getInstance()->call(
 			'SSingleOrders/SaveInventory/',
 			[
 				'inventory' => $data,
@@ -55,10 +69,5 @@ class Buy extends \App\Controller\Action
 			],
 			'post'
 		);
-		if (!empty($response['id'])) {
-			$cart->removeAll();
-			$cart->save();
-		}
-		return $response;
 	}
 }

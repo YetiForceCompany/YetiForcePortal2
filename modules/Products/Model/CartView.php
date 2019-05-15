@@ -80,7 +80,6 @@ class CartView extends ListViewModel
 			$recordModel->set('amountInShoppingCart', $amount);
 			$recordModel->set('totalPriceNetto', $amount * (float) $recordDetail['param']['priceNetto']);
 			$recordModel->set('priceNetto', $recordDetail['param']['priceNetto']);
-			//$recordModel->setRawValue('qtyinstock', (float) $recordModel->getRawValue('qtyinstock') - $amount);
 		}
 		return $this->recordsListModel;
 	}
