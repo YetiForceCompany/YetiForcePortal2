@@ -41,8 +41,8 @@
                 </div>
             </div>
             <div class="col-7 text-right text-secondary">
-                <div class="fs-80"><b>{\App\Language::translate('LBL_NET_PRICE', MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_price')}</div>
-                <div class="fs-80"><b>{\App\Language::translate('LBL_GROSS_PRICE', MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_gross')}</div>
+                <div class="fs-80"><b>{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_price')}</div>
+                <div class="fs-80"><b>{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_gross')}</div>
             </div>
         </div>
     </div>

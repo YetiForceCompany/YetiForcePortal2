@@ -12,7 +12,7 @@
 					</div>
 					{assign var="COUNT_OF_RECORDS" value=count($RECORDS)}
 					{assign var="COUNTER" value=1}
-					{foreach name=foo item=RECORD key=CRM_ID from=$RECORDS}
+					{foreach item=RECORD key=CRM_ID from=$RECORDS}
 						{include file=\App\Resources::templatePath("ProceedToCheckout/Product.tpl", $MODULE_NAME)}
 						{assign var="COUNTER" value=$COUNTER + 1}
 					{/foreach}

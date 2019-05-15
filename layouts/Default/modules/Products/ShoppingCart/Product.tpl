@@ -59,15 +59,15 @@
             </div>
             <div class="col-12 text-secondary">
                 {if !$READONLY}
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_price')}</div>
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_gross')}</div>
+                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_price')}</div>
+                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_gross')}</div>
                 {else}
                     <div class="col-12 text-right fs-80">
-                        <span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', MODULE_NAME)}:</span>
+                        <span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
                         {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}
                     </div>
                     <div class="col-12 text-right fs-80">
-                        <span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', MODULE_NAME)}:</span>
+                        <span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
                         {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('unit_gross'))}
                     </div>
                 {/if}
