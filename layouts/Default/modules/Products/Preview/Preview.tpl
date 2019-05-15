@@ -83,20 +83,22 @@
                 </div>
                 <div class="tab-pane fade p-3" id="details" role="tabpanel" aria-labelledby="details-tab">
                    {foreach item=BLOCK from=$BLOCKS}
-                        {foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
-                            <div class="col-12 row">
-                                {if $FIELD->getLabel() !== 'Description' && $FIELD->getLabel() !== 'Product image'}
-                                    <div class="col-md-2 px-0">
-                                        <label class="muted font-weight-bold">
-                                            {$FIELD->getLabel()}
-                                        </label>
+                        {if isset($FIELDS[$BLOCK['id']])}
+                            {foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
+                                    <div class="col-12 row">
+                                        {if $FIELD->getName() !== 'description' && $FIELD->get('type') !== 'multiImage'}
+                                            <div class="col-md-2 px-0">
+                                                <label class="muted font-weight-bold">
+                                                    {$FIELD->getLabel()}
+                                                </label>
+                                            </div>
+                                            <div class="col-md-9 px-0">
+                                                {$FIELD->getDisplayValue()}
+                                            </div>
+                                        {/if}
                                     </div>
-                                    <div class="col-md-9 px-0">
-                                        {$FIELD->getDisplayValue()}
-                                    </div>
-                                 {/if}
-                            </div>
-                       {/foreach}
+                            {/foreach}
+                        {/if}
                     {/foreach}
                 </div>
             </div>

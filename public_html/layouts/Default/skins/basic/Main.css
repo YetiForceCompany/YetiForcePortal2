@@ -161,6 +161,10 @@
   cursor: default !important;
 }
 
+.shopping-cart .u-mb-0px {
+  margin-bottom: 0px;
+}
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
@@ -373,6 +377,89 @@ hr {
   color: #212529;
   background-color: #cacaca;
   border-color: #c4c4c4;
+}
+
+.hideBlock.show {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.select2-selection--single {
+  height: auto !important;
+}
+
+.select2-selection--single .select2-selection__rendered {
+  line-height: 40px !important;
+}
+
+.select2-selection--single .select2-selection__arrow {
+  top: 7px !important;
+}
+
+.select2-selection--multiple {
+  height: auto !important;
+}
+
+.select2-selection--multiple .select2-selection__rendered {
+  line-height: 28px !important;
+}
+
+.form-control:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.dropdown-menu {
+  opacity: 1 !important;
+  -webkit-transform: none !important;
+          transform: none !important;
+}
+
+.pagination {
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #fff;
+  color: #404952;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.pagination .page-item.previous .page-link {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.pagination .page-item.next .page-link {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.pagination .page-item .page-link {
+  padding: 0px;
+  min-width: 1.6em;
+  border-radius: 2em;
+  color: #404952;
+  margin-right: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #eee;
+  color: #404952;
+}
+
+.pagination .page-item .page-link:focus {
+  -webkit-box-shadow: 0 0 0 0.1rem white;
+          box-shadow: 0 0 0 0.1rem white;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
