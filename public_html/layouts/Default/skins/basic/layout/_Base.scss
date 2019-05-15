@@ -178,3 +178,47 @@ hr {
   transform: none !important;
 }
 
+.pagination {
+  align-items: center !important;
+  display: flex !important;
+  .page-item {
+    &.active {
+      .page-link {
+        background-color: #fff;
+        color: #404952;
+        font-size: 22px;
+        font-weight: bold;
+      }
+    }
+
+    &.previous {
+      .page-link {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+      }
+    }
+    &.next {
+      .page-link {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+      }
+    }
+    .page-link {
+      padding: 0px;
+      min-width: 1.6em;
+      border-radius: 2em;
+      color: #404952;
+      margin-right: 4px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      &:hover {
+        background-color: #eee;
+        color: #404952;
+      }
+      &:focus {
+        box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 1);
+      }
+    }
+  }
+}
