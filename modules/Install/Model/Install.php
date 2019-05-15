@@ -9,6 +9,8 @@
 
 namespace YF\Modules\Install\Model;
 
+use App\Purifier;
+
 class Install
 {
 	protected $configPath = 'config/config.php';
@@ -27,7 +29,7 @@ class Install
 	{
 		$configFile = file_get_contents($this->configPath);
 		foreach ($this->config as $key => $value) {
-			$configFile = str_replace($value, $request->get($key), $configFile);
+			$configFile = str_replace($value, $request->getByType($key, Purifier::TEXT), $configFile);
 		}
 		file_put_contents($this->configPath, $configFile);
 		header('Location: /');

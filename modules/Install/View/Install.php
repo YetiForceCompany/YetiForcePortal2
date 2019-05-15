@@ -9,6 +9,7 @@
 
 namespace YF\Modules\Install\View;
 
+use App\Purifier;
 use App\Request;
 
 class Install extends \App\Controller\View
@@ -70,9 +71,9 @@ class Install extends \App\Controller\View
 
 	public function setLanguage()
 	{
-		if ($this->request->get('lang')) {
+		if (!$this->request->isEmpty('lang')) {
 			$userInstance = \App\User::getUser();
-			$userInstance->set('language', $this->request->get('lang'));
+			$userInstance->set('language', $this->request->getByType('lang', Purifier::STANDARD));
 		}
 	}
 }

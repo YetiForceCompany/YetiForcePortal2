@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-8 pl-5">
-            <div class="fs-120 font-weight-bold">{$RECORD->getDisplayValue('productname')}</div>
+            <div class="fs-120 font-weight-bold"><a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a></div>
             <div class="fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
             <div class="mt-5">
                 <div class="col-3 p-0 m-0">
