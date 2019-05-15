@@ -43,7 +43,7 @@ class ShoppingCart extends View\ListView
 			->setRawData(true)
 			->setCustomFields(static::CUSTOM_FIELDS)
 			->setLimit(\App\Config::get('itemsPrePage'))
-			->setPage($this->request->get('page', 1));
+			->setPage($this->request->getInteger('page', 1));
 		$proceedUrl = 'index.php?module=Products&view=ProceedToCheckout';
 		$readonly = false;
 		if (!$this->request->isEmpty('reference_id')) {

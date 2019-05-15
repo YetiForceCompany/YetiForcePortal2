@@ -22,7 +22,7 @@
                 <div class="card-body c-exception__card-body">
                     <p class="card-text">
                         {\App\Language::translate('LBL_BACKTRACE')}: <br> {\App\Purifier::encodeHtml($MESSAGE)}<br><br>
-                        {\App\Language::translate('LBL_MESSAGE')}: <br> {$BACKTRACE}<br><br>
+                        {\App\Language::translate('LBL_MESSAGE')}: <br> {\App\Purifier::encodeHtml($BACKTRACE)}<br><br>
                     </p>
                 </div>
                 <div class="card-footer c-exception__card-footer d-flex flex-wrap flex-sm-nowrap">

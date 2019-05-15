@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Purifier;
 use App\Request;
 
 /**
@@ -41,7 +42,7 @@ abstract class View extends Base
 		$this->moduleName = $request->getModule();
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
-		$this->viewer->assign('VIEW', $this->request->get('view'));
+		$this->viewer->assign('VIEW', $this->request->getByType('view', Purifier::ALNUM));
 		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('ACTION_NAME', $this->request->getAction());
 	}
@@ -77,7 +78,7 @@ abstract class View extends Base
 	public function getPageTitle(): string
 	{
 		$title = '';
-		if ('Login' !== $this->request->get('view') && 'Users' !== $this->moduleName) {
+		if ('Login' !== $this->request->getByType('view', Purifier::ALNUM) && 'Users' !== $this->moduleName) {
 			$title = \App\Language::translateModule($this->moduleName);
 			$pageTitle = $this->getBreadcrumbTitle();
 			if ($pageTitle) {
@@ -275,13 +276,15 @@ abstract class View extends Base
 	 * {@inheritdoc}
 	 */
 	public function postProcessAjax()
-	{ }
+	{
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function preProcessAjax()
-	{ }
+	{
+	}
 
 	/**
 	 * Get module name from request.
