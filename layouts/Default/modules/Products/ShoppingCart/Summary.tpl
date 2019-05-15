@@ -18,7 +18,7 @@
         </div>
         <div class="row p-2 mb-4">
             {if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
-                <a href="{$PROCCED_URL}" class="btn btn-raised btn-success m-auto">
+                <a href="{$PROCCED_URL}" class="btn btn-raised btn-success m-auto js-btn-proceed-to-checkout">
                     <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_PROCEED_TO_CHECKOUT', $MODULE_NAME)}
                 </a>
             {/if}

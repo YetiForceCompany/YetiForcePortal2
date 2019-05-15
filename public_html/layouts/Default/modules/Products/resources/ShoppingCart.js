@@ -6,17 +6,41 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		this.container = container;
 		this.totalPriceNetto = this.container.find(".js-total-price-netto");
 		this.totalPriceBrutto = this.container.find(".js-total-price-brutto");
+		this.btnProceedToCheckout = this.container.find(
+			".js-btn-proceed-to-checkout"
+		);
 	}
 	updateProduct(product) {
-		this.cartMethod("setToCart", product.data("id"), {
-			amount: product.find(".js-amount").val(),
-			priceNetto: product.data("priceNetto")
-		}).done(data => {
-			this.shoppingCartBadge.text(data["result"]["numberOfItems"]);
-			this.totalPriceNetto.text(data["result"]["totalPriceNetto"]);
-		});
+		let validateResult = this.validate();
+		this.btnProceedToCheckout
+			.toggleClass("btn-success", validateResult)
+			.toggleClass("btn-grey", !validateResult);
+		if (validateResult) {
+			this.cartMethod("setToCart", product.data("id"), {
+				amount: product.find(".js-amount").val(),
+				priceNetto: product.data("priceNetto")
+			}).done(data => {
+				this.shoppingCartBadge.text(data["result"]["numberOfItems"]);
+				this.totalPriceNetto.text(data["result"]["totalPriceNetto"]);
+			});
+		}
 	}
-
+	validate() {
+		let validateResulat = true;
+		this.container.find(".js-cart-item").each((index, element) => {
+			let product = $(element);
+			let amount = parseFloat(product.find(".js-amount").val());
+			let quantity = parseFloat(product.data("qtyinstock"));
+			let isEnoughQuantity = quantity - amount >= 0;
+			product
+				.find(".js-no-such-quantity")
+				.toggleClass("d-none", isEnoughQuantity);
+			if (!isEnoughQuantity) {
+				validateResulat = false;
+			}
+		});
+		return validateResulat;
+	}
 	registerButtonRemoveFromCart() {
 		this.container.find(".js-remove-from-cart").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
@@ -31,30 +55,23 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		this.container.find(".js-amount-inc").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
 			let amountInput = product.find(".js-amount");
-			let quantity = product.data("qtyinstock");
-			if (quantity - amountInput.val() - 1 >= 0) {
-				amountInput.val(parseInt(amountInput.val()) + 1);
-				this.updateProduct(product);
-			} else {
-				product.find(".js-no-such-quantity").removeClass("d-none");
-				product.find(".js-maximum-quantity").text(quantity);
-			}
+			amountInput.val(parseInt(amountInput.val()) + 1);
+			this.updateProduct(product);
 		});
 		this.container.find(".js-amount-dec").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
 			let amountInput = product.find(".js-amount");
 			let amountVal = parseInt(amountInput.val());
-			let quantity = product.data("qtyinstock");
 			if (amountVal > 1) {
 				amountInput.val(amountVal - 1);
-				if (
-					quantity - amountVal + 1 > 0 &&
-					!product.find(".js-no-such-quantity").hasClass("d-none")
-				) {
-					product.find(".js-no-such-quantity").addClass("d-none");
-				}
 				this.updateProduct(product);
 			}
+		});
+		this.container.find(".js-amount").on("change", e => {
+			let amountInput = $(e.currentTarget);
+			let product = this.getCartItem(e.currentTarget);
+			amountInput.val(parseInt(amountInput.val()));
+			this.updateProduct(product);
 		});
 	}
 	registerChangeAddress() {
@@ -88,10 +105,19 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		});
 		this.container.find(".js-select-address").trigger("change");
 	}
-
+	registerProceedToCheckout() {
+		this.btnProceedToCheckout.on("click", e => {
+			let validateResult = this.validate();
+			$(e.currentTarget)
+				.toggleClass("btn-success", validateResult)
+				.toggleClass("btn-grey", !validateResult);
+			return validateResult;
+		});
+	}
 	registerEvents() {
 		super.registerEvents();
 		this.registerButtonRemoveFromCart();
 		this.registerChangeAddress();
+		this.registerProceedToCheckout();
 	}
 };

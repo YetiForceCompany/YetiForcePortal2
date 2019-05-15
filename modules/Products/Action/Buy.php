@@ -31,7 +31,7 @@ class Buy extends \App\Controller\Action
 				$cart = new Cart();
 				$responseFromApi = $this->createSingleOrderFromCart($cart);
 				$response->setResult($responseFromApi);
-				if (!empty($responseFromApi['id'])) {
+				if (!isset($responseFromApi['error'])) {
 					$cart->removeAll();
 					$cart->save();
 				}

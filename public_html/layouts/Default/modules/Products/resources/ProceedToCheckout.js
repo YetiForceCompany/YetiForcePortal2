@@ -27,11 +27,24 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 				params
 			)
 		).done(data => {
-			if (data["success"] === true) {
+			let result = data["result"];
+			if (typeof result["errors"] === "undefined") {
 				app.openUrl(
 					"index.php?module=SSingleOrders&view=DetailView&record=" +
 						data["result"]["id"]
 				);
+			} else {
+				this.container
+					.find(".js-cart-item .js-no-such-quantity")
+					.toggleClass("d-none", true);
+				$.each(result["errors"]["inventory"], (index, value) => {
+					let quantity = value["params"]["quantity"];
+					let product = this.container.find(
+						'.js-cart-item[data-id="' + index + '"]'
+					);
+					product.find(".js-no-such-quantity").removeClass("d-none");
+					product.find(".js-maximum-quantity").text(quantity);
+				});
 			}
 		});
 	}
