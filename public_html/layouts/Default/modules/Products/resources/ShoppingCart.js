@@ -32,13 +32,12 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 			let product = this.getCartItem(e.currentTarget);
 			let amountInput = product.find(".js-amount");
 			let quantity = product.data("qtyinstock");
-			if (quantity > 0) {
+			if (quantity - amountInput.val() - 1 >= 0) {
 				amountInput.val(parseInt(amountInput.val()) + 1);
-				product.data("qtyinstock", quantity - 1);
-				console.log("qtyinstock: " + product.data("qtyinstock"));
 				this.updateProduct(product);
 			} else {
 				product.find(".js-no-such-quantity").removeClass("d-none");
+				product.find(".js-maximum-quantity").text(quantity);
 			}
 		});
 		this.container.find(".js-amount-dec").on("click", e => {
@@ -48,8 +47,10 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 			let quantity = product.data("qtyinstock");
 			if (amountVal > 1) {
 				amountInput.val(amountVal - 1);
-				product.data("qtyinstock", quantity + 1);
-				if (!product.find(".js-no-such-quantity").hasClass("d-none")) {
+				if (
+					quantity - amountVal + 1 > 0 &&
+					!product.find(".js-no-such-quantity").hasClass("d-none")
+				) {
 					product.find(".js-no-such-quantity").addClass("d-none");
 				}
 				this.updateProduct(product);

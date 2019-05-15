@@ -143,8 +143,11 @@ window.Products_Tree_Js = class {
 		this.container.find(".js-add-to-cart").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
 			let amount = product.find(".js-amount").val();
-			let quantityAfterBuy = product.data("qtyinstock") - amount;
-			if (quantityAfterBuy < 0) {
+			let amountInShoppingCart = parseFloat(
+				product.data("amountInShoppingCart")
+			);
+			let qtyinstock = parseFloat(product.data("qtyinstock"));
+			if (qtyinstock - amountInShoppingCart - amount < 0) {
 				Vtiger_Helper_Js.showPnotify({
 					text: app.translate("JS_NO_SUCH_QUANTITY"),
 					type: "error"
@@ -157,7 +160,10 @@ window.Products_Tree_Js = class {
 					this.shoppingCartBadge.text(
 						data["result"]["numberOfItems"]
 					);
-					product.data("qtyinstock", quantityAfterBuy);
+					product.data(
+						"amountInShoppingCart",
+						amountInShoppingCart + amount
+					);
 				});
 			}
 		});

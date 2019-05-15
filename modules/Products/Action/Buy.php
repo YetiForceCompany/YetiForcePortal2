@@ -49,11 +49,15 @@ class Buy extends \App\Controller\Action
 		}
 		$response = \App\Api::getInstance()->call(
 			'SSingleOrders/SaveInventory/',
-			['inventory' => $data],
+			[
+				'inventory' => $data,
+				'address' => $cart->getAddress()
+			],
 			'post'
 		);
 		if (!empty($response['id'])) {
 			$cart->removeAll();
+			$cart->save();
 		}
 		return $response;
 	}

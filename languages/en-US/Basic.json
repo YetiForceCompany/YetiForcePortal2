@@ -46,7 +46,8 @@
 		"LBL_DESCRIPTION": "Description",
 		"LBL_NEXT": "Next",
 		"LBL_PREVIOUS": "Previous",
-		"LBL_NO_SUCH_QUANTITY": "There is no such quantity of product",
+		"LBL_NO_SUCH_QUANTITY": "There is no such quantity of product.",
+		"LBL_MAXIMUM_AMOUNT": "The maximum amount of product is ",
 		"LBL_NET_PRICE": "net price",
 		"LBL_GROSS_PRICE": "gross price"
 	},

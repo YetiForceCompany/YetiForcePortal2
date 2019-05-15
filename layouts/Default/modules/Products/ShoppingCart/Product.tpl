@@ -35,6 +35,8 @@
                 </div>
                 <div class="col-3 p-0 pl-5 m-0 d-none js-no-such-quantity">
                     {\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
+                    {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
+                    <span class="pl-2 js-maximum-quantity"></span>
                 </div>
             </div>
         </div>

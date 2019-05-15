@@ -4,6 +4,7 @@
     <div class="m-0 p-3 box-shadow product js-cart-item"
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
+            data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}">
         <div class="col-12 px-0 mb-4">
             <div class="product-image-contener text-center">
