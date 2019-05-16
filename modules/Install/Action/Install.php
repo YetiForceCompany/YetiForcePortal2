@@ -9,8 +9,6 @@
 
 namespace YF\Modules\Install\Action;
 
-use Install\Model;
-
 class Install extends \App\Controller\Action
 {
 	/**
@@ -24,9 +22,20 @@ class Install extends \App\Controller\Action
 	/**
 	 * {@inheritdoc}
 	 */
+	public function checkPermission(): bool
+	{
+		if (\YF\Modules\Install\Model\Install::isInstalled()) {
+			throw new AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
+		}
+		return true;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function process()
 	{
-		$install = Model\Install::getInstance($this->request->getModule());
+		$install = \YF\Modules\Install\Model\Install::getInstance($this->request->getModule());
 		$install->save($this->request);
 	}
 }

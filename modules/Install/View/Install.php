@@ -9,6 +9,7 @@
 
 namespace YF\Modules\Install\View;
 
+use App\AppException;
 use App\Purifier;
 use App\Request;
 
@@ -30,6 +31,9 @@ class Install extends \App\Controller\View
 
 	public function checkPermission()
 	{
+		if (\YF\Modules\Install\Model\Install::isInstalled()) {
+			throw new AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
+		}
 		return true;
 	}
 
@@ -37,7 +41,7 @@ class Install extends \App\Controller\View
 	{
 		$module = $this->request->getModule();
 		$this->setLanguage();
-		parent::preProcess($display);
+		parent::preProcess(false);
 		$this->viewer->view('InstallPreProcess.tpl', $module);
 	}
 
@@ -47,7 +51,7 @@ class Install extends \App\Controller\View
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
 			return $this->{$mode}();
 		}
-		$this->step1($this->request);
+		$this->step1();
 	}
 
 	public function step1()
@@ -74,6 +78,29 @@ class Install extends \App\Controller\View
 		if (!$this->request->isEmpty('lang')) {
 			$userInstance = \App\User::getUser();
 			$userInstance->set('language', $this->request->getByType('lang', Purifier::STANDARD));
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getPageTitle(): string
+	{
+		return \App\Language::translate('LBL_INSTALLATION_WIZARD', $this->moduleName);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function validateRequest()
+	{
+		$mode = $this->request->getMode();
+		if (!empty($mode) && $this->isMethodExposed($mode)) {
+			if ($mode === 'step1') {
+				$this->request->validateReadAccess();
+			} else {
+				$this->request->validateWriteAccess();
+			}
 		}
 	}
 }

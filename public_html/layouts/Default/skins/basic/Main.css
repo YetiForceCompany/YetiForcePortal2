@@ -974,7 +974,7 @@ table.dataTable.listViewEntries tbody td {
   -webkit-box-shadow: 0 0 5px #ccc;
           box-shadow: 0 0 5px #ccc;
   min-height: 375px;
-  margin-top: 10px;
+  margin: 10px;
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */

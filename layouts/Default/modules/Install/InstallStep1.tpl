@@ -26,11 +26,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="button-container float-right">
-				<button class="btn btn-sm btn-primary"
-						type="submit">{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
-			</div>
+		<div class="button-container float-right">
+			<button class="btn btn-sm btn-outline-primary"
+					type="submit">{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
 		</div>
 	</form>
 {/strip}
