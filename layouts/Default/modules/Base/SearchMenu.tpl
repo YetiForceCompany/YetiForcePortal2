@@ -13,9 +13,9 @@
 		</div>
 		<div class="input-group">
 			<input type="text" class="form-control"
-				   title="{\App\Language::translate('LBL_GLOBAL_SEARCH',$MODULE_NAME)}"
+				   title="{\App\Language::translate('LBL_GLOBAL_SEARCH', $MODULE_NAME)}"
 				   id="globalMobileSearchValue"
-				   placeholder="{\App\Language::translate('LBL_GLOBAL_SEARCH',$MODULE_NAME)}" results="10"/>
+				   placeholder="{\App\Language::translate('LBL_GLOBAL_SEARCH', $MODULE_NAME)}" results="10"/>
 			<div class="input-group-btn">
 				<div class="float-right">
 					<button class="btn btn-default" id="searchMobileIcon" type="button">
@@ -26,7 +26,7 @@
 		</div>
 		<div class="float-left">
 			<button class="btn btn-default" id="globalSearch"
-					title="{\App\Language::translate('LBL_ADVANCE_SEARCH',$MODULE_NAME)}" type="button">
+					title="{\App\Language::translate('LBL_ADVANCE_SEARCH', $MODULE_NAME)}" type="button">
 				<span class="fas fa-th-large"></span>
 			</button>
 		</div>
