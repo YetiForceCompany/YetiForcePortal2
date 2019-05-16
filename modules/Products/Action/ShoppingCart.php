@@ -113,7 +113,7 @@ class ShoppingCart extends \App\Controller\Action
 	private function saveCart()
 	{
 		$this->cart->save();
-		$cartViewModel = CartView::getInstance('Products');
+		$cartViewModel = CartView::getInstance('Products', 'CartView');
 		$response = new \App\Response();
 		$response->setResult([
 			'numberOfItems' => $this->cart->count(),

@@ -11,6 +11,11 @@ namespace App\Controller;
 
 abstract class Action extends Base
 {
+	/**
+	 * Check permission.
+	 *
+	 * @return bool
+	 */
 	public function checkPermission()
 	{
 		$moduleName = $this->request->getModule();

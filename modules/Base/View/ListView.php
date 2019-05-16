@@ -53,7 +53,7 @@ class ListView extends \App\Controller\View
 	protected function getListViewModel()
 	{
 		if (empty($this->listViewModel)) {
-			$this->listViewModel = ListViewModel::getInstance($this->moduleName);
+			$this->listViewModel = ListViewModel::getInstance($this->moduleName, $this->request->getAction());
 		}
 		return $this->listViewModel;
 	}

@@ -3,6 +3,7 @@
     <!--tpl-Products-ShoppingCart-Product-->
     <div class="row m-0 p-1 box-shadow product-shopping-cart {if $COUNTER < $COUNT_OF_RECORDS}product-border-b {/if}js-cart-item"
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
+            data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}">
         <div class="col-2 product-border-r d-flex">
             <div class="product-shopping-cart-image-contener align-items-center m-auto">
@@ -22,7 +23,7 @@
         <div class="col-8 pl-5">
             <div class="fs-120 font-weight-bold"><a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a></div>
             <div class="fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
-            <div class="mt-5">
+            <div class="mt-5 row">
                 <div class="col-3 p-0 m-0">
                  {if !$READONLY}
                     <button type="button" class="btn btn-sm btn-block btn-outline-danger js-remove-from-cart" data-js="click">
@@ -30,6 +31,12 @@
                         {\App\Language::translate('LBL_REMOVE_FROM_CART', $MODULE_NAME)}
                     </button>
                     {/if}
+
+                </div>
+                <div class="col-3 p-0 pl-5 m-0 d-none js-no-such-quantity">
+                    {\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
+                    {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
+                    <span class="pl-2 js-maximum-quantity"></span>
                 </div>
             </div>
         </div>
@@ -52,11 +59,17 @@
             </div>
             <div class="col-12 text-secondary">
                 {if !$READONLY}
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">netto:</span> {$RECORD->getDisplayValue('unit_price')}</div>
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">brutto:</span> {$RECORD->getDisplayValue('unit_price')}</div>
+                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_price')}</div>
+                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span> {$RECORD->getDisplayValue('unit_gross')}</div>
                 {else}
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">netto:</span> {App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}</div>
-                    <div class="col-12 text-right fs-80"><span class="font-weight-bold">brutto:</span> {App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}</div>
+                    <div class="col-12 text-right fs-80">
+                        <span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
+                        {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}
+                    </div>
+                    <div class="col-12 text-right fs-80">
+                        <span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
+                        {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('unit_gross'))}
+                    </div>
                 {/if}
 
             </div>

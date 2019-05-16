@@ -36,6 +36,9 @@ class Save extends \App\Controller\Action
 		$record = $this->request->isEmpty('record') ? '' : $this->request->getByType('record', Purifier::INTEGER);
 		$view = $this->request->getByType('view', Purifier::ALNUM);
 		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $this->request->getAllRaw(), $record ? 'put' : 'post');
+		if ($this->request->isEmpty('record')) {
+			$record = $result['id'] ?? '';
+		}
 		if ($this->request->isAjax()) {
 			$response = new \App\Response();
 			$response->setResult($result);

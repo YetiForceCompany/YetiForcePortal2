@@ -10,6 +10,42 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 		this.registerButtonBuy();
 	}
 	registerButtonBuy() {
-		this.container.find(".js-buy").on("click", e => {});
+		this.container.find(".js-buy").on("click", e => {
+			this.order({
+				reference_id: this.container.data("referenceId"),
+				reference_module: this.container.data("referenceModule")
+			});
+		});
+	}
+	order(params = {}) {
+		AppConnector.request(
+			$.extend(
+				{
+					module: app.getModuleName(),
+					action: "Buy"
+				},
+				params
+			)
+		).done(data => {
+			let result = data["result"];
+			if (typeof result["errors"] === "undefined") {
+				app.openUrl(
+					"index.php?module=SSingleOrders&view=DetailView&record=" +
+						data["result"]["id"]
+				);
+			} else {
+				this.container
+					.find(".js-cart-item .js-no-such-quantity")
+					.toggleClass("d-none", true);
+				$.each(result["errors"]["inventory"], (index, value) => {
+					let quantity = value["params"]["quantity"];
+					let product = this.container.find(
+						'.js-cart-item[data-id="' + index + '"]'
+					);
+					product.find(".js-no-such-quantity").removeClass("d-none");
+					product.find(".js-maximum-quantity").text(quantity);
+				});
+			}
+		});
 	}
 };
