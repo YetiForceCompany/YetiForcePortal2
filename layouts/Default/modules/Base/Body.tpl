@@ -5,8 +5,6 @@
 	 class="d-none d-print-none">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'js'))}</div>
 <div id="pjaxContainer" class="d-none d-print-none"></div>
 <div class="mainPage">
-	{include file=\App\Resources::templatePath("SearchMenu.tpl", $MODULE_NAME)}
-	{include file=\App\Resources::templatePath("ActionMenu.tpl", $MODULE_NAME)}
 	<div class="leftPanel c-menu__container p-0 hidden-phone ">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl", $MODULE_NAME)}
 	</div>
