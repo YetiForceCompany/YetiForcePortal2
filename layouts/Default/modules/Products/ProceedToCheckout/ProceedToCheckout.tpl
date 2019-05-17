@@ -7,8 +7,13 @@
 		<div class="row">
 			<div class="col-9">
 				<div class="box-shadow border rounded shopping-cart p-0">
-					<div class="row p-3 m-0 product-border-b">
-						<h4 class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_CHECKOUT', $MODULE_NAME)}</h4>
+					<div class="row p-3 m-0 product-border-b mb-4">
+						<div class="col-6 d-flex align-items-center">
+							<h4 class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_VIEW_PROCEEDTOCHECKOUT', $MODULE_NAME)}</h4>
+						</div>
+						<div class="col-6 d-flex align-items-center justify-content-end">
+							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
+						</div>
 					</div>
 					{assign var="COUNT_OF_RECORDS" value=count($RECORDS)}
 					{assign var="COUNTER" value=1}
@@ -33,13 +38,6 @@
 			</div>
 			<div class="col-3">
 				{include file=\App\Resources::templatePath("ProceedToCheckout/Summary.tpl", $MODULE_NAME)}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="float-right">
-					{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
-				</div>
 			</div>
 		</div>
 	</div>

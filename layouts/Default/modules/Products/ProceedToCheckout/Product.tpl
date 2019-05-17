@@ -31,11 +31,22 @@
                 </div>
             </div>
        </div>
-        <div class="col-2">
-            <div class="row mt-5">
-                {\App\Language::translate('LBL_QUANTITY', $MODULE_NAME)}: {$RECORD->getDisplayValue('amountInShoppingCart')}
+        <div class="col-2 text-secondary d-flex align-items-end">
+            <div class="col-12">
+                <div class="col-12 text-right fs-80">
+                    <span class="font-weight-bold">
+                        {\App\Language::translate('LBL_QUANTITY', $MODULE_NAME)}:
+                    </span>
+                    {$RECORD->getDisplayValue('amountInShoppingCart')}
+                </div>
+                <div class="col-12 text-right fs-80">
+                    <span class="font-weight-bold">
+                        {\App\Language::translate('LBL_PRICE', $MODULE_NAME)}:
+                    </span>
+                    {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceNetto'))}
+                </div>
             </div>
-            <div class="row">{\App\Language::translate('LBL_PRICE', $MODULE_NAME)}: {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceNetto'))}</div>
+
         </div>
     </div>
     <!--/tpl-Products-ProceedToCheckout-Product-->

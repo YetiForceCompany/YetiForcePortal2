@@ -21,22 +21,24 @@
             </div>
         </div>
         <div class="col-8 pl-5">
-            <div class="fs-120 font-weight-bold"><a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a></div>
-            <div class="fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
-            <div class="mt-5 row">
-                <div class="col-3 p-0 m-0">
-                 {if !$READONLY}
-                    <button type="button" class="btn btn-sm btn-block btn-outline-danger js-remove-from-cart" data-js="click">
-                        <i class="fas fa-trash mr-1"></i>
-                        {\App\Language::translate('LBL_REMOVE_FROM_CART', $MODULE_NAME)}
-                    </button>
-                    {/if}
+            <div class="fs-120 col-12 font-weight-bold"><a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a></div>
+            <div class="fs-80 col-12 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
+            <div class="col-12 mt-5">
+                <div class="d-flex">
+                    <div class="col-3 p-0 m-0">
+                    {if !$READONLY}
+                        <button type="button" class="btn btn-sm btn-block btn-outline-danger js-remove-from-cart" data-js="click">
+                            <i class="fas fa-trash mr-1"></i>
+                            {\App\Language::translate('LBL_REMOVE_FROM_CART', $MODULE_NAME)}
+                        </button>
+                        {/if}
 
-                </div>
-                <div class="col-3 p-0 pl-5 m-0 d-none js-no-such-quantity">
-                    {\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
-                    {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
-                    <span class="pl-2 js-maximum-quantity"></span>
+                    </div>
+                    <div class="col-9 p-0 pl-5 m-0 d-none js-no-such-quantity">
+                        {\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
+                        {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
+                        <span class="pl-2 js-maximum-quantity"></span>
+                    </div>
                 </div>
             </div>
         </div>
