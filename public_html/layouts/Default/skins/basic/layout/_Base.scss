@@ -186,7 +186,7 @@ hr {
       .page-link {
         background-color: #fff;
         color: #404952;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
       }
     }
@@ -201,6 +201,11 @@ hr {
       .page-link {
         padding-left: 5px !important;
         padding-right: 5px !important;
+      }
+    }
+    &.disabled {
+      .page-link {
+        color: #9ca2a9;
       }
     }
     .page-link {
