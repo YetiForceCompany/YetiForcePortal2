@@ -24,7 +24,7 @@ jQuery.Class("Base_Header_Js", {
 			BtnText = item[0];
 			BtnLink = item[1];
 		}
-		var htmlContent = '<ul class="dropdown-menu float-right historyList" role="menu">';
+		var htmlContent = '<ul class="dropdown-menu float-right historyList px-3" role="menu">';
 		var date = new Date().getTime();
 		var howManyDays = -1;
 		var writeSelector = true;
@@ -72,7 +72,7 @@ jQuery.Class("Base_Header_Js", {
 				localStorage.setItem(key, stack.join('_|_'));
 			}
 		}
-		htmlContent += '<li class="divider"></li><li><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
+		htmlContent += '<li class="divider"></li><li class="text-center"><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
 		htmlContent += '</ul>';
 		$(".showHistoryBtn").after(htmlContent);
 		this.registerClearHistory();
@@ -88,7 +88,7 @@ jQuery.Class("Base_Header_Js", {
 		$(".historyBtn .clearHistory").click(function () {
 			var key = 'yf_history_portal_';
 			localStorage.removeItem(key);
-			var htmlContent = '<li class="divider"></li><li><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
+			var htmlContent = '<li class="divider"></li><li class="text-center"><a class="clearHistory" href="#">' + app.translate('JS_CLEAR_HISTORY') + '</a></li>';
 			$(".historyBtn .dropdown-menu").html(htmlContent);
 		});
 	},
