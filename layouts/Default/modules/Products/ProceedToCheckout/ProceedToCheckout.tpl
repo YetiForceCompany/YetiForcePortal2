@@ -9,7 +9,7 @@
 				<div class="box-shadow border rounded shopping-cart p-0">
 					<div class="row p-3 m-0 product-border-b mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h4 class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_CHECKOUT', $MODULE_NAME)}</h4>
+							<h4 class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_VIEW_PROCEEDTOCHECKOUT', $MODULE_NAME)}</h4>
 						</div>
 						<div class="col-6 d-flex align-items-center justify-content-end">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
