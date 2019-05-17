@@ -68,6 +68,7 @@
 
 .historyList {
 	overflow: auto;
+	left: -500px !important;
 }
 
 .selectorHistory {
@@ -81,6 +82,8 @@
 	color: #111;
 	white-space: nowrap;
 	cursor: default;
+	min-width: 500px;
+	max-width: calc(100vh - 100px);
 }
 
 .historyHour {
