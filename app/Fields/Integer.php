@@ -14,7 +14,14 @@ namespace App\Fields;
  */
 class Integer
 {
-	public static function formatToDisplay($value): string
+	/**
+	 * Display integer in user format.
+	 *
+	 * @param int $value
+	 *
+	 * @return string
+	 */
+	public static function formatToDisplay(int $value): string
 	{
 		if (empty($value)) {
 			return '0';

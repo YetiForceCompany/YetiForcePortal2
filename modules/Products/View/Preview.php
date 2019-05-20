@@ -25,7 +25,7 @@ class Preview extends \App\Controller\View
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
 
-		$recordDetail = $api->call("$moduleName/Record/$record");
+		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);
 
@@ -42,6 +42,13 @@ class Preview extends \App\Controller\View
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
+		$tax = current($recordDetail['rawData']['taxes_info']);
+		$unitGross = $recordDetail['rawData']['unit_price'];
+		if ($tax) {
+			$unitGross = $unitGross +  ($unitGross * ((float) $tax['value'])) / 100;
+		}
+
+		$recordModel->set('unit_gross', $unitGross);
 		$recordModel->setId($record);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);

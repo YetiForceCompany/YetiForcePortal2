@@ -428,7 +428,7 @@ hr {
 .pagination .page-item.active .page-link {
   background-color: #fff;
   color: #404952;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -440,6 +440,10 @@ hr {
 .pagination .page-item.next .page-link {
   padding-left: 5px !important;
   padding-right: 5px !important;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9ca2a9;
 }
 
 .pagination .page-item .page-link {
@@ -528,6 +532,7 @@ hr {
 
 .historyList {
   overflow: auto;
+  left: -500px !important;
 }
 
 .selectorHistory {
@@ -541,6 +546,8 @@ hr {
   color: #111;
   white-space: nowrap;
   cursor: default;
+  min-width: 500px;
+  max-width: calc(100vh - 100px);
 }
 
 .historyHour {
