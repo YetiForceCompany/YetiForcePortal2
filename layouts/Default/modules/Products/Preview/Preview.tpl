@@ -44,7 +44,7 @@
                         </tr>
                         <tr>
                             <th class="px-1">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</th>
-                            <td class="px-1">{$RECORD->getDisplayValue('unit_price')}</td>
+                            <td class="px-1">{App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('unit_gross'))}</td>
                         </tr>
                     </tbody>
                 </table>

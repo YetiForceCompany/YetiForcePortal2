@@ -19,19 +19,19 @@
                 {/if}
             </div>
         </div>
-        <div class="col-8 pl-5">
+        <div class="col-7 pl-5">
             <div class="row fs-120 font-weight-bold"><a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a></div>
             <div class="row fs-80 text-muted">EAN: {$RECORD->getDisplayValue('ean')}</div>
             <div class="mt-5 row">
                 <div class="col-3 p-0 m-0"></div>
-                <div class="col-3 p-0 pl-5 m-0 d-none js-no-such-quantity">
+                <div class="col-12 alert alert-warning d-none js-no-such-quantity" role="alert">
                     {\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
                     {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
-                    <span class="pl-2 js-maximum-quantity"></span>
+                     <span class="pl-2 js-maximum-quantity">{App\Fields\Integer::formatToDisplay($RECORD->getRawValue('qtyinstock'))}</span>
                 </div>
             </div>
        </div>
-        <div class="col-2 text-secondary d-flex align-items-end">
+        <div class="col-3 text-secondary d-flex align-items-end">
             <div class="col-12">
                 <div class="col-12 text-right fs-80">
                     <span class="font-weight-bold">
