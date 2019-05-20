@@ -23,11 +23,11 @@ class Language
 	/**
 	 * Functions that gets translated string.
 	 *
-	 * @param <String> $key             - string which need to be translated
-	 * @param <String> $module          - module scope in which the translation need to be check
-	 * @param mixed    $currentLanguage
+	 * @param string $key             - string which need to be translated
+	 * @param string $module          - module scope in which the translation need to be check
+	 * @param string $currentLanguage
 	 *
-	 * @return <String> - translated string
+	 * @return string - translated string
 	 */
 	public static function translate(string $key, string $module = 'Basic', string $currentLanguage = ''): string
 	{
@@ -57,7 +57,7 @@ class Language
 	/**
 	 * Function that returns current language.
 	 *
-	 * @return <String> -
+	 * @return string
 	 */
 	public static function getLanguage()
 	{
@@ -80,7 +80,7 @@ class Language
 	 *
 	 * @return string translated string or null if translation not found
 	 */
-	public static function getLanguageTranslatedString($language, $key, $module = 'Basic')
+	public static function getLanguageTranslatedString(string $language, string $key, string $module = 'Basic')
 	{
 		$moduleStrings = self::getModuleStringsFromFile($language, $module);
 		if (!empty($moduleStrings['php'][$key])) {
