@@ -2,7 +2,7 @@
 /**
  * Log class.
  *
- * @link      http://php.net/manual/en/class.exception.php
+ * @see      http://php.net/manual/en/class.exception.php
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -20,13 +20,9 @@ class Log extends \Exception
 		self::$Messages[] = ['message' => $message, 'type' => $type, 'file' => $file, 'line' => $line];
 	}
 
-	public static function isEmpty()
+	public static function isEmpty(): bool
 	{
-		if (count(self::$Messages)) {
-			return false;
-		} else {
-			return true;
-		}
+		return !count(self::$Messages);
 	}
 
 	public static function display()
