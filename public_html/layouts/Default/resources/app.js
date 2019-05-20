@@ -571,6 +571,41 @@ var AppConnector,
 				});
 			});
 		},
+		/**
+		 * Open url in top window
+		 * @param string url
+		 */
+		openUrl(url) {
+			if (window.location !== window.top.location) {
+				window.top.location.href = url;
+			} else {
+				window.location.href = url;
+			}
+		},
+		errorLog(error, err, errorThrown) {
+			if (false) {
+				return;
+			}
+			console.warn(
+				'%cYetiForce debug mode!!!',
+				'color: red; font-family: sans-serif; font-size: 1.5em; font-weight: bolder; text-shadow: #000 1px 1px;'
+			);
+			if (typeof error === 'object' && error.responseText) {
+				error = error.responseText;
+			}
+			if (typeof error === 'object' && error.statusText) {
+				error = error.statusText;
+			}
+			if (error) {
+				console.error(error);
+			}
+			if (err && err !== 'error') {
+				console.error(err);
+			}
+			if (errorThrown) {
+				console.error(errorThrown);
+			}
+		},
 		registerModalController: function () {
 			let modalContainer = $('#globalmodal .js-modal-data');
 			let modalClass = 'Base_' + modalContainer.data('view') + '_Js';

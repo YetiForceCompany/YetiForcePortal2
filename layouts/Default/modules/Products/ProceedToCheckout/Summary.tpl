@@ -17,7 +17,7 @@
             <div class="col-4 pl-4 js-total-price-brutto">0</div>
         </div>
         <div class="row p-2 mb-4">
-            <button class="btn btn-raised btn-success m-auto" type="button">
+            <button class="btn btn-raised btn-success m-auto js-buy" type="button" data-js="click">
                 <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_BUY', $MODULE_NAME)}
             </button>
         </div>

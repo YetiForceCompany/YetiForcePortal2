@@ -14,7 +14,7 @@ namespace App\Fields;
  */
 class Integer
 {
-	public static function formatToDisplay($value)
+	public static function formatToDisplay($value): string
 	{
 		if (empty($value)) {
 			return '0';

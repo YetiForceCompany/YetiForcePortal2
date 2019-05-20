@@ -17,20 +17,18 @@
 		<hr>
 		<div class="row">
 			<div class="col-md-5 welcome-image">
-				<img src="{\App\Resources::resourcePath('wizard.jpg',$MODULE_NAME)}" alt="Wizard"/>
+				<img src="{\App\Resources::resourcePath('wizard.jpg', $MODULE_NAME)}" alt="Wizard"/>
 			</div>
 			<div class="col-md-7">
 				<div class="welcome-div">
 					<h3>{\App\Language::translate('LBL_WELCOME_TO_SETUP_WIZARD', $MODULE_NAME)}</h3>
-					<p>{\App\Language::translate('LBL_SETUP_WIZARD_DESCRIPTION',$MODULE_NAME)}</p>
+					<p>{\App\Language::translate('LBL_SETUP_WIZARD_DESCRIPTION', $MODULE_NAME)}</p>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="button-container float-right">
-				<button class="btn btn-sm btn-primary"
-						type="submit">{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
-			</div>
+		<div class="button-container float-right">
+			<button class="btn btn-sm btn-outline-primary"
+					type="submit">{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}</button>
 		</div>
 	</form>
 {/strip}

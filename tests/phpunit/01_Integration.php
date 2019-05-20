@@ -31,7 +31,7 @@ final class Integration extends TestCase
 		static::$apiObject = new class() extends \App\Api {
 			public static function clearSelf()
 			{
-				static::$_instance = null;
+				static::$instance = null;
 			}
 		};
 	}

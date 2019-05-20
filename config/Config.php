@@ -19,14 +19,14 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $crmUrl = 'http://yeti/';
+	public static $crmUrl = '__CRM_PATH__';
 
 	/**
 	 * Portal URL.
 	 *
 	 * @var string
 	 */
-	public static $portalUrl = 'http://portal2/';
+	public static $portalUrl = '__PORTAL_PATH__';
 
 	/**
 	 * Theme.
@@ -83,7 +83,7 @@ class Config
 	public static $debugApi = false;
 	public static $debugConsole = false;
 	public static $logs = false;
-	public static $apiKey = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
+	public static $apiKey = '__API_KEY__';
 	public static $serverName = 'portal';
 	public static $serverPass = 'portal';
 	public static $encryptDataTransfer = false;

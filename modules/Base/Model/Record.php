@@ -125,6 +125,20 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Function to set the raw value for a given key.
+	 *
+	 * @param string $key
+	 * @param mixed  $value
+	 *
+	 * @return self
+	 */
+	public function setRawValue(string $key, $value)
+	{
+		$this->valueMap['rawData'][$key] = $value;
+		return $this;
+	}
+
+	/**
 	 * Function to set the name of the module to which the record belongs.
 	 *
 	 * @param string $value

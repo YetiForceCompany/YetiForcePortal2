@@ -3,6 +3,8 @@
     <!--tpl-Products-Tree-Product-->
     <div class="m-0 p-3 box-shadow product js-cart-item"
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
+            data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
+            data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}">
         <div class="col-12 px-0 mb-4">
             <div class="product-image-contener text-center">
@@ -39,8 +41,8 @@
                 </div>
             </div>
             <div class="col-7 text-right text-secondary">
-                <div class="fs-80"><b>netto:</b> {$RECORD->getDisplayValue('unit_price')}</div>
-                <div class="fs-80"><b>brutto:</b> {$RECORD->getDisplayValue('unit_price')}</div>
+                <div class="fs-80"><b>{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_price')}</div>
+                <div class="fs-80"><b>{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</b> {$RECORD->getDisplayValue('unit_gross')}</div>
             </div>
         </div>
     </div>

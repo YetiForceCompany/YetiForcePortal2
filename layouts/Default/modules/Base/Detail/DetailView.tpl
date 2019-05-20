@@ -4,12 +4,12 @@
 		<div class="widget_header row">
 			<div class="col-sm-12">
 				<div class="float-left">
-					{include file=\App\Resources::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+					{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 				</div>
 				<div class="contentHeader">
 					<span class="float-right">
 						{foreach from=$LINKS item=LINK}
-							{include file=\App\Resources::templatePath("ButtonLink.tpl",$MODULE_NAME) BUTTON_VIEW='listViewBasic'}
+							{include file=\App\Resources::templatePath("ButtonLink.tpl", $MODULE_NAME) BUTTON_VIEW='listViewBasic'}
 						{/foreach}
 					</span>
 					<div class="clearfix"></div>
@@ -59,7 +59,7 @@
 				</div>
 			{/if}
 		{/foreach}
-		{include file=\App\Resources::templatePath("Detail\Inventory.tpl",$MODULE_NAME)}
+		{include file=\App\Resources::templatePath("Detail\Inventory.tpl", $MODULE_NAME)}
 		{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
 	</div>
 {/strip}
