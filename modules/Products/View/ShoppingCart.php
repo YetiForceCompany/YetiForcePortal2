@@ -62,6 +62,7 @@ class ShoppingCart extends View\ListView
 		$this->viewer->assign('SELECTED_ADDRESS', $this->getListViewModel()->getSelectedAddress());
 		$this->viewer->assign('PROCCED_URL', $proceedUrl);
 		$this->viewer->assign('READONLY', $readonly);
+		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('checkStockLevels'));
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 

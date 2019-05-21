@@ -83,7 +83,7 @@ class WebUI
 		}
 	}
 
-	public function isInstalled()
+	public function isInstalled(): bool
 	{
 		return '__CRM_PATH__' != Config::$crmUrl;
 	}
