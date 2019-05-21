@@ -27,25 +27,21 @@ class DetailView extends \App\Controller\View
 		$moduleName = $this->request->getModule();
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
-
-		$recordDetail = $api->call("$moduleName/Record/$record");
-		$recordModel = Record::getInstance($moduleName);
-		$recordModel->setData($recordDetail['data']);
+		$recordModel = Record::getInstanceById($moduleName, $record);
 
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
-				if (isset($recordDetail['data'][$field['name']])) {
-					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
+				if ($recordModel->has($field['name'])) {
+					$fieldInstance->setDisplayValue($recordModel->get($field['name']));
 				}
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
 		$inventoryFields = [];
 		if (!empty($moduleStructure['inventory'])) {
-			$recordModel->setInventoryData($recordDetail['inventory']);
 			foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
 				if (1 === $fieldType) {
 					foreach ($fieldsInventory as $field) {
@@ -56,15 +52,15 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-		$recordModel->setId($record);
+
 		$detailViewModel = DetailViewModel::getInstance($moduleName);
 		$detailViewModel->setRecordModel($recordModel);
-		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
+		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
-		$this->viewer->assign('SUMMARY_INVENTORY', $recordDetail['summary_inventory'] ?? []);
+		$this->viewer->assign('SUMMARY_INVENTORY', $recordModel->getInventorySummary());
 		$this->viewer->assign('LINKS', $detailViewModel->getLinksHeader());
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
