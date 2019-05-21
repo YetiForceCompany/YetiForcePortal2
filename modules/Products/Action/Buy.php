@@ -54,20 +54,19 @@ class Buy extends \App\Controller\Action
 	 */
 	private function createSingleOrderFromCart(Cart $cart)
 	{
-		$data = [];
+		$dataInventory = [];
 		foreach ($cart->getAll() as $key => $item) {
-			$data[$key] = [
+			$dataInventory[$key] = [
 				'name' => $key,
 				'qty' => $item['amount']
 			];
 		}
-		return \App\Api::getInstance()->call(
-			'SSingleOrders/SaveInventory/',
-			[
-				'inventory' => $data,
-				'address' => $cart->getAddress()
-			],
-			'post'
-		);
+		$requestParams = [];
+		foreach ($cart->getAddress() as $fieldName => $value) {
+			$requestParams[$fieldName . 'a'] = $value;
+		}
+		$requestParams['inventory'] = $dataInventory;
+		$requestParams['subject'] = 'SSingleOrders - ' . date('Y-m-d');
+		return \App\Api::getInstance()->call('SSingleOrders/SaveInventory/', $requestParams, 'post');
 	}
 }
