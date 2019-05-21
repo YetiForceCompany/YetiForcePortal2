@@ -249,6 +249,10 @@ abstract class AbstractListView
 		if (!empty($this->recordsList['records'])) {
 			foreach ($this->recordsList['records'] as $key => $value) {
 				$recordModel = Record::getInstance($this->getModuleName());
+				if (isset($value['recordLabel'])) {
+					$recordModel->setName($value['recordLabel']);
+					unset($value['recordLabel']);
+				}
 				$recordModel->setData($value)->setId($key);
 				$recordsListModel[$key] = $recordModel;
 			}

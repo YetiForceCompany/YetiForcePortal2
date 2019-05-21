@@ -19,6 +19,20 @@ class Record extends \App\BaseModel
 	private $module;
 
 	/**
+	 * Record name.
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * Privileges.
+	 *
+	 * @var array
+	 */
+	protected $privileges = [];
+
+	/**
 	 * 	Information about inventory.
 	 *
 	 * @var array
@@ -26,13 +40,20 @@ class Record extends \App\BaseModel
 	private $inventoryData = [];
 
 	/**
+	 * 	Information about summary inventory.
+	 *
+	 * @var array
+	 */
+	private $inventorySummaryData = [];
+
+	/**
 	 * Static Function to get the instance of a clean Record for the given module name.
 	 *
-	 * @param type $module
+	 * @param string $module
 	 *
 	 * @return \self
 	 */
-	public static function getInstance($module)
+	public static function getInstance(string $module)
 	{
 		$handlerModule = \App\Loader::getModuleClassName($module, 'Model', 'Record');
 		$instance = new $handlerModule();
@@ -40,15 +61,37 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Static Function to get the instance of record.
+	 *
+	 * @param string $moduleName
+	 * @param int    $recordId
+	 *
+	 * @return \self
+	 */
+	public static function getInstanceById(string $moduleName, int $recordId)
+	{
+		$result = \App\Api::getInstance()->call("{$moduleName}/Record/{$recordId}");
+		$instance = self::getInstance($moduleName);
+		$instance->setData($result['data'] ?? []);
+		$instance->setInventoryData($result['inventory'] ?? [], $result['summaryInventory'] ?? []);
+		$instance->privileges = $result['privileges'] ?? [];
+		$instance->name = $result['name'] ?? '';
+		$instance->setId($recordId);
+		return $instance;
+	}
+
+	/**
 	 * Sets information about inventory.
 	 *
 	 * @param array $values
+	 * @param array $summary
 	 *
 	 * @return void
 	 */
-	public function setInventoryData(array $values)
+	public function setInventoryData(array $values, array $summary = [])
 	{
 		$this->inventoryData = $values;
+		$this->inventorySummaryData = $summary;
 	}
 
 	/**
@@ -59,6 +102,16 @@ class Record extends \App\BaseModel
 	public function getInventoryData()
 	{
 		return $this->inventoryData;
+	}
+
+	/**
+	 * Returns information about summary inventory.
+	 *
+	 * @return void
+	 */
+	public function getInventorySummary()
+	{
+		return $this->inventorySummaryData;
 	}
 
 	public function isInventory()
@@ -152,13 +205,23 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Set record name.
+	 *
+	 * @return string
+	 */
+	public function setName(string $name)
+	{
+		return $this->name = $name;
+	}
+
+	/**
 	 * Record name.
 	 *
 	 * @return string
 	 */
 	public function getName()
 	{
-		return $this->get('recordLabel');
+		return $this->name;
 	}
 
 	/**
@@ -244,9 +307,9 @@ class Record extends \App\BaseModel
 	 *
 	 * @return bool
 	 */
-	public function isEditable()
+	public function isEditable(): bool
 	{
-		return \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'EditView');
+		return $this->privileges['isEditable'] ?? false;
 	}
 
 	/**
@@ -264,9 +327,9 @@ class Record extends \App\BaseModel
 	 *
 	 * @return bool
 	 */
-	public function isDeletable()
+	public function isDeletable(): bool
 	{
-		return \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'Delete');
+		return $this->privileges['moveToTrash'] ?? false;
 	}
 
 	/**
