@@ -16,7 +16,7 @@
 		title="{\App\Language::translate($LABEL, $BTN_MODULE)}"{/strip} {strip}
 		{if isset($LINK['active']) && !$LINK['active']} disabled {/if}
 		id="{$MODULE_NAME}_{$BUTTON_VIEW}_action_{str_replace(' ', '_', $ACTION_NAME)}"{/strip} {strip}
-		class="btn {if $LINK['linkclass'] neq ''}{if $LINK['linkclass']|strrpos:"btn-" === false}btn-default {/if}{$LINK['linkclass']}{else}btn-default{/if} {if $LABEL neq '' && !isset($LINK['showLabel'])} popoverTooltip{/if} {if isset($LINK['modalView'])}showModal{/if}"{/strip} {strip}
+		class="btn {if $LINK['linkclass'] neq ''}{if $LINK['linkclass']|strrpos:"btn-" === false}btn-default {/if}{$LINK['linkclass']}{else}btn-default{/if} {if $LABEL neq '' && !isset($LINK['showLabel'])} popoverTooltip{/if}{if isset($LINK['modalView'])} js-show-modal{/if}"{/strip} {strip}
 		{if isset($LINK['linkdata']) && is_array($LINK['linkdata'])}
 			{foreach from=$LINK['linkdata'] key=NAME item=DATA}
 				data-{$NAME}="{$DATA}"
