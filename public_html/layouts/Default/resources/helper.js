@@ -215,7 +215,7 @@ jQuery.Class(
 							labels: { close: app.translate("JS_CLOSE") }
 						},
 						Animate: {
-							animate: true,
+							animate: false,
 							inClass: "zoomInLeft",
 							outClass: "zoomOutRight"
 						}
