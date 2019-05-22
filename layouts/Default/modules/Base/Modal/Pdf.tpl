@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<form id="pdfExportModal" class="tpl-Modal-Pdf" action="index.php?module={$MODULE_NAME}&action=Pdf&mode=generate" target="_blank" method="POST">
+	<form id="pdfExportModal" class="tpl-Modal-Pdf mb-0" action="index.php?module={$MODULE_NAME}&action=Pdf&mode=generate" target="_blank" method="POST">
 		<div class="modal-body pb-0 js-pdf-container">
 			<div class="table-responsive col-sm-12">
 				<div class="card">
