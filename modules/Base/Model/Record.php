@@ -345,7 +345,6 @@ class Record extends \App\BaseModel
 	 */
 	public function isPermitted(string $actionName): bool
 	{
-		return true;
 		if (!isset($this->privileges[$actionName])) {
 			$this->privileges[$actionName] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), $actionName, $this->getId());
 		}
