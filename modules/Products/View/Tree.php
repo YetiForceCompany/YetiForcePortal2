@@ -52,6 +52,7 @@ class Tree extends View\ListView
 		}
 		$this->viewer->assign('SEARCH_TEXT', '');
 		$this->viewer->assign('SEARCH', $search);
+		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('checkStockLevels'));
 		parent::process();
 	}
 
