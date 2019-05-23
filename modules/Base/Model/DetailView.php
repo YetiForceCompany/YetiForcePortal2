@@ -5,6 +5,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Model;
@@ -73,6 +74,16 @@ class DetailView
 				'linkurl' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
 				'linkicon' => 'fas fa-shopping-cart',
 				'linkclass' => 'btn btn-outline-success btn-sm'
+			];
+		}
+		if ($this->record->isPermitted('ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
+			$links[] = [
+				'linktype' => 'DETAIL_VIEW_ADDITIONAL',
+				'linklabel' => \App\Language::translate('BTN_EXPORT_PDF', $this->moduleName),
+				'linkdata' => ['url' => 'index.php?module=' . $this->moduleName . '&view=Pdf&&record=' . $this->record->getId()],
+				'linkicon' => 'fas fa-file-pdf',
+				'linkclass' => 'btn-outline-dark btn-sm js-show-modal js-pdf',
+				'title' => \App\Language::translate('BTN_EXPORT_PDF', $this->moduleName),
 			];
 		}
 		return $links;

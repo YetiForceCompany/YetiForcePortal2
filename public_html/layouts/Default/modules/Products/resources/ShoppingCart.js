@@ -4,6 +4,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 	constructor(container = $(".js-products-container")) {
 		super(container);
 		this.container = container;
+		this.checkStockLevels = this.container.data("check-stock-levels");
 		this.totalPriceNetto = this.container.find(".js-total-price-netto");
 		this.totalPriceBrutto = this.container.find(".js-total-price-brutto");
 		this.btnProceedToCheckout = this.container.find(
@@ -26,6 +27,9 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		}
 	}
 	validate() {
+		if (!this.checkStockLevels) {
+			return true;
+		}
 		let validateResulat = true;
 		this.container.find(".js-cart-item").each((index, element) => {
 			let product = $(element);

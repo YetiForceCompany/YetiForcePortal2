@@ -3,6 +3,7 @@
 window.Products_Tree_Js = class {
 	constructor(container = $(".js-products-container")) {
 		this.container = container;
+		this.checkStockLevels = this.container.data("check-stock-levels");
 		this.page = this.container.find(".js-pagination-list").data("page");
 		this.treeInstance = $(".js-tree-container");
 		this.shoppingCartBadge = $(
@@ -147,7 +148,10 @@ window.Products_Tree_Js = class {
 				product.data("amountInShoppingCart")
 			);
 			let qtyinstock = parseFloat(product.data("qtyinstock"));
-			if (qtyinstock - amountInShoppingCart - amount < 0) {
+			if (
+				this.checkStockLevels &&
+				qtyinstock - amountInShoppingCart - amount < 0
+			) {
 				Vtiger_Helper_Js.showPnotify({
 					text: app.translate("JS_NO_SUCH_QUANTITY"),
 					type: "error"
