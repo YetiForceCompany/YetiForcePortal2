@@ -61,7 +61,7 @@ class Record extends \App\BaseModel
 	}
 
 	/**
-	 * Static Function to get the instance of record.
+	 * Static function to get the instance of record.
 	 *
 	 * @param string $moduleName
 	 * @param int    $recordId
@@ -309,7 +309,10 @@ class Record extends \App\BaseModel
 	 */
 	public function isEditable(): bool
 	{
-		return $this->privileges['isEditable'] ?? false;
+		if (!isset($this->privileges['isEditable'])) {
+			$this->privileges['isEditable'] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'EditView', $this->getId());
+		}
+		return $this->privileges['isEditable'];
 	}
 
 	/**
@@ -329,7 +332,23 @@ class Record extends \App\BaseModel
 	 */
 	public function isDeletable(): bool
 	{
-		return $this->privileges['moveToTrash'] ?? false;
+		if (!isset($this->privileges['moveToTrash'])) {
+			$this->privileges['moveToTrash'] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'MoveToTrash', $this->getId());
+		}
+		return $this->privileges['moveToTrash'];
+	}
+
+	/**
+	 * Function checks permissions to action.
+	 *
+	 * @return bool
+	 */
+	public function isPermitted(string $actionName): bool
+	{
+		if (!isset($this->privileges[$actionName])) {
+			$this->privileges[$actionName] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), $actionName, $this->getId());
+		}
+		return $this->privileges[$actionName];
 	}
 
 	/**

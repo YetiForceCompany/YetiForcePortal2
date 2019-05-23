@@ -396,6 +396,51 @@ var AppConnector,
 			app.cacheParams[param] = value;
 			$('#' + param).val(value);
 		},
+		registerModal: function(container) {
+			if (typeof container === 'undefined') {
+				container = $('body');
+			}
+			container
+				.off('click', '.js-show-modal')
+				.on('click', '.js-show-modal', function(e) {
+					e.preventDefault();
+					var currentElement = $(e.currentTarget);
+					var url = currentElement.data('url');
+
+					if (typeof url !== 'undefined') {
+						if (currentElement.hasClass('js-popover-tooltip')) {
+							currentElement.popover('hide');
+						}
+						if (currentElement.hasClass('disabledOnClick')) {
+							currentElement.attr('disabled', true);
+						}
+						var modalWindowParams = {
+							url: url,
+							cb: function(container) {
+								var call = currentElement.data('cb');
+								if (typeof call !== 'undefined') {
+									if (call.indexOf('.') !== -1) {
+										var callerArray = call.split('.');
+										if (typeof window[callerArray[0]] === 'object') {
+											window[callerArray[0]][callerArray[1]](container);
+										}
+									} else {
+										if (typeof window[call] === 'function') {
+											window[call](container);
+										}
+									}
+								}
+								currentElement.removeAttr('disabled');
+							}
+						};
+						if (currentElement.data('modalid')) {
+							modalWindowParams['id'] = currentElement.data('modalid');
+						}
+						app.showModalWindow(modalWindowParams);
+					}
+					e.stopPropagation();
+				});
+		},
 		showModalWindow: function (data, url, cb, paramsObject) {
 			var thisInstance = this;
 			var id = 'globalmodal';
@@ -639,6 +684,7 @@ jQuery(document).ready(function () {
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
 	app.registerSubMenu();
+	app.registerModal(container);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

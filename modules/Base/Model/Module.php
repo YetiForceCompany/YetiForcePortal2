@@ -19,8 +19,7 @@ class Module
 	public static function getInstance($module)
 	{
 		$handlerModule = App\Loader::getModuleClassName($module, 'Model', 'Module');
-		$instance = new $handlerModule();
-		return $instance;
+		return new $handlerModule();
 	}
 
 	/**
@@ -31,15 +30,14 @@ class Module
 	 *
 	 * @return bool
 	 */
-	public static function isPermitted($module, $action)
+	public static function isPermitted(string $module, string $action)
 	{
 		if (!\App\Session::has('modulePermissions')) {
 			\App\Session::set('modulePermissions', []);
 		}
 		$data = \App\Session::get('modulePermissions');
 		if (!isset($data[$module])) {
-			$permissions = \App\Api::getInstance()->call($module . '/Privileges');
-			$data[$module] = $permissions['standardActions'];
+			$data[$module] = \App\Api::getInstance()->call($module . '/Privileges');
 			\App\Session::set('modulePermissions', $data);
 		}
 		if (isset($data[$module][$action]) && !empty($data[$module][$action])) {
