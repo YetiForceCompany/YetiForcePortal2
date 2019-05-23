@@ -161,7 +161,7 @@ abstract class View extends Base
 	{
 		if (\App\Session::has('systemError')) {
 			$this->viewer->assign('ERRORS', \App\Session::get('systemError'));
-			unset($_SESSION['systemError']);
+			\App\Session::unset('systemError');
 		}
 		$this->viewer->view($this->preProcessTplName(), $this->moduleName);
 	}
