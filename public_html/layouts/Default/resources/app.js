@@ -620,6 +620,13 @@ var AppConnector,
 					window.location = $(e.currentTarget).attr('href');
 				}
 			});
+		},
+		setPnotifyDefaultOptions() {
+			PNotify.defaults.textTrusted = true;
+			PNotify.defaults.titleTrusted = true;
+			PNotify.defaults.styling = 'bootstrap4';
+			PNotify.defaults.icons = 'fontawesome5';
+
 		}
 	}
 
@@ -627,6 +634,7 @@ jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
 	app.registerDatePicker();
+	app.setPnotifyDefaultOptions();
 	app.registerDateField(container);
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
