@@ -1,5 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
+	<!-- tpl-Base-fieldtypes-Reference -->
 	{assign var=FIELD_NAME value=$FIELD_MODEL->get('name')}
 	{assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
 	{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
@@ -21,7 +22,7 @@
 			<input name="popupReferenceModule" type="hidden" data-multi-reference="1" value="{$REFERENCE_LIST[0]}"/>
 		{/if}
 	{/if}
-	<input name="{$FIELD_NAME}" type="hidden" value="{$RECORD->getRawValue($FIELD_NAME)}"
+	<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_MODEL->getEditViewDisplayValue()}"
 		   title="{$RECORD->getDisplayValue($FIELD_NAME)}" class="sourceField"
 		   data-fieldtype="{$FIELD_MODEL->get('type')}" data-field-label="{$FIELD_MODEL->get('label')}"
 		   data-displayvalue="{$RECORD->getDisplayValue($FIELD_NAME)}"
@@ -60,4 +61,5 @@
 			</button>
 		</div>
 	</div>
+	<!-- /tpl-Base-fieldtypes-Reference -->
 {/strip}

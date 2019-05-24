@@ -13,6 +13,7 @@ use App\Api;
 use App\Purifier;
 use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\Record;
+use YF\Modules\Products\Model\Cart;
 
 class Preview extends \App\Controller\View
 {
@@ -29,13 +30,20 @@ class Preview extends \App\Controller\View
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);
 
+		$amountInCart = 0;
+		$cart = new Cart();
+		if ($cart->has($record)) {
+			$amountInCart = $cart->getAmount($record);
+		}
+		$recordModel->setRawValue('amountInShoppingCart', $amountInCart);
+
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
 				if (isset($recordDetail['data'][$field['name']])) {
-					if ($field['type'] !== 'multiImage') {
+					if ('multiImage' !== $field['type']) {
 						$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
 					}
 				}
@@ -45,7 +53,7 @@ class Preview extends \App\Controller\View
 		$tax = current($recordDetail['rawData']['taxes_info']);
 		$unitGross = $recordDetail['rawData']['unit_price'];
 		if ($tax) {
-			$unitGross = $unitGross +  ($unitGross * ((float) $tax['value'])) / 100;
+			$unitGross = $unitGross + ($unitGross * ((float) $tax['value'])) / 100;
 		}
 
 		$recordModel->set('unit_gross', $unitGross);

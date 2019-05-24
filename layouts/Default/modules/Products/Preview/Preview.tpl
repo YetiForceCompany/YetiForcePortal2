@@ -1,6 +1,9 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-    <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview" data-js="container">
+    <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview"
+            data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
+            data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
+            data-js="container">
         <input type="hidden" class="js-preview-record" value="{$RECORD->getId()}" data-js="val">
         <div class="col-4">
             {assign var="IMAGES" value=$RECORD->get('imagename')}
