@@ -243,6 +243,7 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
 			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
+			YF_ROOT_WWW . 'libraries/bootbox/dist/bootbox.min.js',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.jquery.js',
 			YF_ROOT_WWW . 'libraries/select2/dist/js/select2.full.js',
 			YF_ROOT_WWW . 'libraries/moment/min/moment.min.js',

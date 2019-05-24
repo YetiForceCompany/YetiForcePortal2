@@ -11,10 +11,12 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 	}
 	registerButtonBuy() {
 		this.container.find(".js-buy").on("click", e => {
-			this.order({
-				reference_id: this.container.data("referenceId"),
-				reference_module: this.container.data("referenceModule")
-			});
+			Vtiger_Helper_Js.showConfirmationBox({ 'message': app.translate('LBL_VERIFY_ADDRESS') }).done(function (data) {
+				this.order({
+					reference_id: this.container.data("referenceId"),
+					reference_module: this.container.data("referenceModule")
+				});
+			})
 		});
 	}
 	order(params = {}) {
@@ -31,7 +33,7 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 			if (typeof result["errors"] === "undefined") {
 				app.openUrl(
 					"index.php?module=SSingleOrders&view=DetailView&record=" +
-						data["result"]["id"]
+					data["result"]["id"]
 				);
 			} else {
 				this.container
