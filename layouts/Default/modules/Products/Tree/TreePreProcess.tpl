@@ -15,10 +15,10 @@
             {assign var="COL_WIDTH" value=12}
             {if !empty($LEFT_SIDE_TEMPLATE)}
                 {assign var="COL_WIDTH" value=9}
-                <div class="col-3 pr-2 product-category">
+                <div class="col-xl-3 col-md-12 pr-xl-2 pr-md-3 product-category">
                     {include file=\App\Resources::templatePath($LEFT_SIDE_TEMPLATE, $MODULE_NAME)}
                 </div>
             {/if}
-	        <div class="col-{$COL_WIDTH} c-main-container js-main-container" data-js="container">
+	        <div class="col-xl-{$COL_WIDTH} col-md-12 c-main-container js-main-container" data-js="container">
     <!-- /tpl-Products-Tree-TreePreProcess -->
 {/strip}
