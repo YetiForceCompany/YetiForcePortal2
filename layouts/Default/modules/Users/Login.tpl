@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label for="inputEmail"
 					   class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
-				<input name="email" type="email" id="inputEmail" class="form-control"
+				<input name="email" type="text" id="inputEmail" class="form-control"
 					   placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}"
 					   value="portal@yetiforce.com" required="" autofocus="">
 			</div>

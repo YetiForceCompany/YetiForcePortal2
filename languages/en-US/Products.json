@@ -20,5 +20,7 @@
 		"LBL_NET_PRICE": "Net price",
 		"LBL_GROSS_PRICE": "Gross price"
 	},
-	"js": {}
+	"js": {
+		"LBL_VERIFY_ADDRESS": "Verify delivery address"
+	}
 }

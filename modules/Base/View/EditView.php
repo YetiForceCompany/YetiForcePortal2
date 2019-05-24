@@ -36,7 +36,6 @@ class EditView extends \App\Controller\View
 	{
 		$moduleName = $this->request->getModule();
 		$api = Api::getInstance();
-
 		$recordDetail = [];
 		if (!$this->request->isEmpty('record')) {
 			$record = $this->request->getByType('record', Purifier::INTEGER);
@@ -52,8 +51,6 @@ class EditView extends \App\Controller\View
 		if (!isset($recordDetail['id'])) {
 			$recordDetail['id'] = null;
 		}
-		$recordModel->setData($recordDetail);
-
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
@@ -64,10 +61,12 @@ class EditView extends \App\Controller\View
 					if (isset($recordDetail['rawData'][$field['name']])) {
 						$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
 					}
+				} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
+					$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));
+					$fieldInstance->setRawValue(\App\User::getUser()->get('CompanyId'));
 				} else {
 					$fieldInstance->setIsNewRecord();
 				}
-
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
@@ -83,12 +82,12 @@ class EditView extends \App\Controller\View
 	 */
 	public function getFooterScripts()
 	{
-		$headerScriptInstances = parent::getFooterScripts();
 		$jsFileNames = [
 			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
 		];
-
-		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
-		return array_merge($headerScriptInstances, $jsScriptInstances);
+		return array_merge(
+			parent::getFooterScripts(),
+			$this->convertScripts($jsFileNames, 'js')
+		);
 	}
 }

@@ -19,12 +19,9 @@ class Session
 	 *
 	 * @return mixed for the key
 	 */
-	public static function get($key, $defaultValue = false)
+	public static function get(string $key, $defaultValue = false)
 	{
-		if (isset($_SESSION[$key])) {
-			return $_SESSION[$key];
-		}
-		return $defaultValue;
+		return \array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $defaultValue;
 	}
 
 	/**
@@ -32,17 +29,31 @@ class Session
 	 *
 	 * @return bool if key is definied - return true
 	 */
-	public static function has($key): bool
+	public static function has(string $key): bool
 	{
-		return isset($_SESSION[$key]);
+		return \array_key_exists($key, $_SESSION);
 	}
 
 	/**
 	 * @param $key   Key in table
 	 * @param $value Value for the key
 	 */
-	public static function set($key, $value)
+	public static function set(string $key, $value)
 	{
 		$_SESSION[$key] = $value;
+	}
+
+	/**
+	 * Unset value.
+	 *
+	 * @param string $key
+	 *
+	 * @return void
+	 */
+	public static function unset(string $key)
+	{
+		if (\array_key_exists($key, $_SESSION)) {
+			unset($_SESSION[$key]);
+		}
 	}
 }

@@ -1,5 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
+	<!-- tpl-Base-EditView -->
 	<div class="contentsDiv">
 		<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php"
 			  enctype="multipart/form-data">
@@ -43,7 +44,7 @@
 										</label>
 									</div>
 									<div class="fieldValue col-md-9">
-										{assign var=FIELD value=$FIELD->set('fieldvalue',$RECORD->getRawValue($FIELD->getName()))}
+										{assign var=FIELD value=$FIELD->set('fieldvalue', $RECORD->getRawValue($FIELD->getName()))}
 										{include file=\App\Resources::templatePath($FIELD->getTemplate(), $MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
@@ -55,4 +56,5 @@
 		</form>
 	</div>
 	{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
+	<!-- /tpl-Base-EditView -->
 {/strip}
