@@ -41,22 +41,6 @@ window.Products_Tree_Js = class {
 			this.loadPage();
 		});
 	}
-	registerAmountChange() {
-		this.container.find(".js-amount-inc").on("click", e => {
-			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
-			let amountVal = amount.val();
-			amountVal++;
-			amount.val(amountVal);
-		});
-		this.container.find(".js-amount-dec").on("click", e => {
-			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
-			let amountVal = amount.val();
-			amountVal--;
-			if (amountVal >= 0) {
-				amount.val(amountVal);
-			}
-		});
-	}
 	registerPagination() {
 		this.container.find(".js-page-item").on("click", e => {
 			this.page = parseInt($(e.currentTarget).data("page"));
@@ -77,7 +61,6 @@ window.Products_Tree_Js = class {
 			this.loadPage();
 		});
 	}
-
 	getSearchParams() {
 		let search = [];
 		let searchValue = $(".js-search").val();
@@ -138,6 +121,22 @@ window.Products_Tree_Js = class {
 		});
 		$(".js-search-cancel").on("click", e => {
 			$(".js-search").val("");
+		});
+	}
+	registerAmountChange() {
+		this.container.find(".js-amount-inc").on("click", e => {
+			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
+			let amountVal = amount.val();
+			amountVal++;
+			amount.val(amountVal);
+		});
+		this.container.find(".js-amount-dec").on("click", e => {
+			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
+			let amountVal = amount.val();
+			amountVal--;
+			if (amountVal >= 0) {
+				amount.val(amountVal);
+			}
 		});
 	}
 	registerButtonAddToCart() {
