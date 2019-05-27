@@ -21,12 +21,12 @@
 				{assign var=COUNTER value=0}
 				{assign var=COUNT value=0}
 				<div class="card c-card col-sm-12 px-0 blockContainer my-3">
-					<div class="card-header c-card__header collapsed" id="{$BLOCK['id']}" data-toggle="collapse" data-target="#{strtolower($BLOCK['name'])}" aria-expanded="true">
+					<div class="card-header c-card__header collapsed" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
 						<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 						<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 						{$BLOCK['name']}
 					</div>
-					<div class="col-md-12 px-0 card-body py-0 blockContent collapse" id="{strtolower($BLOCK['name'])}" aria-labelledby="{$BLOCK['id']}">
+					<div class="col-md-12 px-0 card-body py-0 blockContent collapse" id="block_{$BLOCK['id']}">
 						<div class="col-sm-12 px-0 d-flex">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
