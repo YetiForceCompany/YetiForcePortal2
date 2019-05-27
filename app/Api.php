@@ -10,8 +10,6 @@
 
 namespace App;
 
-use Requests;
-
 class Api
 {
 	/**
@@ -63,16 +61,16 @@ class Api
 		$headers = $this->getHeaders();
 		$options = $this->getOptions();
 		if (in_array($requestType, ['get', 'delete'])) {
-			$request = Requests::$requestType($crmPath, $headers, $options);
+			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers] + $options);
 		} else {
 			$data = Json::encode($data);
 			if (Config::$encryptDataTransfer) {
 				$data = $this->encryptData($data);
 			}
-			$request = Requests::$requestType($crmPath, $headers, $data, $options);
+			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers, 'body' => $data] + $options);
 		}
-		$rawResponse = $request->body;
-		if (1 == $request->headers->getValues('X-ENCRYPTED')[0]) {
+		$rawResponse = (string) $request->getBody();
+		if (1 == $request->getHeader('encrypted')[0]) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Json::decode($rawResponse);
@@ -85,7 +83,7 @@ class Api
 				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
 				'response' => $response,
-				'request' => $request->raw,
+				'request' => (string) $request->getBody(),
 				'trace' => Debug::getBacktrace()
 			];
 			$_SESSION['debugApi'][] = $debugApi;
