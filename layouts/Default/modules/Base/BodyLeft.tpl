@@ -2,10 +2,10 @@
 {strip}
 	<!-- tpl-Base-BodyLeft -->
 	<div class="container-fluid c-menu__header row px-2">
-		<div class="col-sm-2 p-0 pt-2">
+		<div class="col-sm-2 p-0 pt-2 c-menu__header-logo">
 			<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
-		<div class="col-sm-10 userDetails">
+		<div class="col-sm-10 userDetails c-menu__header-user">
 			<div class="userName">
 				<span class="name">{$USER->get('name')}</span>
 			</div>

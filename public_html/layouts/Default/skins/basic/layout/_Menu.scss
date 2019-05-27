@@ -26,42 +26,35 @@
 	vertical-align: middle;
 	line-height: 18px;
 }
-
-.mobileLeftPanel {
-	position: fixed;
-	top: 50px;
-	right: -300px;
-	width: 300px;
-	z-index: 1000;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
-	height: calc(100% - 50px);
-
-	.userDetailsContainer {
-		height: 50px;
-		background: #4979aa;
-	}
+@media only screen and (max-width: 768px) {
+  .c-menu__header-logo {
+    width: 17% !important;
+  }
+  .c-menu__header-user {
+    width: 73%;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 17px;
+  }
+  .rightHeaderBtnMenu {
+    display: block !important;
+  }
+  .c-menu-mobile {
+    .c-menu__container:hover + .mainBody {
+      left: 200px !important;
+    }
+    &__content.mainBody {
+      left: 200px !important;
+      &:hover {
+        left: 200px !important;
+      }
+    }
+    .bodyHeader {
+      left: 200px !important;
+    }
+  }
 }
 
-@media (min-width: 768px) {
-	.visible-phone {
-		visibility: hidden;
-	}
-	.hidden-phone{
-		visibility: visible;
-	}
-}
-
-@media (max-width: 767px) {
-	.visible-phone {
-		visibility: visible;
-	}
-	.hidden-phone{
-		visibility: hidden;
-	}
-}
 
 .c-menu {
 	&__container {

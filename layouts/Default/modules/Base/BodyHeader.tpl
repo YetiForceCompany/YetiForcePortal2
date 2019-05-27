@@ -1,6 +1,12 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<header class="tpl-Base-BodyHeader bodyHeader d-flex justify-content-end align-items-center js-body-header" data-js="container">
+	<header class="tpl-Base-BodyHeader bodyHeader d-flex justify-content-end align-items-center js-body-header c-header" data-js="container">
+		<div class="rightHeaderBtnMenu d-none">
+			<a class="btn btn-outline-light btn-sm mr-2 c-header__btn ml-0 js-sidebar-btn" role="button" href="#" data-js="click"
+					 aria-haspopup="true" aria-expanded="false">
+				<span class="fas fa-bars fa-fw" title="{\App\Language::translate('LBL_MENU')}"></span>
+			</a>
+		</div>
 		<div class="dropdown js-shopping-cart">
 			<a class="btn btn-outline-light active btn-sm mr-2" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
 				<span class="fas fa-shopping-cart"></span>

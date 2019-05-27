@@ -4,11 +4,11 @@
 <div id="js_strings"
 	 class="d-none d-print-none">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'js'))}</div>
 <div id="pjaxContainer" class="d-none d-print-none"></div>
-<div class="mainPage">
-	<div class="leftPanel c-menu__container p-0 hidden-phone ">
+<div class="mainPage js-mobile-page">
+	<div class="leftPanel c-menu__container p-0">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl", $MODULE_NAME)}
 	</div>
-	<div class="mainBody">
+	<div class="mainBody js-mobile-body">
 		{include file=\App\Resources::templatePath("BodyHeader.tpl", $MODULE_NAME)}
 		{include file=\App\Resources::templatePath("BodyContent.tpl", $MODULE_NAME)}
 		<!-- /tpl-Base-Body -->
