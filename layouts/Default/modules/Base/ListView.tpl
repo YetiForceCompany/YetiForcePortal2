@@ -3,12 +3,12 @@
 	<div class="tpl-Base-ListView contentsDiv">
 		<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 		<div class="widget_header row py-1">
-			<div class="col-sm-8">
+			<div class="col-sm-8 col-6">
 				<div class="pull-left">
 					{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 				</div>
 			</div>
-			<div class="col-sm-4 listViewAction">
+			<div class="col-sm-4 col-6 listViewAction">
 				<div class="float-right">
 						{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
 						{if $IS_CREATEVIEW}

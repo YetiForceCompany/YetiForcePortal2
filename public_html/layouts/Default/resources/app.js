@@ -627,6 +627,22 @@ var AppConnector,
 				window.location.href = url;
 			}
 		},
+
+		registerMobileMenu: function(container) {
+			$('.js-sidebar-btn').on('click', e => {
+			let mobileMenu = container.find('.js-mobile-page');
+			let mobileMenuContent = container.find('.js-mobile-body');
+			if(mobileMenu.hasClass('c-menu-mobile')){
+				mobileMenu.removeClass('c-menu-mobile');
+				mobileMenuContent.removeClass('c-menu-mobile__content');
+			}else{
+				mobileMenu.addClass('c-menu-mobile');
+				mobileMenuContent.addClass('c-menu-mobile__content');
+			}
+
+			});
+		},
+
 		errorLog(error, err, errorThrown) {
 			if (false) {
 				return;
@@ -685,6 +701,7 @@ jQuery(document).ready(function () {
 	app.registerAdditions(jQuery);
 	app.registerSubMenu();
 	app.registerModal(container);
+	app.registerMobileMenu(container);
 //	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

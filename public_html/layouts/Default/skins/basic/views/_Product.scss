@@ -112,6 +112,7 @@ $borderColor: #eeeeee;
   }
 }
 .c-cart-quantity {
+  min-width: 114px;
   &__btn-circle {
     border-radius: 100% !important;
     width: calc(1.5rem + 2px) !important;
@@ -125,5 +126,14 @@ $borderColor: #eeeeee;
   &__input {
     border-radius: 0.5rem !important;
     background-image: none;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .quantity-content {
+    max-width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  .price-content {
+    display: flow-root;
   }
 }
