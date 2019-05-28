@@ -27,21 +27,21 @@
 						{$BLOCK['name']}
 					</div>
 					<div class="col-md-12 px-0 card-body py-0 blockContent collapse" id="block_{$BLOCK['id']}">
-						<div class="col-sm-12 px-0 d-flex">
+						<div class="col-sm-12 px-0 row m-0">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 							{if $COUNTER eq 2}
 						</div>
-						<div class="col-sm-12 px-0 d-flex">
+						<div class="col-sm-12 px-0 row m-0">
 							{assign var=COUNTER value=0}
 							{/if}
-							<div class="col-sm-12 col-md-6 px-0 borderTop d-flex">
-								<div class="col-md-3 fieldLabel pl-2 form-control-plaintext">
+							<div class="col-sm-12 col-md-6 px-0 borderTop row m-0">
+								<div class="col-xl-3  col-lg-4 col-md-12 fieldLabel pl-2 form-control-plaintext text-xl-right text-md-left">
 									<label class="col-form-label font-weight-bold">
 										{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 										{$FIELD->get('label')}
 									</label>
 								</div>
-								<div class="fieldValue col-md-9 form-control-plaintext d-flex align-items-center">
+								<div class="fieldValue col-xl-8 col-lg-9 col-md-12 form-control-plaintext d-flex align-items-center">
 									{$FIELD->getDisplayValue()}
 								</div>
 								{assign var=COUNTER value=$COUNTER+1}
@@ -49,9 +49,9 @@
 							{assign var=COUNT value=$COUNT+1}
 							{/foreach}
 							{if $COUNT % 2 == 1}
-								<div class="col-sm-12 col-md-6 px-0 borderTop">
-									<div class="col-md-3 fieldLabel pl-2"></div>
-									<div class="fieldValue col-md-9 form-control-plaintext"></div>
+								<div class="col-sm-12 col-md-6 px-0 borderTop row m-0">
+									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel pl-2 text-xl-right text-md-left"></div>
+									<div class="fieldValue col-xl-8 col-lg-9 col-md-12 form-control-plaintext"></div>
 								</div>
 							{/if}
 						</div>
