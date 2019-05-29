@@ -34,16 +34,16 @@
 							<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 							{$BLOCK['name']}
 						</div>
-						<div class="card-body blockContent row collapse hideBlock" id="block_{$BLOCK['id']}">
+						<div class="card-body blockContent row m-0 collapse hideBlock" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
-								<div class="editFields col-sm-12 col-md-6 row">
-									<div class="col-md-3 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-end">
+								<div class="editFields col-sm-12 col-md-6 row m-0">
+									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-lg-end justify-content-md-start">
 										<label class="muted mb-0 pt-0">
 											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}
 											{$FIELD->getLabel()}
 										</label>
 									</div>
-									<div class="fieldValue col-md-9">
+									<div class="fieldValue col-xl-9 col-lg-8 col-md-12 px-1">
 										{assign var=FIELD value=$FIELD->set('fieldvalue', $RECORD->getRawValue($FIELD->getName()))}
 										{include file=\App\Resources::templatePath($FIELD->getTemplate(), $MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
