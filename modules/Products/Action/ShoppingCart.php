@@ -12,7 +12,6 @@
 namespace YF\Modules\Products\Action;
 
 use YF\Modules\Products\Model\Cart;
-use YF\Modules\Products\Model\CartView;
 
 /**
  * Shopping cart action class.
@@ -45,8 +44,10 @@ class ShoppingCart extends \App\Controller\Action
 	 */
 	public function setToCart()
 	{
-		$this->cart->set($this->request->getInteger('record'), $this->request->getInteger('amount', 1), ['priceNetto' => (float) $this->request->get('priceNetto', 0.0)]);
-		$this->cart->save();
+		$this->cart->set($this->request->getInteger('record'), $this->request->getInteger('amount', 1), [
+			'priceNetto' => (float) $this->request->get('priceNetto', 0.0),
+			'priceGross' => (float) $this->request->get('priceGross', 0.0)
+		]);
 		$this->saveCart();
 	}
 
@@ -62,9 +63,11 @@ class ShoppingCart extends \App\Controller\Action
 		if ($this->cart->has($recordId)) {
 			$this->cart->add($recordId, $amount);
 		} else {
-			$this->cart->set($recordId, $amount, ['priceNetto' => (float) $this->request->get('priceNetto', 0.0)]);
+			$this->cart->set($recordId, $amount, [
+				'priceNetto' => (float) $this->request->get('priceNetto', 0.0),
+				'priceGross' => (float) $this->request->get('priceGross', 0.0)
+			]);
 		}
-		$this->cart->save();
 		$this->saveCart();
 	}
 
@@ -112,13 +115,23 @@ class ShoppingCart extends \App\Controller\Action
 	 */
 	private function saveCart()
 	{
-		$this->cart->save();
-		$cartViewModel = CartView::getInstance('Products', 'CartView');
+		$totalPrice = $this->cart->calculateTotalPriceGross();
+		$companyDetails = \App\User::getUser()->get('companyDetails');
+		if (!empty($companyDetails) && isset($companyDetails['creditlimit']) && $totalPrice > ($companyDetails['creditlimit'] - $companyDetails['sum_open_orders'])) {
+			$result = [
+				'error' => \App\Language::translate('LBL_MERCHANT_LIMIT_EXCEEDED', 'Products')
+			];
+		} else {
+			$this->cart->save();
+			$result = [
+				'numberOfItems' => $this->cart->count(),
+				'totalPriceNetto' => \App\Fields\Currency::formatToDisplay($this->cart->calculateTotalPriceNetto()),
+				'totalPriceGross' => \App\Fields\Currency::formatToDisplay($totalPrice),
+			];
+		}
+
 		$response = new \App\Response();
-		$response->setResult([
-			'numberOfItems' => $this->cart->count(),
-			'totalPriceNetto' => \App\Fields\Currency::formatToDisplay($cartViewModel->calculateTotalPriceNetto())
-		]);
+		$response->setResult($result);
 		$response->emit();
 	}
 }

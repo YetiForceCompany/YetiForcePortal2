@@ -50,6 +50,8 @@ class Preview extends \App\Controller\View
 		}
 		$recordModel->set('unit_price', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_price']));
 		$recordModel->set('unit_gross', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_gross']));
+		$recordModel->setRawValue('unit_price', $recordDetail['ext']['unit_price']);
+		$recordModel->setRawValue('unit_gross', $recordDetail['ext']['unit_gross']);
 		$recordModel->setId($record);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);

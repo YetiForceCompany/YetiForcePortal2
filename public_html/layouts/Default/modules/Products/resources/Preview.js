@@ -57,17 +57,25 @@ window.Products_Preview_Js = class {
 					type: "error"
 				});
 			} else {
-				this.cartMethod("addToCart", product.data("id"), {
+				this.cartMethod("addToCart", this.container.find('.js-preview-record').val(), {
 					amount: product.find(".js-amount").val(),
-					priceNetto: product.data("priceNetto")
+					priceNetto: product.data("priceNetto"),
+					priceGross: product.data("priceGross"),
 				}).done(data => {
-					this.shoppingCartBadge.text(
-						data["result"]["numberOfItems"]
-					);
-					product.data(
-						"amountInShoppingCart",
-						amountInShoppingCart + amount
-					);
+					if (data["result"]['error']) {
+						Vtiger_Helper_Js.showPnotify({
+							text: data["result"]['error'],
+							type: "error"
+						});
+					} else {
+						this.shoppingCartBadge.text(
+							data["result"]["numberOfItems"]
+						);
+						product.data(
+							"amountInShoppingCart",
+							amountInShoppingCart + amount
+						);
+					}
 				});
 			}
 		});

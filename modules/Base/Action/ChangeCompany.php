@@ -19,7 +19,7 @@ class ChangeCompany extends \App\Controller\Action
 	public function process()
 	{
 		$userInstance = \App\User::getUser();
-		$userInstance->set('CompanyId', $this->request->getByType('record', Purifier::INTEGER));
+		$userInstance->set('companyId', $this->request->getByType('record', Purifier::INTEGER));
 		$response = new \App\Response();
 		$response->setResult(true);
 		$response->emit();

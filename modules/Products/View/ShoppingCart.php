@@ -58,11 +58,13 @@ class ShoppingCart extends View\ListView
 		$this->viewer->assign('LIST_VIEW_MODEL', $this->getListViewModel());
 		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
+		$this->viewer->assign('TOTAL_PRICE_GROSS', $this->getListViewModel()->calculateTotalPriceGross());
+
 		$this->viewer->assign('ADDRESSES', $this->getListViewModel()->getAddresses());
 		$this->viewer->assign('SELECTED_ADDRESS', $this->getListViewModel()->getSelectedAddress());
 		$this->viewer->assign('PROCCED_URL', $proceedUrl);
 		$this->viewer->assign('READONLY', $readonly);
-		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('checkStockLevels'));
+		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 

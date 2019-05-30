@@ -158,15 +158,24 @@ window.Products_Tree_Js = class {
 			} else {
 				this.cartMethod("addToCart", product.data("id"), {
 					amount: product.find(".js-amount").val(),
-					priceNetto: product.data("priceNetto")
+					priceNetto: product.data("priceNetto"),
+					priceGross: product.data("priceGross")
 				}).done(data => {
-					this.shoppingCartBadge.text(
-						data["result"]["numberOfItems"]
-					);
-					product.data(
-						"amountInShoppingCart",
-						amountInShoppingCart + amount
-					);
+					if (data["result"]['error']) {
+						Vtiger_Helper_Js.showPnotify({
+							text: data["result"]['error'],
+							type: "error"
+						});
+					} else {
+						this.shoppingCartBadge.text(
+							data["result"]["numberOfItems"]
+						);
+						product.data(
+							"amountInShoppingCart",
+							amountInShoppingCart + amount
+						);
+					}
+
 				});
 			}
 		});

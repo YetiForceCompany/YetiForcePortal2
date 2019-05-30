@@ -28,7 +28,8 @@ class Menu
 		$basic['name'] = Language::translateModule($moduleName);
 
 		if (Session::has('Modules') && isset(Session::get('Modules')[$moduleName])) {
-			$basic['url'] = "index.php?module=$moduleName&view=ListView";
+			$moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
+			$basic['url'] = $moduleModel->getDefaultUrl();
 		}
 		$breadcrumbs[] = $basic;
 		if ('EditView' === $view && $request->isEmpty('record')) {

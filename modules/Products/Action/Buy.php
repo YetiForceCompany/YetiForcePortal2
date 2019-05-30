@@ -25,19 +25,24 @@ class Buy extends \App\Controller\Action
 	 */
 	public function process()
 	{
+		$response = new \App\Response();
 		try {
-			$response = new \App\Response();
 			if ($this->request->isEmpty('reference_id')) {
 				$cart = new Cart();
 				$responseFromApi = $this->createSingleOrderFromCart($cart);
 				$response->setResult($responseFromApi);
-				if (!isset($responseFromApi['error'])) {
+				if (!isset($responseFromApi['errors'])) {
+					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
 					$cart->removeAll();
 					$cart->save();
 				}
 			} else {
 				$cart = new ReferenceCart($this->request->getInteger('reference_id'), $this->request->getByType('reference_module', Purifier::ALNUM));
-				$response->setResult($this->createSingleOrderFromCart($cart));
+				$responseFromApi = $this->createSingleOrderFromCart($cart);
+				if (!isset($responseFromApi['errors'])) {
+					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
+				}
+				$response->setResult($responseFromApi);
 			}
 		} catch (\App\AppException $e) {
 			$response->setError($e->getCode(), $e->getMessage());
@@ -64,6 +69,10 @@ class Buy extends \App\Controller\Action
 		$requestParams = [];
 		foreach ($cart->getAddress() as $fieldName => $value) {
 			$requestParams[$fieldName . 'a'] = $value;
+		}
+		if ($cart instanceof  ReferenceCart) {
+			$requestParams['reference_id'] = $cart->recordId;
+			$requestParams['reference_module'] = $cart->moduleName;
 		}
 		$requestParams['inventory'] = $dataInventory;
 		$requestParams['subject'] = 'SSingleOrders - ' . date('Y-m-d');

@@ -79,7 +79,9 @@ class CartView extends ListViewModel
 			$recordDetail = $this->cart->get($recordId);
 			$recordModel->set('amountInShoppingCart', $amount);
 			$recordModel->set('totalPriceNetto', $amount * (float) $recordDetail['param']['priceNetto']);
+			$recordModel->set('totalPriceGross', $amount * (float) $recordDetail['param']['priceGross']);
 			$recordModel->set('priceNetto', $recordDetail['param']['priceNetto']);
+			$recordModel->set('priceGross', $recordDetail['param']['priceGross']);
 		}
 		return $this->recordsListModel;
 	}
@@ -91,11 +93,17 @@ class CartView extends ListViewModel
 	 */
 	public function calculateTotalPriceNetto(): float
 	{
-		$totalPrice = 0;
-		foreach ($this->cart->getAll() as $item) {
-			$totalPrice += ((float) $item['param']['priceNetto']) * $item['amount'];
-		}
-		return $totalPrice;
+		return $this->cart->calculateTotalPriceNetto();
+	}
+
+	/**
+	 * Calculate total price gross.
+	 *
+	 * @return float
+	 */
+	public function calculateTotalPriceGross(): float
+	{
+		return $this->cart->calculateTotalPriceGross();
 	}
 
 	/**
@@ -106,10 +114,10 @@ class CartView extends ListViewModel
 	public function getAddresses(): array
 	{
 		$userModel = \App\User::getUser();
-		if (empty($userModel->get('CompanyId'))) {
+		if (empty($userModel->get('companyId'))) {
 			return [];
 		}
-		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['X-RAW-DATA' => 1])->call("Accounts/Record/{$userModel->get('CompanyId')}", [], 'get');
+		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['X-RAW-DATA' => 1])->call("Accounts/Record/{$userModel->get('companyId')}", [], 'get');
 		$address = [];
 
 		foreach (['a', 'b', 'c'] as $typeAddress) {

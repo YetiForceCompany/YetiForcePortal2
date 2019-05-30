@@ -51,7 +51,11 @@
 		"LBL_NET_PRICE": "net price",
 		"LBL_GROSS_PRICE": "gross price",
 		"LBL_AVAILABLE_PDF_TEMPLATES": "Available PDF templates",
-		"BTN_GENERATE_PDF": "Generate"
+		"BTN_GENERATE_PDF": "Generate",
+		"LBL_SUM_OPEN_ORDERS": "Sum of open sales orders",
+		"LBL_CREDIT_LIMIT": "Merchant limits",
+		"LBL_HOME": "Dashboard",
+		"LBL_VIEW_PREVIEW": "Details"
 	},
 	"js": {
 		"JS_TODAY": "Today",

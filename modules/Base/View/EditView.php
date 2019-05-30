@@ -63,7 +63,7 @@ class EditView extends \App\Controller\View
 					}
 				} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
 					$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));
-					$fieldInstance->setRawValue(\App\User::getUser()->get('CompanyId'));
+					$fieldInstance->setRawValue(\App\User::getUser()->get('companyId'));
 				} else {
 					$fieldInstance->setIsNewRecord();
 				}
