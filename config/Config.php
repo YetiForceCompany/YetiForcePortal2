@@ -94,4 +94,5 @@ class Config
 	public static $cachingDriver = 'Base';
 
 	public static $defaultCharset = 'UTF-8';
+	public static $csrfProtection = true;
 }

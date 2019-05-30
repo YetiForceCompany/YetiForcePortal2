@@ -23,6 +23,10 @@ class WebUI
 	public function process(Request $request)
 	{
 		try {
+			if (Config::get('csrfProtection')) {
+				require_once 'config/csrf_config.php';
+				\CsrfMagic\Csrf::init();
+			}
 			$module = $request->getModule();
 			$view = $request->getByType('view', Purifier::ALNUM);
 			$action = $request->getByType('action', Purifier::ALNUM);

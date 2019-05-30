@@ -256,6 +256,9 @@ class Request
 		if ('POST' !== $_SERVER['REQUEST_METHOD']) {
 			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
 		}
+		if (class_exists('CSRFConfig') && !\CsrfMagic\Csrf::check(false)) {
+			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
+		}
 	}
 
 	public function validateReadAccess()
