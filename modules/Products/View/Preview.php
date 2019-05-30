@@ -42,21 +42,14 @@ class Preview extends \App\Controller\View
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
-				if (isset($recordDetail['data'][$field['name']])) {
-					if ('multiImage' !== $field['type']) {
-						$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
-					}
+				if (isset($recordDetail['data'][$field['name']]) && 'multiImage' !== $field['type']) {
+					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
 				}
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
-		$tax = current($recordDetail['rawData']['taxes_info']);
-		$unitGross = $recordDetail['rawData']['unit_price'];
-		if ($tax) {
-			$unitGross = $unitGross + ($unitGross * ((float) $tax['value'])) / 100;
-		}
-
-		$recordModel->set('unit_gross', $unitGross);
+		$recordModel->set('unit_price', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_price']));
+		$recordModel->set('unit_gross', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_gross']));
 		$recordModel->setId($record);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);
