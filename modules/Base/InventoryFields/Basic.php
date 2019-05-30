@@ -27,13 +27,13 @@ class Basic extends \App\BaseModel
 	/**
 	 * Function to display data.
 	 *
-	 * @param string $value
+	 * @param null|string $value
 	 *
 	 * @return string
 	 */
-	public function getDisplayValue(string $value): string
+	public function getDisplayValue(?string $value): string
 	{
-		return \App\Purifier::encodeHtml($value);
+		return \App\Purifier::encodeHtml((string) $value);
 	}
 
 	/**
