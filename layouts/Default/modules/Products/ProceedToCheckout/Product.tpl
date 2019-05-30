@@ -43,7 +43,7 @@
                     <span class="font-weight-bold">
                         {\App\Language::translate('LBL_PRICE', $MODULE_NAME)}:
                     </span>
-                    {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceNetto'))}
+                    {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceGross'))}
                 </div>
             </div>
 

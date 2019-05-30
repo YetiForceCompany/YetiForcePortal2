@@ -48,6 +48,12 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 					product.find(".js-no-such-quantity").removeClass("d-none");
 					product.find(".js-maximum-quantity").text(quantity);
 				});
+				if (result["errors"]["limit"]) {
+					Vtiger_Helper_Js.showPnotify({
+						text: result["errors"]["limit"],
+						type: "error"
+					});
+				}
 			}
 		});
 	}

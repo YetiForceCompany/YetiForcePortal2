@@ -14,12 +14,18 @@ use App;
 
 class Module
 {
+	protected $moduleName;
 	protected $defaultView = 'ListView';
 
 	public static function getInstance($module)
 	{
 		$handlerModule = App\Loader::getModuleClassName($module, 'Model', 'Module');
-		return new $handlerModule();
+		return new $handlerModule($module);
+	}
+
+	public function __construct(string $moduleName)
+	{
+		$this->moduleName = $moduleName;
 	}
 
 	/**
@@ -46,8 +52,23 @@ class Module
 		return false;
 	}
 
-	public function getDefaultView()
+	/**
+	 * Returns default view for module.
+	 *
+	 * @return string
+	 */
+	public function getDefaultView(): string
 	{
 		return $this->defaultView;
+	}
+
+	/**
+	 * Returns default address url.
+	 *
+	 * @return string
+	 */
+	public function getDefaultUrl(): string
+	{
+		return "index.php?module={$this->moduleName}&view={$this->defaultView}";
 	}
 }

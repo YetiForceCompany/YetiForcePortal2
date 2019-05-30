@@ -118,8 +118,8 @@ class Api
 				'X-API-KEY' => Config::$apiKey,
 				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
 			];
-			if ($userInstance->has('CompanyId')) {
-				$return['X-PARENT-ID'] = $userInstance->get('CompanyId');
+			if ($userInstance->has('companyId')) {
+				$return['X-PARENT-ID'] = $userInstance->get('companyId');
 			}
 			$this->header = $return;
 		}

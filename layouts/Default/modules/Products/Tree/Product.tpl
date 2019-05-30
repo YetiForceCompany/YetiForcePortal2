@@ -5,7 +5,8 @@
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
-            data-price-netto="{$RECORD->getRawValue('unit_price')}">
+            data-price-netto="{$RECORD->getRawValue('unit_price')}"
+            data-price-gross="{$RECORD->getRawValue('unit_gross')}">
         <div class="col-12 px-0 mb-4">
             <div class="product-image-contener text-center">
                 {assign var="IMAGES" value=$RECORD->get('imagename')}

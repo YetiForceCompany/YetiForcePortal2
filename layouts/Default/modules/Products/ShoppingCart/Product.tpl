@@ -4,7 +4,8 @@
     <div class="row m-0 p-1 box-shadow product-shopping-cart {if $COUNTER < $COUNT_OF_RECORDS}product-border-b {/if}js-cart-item"
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
-            data-price-netto="{$RECORD->getRawValue('unit_price')}">
+            data-price-netto="{$RECORD->getRawValue('unit_price')}"
+            data-price-gross="{$RECORD->getRawValue('unit_gross')}">
         <div class="col-2 product-border-r d-flex">
             <div class="product-shopping-cart-image-contener align-items-center m-auto">
                 {assign var="IMAGES" value=$RECORD->get('imagename')}
@@ -67,7 +68,7 @@
                     </div>
                     <div class="col-12 text-right fs-80">
                         <span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
-                        {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('unit_gross'))}
+                        {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceGross'))}
                     </div>
                 {/if}
 

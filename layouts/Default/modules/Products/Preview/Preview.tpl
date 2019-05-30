@@ -1,13 +1,23 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
+    <div class="widget_header row">
+        <div class="col-sm-8">
+            <div class="pull-left">
+                {include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
+            </div>
+        </div>
+	</div>
     <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
+            data-price-netto="{$RECORD->getRawValue('unit_price')}"
+            data-price-gross="{$RECORD->getRawValue('unit_gross')}"
             data-js="container">
+
         <input type="hidden" class="js-preview-record" value="{$RECORD->getId()}" data-js="val">
         <div class="col-4">
             {assign var="IMAGES" value=$RECORD->get('imagename')}
-            {if empty($IMAGES) }
+            {if empty($IMAGES)}
                 <div class="product-image-contener text-center">
                      <div class="product-no-image m-auto">
                         <span class="fa-stack fa-2x product-no-image">

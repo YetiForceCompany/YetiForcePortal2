@@ -702,37 +702,30 @@ hr {
   line-height: 18px;
 }
 
-.mobileLeftPanel {
-  position: fixed;
-  top: 50px;
-  right: -300px;
-  width: 300px;
-  z-index: 1000;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  height: calc(100% - 50px);
-}
-
-.mobileLeftPanel .userDetailsContainer {
-  height: 50px;
-  background: #4979aa;
-}
-
-@media (min-width: 768px) {
-  .visible-phone {
-    visibility: hidden;
+@media only screen and (max-width: 768px) {
+  .c-menu__header-logo {
+    width: 17% !important;
   }
-  .hidden-phone {
-    visibility: visible;
+  .c-menu__header-user {
+    width: 73%;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 17px;
   }
-}
-
-@media (max-width: 767px) {
-  .visible-phone {
-    visibility: visible;
+  .rightHeaderBtnMenu {
+    display: block !important;
   }
-  .hidden-phone {
-    visibility: hidden;
+  .c-menu-mobile .c-menu__container:hover + .mainBody {
+    left: 200px !important;
+  }
+  .c-menu-mobile__content.mainBody {
+    left: 200px !important;
+  }
+  .c-menu-mobile__content.mainBody:hover {
+    left: 200px !important;
+  }
+  .c-menu-mobile .bodyHeader {
+    left: 200px !important;
   }
 }
 
@@ -1097,6 +1090,10 @@ table.dataTable.listViewEntries tbody td {
   background-image: none;
 }
 
+.c-cart-quantity {
+  min-width: 114px;
+}
+
 .c-cart-quantity__btn-circle {
   border-radius: 100% !important;
   width: calc(1.5rem + 2px) !important;
@@ -1110,6 +1107,16 @@ table.dataTable.listViewEntries tbody td {
 .c-cart-quantity__input {
   border-radius: 0.5rem !important;
   background-image: none;
+}
+
+@media only screen and (max-width: 1600px) {
+  .quantity-content {
+    max-width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  .price-content {
+    display: flow-root;
+  }
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */

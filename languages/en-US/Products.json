@@ -18,7 +18,8 @@
 		"LBL_CATEGORIES": "Categories",
 		"LBL_ADDRESS": "Address",
 		"LBL_NET_PRICE": "Net price",
-		"LBL_GROSS_PRICE": "Gross price"
+		"LBL_GROSS_PRICE": "Gross price",
+		"LBL_MERCHANT_LIMIT_EXCEEDED": "Merchant limit was exceeded"
 	},
 	"js": {
 		"LBL_VERIFY_ADDRESS": "Verify delivery address"

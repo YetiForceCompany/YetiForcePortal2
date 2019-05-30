@@ -19,14 +19,20 @@ use App\Session;
  */
 class ReferenceCart extends Cart
 {
+	public $recordId;
+	public $moduleName;
+
 	public function __construct(int $recordId, string $moduleName)
 	{
+		$this->recordId = $recordId;
+		$this->moduleName = $moduleName;
 		$details = Api::getInstance()->setCustomHeaders(['x-raw-data' => 1])->call("$moduleName/Record/$recordId", [], 'get');
 		foreach ($details['rawInventory'] as $item) {
 			$this->cart[$item['name']] = [
 				'amount' => $item['qty'],
 				'param' => [
-					'priceNetto' => $item['price']
+					'priceNetto' => $item['price'],
+					'priceGross' => $item['price'] + $item['tax'] / $item['qty'],
 				]
 			];
 		}

@@ -237,4 +237,32 @@ class Cart
 			throw new AppException('Invalid argument');
 		}
 	}
+
+	/**
+	 * Calculate total price netto.
+	 *
+	 * @return float
+	 */
+	public function calculateTotalPriceNetto(): float
+	{
+		$totalPrice = 0;
+		foreach ($this->cart as $item) {
+			$totalPrice += ((float) $item['param']['priceNetto']) * $item['amount'];
+		}
+		return $totalPrice;
+	}
+
+	/**
+	 * Calculate total price netto.
+	 *
+	 * @return float
+	 */
+	public function calculateTotalPriceGross(): float
+	{
+		$totalPrice = 0;
+		foreach ($this->cart as $item) {
+			$totalPrice += ((float) $item['param']['priceGross']) * $item['amount'];
+		}
+		return $totalPrice;
+	}
 }
