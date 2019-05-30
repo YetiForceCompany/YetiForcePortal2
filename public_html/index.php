@@ -6,9 +6,6 @@
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..');
 define('YF_ROOT_WEB', __DIR__);
 define('YF_ROOT_WWW', '');

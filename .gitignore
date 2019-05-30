@@ -5,6 +5,7 @@
 yarn-error.log
 /node_modules/
 /public_html/libraries/*
+/public_html/vendor/*
 
 # IDEs and editors
 /.buildpath
@@ -16,3 +17,4 @@ yarn-error.log
 *.sublime-workspace
 .babelrc
 .history
+/config/csrf_secret.php
