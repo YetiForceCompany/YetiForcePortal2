@@ -9,8 +9,403 @@ window.Base_Dashboard_MiniList_Js = class {
 }
 
 window.Base_Dashboard_ChartFilter_Js = class {
-	container;
-	widgetData;
+	constructor() {
+		this.container = '';
+		this.widgetData = '';
+		this.globalChartFunctions = {
+			/**
+			 * Functions for x or y axes scales xAxes:[{here}]
+			 */
+			scales: {
+				formatAxesLabels: function formatAxesLabels(value, index, values) {
+					if (String(value).length > 0 && !isNaN(Number(value))) {
+						return App.Fields.Double.formatToDisplay(value);
+					}
+					return value;
+				},
+			},
+			/**
+			 * Functions for datalabels
+			 */
+			datalabels: {
+				display(context) {
+					const meta = context.chart.getDatasetMeta(context.datasetIndex);
+					return meta.hidden !== true;
+				},
+				formatter: function datalabelsFormatter(value, context) {
+					if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+						return App.Fields.Double.formatToDisplay(value, 0);
+					}
+					if (
+						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted !== "undefined" &&
+						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex] !== "undefined"
+					) {
+						// data presented in different format usually exists in alternative dataFormatted array
+						return context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex];
+					}
+					if (String(value).length > 0 && isNaN(Number(value))) {
+						return App.Fields.Double.formatToDisplay(value);
+					}
+					return value;
+				}
+			},
+			/**
+			 * Tooltips functions
+			 */
+			tooltips: {
+				label: function tooltipLabelCallback(tooltipItem, data) {
+					// get already formatted data if exists
+					if (typeof data.datasets[tooltipItem.datasetIndex].dataFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index] !== "undefined") {
+						return data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index];
+					}
+					// if there is no formatted data so try to format it
+					if (String(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).length > 0 && !isNaN(Number(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]))) {
+						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+							return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index], 0);
+						}
+						return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+					}
+					// return raw data at idex
+					return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+				},
+				title: function tooltipTitleCallback(tooltipItems, data) {
+					const tooltipItem = tooltipItems[0];
+					// get already formatted title if exists
+					if (typeof data.datasets[tooltipItem.datasetIndex].titlesFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index] !== "undefined") {
+						return data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index];
+					}
+					// if there is no formatted title so try to format it
+					if (String(data.labels[tooltipItem.index]).length > 0 && !isNaN(Number(data.labels[tooltipItem.index]))) {
+						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+							return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index], 0);
+						}
+						return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index]);
+					}
+					// return label at index
+					return data.labels[tooltipItem.index];
+				}
+			},
+
+			legend: {
+				onClick(e, legendItem) {
+					let type = this.chartInstance.config.type;
+					if (typeof Chart.defaults[type] !== "undefined") {
+						return Chart.defaults[type].legend.onClick.apply(this.chartInstance, [e, legendItem]);
+					}
+					return Chart.defaults.global.legend.onClick.apply(this.chartInstance, [e, legendItem]);
+				},
+				generateLabels(chart) {
+					let type = chart.config.type;
+					let labels;
+					if (typeof Chart.defaults[type] !== "undefined") {
+						labels = Chart.defaults[type].legend.labels.generateLabels(chart);
+					} else {
+						labels = Chart.defaults.global.legend.labels.generateLabels(chart);
+					}
+
+					if (this.areColorsFromDividingField() || this.isMultiFilter()) {
+						chart.config.options.legend.labels.boxWidth = 12;
+						labels.forEach((label, index) => {
+							label.fillStyle = 'rgba(0,0,0,0)';
+							label.strokeStyle = 'rgba(0,0,0,0.15)';
+						});
+					}
+					return labels;
+				},
+				display() {
+					if (this.isMultiFilter() || this.areColorsFromDividingField()) {
+						return true;
+					}
+					return false;
+				}
+			},
+
+			/**
+			 * plugins
+			 */
+			plugins: {
+				/**
+				 * If datalabels doesn't fit - hide them individually
+				 * @param  {Chart} chart chart instance
+				 * @return {undefined}
+				 */
+				hideVerticalBarDatalabelsIfNeeded: function (chart) {
+					let getDatasetsMeta = function (chart) {
+						const datasets = [];
+						const data = chart.data;
+						if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
+							for (let i = 0, len = data.datasets.length; i < len; i++) {
+								const meta = chart.getDatasetMeta(i);
+								if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
+									datasets.push(meta);
+								}
+							}
+						}
+						return datasets;
+					};
+					let datasetsMeta = getDatasetsMeta(chart);
+					let datasets = chart.data.datasets;
+					for (let i = 0, len = datasets.length; i < len; i++) {
+						const dataset = datasets[i];
+						const meta = datasetsMeta[i];
+						if (meta.hidden) {
+							continue;
+						}
+						const metaData = meta.data;
+						if (typeof dataset._models === "undefined") {
+							dataset._models = {};
+						}
+						if (typeof dataset.datalabels === "undefined") {
+							dataset.datalabels = {};
+						}
+						if (typeof dataset.datalabels.display === "undefined") {
+							dataset.datalabels.display = true;
+						}
+						for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
+							const dataItem = metaData[iItem];
+							if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
+								let model = dataItem.$datalabels._model;
+								if (model !== null && typeof model !== "undefined") {
+									dataset._models[iItem] = model;
+								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
+									model = dataset._models[iItem];
+								} else {
+									return false;
+								}
+								const labelWidth = model.size.width + model.padding.width + model.borderWidth * 2;
+								const labelHeight = model.size.height + model.padding.height + model.borderWidth * 2;
+								const barHeight = dataItem.height();
+								let threshold = 10;
+								if (typeof chart.config.options.verticalBarLabelsThreshold !== 'undefined') {
+									threshold = chart.config.options.verticalBarLabelsThreshold;
+								}
+								if (dataItem._view.width + threshold < labelWidth || barHeight + threshold < labelHeight) {
+									dataItem.$datalabels._model.positioner = () => {
+										return false;
+									}
+								} else {
+									dataItem.$datalabels._model = model;
+								}
+							}
+						}
+					}
+				},
+				/**
+				 * If datalabels doesn't fit - hide them individually
+				 * @param  {Chart} chart  Chart instance
+				 * @return {undefined}
+				 */
+				hideHorizontalBarDatalabelsIfNeeded: function hideHorizontalBarDatalabelsIfNeeded(chart) {
+					let getDatasetsMeta = function (chart) {
+						const datasets = [];
+						const data = chart.data;
+						if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
+							for (let i = 0, len = data.datasets.length; i < len; i++) {
+								const meta = chart.getDatasetMeta(i);
+								if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
+									datasets.push(meta);
+								}
+							}
+						}
+						return datasets;
+					};
+					let datasetsMeta = getDatasetsMeta(chart);
+					let datasets = chart.data.datasets;
+					for (let i = 0, len = datasets.length; i < len; i++) {
+						const dataset = datasets[i];
+						const meta = datasetsMeta[i];
+						if (meta.hidden) {
+							continue;
+						}
+						const metaData = meta.data;
+						if (typeof dataset._models === "undefined") {
+							dataset._models = {};
+						}
+						if (typeof dataset.datalabels === "undefined") {
+							dataset.datalabels = {};
+						}
+						if (typeof dataset.datalabels.display === "undefined") {
+							dataset.datalabels.display = true;
+						}
+						for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
+							const dataItem = metaData[iItem];
+							if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
+								let model = dataItem.$datalabels._model;
+								if (model !== null && typeof model !== "undefined") {
+									dataset._models[iItem] = model;
+								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
+									model = dataset._models[iItem];
+								} else {
+									return false;
+								}
+								const labelWidth = model.size.width + model.padding.width + model.borderWidth * 2;
+								const labelHeight = model.size.height + model.padding.height + model.borderWidth * 2;
+								const barWidth = dataItem.width;
+								let threshold = 10;
+								if (typeof chart.config.options.horizontalBarLabelsThreshold !== 'undefined') {
+									threshold = chart.config.options.horizontalBarLabelsThreshold;
+								}
+								if (dataItem._view.height + threshold < labelHeight || barWidth + threshold < labelWidth) {
+									dataItem.$datalabels._model.positioner = () => {
+										return false;
+									}
+								} else {
+									dataItem.$datalabels._model = model;
+								}
+							}
+						}
+					}
+				},
+				/**
+				 * Fix to long axis labels
+				 * @param  {Chart}  chart    Chart instance
+				 * @return {Boolean}       [description]
+				 */
+				fixXAxisLabels: function fixXAxisLabels(chart) {
+					let shortenXTicks = function shortenXTicks(data, options) {
+						if (typeof options.scales === "undefined") {
+							options.scales = {};
+						}
+						if (typeof options.scales.xAxes === "undefined") {
+							options.scales.xAxes = [{}];
+						}
+						options.scales.xAxes.forEach((axis) => {
+							if (typeof axis.ticks === "undefined") {
+								axis.ticks = {};
+							}
+							axis.ticks.callback = function xAxisTickCallback(value, index, values) {
+								if (value.length > 13) {
+									return value.substr(0, 10) + '...';
+								}
+								return value;
+							};
+						});
+						return options;
+					};
+					let rotateXLabels90 = function rotateXLabels90(data, options) {
+						if (typeof options.scales === "undefined") {
+							options.scales = {};
+						}
+						if (typeof options.scales.xAxes === "undefined") {
+							options.scales.xAxes = [{}];
+						}
+						options.scales.xAxes.forEach((axis) => {
+							if (typeof axis.ticks === "undefined") {
+								axis.ticks = {};
+							}
+							axis.ticks.minRotation = 90;
+						});
+						return options;
+					};
+
+					chart.data.datasets.forEach((dataset, index) => {
+						if (dataset._updated) {
+							return false;
+						}
+						for (let prop in dataset._meta) {
+							if (dataset._meta.hasOwnProperty(prop)) {
+								for (let i = 0, len = dataset._meta[prop].data.length; i < len; i++) {
+									const metaDataItem = dataset._meta[prop].data[i];
+									const label = metaDataItem._xScale.ticks[i];
+									const ctx = metaDataItem._xScale.ctx;
+									let categoryWidth = metaDataItem._xScale.width / dataset._meta[prop].data.length;
+									if (typeof metaDataItem._xScale.options.categoryPercentage !== "undefined") {
+										// if it is bar chart there is category percentage option that we should use
+										categoryWidth *= metaDataItem._xScale.options.categoryPercentage;
+									}
+									const fullWidth = ctx.measureText(label).width;
+									if (categoryWidth < fullWidth) {
+										const shortened = label.substr(0, 10) + "...";
+										const shortenedWidth = ctx.measureText(shortened).width;
+										if (categoryWidth < shortenedWidth) {
+											chart.options = rotateXLabels90(chart.data, chart.options);
+											chart.options = shortenXTicks(chart.data, chart.options);
+										} else {
+											chart.options = shortenXTicks(chart.data, chart.options);
+										}
+										if (!dataset._updated) {
+											dataset._updated = true;
+											chart.update();
+											// recalculate positions for smooth animation (for all datasets)
+											chart.data.datasets.forEach((dataset, index) => {
+												dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
+													metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
+													metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
+													metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
+												});
+											});
+											break;
+										}
+									}
+								}
+								dataset._updated = true;
+							}
+						}
+					});
+				},
+				/**
+				 * Fix too long axis labels  - try to shorten and rotate
+				 * @param  {Chart}  chart    Chart instance
+				 * @return {Boolean}
+				 */
+				fixYAxisLabels: function fixYAxisLabels(chart) {
+					let shortenYTicks = function shortenYTicks(data, options) {
+						if (typeof options.scales === "undefined") {
+							options.scales = {};
+						}
+						if (typeof options.scales.yAxes === "undefined") {
+							options.scales.yAxes = [{}];
+						}
+						options.scales.yAxes.forEach((axis) => {
+							if (typeof axis.ticks === "undefined") {
+								axis.ticks = {};
+							}
+							axis.ticks.callback = function yAxisTickCallback(value, index, values) {
+								if (value.length > 13) {
+									return value.substr(0, 10) + '...';
+								}
+								return value;
+							}
+						});
+						return options;
+					};
+					chart.data.datasets.forEach((dataset, index) => {
+						if (dataset._updated) {
+							return false;
+						}
+						for (let prop in dataset._meta) {
+							if (dataset._meta.hasOwnProperty(prop)) {
+								// we have meta
+								for (let i = 0, len = dataset._meta[prop].data.length; i < len; i++) {
+									const metaDataItem = dataset._meta[prop].data[i];
+									const label = metaDataItem._view.label;
+									if (label.length > 13) {
+										chart.options = shortenYTicks(chart.data, chart.options);
+										if (!dataset._updated) {
+											dataset._updated = true;
+											chart.update();
+											// recalculate positions for smooth animation (for all datasets)
+											chart.data.datasets.forEach((dataset, index) => {
+												dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
+													if (typeof metaDataItem._xScale !== "undefined") {
+														metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
+														metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
+														metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
+													}
+												});
+											});
+											break;
+										}
+									}
+								}
+								dataset._updated = true;
+							}
+						}
+					});
+				},
+			}
+		}
+	}
 	setChartContainer(container) {
 		this.container = container;
 	};
@@ -768,399 +1163,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 	areColorsFromDividingField() {
 		return !!Number(this.getChartContainer().find('[name="colorsFromDividingField"]').val());
 	};
-	globalChartFunctions = {
-		/**
-		 * Functions for x or y axes scales xAxes:[{here}]
-		 */
-		scales: {
-			formatAxesLabels: function formatAxesLabels(value, index, values) {
-				if (String(value).length > 0 && !isNaN(Number(value))) {
-					return App.Fields.Double.formatToDisplay(value);
-				}
-				return value;
-			},
-		},
-		/**
-		 * Functions for datalabels
-		 */
-		datalabels: {
-			display(context) {
-				const meta = context.chart.getDatasetMeta(context.datasetIndex);
-				return meta.hidden !== true;
-			},
-			formatter: function datalabelsFormatter(value, context) {
-				if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
-					return App.Fields.Double.formatToDisplay(value, 0);
-				}
-				if (
-					typeof context.chart.data.datasets[context.datasetIndex].dataFormatted !== "undefined" &&
-					typeof context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex] !== "undefined"
-				) {
-					// data presented in different format usually exists in alternative dataFormatted array
-					return context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex];
-				}
-				if (String(value).length > 0 && isNaN(Number(value))) {
-					return App.Fields.Double.formatToDisplay(value);
-				}
-				return value;
-			}
-		},
-		/**
-		 * Tooltips functions
-		 */
-		tooltips: {
-			label: function tooltipLabelCallback(tooltipItem, data) {
-				// get already formatted data if exists
-				if (typeof data.datasets[tooltipItem.datasetIndex].dataFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index] !== "undefined") {
-					return data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index];
-				}
-				// if there is no formatted data so try to format it
-				if (String(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).length > 0 && !isNaN(Number(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]))) {
-					if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
-						return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index], 0);
-					}
-					return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
-				}
-				// return raw data at idex
-				return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-			},
-			title: function tooltipTitleCallback(tooltipItems, data) {
-				const tooltipItem = tooltipItems[0];
-				// get already formatted title if exists
-				if (typeof data.datasets[tooltipItem.datasetIndex].titlesFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index] !== "undefined") {
-					return data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index];
-				}
-				// if there is no formatted title so try to format it
-				if (String(data.labels[tooltipItem.index]).length > 0 && !isNaN(Number(data.labels[tooltipItem.index]))) {
-					if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
-						return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index], 0);
-					}
-					return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index]);
-				}
-				// return label at index
-				return data.labels[tooltipItem.index];
-			}
-		},
 
-		legend: {
-			onClick(e, legendItem) {
-				let type = this.chartInstance.config.type;
-				if (typeof Chart.defaults[type] !== "undefined") {
-					return Chart.defaults[type].legend.onClick.apply(this.chartInstance, [e, legendItem]);
-				}
-				return Chart.defaults.global.legend.onClick.apply(this.chartInstance, [e, legendItem]);
-			},
-			generateLabels(chart) {
-				let type = chart.config.type;
-				let labels;
-				if (typeof Chart.defaults[type] !== "undefined") {
-					labels = Chart.defaults[type].legend.labels.generateLabels(chart);
-				} else {
-					labels = Chart.defaults.global.legend.labels.generateLabels(chart);
-				}
-
-				if (this.areColorsFromDividingField() || this.isMultiFilter()) {
-					chart.config.options.legend.labels.boxWidth = 12;
-					labels.forEach((label, index) => {
-						label.fillStyle = 'rgba(0,0,0,0)';
-						label.strokeStyle = 'rgba(0,0,0,0.15)';
-					});
-				}
-				return labels;
-			},
-			display() {
-				if (this.isMultiFilter() || this.areColorsFromDividingField()) {
-					return true;
-				}
-				return false;
-			}
-		},
-
-		/**
-		 * plugins
-		 */
-		plugins: {
-			/**
-			 * If datalabels doesn't fit - hide them individually
-			 * @param  {Chart} chart chart instance
-			 * @return {undefined}
-			 */
-			hideVerticalBarDatalabelsIfNeeded: function (chart) {
-				let getDatasetsMeta = function (chart) {
-					const datasets = [];
-					const data = chart.data;
-					if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
-						for (let i = 0, len = data.datasets.length; i < len; i++) {
-							const meta = chart.getDatasetMeta(i);
-							if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
-								datasets.push(meta);
-							}
-						}
-					}
-					return datasets;
-				};
-				let datasetsMeta = getDatasetsMeta(chart);
-				let datasets = chart.data.datasets;
-				for (let i = 0, len = datasets.length; i < len; i++) {
-					const dataset = datasets[i];
-					const meta = datasetsMeta[i];
-					if (meta.hidden) {
-						continue;
-					}
-					const metaData = meta.data;
-					if (typeof dataset._models === "undefined") {
-						dataset._models = {};
-					}
-					if (typeof dataset.datalabels === "undefined") {
-						dataset.datalabels = {};
-					}
-					if (typeof dataset.datalabels.display === "undefined") {
-						dataset.datalabels.display = true;
-					}
-					for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
-						const dataItem = metaData[iItem];
-						if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
-							let model = dataItem.$datalabels._model;
-							if (model !== null && typeof model !== "undefined") {
-								dataset._models[iItem] = model;
-							} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
-								model = dataset._models[iItem];
-							} else {
-								return false;
-							}
-							const labelWidth = model.size.width + model.padding.width + model.borderWidth * 2;
-							const labelHeight = model.size.height + model.padding.height + model.borderWidth * 2;
-							const barHeight = dataItem.height();
-							let threshold = 10;
-							if (typeof chart.config.options.verticalBarLabelsThreshold !== 'undefined') {
-								threshold = chart.config.options.verticalBarLabelsThreshold;
-							}
-							if (dataItem._view.width + threshold < labelWidth || barHeight + threshold < labelHeight) {
-								dataItem.$datalabels._model.positioner = () => {
-									return false;
-								}
-							} else {
-								dataItem.$datalabels._model = model;
-							}
-						}
-					}
-				}
-			},
-			/**
-			 * If datalabels doesn't fit - hide them individually
-			 * @param  {Chart} chart  Chart instance
-			 * @return {undefined}
-			 */
-			hideHorizontalBarDatalabelsIfNeeded: function hideHorizontalBarDatalabelsIfNeeded(chart) {
-				let getDatasetsMeta = function (chart) {
-					const datasets = [];
-					const data = chart.data;
-					if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
-						for (let i = 0, len = data.datasets.length; i < len; i++) {
-							const meta = chart.getDatasetMeta(i);
-							if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
-								datasets.push(meta);
-							}
-						}
-					}
-					return datasets;
-				};
-				let datasetsMeta = getDatasetsMeta(chart);
-				let datasets = chart.data.datasets;
-				for (let i = 0, len = datasets.length; i < len; i++) {
-					const dataset = datasets[i];
-					const meta = datasetsMeta[i];
-					if (meta.hidden) {
-						continue;
-					}
-					const metaData = meta.data;
-					if (typeof dataset._models === "undefined") {
-						dataset._models = {};
-					}
-					if (typeof dataset.datalabels === "undefined") {
-						dataset.datalabels = {};
-					}
-					if (typeof dataset.datalabels.display === "undefined") {
-						dataset.datalabels.display = true;
-					}
-					for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
-						const dataItem = metaData[iItem];
-						if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
-							let model = dataItem.$datalabels._model;
-							if (model !== null && typeof model !== "undefined") {
-								dataset._models[iItem] = model;
-							} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
-								model = dataset._models[iItem];
-							} else {
-								return false;
-							}
-							const labelWidth = model.size.width + model.padding.width + model.borderWidth * 2;
-							const labelHeight = model.size.height + model.padding.height + model.borderWidth * 2;
-							const barWidth = dataItem.width;
-							let threshold = 10;
-							if (typeof chart.config.options.horizontalBarLabelsThreshold !== 'undefined') {
-								threshold = chart.config.options.horizontalBarLabelsThreshold;
-							}
-							if (dataItem._view.height + threshold < labelHeight || barWidth + threshold < labelWidth) {
-								dataItem.$datalabels._model.positioner = () => {
-									return false;
-								}
-							} else {
-								dataItem.$datalabels._model = model;
-							}
-						}
-					}
-				}
-			},
-			/**
-			 * Fix to long axis labels
-			 * @param  {Chart}  chart    Chart instance
-			 * @return {Boolean}       [description]
-			 */
-			fixXAxisLabels: function fixXAxisLabels(chart) {
-				let shortenXTicks = function shortenXTicks(data, options) {
-					if (typeof options.scales === "undefined") {
-						options.scales = {};
-					}
-					if (typeof options.scales.xAxes === "undefined") {
-						options.scales.xAxes = [{}];
-					}
-					options.scales.xAxes.forEach((axis) => {
-						if (typeof axis.ticks === "undefined") {
-							axis.ticks = {};
-						}
-						axis.ticks.callback = function xAxisTickCallback(value, index, values) {
-							if (value.length > 13) {
-								return value.substr(0, 10) + '...';
-							}
-							return value;
-						};
-					});
-					return options;
-				};
-				let rotateXLabels90 = function rotateXLabels90(data, options) {
-					if (typeof options.scales === "undefined") {
-						options.scales = {};
-					}
-					if (typeof options.scales.xAxes === "undefined") {
-						options.scales.xAxes = [{}];
-					}
-					options.scales.xAxes.forEach((axis) => {
-						if (typeof axis.ticks === "undefined") {
-							axis.ticks = {};
-						}
-						axis.ticks.minRotation = 90;
-					});
-					return options;
-				};
-
-				chart.data.datasets.forEach((dataset, index) => {
-					if (dataset._updated) {
-						return false;
-					}
-					for (let prop in dataset._meta) {
-						if (dataset._meta.hasOwnProperty(prop)) {
-							for (let i = 0, len = dataset._meta[prop].data.length; i < len; i++) {
-								const metaDataItem = dataset._meta[prop].data[i];
-								const label = metaDataItem._xScale.ticks[i];
-								const ctx = metaDataItem._xScale.ctx;
-								let categoryWidth = metaDataItem._xScale.width / dataset._meta[prop].data.length;
-								if (typeof metaDataItem._xScale.options.categoryPercentage !== "undefined") {
-									// if it is bar chart there is category percentage option that we should use
-									categoryWidth *= metaDataItem._xScale.options.categoryPercentage;
-								}
-								const fullWidth = ctx.measureText(label).width;
-								if (categoryWidth < fullWidth) {
-									const shortened = label.substr(0, 10) + "...";
-									const shortenedWidth = ctx.measureText(shortened).width;
-									if (categoryWidth < shortenedWidth) {
-										chart.options = rotateXLabels90(chart.data, chart.options);
-										chart.options = shortenXTicks(chart.data, chart.options);
-									} else {
-										chart.options = shortenXTicks(chart.data, chart.options);
-									}
-									if (!dataset._updated) {
-										dataset._updated = true;
-										chart.update();
-										// recalculate positions for smooth animation (for all datasets)
-										chart.data.datasets.forEach((dataset, index) => {
-											dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
-												metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
-												metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
-												metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
-											});
-										});
-										break;
-									}
-								}
-							}
-							dataset._updated = true;
-						}
-					}
-				});
-			},
-			/**
-			 * Fix too long axis labels  - try to shorten and rotate
-			 * @param  {Chart}  chart    Chart instance
-			 * @return {Boolean}
-			 */
-			fixYAxisLabels: function fixYAxisLabels(chart) {
-				let shortenYTicks = function shortenYTicks(data, options) {
-					if (typeof options.scales === "undefined") {
-						options.scales = {};
-					}
-					if (typeof options.scales.yAxes === "undefined") {
-						options.scales.yAxes = [{}];
-					}
-					options.scales.yAxes.forEach((axis) => {
-						if (typeof axis.ticks === "undefined") {
-							axis.ticks = {};
-						}
-						axis.ticks.callback = function yAxisTickCallback(value, index, values) {
-							if (value.length > 13) {
-								return value.substr(0, 10) + '...';
-							}
-							return value;
-						}
-					});
-					return options;
-				};
-				chart.data.datasets.forEach((dataset, index) => {
-					if (dataset._updated) {
-						return false;
-					}
-					for (let prop in dataset._meta) {
-						if (dataset._meta.hasOwnProperty(prop)) {
-							// we have meta
-							for (let i = 0, len = dataset._meta[prop].data.length; i < len; i++) {
-								const metaDataItem = dataset._meta[prop].data[i];
-								const label = metaDataItem._view.label;
-								if (label.length > 13) {
-									chart.options = shortenYTicks(chart.data, chart.options);
-									if (!dataset._updated) {
-										dataset._updated = true;
-										chart.update();
-										// recalculate positions for smooth animation (for all datasets)
-										chart.data.datasets.forEach((dataset, index) => {
-											dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
-												if (typeof metaDataItem._xScale !== "undefined") {
-													metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
-													metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
-													metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
-												}
-											});
-										});
-										break;
-									}
-								}
-							}
-							dataset._updated = true;
-						}
-					}
-				});
-			},
-		}
-	}
 	getFunctionFromReplacementString(replacementStr) {
 		let assignResult = false;
 		if (replacementStr.substr(replacementStr.length - 2) === '()') {

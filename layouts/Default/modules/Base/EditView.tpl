@@ -34,7 +34,7 @@
 							<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 							{$BLOCK['name']}
 						</div>
-						<div class="card-body blockContent row m-0 collapse hideBlock" id="block_{$BLOCK['id']}">
+						<div class="card-body blockContent row m-0 collapse hideBlock {if $BLOCK['display_status'] === 1}show{/if}" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 row m-0">
 									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-lg-end justify-content-md-start">
