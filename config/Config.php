@@ -84,8 +84,8 @@ class Config
 	public static $debugConsole = false;
 	public static $logs = false;
 	public static $apiKey = '__API_KEY__';
-	public static $serverName = 'portal';
-	public static $serverPass = 'portal';
+	public static $serverName = '__SERVER_NAME__';
+	public static $serverPass = '__SERVER_PASS__';
 	public static $encryptDataTransfer = false;
 	public static $privateKey = 'config/private.key';
 	public static $publicKey = 'config/public.key';
@@ -95,4 +95,5 @@ class Config
 
 	public static $defaultCharset = 'UTF-8';
 	public static $csrfProtection = true;
+	public static $displayDetailsException = true;
 }
