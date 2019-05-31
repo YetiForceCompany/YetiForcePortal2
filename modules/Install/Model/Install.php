@@ -9,6 +9,7 @@
 
 namespace YF\Modules\Install\Model;
 
+use App\Api;
 use App\Config;
 use App\Purifier;
 
@@ -16,8 +17,10 @@ class Install
 {
 	protected $configPath = 'config/Config.php';
 	protected $config = [
-		'crmPath' => '__CRM_PATH__',
+		'crmUrl' => '__CRM_PATH__',
 		'apiKey' => '__API_KEY__',
+		'serverName' => '__SERVER_NAME__',
+		'serverPass' => '__SERVER_PASS__',
 	];
 
 	public static function getInstance($module)
@@ -31,11 +34,35 @@ class Install
 		return '__CRM_PATH__' != Config::get('crmUrl');
 	}
 
+	/**
+	 * Checks connection.
+	 *
+	 * @return void
+	 */
+	public function check()
+	{
+		$testMessage = 'Install Wizard';
+		try {
+			$response = Api::getInstance()->call('Install', ['data' => $testMessage], 'PUT');
+			return $response === $testMessage;
+		} catch (\Throwable $ex) {
+			return false;
+		}
+		return false;
+	}
+
+	/**
+	 * Save configuration.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @return void
+	 */
 	public function save(\App\Request $request)
 	{
 		$configFile = file_get_contents($this->configPath);
 		foreach ($this->config as $key => $value) {
-			$configFile = str_replace($value, addslashes($request->getByType($key, Purifier::TEXT)), $configFile);
+			$configFile = str_replace('\'' . $value . '\'', var_export($request->getByType($key, Purifier::TEXT), true), $configFile);
 		}
 		$webRoot = ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 		$webRoot .= $_SERVER['REQUEST_URI'];
@@ -45,8 +72,8 @@ class Install
 		unset($tabUrl[count($tabUrl) - 1]);
 		$webRoot = implode('/', $tabUrl) . '/';
 		$configFile = str_replace('__PORTAL_PATH__', addslashes($webRoot), $configFile);
+		Config::$portalUrl = $webRoot;
 		file_put_contents($this->configPath, $configFile);
-		header('Location: ' . $webRoot);
 	}
 
 	public function removeInstallationFiles()

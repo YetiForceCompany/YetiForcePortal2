@@ -26,10 +26,15 @@ class AppException extends \Exception
 
 	public static function view(\Throwable $e)
 	{
-		$tplName = 'Exception.tpl';
-		if (!empty($e->tplName)) {
-			$tplName = $e->tplName;
+		if (Config::get('displayDetailsException')) {
+			$tplName = 'Exception.tpl';
+			if (!empty($e->tplName)) {
+				$tplName = $e->tplName;
+			}
+		} else {
+			$tplName = 'ShortException.tpl';
 		}
+
 		if (empty($e->backtrace)) {
 			$backtrace = $e->getTraceAsString();
 		} else {
