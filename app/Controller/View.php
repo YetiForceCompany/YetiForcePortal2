@@ -114,7 +114,7 @@ abstract class View extends Base
 			} elseif (file_exists($fileName)) {
 				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
 			} else {
-				\App\Log::message('Asset not found: ' . $fileName, 'WARNING');
+				\App\Log::warning('Asset not found: ' . $fileName);
 			}
 		}
 		return $scriptsInstances;
