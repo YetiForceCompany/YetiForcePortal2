@@ -51,7 +51,7 @@ class Menu
 	 */
 	public function getItemsFromSystem(): array
 	{
-		if (\App\Cache::has('Menu', 'Items')) {
+		if (\App\Cache::has('MenuItems', 'Items')) {
 			return \App\Cache::get('MenuItems', 'Items');
 		}
 		$menus = \App\Api::getInstance()->call('Menu')['items'];
