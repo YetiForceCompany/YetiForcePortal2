@@ -51,6 +51,7 @@ class EditView extends \App\Controller\View
 		if (!isset($recordDetail['id'])) {
 			$recordDetail['id'] = null;
 		}
+		$recordModel->setData($recordDetail);
 		$moduleStructure = $api->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
