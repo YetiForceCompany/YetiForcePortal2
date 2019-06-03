@@ -14,6 +14,34 @@ namespace App\Fields;
  */
 class Currency
 {
+	/**
+	 * Function to truncate zeros.
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public static function truncateZeros(string $value)
+	{
+		$seperator = \App\User::getUser()->getPreferences('currency_decimal_separator');
+		if (false === strpos($value, $seperator)) {
+			return $value;
+		}
+		for ($i = strlen($value) - 1; $i >= 0; --$i) {
+			if ($value[$i] === $seperator) {
+				--$i;
+				break;
+			}
+			if ('0' !== $value[$i]) {
+				break;
+			}
+		}
+		if (-1 !== $i) {
+			$value = substr($value, 0, $i + 1);
+		}
+		return $value;
+	}
+
 	public static function formatToDisplay($value)
 	{
 		if (empty($value)) {

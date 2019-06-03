@@ -6,8 +6,10 @@
         "LBL_SETUP_WIZARD_DESCRIPTION": "This wizard will help you to go through the installation process of YetiForce Portal",
         "LBL_INSTALL_BUTTON": "Install",
         "LBL_CRM_PATH": "YetiForce system address",
-        "LBL_API_KEY": "API Key"
+        "LBL_API_KEY": "API Key",
+        "LBL_SERVER_NAME": "Login",
+        "LBL_SERVER_PASS": "Password",
+        "LBL_WRONG_PROPERTIES": "Wrong properties"
     },
-    "js": {
-    }
-  }
+    "js": {}
+}
