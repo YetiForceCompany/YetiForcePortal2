@@ -19,7 +19,11 @@
 		"LBL_ADDRESS": "Address",
 		"LBL_NET_PRICE": "Net price",
 		"LBL_GROSS_PRICE": "Gross price",
-		"LBL_MERCHANT_LIMIT_EXCEEDED": "Merchant limit was exceeded"
+		"LBL_MERCHANT_LIMIT_EXCEEDED": "Merchant limit was exceeded",
+		"LBL_THANK_YOU": "Thank you!",
+		"LBL_THANK_YOU_FOR_SHOPPING": "Thank you for shopping with us",
+		"LBL_UNSUCCESSFUL_TRANSACTION": "The transaction ended unsuccessfully",
+		"LBL_GO_TO_ORDER": "Go to the order"
 	},
 	"js": {
 		"LBL_VERIFY_ADDRESS": "Verify delivery address"
