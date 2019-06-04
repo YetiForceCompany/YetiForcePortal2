@@ -20,7 +20,8 @@ session_start();
 
 try {
 	$request = new \App\Request($_REQUEST);
-	$payments = \App\Payments::getInstance($request->getByType('paymentSystem', \App\Purifier::ALNUM));
+	$paymentSystem = $request->getByType('paymentSystem', \App\Purifier::ALNUM);
+	$payments = \App\Payments::getInstance($paymentSystem);
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
@@ -31,6 +32,7 @@ try {
 		'paymentscurrency' => $transactionState->currency,
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
+		'payment_system' => $paymentSystem,
 	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
