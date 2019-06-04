@@ -23,14 +23,14 @@ try {
 	$payments = \App\Payments::getInstance($request->getByType('paymentSystem', \App\Purifier::ALNUM));
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
-		'crmOrderId' => $transactionState->crmOrderId,
-		'transactionState' => $transactionState,
-		'transactionId' => $transactionState->transactionId,
-		'amount' => $transactionState->amount,
-		'originalAmount' => $transactionState->originalAmount,
-		'currency' => $transactionState->currency,
-		'originalCurrency' => $transactionState->originalCurrency,
-		'description' => $transactionState->description,
+		'ssingleordersid' => $transactionState->crmOrderId,
+		'paymentsin_status' => $transactionState,
+		'transaction_id' => $transactionState->transactionId,
+		'paymentsvalue' => $transactionState->amount,
+		'payments_original_value' => $transactionState->originalAmount,
+		'paymentscurrency' => $transactionState->currency,
+		'payments_original_currency' => $transactionState->originalCurrency,
+		'paymentstitle' => $transactionState->description,
 	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
