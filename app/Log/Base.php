@@ -25,7 +25,7 @@ abstract class Base
 	 *
 	 * @var array
 	 */
-	protected static $messages = [];
+	public static $messages = [];
 
 	/**
 	 * Add log.

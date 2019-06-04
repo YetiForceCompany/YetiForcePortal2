@@ -120,4 +120,9 @@ class Log
 			$className::flush();
 		}
 	}
+
+	public static function display()
+	{
+		return Log\Base::$messages;
+	}
 }
