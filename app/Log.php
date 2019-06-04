@@ -24,7 +24,7 @@ class Log
 	 *
 	 * @var array
 	 */
-	private static $category = ['System'];
+	private static $category = ['System', 'Api'];
 
 	/**
 	 * Initial process.
@@ -119,5 +119,10 @@ class Log
 			$className = '\\App\Log\\' . $category;
 			$className::flush();
 		}
+	}
+
+	public static function display()
+	{
+		return Log\Base::$messages;
 	}
 }

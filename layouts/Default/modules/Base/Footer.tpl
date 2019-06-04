@@ -56,7 +56,6 @@
 			<script src="{$SCRIPT->getSrc()}"></script>
 		{/foreach}
 	</div>
-	{include file=\App\Resources::templatePath("Log.tpl", $MODULE_NAME)}
 	</body>
 	</html>
 	<!-- /tpl-Base-Footer -->

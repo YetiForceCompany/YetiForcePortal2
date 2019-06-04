@@ -75,6 +75,7 @@ class WebUI
 				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
+			Log::error($e->getMessage());
 			if ($request->isAjax() && $request->isEmpty('view')) {
 				$response = new \App\Response();
 				if (Config::get('displayDetailsException')) {
