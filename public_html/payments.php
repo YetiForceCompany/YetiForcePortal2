@@ -6,12 +6,9 @@
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  */
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..');
-define('YF_ROOT_WEB', __DIR__);
-define('YF_ROOT_WWW', '');
+\define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..');
+\define('YF_ROOT_WEB', __DIR__);
+\define('YF_ROOT_WWW', '');
 
 if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
 	die('Please install dependencies via composer install.');
@@ -23,11 +20,17 @@ session_start();
 
 try {
 	$request = new \App\Request($_REQUEST);
-	$payments = \App\Payments::getInstance($request->get('paymentSystem'));
+	$payments = \App\Payments::getInstance($request->getByType('paymentSystem', \App\Purifier::ALNUM));
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
 		'crmOrderId' => $transactionState->crmOrderId,
 		'transactionState' => $transactionState,
+		'transactionId' => $transactionState->transactionId,
+		'amount' => $transactionState->amount,
+		'originalAmount' => $transactionState->originalAmount,
+		'currency' => $transactionState->currency,
+		'originalCurrency' => $transactionState->originalCurrency,
+		'description' => $transactionState->description,
 	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {

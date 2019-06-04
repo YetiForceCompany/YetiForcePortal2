@@ -100,4 +100,11 @@ class TransactionState
 	 * @var \DateTime
 	 */
 	public $datetime;
+
+	/**
+	 * Description.
+	 *
+	 * @var string
+	 */
+	public $description;
 }

@@ -233,6 +233,7 @@ class Dotpay extends AbstractPayments implements PaymentsInterface, PaymentsMult
 		$transactionState->currency = $dataFromRequest['operation_currency'];
 		$transactionState->originalCurrency = $dataFromRequest['operation_original_currency'];
 		$transactionState->crmOrderId = (int) $dataFromRequest['control'];
+		$transactionState->description = $dataFromRequest['description'];
 		if (empty(static::AVAILABLE_STATUSES[$dataFromRequest['operation_status']])) {
 			throw new \App\Exception\Payments('Unknown status');
 		}
@@ -318,11 +319,23 @@ class Dotpay extends AbstractPayments implements PaymentsInterface, PaymentsMult
 		return $this->parameters + ['chk' => $this->calculateSignature()];
 	}
 
+	/**
+	 * Calculate the checksum, signature..
+	 *
+	 * @return string
+	 */
 	public function calculateSignature(): string
 	{
 		return hash('sha256', $this->joinParameters());
 	}
 
+	/**
+	 * Calculate the checksum, signature from incoming data from the payment system.
+	 *
+	 * @param array $requestFromDotpay
+	 *
+	 * @return string
+	 */
 	public function calculateSignatureFromDotpay(array $requestFromDotpay): string
 	{
 		$signature = $this->dotpayPin;
