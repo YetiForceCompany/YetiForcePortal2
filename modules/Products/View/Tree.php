@@ -46,11 +46,23 @@ class Tree extends View\ListView
 			->setLimit(\App\Config::get('itemsPrePage'))
 			->setPage($this->request->getInteger('page', 1));
 		$search = [];
+		$searchText = '';
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
 			$search = $this->request->get('search');
+			foreach ($search as &$condition) {
+				if ('productname' === $condition['fieldName']) {
+					$condition['group'] = false;
+					$search[] = [
+						'fieldName' => 'ean',
+						'value' => $condition['value'],
+						'operator' => 'c',
+						'group' => false
+					];
+				}
+			}
 			$this->getListViewModel()->setConditions($search);
 		}
-		$this->viewer->assign('SEARCH_TEXT', '');
+		$this->viewer->assign('SEARCH_TEXT', $searchText);
 		$this->viewer->assign('SEARCH', $search);
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		parent::process();
@@ -61,6 +73,15 @@ class Tree extends View\ListView
 	 */
 	public function preProcess($display = true)
 	{
+		$searchText = '';
+		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
+			foreach ($this->request->get('search') as $condition) {
+				if ('productname' === $condition['fieldName']) {
+					$searchText = $condition['value'];
+				}
+			}
+		}
+		$this->viewer->assign('SEARCH_TEXT', $searchText);
 		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$this->viewer->assign(
 			'TREE',

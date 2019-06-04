@@ -7,7 +7,7 @@
             </button>
         </div>
         <input type="text" class="form-control u-font-size-13px js-search o-category__input-search o-chat__form-control border-right-0 border-left-0 border-top border-bottom"
-            autocomplete="off" placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}" data-js="keydown"/>
+            value="{$SEARCH_TEXT}" autocomplete="off" placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}" data-js="keydown"/>
         <div class="input-group-append">
             <button class="btn btn-outline-secondary o-category__button-search js-search-button border-left-0 mb-0" type="button">
                     <span class="fas fa-search"></span>

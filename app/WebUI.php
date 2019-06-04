@@ -22,6 +22,7 @@ class WebUI
 	 */
 	public function process(Request $request)
 	{
+		\App\Log::init();
 		try {
 			if (Config::get('csrfProtection')) {
 				require_once 'config/csrf_config.php';
