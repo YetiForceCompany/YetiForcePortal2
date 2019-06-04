@@ -24,7 +24,7 @@ class Log
 	 *
 	 * @var array
 	 */
-	private static $category = ['System'];
+	private static $category = ['System', 'Api'];
 
 	/**
 	 * Initial process.

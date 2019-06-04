@@ -24,6 +24,6 @@ class System extends Base
 	 */
 	public static function display($value, string $type): string
 	{
-		return date('Y-m-d H:i:s') . ' [' . $type . '] ' . $value;
+		return date('Y-m-d H:i:s') . ' [' . $type . '] ' . $value . PHP_EOL . \App\Debug::getBacktrace(4);
 	}
 }

@@ -20,7 +20,6 @@ class Api
 	protected static $instance;
 	protected $url;
 	protected $header;
-	protected $log = YF_ROOT . \DIRECTORY_SEPARATOR . 'cache/logs/api.log';
 
 	/**
 	 * Api class constructor.
@@ -171,14 +170,13 @@ class Api
 	 */
 	public function addLogs($method, $data, $response, $rawResponse = false)
 	{
-		$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;
-		$content .= 'Metod: ' . $method . PHP_EOL;
-		$content .= 'Request: ' . print_r($data, true) . PHP_EOL;
+		$value['method'] = $method;
+		$value['data'] = $data;
 		if ($rawResponse) {
-			$content .= 'Response (raw): ' . print_r($rawResponse, true) . PHP_EOL;
+			$value['rawResponse'] = $rawResponse;
 		}
-		$content .= 'Response: ' . print_r($response, true) . PHP_EOL;
-		file_put_contents($this->log, $content, FILE_APPEND);
+		$value['response'] = $response;
+		\App\Log::info($value, 'Api');
 	}
 
 	/**

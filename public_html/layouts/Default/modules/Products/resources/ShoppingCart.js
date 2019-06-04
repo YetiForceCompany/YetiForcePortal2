@@ -63,6 +63,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 				product.remove();
 				this.shoppingCartBadge.text(data["result"]["numberOfItems"]);
 				this.totalPriceNetto.text(data["result"]["totalPriceNetto"]);
+				this.totalPriceGross.text(data["result"]["totalPriceGross"]);
 			});
 		});
 	}
