@@ -30,7 +30,6 @@ class Buy extends \App\Controller\Action
 			if ($this->request->isEmpty('reference_id')) {
 				$cart = new Cart();
 				$responseFromApi = $this->createSingleOrderFromCart($cart);
-				$response->setResult($responseFromApi);
 				if (!isset($responseFromApi['errors'])) {
 					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
 					$cart->removeAll();
@@ -42,8 +41,24 @@ class Buy extends \App\Controller\Action
 				if (!isset($responseFromApi['errors'])) {
 					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
 				}
-				$response->setResult($responseFromApi);
 			}
+			$paymentType = \App\Config::get('paymentType');
+			if (!empty($paymentType)) {
+				$payment = \App\Payments::getInstance($paymentType);
+				$payment->setCrmOrderId($responseFromApi['id']);
+				$payment->setDescription($responseFromApi['id']); //Insert the order title here
+				if ($payment instanceof \App\Payments\PaymentsMultiCurrencyInterface) {
+					$payment->setCurrency('PLN');
+				}
+				$payment->setAmount($cart->calculateTotalPriceGross());
+				if ('GET' === $payment->getTypeOfOutputCommunication()) {
+					$responseFromApi['paymentUrl'] = $payment->generatePaymentURL();
+				} else {
+					$responseFromApi['paymentUrl'] = $payment->getPaymentExecutionURL();
+					$responseFromApi['paymentPostData'] = $payment->getParametersForForm();
+				}
+			}
+			$response->setResult($responseFromApi);
 		} catch (\App\AppException $e) {
 			$response->setError($e->getCode(), $e->getMessage());
 		}

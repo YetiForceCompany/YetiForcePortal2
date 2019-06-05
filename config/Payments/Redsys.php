@@ -1,0 +1,88 @@
+<?php
+/**
+ * The file contains: Description class.
+ *
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author Arkadiusz Adach <a.adach@yetiforce.com>
+ */
+
+namespace Conf\Payments;
+
+/**
+ * Class Description.
+ */
+class Redsys extends \App\AbstractConfig
+{
+	/**
+	 * Private key.
+	 *
+	 * @var string
+	 */
+	protected $privateKey;
+
+	/**
+	 * Payment execution URL.
+	 *
+	 * @var string
+	 */
+	protected $paymentExecutionURL;
+
+	/**
+	 * Signature version.
+	 *
+	 * @var string
+	 */
+	protected $signatureVersion = 'HMAC_SHA256_V1';
+
+	/**
+	 * Ds_Merchant_MerchantCode - (Mandatory) The FUC code assigned to the seller.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantMerchantCode;
+
+	/**
+	 * Ds_Merchant_Terminal - (Mandatory) The number of the terminal that your bank assigned.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantTerminal;
+
+	/**
+	 * Ds_Merchant_TransactionType - (Mandatory) Type transaction.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantTransactionType;
+
+	/**
+	 * Ds_Merchant_MerchantURL - (Mandatory) Seller's URL for online notifications. Mandatory if the merchant has an "online" notification.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantMerchantURL = 'payments.php?paymentSystem=Redsys';
+
+	/**
+	 * Ds_Merchant_UrlOK - (Optional) If the process is successful, the user will be redirected to this address.
+	 * Parameters "paymentSystem", "status" are required. Example &paymentSystem=Redsys&status=OK.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantUrlOK = 'index.php?module=Products&view=PaymentAfterPurchase&paymentSystem=Redsys&status=OK';
+
+	/**
+	 * Ds_Merchant_UrlKO - (Optional) If the process fails, the user will be redirected to this address.
+	 * Parameters "paymentSystem", "status" are required. Example &paymentSystem=Redsys&status=ERROR.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantUrlKO = 'index.php?module=Products&view=PaymentAfterPurchase&paymentSystem=Redsys&status=ERROR';
+
+	/**
+	 * The HTTP method that data will be sent to the payment system.
+	 *
+	 * @var string
+	 */
+	protected $typeOfOutputCommunication = 'POST';
+}

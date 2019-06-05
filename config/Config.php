@@ -96,4 +96,11 @@ class Config
 	public static $defaultCharset = 'UTF-8';
 	public static $csrfProtection = true;
 	public static $displayDetailsException = true;
+
+	/**
+	 * Type of payment.
+	 *
+	 * @var string
+	 */
+	public static $paymentType = '';
 }

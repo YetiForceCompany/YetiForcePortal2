@@ -627,7 +627,17 @@ var AppConnector,
 				window.location.href = url;
 			}
 		},
-
+		openUrlMethodPost(url, postData) {
+			let formHtml = '<form action="' + url + '" method="post">';
+			$.each(postData, (index, value) => {
+				formHtml += '<input type="text" name="' +
+					index + '" value="' + value + '" />';
+			});
+			formHtml += "</form>";
+			let form = $(formHtml);
+			$("body").append(form);
+			form.submit();
+		},
 		registerMobileMenu: function(container) {
 			$('.js-sidebar-btn').on('click', e => {
 			let mobileMenu = container.find('.js-mobile-page');
