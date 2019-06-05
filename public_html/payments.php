@@ -25,11 +25,11 @@ try {
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
-		'paymentsin_status' => $transactionState,
+		'paymentsin_status' => $transactionState->status,
 		'transaction_id' => $transactionState->transactionId,
 		'paymentsvalue' => $transactionState->amount,
 		'payments_original_value' => $transactionState->originalAmount,
-		'paymentscurrency' => $transactionState->currency,
+		'currency_id' => $transactionState->currency,
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
 		'payment_system' => $paymentSystem,
