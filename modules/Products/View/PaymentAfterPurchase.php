@@ -21,10 +21,14 @@ class PaymentAfterPurchase extends \App\Controller\View
 	 */
 	public function process()
 	{
-		$resultOfReturn = \App\Payments::getInstance($this->request->getByType('paymentSystem'))
-			->handlingReturn($this->request->getAllRaw());
+		$resultOfReturn = \App\Payments::getInstance($this->request->getByType('paymentSystem'))->handlingReturn($this->request->getAllRaw());		
+		$this->viewer->assign('ORDER_NUMBER', $resultOfReturn['crmOrderId']);
 		$this->viewer->assign('ORDER_URL', 'index.php?module=SSingleOrders&view=DetailView&record=' . $resultOfReturn['crmOrderId']);
-		$this->viewer->assign('STATUS', $resultOfReturn['status']);
-		$this->viewer->view('PaymentAfterPurchase/PaymentAfterPurchase.tpl', $this->request->getModule());
+		if ('OK' === $resultOfReturn['status']) {
+			$tplName = 'PaymentAfterPurchase/PaymentAfterPurchaseStatusOk.tpl';
+		} else {
+			$tplName = 'PaymentAfterPurchase/PaymentAfterPurchaseStatusError.tpl';
+		}
+		$this->viewer->view($tplName, $this->request->getModule());
 	}
 }
