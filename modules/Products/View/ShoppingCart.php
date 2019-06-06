@@ -11,6 +11,7 @@
 
 namespace YF\Modules\Products\View;
 
+use App\Config;
 use App\Purifier;
 use YF\Modules\Base\View;
 use YF\Modules\Products\Model\CartView;
@@ -51,6 +52,10 @@ class ShoppingCart extends View\ListView
 			$listViewModel->setCart(new ReferenceCart($this->request->getInteger('reference_id'), $this->request->getByType('reference_module', Purifier::ALNUM)));
 			$proceedUrl .= '&reference_id=' . $this->request->getInteger('reference_id') . '&reference_module=' . $this->request->getByType('reference_module', Purifier::ALNUM);
 		}
+		$payments = [];
+		foreach (Config::get('paymentType') as $paymentType) {
+			$payments[] = \App\Payments::getInstance($paymentType);
+		}
 		$listViewModel->loadRecordsList();
 		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
 		$this->viewer->assign('MODULE_NAME', $moduleName);
@@ -65,6 +70,9 @@ class ShoppingCart extends View\ListView
 		$this->viewer->assign('PROCCED_URL', $proceedUrl);
 		$this->viewer->assign('READONLY', $readonly);
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
+		$this->viewer->assign('PAYMENTS', $payments);
+
+		$this->viewer->assign('SELECTED_PAYMENTS', $this->getListViewModel()->getSelectedPayment());
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 

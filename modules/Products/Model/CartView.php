@@ -146,4 +146,18 @@ class CartView extends ListViewModel
 	{
 		return $this->cart->getAddress();
 	}
+
+	/**
+	 * Returns selected address.
+	 *
+	 * @return array
+	 */
+	public function getSelectedPayment(): ?\App\Payments\PaymentsInterface
+	{
+		$payment = $this->cart->getPayment();
+		if (!$payment) {
+			return null;
+		}
+		return \App\Payments::getInstance($this->cart->getPayment());
+	}
 }

@@ -102,5 +102,5 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $paymentType = '';
+	public static $paymentType = ['CashOnDelivery', 'Transfer'];
 }

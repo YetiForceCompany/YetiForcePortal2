@@ -12,7 +12,7 @@ namespace App\Payments;
 /**
  * Class Description.
  */
-class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMultiCurrencyInterface
+class Redsys extends AbstractPayments implements PaymentsSystemInterface, PaymentsMultiCurrencyInterface
 {
 	/**
 	 * Allowed parameters in the form / POST. The process of sending data to the payment system.
@@ -46,13 +46,6 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	];
 
 	/**
-	 * Private key.
-	 *
-	 * @var string
-	 */
-	private $privateKey;
-
-	/**
 	 * List of parameters set from configuration in the constructor.
 	 */
 	const PARAMETER_FROM_CONFIG = [
@@ -63,13 +56,36 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	];
 
 	/**
+	 * Private key.
+	 *
+	 * @var string
+	 */
+	private $privateKey;
+
+	/**
+	 * Custom merchant data.
+	 *
+	 * @var array
+	 */
+	private $merchantData = [];
+
+	/**
 	 * {@inheritdoc}
 	 */
-	public function __construct(ConfigInterface $config)
+	public function __construct(ConfigInterface $config, string $type)
 	{
 		$this->config = $config;
+		$this->type = $type;
 		$this->setPrivateKey($config->get('privateKey'));
 		$this->setParameterFromConfig();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getPicklistValue(): string
+	{
+		return 'PLL_REDSYS';
 	}
 
 	/**
@@ -138,12 +154,15 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 		if (empty($currencyInfo)) {
 			throw new \App\Exception\Payments('Unknown currency');
 		}
+		$merchantDataParameters = \App\Json::decode($data['DS_MERCHANTDATA']);
 		$transactionState = new Utilities\TransactionState();
 		$transactionState->originalAmount = $transactionState->amount =
 			round((float) $data['DS_AMOUNT'] / pow(10, $currencyInfo['numberOfDigitsAfter']), $currencyInfo['numberOfDigitsAfter']);
 		$transactionState->transactionId = $transactionState->orderNumber = $data['DS_ORDER'];
 		$transactionState->datetime = \DateTime::createFromFormat('d/m/Y H:i', $data['DS_DATE'] . $data['DS_HOUR']);
-		$transactionState->crmOrderId = (int) $data['DS_MERCHANTDATA'];
+		$transactionState->crmOrderId = (int) $merchantDataParameters['crmId'];
+		$transactionState->status = Utilities\TransactionState::STATUS_NEW;
+		$transactionState->description = $merchantDataParameters['description'];
 		if (false === $transactionState->datetime) {
 			throw new \App\Exception\Payments('Invalid date format');
 		}
@@ -194,7 +213,7 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	 */
 	public function setCrmOrderId(int $crmId)
 	{
-		$this->setParameter('DS_MERCHANT_MERCHANTDATA', $crmId);
+		$this->setMerchantData('crmId', $crmId);
 		$this->setOrder("0001CRM{$crmId}");
 		$this->setParameter('DS_MERCHANT_URLOK', $this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId);
 		$this->setParameter('DS_MERCHANT_URLKO', $this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId);
@@ -207,6 +226,7 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	public function setDescription(string $description)
 	{
 		$this->setParameter('DS_MERCHANT_PRODUCTDESCRIPTION', $description);
+		$this->setMerchantData('description', $description);
 	}
 
 	/**
@@ -244,8 +264,14 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 		return parent::setParameter(\strtoupper($key), $value);
 	}
 
+	/**
+	 * Create merchant parameters.
+	 *
+	 * @return string
+	 */
 	public function createMerchantParameters(): string
 	{
+		$this->setParameter('DS_MERCHANT_MERCHANTDATA', \App\Json::encode($this->merchantData));
 		return \base64_encode(\json_encode($this->parameters));
 	}
 
@@ -292,7 +318,7 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	 */
 	private function encrypt3Des(string $message, string $key): string
 	{
-		$lengthMessage = strlen($message);
+		$lengthMessage = \strlen($message);
 		$lengthCeil = ceil($lengthMessage / 8) * 8;
 		return substr(
 			openssl_encrypt(
@@ -351,5 +377,18 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	private function calculateSha256(string $data, string $key): string
 	{
 		return hash_hmac('sha256', $data, $key, true);
+	}
+
+	/**
+	 * Set merchant data.
+	 *
+	 * @param string $key
+	 * @param mixed  $value
+	 *
+	 * @return void
+	 */
+	private function setMerchantData(string $key, $value)
+	{
+		$this->merchantData[$key] = $value;
 	}
 }

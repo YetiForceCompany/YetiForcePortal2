@@ -100,6 +100,9 @@ class Viewer extends \SmartyBC
 				return $tpl;
 			}
 			$filePath = 'modules' . \DIRECTORY_SEPARATOR . 'Base' . \DIRECTORY_SEPARATOR . $templateName;
+			if (!file_exists($templateDir . $filePath)) {
+				throw new AppException('Template not found: ' . $filePath);
+			}
 		}
 		return $filePath;
 	}

@@ -31,6 +31,12 @@ class Cart
 	 * @var array
 	 */
 	protected $cart = [];
+	/**
+	 * Method payments.
+	 *
+	 * @var string
+	 */
+	protected $methodPayments = '';
 
 	/**
 	 * Get the number of items in the cart.
@@ -49,6 +55,7 @@ class Cart
 	{
 		$this->cart = Session::get('Products.Cart', []);
 		$this->address = Session::get('Products.Address', []);
+		$this->methodPayments = Session::get('Products.MethodPayments', '');
 	}
 
 	/**
@@ -72,6 +79,16 @@ class Cart
 	}
 
 	/**
+	 * Returns address.
+	 *
+	 * @return array
+	 */
+	public function getPayment(): string
+	{
+		return $this->methodPayments;
+	}
+
+	/**
 	 * Sets address.
 	 *
 	 * @param array $address
@@ -81,6 +98,18 @@ class Cart
 	public function setAddress(array $address)
 	{
 		$this->address = $address;
+	}
+
+	/**
+	 * Sets address.
+	 *
+	 * @param array $address
+	 *
+	 * @return void
+	 */
+	public function setMethodPayments(string $methodPayments)
+	{
+		$this->methodPayments = $methodPayments;
 	}
 
 	/**
@@ -222,6 +251,7 @@ class Cart
 	{
 		Session::set('Products.Cart', $this->cart);
 		Session::set('Products.Address', $this->address);
+		Session::set('Products.MethodPayments', $this->methodPayments);
 	}
 
 	/**
