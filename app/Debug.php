@@ -32,6 +32,9 @@ class Debug
 			if ($k < $minLevel) {
 				continue;
 			}
+			if (!isset($v['file'])) {
+				continue;
+			}
 			$l = $k - $minLevel;
 			$args = '';
 			if (isset($v['args'])) {

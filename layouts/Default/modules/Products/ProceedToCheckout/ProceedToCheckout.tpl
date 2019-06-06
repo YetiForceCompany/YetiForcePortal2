@@ -23,18 +23,28 @@
 					{/foreach}
 				</div>
 				<div class="box-shadow border rounded shopping-cart p-0 my-2">
-						<div class="row p-3 m-0 product-border-b">
-							<span class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</span>
-						</div>
-						{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
-							<div class="row mx-2">
-								<label class="col-sm-2 col-form-label">{$ADDRESSES['fields'][$FIELDNAME|cat:'a']}:</label>
-								<div class="col-sm-10">
-									{$SELECTED_ADDRESS[$FIELDNAME]}
-								</div>
-							</div>
-						{/foreach}
+					<div class="row p-3 m-0 product-border-b">
+						<span class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</span>
 					</div>
+					{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
+						<div class="row mx-2">
+							<label class="col-sm-2 col-form-label">{$ADDRESSES['fields'][$FIELDNAME|cat:'a']}:</label>
+							<div class="col-sm-10">
+								{$SELECTED_ADDRESS[$FIELDNAME]}
+							</div>
+						</div>
+					{/foreach}
+				</div>
+				<div class="box-shadow border rounded shopping-cart p-0">
+					<div class="row p-3 m-0 product-border-b mb-4">
+						<div class="col-6 d-flex align-items-center">
+							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
+						</div>
+					</div>
+					{if $SELECTED_PAYMENTS}
+						{include file=\App\Resources::templatePath("ProceedToCheckout/Payments/"|cat:{$SELECTED_PAYMENTS->getType()}|cat:".tpl", $MODULE_NAME)}
+					{/if}
+				</div>
 			</div>
 			<div class="col-3">
 				{include file=\App\Resources::templatePath("ProceedToCheckout/Summary.tpl", $MODULE_NAME)}

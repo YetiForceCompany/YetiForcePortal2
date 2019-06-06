@@ -33,6 +33,6 @@ class Payments
 		if (!\class_exists($classPayment)) {
 			throw new \App\Exception\Payments("Unknown payment type: {$typeOfPayments}");
 		}
-		return new $classPayment(new $classConfig());
+		return new $classPayment(new $classConfig(), $typeOfPayments);
 	}
 }

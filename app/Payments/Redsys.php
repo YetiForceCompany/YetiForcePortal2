@@ -12,7 +12,7 @@ namespace App\Payments;
 /**
  * Class Description.
  */
-class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMultiCurrencyInterface
+class Redsys extends AbstractPayments implements PaymentsSystemInterface, PaymentsMultiCurrencyInterface
 {
 	/**
 	 * Allowed parameters in the form / POST. The process of sending data to the payment system.
@@ -72,11 +72,20 @@ class Redsys extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	/**
 	 * {@inheritdoc}
 	 */
-	public function __construct(ConfigInterface $config)
+	public function __construct(ConfigInterface $config, string $type)
 	{
 		$this->config = $config;
+		$this->type = $type;
 		$this->setPrivateKey($config->get('privateKey'));
 		$this->setParameterFromConfig();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getPicklistValue(): string
+	{
+		return 'PLL_REDSYS';
 	}
 
 	/**
