@@ -28,8 +28,13 @@ class PaymentAfterPurchase extends \App\Controller\View
 			$resultOfReturn['crmOrderId'] = $this->request->getInteger('crmOrderId');
 			$resultOfReturn['status'] = 'OK';
 		}
+    $this->viewer->assign('ORDER_NUMBER', $resultOfReturn['crmOrderId']);
 		$this->viewer->assign('ORDER_URL', 'index.php?module=SSingleOrders&view=DetailView&record=' . $resultOfReturn['crmOrderId']);
-		$this->viewer->assign('STATUS', $resultOfReturn['status']);
-		$this->viewer->view('PaymentAfterPurchase/PaymentAfterPurchase.tpl', $this->request->getModule());
+		if ('OK' === $resultOfReturn['status']) {
+			$tplName = 'PaymentAfterPurchase/PaymentAfterPurchaseStatusOk.tpl';
+		} else {
+			$tplName = 'PaymentAfterPurchase/PaymentAfterPurchaseStatusError.tpl';
+		}
+		$this->viewer->view($tplName, $this->request->getModule());
 	}
 }
