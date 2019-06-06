@@ -19,13 +19,22 @@ session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR 
 session_start();
 
 try {
+	$paymentStatusMap = [
+		1 => 'Created',
+		2 => 'Created',
+		3 => 'Paid',
+		4 => 'Denied',
+	];
 	$request = new \App\Request($_REQUEST);
 	$paymentSystem = $request->getByType('paymentSystem', \App\Purifier::ALNUM);
 	$payments = \App\Payments::getInstance($paymentSystem);
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
+	if (empty($paymentStatusMap[$transactionState->status])) {
+		throw new \Exception('Unknown status of the transaction.');
+	}
 	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
-		'paymentsin_status' => $transactionState->status,
+		'paymentsin_status' => $paymentStatusMap[$transactionState->status],
 		'transaction_id' => $transactionState->transactionId,
 		'paymentsvalue' => $transactionState->amount,
 		'payments_original_value' => $transactionState->originalAmount,
