@@ -9,7 +9,7 @@
         "LBL_API_KEY": "API Key",
         "LBL_SERVER_NAME": "Login",
         "LBL_SERVER_PASS": "Password",
-        "LBL_WRONG_PROPERTIES": "Wrong properties"
+        "LBL_WRONG_PROPERTIES": "Wrong parameters"
     },
     "js": {}
 }
