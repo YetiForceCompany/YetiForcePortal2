@@ -53,7 +53,7 @@ class Buy extends \App\Controller\Action
 				if ($payment instanceof \App\Payments\PaymentsSystemInterface) {
 					$payment->setDescription($responseFromApi['id']); //Insert the order title here
 					if ($payment instanceof \App\Payments\PaymentsMultiCurrencyInterface) {
-						$payment->setCurrency('PLN');
+						$payment->setCurrency(\App\User::getUser()->getPreferences('currency_code'));
 					}
 					$payment->setAmount($totalPriceGross);
 					if ('GET' === $payment->getTypeOfOutputCommunication()) {
