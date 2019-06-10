@@ -103,4 +103,8 @@ class Config
 	 * @var string
 	 */
 	public static $paymentType = ['CashOnDelivery', 'Transfer'];
+
+	public static $paymentServerName = '';
+	public static $paymentServerPass = '';
+	public static $paymentApiKey = '';
 }
