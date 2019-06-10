@@ -58,9 +58,14 @@
 							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
 						</div>
 					</div>
-					{foreach from=$PAYMENTS item=PAYMENT}
-						{include file=\App\Resources::templatePath("ShoppingCart/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
-					{/foreach}
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						{foreach from=$PAYMENTS item=PAYMENT}
+							<label class="btn btn-secondary">
+								<input type="radio" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off"> {\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
+							</label>
+							{include file=\App\Resources::templatePath("ShoppingCart/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
+						{/foreach}
+					</div>
 				</div>
 			</div>
 			<div class="col-3">
