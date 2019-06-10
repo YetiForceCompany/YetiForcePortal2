@@ -12,7 +12,7 @@ namespace App\Payments;
 /**
  * Class Dotpay payments.
  */
-class Dotpay extends AbstractPayments implements PaymentsInterface, PaymentsMultiCurrencyInterface
+class Dotpay extends AbstractPayments implements PaymentsSystemInterface, PaymentsMultiCurrencyInterface
 {
 	/**
 	 * AbstractPayments
@@ -161,12 +161,21 @@ class Dotpay extends AbstractPayments implements PaymentsInterface, PaymentsMult
 	 * PaymentsInterface
 	 * {@inheritdoc}
 	 */
-	public function __construct(ConfigInterface $config)
+	public function __construct(ConfigInterface $config, string $type)
 	{
 		$this->config = $config;
+		$this->type = $type;
 		$this->setDotpayPin($config->get('dotpayPin'))
 			->setParameter('lang', 'en')
 			->setParameter('id', $config->get('id'));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getPicklistValue(): string
+	{
+		return 'PLL_DOTPAY';
 	}
 
 	/**

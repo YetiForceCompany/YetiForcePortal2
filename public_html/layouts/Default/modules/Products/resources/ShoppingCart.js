@@ -118,6 +118,16 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		});
 		this.container.find(".js-select-address").trigger("change");
 	}
+	registerChangePayments() {
+		this.container.find(".js-method-payments").on("change", e => {
+			AppConnector.request({
+				module: app.getModuleName(),
+				action: "ShoppingCart",
+				mode: "setMethodPayments",
+				method: $(e.currentTarget).val()
+			});
+		});
+	}
 	registerProceedToCheckout() {
 		this.btnProceedToCheckout.on("click", e => {
 			let validateResult = this.validate();
@@ -131,6 +141,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		super.registerEvents();
 		this.registerButtonRemoveFromCart();
 		this.registerChangeAddress();
+		this.registerChangePayments();
 		this.registerProceedToCheckout();
 	}
 };

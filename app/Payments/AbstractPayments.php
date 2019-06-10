@@ -48,13 +48,33 @@ abstract class AbstractPayments
 	protected $config;
 
 	/**
+	 * Type of payments.
+	 *
+	 * @var string
+	 */
+	protected $type;
+
+	/**
 	 * Validation of incoming data from the payment system.
 	 *
 	 * @param array $requestParameters
 	 *
 	 * @return bool
 	 */
-	abstract public function validateRequestFromPaymentsSystem(array $requestParameters): bool;
+	public function validateRequestFromPaymentsSystem(array $requestParameters): bool
+	{
+		return false;
+	}
+
+	/**
+	 * Returns type of payments.
+	 *
+	 * @return string
+	 */
+	public function getType(): string
+	{
+		return $this->type;
+	}
 
 	/**
 	 * Set parameter.
@@ -71,6 +91,21 @@ abstract class AbstractPayments
 		}
 		$this->parameters[$key] = $value;
 		return $this;
+	}
+
+	/**
+	 * Gets parameter.
+	 *
+	 * @param string $key
+	 *
+	 * @return mixed
+	 */
+	public function getParameter(string $key)
+	{
+		if (!\in_array($key, static::ALLOWED_PARAMETERS)) {
+			throw new \App\Exception\Payments('Not allowed parameter');
+		}
+		return $this->parameters[$key] ?? null;
 	}
 
 	/**

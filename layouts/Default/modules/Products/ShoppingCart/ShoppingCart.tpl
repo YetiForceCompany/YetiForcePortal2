@@ -52,6 +52,16 @@
 						</form>
 					{/if}
 				</div>
+				<div class="box-shadow border rounded shopping-cart p-0">
+					<div class="row p-3 m-0 product-border-b mb-4">
+						<div class="col-6 d-flex align-items-center">
+							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
+						</div>
+					</div>
+					{foreach from=$PAYMENTS item=PAYMENT}
+						{include file=\App\Resources::templatePath("ShoppingCart/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
+					{/foreach}
+				</div>
 			</div>
 			<div class="col-3">
 				{include file=\App\Resources::templatePath("ShoppingCart/Summary.tpl", $MODULE_NAME)}

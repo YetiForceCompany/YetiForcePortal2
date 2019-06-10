@@ -29,12 +29,13 @@ class Viewer extends \SmartyBC
 
 		self::$currentLayout = self::getLayoutName();
 		$templatesDir = YF_ROOT . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
+		$customTemplate = YF_ROOT . \DIRECTORY_SEPARATOR . 'custom' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
 		$compileDir = YF_ROOT . \DIRECTORY_SEPARATOR . 'cache' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
 
 		if (!file_exists($compileDir)) {
 			mkdir($compileDir, 0777, true);
 		}
-		$this->setTemplateDir([$templatesDir]);
+		$this->setTemplateDir([$customTemplate, $templatesDir]);
 		$this->setCompileDir($compileDir);
 	}
 
@@ -94,12 +95,15 @@ class Viewer extends \SmartyBC
 	public function getTemplatePath(string $templateName, string $moduleName = ''): string
 	{
 		foreach ($this->getTemplateDir() as $templateDir) {
-			$tpl = 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $templateName;
-			$completeFilePath = $templateDir . $tpl;
+			$filePath = 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $templateName;
+			$completeFilePath = $templateDir . $filePath;
 			if (!empty($moduleName) && file_exists($completeFilePath)) {
-				return $tpl;
+				break;
 			}
 			$filePath = 'modules' . \DIRECTORY_SEPARATOR . 'Base' . \DIRECTORY_SEPARATOR . $templateName;
+			if (file_exists($templateDir . $filePath)) {
+				break;
+			}
 		}
 		return $filePath;
 	}

@@ -11,6 +11,7 @@
 
 namespace YF\Modules\Products\Action;
 
+use App\Purifier;
 use YF\Modules\Products\Model\Cart;
 
 /**
@@ -35,6 +36,7 @@ class ShoppingCart extends \App\Controller\Action
 		$this->exposeMethod('addToCart');
 		$this->exposeMethod('removeFromCart');
 		$this->exposeMethod('changeAddress');
+		$this->exposeMethod('setMethodPayments');
 	}
 
 	/**
@@ -132,6 +134,20 @@ class ShoppingCart extends \App\Controller\Action
 
 		$response = new \App\Response();
 		$response->setResult($result);
+		$response->emit();
+	}
+
+	/**
+	 * Change method payments.
+	 *
+	 * @return void
+	 */
+	public function setMethodPayments()
+	{
+		$this->cart->setMethodPayments($this->request->getByType('method', Purifier::ALNUM));
+		$this->cart->save();
+		$response = new \App\Response();
+		$response->setResult(true);
 		$response->emit();
 	}
 }

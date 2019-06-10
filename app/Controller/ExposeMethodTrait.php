@@ -59,7 +59,7 @@ trait ExposeMethodTrait
 		if (!empty($methodName) && $this->isMethodExposed($methodName)) {
 			return $this->{$methodName}();
 		}
-		throw new \App\Exceptions\BadRequest('ERR_NOT_ACCESSIBLE', 406);
+		throw new \App\Exception\BadRequest('ERR_NOT_ACCESSIBLE', 406);
 	}
 
 	/**
