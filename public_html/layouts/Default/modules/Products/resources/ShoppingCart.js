@@ -119,6 +119,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
   }
   registerChangePayments() {
     this.container.find('.js-method-payments').on('change', e => {
+      $('.mainPage ').animate({ scrollTop: $(document).height() }, 'slow');
       AppConnector.request({
         module: app.getModuleName(),
         action: 'ShoppingCart',
