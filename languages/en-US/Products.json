@@ -1,31 +1,39 @@
 {
-	"php": {
-		"LBL_ADD_TO_CART": "Add to cart",
-		"LBL_SEARCH_PRODUCT": "Search for the product",
-		"LBL_REMOVE_FROM_CART": "Remove from the cart",
-		"LBL_TOTAL_PRICE": "Total price",
-		"LBL_SHIPPING": "Shipping",
-		"LBL_PROCEED_TO_CHECKOUT": "Proceed to checkout",
-		"LBL_VIEW_PROCEEDTOCHECKOUT": "Checkout",
-		"LBL_INCLUDING_VAT": "including VAT",
-		"LBL_VIEW_TREE": "Products",
-		"LBL_SHIPPING_CART": "Shipping cart",
-		"LBL_QUANTITY": "Quantity",
-		"LBL_PRICE": "Price",
-		"LBL_SUMMARY": "Summary",
-		"LBL_BUY": "Buy",
-		"LBL_VIEW_SHOPPINGCART": "Shipping cart",
-		"LBL_CATEGORIES": "Categories",
-		"LBL_ADDRESS": "Address",
-		"LBL_NET_PRICE": "Net price",
-		"LBL_GROSS_PRICE": "Gross price",
-		"LBL_MERCHANT_LIMIT_EXCEEDED": "Merchant limit was exceeded",
-		"LBL_THANK_YOU": "Thank you!",
-		"LBL_THANK_YOU_FOR_SHOPPING": "Thank you for shopping with us",
-		"LBL_UNSUCCESSFUL_TRANSACTION": "The transaction ended unsuccessfully",
-		"LBL_GO_TO_ORDER": "Go to the order"
-	},
-	"js": {
-		"LBL_VERIFY_ADDRESS": "Verify delivery address"
-	}
+  "php": {
+    "LBL_ADD_TO_CART": "Add to cart",
+    "LBL_SEARCH_PRODUCT": "Search for the product",
+    "LBL_REMOVE_FROM_CART": "Remove from the cart",
+    "LBL_TOTAL_PRICE": "Total price",
+    "LBL_SHIPPING": "Shipping",
+    "LBL_PROCEED_TO_CHECKOUT": "Proceed to checkout",
+    "LBL_VIEW_PROCEEDTOCHECKOUT": "Checkout",
+    "LBL_INCLUDING_VAT": "including VAT",
+    "LBL_VIEW_TREE": "Products",
+    "LBL_SHIPPING_CART": "Shipping cart",
+    "LBL_QUANTITY": "Quantity",
+    "LBL_PRICE": "Price",
+    "LBL_SUMMARY": "Summary",
+    "LBL_BUY": "Buy",
+    "LBL_VIEW_SHOPPINGCART": "Shipping cart",
+    "LBL_CATEGORIES": "Categories",
+    "LBL_ADDRESS": "Address",
+    "LBL_NET_PRICE": "Net price",
+    "LBL_GROSS_PRICE": "Gross price",
+    "LBL_MERCHANT_LIMIT_EXCEEDED": "Merchant limit was exceeded",
+    "LBL_THANK_YOU": "Thank you!",
+    "LBL_THANK_YOU_FOR_SHOPPING": "Thank you for shopping with us",
+    "LBL_UNSUCCESSFUL_TRANSACTION": "The transaction ended unsuccessfully",
+    "LBL_GO_TO_ORDER": "Go to the order",
+    "LBL_METHOD_PAYMENTS": "Payment Methods",
+    "LBL_TRANSFER": "Transfer",
+    "LBL_REDSYS": "Redsys",
+    "LBL_DOTPAY": "Dotpay",
+    "LBL_CASHONDELIVERY": "Cash on delivery",
+    "LBL_BANKACCOUNTOWNER": "Name of beneficiary",
+    "LBL_BANKACCOUNTADDRESS": "Address",
+    "LBL_BANKACCOUNTNUMBER": "Account number"
+  },
+  "js": {
+    "LBL_VERIFY_ADDRESS": "Verify delivery address"
+  }
 }
