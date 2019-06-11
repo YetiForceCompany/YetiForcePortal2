@@ -38,10 +38,10 @@
 					</div>
 					<input type="hidden" class="js-addresses" value="{App\Purifier::encodeHTML(App\Json::encode($ADDRESSES))}">
 					{if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
-						<form class="js-form-address" data-js="container">
+						<form class="js-form-address px-2 px-sm-4" data-js="container">
 							{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
-								<div class="row mx-2">
-									<label class="col-sm-2 col-form-label">
+								<div class="row small">
+									<label class="col-sm-2 col-form-label text-muted">
 										{App\Language::translate('LBL_ADDRESS_'|cat:(strtoupper($FIELDNAME)), $MODULE_NAME)}
 									</label>
 									<div class="col-sm-10">
@@ -58,13 +58,21 @@
 							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
 						</div>
 					</div>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						{foreach from=$PAYMENTS item=PAYMENT}
-							<label class="btn btn-secondary">
-								<input type="radio" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off"> {\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
-							</label>
-							{include file=\App\Resources::templatePath("ShoppingCart/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
-						{/foreach}
+					<div>
+						<div class="mx-2 btn-group btn-group-toggle" data-toggle="buttons">
+							{foreach from=$PAYMENTS item=PAYMENT}
+								<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
+									<input type="radio" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off"> {\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
+								</label>
+							{/foreach}
+						</div>
+						<div id="payments-info-accordion" class="js-payments-info">
+							{foreach from=$PAYMENTS item=PAYMENT}
+								<div id="collapse-{$PAYMENT->getType()}" class="collapse js-{$PAYMENT->getType()}" data-parent="#payments-info-accordion">
+									{include file=\App\Resources::templatePath("ShoppingCart/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
+								</div>
+							{/foreach}
+						</div>
 					</div>
 				</div>
 			</div>

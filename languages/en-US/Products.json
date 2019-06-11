@@ -28,7 +28,10 @@
     "LBL_TRANSFER": "Transfer",
     "LBL_REDSYS": "Redsys",
     "LBL_DOTPAY": "Dotpay",
-    "LBL_CASHONDELIVERY": "Cash on delivery"
+    "LBL_CASHONDELIVERY": "Cash on delivery",
+    "LBL_BANKACCOUNTOWNER": "Name of beneficiary",
+    "LBL_BANKACCOUNTADDRESS": "Address",
+    "LBL_BANKACCOUNTNUMBER": "Account number"
   },
   "js": {
     "LBL_VERIFY_ADDRESS": "Verify delivery address"

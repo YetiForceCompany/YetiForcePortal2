@@ -35,6 +35,18 @@ class Transfer extends AbstractPayments implements PaymentsInterface
 	}
 
 	/**
+	 * Returns bank account info array
+	 */
+	public function getBankAccountInfo(): array
+	{
+		return [
+			'bankAccountOwner' => $this->config->get('bankAccountOwner'),
+			'bankAccountAddress' => $this->config->get('bankAccountAddress'),
+			'bankAccountNumber' => $this->config->get('bankAccountNumber')
+		];
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function setCrmOrderId(int $crmId)
