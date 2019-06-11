@@ -21,9 +21,9 @@ class Payments
 	 *
 	 * @param string $typeOfPayments
 	 *
-	 * @return Payments\PaymentsSystemInterface
+	 * @return Payments\PaymentsInterface
 	 */
-	public static function getInstance(string $typeOfPayments): Payments\PaymentsSystemInterface
+	public static function getInstance(string $typeOfPayments): Payments\PaymentsInterface
 	{
 		$classConfig = "\\Conf\\Payments\\{$typeOfPayments}";
 		if (!\class_exists($classConfig)) {
@@ -34,5 +34,17 @@ class Payments
 			throw new \App\Exception\Payments("Unknown payment type: {$typeOfPayments}");
 		}
 		return new $classPayment(new $classConfig(), $typeOfPayments);
+	}
+
+	/**
+	 * Get instance of payments system.
+	 *
+	 * @param string $typeOfPayments
+	 *
+	 * @return Payments\PaymentsSystemInterface
+	 */
+	public static function getInstanceOfPaymentsSystem(string $typeOfPayments): Payments\PaymentsSystemInterface
+	{
+		return static::getInstance($typeOfPayments);
 	}
 }

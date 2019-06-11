@@ -27,7 +27,7 @@ try {
 	];
 	$request = new \App\Request($_REQUEST);
 	$paymentSystem = $request->getByType('paymentSystem', \App\Purifier::ALNUM);
-	$payments = \App\Payments::getInstance($paymentSystem);
+	$payments = \App\Payments::getInstanceOfPaymentsSystem($paymentSystem);
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	if (empty($paymentStatusMap[$transactionState->status])) {
 		throw new \Exception('Unknown status of the transaction.');
