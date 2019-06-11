@@ -165,6 +165,7 @@ class Dotpay extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$this->config = $config;
 		$this->type = $type;
+		$this->icon = 'fas fa-hand-holding-usd';
 		$this->setDotpayPin($config->get('dotpayPin'))
 			->setParameter('lang', 'en')
 			->setParameter('id', $config->get('id'));
