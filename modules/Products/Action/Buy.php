@@ -31,18 +31,20 @@ class Buy extends \App\Controller\Action
 			if ($this->request->isEmpty('reference_id')) {
 				$cart = new Cart();
 				$responseFromApi = $this->createSingleOrderFromCart($cart);
+				$totalPriceGross = $cart->calculateTotalPriceGross();
 				if (!isset($responseFromApi['errors'])) {
 					$paymentMethod = $cart->getPayment();
-					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
+					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
 					$cart->removeAll();
 					$cart->save();
 				}
 			} else {
 				$cart = new ReferenceCart($this->request->getInteger('reference_id'), $this->request->getByType('reference_module', Purifier::ALNUM));
 				$responseFromApi = $this->createSingleOrderFromCart($cart);
+				$totalPriceGross = $cart->calculateTotalPriceGross();
 				if (!isset($responseFromApi['errors'])) {
 					$paymentMethod = $cart->getPayment();
-					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $cart->calculateTotalPriceGross();
+					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
 				}
 			}
 			if (!empty($paymentMethod)) {
@@ -51,9 +53,9 @@ class Buy extends \App\Controller\Action
 				if ($payment instanceof \App\Payments\PaymentsSystemInterface) {
 					$payment->setDescription($responseFromApi['id']); //Insert the order title here
 					if ($payment instanceof \App\Payments\PaymentsMultiCurrencyInterface) {
-						$payment->setCurrency('PLN');
+						$payment->setCurrency(\App\User::getUser()->getPreferences('currency_code'));
 					}
-					$payment->setAmount($cart->calculateTotalPriceGross());
+					$payment->setAmount($totalPriceGross);
 					if ('GET' === $payment->getTypeOfOutputCommunication()) {
 						$responseFromApi['paymentUrl'] = $payment->generatePaymentURL();
 					} else {

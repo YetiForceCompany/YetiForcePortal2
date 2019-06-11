@@ -15,4 +15,22 @@ namespace Conf\Payments;
 class Transfer extends \App\AbstractConfig
 {
 	protected $urlReturn = 'index.php?module=Products&view=PaymentAfterPurchase&paymentSystem=CashOnDelivery';
+	/**
+	 * Bank account owner - this is the bank account owner.
+	 *
+	 * @var string
+	 */
+	protected $bankAccountOwner;
+	/**
+	 * Bank account address - this is the bank account address.
+	 *
+	 * @var string
+	 */
+	protected $bankAccountAddress;
+	/**
+	 * Bank account number - this is the bank account number.
+	 *
+	 * @var int
+	 */
+	protected $bankAccountNumber;
 }

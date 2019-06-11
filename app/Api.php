@@ -19,14 +19,26 @@ class Api
 	 */
 	protected static $instance;
 	protected $url;
-	protected $header;
+	protected $header = [];
+
+	/**
+	 * Options.
+	 *
+	 * @var array
+	 */
+	protected $options = [];
 
 	/**
 	 * Api class constructor.
+	 *
+	 * @param mixed $options
+	 * @param array $header
 	 */
-	public function __construct()
+	public function __construct(array $header, array $options)
 	{
 		$this->url = Config::$crmUrl . 'webservice/';
+		$this->options = $options;
+		$this->header = $header;
 	}
 
 	/**
@@ -37,7 +49,19 @@ class Api
 	public static function getInstance()
 	{
 		if (!isset(self::$instance)) {
-			self::$instance = new self();
+			$userInstance = User::getUser();
+			$header = [
+				'Content-Type' => 'application/json',
+				'X-ENCRYPTED' => Config::$encryptDataTransfer ? 1 : 0,
+				'X-API-KEY' => Config::$apiKey,
+				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
+			];
+			if ($userInstance->has('companyId')) {
+				$header['X-PARENT-ID'] = $userInstance->get('companyId');
+			}
+			self::$instance = new self($header, [
+				'auth' => [Config::$serverName, Config::$serverPass]
+			]);
 		}
 
 		return self::$instance;
@@ -59,7 +83,7 @@ class Api
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
 		$options = $this->getOptions();
-		if (in_array($requestType, ['get', 'delete'])) {
+		if (\in_array($requestType, ['get', 'delete'])) {
 			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers] + $options);
 		} else {
 			$data = Json::encode($data);
@@ -107,29 +131,19 @@ class Api
 	 *
 	 * @return array
 	 */
-	public function getHeaders()
+	public function getHeaders(): array
 	{
-		if (empty($this->header)) {
-			$userInstance = User::getUser();
-			$return = [
-				'Content-Type' => 'application/json',
-				'X-ENCRYPTED' => Config::$encryptDataTransfer ? 1 : 0,
-				'X-API-KEY' => Config::$apiKey,
-				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
-			];
-			if ($userInstance->has('companyId')) {
-				$return['X-PARENT-ID'] = $userInstance->get('companyId');
-			}
-			$this->header = $return;
-		}
 		return $this->header;
 	}
 
-	public function getOptions()
+	/**
+	 * Get options.
+	 *
+	 * @return array
+	 */
+	public function getOptions(): array
 	{
-		return [
-			'auth' => [Config::$serverName, Config::$serverPass]
-		];
+		return $this->options;
 	}
 
 	/**
@@ -137,7 +151,7 @@ class Api
 	 *
 	 * @return string Encrypted string
 	 */
-	public function encryptData($data)
+	public function encryptData($data): string
 	{
 		$publicKey = 'file://' . YF_ROOT . \DIRECTORY_SEPARATOR . Config::$publicKey;
 		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey, \OPENSSL_PKCS1_OAEP_PADDING);
