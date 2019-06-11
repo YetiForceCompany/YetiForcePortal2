@@ -21,9 +21,9 @@ class Payments
 	 *
 	 * @param string $typeOfPayments
 	 *
-	 * @return Payments\PaymentsInterface
+	 * @return Payments\PaymentsSystemInterface
 	 */
-	public static function getInstance(string $typeOfPayments): Payments\PaymentsInterface
+	public static function getInstance(string $typeOfPayments): Payments\PaymentsSystemInterface
 	{
 		$classConfig = "\\Conf\\Payments\\{$typeOfPayments}";
 		if (!\class_exists($classConfig)) {

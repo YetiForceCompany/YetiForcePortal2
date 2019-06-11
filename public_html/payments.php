@@ -32,7 +32,14 @@ try {
 	if (empty($paymentStatusMap[$transactionState->status])) {
 		throw new \Exception('Unknown status of the transaction.');
 	}
-	$answerfromApi = \App\Api::getInstance()->call('ReceiveFromPaymentsSystem', [
+	$api = new \App\Api([
+		'Content-Type' => 'application/json',
+		'X-ENCRYPTED' => 1,
+		'X-API-KEY' => \App\Config::get('paymentApiKey')
+	], [
+		'auth' => [\App\Config::get('paymentServerName'), \App\Config::get('paymentServerPass')]
+	]);
+	$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
 		'paymentsin_status' => $paymentStatusMap[$transactionState->status],
 		'transaction_id' => $transactionState->transactionId,
@@ -41,7 +48,7 @@ try {
 		'currency_id' => $transactionState->currency,
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
-		'payment_system' => $paymentSystem,
+		'payment_system' => $payments->getPicklistValue(),
 	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
