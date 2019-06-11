@@ -6,7 +6,7 @@
 				<div class="box-shadow border rounded shopping-cart p-0">
 					<div class="row p-3 m-0 product-border-b mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_SHIPPING_CART', $MODULE_NAME)}</h4>
+							<h5 class="mb-0">{\App\Language::translate('LBL_SHIPPING_CART', $MODULE_NAME)}</h5>
 						</div>
 						<div class="col-6 d-flex align-items-center justify-content-end">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
@@ -21,7 +21,7 @@
 				</div>
 				<div class="box-shadow border rounded shopping-cart p-0 my-2">
 					<div class="row p-3 m-0 product-border-b">
-						<span class="col-12 mb-4 font-weight-bold">{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</span>
+						<h5 class="col-12 mb-4">{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h5>
 						{if !empty($ADDRESSES)}
 							{if empty($ADDRESSES['data'])}
 								<div class="alert alert-warning w-100" role="alert">
@@ -55,11 +55,11 @@
 				<div class="box-shadow border rounded shopping-cart p-0">
 					<div class="row p-3 m-0 product-border-b mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h4 class="mb-0 font-weight-bold">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
+							<h5 class="mb-0">{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h5>
 						</div>
 					</div>
 					<div>
-						<div class="mx-2 btn-group btn-group-toggle" data-toggle="buttons">
+						<div class="mx-2 btn-group" data-toggle="buttons">
 							{foreach from=$PAYMENTS item=PAYMENT}
 								<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
 									<input type="radio" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off"> {\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
