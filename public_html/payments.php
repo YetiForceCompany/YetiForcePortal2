@@ -25,19 +25,12 @@ try {
 		3 => 'Paid',
 		4 => 'Denied',
 	];
-	$paymentSystemMap = [
-		'Redsys' => 'PLL_REDSYS',
-		'Dotpay' => 'PLL_DOTPAY',
-	];
 	$request = new \App\Request($_REQUEST);
 	$paymentSystem = $request->getByType('paymentSystem', \App\Purifier::ALNUM);
 	$payments = \App\Payments::getInstance($paymentSystem);
 	$transactionState = $payments->requestHandlingFromPaymentsSystem($request->getAllRaw());
 	if (empty($paymentStatusMap[$transactionState->status])) {
 		throw new \Exception('Unknown status of the transaction.');
-	}
-	if (empty($paymentSystemMap[$paymentSystem])) {
-		throw new \Exception('Unknown payment system');
 	}
 	$api = new \App\Api([
 		'Content-Type' => 'application/json',
@@ -55,7 +48,7 @@ try {
 		'currency_id' => $transactionState->currency,
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
-		'payment_system' => $paymentSystemMap[$paymentSystem],
+		'payment_system' => $payments->getPicklistValue(),
 	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
