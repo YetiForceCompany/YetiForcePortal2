@@ -6,7 +6,7 @@
 				<div class="box-shadow border rounded shopping-cart p-0">
 					<div class="row p-3 m-0 product-border-b mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h5 class="mb-0"><span class="fas fa-shopping-cart"></span> {\App\Language::translate('LBL_SHIPPING_CART', $MODULE_NAME)}</h5>
+							<h5 class="mb-0"><span class="fas fa-shopping-cart mr-2"></span>{\App\Language::translate('LBL_SHIPPING_CART', $MODULE_NAME)}</h5>
 						</div>
 						<div class="col-6 d-flex align-items-center justify-content-end">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
