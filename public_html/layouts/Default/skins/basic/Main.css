@@ -1,4 +1,5 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .imageHolder {
   margin: 0 auto;
   background-position: center;
@@ -165,6 +166,10 @@
   margin-bottom: 0px;
 }
 
+.u-min-w-0 {
+  min-width: 0;
+}
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
@@ -192,7 +197,10 @@
   border-radius: 0;
 }
 
-.quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
+.quickCreateContent
+.referenceGroup
+.referenceModulesListGroup
+.chosen-container {
   min-width: 80px !important;
 }
 
@@ -210,94 +218,88 @@
   border-bottom-right-radius: 0.25rem !important;
 }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-@media only screen and (max-width: 992px) {
-  .blockContainer .blockContent .fieldLabel {
-    text-align: left;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    min-height: 1px;
-  }
-  .blockContainer .blockContent .fieldValue {
-    min-height: 1px;
-  }
+.select2-selection--single {
+  height: auto !important;
 }
 
-@media only screen and (min-width: 992px) {
-  .blockContainer .blockContent .fieldLabel {
-    text-align: right;
-  }
+.select2-selection--single .select2-selection__rendered {
+  line-height: 40px !important;
 }
 
-#EditView .blockContainer .blockContent .fieldLabel label {
-  padding-top: 8px;
+.select2-selection--single .select2-selection__arrow {
+  top: 7px !important;
 }
 
-.blockContainer .blockContent .fieldLabel label {
-  font-size: 12px !important;
+.select2-selection--multiple {
+  height: auto !important;
 }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-html, body {
-  height: 100%;
-  width: 100%;
-  display: block;
-  background: #fff;
-  padding: 0 !important;
+.select2-selection--multiple .select2-selection__rendered {
+  line-height: 28px !important;
 }
 
-.bodyContainer {
+.form-control:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.dropdown-menu {
+  opacity: 1 !important;
+  -webkit-transform: none !important;
+          transform: none !important;
+}
+
+.pagination {
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #fff;
+  color: #404952;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.pagination .page-item.previous .page-link {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.pagination .page-item.next .page-link {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9ca2a9;
+}
+
+.pagination .page-item .page-link {
+  padding: 0px;
+  min-width: 1.6em;
+  border-radius: 2em;
+  color: #404952;
+  margin-right: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pagination .page-item .page-link:hover {
   background-color: #eee;
+  color: #404952;
 }
 
-img {
-  max-width: 100%;
+.pagination .page-item .page-link:focus {
+  -webkit-box-shadow: 0 0 0 0.1rem white;
+          box-shadow: 0 0 0 0.1rem white;
 }
 
-.mainPage {
-  height: 100%;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin-left: 50px;
-  background: #fff;
-  overflow-y: auto;
-}
-
-.mainBody {
-  background: #fff;
-  position: relative;
-  height: 100%;
-  top: 0;
-  left: 0px;
-  z-index: 1000;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-.bodyContent {
-  position: relative;
-  padding-top: 50px;
-  overflow-x: hidden;
-  width: 100%;
-  background: #fff;
-  padding-bottom: 33px;
-}
-
-@media only screen and (max-width: 768px) {
-  .bodyContent {
-    padding-left: 10px;
-  }
-  .mainPage {
-    margin-left: 0px;
-  }
-}
-
-hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-card__header {
   background-color: #f7f7f7 !important;
   cursor: pointer;
@@ -385,85 +387,103 @@ hr {
   display: flex !important;
 }
 
-.select2-selection--single {
-  height: auto !important;
+@media only screen and (max-width: 992px) {
+  .blockContainer .blockContent .fieldLabel {
+    text-align: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: 1px;
+  }
+  .blockContainer .blockContent .fieldValue {
+    min-height: 1px;
+  }
 }
 
-.select2-selection--single .select2-selection__rendered {
-  line-height: 40px !important;
+@media only screen and (min-width: 992px) {
+  .blockContainer .blockContent .fieldLabel {
+    text-align: right;
+  }
 }
 
-.select2-selection--single .select2-selection__arrow {
-  top: 7px !important;
+#EditView .blockContainer .blockContent .fieldLabel label {
+  padding-top: 8px;
 }
 
-.select2-selection--multiple {
-  height: auto !important;
+.blockContainer .blockContent .fieldLabel label {
+  font-size: 12px !important;
 }
 
-.select2-selection--multiple .select2-selection__rendered {
-  line-height: 28px !important;
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: #fff;
 }
 
-.form-control:focus {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+.mainContent,
+#page,
+.mainContainer {
+  height: 100%;
 }
 
-.dropdown-menu {
-  opacity: 1 !important;
-  -webkit-transform: none !important;
-          transform: none !important;
-}
-
-.pagination {
-  -webkit-box-align: center !important;
-      -ms-flex-align: center !important;
-          align-items: center !important;
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-}
-
-.pagination .page-item.active .page-link {
-  background-color: #fff;
-  color: #404952;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.pagination .page-item.previous .page-link {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-}
-
-.pagination .page-item.next .page-link {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-}
-
-.pagination .page-item.disabled .page-link {
-  color: #9ca2a9;
-}
-
-.pagination .page-item .page-link {
-  padding: 0px;
-  min-width: 1.6em;
-  border-radius: 2em;
-  color: #404952;
-  margin-right: 4px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.pagination .page-item .page-link:hover {
+.bodyContainer {
   background-color: #eee;
-  color: #404952;
+  padding-top: 50px;
+  padding-bottom: 33px;
 }
 
-.pagination .page-item .page-link:focus {
-  -webkit-box-shadow: 0 0 0 0.1rem white;
-          box-shadow: 0 0 0 0.1rem white;
+.mainPage {
+  height: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: 50px;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mainBody {
+  background: #fff;
+  position: relative;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.bodyContent {
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  width: 100%;
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .bodyContainer {
+    padding-bottom: 17px;
+  }
+  .bodyContent {
+    padding-left: 10px;
+  }
+  .mainPage {
+    margin-left: 0px;
+  }
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -472,8 +492,9 @@ hr {
   height: 50px;
   background: #4a5364;
   right: 0;
+  top: 0;
   left: 50px;
-  z-index: 1200;
+  z-index: 1031;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -519,15 +540,6 @@ hr {
 .bodyHeader .rightSide .rightHeaderBtn a {
   line-height: 20px;
   font-size: 18px;
-}
-
-@media only screen and (max-width: 768px) {
-  .bodyHeader {
-    left: 0px;
-  }
-  .bodyHeader .leftSide {
-    width: auto;
-  }
 }
 
 .historyList {
@@ -602,7 +614,8 @@ hr {
   padding-top: 5px;
 }
 
-.actionMenu .commonActionsButtonDropDown, .actionMenu .historyList {
+.actionMenu .commonActionsButtonDropDown,
+.actionMenu .historyList {
   position: fixed;
   top: 50px;
   left: 5px;
@@ -648,8 +661,20 @@ hr {
   font-weight: bold;
 }
 
-.c-main-container {
-  padding: 0;
+.c-header__btn--sidebar {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .bodyHeader {
+    left: 0px;
+  }
+  .bodyHeader .leftSide {
+    width: auto;
+  }
+  .c-header__btn--sidebar {
+    display: inline-block;
+  }
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -702,45 +727,17 @@ hr {
   line-height: 18px;
 }
 
-@media only screen and (max-width: 768px) {
-  .c-menu__header-logo {
-    width: 17% !important;
-  }
-  .c-menu__header-user {
-    width: 73%;
-    font-size: 14px;
-    padding: 5px;
-    padding-left: 17px;
-  }
-  .rightHeaderBtnMenu {
-    display: block !important;
-  }
-  .c-menu-mobile .c-menu__container:hover + .mainBody {
-    left: 200px !important;
-  }
-  .c-menu-mobile__content.mainBody {
-    left: 200px !important;
-  }
-  .c-menu-mobile__content.mainBody:hover {
-    left: 200px !important;
-  }
-  .c-menu-mobile .bodyHeader {
-    left: 200px !important;
-  }
-}
-
 .c-menu__container {
   position: fixed;
   left: 0;
   top: 0;
-  bottom: 2rem;
+  bottom: 33px;
   width: 230px;
   color: #f8f9fa;
-  z-index: 900;
+  z-index: 1030;
   background: #4a5364;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  height: calc(100% - 32px);
 }
 
 .c-menu__container a {
@@ -754,12 +751,13 @@ hr {
   cursor: pointer;
 }
 
-.c-menu__container:hover + .mainBody {
-  left: 180px !important;
+.c-menu__container:hover ~ .mainBody {
+  left: calc(230px - 50px);
 }
 
-.c-menu__container:hover + .mainBody .bodyHeader {
-  left: 230px;
+.c-menu__container:hover ~ .bodyHeader {
+  -webkit-transform: translate(calc(230px - 50px));
+          transform: translate(calc(230px - 50px));
 }
 
 .c-menu__item {
@@ -808,7 +806,8 @@ hr {
   height: 1.25rem;
 }
 
-.c-menu__item a .fa, .c-menu__item a.hasIcon img {
+.c-menu__item a .fa,
+.c-menu__item a.hasIcon img {
   margin-right: 0.75rem;
   font-size: 1.25rem;
   padding-right: 0.4375rem;
@@ -885,6 +884,34 @@ a:hover {
   display: block;
   width: 48px;
   padding: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  .c-menu__container {
+    bottom: 17px;
+  }
+  .c-menu__header-logo {
+    width: 17%;
+  }
+  .c-menu__header-user {
+    width: 73%;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 17px;
+  }
+  .c-menu-mobile .c-menu__container:hover + .mainBody {
+    left: 200px;
+  }
+  .c-menu-mobile__content.mainBody {
+    left: 200px;
+  }
+  .c-menu-mobile__content.mainBody:hover {
+    left: 200px;
+  }
+  .c-menu-mobile .bodyHeader {
+    -webkit-transform: translate(200px);
+            transform: translate(200px);
+  }
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
@@ -978,9 +1005,13 @@ table.dataTable.listViewEntries tbody td {
 }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.View-ProceedToCheckout,
+.View-ShoppingCart {
+  background-color: #eeeeee;
+}
+
 .product-container {
-  background-color: #eee;
-  padding: 12px;
+  background-color: #eeeeee;
 }
 
 .product-border-l {
