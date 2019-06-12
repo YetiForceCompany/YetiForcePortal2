@@ -35,16 +35,4 @@ class Payments
 		}
 		return new $classPayment(new $classConfig(), $typeOfPayments);
 	}
-
-	/**
-	 * Get instance of payments system.
-	 *
-	 * @param string $typeOfPayments
-	 *
-	 * @return Payments\PaymentsSystemInterface
-	 */
-	public static function getInstanceOfPaymentsSystem(string $typeOfPayments): Payments\PaymentsSystemInterface
-	{
-		return static::getInstance($typeOfPayments);
-	}
 }
