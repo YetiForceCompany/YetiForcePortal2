@@ -2,7 +2,7 @@
 {strip}
     <div class="tpl-Products-ShoppingCart-Summary container p-3 box-shadow border rounded product-summary js-summary-container">
         <div class="row">
-            <h4 class="col-12 mb-2 font-weight-bold">{\App\Language::translate('LBL_SUMMARY', $MODULE_NAME)}</h4>
+            <h5 class="col-12 mb-3"><span class="fas fa-list-alt mr-2"></span>{\App\Language::translate('LBL_SUMMARY', $MODULE_NAME)}</h5>
         </div>
         <div class="row mb-2 pl-4">
             <div class="col-8">{\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)}</div>

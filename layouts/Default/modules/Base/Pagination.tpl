@@ -2,7 +2,7 @@
 {strip}
 	{assign var=PAGE value=$LIST_VIEW_MODEL->getPage()}
 	{assign var=IS_MORE_PAGES value=$LIST_VIEW_MODEL->isMorePages()}
-	{if !(PAGE==1 && !IS_MORE_PAGES) }
+	{if !($PAGE==1 && !$IS_MORE_PAGES) }
 		<nav aria-label="Page navigation c-page">
 			<ul class="pagination u-mb-0px js-pagination-list d-flex align-items-center" data-page="{$PAGE}">
 				<li class="page-item {if $LIST_VIEW_MODEL->getPage() < 2} disabled{/if}">

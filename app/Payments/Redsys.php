@@ -76,6 +76,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$this->config = $config;
 		$this->type = $type;
+		$this->icon = 'fas fa-hand-holding-usd';
 		$this->setPrivateKey($config->get('privateKey'));
 		$this->setParameterFromConfig();
 	}
