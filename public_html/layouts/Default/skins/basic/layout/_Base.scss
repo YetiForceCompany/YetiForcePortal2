@@ -24,7 +24,7 @@ body {
   position: relative;
   left: 0;
   right: 0;
-  margin-left: 50px;
+  margin-left: $w-menu-mini-state;
   background: #fff;
   overflow-y: auto;
   overflow-x: hidden;
@@ -37,7 +37,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: $z-index-body;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
