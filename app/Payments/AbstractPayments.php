@@ -75,6 +75,15 @@ abstract class AbstractPayments
 	{
 		return $this->type;
 	}
+	/**
+	 * Returns payment's icon.
+	 *
+	 * @return string
+	 */
+	public function getIcon(): string
+	{
+		return $this->icon;
+	}
 
 	/**
 	 * Set parameter.

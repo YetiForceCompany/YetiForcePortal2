@@ -1,103 +1,109 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 $borderColor: #eeeeee;
+$bg-product-view: #eeeeee;
+
+.View-ProceedToCheckout,
+.View-ShoppingCart {
+  background-color: $bg-product-view;
+}
 
 .product-container {
-	background-color: #eee;
-	padding: 12px;
+  background-color: $bg-product-view;
+  padding: 12px;
 }
 
 .product-border-l {
-	border-left: 1px $borderColor solid;
+  border-left: 1px $borderColor solid;
 }
 
 .product-border-r {
-	border-right: 1px $borderColor solid;
+  border-right: 1px $borderColor solid;
 }
 
 .product-border-b {
-	border-bottom: 1px $borderColor solid;
+  border-bottom: 1px $borderColor solid;
 }
 
 .product-border {
-	border: 1px $borderColor solid;
+  border: 1px $borderColor solid;
 }
 
 .product-line {
-	border-bottom: 1px $borderColor solid;
+  border-bottom: 1px $borderColor solid;
 }
 
 .product-category {
-	background-color: white;
+  background-color: white;
 }
 
 .shopping-cart {
-	background-color: white;
-	border: 1px $borderColor solid;
-	padding: 5px;
+  background-color: white;
+  border: 1px $borderColor solid;
+  padding: 5px;
 }
 
 .product-summary {
-	background-color: white;
-	border: 1px $borderColor solid;
-	padding: 5px;
+  background-color: white;
+  border: 1px $borderColor solid;
+  padding: 5px;
 }
 
 .product-shopping-cart {
-	/*border-bottom: 1px $borderColor solid;*/
-	background-color: white;
+  /*border-bottom: 1px $borderColor solid;*/
+  background-color: white;
 }
 
 .fs-80 {
-	font-size: 80%;
+  font-size: 80%;
 }
 
 .fs-120 {
-	font-size: 120%;
+  font-size: 120%;
 }
 
 .product {
-	width: 33.33%;
-	border-right: 1px $borderColor solid;
-	border-top: 1px $borderColor solid;
-	background-color: white;
+  width: 33.33%;
+  border-right: 1px $borderColor solid;
+  border-top: 1px $borderColor solid;
+  background-color: white;
 }
 
 .product-image-contener img {
-	width: 260px;
-	height: 225px;
-	padding: 5px;
+  width: 260px;
+  height: 225px;
+  padding: 5px;
 }
 .product-image-contener .product-no-image {
-	width: 260px;
-	height: 225px;
-	padding: 5px;
-	font-size: 6rem;
+  width: 260px;
+  height: 225px;
+  padding: 5px;
+  font-size: 6rem;
 }
 .product-shopping-cart-image-contener {
-	width: 100px;
-	height: 100px;
-	border: 1px $borderColor solid;
-	padding: 5px;
+  width: 100px;
+  height: 100px;
+  border: 1px $borderColor solid;
+  padding: 5px;
 }
 
 .product-no-image {
-	width: 100%;
-	height: 100%;
-	color: #eeeeee;
+  width: 100%;
+  height: 100%;
+  color: #eeeeee;
 }
 
 .product-image {
-	object-fit: cover;
+  object-fit: cover;
 }
 
 .add-to-cart {
-	background-color: pink;
+  background-color: pink;
 }
 
 .product-btn-buy {
-	height: 48px;
-	width: 300px;
+  height: 48px;
+  width: 300px;
 }
 
 .o-category {

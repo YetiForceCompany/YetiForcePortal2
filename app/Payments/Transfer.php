@@ -23,6 +23,7 @@ class Transfer extends AbstractPayments implements PaymentsInterface
 	{
 		$this->config = $config;
 		$this->type = $type;
+		$this->icon = 'fas fa-exchange-alt';
 		$this->setParameterFromConfig();
 	}
 

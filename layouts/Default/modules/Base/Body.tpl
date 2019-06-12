@@ -8,8 +8,8 @@
 	<div class="leftPanel c-menu__container p-0">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl", $MODULE_NAME)}
 	</div>
+	{include file=\App\Resources::templatePath("BodyHeader.tpl", $MODULE_NAME)}
 	<div class="mainBody js-mobile-body">
-		{include file=\App\Resources::templatePath("BodyHeader.tpl", $MODULE_NAME)}
 		{include file=\App\Resources::templatePath("BodyContent.tpl", $MODULE_NAME)}
 		<!-- /tpl-Base-Body -->
 		{/strip}

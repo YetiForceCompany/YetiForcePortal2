@@ -23,6 +23,7 @@ class CashOnDelivery extends AbstractPayments implements PaymentsInterface
 	{
 		$this->config = $config;
 		$this->type = $type;
+		$this->icon = 'fas fa-money-bill-wave';
 		$this->setParameterFromConfig();
 	}
 

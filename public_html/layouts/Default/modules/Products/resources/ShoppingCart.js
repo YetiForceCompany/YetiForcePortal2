@@ -7,6 +7,8 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     this.checkStockLevels = this.container.data('check-stock-levels');
     this.totalPriceNetto = this.container.find('.js-total-price-netto');
     this.totalPriceGross = this.container.find('.js-total-price-gross');
+    this.addressSelect = this.container.find('.js-select-address');
+    this.formElement = this.container.find('form');
     this.btnProceedToCheckout = this.container.find(
       '.js-btn-proceed-to-checkout'
     );
@@ -37,11 +39,14 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     }
   }
   validate() {
+    if (this.formElement.validationEngine('validate') !== true) {
+      return false;
+    }
     if (!this.checkStockLevels) {
       return true;
     }
-    let validateResulat = true;
-    this.container.find('.js-cart-item').each((index, element) => {
+    let validateResult = true;
+    this.container.find('.js-cart-item').each((i, element) => {
       let product = $(element);
       let amount = parseFloat(product.find('.js-amount').val());
       let quantity = parseFloat(product.data('qtyinstock'));
@@ -50,10 +55,10 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
         .find('.js-no-such-quantity')
         .toggleClass('d-none', isEnoughQuantity);
       if (!isEnoughQuantity) {
-        validateResulat = false;
+        validateResult = false;
       }
     });
-    return validateResulat;
+    return validateResult;
   }
   registerButtonRemoveFromCart() {
     this.container.find('.js-remove-from-cart').on('click', e => {
@@ -89,7 +94,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
   registerChangeAddress() {
     let addresses = JSON.parse(this.container.find('.js-addresses').val());
     let self = this;
-    this.container.find('.js-select-address').on('change', e => {
+    this.addressSelect.on('change', e => {
       const type = $(e.currentTarget).val();
       const data = addresses['data'][type];
       Object.keys(data).forEach(function(fieldname) {
@@ -140,8 +145,11 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
   registerEvents() {
     super.registerEvents();
     this.registerButtonRemoveFromCart();
-    this.registerChangeAddress();
     this.registerChangePayments();
     this.registerProceedToCheckout();
+    if (this.addressSelect.length) {
+      this.registerChangeAddress();
+    }
+    this.formElement.validationEngine(app.validationEngineOptions);
   }
 };

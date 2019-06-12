@@ -1,30 +1,113 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
+.c-card {
+  &__header {
+    background-color: #f7f7f7 !important;
+    cursor: pointer;
+    .btn-link {
+      color: #006cdf;
+    }
+  }
+  &__icon-right {
+    display: none;
+  }
+  &__icon-down {
+    display: inline;
+  }
+  &__accordion {
+    background-color: #f7f7f7 !important;
+  }
+}
+
+.collapsed {
+  .c-card {
+    &__icon-right {
+      display: inline !important;
+    }
+    &__icon-down {
+      display: none !important;
+    }
+  }
+}
+
+.c-nav {
+  border-bottom: 1px solid #dee2e6;
+  &__item {
+    margin-bottom: -1px;
+  }
+
+  &__link {
+    border: 1px solid transparent !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    color: #006cdf !important;
+    &:hover {
+      color: #004793 !important;
+      border: 1px solid #dee2e6 !important;
+    }
+  }
+
+  &__link.active {
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
+  }
+}
+
+.c-exception {
+  background-color: #fff8e1;
+
+  &__card-header {
+    color: #ff5252;
+    background-color: #ffebee !important;
+  }
+  &__card-body {
+    overflow-y: auto;
+    height: 300px !important;
+    background-color: #fafafa;
+  }
+  &__card-footer {
+    a {
+      color: #212529;
+      background-color: #ddd;
+      border-color: #ddd;
+
+      &:hover {
+        color: #212529;
+        background-color: #cacaca;
+        border-color: #c4c4c4;
+      }
+    }
+  }
+}
+
+.hideBlock.show {
+  display: flex !important;
+}
 //blocks
 @media only screen and (max-width: 992px) {
-	.blockContainer .blockContent {
-		.fieldLabel {
-			text-align: left;
-			margin-bottom: 0;
-			padding-bottom: 0;
-			min-height: 1px;
-		}
-		.fieldValue {
-			min-height: 1px;
-		}
-	}
+  .blockContainer .blockContent {
+    .fieldLabel {
+      text-align: left;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      min-height: 1px;
+    }
+    .fieldValue {
+      min-height: 1px;
+    }
+  }
 }
 
 @media only screen and (min-width: 992px) {
-	.blockContainer .blockContent .fieldLabel {
-		text-align: right;
-	}
+  .blockContainer .blockContent .fieldLabel {
+    text-align: right;
+  }
 }
 
 #EditView .blockContainer .blockContent .fieldLabel label {
-	padding-top: 8px;
+  padding-top: 8px;
 }
 
 .blockContainer .blockContent .fieldLabel label {
-	font-size: 12px !important;
+  font-size: 12px !important;
 }
