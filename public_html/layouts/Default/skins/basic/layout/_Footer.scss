@@ -1,26 +1,26 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .footerContainer {
-	position: fixed;
-	height: 33px;
-	bottom: 0px;
-	left: 0px;
-	z-index: 1500;
-	background: #404952;
+  position: fixed;
+  height: 33px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1500;
+  background: #404952;
 }
 
 .footer {
-	text-align: center;
+  text-align: center;
 
-	p {
-		color: #ffffff;
-		padding: calculate-rem(1px) 0;
-		font-size: calculate-rem(10px);
-	}
+  p {
+    color: #ffffff;
+    padding: calculate-rem(1px) 0;
+    font-size: calculate-rem(10px);
+  }
 }
 
 @media only screen and (max-width: 768px) {
-	.footerContainer {
-		height: 17px;
-	}
+  .footerContainer {
+    height: $h-footer-mini;
+  }
 }
