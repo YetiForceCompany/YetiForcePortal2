@@ -24,12 +24,8 @@
                 <div class="font-weight-bold text-nowrap">{\App\Fields\Currency::formatToDisplay($TOTAL_PRICE_GROSS)}</div>
             </div>
         </div>
-        <div class="row p-2 mb-4">
-            {if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
-                <a href="{$PROCCED_URL}" class="btn btn-raised btn-success js-btn-proceed-to-checkout m-auto text-truncate">
-                    <i class="fas fa-cart-arrow-down"></i> {\App\Language::translate('LBL_PROCEED_TO_CHECKOUT', $MODULE_NAME)}
-                </a>
-            {/if}
+        <div class="row p-2">
+            {include file=\App\Resources::templatePath("components/{$VIEW}Btn.tpl", $MODULE_NAME)}
         </div>
     </div>
 {/strip}
