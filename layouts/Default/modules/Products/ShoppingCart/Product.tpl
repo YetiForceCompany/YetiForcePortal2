@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
     <!--tpl-Products-ShoppingCart-Product-->
-    <div class="d-flex flex-nowrap m-0 p-1 box-shadow product-shopping-cart {if $COUNTER < $COUNT_OF_RECORDS}product-border-b {/if}js-cart-item"
+    <div class="d-flex flex-nowrap m-0 p-2 box-shadow product-shopping-cart {if $COUNTER < $COUNT_OF_RECORDS}product-border-b {/if}js-cart-item"
             data-id="{\App\Purifier::encodeHTML($CRM_ID)}"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}"

@@ -1055,6 +1055,10 @@ table.dataTable.listViewEntries tbody td {
   background-color: white;
 }
 
+.product-shopping-cart:hover {
+  background-color: rgba(0, 0, 0, 0.035);
+}
+
 .fs-80 {
   font-size: 80%;
 }
@@ -1123,6 +1127,7 @@ table.dataTable.listViewEntries tbody td {
 
 .c-cart-quantity {
   min-width: 114px;
+  max-width: 150px;
 }
 
 .c-cart-quantity__btn-circle {

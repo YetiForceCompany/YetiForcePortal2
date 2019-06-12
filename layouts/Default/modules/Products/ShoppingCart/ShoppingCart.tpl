@@ -64,7 +64,7 @@
 						<div class="d-flex p-3 m-0 product-border-b mb-4 align-items-center">
 							<h6 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h6>
 						</div>
-						<div>
+						<div class="px-3">
 							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
 								{foreach from=$PAYMENTS item=PAYMENT}
 									<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
