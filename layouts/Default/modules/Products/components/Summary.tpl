@@ -13,11 +13,17 @@
                     {\App\Fields\Currency::formatToDisplay($TOTAL_PRICE)}
                 </div>
             </div>
-            <div class="mb-2 d-flex justify-content-between border-bottom">
+            <div class="mb-2 d-flex justify-content-between">
                  <div class="text-muted text-truncated">{\App\Language::translate('LBL_SHIPPING', $MODULE_NAME)}</div>
                 <div class="text-nowrap">0</div>
             </div>
-            <div class="d-flex justify-content-between">
+            {if \App\Config::getBool('addDelivery')}
+                <div class="mb-2 d-flex justify-content-between">
+                    <div class="text-muted text-truncated">{\App\Language::translate('LBL_SHIPPING', $MODULE_NAME)}</div>
+                    <div class="text-nowrap js-shipping-price">{\App\Fields\Currency::formatToDisplay($SHIPPING_PRICE)}</div>
+                </div>
+            {/if}
+            <div class="d-flex justify-content-between border-top">
                 <div class="text-muted text-truncated">
                     {\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)} ({\App\Language::translate('LBL_INCLUDING_VAT', $MODULE_NAME)})
                 </div>

@@ -129,6 +129,7 @@ class ShoppingCart extends \App\Controller\Action
 				'numberOfItems' => $this->cart->count(),
 				'totalPriceNetto' => \App\Fields\Currency::formatToDisplay($this->cart->calculateTotalPriceNetto()),
 				'totalPriceGross' => \App\Fields\Currency::formatToDisplay($totalPrice),
+				'shippingPrice' => \App\Fields\Currency::formatToDisplay($this->cart->getShippingPrice()),
 			];
 		}
 
