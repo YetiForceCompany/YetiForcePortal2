@@ -21,7 +21,7 @@
 						{assign var="COUNTER" value=$COUNTER + 1}
 					{/foreach}
 				</div>
-				<form class="js-form-address" data-js="container">
+				<form class="js-form-address mb-0" data-js="container">
 					<div class="{$CSS_CARD_CONTAINER} my-3">
 						<div class="{$CSS_CARD_CONTENT}">
 							<h6 class="col-12 mb-4"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h6>
@@ -87,7 +87,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-12 col-lg-3 pl-lg-3">
+			<div class="col-12 col-lg-3 pl-lg-3 mt-3 mt-lg-0">
 				{include file=\App\Resources::templatePath("components/Summary.tpl", $MODULE_NAME)}
 			</div>
 		</div>

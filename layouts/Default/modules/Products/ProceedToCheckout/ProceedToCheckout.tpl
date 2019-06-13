@@ -28,7 +28,7 @@
 					<div class="{$CSS_CARD_CONTENT}">
 							<h6 class="col-12 mb-0"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h6>
 					</div>
-					<div class="px-2 px-sm-4">
+					<div class="px-3">
 						{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
 							<div class="row small">
 								<label class="col-sm-2 col-form-label text-muted">{$ADDRESSES['fields'][$FIELDNAME|cat:'a']}:</label>

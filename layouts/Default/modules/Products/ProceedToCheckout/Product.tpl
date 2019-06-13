@@ -33,18 +33,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-auto d-flex flex-md-column justify-content-end ml-auto px-2">
-                <div class="col-12 text-right fs-80">
-                    <span class="font-weight-bold">
+            <div class="col-auto d-flex flex-column justify-content-end ml-auto px-2">
+                <div class="d-flex flex-wrap justify-content-between fs-80">
+                    <span class="font-weight-bold mr-1 mr-lg-3">
                         {\App\Language::translate('LBL_QUANTITY', $MODULE_NAME)}:
                     </span>
-                    {$RECORD->getDisplayValue('amountInShoppingCart')}
+                    <span>{$RECORD->getDisplayValue('amountInShoppingCart')}</span>
                 </div>
-                <div class="col-12 text-right fs-80">
-                    <span class="font-weight-bold">
+                <div class="d-flex flex-wrap justify-content-between fs-80">
+                    <span class="font-weight-bold mr-1 mr-lg-3">
                         {\App\Language::translate('LBL_PRICE', $MODULE_NAME)}:
                     </span>
-                    {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceGross'))}
+                    <span>
+                        {\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('totalPriceGross'))}
+                    </span>
                 </div>
             </div>
        </div>
