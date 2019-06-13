@@ -107,16 +107,34 @@ $bg-product-view: #eeeeee;
   height: 48px;
   width: 300px;
 }
-
-.o-category {
-  &__button-search {
-    border-color: #cee2e6 !important;
-    height: 2.33rem !important;
-    font-size: 1rem !important;
-    border-radius: 0.5rem;
+$border-radius: 100px;
+.c-input-rounded {
+  &__prepend {
+    border: 1px solid #dee2e6;
+    border-right: none;
+    &,
+    .btn {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
   }
-  &__input-search {
+  &__append {
+    border: 1px solid #dee2e6;
+    border-left: none;
+    &,
+    .btn {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+  &__input {
+    border: 1px solid #dee2e6;
+    border-left: none;
+    border-right: none;
     background-image: none;
+  }
+  .btn {
+    margin-bottom: 0;
   }
 }
 .c-cart-quantity {

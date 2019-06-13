@@ -1114,15 +1114,37 @@ table.dataTable.listViewEntries tbody td {
   width: 300px;
 }
 
-.o-category__button-search {
-  border-color: #cee2e6 !important;
-  height: 2.33rem !important;
-  font-size: 1rem !important;
-  border-radius: 0.5rem;
+.c-input-rounded__prepend {
+  border: 1px solid #dee2e6;
+  border-right: none;
 }
 
-.o-category__input-search {
+.c-input-rounded__prepend,
+.c-input-rounded__prepend .btn {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+.c-input-rounded__append {
+  border: 1px solid #dee2e6;
+  border-left: none;
+}
+
+.c-input-rounded__append,
+.c-input-rounded__append .btn {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.c-input-rounded__input {
+  border: 1px solid #dee2e6;
+  border-left: none;
+  border-right: none;
   background-image: none;
+}
+
+.c-input-rounded .btn {
+  margin-bottom: 0;
 }
 
 .c-cart-quantity {
