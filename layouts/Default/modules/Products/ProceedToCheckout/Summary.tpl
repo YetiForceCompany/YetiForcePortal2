@@ -8,10 +8,12 @@
             <div class="col-8">{\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)}</div>
             <div class="col-4 js-total-price-netto">{\App\Fields\Currency::formatToDisplay($TOTAL_PRICE)}</div>
         </div>
-        <div class="row mb-2 product-line pl-4 pb-2">
-            <div class="col-8">{\App\Language::translate('LBL_SHIPPING', $MODULE_NAME)}</div>
-            <div class="col-4">0</div>
-        </div>
+        {if \App\Config::getBool('addDelivery')}
+            <div class="row mb-2 product-line pl-4 pb-2">
+                <div class="col-8">{\App\Language::translate('LBL_SHIPPING', $MODULE_NAME)}</div>
+                <div class="col-4">{\App\Fields\Currency::formatToDisplay($SHIPPING_PRICE)}</div>
+            </div>
+        {/if}
         <div class="row mb-2 font-weight-bold">
             <div class="col-8">{\App\Language::translate('LBL_TOTAL_PRICE', $MODULE_NAME)} ({\App\Language::translate('LBL_INCLUDING_VAT', $MODULE_NAME)})</div>
             <div class="col-4 pl-4 js-total-price-brutto">{\App\Fields\Currency::formatToDisplay($TOTAL_PRICE_GROSS)}</div>

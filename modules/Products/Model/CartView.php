@@ -160,4 +160,14 @@ class CartView extends ListViewModel
 		}
 		return \App\Payments::getInstance($this->cart->getPayment());
 	}
+
+	/**
+	 * Gets shipping price.
+	 *
+	 * @return void
+	 */
+	public function getShippingPrice()
+	{
+		return $this->cart->getShippingPrice();
+	}
 }

@@ -8,6 +8,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     this.totalPriceNetto = this.container.find('.js-total-price-netto');
     this.totalPriceGross = this.container.find('.js-total-price-gross');
     this.addressSelect = this.container.find('.js-select-address');
+    this.shippingPrice = this.container.find('.js-shipping-price');
     this.formElement = this.container.find('form');
     this.btnProceedToCheckout = this.container.find(
       '.js-btn-proceed-to-checkout'
@@ -34,6 +35,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
           this.shoppingCartBadge.text(data['result']['numberOfItems']);
           this.totalPriceNetto.text(data['result']['totalPriceNetto']);
           this.totalPriceGross.text(data['result']['totalPriceGross']);
+          this.shippingPrice.text(data['result']['shippingPrice']);
         }
       });
     }
@@ -68,6 +70,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
         this.shoppingCartBadge.text(data['result']['numberOfItems']);
         this.totalPriceNetto.text(data['result']['totalPriceNetto']);
         this.totalPriceGross.text(data['result']['totalPriceGross']);
+        this.shippingPrice.text(data['result']['shippingPrice']);
       });
     });
   }
@@ -97,7 +100,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     this.addressSelect.on('change', e => {
       const type = $(e.currentTarget).val();
       const data = addresses['data'][type];
-      Object.keys(data).forEach(function(fieldname) {
+      Object.keys(data).forEach(function (fieldname) {
         let value = data[fieldname];
         fieldname = fieldname.substring(0, fieldname.length - 1);
         self.container.find('[name="' + fieldname + '"]').val(value);

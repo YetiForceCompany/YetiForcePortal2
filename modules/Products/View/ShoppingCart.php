@@ -71,6 +71,7 @@ class ShoppingCart extends View\ListView
 		$this->viewer->assign('READONLY', $readonly);
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		$this->viewer->assign('PAYMENTS', $payments);
+		$this->viewer->assign('SHIPPING_PRICE', $this->getListViewModel()->getShippingPrice());
 
 		$this->viewer->assign('SELECTED_PAYMENTS', $this->getListViewModel()->getSelectedPayment());
 		$this->viewer->view($this->processTplName(), $moduleName);
