@@ -93,7 +93,8 @@ class Api
 			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers, 'body' => $data] + $options);
 		}
 		$rawResponse = (string) $request->getBody();
-		if (1 == $request->getHeader('encrypted')[0]) {
+		$encryptedHeader = $request->getHeader('encrypted');
+		if ($encryptedHeader && 1 == $request->getHeader('encrypted')[0]) {
 			$rawResponse = $this->decryptData($rawResponse);
 		}
 		$response = Json::decode($rawResponse);
