@@ -10,7 +10,6 @@ $bg-product-view: #eeeeee;
 
 .product-container {
   background-color: $bg-product-view;
-  padding: 12px;
 }
 
 .product-border-l {
@@ -52,6 +51,9 @@ $bg-product-view: #eeeeee;
 .product-shopping-cart {
   /*border-bottom: 1px $borderColor solid;*/
   background-color: white;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.035);
+  }
 }
 
 .fs-80 {
@@ -119,6 +121,7 @@ $bg-product-view: #eeeeee;
 }
 .c-cart-quantity {
   min-width: 114px;
+  max-width: 150px;
   &__btn-circle {
     border-radius: 100% !important;
     width: calc(1.5rem + 2px) !important;

@@ -177,13 +177,10 @@
   font-weight: bold;
 }
 
-.c-main-container {
-  padding: 0;
-}
 .c-header__btn--sidebar {
   display: none;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .bodyHeader {
     .leftSide {
       width: auto;
