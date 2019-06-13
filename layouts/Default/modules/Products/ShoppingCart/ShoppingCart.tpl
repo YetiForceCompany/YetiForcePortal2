@@ -40,7 +40,7 @@
 							{/if}
 						</div>
 						<input type="hidden" class="js-addresses" value="{App\Purifier::encodeHTML(App\Json::encode($ADDRESSES))}">
-						{if !(!empty($ADDRESSES) && empty($ADDRESSES['drequiredata']))}
+						{if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
 							<div class="px-2 px-sm-4">
 							{assign var=REQUIRED_FIELDS value=['addresslevel5', 'addresslevel7', 'addresslevel8', 'buildingnumber']}
 									{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
