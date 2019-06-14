@@ -11,6 +11,7 @@
 
 namespace YF\Modules\Products\Model;
 
+use App\Api;
 use App\AppException;
 use App\Session;
 
@@ -37,6 +38,13 @@ class Cart
 	 * @var string
 	 */
 	protected $methodPayments = '';
+
+	/**
+	 * Shipping price.
+	 *
+	 * @var float
+	 */
+	protected $shippingPrice;
 
 	/**
 	 * Get the number of items in the cart.
@@ -103,7 +111,8 @@ class Cart
 	/**
 	 * Sets address.
 	 *
-	 * @param array $address
+	 * @param array  $address
+	 * @param string $methodPayments
 	 *
 	 * @return void
 	 */
@@ -189,8 +198,9 @@ class Cart
 	/**
 	 * Set item.
 	 *
-	 * @param int $recordId
-	 * @param int $amount
+	 * @param int   $recordId
+	 * @param int   $amount
+	 * @param array $param
 	 *
 	 * @return void
 	 */
@@ -293,6 +303,28 @@ class Cart
 		foreach ($this->cart as $item) {
 			$totalPrice += ((float) $item['param']['priceGross']) * $item['amount'];
 		}
-		return $totalPrice;
+		return $totalPrice + $this->getShippingPrice();
+	}
+
+	/**
+	 * Gets shipping price.
+	 */
+	public function getShippingPrice()
+	{
+		if (!\App\Config::getBool('addDelivery')) {
+			return 0;
+		}
+		if (isset($this->shippingPrice)) {
+			return $this->shippingPrice;
+		}
+		$data = [];
+		foreach ($this->cart as $productId => $info) {
+			$data[] = [
+				'productId' => $productId,
+				'qty' => $info['amount']
+			];
+		}
+		$results = Api::getInstance()->call('SSingleOrders/Delivery/?' . http_build_query(['products' => $data]));
+		return $results['price'] ?? 0;
 	}
 }

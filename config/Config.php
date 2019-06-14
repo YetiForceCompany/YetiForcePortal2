@@ -107,4 +107,5 @@ class Config
 	public static $paymentServerName = '';
 	public static $paymentServerPass = '';
 	public static $paymentApiKey = '';
+	public static $addDelivery = false;
 }

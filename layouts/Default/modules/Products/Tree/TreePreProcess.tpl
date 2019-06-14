@@ -2,7 +2,7 @@
 {strip}
     <!-- tpl-Products-Tree-TreePreProcess -->
     {include file=\App\Resources::templatePath("Header.tpl", $MODULE_NAME)}
-    <div>
+    <div class="pb-3">
         <input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Purifier::encodeHtml(\App\Json::encode(\App\Config::$listEntriesPerPage))}">
         <div class="widget_header row">
 			<div class="col-sm-8">
@@ -19,6 +19,6 @@
                     {include file=\App\Resources::templatePath($LEFT_SIDE_TEMPLATE, $MODULE_NAME)}
                 </div>
             {/if}
-	        <div class="col-xl-{$COL_WIDTH} col-md-12 c-main-container js-main-container" data-js="container">
+	        <div class="col-xl-{$COL_WIDTH} col-md-12 js-main-container" data-js="container">
     <!-- /tpl-Products-Tree-TreePreProcess -->
 {/strip}
