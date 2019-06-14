@@ -107,28 +107,29 @@ $bg-product-view: #eeeeee;
   height: 48px;
   width: 300px;
 }
-$border-radius: 100px;
+$c-input-rounded-border-radius: 100px;
+$c-input-rounded-border-color: #dee2e6;
 .c-input-rounded {
   &__prepend {
-    border: 1px solid #dee2e6;
+    border: 1px solid $c-input-rounded-border-color;
     border-right: none;
     &,
     .btn {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
+      border-top-left-radius: $c-input-rounded-border-radius;
+      border-bottom-left-radius: $c-input-rounded-border-radius;
     }
   }
   &__append {
-    border: 1px solid #dee2e6;
+    border: 1px solid $c-input-rounded-border-color;
     border-left: none;
     &,
     .btn {
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-top-right-radius: $c-input-rounded-border-radius;
+      border-bottom-right-radius: $c-input-rounded-border-radius;
     }
   }
   &__input {
-    border: 1px solid #dee2e6;
+    border: 1px solid $c-input-rounded-border-color;
     border-left: none;
     border-right: none;
     background-image: none;
