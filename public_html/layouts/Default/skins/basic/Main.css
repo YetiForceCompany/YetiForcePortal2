@@ -1143,6 +1143,11 @@ table.dataTable.listViewEntries tbody td {
   background-image: none;
 }
 
+.c-input-rounded__input:focus ~ .c-input-rounded__prepend,
+.c-input-rounded__input:focus ~ .c-input-rounded__append {
+  border-color: #17ffe9;
+}
+
 .c-input-rounded .btn {
   margin-bottom: 0;
 }

@@ -132,6 +132,12 @@ $border-radius: 100px;
     border-left: none;
     border-right: none;
     background-image: none;
+    &:focus {
+      & ~ .c-input-rounded__prepend,
+      & ~ .c-input-rounded__append {
+        border-color: #17ffe9;
+      }
+    }
   }
   .btn {
     margin-bottom: 0;
