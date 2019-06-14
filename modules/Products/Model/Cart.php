@@ -324,7 +324,7 @@ class Cart
 				'qty' => $info['amount']
 			];
 		}
-		$results = Api::getInstance()->call('SSingleOrders/Delivery/' . http_build_query(['products' => $data]));
+		$results = Api::getInstance()->call('SSingleOrders/Delivery/?' . http_build_query(['products' => $data]));
 		return $results['price'] ?? 0;
 	}
 }
