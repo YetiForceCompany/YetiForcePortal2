@@ -285,6 +285,7 @@ window.App.Fields = {
 			this.treeInstance.jstree({
 				'core': {
 					data: treeData,
+					multiple: false,
 					themes: {
 						name: 'proton',
 						responsive: true

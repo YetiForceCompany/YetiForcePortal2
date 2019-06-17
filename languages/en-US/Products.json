@@ -34,6 +34,10 @@
     "LBL_BANKACCOUNTNUMBER": "Account number"
   },
   "js": {
-    "LBL_VERIFY_ADDRESS": "Verify delivery address"
+    "LBL_VERIFY_ADDRESS": "Verify delivery address",
+    "JS_YOU_HAVE_NO_ITEMS_IN_YOUR_SHOPPING_CART": "You have no items in your shopping cart.",
+    "JS_REMOVED_ITEM_FROM_CART": "Removed item from the shipping cart.",
+    "JS_ADDED_ITEM_TO_CART": "Added item to the shipping cart.",
+    "JS_ADDED_ITEMS_TO_CART": "Added ${amount} items to the shipping cart."
   }
 }

@@ -79,6 +79,9 @@ class Tree extends View\ListView
 				if ('productname' === $condition['fieldName']) {
 					$searchText = $condition['value'];
 				}
+				if ('pscategory' === $condition['fieldName']) {
+					$this->pscategory[] = $condition['value'];
+				}
 			}
 		}
 		$this->viewer->assign('SEARCH_TEXT', $searchText);

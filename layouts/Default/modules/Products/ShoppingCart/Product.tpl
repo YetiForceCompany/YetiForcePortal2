@@ -63,22 +63,22 @@
                 </div>
                 <div class="text-secondary text-nowrap ml-2 u-min-w-0">
                     {if !$READONLY}
-                        <div class="text-right fs-80 text-truncate">
-                            <span class="font-weight-bold mr-1">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
-                            <span>{$RECORD->getDisplayValue('unit_price')}</span>
+                        <div class="d-flex flex-wrap text-right fs-80">
+                            <span class="text-nowrap font-weight-bold mr-1">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
+                            <span class="text-nowrap">{$RECORD->getDisplayValue('unit_price')}</span>
                         </div>
-                        <div class="text-right fs-80 text-truncate">
-                            <span class="font-weight-bold mr-1">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
-                            <span>{$RECORD->getDisplayValue('unit_gross')}</span>
+                        <div class="d-flex flex-wrap text-right fs-80">
+                            <span class="text-nowrap font-weight-bold mr-1">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
+                            <span class="text-nowrap">{$RECORD->getDisplayValue('unit_gross')}</span>
                         </div>
                     {else}
-                        <div class="text-right fs-80 text-truncate">
-                            <span class="font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
-                            <span>{\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}</span>
+                        <div class="d-flex flex-wrap text-right fs-80">
+                            <span class="text-nowrap font-weight-bold">{\App\Language::translate('LBL_NET_PRICE', $MODULE_NAME)}:</span>
+                            <span class="text-nowrap">{\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceNetto'))}</span>
                         </div>
-                        <div class="text-right fs-80 text-truncate">
-                            <span class="font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
-                            <span>{\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceGross'))}</span>
+                        <div class="d-flex flex-wrap text-right fs-80">
+                            <span class="text-nowrap font-weight-bold">{\App\Language::translate('LBL_GROSS_PRICE', $MODULE_NAME)}:</span>
+                            <span class="text-nowrap">{\App\Fields\Currency::formatToDisplay($RECORD->getDisplayValue('priceGross'))}</span>
                         </div>
                     {/if}
 
