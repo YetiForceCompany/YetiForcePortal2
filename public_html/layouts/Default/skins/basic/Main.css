@@ -408,6 +408,7 @@
   border-left: none;
   border-right: none;
   background-image: none;
+  line-height: 2 !important;
 }
 
 .c-input-rounded__input:focus ~ .c-input-rounded__prepend,

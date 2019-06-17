@@ -4,13 +4,13 @@
         <input type="text" class="c-input-rounded__input js-search form-control order-1" value="{$SEARCH_TEXT}"
         autocomplete="off" placeholder="{\App\Language::translate('LBL_SEARCH_PRODUCT', $MODULE_NAME)}" data-js="keydown"/>
         <div class="c-input-rounded__prepend input-group-prepend order-0">
-             <button class="btn btn-secondary js-search-cancel" type="button">
-                    <span data-js="click" aria-hidden="true">&times;</span>
+            <button class="btn btn-secondary js-search-button" type="button">
+                <span class="fas fa-search"></span>
             </button>
         </div>
         <div class="c-input-rounded__append input-group-append order-2">
-            <button class="btn btn-secondary js-search-button" type="button">
-                    <span class="fas fa-search"></span>
+            <button class="btn btn-secondary js-search-cancel" type="button">
+                <span class="fas fa-times"></span>
             </button>
         </div>
     </div>

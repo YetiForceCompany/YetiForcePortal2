@@ -106,6 +106,7 @@ $c-input-rounded-border-color: #dee2e6;
     border-left: none;
     border-right: none;
     background-image: none;
+    line-height: 2 !important;
     &:focus {
       & ~ .c-input-rounded__prepend,
       & ~ .c-input-rounded__append {
