@@ -15,7 +15,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     );
   }
   updateProduct(product, expectedAmount) {
-    let validateResult = this.validate();
+    let validateResult = this.validate(false);
     this.btnProceedToCheckout
       .toggleClass('btn-success', validateResult)
       .toggleClass('btn-grey', !validateResult);
@@ -31,7 +31,13 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
             type: 'error'
           });
         } else {
-          product.find('.js-amount').val(expectedAmount);
+          const amount = product.find('.js-amount')
+          const notifyText = amount.val() > expectedAmount ? app.translate('JS_REMOVED_ITEM_FROM_CART') : app.translate('JS_ADDED_ITEM_TO_CART')
+          Vtiger_Helper_Js.showPnotify({
+            text: notifyText,
+            type: "success"
+          });
+          amount.val(expectedAmount);
           this.shoppingCartBadge.text(data['result']['numberOfItems']);
           this.totalPriceNetto.text(data['result']['totalPriceNetto']);
           this.totalPriceGross.text(data['result']['totalPriceGross']);
@@ -40,8 +46,8 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
       });
     }
   }
-  validate() {
-    if (this.formElement.validationEngine('validate') !== true) {
+  validate(formValidation = true) {
+    if (formValidation && this.formElement.validationEngine('validate') !== true) {
       return false;
     }
     if (!this.checkStockLevels) {

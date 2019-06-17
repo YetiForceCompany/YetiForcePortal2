@@ -35,6 +35,7 @@
   },
   "js": {
     "LBL_VERIFY_ADDRESS": "Verify delivery address",
+    "JS_REMOVED_ITEM_FROM_CART": "Removed item from the shipping cart.",
     "JS_ADDED_ITEM_TO_CART": "Added item to the shipping cart.",
     "JS_ADDED_ITEMS_TO_CART": "Added ${amount} items to the shipping cart."
   }
