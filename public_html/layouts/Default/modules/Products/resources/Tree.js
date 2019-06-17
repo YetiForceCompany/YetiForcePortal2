@@ -4,7 +4,7 @@ window.Products_Tree_Js = class {
 	constructor(container = $(".js-products-container")) {
 		this.container = container;
 		this.checkStockLevels = this.container.data("check-stock-levels");
-		this.page = this.container.find(".js-pagination-list").data("page");
+		this.page = this.container.find(".js-pagination-list").data("page") || 1;
 		this.treeInstance = $(".js-tree-container");
 		this.shoppingCartBadge = $(
 			".js-body-header .js-shopping-cart .js-badge"
