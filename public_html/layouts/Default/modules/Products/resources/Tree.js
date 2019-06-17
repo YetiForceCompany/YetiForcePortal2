@@ -35,9 +35,19 @@ window.Products_Tree_Js = class {
 		this.registerPagination();
 		this.registerSearch();
 		this.registerTreeEvents();
+		this.registerClearButton();
+	}
+	registerClearButton() {
+		$('.js-tree-clear').on('click', e => {
+			this.treeInstance.jstree("deselect_all")
+			$(e.target).addClass('d-none')
+		})
 	}
 	registerTreeEvents() {
 		this.treeInstance.on("changed.jstree", (e, data) => {
+			if (data.selected.length) {
+				$('.js-tree-clear').removeClass('d-none')
+			}
 			this.loadPage();
 		});
 	}
