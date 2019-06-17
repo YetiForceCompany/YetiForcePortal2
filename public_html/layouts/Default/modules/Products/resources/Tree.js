@@ -153,7 +153,7 @@ window.Products_Tree_Js = class {
 		this.container.find(".js-add-to-cart").on("click", e => {
 			let product = this.getCartItem(e.currentTarget);
 			let amount = product.find(".js-amount").val();
-			if (amount === '0') {
+			if (parseInt(amount) <= 0) {
 				return
 			}
 			let amountInShoppingCart = parseFloat(

@@ -44,7 +44,7 @@ window.Products_Preview_Js = class {
 		this.container.find(".js-add-to-cart").on("click", e => {
 			let product = this.container;
 			let amount = product.find(".js-amount").val();
-			if (amount === '0') {
+			if (parseInt(amount) <= 0) {
 				return
 			}
 			let amountInShoppingCart = parseFloat(
