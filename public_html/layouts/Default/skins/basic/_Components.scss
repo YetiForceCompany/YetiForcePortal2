@@ -80,6 +80,63 @@
   }
 }
 
+$c-input-rounded-border-radius: 100px;
+$c-input-rounded-border-color: #dee2e6;
+.c-input-rounded {
+  &__prepend {
+    border: 1px solid $c-input-rounded-border-color;
+    border-right: none;
+    &,
+    .btn {
+      border-top-left-radius: $c-input-rounded-border-radius !important;
+      border-bottom-left-radius: $c-input-rounded-border-radius !important;
+    }
+  }
+  &__append {
+    border: 1px solid $c-input-rounded-border-color;
+    border-left: none;
+    &,
+    .btn {
+      border-top-right-radius: $c-input-rounded-border-radius;
+      border-bottom-right-radius: $c-input-rounded-border-radius;
+    }
+  }
+  &__input {
+    border: 1px solid $c-input-rounded-border-color;
+    border-left: none;
+    border-right: none;
+    background-image: none;
+    &:focus {
+      & ~ .c-input-rounded__prepend,
+      & ~ .c-input-rounded__append {
+        border-color: #17ffe9;
+      }
+    }
+  }
+  .btn {
+    margin-bottom: 0;
+  }
+}
+
+.c-cart-quantity {
+  min-width: 114px;
+  max-width: 150px;
+  &__btn-circle {
+    border-radius: 100% !important;
+    width: calc(1.5rem + 2px) !important;
+    height: calc(1.5rem + 2px) !important;
+    line-height: normal !important;
+    font-family: initial !important;
+    padding: 0px !important;
+    min-width: 0px !important;
+  }
+
+  &__input {
+    border-radius: 0.5rem !important;
+    background-image: none;
+  }
+}
+
 .hideBlock.show {
   display: flex !important;
 }

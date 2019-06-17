@@ -66,6 +66,8 @@ hr {
   }
   .bodyContent {
     padding-left: 10px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .mainPage {

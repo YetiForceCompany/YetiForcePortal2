@@ -381,6 +381,64 @@
   border-color: #c4c4c4;
 }
 
+.c-input-rounded__prepend {
+  border: 1px solid #dee2e6;
+  border-right: none;
+}
+
+.c-input-rounded__prepend,
+.c-input-rounded__prepend .btn {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+}
+
+.c-input-rounded__append {
+  border: 1px solid #dee2e6;
+  border-left: none;
+}
+
+.c-input-rounded__append,
+.c-input-rounded__append .btn {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.c-input-rounded__input {
+  border: 1px solid #dee2e6;
+  border-left: none;
+  border-right: none;
+  background-image: none;
+}
+
+.c-input-rounded__input:focus ~ .c-input-rounded__prepend,
+.c-input-rounded__input:focus ~ .c-input-rounded__append {
+  border-color: #17ffe9;
+}
+
+.c-input-rounded .btn {
+  margin-bottom: 0;
+}
+
+.c-cart-quantity {
+  min-width: 114px;
+  max-width: 150px;
+}
+
+.c-cart-quantity__btn-circle {
+  border-radius: 100% !important;
+  width: calc(1.5rem + 2px) !important;
+  height: calc(1.5rem + 2px) !important;
+  line-height: normal !important;
+  font-family: initial !important;
+  padding: 0px !important;
+  min-width: 0px !important;
+}
+
+.c-cart-quantity__input {
+  border-radius: 0.5rem !important;
+  background-image: none;
+}
+
 .hideBlock.show {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -480,6 +538,8 @@ hr {
   }
   .bodyContent {
     padding-left: 10px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   .mainPage {
     margin-left: 0px;
@@ -1112,64 +1172,6 @@ table.dataTable.listViewEntries tbody td {
 .product-btn-buy {
   height: 48px;
   width: 300px;
-}
-
-.c-input-rounded__prepend {
-  border: 1px solid #dee2e6;
-  border-right: none;
-}
-
-.c-input-rounded__prepend,
-.c-input-rounded__prepend .btn {
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-
-.c-input-rounded__append {
-  border: 1px solid #dee2e6;
-  border-left: none;
-}
-
-.c-input-rounded__append,
-.c-input-rounded__append .btn {
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-}
-
-.c-input-rounded__input {
-  border: 1px solid #dee2e6;
-  border-left: none;
-  border-right: none;
-  background-image: none;
-}
-
-.c-input-rounded__input:focus ~ .c-input-rounded__prepend,
-.c-input-rounded__input:focus ~ .c-input-rounded__append {
-  border-color: #17ffe9;
-}
-
-.c-input-rounded .btn {
-  margin-bottom: 0;
-}
-
-.c-cart-quantity {
-  min-width: 114px;
-  max-width: 150px;
-}
-
-.c-cart-quantity__btn-circle {
-  border-radius: 100% !important;
-  width: calc(1.5rem + 2px) !important;
-  height: calc(1.5rem + 2px) !important;
-  line-height: normal !important;
-  font-family: initial !important;
-  padding: 0px !important;
-  min-width: 0px !important;
-}
-
-.c-cart-quantity__input {
-  border-radius: 0.5rem !important;
-  background-image: none;
 }
 
 @media only screen and (max-width: 1600px) {
