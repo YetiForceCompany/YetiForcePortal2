@@ -166,8 +166,9 @@ window.Products_Tree_Js = class {
 					type: "error"
 				});
 			} else {
+				const amount = product.find(".js-amount").val()
 				this.cartMethod("addToCart", product.data("id"), {
-					amount: product.find(".js-amount").val(),
+					amount: amount,
 					priceNetto: product.data("priceNetto"),
 					priceGross: product.data("priceGross")
 				}).done(data => {
@@ -180,6 +181,11 @@ window.Products_Tree_Js = class {
 						this.shoppingCartBadge.text(
 							data["result"]["numberOfItems"]
 						);
+						const notifyText = amount > 1 ? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amount) : app.translate('JS_ADDED_ITEM_TO_CART')
+						Vtiger_Helper_Js.showPnotify({
+							text: notifyText,
+							type: "success"
+						});
 						product.data(
 							"amountInShoppingCart",
 							amountInShoppingCart + amount
