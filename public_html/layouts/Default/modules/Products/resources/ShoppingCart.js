@@ -15,7 +15,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
     );
   }
   updateProduct(product, expectedAmount) {
-    let validateResult = this.validate();
+    let validateResult = this.validate(false);
     this.btnProceedToCheckout
       .toggleClass('btn-success', validateResult)
       .toggleClass('btn-grey', !validateResult);
@@ -31,7 +31,13 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
             type: 'error'
           });
         } else {
-          product.find('.js-amount').val(expectedAmount);
+          const amount = product.find('.js-amount')
+          const notifyText = amount.val() > expectedAmount ? app.translate('JS_REMOVED_ITEM_FROM_CART') : app.translate('JS_ADDED_ITEM_TO_CART')
+          Vtiger_Helper_Js.showPnotify({
+            text: notifyText,
+            type: "success"
+          });
+          amount.val(expectedAmount);
           this.shoppingCartBadge.text(data['result']['numberOfItems']);
           this.totalPriceNetto.text(data['result']['totalPriceNetto']);
           this.totalPriceGross.text(data['result']['totalPriceGross']);
@@ -40,15 +46,23 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
       });
     }
   }
-  validate() {
-    if (this.formElement.validationEngine('validate') !== true) {
+  validate(formValidation = true) {
+    const products = this.container.find('.js-cart-item');
+    if (!products.length) {
+      Vtiger_Helper_Js.showPnotify({
+        text: app.translate('JS_YOU_HAVE_NO_ITEMS_IN_YOUR_SHOPPING_CART'),
+        type: 'error'
+      });
+      return false
+    }
+    if (formValidation && this.formElement.validationEngine('validate') !== true) {
       return false;
     }
     if (!this.checkStockLevels) {
       return true;
     }
     let validateResult = true;
-    this.container.find('.js-cart-item').each((i, element) => {
+    products.each((i, element) => {
       let product = $(element);
       let amount = parseFloat(product.find('.js-amount').val());
       let quantity = parseFloat(product.data('qtyinstock'));
@@ -127,6 +141,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
   }
   registerChangePayments() {
     this.container.find('.js-method-payments').on('change', e => {
+      this.btnProceedToCheckout.addClass('btn-success').removeClass('btn-grey');
       $('.mainPage ').animate({ scrollTop: $(document).height() }, 'slow');
       AppConnector.request({
         module: app.getModuleName(),
@@ -145,14 +160,17 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
       return validateResult;
     });
   }
-  registerEvents() {
-    super.registerEvents();
-    this.registerButtonRemoveFromCart();
+  registerFormEvents() {
     this.registerChangePayments();
-    this.registerProceedToCheckout();
     if (this.addressSelect.length) {
       this.registerChangeAddress();
     }
     this.formElement.validationEngine(app.validationEngineOptions);
+  }
+  registerEvents() {
+    super.registerEvents();
+    this.registerButtonRemoveFromCart();
+    this.registerProceedToCheckout();
+    this.registerFormEvents()
   }
 };

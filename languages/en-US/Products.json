@@ -9,12 +9,12 @@
     "LBL_VIEW_PROCEEDTOCHECKOUT": "Checkout",
     "LBL_INCLUDING_VAT": "including VAT",
     "LBL_VIEW_TREE": "Products",
-    "LBL_SHIPPING_CART": "Shipping cart",
+    "LBL_SHOPPING_CART": "Shopping cart",
     "LBL_QUANTITY": "Quantity",
     "LBL_PRICE": "Price",
     "LBL_SUMMARY": "Summary",
     "LBL_BUY": "Buy",
-    "LBL_VIEW_SHOPPINGCART": "Shipping cart",
+    "LBL_VIEW_SHOPPINGCART": "Shopping cart",
     "LBL_CATEGORIES": "Categories",
     "LBL_ADDRESS": "Address",
     "LBL_NET_PRICE": "Net price",
@@ -34,6 +34,10 @@
     "LBL_BANKACCOUNTNUMBER": "Account number"
   },
   "js": {
-    "LBL_VERIFY_ADDRESS": "Verify delivery address"
+    "LBL_VERIFY_ADDRESS": "Verify delivery address",
+    "JS_YOU_HAVE_NO_ITEMS_IN_YOUR_SHOPPING_CART": "You have no items in your shopping cart.",
+    "JS_REMOVED_ITEM_FROM_CART": "Removed item from the shopping cart.",
+    "JS_ADDED_ITEM_TO_CART": "Added item to the shopping cart.",
+    "JS_ADDED_ITEMS_TO_CART": "Added ${amount} items to the shopping cart."
   }
 }

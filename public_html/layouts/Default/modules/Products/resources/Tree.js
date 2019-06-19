@@ -4,7 +4,7 @@ window.Products_Tree_Js = class {
 	constructor(container = $(".js-products-container")) {
 		this.container = container;
 		this.checkStockLevels = this.container.data("check-stock-levels");
-		this.page = this.container.find(".js-pagination-list").data("page");
+		this.page = this.container.find(".js-pagination-list").data("page") || 1;
 		this.treeInstance = $(".js-tree-container");
 		this.shoppingCartBadge = $(
 			".js-body-header .js-shopping-cart .js-badge"
@@ -35,9 +35,19 @@ window.Products_Tree_Js = class {
 		this.registerPagination();
 		this.registerSearch();
 		this.registerTreeEvents();
+		this.registerClearButton();
+	}
+	registerClearButton() {
+		$('.js-tree-clear').on('click', e => {
+			this.treeInstance.jstree("deselect_all")
+			$(e.target).addClass('d-none')
+		})
 	}
 	registerTreeEvents() {
 		this.treeInstance.on("changed.jstree", (e, data) => {
+			if (data.selected.length) {
+				$('.js-tree-clear').removeClass('d-none')
+			}
 			this.loadPage();
 		});
 	}
@@ -156,8 +166,9 @@ window.Products_Tree_Js = class {
 					type: "error"
 				});
 			} else {
+				const amount = product.find(".js-amount").val()
 				this.cartMethod("addToCart", product.data("id"), {
-					amount: product.find(".js-amount").val(),
+					amount: amount,
 					priceNetto: product.data("priceNetto"),
 					priceGross: product.data("priceGross")
 				}).done(data => {
@@ -170,6 +181,11 @@ window.Products_Tree_Js = class {
 						this.shoppingCartBadge.text(
 							data["result"]["numberOfItems"]
 						);
+						const notifyText = amount > 1 ? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amount) : app.translate('JS_ADDED_ITEM_TO_CART')
+						Vtiger_Helper_Js.showPnotify({
+							text: notifyText,
+							type: "success"
+						});
 						product.data(
 							"amountInShoppingCart",
 							amountInShoppingCart + amount
