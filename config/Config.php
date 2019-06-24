@@ -108,4 +108,5 @@ class Config
 	public static $paymentServerPass = '';
 	public static $paymentApiKey = '';
 	public static $addDelivery = false;
+	public static $filterInProducts = [];
 }
