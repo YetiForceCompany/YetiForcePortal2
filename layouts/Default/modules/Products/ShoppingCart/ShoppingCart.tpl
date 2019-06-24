@@ -8,7 +8,7 @@
 				<div class="{$CSS_CARD_CONTAINER}">
 					<div class="{$CSS_CARD_CONTENT} mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h6 class="mb-0 text-truncate"><span class="fas fa-shopping-cart mr-2"></span>{\App\Language::translate('LBL_SHIPPING_CART', $MODULE_NAME)}</h6>
+							<h6 class="mb-0 text-truncate"><span class="fas fa-shopping-cart mr-2"></span>{\App\Language::translate('LBL_SHOPPING_CART', $MODULE_NAME)}</h6>
 						</div>
 						<div class="col-6 pl-3 d-flex align-items-center justify-content-end fs-80">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
