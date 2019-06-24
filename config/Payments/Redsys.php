@@ -80,6 +80,20 @@ class Redsys extends \App\AbstractConfig
 	protected $dsMerchantUrlKO = 'index.php?module=Products&view=PaymentAfterPurchase&paymentSystem=Redsys&status=ERROR';
 
 	/**
+	 * Merchant name - (Optional) Maximum length 25 characters.
+	 *
+	 * @var string
+	 */
+	protected $dsMerchantMerchantname = '';
+
+	/**
+	 * Order prefix - The first four characters must be a number. The remaining characters are [0-9a-zA-Z]. See the documentation Ds_Merchant_Order.
+	 *
+	 * @var string
+	 */
+	protected $orderPrefix = '0000';
+
+	/**
 	 * The HTTP method that data will be sent to the payment system.
 	 *
 	 * @var string

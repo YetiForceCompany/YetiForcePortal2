@@ -53,6 +53,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		'DS_MERCHANT_TERMINAL' => 'dsMerchantTerminal',
 		'DS_MERCHANT_TRANSACTIONTYPE' => 'dsMerchantTransactionType',
 		'DS_MERCHANT_MERCHANTURL' => 'dsMerchantMerchantURL',
+		'DS_MERCHANT_MERCHANTNAME' => 'dsMerchantMerchantname',
 	];
 
 	/**
@@ -98,6 +99,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 */
 	public function setOrder(string $order)
 	{
+		$order = $this->config->get('orderPrefix') . $order;
 		if (!\preg_match('/^[0-9]{4}[a-zA-Z0-9]{0,8}$/i', $order)) {
 			throw new \App\Exception\Payments('Invalid order ID format');
 		}
@@ -215,7 +217,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	public function setCrmOrderId(int $crmId)
 	{
 		$this->setMerchantData('crmId', $crmId);
-		$this->setOrder("0001CRM{$crmId}");
+		$this->setOrder((string) $crmId);
 		$this->setParameter('DS_MERCHANT_URLOK', $this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId);
 		$this->setParameter('DS_MERCHANT_URLKO', $this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId);
 	}
