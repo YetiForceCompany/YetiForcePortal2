@@ -201,7 +201,13 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		if (empty($currencyInfo)) {
 			throw new \App\Exception\Payments('Unknown currency');
 		}
+		if (\App\Json::isEmpty($data['DS_MERCHANTDATA'])) {
+			throw new \App\Exception\Payments('Empty DS_MERCHANTDATA');
+		}
 		$merchantDataParameters = \App\Json::decode(htmlspecialchars_decode($data['DS_MERCHANTDATA']));
+		if (!\is_array($merchantDataParameters)) {
+			throw new \App\Exception\Payments('DS_MERCHANTDATA, incorrect data');
+		}
 		$transactionState = new Utilities\TransactionState();
 		$transactionState->originalAmount = $transactionState->amount =
 			round((float) $data['DS_AMOUNT'] / pow(10, $currencyInfo['numberOfDigitsAfter']), $currencyInfo['numberOfDigitsAfter']);

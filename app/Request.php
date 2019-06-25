@@ -148,9 +148,9 @@ class Request
 				return [];
 			}
 			if ($this->isJSON($value)) {
-				try {
-					$value = Json::decode($value);
-				} catch (\JsonException $exception) {
+				$decodeValue = Json::decode($value);
+				if (isset($decodeValue)) {
+					$value = $decodeValue;
 				}
 			}
 			if ($value) {
@@ -181,9 +181,9 @@ class Request
 		}
 		$value = $this->rawValues[$key];
 		if ($this->isJSON($value)) {
-			try {
-				$value = Json::decode($value);
-			} catch (\JsonException $exception) {
+			$decodeValue = Json::decode($value);
+			if (isset($decodeValue)) {
+				$value = $decodeValue;
 			}
 		}
 		if (!empty($value)) {

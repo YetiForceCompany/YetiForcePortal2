@@ -6,9 +6,9 @@
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
-define('YF_ROOT', __DIR__);
-define('YF_ROOT_PUBLIC', __DIR__ . DIRECTORY_SEPARATOR . 'public');
-define('YF_ROOT_WWW', 'public_html/');
+\define('YF_ROOT', __DIR__);
+\define('YF_ROOT_PUBLIC', __DIR__ . DIRECTORY_SEPARATOR . 'public');
+\define('YF_ROOT_WWW', 'public_html/');
 
 if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
 	die('Please install dependencies via composer install.');
