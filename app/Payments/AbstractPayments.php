@@ -144,16 +144,4 @@ abstract class AbstractPayments
 			$this->setParameter($parameterName, $this->config->get($configName));
 		}
 	}
-
-	/**
-	 * Get absolute URL for Portal2.
-	 *
-	 * @param string $url
-	 *
-	 * @return string
-	 */
-	protected function AbsoluteUrl(string $url): string
-	{
-		return \App\Config::get('portalUrl') . $url;
-	}
 }

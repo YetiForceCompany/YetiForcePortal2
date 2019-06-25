@@ -122,7 +122,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		$this->type = $type;
 		$this->icon = 'fas fa-hand-holding-usd';
 		$this->setPrivateKey($config->get('privateKey'));
-		$this->setParameter('DS_MERCHANT_MERCHANTURL', $this->AbsoluteUrl($config->get('dsMerchantMerchantURL')));
+		$this->setParameter('DS_MERCHANT_MERCHANTURL', \App\Utils::AbsoluteUrl($config->get('dsMerchantMerchantURL')));
 		$this->setParameterFromConfig();
 	}
 
@@ -265,8 +265,8 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$this->setMerchantData('crmId', $crmId);
 		$this->setOrder((string) $crmId);
-		$this->setParameter('DS_MERCHANT_URLOK', $this->AbsoluteUrl($this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId));
-		$this->setParameter('DS_MERCHANT_URLKO', $this->AbsoluteUrl($this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId));
+		$this->setParameter('DS_MERCHANT_URLOK', \App\Utils::AbsoluteUrl($this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId));
+		$this->setParameter('DS_MERCHANT_URLKO', \App\Utils::AbsoluteUrl($this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId));
 	}
 
 	/**

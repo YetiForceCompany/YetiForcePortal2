@@ -1,6 +1,8 @@
 <?php
 /**
- * The file contains: Base controller class.
+ * The file contains: Utils class.
+ *
+ * @package App
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -10,15 +12,14 @@
 namespace App;
 
 /**
- * Base controller class.
+ * Utils class.
  */
 class Utils
 {
-	public static function recurseDelete($src)
+	public static function recurseDelete(string $src)
 	{
-		$vendorDir = dirname(dirname(__FILE__));
-		$rootDir = dirname(dirname($vendorDir)) . \DIRECTORY_SEPARATOR;
-
+		$vendorDir = \dirname(\dirname(__FILE__));
+		$rootDir = \dirname(\dirname($vendorDir)) . \DIRECTORY_SEPARATOR;
 		if (!file_exists($rootDir . $src)) {
 			return;
 		}
@@ -26,7 +27,7 @@ class Utils
 		if (is_dir($src)) {
 			$dirs[] = $rootDir . $src;
 		}
-		@chmod($root_dir . $src, 0777);
+		@chmod($rootDir . $src, 0777);
 		if (is_dir($src)) {
 			foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
 				if ($item->isDir()) {
@@ -42,5 +43,17 @@ class Utils
 		} else {
 			unlink($rootDir . $src);
 		}
+	}
+
+	/**
+	 * Get absolute URL for Portal2.
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	public static function AbsoluteUrl(string $url): string
+	{
+		return \App\Config::get('portalUrl') . $url;
 	}
 }
