@@ -17,7 +17,7 @@ class Api extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	protected static $fileName = 'cache\\logs\\api.log';
+	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'api.log';
 
 	/**
 	 * {@inheritdoc}

@@ -17,7 +17,7 @@ class System extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	protected static $fileName = 'cache\\logs\\system.log';
+	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'system.log';
 
 	/**
 	 * {@inheritdoc}
