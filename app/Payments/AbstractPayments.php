@@ -75,6 +75,7 @@ abstract class AbstractPayments
 	{
 		return $this->type;
 	}
+
 	/**
 	 * Returns payment's icon.
 	 *
