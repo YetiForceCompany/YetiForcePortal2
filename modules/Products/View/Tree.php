@@ -33,8 +33,6 @@ class Tree extends View\ListView
 		'description'
 	];
 
-	private $pscategory = [];
-
 	/**
 	 * {@inheritdoc}
 	 */
@@ -73,25 +71,33 @@ class Tree extends View\ListView
 	 */
 	public function preProcess($display = true)
 	{
-		$searchText = '';
+		$moduleName = $this->request->getModule();
+		$fields = \App\Api::getInstance()->call('Products/Fields');
+		$searchInfo = [];
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
 			foreach ($this->request->get('search') as $condition) {
-				if ('productname' === $condition['fieldName']) {
-					$searchText = $condition['value'];
-				}
-				if ('pscategory' === $condition['fieldName']) {
-					$this->pscategory[] = $condition['value'];
-				}
+				$searchInfo[$condition['fieldName']] = $condition['value'];
 			}
 		}
-		$this->viewer->assign('SEARCH_TEXT', $searchText);
+		$this->viewer->assign('SEARCH_TEXT', $searchInfo['productname'] ?? '');
 		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$this->viewer->assign(
 			'TREE',
 			TreeModel::getInstance()
-				->setSelectedItems($this->pscategory)
+				->setFields($fields)
+				->setSelectedItems([$searchInfo['pscategory'] ?? null])
 				->getTree()
 		);
+		$filterFields = [];
+		$filterFieldsName = \App\Config::get('filterInProducts', []);
+		foreach ($fields['fields'] as $field) {
+			if (\in_array($field['name'], $filterFieldsName)) {
+				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
+				$fieldInstance->setRawValue($searchInfo[$field['name']] ?? '');
+				$filterFields[] = $fieldInstance;
+			}
+		}
+		$this->viewer->assign('FILTER_FIELDS', $filterFields);
 		parent::preProcess($display);
 	}
 

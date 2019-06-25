@@ -95,7 +95,17 @@ window.Products_Tree_Js = class {
 				operator: "e"
 			});
 		}
+		$('.js-advance-filter select.select2').each(function (index, e) {
+			let value = $(this).val();
+			if (value) {
+				search.push({
+					fieldName: $(this).attr('name'),
+					value: $(this).val(),
+					operator: "e"
+				});
+			}
 
+		});
 		return search;
 	}
 	loadPage() {
@@ -131,6 +141,11 @@ window.Products_Tree_Js = class {
 		});
 		$(".js-search-cancel").on("click", e => {
 			$(".js-search").val("");
+			this.loadPage();
+		});
+		$('.js-advance-filter .select2').on('change', e => {
+			this.page = 1;
+			this.loadPage();
 		});
 	}
 	registerAmountChange() {
