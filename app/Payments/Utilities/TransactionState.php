@@ -107,4 +107,18 @@ class TransactionState
 	 * @var string
 	 */
 	public $description;
+
+	/**
+	 * Response code.
+	 *
+	 * @var string
+	 */
+	public $responseCode;
+
+	/**
+	 * Response message.
+	 *
+	 * @var string
+	 */
+	public $responseMessage;
 }

@@ -24,7 +24,7 @@ class Log
 	 *
 	 * @var array
 	 */
-	private static $category = ['System', 'Api'];
+	private static $category = ['System', 'Api', 'Payments'];
 
 	/**
 	 * Initial process.
@@ -101,7 +101,7 @@ class Log
 	 */
 	private static function log($value, string $type, string $category)
 	{
-		if (!in_array($category, static::$category)) {
+		if (!\in_array($category, static::$category)) {
 			throw new AppException('Category not found', 500);
 		}
 		$className = '\\App\Log\\' . $category;

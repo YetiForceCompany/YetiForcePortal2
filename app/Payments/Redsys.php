@@ -1,6 +1,6 @@
 <?php
 /**
- * The file contains: Description class.
+ * The file contains: Redsys class.
  *
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -10,7 +10,7 @@
 namespace App\Payments;
 
 /**
- * Class Description.
+ * Class Redsys.
  */
 class Redsys extends AbstractPayments implements PaymentsSystemInterface, PaymentsMultiCurrencyInterface
 {
@@ -52,8 +52,39 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		'DS_MERCHANT_MERCHANTCODE' => 'dsMerchantMerchantCode',
 		'DS_MERCHANT_TERMINAL' => 'dsMerchantTerminal',
 		'DS_MERCHANT_TRANSACTIONTYPE' => 'dsMerchantTransactionType',
-		'DS_MERCHANT_MERCHANTURL' => 'dsMerchantMerchantURL',
 		'DS_MERCHANT_MERCHANTNAME' => 'dsMerchantMerchantname',
+	];
+
+	const ERROR_MESSAGES = [
+		'SIS0432' => 'FUC del comercio erróneo.',
+		'SIS0433' => 'Terminal del comercio erróneo.',
+		'SIS0434' => 'Ausencia de número de pedido en la operación enviada por el comercio.',
+		'SIS0435' => 'Error en el cálculo de la firma.',
+		'SIS0904' => 'Comercio no registrado en FUC.',
+		'SIS0909' => 'Error de sistema.',
+		'SIS0912' => 'Emisor no disponible.',
+		'SIS0913' => 'Pedido repetido.',
+		'SIS0944' => 'Sesión Incorrecta.',
+		'SIS0950' => 'Operación de devolución no permitida.',
+		'SIS9064' => 'Número de posiciones de la tarjeta incorrecto.',
+		'SIS9078' => 'No existe método de pago válido para esa tarjeta.',
+		'SIS9093' => 'Tarjeta no existente.',
+		'SIS9094' => 'Rechazo servidores internacionales.',
+		'SIS9104' => 'Comercio con “titular seguro” y titular sin clave de compra segura.',
+		'SIS9218' => 'El comercio no permite op. seguras por entrada /operaciones.',
+		'SIS9253' => 'Tarjeta no cumple el check-digit.',
+		'SIS9256' => 'El comercio no puede realizar preautorizaciones.',
+		'SIS9257' => 'Esta tarjeta no permite operativa de preautorizaciones.',
+		'SIS9261' => 'Operación detenida por superar el control de restricciones en la entrada al SIS.',
+		'SIS9912' => 'Emisor no disponible.',
+		'SIS9913' => 'Error en la confirmación que el comercio envía al TPV Virtual (solo aplicable en la opción de sincronización SOAP).',
+		'SIS9914' => 'Confirmación “KO” del comercio (solo aplicable en la opción de sincronización SOAP).',
+		'SIS9915' => 'A petición del usuario se ha cancelado el pago.',
+		'SIS9928' => 'Anulación de autorización en diferido realizada por el SIS (proceso batch).',
+		'SIS9929' => 'Anulación de autorización en diferido realizada por el comercio.',
+		'SIS9997' => 'Se está procesando otra transacción en SIS con la misma tarjeta.',
+		'SIS9998' => 'Operación en proceso de solicitud de datos de tarjeta.',
+		'SIS9999' => 'Operación que ha sido redirigida al emisor a autenticar.',
 	];
 
 	/**
@@ -71,6 +102,18 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	private $merchantData = [];
 
 	/**
+	 * Get error message by code.
+	 *
+	 * @param string $errorCode
+	 *
+	 * @return string|null
+	 */
+	public static function getErrorMessageByCode(string $errorCode): ?string
+	{
+		return static::ERROR_MESSAGES[$errorCode] ?? null;
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function __construct(ConfigInterface $config, string $type)
@@ -79,6 +122,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		$this->type = $type;
 		$this->icon = 'fas fa-hand-holding-usd';
 		$this->setPrivateKey($config->get('privateKey'));
+		$this->setParameter('DS_MERCHANT_MERCHANTURL', \App\Utils::absoluteUrl($config->get('dsMerchantMerchantURL')));
 		$this->setParameterFromConfig();
 	}
 
@@ -157,7 +201,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		if (empty($currencyInfo)) {
 			throw new \App\Exception\Payments('Unknown currency');
 		}
-		$merchantDataParameters = \App\Json::decode($data['DS_MERCHANTDATA']);
+		$merchantDataParameters = \App\Json::decode(htmlspecialchars_decode($data['DS_MERCHANTDATA']));
 		$transactionState = new Utilities\TransactionState();
 		$transactionState->originalAmount = $transactionState->amount =
 			round((float) $data['DS_AMOUNT'] / pow(10, $currencyInfo['numberOfDigitsAfter']), $currencyInfo['numberOfDigitsAfter']);
@@ -170,6 +214,9 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 			throw new \App\Exception\Payments('Invalid date format');
 		}
 		$transactionState->originalCurrency = $transactionState->currency = $currencyInfo['symbol'];
+		$responseCode = $data['DS_ERRORCODE'] ?? null;
+		$transactionState->responseCode = $responseCode;
+		$transactionState->responseMessage = empty($responseCode) || empty(static::ERROR_MESSAGES[$responseCode]) ? null : static::ERROR_MESSAGES[$responseCode];
 		return $transactionState;
 	}
 
@@ -183,7 +230,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 			throw new \App\Exception\Payments('Invalid status');
 		}
 		$dataFromRequestCaseUpper = array_change_key_case($dataFromRequest, \CASE_UPPER);
-		if (!$this->validateRequestFromPaymentsSystem($dataFromRequestCaseUpper)) {
+		if (!empty($dataFromRequestCaseUpper['DS_SIGNATUREVERSION']) && !$this->validateRequestFromPaymentsSystem($dataFromRequestCaseUpper)) {
 			throw new \App\Exception\Payments('Signature error, incorrect data');
 		}
 		return [
@@ -218,8 +265,8 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$this->setMerchantData('crmId', $crmId);
 		$this->setOrder((string) $crmId);
-		$this->setParameter('DS_MERCHANT_URLOK', $this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId);
-		$this->setParameter('DS_MERCHANT_URLKO', $this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId);
+		$this->setParameter('DS_MERCHANT_URLOK', \App\Utils::absoluteUrl($this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId));
+		$this->setParameter('DS_MERCHANT_URLKO', \App\Utils::absoluteUrl($this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId));
 	}
 
 	/**

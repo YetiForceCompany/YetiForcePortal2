@@ -48,21 +48,6 @@ class User extends BaseModel
 		return self::$user;
 	}
 
-	/**
-	 * Checking login.
-	 *
-	 * @param Request $request
-	 *
-	 * @throws AppException
-	 */
-	public function checkLogin(Request $request)
-	{
-		if (!$this->hasLogin()) {
-			header('Location: index.php');
-			throw new AppException('Login is required');
-		}
-	}
-
 	public function hasLogin()
 	{
 		return $this->has('logged') ? $this->get('logged') : false;
