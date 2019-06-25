@@ -52,7 +52,7 @@ try {
 	], [
 		'auth' => [\App\Config::get('paymentServerName'), \App\Config::get('paymentServerPass')]
 	]);
-	/*$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
+	$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
 		'paymentsin_status' => $paymentStatusMap[$transactionState->status],
 		'transaction_id' => $transactionState->transactionId,
@@ -62,7 +62,7 @@ try {
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
 		'payment_system' => $payments->getPicklistValue(),
-	], 'PUT');*/
+	], 'PUT');
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
 	header('HTTP/1.1 400 Bad request');
