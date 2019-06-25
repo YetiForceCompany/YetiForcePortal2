@@ -52,7 +52,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	public static function AbsoluteUrl(string $url): string
+	public static function absoluteUrl(string $url): string
 	{
 		return \App\Config::get('portalUrl') . $url;
 	}
