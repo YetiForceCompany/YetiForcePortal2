@@ -6,4 +6,5 @@
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  */
-require_once '../payments.php';
+chdir(__DIR__ . '/../');
+require_once './payments.php';

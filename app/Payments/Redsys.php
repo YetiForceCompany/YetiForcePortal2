@@ -101,6 +101,13 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 */
 	private $merchantData = [];
 
+	/**
+	 * Get error message by code.
+	 *
+	 * @param string $errorCode
+	 *
+	 * @return string|null
+	 */
 	public static function getErrorMessageByCode(string $errorCode): ?string
 	{
 		return static::ERROR_MESSAGES[$errorCode] ?? null;
