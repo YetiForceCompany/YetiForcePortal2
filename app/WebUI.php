@@ -65,7 +65,7 @@ class WebUI
 				$handler = new $handlerClass($request);
 				$handler->validateRequest();
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
-					throw new AppException('Login is required');
+					header('Location:index.php');
 				}
 				$handler->checkPermission();
 				$this->triggerPreProcess($handler, $request);
