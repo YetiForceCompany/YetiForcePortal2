@@ -75,6 +75,7 @@ abstract class AbstractPayments
 	{
 		return $this->type;
 	}
+
 	/**
 	 * Returns payment's icon.
 	 *
@@ -142,5 +143,17 @@ abstract class AbstractPayments
 		foreach (static::PARAMETER_FROM_CONFIG as $parameterName => $configName) {
 			$this->setParameter($parameterName, $this->config->get($configName));
 		}
+	}
+
+	/**
+	 * Get absolute URL for Portal2.
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	protected function AbsoluteUrl(string $url): string
+	{
+		return \App\Config::get('portalUrl') . $url;
 	}
 }

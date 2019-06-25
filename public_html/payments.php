@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * File to handle notifications from the payment system.
  *
  * @copyright YetiForce Sp. z o.o.

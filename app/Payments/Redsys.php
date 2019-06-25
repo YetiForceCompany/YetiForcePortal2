@@ -52,7 +52,6 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		'DS_MERCHANT_MERCHANTCODE' => 'dsMerchantMerchantCode',
 		'DS_MERCHANT_TERMINAL' => 'dsMerchantTerminal',
 		'DS_MERCHANT_TRANSACTIONTYPE' => 'dsMerchantTransactionType',
-		'DS_MERCHANT_MERCHANTURL' => 'dsMerchantMerchantURL',
 		'DS_MERCHANT_MERCHANTNAME' => 'dsMerchantMerchantname',
 	];
 
@@ -116,6 +115,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		$this->type = $type;
 		$this->icon = 'fas fa-hand-holding-usd';
 		$this->setPrivateKey($config->get('privateKey'));
+		$this->setParameter('DS_MERCHANT_MERCHANTURL', $this->AbsoluteUrl($config->get('dsMerchantMerchantURL')));
 		$this->setParameterFromConfig();
 	}
 
@@ -207,6 +207,9 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 			throw new \App\Exception\Payments('Invalid date format');
 		}
 		$transactionState->originalCurrency = $transactionState->currency = $currencyInfo['symbol'];
+		$responseCode = $data['DS_ERRORCODE'] ?? null;
+		$transactionState->responseCode = $responseCode;
+		$transactionState->responseMessage = empty($responseCode) || empty(static::ERROR_MESSAGES[$responseCode]) ? null : static::ERROR_MESSAGES[$responseCode];
 		return $transactionState;
 	}
 
@@ -255,8 +258,8 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$this->setMerchantData('crmId', $crmId);
 		$this->setOrder((string) $crmId);
-		$this->setParameter('DS_MERCHANT_URLOK', $this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId);
-		$this->setParameter('DS_MERCHANT_URLKO', $this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId);
+		$this->setParameter('DS_MERCHANT_URLOK', $this->AbsoluteUrl($this->config->get('dsMerchantUrlOK') . '&crmOrderId=' . $crmId));
+		$this->setParameter('DS_MERCHANT_URLKO', $this->AbsoluteUrl($this->config->get('dsMerchantUrlKO') . '&crmOrderId=' . $crmId));
 	}
 
 	/**

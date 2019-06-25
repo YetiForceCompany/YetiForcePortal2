@@ -1,12 +1,11 @@
 <?php
-/*
+/**
  * File to handle notifications from the payment system.
  *
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  */
-
 \define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '.');
 \define('YF_ROOT_WEB', __DIR__);
 \define('YF_ROOT_WWW', '');
@@ -53,7 +52,7 @@ try {
 	], [
 		'auth' => [\App\Config::get('paymentServerName'), \App\Config::get('paymentServerPass')]
 	]);
-	$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
+	/*$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
 		'paymentsin_status' => $paymentStatusMap[$transactionState->status],
 		'transaction_id' => $transactionState->transactionId,
@@ -63,7 +62,7 @@ try {
 		'payments_original_currency' => $transactionState->originalCurrency,
 		'paymentstitle' => $transactionState->description,
 		'payment_system' => $payments->getPicklistValue(),
-	], 'PUT');
+	], 'PUT');*/
 	echo $payments->successAnswerForPaymentSystem();
 } catch (\Throwable $exception) {
 	header('HTTP/1.1 400 Bad request');
