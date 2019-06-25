@@ -35,7 +35,7 @@ class Json
 	 */
 	public static function decode(string $encodedValue, bool $objectDecodeType = self::TYPE_ARRAY)
 	{
-		return json_decode($encodedValue, $objectDecodeType, 512, \JSON_THROW_ON_ERROR);
+		return json_decode($encodedValue, $objectDecodeType);
 	}
 
 	/**
