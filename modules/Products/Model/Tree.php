@@ -25,6 +25,11 @@ class Tree extends \App\BaseModel
 	private $selectedItems = [];
 
 	/**
+	 * Fields in module.
+	 */
+	private $fields = [];
+
+	/**
 	 * Get instance.
 	 *
 	 * @return self
@@ -35,9 +40,23 @@ class Tree extends \App\BaseModel
 	}
 
 	/**
+	 * Sets fields.
+	 *
+	 * @param array $fields
+	 *
+	 * @return self
+	 */
+	public function setFields(array $fields): self
+	{
+		$this->fields = $fields;
+		return $this;
+	}
+
+	/**
 	 * Set selected items.
 	 *
 	 * @param array $selectedItems
+	 *
 	 * @return void
 	 */
 	public function setSelectedItems(array $selectedItems)
@@ -53,10 +72,11 @@ class Tree extends \App\BaseModel
 	 */
 	public function getTreeFromApi(): array
 	{
-		$api = \App\Api::getInstance();
-		$fields = $api->call('Products/Fields');
+		if (!$this->fields) {
+			$this->fields = \App\Api::getInstance()->call('Products/Fields');
+		}
 		$tree = [];
-		foreach ($fields['fields'] as $val) {
+		foreach ($this->fields['fields'] as $val) {
 			if ('pscategory' === $val['name']) {
 				$tree = $val['treeValues'];
 				break;
