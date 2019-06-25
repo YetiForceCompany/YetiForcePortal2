@@ -148,9 +148,9 @@ class Request
 				return [];
 			}
 			if ($this->isJSON($value)) {
-				$decodeValue = Json::decode($value);
-				if (isset($decodeValue)) {
-					$value = $decodeValue;
+				try {
+					$value = Json::decode($value);
+				} catch (\JsonException $exception) {
 				}
 			}
 			if ($value) {
@@ -181,9 +181,9 @@ class Request
 		}
 		$value = $this->rawValues[$key];
 		if ($this->isJSON($value)) {
-			$decodeValue = Json::decode($value);
-			if (isset($decodeValue)) {
-				$value = $decodeValue;
+			try {
+				$value = Json::decode($value);
+			} catch (\JsonException $exception) {
 			}
 		}
 		if (!empty($value)) {
@@ -202,7 +202,7 @@ class Request
 	 */
 	private function isJSON($value): bool
 	{
-		return is_string($value) && (0 === strpos($value, '[') || 0 === strpos($value, '{'));
+		return \is_string($value) && (0 === strpos($value, '[') || 0 === strpos($value, '{'));
 	}
 
 	/**

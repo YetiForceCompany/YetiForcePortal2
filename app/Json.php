@@ -1,14 +1,20 @@
 <?php
 /**
- * Json class.
+ * The file contains: Json class.
+ *
+ * @package App
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author 	  Arkadiusz Adach <a.adach@yetiforce.com>
  */
 
 namespace App;
 
+/**
+ * Json class.
+ */
 class Json
 {
 	/**
@@ -16,16 +22,43 @@ class Json
 	 * so that it is a boolean true value, allowing it to be used with
 	 * ext/json's functions.
 	 */
-	const TYPE_ARRAY = 1;
-	const TYPE_OBJECT = 0;
+	const TYPE_ARRAY = true;
+	const TYPE_OBJECT = false;
 
-	public static function decode($encodedValue, $objectDecodeType = self::TYPE_ARRAY)
+	/**
+	 * Decode JSON to value.
+	 *
+	 * @param string $encodedValue
+	 * @param bool   $objectDecodeType
+	 *
+	 * @return mixed
+	 */
+	public static function decode(string $encodedValue, bool $objectDecodeType = self::TYPE_ARRAY)
 	{
-		return json_decode($encodedValue, $objectDecodeType);
+		return json_decode($encodedValue, $objectDecodeType, 512, \JSON_THROW_ON_ERROR);
 	}
 
-	public static function encode($valueToEncode, $cycleCheck = false): string
+	/**
+	 * Encode value to JSON.
+	 *
+	 * @param mixed $valueToEncode
+	 *
+	 * @return string
+	 */
+	public static function encode($valueToEncode): string
 	{
 		return json_encode($valueToEncode);
+	}
+
+	/**
+	 * Determine whether a variable is empty.
+	 *
+	 * @param string|null $value
+	 *
+	 * @return bool
+	 */
+	public static function isEmpty(?string $value): bool
+	{
+		return empty($value) || '[]' === $value || '""' === $value;
 	}
 }
