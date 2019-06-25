@@ -77,7 +77,7 @@ class Tree extends \App\BaseModel
 		}
 		$tree = [];
 		foreach ($this->fields['fields'] as $val) {
-			if ('pscategory' === $val['name']) {
+			if ('category_multipicklist' === $val['name']) {
 				$tree = $val['treeValues'];
 				break;
 			}

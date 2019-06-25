@@ -26,7 +26,7 @@ class ShoppingCart extends View\ListView
 		'productname',
 		'product_no',
 		'ean',
-		'pscategory',
+		'category_multipicklist',
 		'productcode',
 		'unit_price',
 		'taxes',

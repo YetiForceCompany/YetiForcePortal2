@@ -90,9 +90,9 @@ window.Products_Tree_Js = class {
 		);
 		if (selectedCategories[0]) {
 			search.push({
-				fieldName: "pscategory",
+				fieldName: "category_multipicklist",
 				value: selectedCategories[0],
-				operator: "e"
+				operator: "c"
 			});
 		}
 		$('.js-advance-filter select.select2').each(function (index, e) {
