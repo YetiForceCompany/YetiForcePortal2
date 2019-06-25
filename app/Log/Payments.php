@@ -16,7 +16,7 @@ use App\Payments\Utilities\TransactionState;
 /**
  * Class Payments log.
  */
-class Payments extends Base
+class Payments extends AbstractBase
 {
 	/**
 	 * {@inheritdoc}

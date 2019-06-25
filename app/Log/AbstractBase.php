@@ -12,7 +12,7 @@ namespace App\Log;
 /**
  * Base class.
  */
-abstract class Base
+abstract class AbstractBase
 {
 	/**
 	 * Path of file.

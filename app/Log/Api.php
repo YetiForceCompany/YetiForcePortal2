@@ -12,7 +12,7 @@ namespace App\Log;
 /**
  * Api class.
  */
-class Api extends Base
+class Api extends AbstractBase
 {
 	/**
 	 * {@inheritdoc}
