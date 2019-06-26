@@ -21,7 +21,7 @@ class Payments extends Base
 	/**
 	 * {@inheritdoc}
 	 */
-	protected static $fileName = 'cache\\logs\\payments.log';
+	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'payments.log';
 
 	/**
 	 * {@inheritdoc}

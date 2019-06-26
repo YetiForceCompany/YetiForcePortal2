@@ -25,7 +25,7 @@ class Tree extends View\ListView
 		'productname',
 		'product_no',
 		'ean',
-		'pscategory',
+		'category_multipicklist',
 		'productcode',
 		'unit_price',
 		'taxes',
@@ -85,7 +85,7 @@ class Tree extends View\ListView
 			'TREE',
 			TreeModel::getInstance()
 				->setFields($fields)
-				->setSelectedItems([$searchInfo['pscategory'] ?? null])
+				->setSelectedItems([$searchInfo['category_multipicklist'] ?? null])
 				->getTree()
 		);
 		$filterFields = [];
