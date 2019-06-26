@@ -12,7 +12,7 @@ namespace App\Log;
 /**
  * System class.
  */
-class System extends Base
+class System extends AbstractBase
 {
 	/**
 	 * {@inheritdoc}
