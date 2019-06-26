@@ -214,7 +214,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		$transactionState->transactionId = $transactionState->orderNumber = $data['DS_ORDER'];
 		$transactionState->datetime = \DateTime::createFromFormat('d/m/Y H:i', $data['DS_DATE'] . $data['DS_HOUR']);
 		$transactionState->crmOrderId = (int) $merchantDataParameters['crmId'];
-		$transactionState->status = Utilities\TransactionState::STATUS_NEW;
+		$transactionState->status = $this->getTransactionStatus($data['DS_RESPONSE']);
 		$transactionState->description = $merchantDataParameters['description'];
 		if (false === $transactionState->datetime) {
 			throw new \App\Exception\Payments('Invalid date format');
@@ -446,5 +446,25 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	private function setMerchantData(string $key, $value)
 	{
 		$this->merchantData[$key] = $value;
+	}
+
+	/**
+	 * Get transaction status.
+	 *
+	 * @param string $response
+	 *
+	 * @return int
+	 */
+	private function getTransactionStatus(string $response): int
+	{
+		$responseCode = (int) $response;
+		if (0 <= $responseCode && 99 >= $response) {
+			$status = Utilities\TransactionState::STATUS_COMPLETED;
+		} elseif (9915 === $responseCode) {
+			$status = Utilities\TransactionState::STATUS_REJECTED;
+		} else {
+			$status = Utilities\TransactionState::STATUS_PROCESSING;
+		}
+		return $status;
 	}
 }
