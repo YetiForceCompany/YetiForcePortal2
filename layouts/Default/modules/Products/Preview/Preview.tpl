@@ -7,7 +7,7 @@
             </div>
         </div>
 	</div>
-    <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview"
+    <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview js-cart-item"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}"
@@ -65,18 +65,29 @@
             <div class="w-100 my-2 u-fs-12px">
                 <span class="text-muted">{$FIELDS_LABEL['ean']}:</span> {$RECORD->getDisplayValue('ean')}
             </div>
-            <div class="col-12 row">
-                <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
-                <div class="input-group input-group-sm col-2 d-flex align-items-center px-0 c-cart-quantity">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
-                    </div>
-                    <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="1">
-                    <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+            {assign var="COUNT_OF_RECORDS" value=count($RECORDS)}
+            {if $COUNT_OF_RECORDS > 0 }
+                <div>
+                    {assign var="COUNTER" value=1}
+                    {foreach item=RECORD key=CRM_ID from=$RECORDS}
+                        {include file=\App\Resources::templatePath("Preview/Product.tpl", $MODULE_NAME)}
+                        {assign var="COUNTER" value=$COUNTER + 1}
+                    {/foreach}
+                </div>
+            {else}
+                <div class="col-12 row">
+                    <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
+                    <div class="input-group input-group-sm col-2 d-flex align-items-center px-0 c-cart-quantity">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
+                        </div>
+                        <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="1">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {/if}
             <hr>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
