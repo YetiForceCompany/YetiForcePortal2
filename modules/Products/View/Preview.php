@@ -58,6 +58,28 @@ class Preview extends \App\Controller\View
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('FIELDS_LABEL', $recordDetail['fields']);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->assign('RECORDS', $this->getProductBundles($recordDetail['productBundles']));
+		$this->viewer->assign('READONLY', false);
 		$this->viewer->view('Preview/Preview.tpl', $moduleName);
+	}
+
+	/**
+	 * Get product bundles.
+	 *
+	 * @param array $productBundles
+	 *
+	 * @return Record[]
+	 */
+	private function getProductBundles(array $productBundles): array
+	{
+		$moduleName = $this->request->getModule();
+		$products = [];
+		foreach ($productBundles as $key => $row) {
+			$recordModel = Record::getInstance($moduleName);
+			$recordModel->setData($row['data']);
+			$recordModel->setRawData($row['rawData']);
+			$products[$key] = $recordModel;
+		}
+		return $products;
 	}
 }
