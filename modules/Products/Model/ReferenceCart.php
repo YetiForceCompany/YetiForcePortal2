@@ -37,5 +37,6 @@ class ReferenceCart extends Cart
 			];
 		}
 		$this->address = Session::get('Products.Address', []);
+		$this->methodPayments = Session::get('Products.MethodPayments', '');
 	}
 }
