@@ -67,7 +67,7 @@ class Menu
 			'childs' => array_map([$this, 'getItemModule'], $row['childs']),
 			'name' => $row['name'],
 			'icon' => 'userIcon-' . $row['mod'],
-			'link' => "index.php?module={$row['mod']}&view=ListView",
+			'link' => Module::getInstance($row['mod'])->getDefaultUrl(),
 			'parent' => $row['parent']
 		];
 	}

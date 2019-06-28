@@ -299,6 +299,10 @@
           box-shadow: 0 0 0 0.1rem white;
 }
 
+.dataTables_info {
+  color: white;
+}
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-card__header {
   background-color: #f7f7f7 !important;

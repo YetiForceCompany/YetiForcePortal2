@@ -186,7 +186,7 @@ class BaseField extends \App\BaseModel
 	public function getPicklistValues()
 	{
 		$picklist = $this->get('picklistvalues');
-		if (!\in_array($this->rawValue, array_keys($picklist))) {
+		if ($this->rawValue && !\in_array($this->rawValue, array_keys($picklist))) {
 			$picklist[$this->rawValue] = $this->value;
 			$this->set('isEditableReadOnly', true);
 		}

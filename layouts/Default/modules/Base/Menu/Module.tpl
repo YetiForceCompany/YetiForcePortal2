@@ -15,7 +15,7 @@
 		<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} {if !empty($ITEM_MENU['icon'])} hasIcon {/if} js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="{$ACTIVE}" aria-controls="submenu-{$ITEM_MENU['id']}">
 			<span class="c-menu__item__icon {$ITEM_MENU['icon']}" aria-hidden="true"></span>
   			<span class="c-menu__item__text" title="{$ITEM_MENU['name']}">
-    			{$ITEM_MENU['name']}
+    			{App\Language::translateModule($ITEM_MENU['name'])}
   			</span>
 		</a>
 		{include file=\App\Resources::templatePath('Menu/SubMenu.tpl', $MODULE_NAME)}
