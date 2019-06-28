@@ -11,6 +11,8 @@
 
 namespace YF\Modules\Products\View;
 
+use YF\Modules\Base\Model\Record;
+
 /**
  * View class for payment after purchase.
  */
@@ -28,7 +30,8 @@ class PaymentAfterPurchase extends \App\Controller\View
 			$resultOfReturn['crmOrderId'] = $this->request->getInteger('crmOrderId');
 			$resultOfReturn['status'] = 'OK';
 		}
-    $this->viewer->assign('ORDER_NUMBER', $resultOfReturn['crmOrderId']);
+		$this->viewer->assign('RECORD_MODEL', Record::getInstanceById('SSingleOrders', $resultOfReturn['crmOrderId']));
+		$this->viewer->assign('ORDER_NUMBER', $resultOfReturn['crmOrderId']);
 		$this->viewer->assign('ORDER_URL', 'index.php?module=SSingleOrders&view=DetailView&record=' . $resultOfReturn['crmOrderId']);
 		if ('OK' === $resultOfReturn['status']) {
 			$tplName = 'PaymentAfterPurchase/PaymentAfterPurchaseStatusOk.tpl';
