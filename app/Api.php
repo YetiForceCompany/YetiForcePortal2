@@ -199,7 +199,7 @@ class Api
 	 *
 	 * @param array $headers
 	 *
-	 * @return $this
+	 * @return self
 	 */
 	public function setCustomHeaders(array $headers): self
 	{
