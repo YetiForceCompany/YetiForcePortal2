@@ -23,10 +23,10 @@ use App\Log;
 Log::init();
 try {
 	$paymentStatusMap = [
-		1 => 'Created',
-		2 => 'Created',
-		3 => 'Paid',
-		4 => 'Denied',
+		\App\Payments\Utilities\TransactionState::STATUS_NEW => 'PLL_CREATED',
+		\App\Payments\Utilities\TransactionState::STATUS_PROCESSING => 'PLL_CREATED',
+		\App\Payments\Utilities\TransactionState::STATUS_COMPLETED => 'PLL_PAID',
+		\App\Payments\Utilities\TransactionState::STATUS_REJECTED => 'PLL_DENIED',
 	];
 	$request = new \App\Request($_REQUEST);
 	$paymentSystem = $request->getByType('paymentSystem', \App\Purifier::ALNUM);
