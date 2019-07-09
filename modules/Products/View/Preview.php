@@ -25,8 +25,12 @@ class Preview extends \App\Controller\View
 		$moduleName = $this->request->getModule();
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
-
-		$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record");
+		$recordDetail = $api->setCustomHeaders([
+			'X-RAW-DATA' => 1,
+			'X-PRODUCT-BUNDLES' => 1,
+			'X-UNIT-PRICE' => 1,
+			'X-UNIT-GROSS' => 1,
+		])->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);
 
@@ -58,7 +62,7 @@ class Preview extends \App\Controller\View
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('FIELDS_LABEL', $recordDetail['fields']);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$this->viewer->assign('RECORDS', $this->getProductBundles($recordDetail['productBundles']));
+		$this->viewer->assign('RECORDS', isset($recordDetail['productBundles']) ? $this->getProductBundles($recordDetail['productBundles']) : []);
 		$this->viewer->assign('READONLY', false);
 		$this->viewer->view('Preview/Preview.tpl', $moduleName);
 	}

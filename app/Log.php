@@ -123,6 +123,6 @@ class Log
 
 	public static function display()
 	{
-		return Log\Base::$messages;
+		return Log\AbstractBase::$messages;
 	}
 }
