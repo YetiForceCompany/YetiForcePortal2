@@ -1,7 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 'use strict';
-class ProgressIndicatorHelper{
-	constructor(){
+class ProgressIndicatorHelper {
+	constructor() {
 		this.defaults = {
 			'position': 'append',
 			'mode': 'show',
@@ -14,20 +14,22 @@ class ProgressIndicatorHelper{
 			'text-align': 'center'
 		};
 		this.blockOverlayCSS = {
-			'opacity': '0.2'
+			'opacity': '0.2',
+			'z-index': '1030'
 		};
 		this.blockCss = {
 			'border': '',
 			'background-color': '',
 			'background-clip': 'border-box',
-			'border-radius': '2px'
+			'border-radius': '2px',
+			'z-index': '1030'
 		};
 		this.showTopCSS = {
 			width: '25%',
 			left: '37.5%',
 			position: 'fixed',
 			top: '4.5%',
-			'z-index': '100000'
+			'z-index': '1030'
 		};
 		this.showOnTop = false;
 	}
@@ -46,26 +48,26 @@ class ProgressIndicatorHelper{
 		}
 		return this;
 	}
-	initActions(){
+	initActions() {
 		if (this.options.mode === 'show') {
 			this.show();
 		} else if (this.options.mode === 'hide') {
 			this.hide();
 		}
 	}
-	isPageBlockMode(){
+	isPageBlockMode() {
 		if ((typeof this.elementToBlock !== "undefined") && this.elementToBlock.is('body')) {
 			return true;
 		}
 		return false;
 	}
-	isBlockMode(){
+	isBlockMode() {
 		if ((typeof this.options.blockInfo !== "undefined") && (this.options.blockInfo.enabled === true)) {
 			return true;
 		}
 		return false;
 	}
-	show(){
+	show() {
 		let className = 'bigLoading';
 		if (this.options.smallLoadingImage == true) {
 			className = 'smallLoading';
@@ -126,7 +128,7 @@ class ProgressIndicatorHelper{
 			this.container.css(this.showTopCSS).appendTo('body');
 		}
 	}
-	hide(){
+	hide() {
 		$('.imageHolder', this.container).remove();
 		if (typeof this.blockedElement !== "undefined") {
 			if (this.isPageBlockMode()) {
@@ -160,8 +162,8 @@ $.extend({
 			}
 		});
 	},
-	progressIndicatorHide(){
-		$('.js-progress-image-container').progressIndicator({'mode': 'hide'});
+	progressIndicatorHide() {
+		$('.js-progress-image-container').progressIndicator({ 'mode': 'hide' });
 	}
 });
 /**

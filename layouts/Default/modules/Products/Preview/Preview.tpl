@@ -103,7 +103,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active p-3" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    {$RECORD->getDisplayValue('description')}
+                    {$RECORD->get('description')}
                 </div>
                 <div class="tab-pane fade p-3" id="details" role="tabpanel" aria-labelledby="details-tab">
                    {foreach item=BLOCK from=$BLOCKS}

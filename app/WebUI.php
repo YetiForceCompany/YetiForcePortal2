@@ -25,7 +25,7 @@ class WebUI
 		\App\Log::init();
 		try {
 			if (Config::get('csrfProtection')) {
-				require_once 'config/csrf_config.php';
+				require_once YF_ROOT . \DIRECTORY_SEPARATOR . 'config/csrf_config.php';
 				\CsrfMagic\Csrf::init();
 			}
 			$module = $request->getModule();
