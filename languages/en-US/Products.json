@@ -31,7 +31,8 @@
     "LBL_CASHONDELIVERY": "Cash on delivery",
     "LBL_BANKACCOUNTOWNER": "Name of beneficiary",
     "LBL_BANKACCOUNTADDRESS": "Address",
-    "LBL_BANKACCOUNTNUMBER": "Account number"
+    "LBL_BANKACCOUNTNUMBER": "Account number",
+    "LBL_ATTENTION": "Attention"
   },
   "js": {
     "LBL_VERIFY_ADDRESS": "Verify delivery address",

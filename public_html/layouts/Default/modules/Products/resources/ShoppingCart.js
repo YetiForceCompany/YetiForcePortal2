@@ -151,6 +151,16 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
       });
     });
   }
+  registerAttention() {
+    this.container.find('.js-attention').on('change', e => {
+      AppConnector.request({
+        module: app.getModuleName(),
+        action: 'ShoppingCart',
+        mode: 'setAttention',
+        attention: $(e.currentTarget).val()
+      });
+    });
+  }
   registerProceedToCheckout() {
     this.btnProceedToCheckout.on('click', e => {
       let validateResult = this.validate();
@@ -162,6 +172,7 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
   }
   registerFormEvents() {
     this.registerChangePayments();
+    this.registerAttention();
     if (this.addressSelect.length) {
       this.registerChangeAddress();
     }

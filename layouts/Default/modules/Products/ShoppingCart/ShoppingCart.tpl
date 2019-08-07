@@ -62,6 +62,14 @@
 							</div>
 						{/if}
 					</div>
+					<div class="{$CSS_CARD_CONTAINER} my-3">
+						<div class="{$CSS_CARD_CONTENT}">
+							<h6 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h6>
+						</div>
+						<div class="m-2">
+							<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
+						</div>
+					</div>
 					<div class="{$CSS_CARD_CONTAINER}">
 						<div class="{$CSS_CARD_CONTENT}">
 							<h6 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h6>

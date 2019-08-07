@@ -39,6 +39,16 @@
 						{/foreach}
 					</div>
 				</div>
+				<div class="{$CSS_CARD_CONTAINER} my-3">
+					<div class="{$CSS_CARD_CONTENT}">
+						<div class="col-6 d-flex align-items-center">
+								<h6 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h6>
+						</div>
+					</div>
+					<div class="px-3 pt-3 pb-2">
+						{$ATTENTION}
+					</div>
+				</div>
 				<div class="{$CSS_CARD_CONTAINER}">
 					<div class="{$CSS_CARD_CONTENT}">
 						<div class="col-6 d-flex align-items-center">

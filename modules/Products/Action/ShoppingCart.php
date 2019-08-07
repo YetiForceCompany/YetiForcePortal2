@@ -37,6 +37,7 @@ class ShoppingCart extends \App\Controller\Action
 		$this->exposeMethod('removeFromCart');
 		$this->exposeMethod('changeAddress');
 		$this->exposeMethod('setMethodPayments');
+		$this->exposeMethod('setAttention');
 	}
 
 	/**
@@ -146,6 +147,20 @@ class ShoppingCart extends \App\Controller\Action
 	public function setMethodPayments()
 	{
 		$this->cart->setMethodPayments($this->request->getByType('method', Purifier::ALNUM));
+		$this->cart->save();
+		$response = new \App\Response();
+		$response->setResult(true);
+		$response->emit();
+	}
+
+	/**
+	 * Change attention.
+	 *
+	 * @return void
+	 */
+	public function setAttention()
+	{
+		$this->cart->setAttention($this->request->getByType('attention', Purifier::TEXT));
 		$this->cart->save();
 		$response = new \App\Response();
 		$response->setResult(true);

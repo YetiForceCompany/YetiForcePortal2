@@ -38,6 +38,12 @@ class Cart
 	 * @var string
 	 */
 	protected $methodPayments = '';
+	/**
+	 * Attention.
+	 *
+	 * @var string
+	 */
+	protected $attention = '';
 
 	/**
 	 * Shipping price.
@@ -64,6 +70,7 @@ class Cart
 		$this->cart = Session::get('Products.Cart', []);
 		$this->address = Session::get('Products.Address', []);
 		$this->methodPayments = Session::get('Products.MethodPayments', '');
+		$this->attention = Session::get('Products.Attention', '');
 	}
 
 	/**
@@ -119,6 +126,20 @@ class Cart
 	public function setMethodPayments(string $methodPayments)
 	{
 		$this->methodPayments = $methodPayments;
+	}
+
+	/**
+	 * Sets address.
+	 *
+	 * @param array  $address
+	 * @param string $methodPayments
+	 * @param string $attention
+	 *
+	 * @return void
+	 */
+	public function setAttention(string $attention)
+	{
+		$this->attention = $attention;
 	}
 
 	/**
@@ -250,6 +271,7 @@ class Cart
 	public function removeAll()
 	{
 		$this->cart = [];
+		$this->attention = '';
 	}
 
 	/**
@@ -262,6 +284,7 @@ class Cart
 		Session::set('Products.Cart', $this->cart);
 		Session::set('Products.Address', $this->address);
 		Session::set('Products.MethodPayments', $this->methodPayments);
+		Session::set('Products.Attention', $this->attention);
 	}
 
 	/**
@@ -304,6 +327,11 @@ class Cart
 			$totalPrice += ((float) $item['param']['priceGross']) * $item['amount'];
 		}
 		return $totalPrice + $this->getShippingPrice();
+	}
+
+	public function getAttention(): ?string
+	{
+		return $this->attention;
 	}
 
 	/**

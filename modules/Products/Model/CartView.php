@@ -132,7 +132,7 @@ class CartView extends ListViewModel
 		}
 		$fields = [];
 		foreach (static::ADDRESS_FIELDS as $field) {
-			$fields[$field . 'a'] = $accountRecordDetail['fields'][$field . 'a'];
+			$fields[$field . 'a'] = $accountRecordDetail['fields'][$field . 'a'] ?? '';
 		}
 		return ['data' => $address, 'fields' => $fields];
 	}
@@ -145,6 +145,11 @@ class CartView extends ListViewModel
 	public function getSelectedAddress(): array
 	{
 		return $this->cart->getAddress();
+	}
+
+	public function getAttention(): ?string
+	{
+		return $this->cart->getAttention();
 	}
 
 	/**
