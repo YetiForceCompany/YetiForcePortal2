@@ -101,7 +101,7 @@ class Buy extends \App\Controller\Action
 			$requestParams['reference_module'] = $cart->moduleName;
 		}
 		$requestParams['inventory'] = $dataInventory;
-		$requestParams['subject'] = 'SSingleOrders - ' . date('Y-m-d');
+		$requestParams['subject'] = \App\Config::get('subjectPrefixForSingleOrderFromCart') . date('Y-m-d');
 		return \App\Api::getInstance()->call('SSingleOrders/SaveInventory/', $requestParams, 'post');
 	}
 }

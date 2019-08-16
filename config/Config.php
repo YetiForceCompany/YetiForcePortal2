@@ -109,4 +109,6 @@ class Config
 	public static $paymentApiKey = '';
 	public static $addDelivery = false;
 	public static $filterInProducts = [];
+	
+	public static $subjectPrefixForSingleOrderFromCart = 'SSingleOrders - ';
 }
