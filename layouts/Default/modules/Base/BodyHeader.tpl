@@ -10,7 +10,7 @@
 				{\App\Config::get('headerMessage')}
 			</div>
 		{/if}
-		{assign var="COMPANY_DETAILS" value=[]}
+		{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
 		{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
 			<div class="ml-auto mr-2 text-truncate text-white">
 				{if !empty($COMPANY_DETAILS['sum_open_orders'])}
