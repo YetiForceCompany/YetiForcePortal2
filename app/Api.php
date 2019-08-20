@@ -83,23 +83,43 @@ class Api
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
 		$options = $this->getOptions();
-		if (\in_array($requestType, ['get', 'delete'])) {
-			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers] + $options);
-		} else {
-			$data = Json::encode($data);
-			if (Config::$encryptDataTransfer) {
-				$data = $this->encryptData($data);
+		try {
+			if (\in_array($requestType, ['get', 'delete'])) {
+				$request = (new \GuzzleHttp\Client($options))->request($requestType, $crmPath, ['headers' => $headers]);
+			} else {
+				$data = Json::encode($data);
+				if (Config::$encryptDataTransfer) {
+					$data = $this->encryptData($data);
+				}
+				$request = (new \GuzzleHttp\Client($options))->request($requestType, $crmPath, ['headers' => $headers, 'body' => $data]);
 			}
-			$request = (new \GuzzleHttp\Client())->request($requestType, $crmPath, ['headers' => $headers, 'body' => $data] + $options);
+			$rawResponse = (string) $request->getBody();
+			$encryptedHeader = $request->getHeader('encrypted');
+			if ($encryptedHeader && 1 == $request->getHeader('encrypted')[0]) {
+				$rawResponse = $this->decryptData($rawResponse);
+			}
+			$response = Json::decode($rawResponse);
+		} catch (\Throwable $e) {
+			if (Config::$logs) {
+				$this->addLogs($method, $data, '', $e->__toString());
+			}
+			if (\App\Config::$debugApi) {
+				$_SESSION['debugApi'][] = [
+					'date' => date('Y-m-d H:i:s', $startTime),
+					'time' => round(microtime(true) - $startTime, 4),
+					'method' => $method,
+					'requestType' => strtoupper($requestType),
+					'rawRequest' => [$headers, $rawRequest],
+					'rawResponse' => $e->getMessage(),
+					'response' => '',
+					'request' => '',
+					'trace' => Debug::getBacktrace()
+				];
+			}
+			throw new \App\AppException('An error occurred while communicating with the CRM', 500, $e);
 		}
-		$rawResponse = (string) $request->getBody();
-		$encryptedHeader = $request->getHeader('encrypted');
-		if ($encryptedHeader && 1 == $request->getHeader('encrypted')[0]) {
-			$rawResponse = $this->decryptData($rawResponse);
-		}
-		$response = Json::decode($rawResponse);
 		if (\App\Config::$debugApi) {
-			$debugApi = [
+			$_SESSION['debugApi'][] = [
 				'date' => date('Y-m-d H:i:s', $startTime),
 				'time' => round(microtime(true) - $startTime, 4),
 				'method' => $method,
@@ -110,7 +130,6 @@ class Api
 				'request' => (string) $request->getBody(),
 				'trace' => Debug::getBacktrace()
 			];
-			$_SESSION['debugApi'][] = $debugApi;
 		}
 		if (Config::$logs) {
 			$this->addLogs($method, $data, $response, $rawResponse);

@@ -18,7 +18,7 @@ class AppException extends \Exception
 
 	private $backtrace;
 
-	public function __construct($message, $code = 200, Exception $previous = null)
+	public function __construct($message, $code = 200, \Throwable $previous = null)
 	{
 		parent::__construct($message, $code, $previous);
 		$this->backtrace = \App\Debug::getBacktrace();
@@ -52,5 +52,11 @@ class AppException extends \Exception
 		$viewer->assign('SESSION', $_SESSION);
 		$viewer->assign('CSS_FILE', $cssFileNames);
 		$viewer->view($tplName);
+		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
+			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
+			$viewer->assign('COLLAPSE', true);
+			$viewer->view('DebugApi.tpl');
+			\App\Session::set('debugApi', false);
+		}
 	}
 }

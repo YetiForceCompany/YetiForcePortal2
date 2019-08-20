@@ -49,6 +49,24 @@
                         </p>
                     </div>
                 </div>
+				{if App\Config::getBool('debugConsole')}
+					<div class="card mx-auto shadow mt-4" role="alert">
+						<div class="card-header text-white bg-info u-cursor-default d-flex justify-content-center flex-wrap">
+							<h3 class="card-title d-flex align-items-center justify-content-center m-0">
+								<strong>{\App\Language::translate('LBL_CORE_LOG')}</strong>
+							</h3>
+						</div>
+						<div class="card-body c-exception__card-body">
+							<p class="card-text">
+									{foreach item=MESSAGES from=\App\Log::display()}
+										{foreach item=MESSAGE from=$MESSAGES}
+											<p>{$MESSAGE}</p>;
+										{/foreach}
+									{/foreach}
+							</p>
+						</div>
+					</div>
+				{/if}
             {/if}
         </div>
         <script type="text/javascript" src="{YF_ROOT_WWW}libraries/@fortawesome/fontawesome/index.js"></script>

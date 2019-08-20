@@ -5,9 +5,9 @@
 			<div class="card-header collapsed c-card__header"  id="headingDebugApi" data-toggle="collapse" data-target="#debugApi" aria-expanded="true" aria-controls="collapseOne">
 				<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 				<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
-				<span class="font-weight-bold">{\App\Language::translate('LBL_DEBUG_CONSOLE', $MODULE_NAME)}</span>
+				<span class="font-weight-bold">{\App\Language::translate('LBL_DEBUG_CONSOLE')}</span>
 			</div>
-			<div id="debugApi" class="collapse"  aria-labelledby="headingDebugApi">
+			<div id="debugApi" class="collapse {if !empty($COLLAPSE)}show{/if}"  aria-labelledby="headingDebugApi">
 				<div class="card-body">
 					<div class="accordion c-card__accordion" id="accordionExample">
 						{foreach item=ITEM key=KEY from=$DEBUG_API}
@@ -17,7 +17,7 @@
 										<span class="font-weight-bold">{$ITEM['method']}</span>
 									</button>
 								</div>
-								<div id="request{$KEY}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div id="request{$KEY}" class="collapse {if !empty($COLLAPSE)}show{/if}" aria-labelledby="headingOne" data-parent="#accordionExample">
 									<div class="card-body">
 										<div class="col-3 px-0">
 											<table class="table">
@@ -64,10 +64,10 @@
 												<pre>{App\Purifier::encodeHTML(print_r($ITEM['rawRequest'][1],true))}</pre>
 											</div>
 											<div role="tabpanel" class="tab-pane" id="rawResponse{$KEY}">
-												<pre>{App\Purifier::encodeHTML(print_r($ITEM['request'],true))}</pre>
+												{if isset($ITEM['request'])}<pre>{App\Purifier::encodeHTML(print_r($ITEM['request'],true))}</pre>{/if}
 											</div>
 											<div role="tabpanel" class="tab-pane " id="response{$KEY}">
-												<pre>{App\Purifier::encodeHTML(print_r($ITEM['response'],true))}</pre>
+												{if isset($ITEM['response'])}<pre>{App\Purifier::encodeHTML(print_r($ITEM['response'],true))}</pre>{/if}
 											</div>
 											<div role="tabpanel" class="tab-pane" id="trace{$KEY}">
 												<pre class="bg-light p-3">{App\Purifier::encodeHTML(print_r($ITEM['trace'],true))}</pre>
