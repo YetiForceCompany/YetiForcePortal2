@@ -30,12 +30,14 @@
 					</div>
 					<div class="px-3">
 						{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
-							<div class="row small">
-								<label class="col-sm-2 col-form-label text-muted">{$ADDRESSES['fields'][$FIELDNAME|cat:'a']}:</label>
-								<div class="col-sm-10">
-									{$SELECTED_ADDRESS[$FIELDNAME]}
+							{if isset($ADDRESSES['fields'], $ADDRESSES['fields'][$FIELDNAME|cat:'a'])}
+								<div class="row small">
+									<label class="col-sm-2 col-form-label text-muted">{$ADDRESSES['fields'][$FIELDNAME|cat:'a']}:</label>
+									<div class="col-sm-10">
+										{$SELECTED_ADDRESS[$FIELDNAME]}
+									</div>
 								</div>
-							</div>
+							{/if}
 						{/foreach}
 					</div>
 				</div>
