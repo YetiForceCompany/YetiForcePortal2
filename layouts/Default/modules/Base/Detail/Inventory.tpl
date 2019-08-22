@@ -1,8 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<!-- tpl-Base-Detail-Inventory -->
 	{if !empty($INVENTORY_FIELDS)}
-		<table class="table table-bordered my-3">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					{foreach from=$INVENTORY_FIELDS item=INVENTORY_FIELD_MODEL}
@@ -32,5 +31,4 @@
 			</tfoot>
 		</table>
 	{/if}
-	<!-- /tpl-Base-Detail-Inventory -->
 {/strip}
