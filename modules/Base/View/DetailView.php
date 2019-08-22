@@ -42,10 +42,12 @@ class DetailView extends \App\Controller\View
 		}
 		$inventoryFields = [];
 		if (!empty($moduleStructure['inventory'])) {
+			$columns = \Conf\Inventory::$columnsByModule[$moduleName] ?? \Conf\Inventory::$columns ?? [];
+			$columnsIsActive = !empty($columns);
 			foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
 				if (1 === $fieldType) {
 					foreach ($fieldsInventory as $field) {
-						if ($field['isVisibleInDetail']) {
+						if ($field['isVisibleInDetail'] && (!$columnsIsActive || \in_array($field['columnname'], $columns))) {
 							$inventoryFields[] = InventoryField::getInstance($moduleName, $field);
 						}
 					}
