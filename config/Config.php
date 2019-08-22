@@ -19,14 +19,14 @@ class Config
 	 *
 	 * @var string
 	 */
-	public static $crmUrl = '__CRM_PATH__';
+	public static $crmUrl = 'http://yeti/';
 
 	/**
 	 * Portal URL.
 	 *
 	 * @var string
 	 */
-	public static $portalUrl = '__PORTAL_PATH__';
+	public static $portalUrl = 'http://portal2/';
 
 	/**
 	 * Theme.
@@ -80,12 +80,12 @@ class Config
 	 */
 	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
 	public static $minScripts = false;
-	public static $debugApi = false;
-	public static $debugConsole = false;
-	public static $logs = false;
-	public static $apiKey = '__API_KEY__';
-	public static $serverName = '__SERVER_NAME__';
-	public static $serverPass = '__SERVER_PASS__';
+	public static $debugApi = true;
+	public static $debugConsole = true;
+	public static $logs = true;
+	public static $apiKey = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
+	public static $serverName = 'portal';
+	public static $serverPass = 'portal';
 	public static $encryptDataTransfer = false;
 	public static $privateKey = 'config/private.key';
 	public static $publicKey = 'config/public.key';
@@ -111,5 +111,5 @@ class Config
 	public static $filterInProducts = [];
 
 	public static $subjectPrefixForSingleOrderFromCart = 'SSingleOrders - ';
-	public static $headerMessage = '';
+	public static $headerMessage = 'A.W.Kulpa S.L. NIF: B66106550 <br> c/ Sant Adria 66 local 8 08030 Barcelona <br> ES33 0081 0175 2600 0136 6146 / BSAB ESBB';
 }
