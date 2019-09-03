@@ -42,29 +42,29 @@ block-ui@^2.70.1:
   dependencies:
     jquery ">=1.7.x"
 
-blueimp-canvas-to-blob@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/blueimp-canvas-to-blob/-/blueimp-canvas-to-blob-3.5.0.tgz#5679ac32f6a2835821f0c3ad661719ff85a9236b"
-  integrity sha1-VnmsMvaig1gh8MOtZhcZ/4WpI2s=
+blueimp-canvas-to-blob@3:
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/blueimp-canvas-to-blob/-/blueimp-canvas-to-blob-3.16.0.tgz#eb5932207f9bf23558c8bc2fbcdc5ca2cca35c36"
+  integrity sha512-r5TRlxH5Y0iKrRajCfiW1K4o2U1JniarjLXuNJrC5nnlWV/UopieF8sysw9pAYBauxg2I3Ah1hUp3NEuinwmkA==
 
-blueimp-file-upload@^9.32.0:
-  version "9.32.0"
-  resolved "https://registry.yarnpkg.com/blueimp-file-upload/-/blueimp-file-upload-9.32.0.tgz#c53e1d3ccec8b770639b514ead93ed684982703f"
-  integrity sha512-GS68kE4ybcYU7qlsvU8lXygLnebsoRhx68yUyg6n+54TpZDcCK2L7Ra1YS9IYG/t3nQoxS8v2uIuno+YRAfDmw==
+blueimp-file-upload@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/blueimp-file-upload/-/blueimp-file-upload-10.2.0.tgz#7289713c8354fa02107bc2e5eb3b26465202f16e"
+  integrity sha512-xDAZZ+lGC9TVdHojP96AcFuVBrQty0IYrBOcq3vQ+Y8Sx3uwRH8WQrbbjwIqLPWcOKilUss/RPbPbWW796fYWQ==
   optionalDependencies:
-    blueimp-canvas-to-blob "3.5.0"
-    blueimp-load-image "2.12.2"
-    blueimp-tmpl "3.6.0"
+    blueimp-canvas-to-blob "3"
+    blueimp-load-image "2"
+    blueimp-tmpl "3"
 
-blueimp-load-image@2.12.2:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/blueimp-load-image/-/blueimp-load-image-2.12.2.tgz#6a17598aab858d4fbf01543e0631141b51057c87"
-  integrity sha1-ahdZiquFjU+/AVQ+BjEUG1EFfIc=
+blueimp-load-image@2:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/blueimp-load-image/-/blueimp-load-image-2.24.0.tgz#ced5b78fc9b32b4743fc4f780d3305d56391f04f"
+  integrity sha512-fR/CNGEOqbcgbQC7+6hJKcxjD5updapWECbptrHrYpkacP1eXCOoA+92D0v49Sc+gwtxTDzu8nxNmYYd7AXzUg==
 
-blueimp-tmpl@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/blueimp-tmpl/-/blueimp-tmpl-3.6.0.tgz#a4910975d042e2bc03ba77f0e62d04f1548a524c"
-  integrity sha1-pJEJddBC4rwDunfw5i0E8VSKUkw=
+blueimp-tmpl@3:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/blueimp-tmpl/-/blueimp-tmpl-3.13.0.tgz#910c337d5742a8a17e3237139389853ebc9ced56"
+  integrity sha512-TC5eLXhPGGgBJG1gGxKRORB5DMxSVSTS/GsqsQuJ+shv0Ez5wc9bjoXVhPqtdbzVZAzFvveasAMrjqEYY/18Og==
 
 bootbox@^5.1.2:
   version "5.1.3"
@@ -267,7 +267,7 @@ select2-theme-bootstrap4@^0.2.0-beta.2:
   resolved "https://registry.yarnpkg.com/select2-theme-bootstrap4/-/select2-theme-bootstrap4-0.2.0-beta.3.tgz#ddaf572aeb8709fa55985da7c9005c7396738366"
   integrity sha512-M/E+n6M5jLxG6gt2hcVntvhs5YP6cQtIeDU9DJRFYCB1egD25h62gD8SBeokf43S2traTdQriL1THy6vbfNepQ==
 
-select2@^4.0.6-rc.1:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.7.tgz#7b80473ef7900f4dc2b988623275fe569204ae8d"
-  integrity sha512-t46Z2nkEEYnBYdRpLNw5dj9qqO+YTiTlWKnpJ/B5e1Q3hPND00JRgcLJxYRzqpeLZd+ZkszkHEMagLKIfbTjVA==
+select2@^4.0.8:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.10.tgz#c8d4e3e2504f49956b3dfd9018ab1d7bc601a41b"
+  integrity sha512-g9fWMdEif4eQ901eiJV3os0MG5y20/3E2WNy0PfYf0T6Q/zZB/NOroJwAxcfE6uv5x0/BGeCDGNtoj9PqCdQEg==
