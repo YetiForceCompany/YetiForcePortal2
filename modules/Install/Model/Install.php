@@ -41,14 +41,8 @@ class Install
 	 */
 	public function check()
 	{
-		$testMessage = 'Install Wizard';
-		try {
-			$response = Api::getInstance()->call('Install', ['data' => $testMessage], 'PUT');
-			return $response === $testMessage;
-		} catch (\Throwable $ex) {
-			return false;
-		}
-		return false;
+		$response = Api::getInstance()->call('Install', ['data' => 'Install Wizard'], 'PUT');
+		return 'Install Wizard' === $response;
 	}
 
 	/**
@@ -69,7 +63,7 @@ class Install
 		$webRoot = str_replace('index.php', '', $webRoot);
 		$webRoot = (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://') . $webRoot;
 		$tabUrl = explode('/', $webRoot);
-		unset($tabUrl[count($tabUrl) - 1]);
+		unset($tabUrl[\count($tabUrl) - 1]);
 		$webRoot = implode('/', $tabUrl) . '/';
 		$configFile = str_replace('__PORTAL_PATH__', addslashes($webRoot), $configFile);
 		Config::$portalUrl = $webRoot;

@@ -38,19 +38,22 @@ class Install extends \App\Controller\Action
 	 */
 	public function process()
 	{
-		$response = new Response();
-		$install = \YF\Modules\Install\Model\Install::getInstance($this->request->getModule());
-		\Conf\Config::$apiKey = $this->request->getByType('apiKey', Purifier::TEXT);
-		\Conf\Config::$crmUrl = $this->request->getByType('crmUrl', Purifier::TEXT);
-		\Conf\Config::$serverName = $this->request->getByType('serverName', Purifier::TEXT);
-		\Conf\Config::$serverPass = $this->request->getByType('serverPass', Purifier::TEXT);
-		if ($install->check()) {
-			$install->save($this->request);
-			$result = ['url' => \App\Config::get('portalUrl')];
-		} else {
-			$result = ['error' => \App\Language::translate('LBL_WRONG_PROPERTIES', 'Install')];
+		try {
+			$response = new Response();
+			$install = \YF\Modules\Install\Model\Install::getInstance($this->request->getModule());
+			\Conf\Config::$apiKey = $this->request->getByType('apiKey', Purifier::TEXT);
+			\Conf\Config::$crmUrl = $this->request->getByType('crmUrl', Purifier::TEXT);
+			\Conf\Config::$serverName = $this->request->getByType('serverName', Purifier::TEXT);
+			\Conf\Config::$serverPass = $this->request->getByType('serverPass', Purifier::TEXT);
+			if ($install->check()) {
+				$install->save($this->request);
+				$result = ['url' => \App\Config::get('portalUrl')];
+			} else {
+				$result = ['error' => \App\Language::translate('LBL_WRONG_PROPERTIES', 'Install')];
+			}
+		} catch (\Throwable $ex) {
+			$result = ['error' => $ex->getMessage()];
 		}
-
 		$response->setResult($result);
 		$response->emit();
 	}

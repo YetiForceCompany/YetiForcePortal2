@@ -139,7 +139,7 @@ class Api
 		}
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
-			throw new \App\AppException($response['error']['message'], $response['error']['code']);
+			throw new \App\AppException($response['error']['message'], $response['error']['code'] ?? 500);
 		}
 		if (isset($response['result'])) {
 			return $response['result'];
