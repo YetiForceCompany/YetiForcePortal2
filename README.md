@@ -9,4 +9,5 @@ Installation
 yarn install
 
 composer install
+
 4. Adjust configuration
