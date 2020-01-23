@@ -6,8 +6,7 @@ Installation
 2. Point web server document root to /public
 3. Run:
 
-yarn install
-
-composer install
+- yarn install
+- composer install
 
 4. Adjust configuration
