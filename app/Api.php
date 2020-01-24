@@ -54,8 +54,10 @@ class Api
 				'Content-Type' => 'application/json',
 				'X-ENCRYPTED' => Config::$encryptDataTransfer ? 1 : 0,
 				'X-API-KEY' => Config::$apiKey,
-				'X-TOKEN' => $userInstance->has('logged') ? $userInstance->get('token') : null,
 			];
+			if ($userInstance->has('logged')) {
+				$header['X-TOKEN'] = $userInstance->get('token');
+			}
 			if ($userInstance->has('companyId')) {
 				$header['X-PARENT-ID'] = $userInstance->get('companyId');
 			}
