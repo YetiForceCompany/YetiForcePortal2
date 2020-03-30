@@ -64,7 +64,7 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return Field
 	 */
-	public function setDisplayValue(string $value): self
+	public function setDisplayValue($value): self
 	{
 		$this->value = $value;
 		return $this;

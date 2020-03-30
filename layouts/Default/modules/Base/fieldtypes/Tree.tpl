@@ -6,7 +6,7 @@
 			<div class="input-group">
 				<input type="text"
 					title="{$FIELD_MODEL->getDisplayValue()}"
-					class="form-control js-tree-text" data-js="val"
+					class="form-control js-tree-text pl-1" data-js="val"
 					value="{$FIELD_MODEL->getDisplayValue()}" readonly="readonly"
 					data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]">
 				<div class="input-group-append">

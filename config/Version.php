@@ -17,7 +17,7 @@ class Version
 	/**
 	 * Application version.
 	 */
-	const APP = '0.0.85';
+	const APP = '0.0.86';
 	/**
 	 * Date of publication of the application.
 	 */

@@ -36,7 +36,7 @@
 						</div>
 						<div class="card-body blockContent row m-0 collapse hideBlock {if $BLOCK['display_status'] === 1}show{/if}" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
-								<div class="editFields col-sm-12 col-md-6 row m-0">
+								<div class="editFields col-sm-12 col-md-6 row m-0 {if !$FIELD->isEditable()} d-none{/if}">
 									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-lg-end justify-content-md-start">
 										<label class="muted mb-0 pt-0">
 											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}

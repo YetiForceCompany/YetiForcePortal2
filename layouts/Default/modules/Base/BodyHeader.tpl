@@ -10,18 +10,18 @@
 				{\App\Config::get('headerMessage')}
 			</div>
 		{/if}
-		{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
-		{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
-			<div class="ml-auto mr-2 text-truncate text-white">
-				{if !empty($COMPANY_DETAILS['sum_open_orders'])}
-					<i class="fas fa-file-alt mr-2"></i><span class="u-fs-12px">{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}</span>
-				{/if}
-				{if !empty($COMPANY_DETAILS['creditlimit'])}
-					<br><i class="fas fa-wallet mr-2"></i><span class="u-fs-12px">{\App\Language::translate('LBL_CREDIT_LIMIT')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['creditlimit'])}</span>
-				{/if}
-			</div>
-		{/if}
-		<div class="d-flex align-items-center">
+		<div class="d-flex ml-auto align-items-center">
+			{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
+			{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
+				<div class="ml-auto mr-2 text-truncate text-white">
+					{if !empty($COMPANY_DETAILS['sum_open_orders'])}
+						<i class="fas fa-file-alt mr-2"></i><span class="u-fs-12px">{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}</span>
+					{/if}
+					{if !empty($COMPANY_DETAILS['creditlimit'])}
+						<br><i class="fas fa-wallet mr-2"></i><span class="u-fs-12px">{\App\Language::translate('LBL_CREDIT_LIMIT')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['creditlimit'])}</span>
+					{/if}
+				</div>
+			{/if}
 			<a class="js-shopping-cart btn btn-outline-light active btn-sm mr-2 mb-0" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
 				<span class="fas fa-shopping-cart"></span>
 				<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
