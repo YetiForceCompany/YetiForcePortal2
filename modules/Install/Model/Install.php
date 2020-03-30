@@ -54,7 +54,8 @@ class Install
 	 */
 	public function save(\App\Request $request)
 	{
-		$configFile = file_get_contents($this->configPath);
+		$path = YF_ROOT . \DIRECTORY_SEPARATOR . $this->configPath;
+		$configFile = file_get_contents($path);
 		foreach ($this->config as $key => $value) {
 			$configFile = str_replace('\'' . $value . '\'', var_export($request->getByType($key, Purifier::TEXT), true), $configFile);
 		}
@@ -67,7 +68,7 @@ class Install
 		$webRoot = implode('/', $tabUrl) . '/';
 		$configFile = str_replace('__PORTAL_PATH__', addslashes($webRoot), $configFile);
 		Config::$portalUrl = $webRoot;
-		file_put_contents($this->configPath, $configFile);
+		file_put_contents($path, $configFile);
 	}
 
 	public function removeInstallationFiles()

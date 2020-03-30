@@ -103,6 +103,7 @@ class Menu
 			return [
 				[
 					'type' => 'Module',
+					'id' => '',
 					'childs' => [],
 					'name' => Language::translateModule($defaultModule),
 					'icon' => 'userIcon-' . $defaultModule,
@@ -110,7 +111,7 @@ class Menu
 				]
 			];
 		}
-		foreach ($menu as $key => $values) {
+		foreach ($menu as $values) {
 			$items[] = $this->getItem($values);
 		}
 		return $items;
