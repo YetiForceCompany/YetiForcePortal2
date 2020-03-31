@@ -413,7 +413,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 		return this.container;
 	};
 	getWidgetData() {
-		if (typeof this.widgetData !== 'undefined') {
+		if (typeof this.widgetData !== 'undefined' && this.widgetData !== '') {
 			return this.widgetData;
 		}
 		let widgetDataEl = this.getChartContainer().find('[name="widgetData"]');
