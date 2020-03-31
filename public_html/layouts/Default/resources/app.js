@@ -733,7 +733,37 @@ var AppConnector,
 			PNotify.defaults.titleTrusted = true;
 			PNotify.defaults.styling = 'bootstrap4';
 			PNotify.defaults.icons = 'fontawesome5';
-		}
+		},
+		registerIframeAndMoreContent() {
+			let showMoreModal = e => {
+				e.preventDefault();
+				e.stopPropagation();
+				const btn = $(e.currentTarget);
+				const message = btn.data('iframe')
+					? btn
+							.siblings('iframe')
+							.clone()
+							.show()
+					: btn
+							.closest('.js-more-content')
+							.find('.fullContent')
+							.html();
+				bootbox.dialog({
+					message,
+					title: '<span class="mdi mdi-overscan"></span>  ' + app.translate('JS_FULL_TEXT'),
+					className: 'u-word-break modal-fullscreen',
+					buttons: {
+						danger: {
+							label: '<span class="fas fa-times mr-1"></span>' + app.translate('JS_CLOSE'),
+							className: 'btn-danger',
+							callback: function() {}
+						}
+					}
+				});
+			};
+			$('.js-more').on('click', showMoreModal);
+			$(document).on('click', '.js-more', showMoreModal);
+		},
 	};
 
 jQuery(document).ready(function() {
@@ -747,6 +777,7 @@ jQuery(document).ready(function() {
 	app.registerSubMenu();
 	app.registerModal(container);
 	app.registerMobileMenu(container);
+	app.registerIframeAndMoreContent();
 	//	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

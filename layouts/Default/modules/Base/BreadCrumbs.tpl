@@ -7,7 +7,7 @@
 			{assign var="BREADCRUMBS" value=\App\Menu::getBreadcrumbs()}
 		{/if}
 
-		{assign var=HOMEICON value='userIcon-Home'}
+		{assign var=HOMEICON value='yfm-Home'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks textOverflowEllipsis">

@@ -4,7 +4,6 @@
 	{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 	{assign var="FIELD_NAME" value=$FIELD_MODEL->get('name')}
 	{assign var=UNIQUE_ID value=10|mt_rand:20}
-	{*	{$FIELD_MODEL->get('label')}*}
 	<textarea id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}" class="form-control"
 			  title="{$FIELD_MODEL->get('label')} " name="{$FIELD_NAME}"
 			  data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true}required{/if}]"

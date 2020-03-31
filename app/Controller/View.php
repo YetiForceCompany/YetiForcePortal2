@@ -136,6 +136,12 @@ abstract class View extends Base
 	public function getHeaderCss()
 	{
 		$cssFileNames = [
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/adminIcon.css',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/additionalIcons.css',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/yfm.css',
+			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/yfi.css',
+			YF_ROOT_WWW . 'libraries/@fortawesome/fontawesome-free/css/all.css',
+			YF_ROOT_WWW . 'libraries/@mdi/font/css/materialdesignicons.css',
 			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
 			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
 			YF_ROOT_WWW . 'libraries/chosen-js/chosen.css',
@@ -143,7 +149,6 @@ abstract class View extends Base
 			YF_ROOT_WWW . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
 			YF_ROOT_WWW . 'libraries/select2/dist/css/select2.css',
 			YF_ROOT_WWW . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/userIcons.css',
 			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
 			YF_ROOT_WWW . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',

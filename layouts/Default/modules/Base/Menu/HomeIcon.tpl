@@ -13,7 +13,7 @@
 	{/if}
 	<li role="presentation" class="tpl-menu-HomeIcon c-menu__item nav-item menuHomeIcon" data-id="{$ITEM_MENU['id']}">
 		<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} hasIcon js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="index.php?module=Home&view=Dashboard" aria-haspopup="true" aria-expanded="{$ACTIVE}" aria-controls="submenu-{$ITEM_MENU['id']}">
-			<span class="c-menu__item__icon userIcon-Home" aria-hidden="true"></span>
+			<span class="c-menu__item__icon yfm-Home" aria-hidden="true"></span>
   			<span class="c-menu__item__text" title="{$ITEM_MENU['name']}">
     			{App\Language::translate($ITEM_MENU['name'])}
   			</span>
