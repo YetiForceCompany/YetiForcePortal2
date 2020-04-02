@@ -26,15 +26,16 @@
 			<input type="hidden" name="module" value="{$MODULE_NAME}">
 			<input type="hidden" name="action" value="Save">
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
+			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
 					<div class="c-card card card my-3 blockContainer">
-						<div class="card-header c-card__header collapsed" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
+						<div class="card-header c-card__header{if $ITERATION} collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
 							<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 							<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 							{$BLOCK['name']}
 						</div>
-						<div class="card-body blockContent row m-0 collapse hideBlock {if $BLOCK['display_status'] === 1}show{/if}" id="block_{$BLOCK['id']}">
+						<div class="card-body blockContent row m-0 collapse hideBlock{if !$ITERATION} show{/if}" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 row m-0 {if !$FIELD->isEditable()} d-none{/if}">
 									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-lg-end justify-content-md-start">
@@ -51,6 +52,7 @@
 							{/foreach}
 						</div>
 					</div>
+					{assign var=ITERATION value=$ITERATION+1}
 				{/if}
 			{/foreach}
 		</form>

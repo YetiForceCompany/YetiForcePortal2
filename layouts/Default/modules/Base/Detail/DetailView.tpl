@@ -18,17 +18,18 @@
 		</div>
 		<div class="row">
 			<div class="{if !empty($INVENTORY_FIELDS)}col-4{else}col-12{/if}">
+				{assign var=ITERATION value=0}
 				{foreach item=BLOCK from=$BLOCKS}
 					{if isset($FIELDS[$BLOCK['id']])}
 						{assign var=COUNTER value=0}
 						{assign var=COUNT value=0}
 						<div class="card c-card col-sm-12 px-0 blockContainer my-3">
-							<div class="card-header c-card__header collapsed" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
+							<div class="card-header c-card__header{if $ITERATION} collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
 								<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 								<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 								{$BLOCK['name']}
 							</div>
-							<div class="col-md-12 px-0 card-body py-0 blockContent collapse {if $BLOCK['display_status'] === 1}show{/if}" id="block_{$BLOCK['id']}">
+							<div class="col-md-12 px-0 card-body py-0 blockContent collapse {if !$ITERATION}show{/if}" id="block_{$BLOCK['id']}">
 								<div class="col-sm-12 px-0 row m-0">
 									{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 									{if $COUNTER eq 2}
@@ -59,6 +60,7 @@
 								</div>
 							</div>
 						</div>
+						{assign var=ITERATION value=$ITERATION+1}
 					{/if}
 				{/foreach}
 			</div>
