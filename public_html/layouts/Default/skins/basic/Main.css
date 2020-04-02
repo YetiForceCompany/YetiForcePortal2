@@ -8,7 +8,9 @@
 }
 
 @-webkit-keyframes sk-cubeGridScaleDelay {
-  0%, 70%, 100% {
+  0%,
+  70%,
+  100% {
     -webkit-transform: scale3D(1, 1, 1);
     transform: scale3D(1, 1, 1);
   }
@@ -19,7 +21,9 @@
 }
 
 @keyframes sk-cubeGridScaleDelay {
-  0%, 70%, 100% {
+  0%,
+  70%,
+  100% {
     -webkit-transform: scale3D(1, 1, 1);
     transform: scale3D(1, 1, 1);
   }
@@ -219,10 +223,7 @@
   border-radius: 0;
 }
 
-.quickCreateContent
-.referenceGroup
-.referenceModulesListGroup
-.chosen-container {
+.quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
   min-width: 80px !important;
 }
 
@@ -262,19 +263,19 @@
 
 .form-control:focus {
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .dropdown-menu {
   opacity: 1 !important;
   -webkit-transform: none !important;
-          transform: none !important;
+  transform: none !important;
 }
 
 .pagination {
   -webkit-box-align: center !important;
-      -ms-flex-align: center !important;
-          align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -318,7 +319,7 @@
 
 .pagination .page-item .page-link:focus {
   -webkit-box-shadow: 0 0 0 0.1rem white;
-          box-shadow: 0 0 0 0.1rem white;
+  box-shadow: 0 0 0 0.1rem white;
 }
 
 .dataTables_info {
@@ -844,7 +845,7 @@ hr {
 
 .c-menu__container:hover ~ .bodyHeader {
   -webkit-transform: translate(calc(230px - 50px));
-          transform: translate(calc(230px - 50px));
+  transform: translate(calc(230px - 50px));
 }
 
 .c-menu__item {
@@ -867,7 +868,8 @@ hr {
   position: relative;
 }
 
-.c-menu__item a:hover, .c-menu__item a:focus {
+.c-menu__item a:hover,
+.c-menu__item a:focus {
   background: #555f73;
 }
 
@@ -914,7 +916,8 @@ hr {
   padding-right: 1.875rem;
 }
 
-.c-menu__item .c-submenu a:hover, .c-menu__item .c-submenu a:focus {
+.c-menu__item .c-submenu a:hover,
+.c-menu__item .c-submenu a:focus {
   background: #293851;
 }
 
@@ -947,7 +950,8 @@ a:hover {
   text-decoration: underline;
 }
 
-.nav-link:hover, .nav-link:focus {
+.nav-link:hover,
+.nav-link:focus {
   text-decoration: none;
 }
 
@@ -997,7 +1001,7 @@ a:hover {
   }
   .c-menu-mobile .bodyHeader {
     -webkit-transform: translate(200px);
-            transform: translate(200px);
+    transform: translate(200px);
   }
 }
 
@@ -1074,7 +1078,7 @@ table.dataTable.listViewEntries tbody td {
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .Install_Install .logo {
-  max-height: 100px;
+  max-height: 50px;
 }
 
 .Install_Install .container-fluid {
@@ -1086,7 +1090,7 @@ table.dataTable.listViewEntries tbody td {
   border: 1px solid #ddd;
   border-radius: 3px;
   -webkit-box-shadow: 0 0 5px #ccc;
-          box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
   min-height: 375px;
   margin: 10px;
 }
@@ -1189,7 +1193,7 @@ table.dataTable.listViewEntries tbody td {
 
 .product-image {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .add-to-cart {

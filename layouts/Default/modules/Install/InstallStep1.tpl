@@ -16,8 +16,8 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-md-5 welcome-image">
-				<img src="{\App\Resources::resourcePath('wizard.jpg', $MODULE_NAME)}" alt="Wizard"/>
+			<div class="col-md-4 welcome-image">
+				<img src="{\App\Resources::resourcePath('yetiforce_capterra.png', $MODULE_NAME)}" alt="Wizard"/>
 			</div>
 			<div class="col-md-7">
 				<div class="welcome-div">
