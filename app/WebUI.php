@@ -24,10 +24,6 @@ class WebUI
 	{
 		\App\Log::init();
 		try {
-			if (Config::get('csrfProtection')) {
-				require_once YF_ROOT . \DIRECTORY_SEPARATOR . 'config/csrf_config.php';
-				\CsrfMagic\Csrf::init();
-			}
 			$module = $request->getModule();
 			$view = $request->getByType('view', Purifier::ALNUM);
 			$action = $request->getByType('action', Purifier::ALNUM);
@@ -58,6 +54,10 @@ class WebUI
 					$view = 'Index';
 				}
 				$componentName = $view;
+			}
+			if($action === 'Logout' && $module === 'Users' && !$userInstance->hasLogin() && !$request->isAjax()){
+				header('Location:index.php');
+				return false;
 			}
 			$handlerClass = Loader::getModuleClassName($module, $componentType, $componentName);
 

@@ -40,7 +40,7 @@
 				</a>
 			{/if}
 			<form class="noSpaces" method="POST" action="index.php?module=Users&action=Logout">
-				<button type="submit" class="loadPage btn btn-outline-light active btn-sm mb-0" role="button">
+				<button type="submit" class="loadPage btn btn-outline-danger active btn-sm mb-0" role="button">
 					<span class="fas fa-power-off" aria-hidden="true"></span>
 				</button>
 			</form>

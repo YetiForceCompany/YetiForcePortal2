@@ -22,6 +22,10 @@ abstract class Base
 
 	public function __construct(Request $request)
 	{
+		if (\App\Config::get('csrfProtection')) {
+			require_once YF_ROOT . \DIRECTORY_SEPARATOR . 'config/csrf_config.php';
+			\CsrfMagic\Csrf::init();
+		}
 		$this->request = $request;
 		self::setHeaders();
 	}
