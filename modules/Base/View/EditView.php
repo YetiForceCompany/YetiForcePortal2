@@ -39,7 +39,7 @@ class EditView extends \App\Controller\View
 		$recordDetail = [];
 		if (!$this->request->isEmpty('record')) {
 			$record = $this->request->getByType('record', Purifier::INTEGER);
-			$recordDetail = $api->setCustomHeaders(['X-RAW-DATA' => 1])->call("$moduleName/Record/$record", [], 'get');
+			$recordDetail = $api->setCustomHeaders(['x-raw-data' => 1])->call("$moduleName/Record/$record", [], 'get');
 		}
 		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
 		if (!isset($recordDetail['data'])) {

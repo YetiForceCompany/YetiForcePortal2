@@ -17,9 +17,9 @@ class Version
 	/**
 	 * Application version.
 	 */
-	const APP = '0.0.91';
+	const APP = '0.0.92';
 	/**
 	 * Date of publication of the application.
 	 */
-	const DATE = '2020.04.02';
+	const DATE = '2020.04.03';
 }

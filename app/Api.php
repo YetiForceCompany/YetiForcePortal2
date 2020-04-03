@@ -226,7 +226,7 @@ class Api
 	{
 		$this->header = $this->getHeaders();
 		foreach ($headers as $key => $value) {
-			$this->header[$key] = $value;
+			$this->header[strtolower($key)] = $value;
 		}
 		return $this;
 	}

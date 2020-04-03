@@ -26,10 +26,10 @@ class Preview extends \App\Controller\View
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$api = Api::getInstance();
 		$recordDetail = $api->setCustomHeaders([
-			'X-RAW-DATA' => 1,
-			'X-PRODUCT-BUNDLES' => 1,
-			'X-UNIT-PRICE' => 1,
-			'X-UNIT-GROSS' => 1,
+			'x-raw-data' => 1,
+			'x-product-bundles' => 1,
+			'x-unit-price' => 1,
+			'x-unit-gross' => 1,
 		])->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);

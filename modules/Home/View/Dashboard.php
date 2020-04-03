@@ -59,7 +59,7 @@ class Dashboard extends \App\Controller\View
 		$dashboard = $this->getDashboardData($moduleName, $selectedDashboard);
 		$widgets = [];
 		foreach ($dashboard['widgets'] as $widgetData) {
-			$widgets[]= \YF\Modules\Base\Dashboard\Base::getInstance($widgetData['type'], $widgetData['data']);
+			$widgets[] = \YF\Modules\Base\Dashboard\Base::getInstance($widgetData['type'], $widgetData['data']);
 		}
 		$this->viewer->assign('WIDGETS', $widgets);
 		$this->viewer->view('Dashboard/Dashboard.tpl', $moduleName);

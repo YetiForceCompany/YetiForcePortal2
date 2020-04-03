@@ -117,7 +117,7 @@ class CartView extends ListViewModel
 		if (empty($userModel->get('companyId'))) {
 			return [];
 		}
-		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['X-RAW-DATA' => 1])->call("Accounts/Record/{$userModel->get('companyId')}", [], 'get');
+		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['x-raw-data' => 1])->call("Accounts/Record/{$userModel->get('companyId')}", [], 'get');
 		$address = [];
 
 		foreach (['a', 'b', 'c'] as $typeAddress) {

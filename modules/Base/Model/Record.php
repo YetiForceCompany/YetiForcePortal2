@@ -207,6 +207,8 @@ class Record extends \App\BaseModel
 	/**
 	 * Set record name.
 	 *
+	 * @param string $name
+	 *
 	 * @return string
 	 */
 	public function setName(string $name)
@@ -340,6 +342,8 @@ class Record extends \App\BaseModel
 
 	/**
 	 * Function checks permissions to action.
+	 *
+	 * @param string $actionName
 	 *
 	 * @return bool
 	 */
