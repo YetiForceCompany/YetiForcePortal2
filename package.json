@@ -23,7 +23,7 @@
     "html5shiv": "^3.7.3",
     "inputmask": "^4.0",
     "jQuery-Validation-Engine": "https://github.com/YetiForceCompany/jQuery-Validation-Engine#master",
-    "jquery": ">3.0.0",
+    "jquery": "3.5.0",
     "jquery.class.js": "^1.0.0",
     "jstree": "^3.3.7",
     "jstree-bootstrap-theme": "^1.0.1",
