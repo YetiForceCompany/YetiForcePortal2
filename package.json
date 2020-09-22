@@ -18,7 +18,7 @@
     "chosen-js": "^1.8.7",
     "clockpicker": "https://github.com/YetiForceCompany/clockpicker#master",
     "datatables.net": "^1.10.19",
-    "datatables.net-bs4": "^1.10.19",
+    "datatables.net-bs4": "^1.10.22",
     "datatables.net-responsive-bs4": "^2.2.3",
     "html5shiv": "^3.7.3",
     "inputmask": "^4.0",
