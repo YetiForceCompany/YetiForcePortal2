@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d929c46aeb810aedc1891cabf619ebdc",
+    "content-hash": "bdaba0a80e6f8461930119ab44f544f0",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -334,17 +334,20 @@
         },
         {
             "name": "yetiforce/csrf-magic",
-            "version": "v1.0.8",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/YetiForceCompany/csrf-magic.git",
-                "reference": "3effa536766a0c159f50a0dde777264b7088cb94"
+                "reference": "f0da3a6f986def4e06b4a1d27b13005a59d172dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YetiForceCompany/csrf-magic/zipball/3effa536766a0c159f50a0dde777264b7088cb94",
-                "reference": "3effa536766a0c159f50a0dde777264b7088cb94",
+                "url": "https://api.github.com/repos/YetiForceCompany/csrf-magic/zipball/f0da3a6f986def4e06b4a1d27b13005a59d172dd",
+                "reference": "f0da3a6f986def4e06b4a1d27b13005a59d172dd",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
             },
             "type": "library",
             "autoload": {
@@ -358,14 +361,14 @@
             ],
             "authors": [
                 {
-                    "name": "YetiForceCompany",
-                    "email": "info@yetiforce.com",
-                    "homepage": "https://yetiforce.com/"
-                },
-                {
                     "name": "Edward Z. Yang",
                     "email": "ezyang@mit.edu",
                     "homepage": "https://github.com/ezyang"
+                },
+                {
+                    "name": "YetiForceCompany",
+                    "email": "info@yetiforce.com",
+                    "homepage": "https://yetiforce.com/"
                 }
             ],
             "description": "Cross Site Request Forgery security library",
@@ -375,7 +378,10 @@
                 "php",
                 "security"
             ],
-            "time": "2018-05-23T20:17:08+00:00"
+            "support": {
+                "source": "https://github.com/YetiForceCompany/csrf-magic/tree/v1.1.2"
+            },
+            "time": "2021-02-05T12:04:07+00:00"
         }
     ],
     "packages-dev": [
@@ -1908,5 +1914,6 @@
     "platform": {
         "php": ">=7.1.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
