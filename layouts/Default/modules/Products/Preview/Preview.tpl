@@ -8,6 +8,7 @@
         </div>
 	</div>
     <div class="tpl-Products-Preview-Preview d-flex mt-3 js-preview js-cart-item"
+			data-check-stock-levels="{$CHECK_STOCK_LEVELS}"
             data-qtyinstock="{$RECORD->getRawValue('qtyinstock')}"
             data-amount-in-shopping-cart="{$RECORD->getRawValue('amountInShoppingCart')}"
             data-price-netto="{$RECORD->getRawValue('unit_price')}"

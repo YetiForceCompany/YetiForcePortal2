@@ -3,6 +3,7 @@
 window.Products_Preview_Js = class {
 	constructor(container = $('.js-preview')) {
 		this.container = container;
+		this.checkStockLevels = this.container.data("check-stock-levels");
 		this.shoppingCartBadge = $('.js-body-header .js-shopping-cart .js-badge');
 	}
 	cartMethod(mode, recordId, params = {}) {

@@ -56,6 +56,7 @@ class Preview extends \App\Controller\View
 		$recordModel->set('unit_gross', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_gross']));
 		$recordModel->setRawValue('unit_price', $recordDetail['ext']['unit_price']);
 		$recordModel->setRawValue('unit_gross', $recordDetail['ext']['unit_gross']);
+		$recordModel->setRawValue('qtyinstock', $recordDetail['ext']['qtyinstock']);
 		$recordModel->setId($record);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);
@@ -64,6 +65,7 @@ class Preview extends \App\Controller\View
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('RECORDS', isset($recordDetail['productBundles']) ? $this->getProductBundles($recordDetail['productBundles']) : []);
 		$this->viewer->assign('READONLY', false);
+		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		$this->viewer->view('Preview/Preview.tpl', $moduleName);
 	}
 
