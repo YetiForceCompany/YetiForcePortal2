@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d929c46aeb810aedc1891cabf619ebdc",
+    "content-hash": "bf53da7737c750d6010da7df337e20e6",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -281,20 +281,24 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v3.1.33",
+            "version": "v3.1.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "dd55b23121e55a3b4f1af90a707a6c4e5969530f"
+                "reference": "e27da524f7bcd7361e3ea5cdfa99c4378a7b5419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/dd55b23121e55a3b4f1af90a707a6c4e5969530f",
-                "reference": "dd55b23121e55a3b4f1af90a707a6c4e5969530f",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/e27da524f7bcd7361e3ea5cdfa99c4378a7b5419",
+                "reference": "e27da524f7bcd7361e3ea5cdfa99c4378a7b5419",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^6.5 || ^5.7 || ^4.8",
+                "smarty/smarty-lexer": "^3.1"
             },
             "type": "library",
             "extra": {
@@ -303,8 +307,8 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "libs/bootstrap.php"
+                "classmap": [
+                    "libs/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -330,7 +334,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-09-12T20:54:16+00:00"
+            "time": "2021-02-17T21:57:51+00:00"
         },
         {
             "name": "yetiforce/csrf-magic",
@@ -1050,6 +1054,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2018-10-30T05:52:18+00:00"
         },
         {
@@ -1853,12 +1858,12 @@
             "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
@@ -1908,5 +1913,6 @@
     "platform": {
         "php": ">=7.1.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
