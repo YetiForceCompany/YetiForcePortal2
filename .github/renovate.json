@@ -1,11 +1,20 @@
 {
-	"extends": ["config:base"],
-	"rangeStrategy": "update-lockfile",
-	"assignees": ["mariuszkrzaczkowski", "rskrzypczak", "TomaszQr"],
-	"packageRules": [
-		{
-			"baseBranchList": ["developer", "quasar-gui"],
-			"enabled": true
-		}
-	]
+  "extends": ["config:base", ":assignee(mariuszkrzaczkowski)", ":label(dependencies)"],
+  "rangeStrategy": "update-lockfile",
+  "assignees": ["mariuszkrzaczkowski", "rskrzypczak"],
+  "schedule": ["every weekend"],
+  "timezone": "Europe/Warsaw",
+  "commitMessagePrefix": "[PROD](renovate)",
+  "baseBranches": ["developer"],
+  "packageRules": [
+    {
+      "baseBranchList": ["developer"],
+      "assignees": ["mariuszkrzaczkowski"],
+      "enabled": true
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "enabled": false
+    }
+  ]
 }
