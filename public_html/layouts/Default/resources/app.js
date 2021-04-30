@@ -741,7 +741,7 @@ var AppConnector,
 			PNotify.defaults.stack.maxOpen = 10;
 			PNotify.defaults.stack.spacing1 = 5;
 			PNotify.defaults.stack.spacing2 = 5;
-			PNotify.defaults.labels.close = app.vtranslate('JS_CLOSE');
+			//PNotify.defaults.labels.close = app.vtranslate('JS_CLOSE');
 			PNotify.defaultModules.set(PNotifyBootstrap4, {});
 			PNotify.defaultModules.set(PNotifyFontAwesome5, {});
 			PNotify.defaultModules.set(PNotifyMobile, {});

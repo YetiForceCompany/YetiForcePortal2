@@ -136,10 +136,6 @@ abstract class View extends Base
 	public function getHeaderCss()
 	{
 		$cssFileNames = [
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/adminIcon.css',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/additionalIcons.css',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/yfm.css',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/icons/yfi.css',
 			ROOT_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
 			ROOT_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
 			ROOT_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
@@ -149,7 +145,6 @@ abstract class View extends Base
 			ROOT_DIRECTORY . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
 			ROOT_DIRECTORY . 'libraries/select2/dist/css/select2.css',
 			ROOT_DIRECTORY . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 			ROOT_DIRECTORY . 'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
 			ROOT_DIRECTORY . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
 			ROOT_DIRECTORY . 'libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
@@ -157,8 +152,17 @@ abstract class View extends Base
 			ROOT_DIRECTORY . 'libraries/clockpicker/dist/bootstrap4-clockpicker.css',
 			ROOT_DIRECTORY . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
 			ROOT_DIRECTORY . 'libraries/jstree/dist/themes/default/style.css',
+			ROOT_DIRECTORY . 'libraries/@pnotify/core/dist/PNotify.css',
+			ROOT_DIRECTORY . 'libraries/@pnotify/confirm/dist/PNotifyConfirm.css',
+			ROOT_DIRECTORY . 'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css',
+			ROOT_DIRECTORY . 'libraries/@pnotify/mobile/dist/PNotifyMobile.css',
+			ROOT_DIRECTORY . 'libraries/@pnotify/desktop/dist/PNotifyDesktop.css',
+			ROOT_DIRECTORY . 'layouts/resources/icons/adminIcon.css',
+			ROOT_DIRECTORY . 'layouts/resources/icons/additionalIcons.css',
+			ROOT_DIRECTORY . 'layouts/resources/icons/yfm.css',
+			ROOT_DIRECTORY . 'layouts/resources/icons/yfi.css',
+			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 		];
-
 		return $this->convertScripts($cssFileNames, 'css');
 	}
 
@@ -237,12 +241,12 @@ abstract class View extends Base
 			ROOT_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
 			ROOT_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
 			ROOT_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotify.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotifyButtons.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotifyAnimate.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotifyMobile.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotifyConfirm.js',
-			ROOT_DIRECTORY . 'libraries/pnotify/dist/iife/PNotifyDesktop.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/core/dist/PNotify.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/mobile/dist/PNotifyMobile.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/desktop/dist/PNotifyDesktop.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/confirm/dist/PNotifyConfirm.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js',
+			ROOT_DIRECTORY . 'libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js',
 			ROOT_DIRECTORY . 'libraries/popper.js/dist/umd/popper.js',
 			ROOT_DIRECTORY . 'libraries/bootstrap/dist/js/bootstrap.js',
 			ROOT_DIRECTORY . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
