@@ -99,7 +99,6 @@ abstract class View extends Base
 	public function convertScripts($fileNames, $fileExtension)
 	{
 		$scriptsInstances = [];
-
 		foreach ($fileNames as $fileName) {
 			$script = new \App\Script();
 			$script->set('type', $fileExtension);
@@ -175,11 +174,7 @@ abstract class View extends Base
 		$this->viewer->view($this->preProcessTplName(), $this->moduleName);
 	}
 
-	/**
-	 * Get preprocess tpl name.
-	 *
-	 * @return string
-	 */
+	/** {@inheritdoc}  */
 	protected function preProcessTplName(): string
 	{
 		return 'Header.tpl';
@@ -195,11 +190,7 @@ abstract class View extends Base
 		return $this->request->getAction() . '/Index.tpl';
 	}
 
-	/**
-	 * Get preprocess tpl name.
-	 *
-	 * @return string
-	 */
+	/** {@inheritdoc}  */
 	protected function postProcessTplName(): string
 	{
 		return 'Footer.tpl';

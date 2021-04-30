@@ -39,17 +39,19 @@ var AppConnector,
 		 * Function returns the javascript controller based on the current view
 		 */
 		getPageController: function () {
-			var moduleName = app.getModuleName();
-			var view = app.getViewName();
-
-			var moduleClassName = moduleName + '_' + view + '_Js';
-			var extendModules = jQuery('#extendModules').val();
+			let moduleName = app.getModuleName();
+			let view = app.getViewName();
+			let moduleClassName = moduleName + '_' + view + '_Js';
+			let extendModules = jQuery('#extendModules').val();
+			console.log(moduleClassName);
 			if (typeof window[moduleClassName] == 'undefined' && extendModules != undefined) {
 				moduleClassName = extendModules + '_' + view + '_Js';
 			}
+			console.log(moduleClassName);
 			if (typeof window[moduleClassName] == 'undefined') {
 				moduleClassName = 'Base_' + view + '_Js';
 			}
+			console.log(moduleClassName);
 			if (typeof window[moduleClassName] != 'undefined') {
 				return new window[moduleClassName]();
 			}
@@ -771,8 +773,7 @@ var AppConnector,
 			$(document).on('click', '.js-more', showMoreModal);
 		}
 	};
-
-jQuery(document).ready(function () {
+$(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
 	app.registerDatePicker();
