@@ -46,7 +46,7 @@ abstract class Modal extends View
 	{
 		$action = $this->request->getAction();
 		$jsFileNames = [
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
 		];
 		return $this->convertScripts($jsFileNames, 'js');
 	}

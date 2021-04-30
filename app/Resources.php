@@ -27,11 +27,11 @@ class Resources
 	 */
 	public static function resourcePath(string $name, string $moduleName, string $type = 'images'): string
 	{
-		$filePath = YF_ROOT_WWW . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
+		$filePath = ROOT_DIRECTORY . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
 		}
-		$filePath = YF_ROOT_WWW . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'skins' . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
+		$filePath = ROOT_DIRECTORY . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'skins' . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
 		if (file_exists($filePath)) {
 			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
 		}

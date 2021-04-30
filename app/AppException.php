@@ -41,9 +41,9 @@ class AppException extends \Exception
 			$backtrace = $e->backtrace;
 		}
 		$cssFileNames = [
-			YF_ROOT_WWW . 'libraries/bootstrap/dist/css/bootstrap.css',
-			YF_ROOT_WWW . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
-			YF_ROOT_WWW . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
+			ROOT_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
+			ROOT_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
+			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 		];
 		$viewer = new \App\Viewer();
 		$viewer->assign('MESSAGE', $e->getMessage());

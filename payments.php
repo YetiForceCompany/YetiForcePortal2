@@ -8,7 +8,7 @@
  */
 \define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '.');
 \define('YF_ROOT_WEB', __DIR__);
-\define('YF_ROOT_WWW', '');
+\define('ROOT_DIRECTORY', '');
 
 if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
 	die('Please install dependencies via composer install.');

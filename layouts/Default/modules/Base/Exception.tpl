@@ -69,8 +69,8 @@
 				{/if}
             {/if}
         </div>
-        <script type="text/javascript" src="{YF_ROOT_WWW}libraries/@fortawesome/fontawesome/index.js"></script>
-        <script type="text/javascript" src="{YF_ROOT_WWW}libraries/@fortawesome/fontawesome-free-solid/index.js"></script>
+        <script type="text/javascript" src="{ROOT_DIRECTORY}libraries/@fortawesome/fontawesome/index.js"></script>
+        <script type="text/javascript" src="{ROOT_DIRECTORY}libraries/@fortawesome/fontawesome-free-solid/index.js"></script>
     </body>
 </html>
 {/strip}

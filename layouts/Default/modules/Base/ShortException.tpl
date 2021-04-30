@@ -22,8 +22,8 @@
                 <i class="fas fa-chevron-left mr-2"></i>{\App\Language::translate('LBL_STEP_BACK')}
             </a>
         </div>
-        <script type="text/javascript" src="{YF_ROOT_WWW}libraries/@fortawesome/fontawesome/index.js"></script>
-        <script type="text/javascript" src="{YF_ROOT_WWW}libraries/@fortawesome/fontawesome-free-solid/index.js"></script>
+        <script type="text/javascript" src="{ROOT_DIRECTORY}libraries/@fortawesome/fontawesome/index.js"></script>
+        <script type="text/javascript" src="{ROOT_DIRECTORY}libraries/@fortawesome/fontawesome-free-solid/index.js"></script>
     </body>
 </html>
 {/strip}

@@ -5,18 +5,18 @@ var AppConnector,
 		/**
 		 * Events in application
 		 */
-		event: new (function() {
+		event: new (function () {
 			this.el = $({});
-			this.trigger = function() {
+			this.trigger = function () {
 				this.el.trigger(arguments[0], Array.prototype.slice.call(arguments, 1));
 			};
-			this.on = function() {
+			this.on = function () {
 				this.el.on.apply(this.el, arguments);
 			};
-			this.one = function() {
+			this.one = function () {
 				this.el.one.apply(this.el, arguments);
 			};
-			this.off = function() {
+			this.off = function () {
 				this.el.off.apply(this.el, arguments);
 			};
 		})(),
@@ -26,19 +26,19 @@ var AppConnector,
 		 * Function to get the module name. This function will get the value from element which has id module
 		 * @return : string - module name
 		 */
-		getModuleName: function() {
+		getModuleName: function () {
 			return app.getMainParams('module');
 		},
 		/**
 		 * Function returns the current view name
 		 */
-		getViewName: function() {
+		getViewName: function () {
 			return app.getMainParams('view');
 		},
 		/**
 		 * Function returns the javascript controller based on the current view
 		 */
-		getPageController: function() {
+		getPageController: function () {
 			var moduleName = app.getModuleName();
 			var view = app.getViewName();
 
@@ -64,7 +64,7 @@ var AppConnector,
 			useSuffix: '_chosen',
 			usePrefix: 's2id_'
 		},
-		formatDate: function(date) {
+		formatDate: function (date) {
 			var y = date.getFullYear(),
 				m = date.getMonth() + 1,
 				d = date.getDate(),
@@ -85,19 +85,19 @@ var AppConnector,
 				this.formatDateZ(s)
 			);
 		},
-		formatDateZ: function(i) {
+		formatDateZ: function (i) {
 			return i <= 9 ? '0' + i : i;
 		},
-		howManyDaysFromDate: function(time) {
+		howManyDaysFromDate: function (time) {
 			var fromTime = time.getTime();
 			var today = new Date();
 			var toTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 			return Math.floor((toTime - fromTime) / (1000 * 60 * 60 * 24)) + 1;
 		},
-		parseFieldInfo: function(fieldInfo) {
+		parseFieldInfo: function (fieldInfo) {
 			return JSON.parse(fieldInfo);
 		},
-		parseNumberToFloat: function(val) {
+		parseNumberToFloat: function (val) {
 			var groupSeparator = app.getMainParams('currencyGroupingSeparator');
 			var decimalSeparator = app.getMainParams('currencyDecimalSeparator');
 			if (val === undefined || val === '') {
@@ -108,11 +108,11 @@ var AppConnector,
 			val = val.replace(/\s/g, '').replace(decimalSeparator, '.');
 			return parseFloat(val);
 		},
-		registerSelectField: function(container) {
+		registerSelectField: function (container) {
 			this.registerChznSelectField(container);
 			this.registerSelect2Field(container);
 		},
-		registerTimeField: function(container) {
+		registerTimeField: function (container) {
 			var thisInstance = this;
 			if (typeof container === 'undefined') {
 				container = jQuery('body');
@@ -122,7 +122,7 @@ var AppConnector,
 			}
 			var timeFieldElements = jQuery('.timeField', container);
 			params.autoclose = true;
-			timeFieldElements.each(function() {
+			timeFieldElements.each(function () {
 				var element = $(this);
 				var input = element.find('.timeFieldInput');
 				var button = element.find('.timeFieldButton');
@@ -143,13 +143,13 @@ var AppConnector,
 					params_custom.twelvehour = false;
 				}
 				input.clockpicker(params_custom);
-				button.click(function(e) {
+				button.click(function (e) {
 					e.stopPropagation();
 					input.clockpicker('toggle');
 				});
 			});
 		},
-		registerDatePicker: function() {
+		registerDatePicker: function () {
 			$('input.datepicker').datepicker({
 				todayBtn: 'linked',
 				clearBtn: true,
@@ -158,7 +158,7 @@ var AppConnector,
 				enableOnReadonly: false
 			});
 		},
-		registerDateField: function(container) {
+		registerDateField: function (container) {
 			var thisInstance = this;
 			if (typeof container === 'undefined') {
 				container = jQuery('body');
@@ -199,7 +199,7 @@ var AppConnector,
 				app.translate('JS_DATE_MONTH_DECEMBER')
 			];
 
-			dateFieldElements.each(function() {
+			dateFieldElements.each(function () {
 				var element = $(this);
 				var input = element.find('.dateFieldInput');
 				var button = element.find('.dateFieldButton');
@@ -221,15 +221,15 @@ var AppConnector,
 					params_custom.locale.firstDay = fieldInfo['day-of-the-week-int'];
 				}
 				input.daterangepicker(params_custom);
-				button.click(function() {
+				button.click(function () {
 					input.focus();
 				});
-				input.on('apply.daterangepicker', function(ev, picker) {
+				input.on('apply.daterangepicker', function (ev, picker) {
 					$(this).val(picker.startDate.format(params_custom.locale.format));
 				});
 			});
 		},
-		registerChznSelectField: function(parent, view, params) {
+		registerChznSelectField: function (parent, view, params) {
 			var thisInstance = this;
 			if (typeof parent == 'undefined') {
 				parent = jQuery('body');
@@ -238,7 +238,7 @@ var AppConnector,
 				params = {};
 			}
 			var selectElement = jQuery('.chzn-select', parent);
-			selectElement.each(function() {
+			selectElement.each(function () {
 				if ($(this).prop('id').length == 0) {
 					$(this).attr(
 						'id',
@@ -252,7 +252,7 @@ var AppConnector,
 			selectElement
 				.filter('[multiple]')
 				.filter('[data-validation-engine*="validate"]')
-				.on('change', function(e) {
+				.on('change', function (e) {
 					jQuery(e.currentTarget).trigger('focusout');
 				});
 
@@ -267,12 +267,12 @@ var AppConnector,
 			params.placeholder_text_single = ' ' + app.translate('JS_SELECT_AN_OPTION');
 			selectElement.chosen(params);
 
-			selectElement.each(function() {
+			selectElement.each(function () {
 				var select = $(this);
 				// hide selected items in the chosen instance when item is hidden.
 				if (select.hasClass('hideSelected')) {
 					var ns = [];
-					select.find('optgroup,option').each(function(n, e) {
+					select.find('optgroup,option').each(function (n, e) {
 						if (jQuery(this).hasClass('d-none')) {
 							ns.push(n);
 						}
@@ -281,7 +281,7 @@ var AppConnector,
 						select
 							.next()
 							.find('.search-choice-close')
-							.each(function(n, e) {
+							.each(function (n, e) {
 								var element = jQuery(this);
 								var index = element.data('option-array-index');
 								if (jQuery.inArray(index, ns) != -1) {
@@ -291,7 +291,7 @@ var AppConnector,
 					}
 				}
 				if (select.attr('readonly') == 'readonly') {
-					select.on('chosen:updated', function() {
+					select.on('chosen:updated', function () {
 						if (select.attr('readonly')) {
 							var wasDisabled = select.is(':disabled');
 							var selectData = select.data('chosen');
@@ -314,7 +314,7 @@ var AppConnector,
 			var chosenSelectConainer = jQuery('.chosen-container-multi .default').css('width', '100%');
 			return chosenSelectConainer;
 		},
-		registerSelect2Field: function(parent, params) {
+		registerSelect2Field: function (parent, params) {
 			var thisInstance = this;
 			if (typeof parent == 'undefined') {
 				parent = jQuery('body');
@@ -326,7 +326,7 @@ var AppConnector,
 			params.language = {};
 			//params.theme = "bootstrap";
 			params.width = '100%';
-			selectElement.each(function() {
+			selectElement.each(function () {
 				if ($(this).prop('id').length == 0) {
 					$(this).attr(
 						'id',
@@ -339,7 +339,7 @@ var AppConnector,
 				$(this).select2(params);
 			});
 		},
-		getUrlParam: function(name) {
+		getUrlParam: function (name) {
 			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 				sURLVariables = sPageURL.split('&'),
 				sParameterName,
@@ -353,20 +353,20 @@ var AppConnector,
 				}
 			}
 		},
-		generateRandomChar: function() {
+		generateRandomChar: function () {
 			var chars, newchar, rand;
 			chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ';
 			rand = Math.floor(Math.random() * chars.length);
 			return (newchar = chars.substring(rand, rand + 1));
 		},
-		registerSideLoading: function(body) {
+		registerSideLoading: function (body) {
 			$(document).pjax('a[href]:not(.loadPage)', 'div.bodyContent');
-			$(document).on('pjax:complete', function() {
+			$(document).on('pjax:complete', function () {
 				var pageController = app.getPageController();
 				if (pageController) pageController.registerEvents();
 			});
 		},
-		translate: function(key) {
+		translate: function (key) {
 			if (app.languageString[key] != undefined) {
 				return app.languageString[key];
 			} else {
@@ -380,7 +380,7 @@ var AppConnector,
 			}
 			return key;
 		},
-		registerDataTables: function(table, customParams) {
+		registerDataTables: function (table, customParams) {
 			if ($.fn.dataTable == undefined) {
 				return false;
 			}
@@ -416,7 +416,7 @@ var AppConnector,
 			$.extend($.fn.dataTable.defaults, params);
 			return table.DataTable();
 		},
-		getMainParams: function(param, json) {
+		getMainParams: function (param, json) {
 			if (app.cacheParams[param] == undefined) {
 				var value = $('#' + param).val();
 				app.cacheParams[param] = value;
@@ -431,15 +431,15 @@ var AppConnector,
 			}
 			return value;
 		},
-		setMainParams: function(param, value) {
+		setMainParams: function (param, value) {
 			app.cacheParams[param] = value;
 			$('#' + param).val(value);
 		},
-		registerModal: function(container) {
+		registerModal: function (container) {
 			if (typeof container === 'undefined') {
 				container = $('body');
 			}
-			container.off('click', '.js-show-modal').on('click', '.js-show-modal', function(e) {
+			container.off('click', '.js-show-modal').on('click', '.js-show-modal', function (e) {
 				e.preventDefault();
 				var currentElement = $(e.currentTarget);
 				var url = currentElement.data('url');
@@ -453,7 +453,7 @@ var AppConnector,
 					}
 					var modalWindowParams = {
 						url: url,
-						cb: function(container) {
+						cb: function (container) {
 							var call = currentElement.data('cb');
 							if (typeof call !== 'undefined') {
 								if (call.indexOf('.') !== -1) {
@@ -478,7 +478,7 @@ var AppConnector,
 				e.stopPropagation();
 			});
 		},
-		showModalWindow: function(data, url, cb, paramsObject) {
+		showModalWindow: function (data, url, cb, paramsObject) {
 			var thisInstance = this;
 			var id = 'globalmodal';
 			//null is also an object
@@ -501,15 +501,15 @@ var AppConnector,
 				cb = url;
 				url = false;
 			} else if (typeof url == 'object') {
-				cb = function() {};
+				cb = function () {};
 				paramsObject = url;
 				url = false;
 			}
 			if (typeof cb != 'function') {
-				cb = function() {};
+				cb = function () {};
 			}
 			if (typeof sendByAjaxCb != 'function') {
-				var sendByAjaxCb = function() {};
+				var sendByAjaxCb = function () {};
 			}
 
 			var container = jQuery('#' + id);
@@ -519,7 +519,7 @@ var AppConnector,
 			container = jQuery('<div></div>');
 			container.attr('id', id).addClass('modalContainer');
 
-			var showModalData = function(data) {
+			var showModalData = function (data) {
 				var params = {
 					show: true
 				};
@@ -533,12 +533,12 @@ var AppConnector,
 				container.html(data);
 
 				// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog.
-				$.fn.modal.Constructor.prototype.enforceFocus = function(e) {
+				$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
 					$(document)
 						.off('focusin.bs.modal') // guard against infinite focus loop
 						.on(
 							'focusin.bs.modal',
-							$.proxy(function(e) {
+							$.proxy(function (e) {
 								if ($(e.target).hasClass('select2-search__field')) {
 									return true;
 								}
@@ -547,7 +547,7 @@ var AppConnector,
 				};
 				var modalContainer = container.find('.modal:first');
 				thisInstance.registerDataTables(modalContainer.find('.dataTable'));
-				modalContainer.one('shown.bs.modal', function() {
+				modalContainer.one('shown.bs.modal', function () {
 					var backdrop = jQuery('.modal-backdrop');
 					if (backdrop.length > 1) {
 						jQuery('.modal-backdrop:not(:first)').remove();
@@ -560,11 +560,11 @@ var AppConnector,
 			if (data) {
 				showModalData(data);
 			} else {
-				jQuery.get(url).then(function(response) {
+				jQuery.get(url).then(function (response) {
 					showModalData(response);
 				});
 			}
-			container.one('hidden.bs.modal', function() {
+			container.one('hidden.bs.modal', function () {
 				container.remove();
 				var backdrop = jQuery('.modal-backdrop');
 				var modalContainers = jQuery('.modalContainer');
@@ -577,7 +577,7 @@ var AppConnector,
 			});
 			return container;
 		},
-		hideModalWindow: function(callback, id) {
+		hideModalWindow: function (callback, id) {
 			if (id == undefined) {
 				id = 'globalmodal';
 			}
@@ -586,7 +586,7 @@ var AppConnector,
 				return;
 			}
 			if (typeof callback != 'function') {
-				callback = function() {};
+				callback = function () {};
 			}
 			var modalContainer = container.find('.modal');
 			modalContainer.modal('hide');
@@ -597,13 +597,13 @@ var AppConnector,
 			}
 			modalContainer.one('hidden.bs.modal', callback);
 		},
-		registerAdditions: function($) {
-			$.fn.serializeFormData = function() {
+		registerAdditions: function ($) {
+			$.fn.serializeFormData = function () {
 				var form = $(this);
 				var values = form.serializeArray();
 				var data = {};
 				if (values) {
-					$(values).each(function(k, v) {
+					$(values).each(function (k, v) {
 						if (v.name in data && typeof data[v.name] != 'object') {
 							var element = form.find('[name="' + v.name + '"]');
 							//Only for muti select element we need to send array of values
@@ -622,7 +622,7 @@ var AppConnector,
 				}
 				// If data-type="autocomplete", pickup data-value="..." set
 				var autocompletes = $('[data-type="autocomplete"]', $(this));
-				$(autocompletes).each(function(i) {
+				$(autocompletes).each(function (i) {
 					var ac = $(autocompletes[i]);
 					data[ac.attr('name')] = ac.data('value');
 				});
@@ -633,7 +633,7 @@ var AppConnector,
 		 * Function to push down the error message size when validation is invoked
 		 * @params : form Element
 		 */
-		formAlignmentAfterValidation: function(form) {
+		formAlignmentAfterValidation: function (form) {
 			// to avoid hiding of error message under the fixed nav bar
 			var formError = form.find(".formError:not('.greenPopup'):first");
 			if (formError.length > 0) {
@@ -647,9 +647,9 @@ var AppConnector,
 				);
 			}
 		},
-		getRecordList: function(params, callback) {
-			app.showModalWindow(null, params, function() {
-				app.event.one('AfterSelectedRecordList', function(event, item) {
+		getRecordList: function (params, callback) {
+			app.showModalWindow(null, params, function () {
+				app.event.one('AfterSelectedRecordList', function (event, item) {
 					callback(item);
 				});
 			});
@@ -675,8 +675,8 @@ var AppConnector,
 			$('body').append(form);
 			form.submit();
 		},
-		registerMobileMenu: function(container) {
-			$('.js-sidebar-btn').on('click', e => {
+		registerMobileMenu: function (container) {
+			$('.js-sidebar-btn').on('click', (e) => {
 				let mobileMenu = container.find('.js-mobile-page');
 				let mobileMenuContent = container.find('.js-mobile-body');
 				if (mobileMenu.hasClass('c-menu-mobile')) {
@@ -713,7 +713,7 @@ var AppConnector,
 				console.error(errorThrown);
 			}
 		},
-		registerModalController: function() {
+		registerModalController: function () {
 			let modalContainer = $('#globalmodal .js-modal-data');
 			let modalClass = 'Base_' + modalContainer.data('view') + '_Js';
 			if (typeof window[modalClass] !== 'undefined') {
@@ -721,33 +721,39 @@ var AppConnector,
 				instance.registerEvents(modalContainer);
 			}
 		},
-		registerSubMenu: function() {
-			$('.js-submenu-toggler').on('click', e => {
+		registerSubMenu: function () {
+			$('.js-submenu-toggler').on('click', (e) => {
 				if (!$(e.currentTarget).hasClass('collapsed') && !$(e.target).closest('.toggler').length) {
 					window.location = $(e.currentTarget).attr('href');
 				}
 			});
 		},
+		/**
+		 * Set Pnotify defaults options
+		 */
 		setPnotifyDefaultOptions() {
-			PNotify.defaults.textTrusted = true;
+			PNotify.defaults.textTrusted = true; // *Trusted option enables html as parameter's value
 			PNotify.defaults.titleTrusted = true;
+			PNotify.defaults.sticker = false;
 			PNotify.defaults.styling = 'bootstrap4';
 			PNotify.defaults.icons = 'fontawesome5';
+			PNotify.defaults.delay = 3000;
+			PNotify.defaults.stack.maxOpen = 10;
+			PNotify.defaults.stack.spacing1 = 5;
+			PNotify.defaults.stack.spacing2 = 5;
+			PNotify.defaults.labels.close = app.vtranslate('JS_CLOSE');
+			PNotify.defaultModules.set(PNotifyBootstrap4, {});
+			PNotify.defaultModules.set(PNotifyFontAwesome5, {});
+			PNotify.defaultModules.set(PNotifyMobile, {});
 		},
 		registerIframeAndMoreContent() {
-			let showMoreModal = e => {
+			let showMoreModal = (e) => {
 				e.preventDefault();
 				e.stopPropagation();
 				const btn = $(e.currentTarget);
 				const message = btn.data('iframe')
-					? btn
-							.siblings('iframe')
-							.clone()
-							.show()
-					: btn
-							.closest('.js-more-content')
-							.find('.fullContent')
-							.html();
+					? btn.siblings('iframe').clone().show()
+					: btn.closest('.js-more-content').find('.fullContent').html();
 				bootbox.dialog({
 					message,
 					title: '<span class="mdi mdi-overscan"></span>  ' + app.translate('JS_FULL_TEXT'),
@@ -756,17 +762,17 @@ var AppConnector,
 						danger: {
 							label: '<span class="fas fa-times mr-1"></span>' + app.translate('JS_CLOSE'),
 							className: 'btn-danger',
-							callback: function() {}
+							callback: function () {}
 						}
 					}
 				});
 			};
 			$('.js-more').on('click', showMoreModal);
 			$(document).on('click', '.js-more', showMoreModal);
-		},
+		}
 	};
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
 	app.registerDatePicker();
