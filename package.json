@@ -56,7 +56,7 @@
     "sass-material-colors": "^0.0.5",
     "select2": "^4.0.8",
     "select2-theme-bootstrap4": "^1.0.0",
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.0.0",
     "chartjs-plugin-datalabels": "^0.7.0",
     "chartjs-plugin-funnel": "^1.1.5",
     "bootstrap-material-design": "^4.1.1",
