@@ -55,7 +55,7 @@ class WebUI
 				}
 				$componentName = $view;
 			}
-			if($action === 'Logout' && $module === 'Users' && !$userInstance->hasLogin() && !$request->isAjax()){
+			if ('Logout' === $action && 'Users' === $module && !$userInstance->hasLogin() && !$request->isAjax()) {
 				header('Location:index.php');
 				return false;
 			}
@@ -98,7 +98,7 @@ class WebUI
 
 	public function isInstalled(): bool
 	{
-		return '__CRM_PATH__' != Config::$crmUrl;
+		return '__CRM_PATH__' != Config::$apiUrl;
 	}
 
 	protected function triggerPreProcess($handler, $request)

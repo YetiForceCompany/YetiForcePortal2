@@ -2,6 +2,8 @@
 /**
  * Config class.
  *
+ * @package Config
+ *
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
@@ -15,7 +17,7 @@ namespace Conf;
 class Config
 {
 	/** @var string Crm URL. */
-	public static $crmUrl = '__CRM_PATH__';
+	public static $apiUrl = '__CRM_PATH__';
 
 	/** @var string Portal URL. */
 	public static $portalUrl = '__PORTAL_PATH__';

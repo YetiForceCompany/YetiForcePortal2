@@ -43,15 +43,12 @@ var AppConnector,
 			let view = app.getViewName();
 			let moduleClassName = moduleName + '_' + view + '_Js';
 			let extendModules = jQuery('#extendModules').val();
-			console.log(moduleClassName);
 			if (typeof window[moduleClassName] == 'undefined' && extendModules != undefined) {
 				moduleClassName = extendModules + '_' + view + '_Js';
 			}
-			console.log(moduleClassName);
 			if (typeof window[moduleClassName] == 'undefined') {
 				moduleClassName = 'Base_' + view + '_Js';
 			}
-			console.log(moduleClassName);
 			if (typeof window[moduleClassName] != 'undefined') {
 				return new window[moduleClassName]();
 			}

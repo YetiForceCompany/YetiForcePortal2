@@ -51,7 +51,7 @@ abstract class View extends Base
 		return true;
 	}
 
-	public function preProcess($display = true)
+	public function preProcess($display = true): void
 	{
 		$this->viewer->assign('PAGE_TITLE', $this->getPageTitle());
 		$this->viewer->assign('STYLES', $this->getHeaderCss());
@@ -178,7 +178,11 @@ abstract class View extends Base
 		$this->viewer->view($this->preProcessTplName(), $this->moduleName);
 	}
 
-	/** {@inheritdoc}  */
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @return string
+	 */
 	protected function preProcessTplName(): string
 	{
 		return 'Header.tpl';
@@ -201,7 +205,7 @@ abstract class View extends Base
 	}
 
 	/** {@inheritdoc} */
-	public function postProcess()
+	public function postProcess(): void
 	{
 		$this->viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
@@ -258,14 +262,14 @@ abstract class View extends Base
 			$fileName,
 			'libraries/jstree/dist/jstree.js',
 			'libraries/clockpicker/dist/bootstrap4-clockpicker.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/helper.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Field.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/resources/ProgressIndicator.js',
+			'layouts/resources/validator/BaseValidator.js',
+			'layouts/resources/validator/FieldValidator.js',
+			'layouts/resources/helper.js',
+			'layouts/resources/Field.js',
+			'layouts/resources/Connector.js',
+			'layouts/resources/app.js',
+			'layouts/resources/Fields.js',
+			'layouts/resources/ProgressIndicator.js',
 			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
 			'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
 			'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",

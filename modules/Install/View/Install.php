@@ -1,6 +1,8 @@
 <?php
 /**
- * Install view class.
+ * Install view file.
+ *
+ * @package View
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -13,10 +15,14 @@ use App\AppException;
 use App\Purifier;
 use App\Request;
 
+/**
+ * Install view  class.
+ */
 class Install extends \App\Controller\View
 {
 	use \App\Controller\ExposeMethodTrait;
 
+	/** {@inheritdoc} */
 	public function __construct(Request $request)
 	{
 		parent::__construct($request);
@@ -24,11 +30,13 @@ class Install extends \App\Controller\View
 		$this->exposeMethod('step2');
 	}
 
+	/** {@inheritdoc} */
 	public function loginRequired(): bool
 	{
 		return false;
 	}
 
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		if (\YF\Modules\Install\Model\Install::isInstalled()) {
@@ -37,7 +45,8 @@ class Install extends \App\Controller\View
 		return true;
 	}
 
-	public function preProcess($display = true)
+	/** {@inheritdoc} */
+	public function preProcess($display = true): void
 	{
 		$this->setLanguage();
 		parent::preProcess(false);
@@ -46,16 +55,13 @@ class Install extends \App\Controller\View
 		}
 	}
 
-	/**
-	 * Get preprocess tpl name.
-	 *
-	 * @return string
-	 */
+	/** {@inheritdoc}  */
 	protected function preProcessTplName(): string
 	{
 		return 'InstallPreProcess.tpl';
 	}
 
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$mode = $this->request->getMode();
@@ -65,25 +71,36 @@ class Install extends \App\Controller\View
 		$this->step1();
 	}
 
-	public function step1()
+	/**
+	 * Step 1.
+	 *
+	 * @return void
+	 */
+	public function step1(): void
 	{
 		$module = $this->request->getModule();
 		$this->viewer->view('InstallStep1.tpl', $module);
 	}
 
-	public function step2()
+	public function step2(): void
 	{
 		$module = $this->request->getModule();
 		$this->viewer->view('InstallStep2.tpl', $module);
 	}
 
-	public function postProcess($display = true)
+	/** {@inheritdoc} */
+	public function postProcess($display = true): void
 	{
 		$module = $this->request->getModule();
 		$this->viewer->view('InstallPostProcess.tpl', $module);
 		parent::postProcess($display);
 	}
 
+	/**
+	 * Set user language.
+	 *
+	 * @return void
+	 */
 	public function setLanguage()
 	{
 		if (!$this->request->isEmpty('lang')) {
@@ -103,11 +120,7 @@ class Install extends \App\Controller\View
 	{
 		$mode = $this->request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
-			if ('step1' === $mode) {
-				$this->request->validateReadAccess();
-			} else {
-				$this->request->validateWriteAccess();
-			}
+			$this->request->validateWriteAccess();
 		}
 	}
 }

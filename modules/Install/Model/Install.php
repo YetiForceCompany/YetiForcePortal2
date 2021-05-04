@@ -1,6 +1,8 @@
 <?php
 /**
- * Basic module model class.
+ * Install model file.
+ *
+ * @package Model
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -13,11 +15,14 @@ use App\Api;
 use App\Config;
 use App\Purifier;
 
+/**
+ * Install model class.
+ */
 class Install
 {
 	protected $configPath = 'config/Config.php';
 	protected $config = [
-		'crmUrl' => '__CRM_PATH__',
+		'apiUrl' => '__CRM_PATH__',
 		'apiKey' => '__API_KEY__',
 		'serverName' => '__SERVER_NAME__',
 		'serverPass' => '__SERVER_PASS__',
@@ -31,15 +36,15 @@ class Install
 
 	public static function isInstalled()
 	{
-		return '__CRM_PATH__' != Config::get('crmUrl');
+		return '__CRM_PATH__' !== Config::get('apiUrl');
 	}
 
 	/**
 	 * Checks connection.
 	 *
-	 * @return void
+	 * @return bool
 	 */
-	public function check()
+	public function check(): bool
 	{
 		$response = Api::getInstance()->call('Install', ['data' => 'Install Wizard'], 'PUT');
 		return 'Install Wizard' === $response;
@@ -52,14 +57,14 @@ class Install
 	 *
 	 * @return void
 	 */
-	public function save(\App\Request $request)
+	public function save(\App\Request $request): void
 	{
 		$path = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . $this->configPath;
 		$configFile = file_get_contents($path);
 		foreach ($this->config as $key => $value) {
 			$configFile = str_replace('\'' . $value . '\'', var_export($request->getByType($key, Purifier::TEXT), true), $configFile);
 		}
-		$webRoot = ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
+		$webRoot = ($_SERVER['HTTP_HOST']) ?: $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 		$webRoot .= $_SERVER['REQUEST_URI'];
 		$webRoot = str_replace('index.php', '', $webRoot);
 		$webRoot = (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://') . $webRoot;

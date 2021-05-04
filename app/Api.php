@@ -36,7 +36,7 @@ class Api
 	 */
 	public function __construct(array $header, array $options)
 	{
-		$this->url = Config::$crmUrl . 'webservice/';
+		$this->url = Config::$apiUrl;
 		$this->options = $options;
 		$this->header = $header;
 	}
@@ -176,7 +176,7 @@ class Api
 	public function encryptData($data): string
 	{
 		$publicKey = 'file://' . ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . Config::$publicKey;
-		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey, \OPENSSL_PKCS1_OAEP_PADDING);
+		openssl_public_encrypt(Json::encode($data), $encrypted, $publicKey, OPENSSL_PKCS1_OAEP_PADDING);
 		return $encrypted;
 	}
 
@@ -194,7 +194,7 @@ class Api
 			throw new AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
-		openssl_private_decrypt($data, $decrypted, $privateKey, \OPENSSL_PKCS1_OAEP_PADDING);
+		openssl_private_decrypt($data, $decrypted, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
 		return $decrypted;
 	}
 

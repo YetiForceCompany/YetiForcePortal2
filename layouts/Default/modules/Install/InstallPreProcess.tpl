@@ -15,20 +15,10 @@
 		<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}"/>
 	{/foreach}
 </head>
-<body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME} p-2">
+<body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME} p-4">
+	<input type="hidden" id="view" value="{$VIEW}">
+	<input type="hidden" id="module" value="{$MODULE_NAME}">
 	<div class="">
-		<div class="d-flex py-2">
-			<div class="col-md-6">
-				<div class="logoContainer">
-					<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="head float-right">
-					<h3>{\App\Language::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
-				</div>
-			</div>
-		</div>
 		<div class="row main-container">
 			<div class="container-fluid">
 <!-- /tpl-Install-InstallPreProcess -->
