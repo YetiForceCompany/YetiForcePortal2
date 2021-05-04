@@ -1,6 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 window.App = {};
 var AppConnector,
+	App = { Fields: { Picklist: {} } },
 	app = {
 		/**
 		 * Events in application
@@ -28,6 +29,13 @@ var AppConnector,
 		 */
 		getModuleName: function () {
 			return app.getMainParams('module');
+		},
+		/**
+		 * Function to get the module name. This function will get the value from element which has id module
+		 * @return : string - module name
+		 */
+		getParentModuleName: function () {
+			return this.getMainParams('parent');
 		},
 		/**
 		 * Function returns the current view name
@@ -109,7 +117,7 @@ var AppConnector,
 		},
 		registerSelectField: function (container) {
 			this.registerChznSelectField(container);
-			this.registerSelect2Field(container);
+			App.Fields.Picklist.changeSelectElementView(container);
 		},
 		registerTimeField: function (container) {
 			var thisInstance = this;
@@ -477,96 +485,154 @@ var AppConnector,
 				e.stopPropagation();
 			});
 		},
+
+		/**
+		 * Show modal
+		 * @param {string} data
+		 * @param {object} container
+		 * @param {object} paramsObject
+		 * @param {function} cb
+		 * @param {string} url
+		 * @param {function} sendByAjaxCb
+		 */
+		showModalData(data, container, paramsObject, cb, url, sendByAjaxCb) {
+			const thisInstance = this;
+			let params = {
+				show: true
+			};
+			if ($('#backgroundClosingModal').val() !== 1) {
+				params.backdrop = true;
+			}
+			if (typeof paramsObject === 'object') {
+				container.css(paramsObject);
+				params = $.extend(params, paramsObject);
+			}
+			container.html(data);
+			if (container.find('.modal').hasClass('static')) {
+				params.backdrop = 'static';
+			}
+			// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog.
+			$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
+				$(document)
+					.off('focusin.bs.modal') // guard against infinite focus loop
+					.on(
+						'focusin.bs.modal',
+						$.proxy(function (e) {
+							if ($(e.target).hasClass('select2-search__field')) {
+								return true;
+							}
+						}, this)
+					);
+			};
+			const modalContainer = container.find('.modal:first');
+			modalContainer.one('shown.bs.modal', function () {
+				var backdrop = jQuery('.modal-backdrop');
+				if (backdrop.length > 1) {
+					jQuery('.modal-backdrop:not(:first)').remove();
+				}
+				cb(modalContainer);
+			});
+			$('body').append(container);
+			modalContainer.modal(params);
+			thisInstance.registerModalEvents(modalContainer, sendByAjaxCb);
+			thisInstance.registerDataTables(modalContainer.find('.dataTable'));
+		},
+
+		registerModalEvents: function (container, sendByAjaxCb) {
+			var form = container.find('form');
+			var validationForm = false;
+			if (form.hasClass('validateForm')) {
+				form.validationEngine(app.validationEngineOptions);
+				validationForm = true;
+			}
+			if (form.hasClass('sendByAjax')) {
+				form.on('submit', function (e) {
+					var save = true;
+					e.preventDefault();
+					if (validationForm && form.data('jqv').InvalidFields.length > 0) {
+						app.formAlignmentAfterValidation(form);
+						save = false;
+					}
+					if (save) {
+						var progressIndicatorElement = $.progressIndicator({
+							blockInfo: { enabled: true }
+						});
+						var formData = form.serializeFormData();
+						AppConnector.request(formData)
+							.done(function (responseData) {
+								sendByAjaxCb(formData, responseData);
+								if (responseData.success && responseData.result) {
+									if (responseData.result.notify) {
+										Vtiger_Helper_Js.showMessage(responseData.result.notify);
+									}
+									if (responseData.result.procesStop) {
+										progressIndicatorElement.progressIndicator({ mode: 'hide' });
+										return false;
+									}
+								}
+								app.hideModalWindow();
+								progressIndicatorElement.progressIndicator({ mode: 'hide' });
+							})
+							.fail(function () {
+								progressIndicatorElement.progressIndicator({ mode: 'hide' });
+							});
+					}
+				});
+			}
+		},
+
 		showModalWindow: function (data, url, cb, paramsObject) {
-			var thisInstance = this;
-			var id = 'globalmodal';
+			if (window.parent !== window) {
+				this.childFrame = true;
+				window.parent.app.showModalWindow(data, url, cb, paramsObject);
+				return;
+			}
+			const thisInstance = this;
+			Window.lastModalId = 'modal_' + Math.random().toString(36).substr(2, 9);
 			//null is also an object
-			if (typeof data == 'object' && data != null && !(data instanceof jQuery)) {
+			if (typeof data === 'object' && data != null && !(data instanceof $)) {
 				if (data.id != undefined) {
-					id = data.id;
+					Window.lastModalId = data.id;
 				}
 				paramsObject = data.css;
 				cb = data.cb;
 				url = data.url;
-				if (data.sendByAjaxCb != 'undefined') {
+				if (data.sendByAjaxCb !== 'undefined') {
 					var sendByAjaxCb = data.sendByAjaxCb;
 				}
 				data = data.data;
 			}
-			if (typeof url == 'function') {
-				if (typeof cb == 'object') {
+			if (typeof url === 'function') {
+				if (typeof cb === 'object') {
 					paramsObject = cb;
 				}
 				cb = url;
 				url = false;
-			} else if (typeof url == 'object') {
+			} else if (typeof url === 'object') {
 				cb = function () {};
 				paramsObject = url;
 				url = false;
 			}
-			if (typeof cb != 'function') {
+			if (typeof cb !== 'function') {
 				cb = function () {};
 			}
-			if (typeof sendByAjaxCb != 'function') {
+			if (typeof sendByAjaxCb !== 'function') {
 				var sendByAjaxCb = function () {};
 			}
-
-			var container = jQuery('#' + id);
+			if (paramsObject !== undefined && paramsObject.modalId !== undefined) {
+				Window.lastModalId = paramsObject.modalId;
+			}
+			// prevent duplicate hash generation
+			let container = $('#' + Window.lastModalId);
 			if (container.length) {
 				container.remove();
 			}
-			container = jQuery('<div></div>');
-			container.attr('id', id).addClass('modalContainer');
-
-			var showModalData = function (data) {
-				var params = {
-					show: true
-				};
-				if (jQuery('#backgroundClosingModal').val() != 1) {
-					params.backdrop = 'static';
-				}
-				if (typeof paramsObject == 'object') {
-					container.css(paramsObject);
-					params = jQuery.extend(params, paramsObject);
-				}
-				container.html(data);
-
-				// In a modal dialog elements can be specified which can receive focus even though they are not descendants of the modal dialog.
-				$.fn.modal.Constructor.prototype.enforceFocus = function (e) {
-					$(document)
-						.off('focusin.bs.modal') // guard against infinite focus loop
-						.on(
-							'focusin.bs.modal',
-							$.proxy(function (e) {
-								if ($(e.target).hasClass('select2-search__field')) {
-									return true;
-								}
-							}, this)
-						);
-				};
-				var modalContainer = container.find('.modal:first');
-				thisInstance.registerDataTables(modalContainer.find('.dataTable'));
-				modalContainer.one('shown.bs.modal', function () {
-					var backdrop = jQuery('.modal-backdrop');
-					if (backdrop.length > 1) {
-						jQuery('.modal-backdrop:not(:first)').remove();
-					}
-					cb(modalContainer);
-				});
-				jQuery('body').append(container);
-				modalContainer.modal(params);
-			};
-			if (data) {
-				showModalData(data);
-			} else {
-				jQuery.get(url).then(function (response) {
-					showModalData(response);
-				});
-			}
+			container = $('<div></div>');
+			container.attr('id', Window.lastModalId).addClass('modalContainer js-modal-container');
 			container.one('hidden.bs.modal', function () {
 				container.remove();
-				var backdrop = jQuery('.modal-backdrop');
-				var modalContainers = jQuery('.modalContainer');
+				let backdrop = $('.modal-backdrop');
+				let modalContainers = $('.modalContainer');
 				if (modalContainers.length == 0 && backdrop.length) {
 					backdrop.remove();
 				}
@@ -574,6 +640,13 @@ var AppConnector,
 					$('body').addClass('modal-open');
 				}
 			});
+			if (data) {
+				thisInstance.showModalData(data, container, paramsObject, cb, url, sendByAjaxCb);
+			} else {
+				$.get(url).done(function (response) {
+					thisInstance.showModalData(response, container, paramsObject, cb, url, sendByAjaxCb);
+				});
+			}
 			return container;
 		},
 		hideModalWindow: function (callback, id) {

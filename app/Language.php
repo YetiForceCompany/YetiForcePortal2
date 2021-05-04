@@ -35,7 +35,7 @@ class Language
 			$currentLanguage = static::getLanguage();
 		}
 		//decoding for Start Date & Time and End Date & Time
-		if (!is_array($key)) {
+		if (!\is_array($key)) {
 			$key = html_entity_decode($key);
 		}
 		$translatedString = static::getLanguageTranslatedString($currentLanguage, $key, $module);
@@ -52,6 +52,24 @@ class Language
 			$translatedString = $key;
 		}
 		return $translatedString;
+	}
+
+	/**
+	 * Functions that gets translated string by $args.
+	 *
+	 * @param string $key        - string which need to be translated
+	 * @param string $moduleName - module scope in which the translation need to be check
+	 *
+	 * @return string - translated string
+	 */
+	public static function translateArgs(string $key, string $moduleName = 'Basic'): string
+	{
+		$formattedString = static::translate($key, $moduleName);
+		$args = \array_slice(\func_get_args(), 2);
+		if (\is_array($args) && !empty($args)) {
+			$formattedString = \call_user_func_array('vsprintf', [$formattedString, $args]);
+		}
+		return $formattedString;
 	}
 
 	/**
@@ -204,6 +222,6 @@ class Language
 			$userInstance = User::getUser();
 			self::$modules = $userInstance->getModulesList();
 		}
-		return isset(self::$modules[$module]) ? self::$modules[$module] : $module;
+		return self::$modules[$module] ?? $module;
 	}
 }

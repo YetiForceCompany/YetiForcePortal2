@@ -1,7 +1,4 @@
 <?php
-
-namespace App\Installer;
-
 /**
  * Get info about libraries file.
  *
@@ -11,6 +8,8 @@ namespace App\Installer;
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
  */
+
+namespace App\Installer;
 
 /**
  * Get info about libraries class.

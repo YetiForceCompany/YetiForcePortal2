@@ -74,6 +74,9 @@ abstract class View extends Base
 		if ('Login' !== $this->request->getByType('view', Purifier::ALNUM) && 'Users' !== $this->moduleName) {
 			$title = \App\Language::translateModule($this->moduleName);
 			$pageTitle = $this->getBreadcrumbTitle();
+			if (isset($this->pageTitle)) {
+				$pageTitle = \App\Language::translate($this->pageTitle);
+			}
 			if ($pageTitle) {
 				$title .= ' - ' . $pageTitle;
 			}
