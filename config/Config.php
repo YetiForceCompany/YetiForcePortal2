@@ -17,19 +17,19 @@ namespace Conf;
 class Config
 {
 	/** @var string CRM API URL ex. https://gitdeveloper.yetiforce.com/webservice/. */
-	public static $apiUrl = 'http://yeti/webservice/';
+	public static $apiUrl = '__API_PATH__';
 
 	/** @var string Portal URL. */
-	public static $portalUrl = 'http://portal2/';
+	public static $portalUrl = '__PORTAL_PATH__';
 
 	/** @var string Web service - Application KEY. */
-	public static $apiKey = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
+	public static $apiKey = '__API_KEY__';
 
 	/** @var string Web service - Application login. */
-	public static $serverName = 'portal';
+	public static $serverName = '__SERVER_NAME__';
 
 	/** @var string Web service - Application password. */
-	public static $serverPass = 'portal';
+	public static $serverPass = '__SERVER_PASS__';
 
 	/** @var string Additional message in the header */
 	public static $headerMessage = '';
