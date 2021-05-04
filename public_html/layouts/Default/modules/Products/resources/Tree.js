@@ -1,14 +1,12 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-"use strict";
+'use strict';
 window.Products_Tree_Js = class {
-	constructor(container = $(".js-products-container")) {
+	constructor(container = $('.js-products-container')) {
 		this.container = container;
-		this.checkStockLevels = this.container.data("check-stock-levels");
-		this.page = this.container.find(".js-pagination-list").data("page") || 1;
-		this.treeInstance = $(".js-tree-container");
-		this.shoppingCartBadge = $(
-			".js-body-header .js-shopping-cart .js-badge"
-		);
+		this.checkStockLevels = this.container.data('check-stock-levels');
+		this.page = this.container.find('.js-pagination-list').data('page') || 1;
+		this.treeInstance = $('.js-tree-container');
+		this.shoppingCartBadge = $('.js-body-header .js-shopping-cart .js-badge');
 		this.isTreeLoaded = false;
 		window.Products_Tree_Js.instance = this;
 	}
@@ -16,17 +14,15 @@ window.Products_Tree_Js = class {
 	 * Get instance of Tree.
 	 * @returns {Tree}
 	 */
-	static getInstance(container = $(".js-products-container")) {
-		if (typeof window.Products_Tree_Js.instance === "undefined") {
-			window.Products_Tree_Js.instance = new window.Products_Tree_Js(
-				container
-			);
+	static getInstance(container = $('.js-products-container')) {
+		if (typeof window.Products_Tree_Js.instance === 'undefined') {
+			window.Products_Tree_Js.instance = new window.Products_Tree_Js(container);
 		}
 		return window.Products_Tree_Js.instance;
 	}
-	init(container = $(".js-products-container")) {
+	init(container = $('.js-products-container')) {
 		this.container = container;
-		this.treeInstance = $(".js-tree-container");
+		this.treeInstance = $('.js-tree-container');
 		this.registerEvents();
 	}
 	registerEvents() {
@@ -38,61 +34,52 @@ window.Products_Tree_Js = class {
 		this.registerClearButton();
 	}
 	registerClearButton() {
-		$('.js-tree-clear').on('click', e => {
-			this.treeInstance.jstree("deselect_all")
-			$(e.target).addClass('d-none')
-		})
+		$('.js-tree-clear').on('click', (e) => {
+			this.treeInstance.jstree('deselect_all');
+			$(e.target).addClass('d-none');
+		});
 	}
 	registerTreeEvents() {
-		this.treeInstance.on("changed.jstree", (e, data) => {
+		this.treeInstance.on('changed.jstree', (e, data) => {
 			if (data.selected.length) {
-				$('.js-tree-clear').removeClass('d-none')
+				$('.js-tree-clear').removeClass('d-none');
 			}
 			this.loadPage();
 		});
 	}
 	registerPagination() {
-		this.container.find(".js-page-item").on("click", e => {
-			this.page = parseInt($(e.currentTarget).data("page"));
+		this.container.find('.js-page-item').on('click', (e) => {
+			this.page = parseInt($(e.currentTarget).data('page'));
 			this.loadPage();
 		});
-		this.container.find(".js-page-next").on("click", e => {
-			this.page =
-				parseInt(
-					this.container.find(".js-pagination-list").data("page")
-				) + 1;
+		this.container.find('.js-page-next').on('click', (e) => {
+			this.page = parseInt(this.container.find('.js-pagination-list').data('page')) + 1;
 			this.loadPage();
 		});
-		this.container.find(".js-page-previous").on("click", e => {
-			this.page =
-				parseInt(
-					this.container.find(".js-pagination-list").data("page")
-				) - 1;
+		this.container.find('.js-page-previous').on('click', (e) => {
+			this.page = parseInt(this.container.find('.js-pagination-list').data('page')) - 1;
 			this.loadPage();
 		});
 	}
 	getSearchParams() {
 		let search = [];
-		let searchValue = $(".js-search").val();
+		let searchValue = $('.js-search').val();
 		if (searchValue) {
 			search.push({
-				fieldName: "productname",
+				fieldName: 'productname',
 				value: searchValue,
-				operator: "c"
+				operator: 'c'
 			});
 		}
 		let selectedCategories = [];
-		$.each(
-			this.treeInstance.jstree("get_selected", true),
-			(index, value) => {
-				selectedCategories.push(value["original"]["tree"]);
-			}
-		);
+		$.each(this.treeInstance.jstree('get_selected', true), (index, value) => {
+			selectedCategories.push(value['original']['tree']);
+		});
 		if (selectedCategories[0]) {
 			search.push({
-				fieldName: "category_multipicklist",
+				fieldName: 'category_multipicklist',
 				value: selectedCategories[0],
-				operator: "c"
+				operator: 'c'
 			});
 		}
 		$('.js-advance-filter select.select2').each(function (index, e) {
@@ -101,10 +88,9 @@ window.Products_Tree_Js = class {
 				search.push({
 					fieldName: $(this).attr('name'),
 					value: $(this).val(),
-					operator: "e"
+					operator: 'e'
 				});
 			}
-
 		});
 		return search;
 	}
@@ -117,10 +103,10 @@ window.Products_Tree_Js = class {
 				search: this.getSearchParams(),
 				page: this.page
 			},
-			type: "GET"
-		}).done(data => {
-			progressInstance.progressIndicator({ mode: "hide" });
-			let container = $(".js-main-container");
+			type: 'GET'
+		}).done((data) => {
+			progressInstance.progressIndicator({ mode: 'hide' });
+			let container = $('.js-main-container');
 			container.html(data);
 			this.container = container;
 			this.registerAmountChange();
@@ -129,34 +115,34 @@ window.Products_Tree_Js = class {
 		});
 	}
 	registerSearch() {
-		$(".js-search-button").on("click", e => {
+		$('.js-search-button').on('click', (e) => {
 			this.page = 1;
 			this.loadPage();
 		});
-		$(".js-search").on("keypress", e => {
+		$('.js-search').on('keypress', (e) => {
 			if (e.keyCode == 13) {
 				this.page = 1;
 				this.loadPage();
 			}
 		});
-		$(".js-search-cancel").on("click", e => {
-			$(".js-search").val("");
+		$('.js-search-cancel').on('click', (e) => {
+			$('.js-search').val('');
 			this.loadPage();
 		});
-		$('.js-advance-filter .select2').on('change', e => {
+		$('.js-advance-filter .select2').on('change', (e) => {
 			this.page = 1;
 			this.loadPage();
 		});
 	}
 	registerAmountChange() {
-		this.container.find(".js-amount-inc").on("click", e => {
-			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
+		this.container.find('.js-amount-inc').on('click', (e) => {
+			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
 			let amountVal = amount.val();
 			amountVal++;
 			amount.val(amountVal);
 		});
-		this.container.find(".js-amount-dec").on("click", e => {
-			let amount = this.getCartItem(e.currentTarget).find(".js-amount");
+		this.container.find('.js-amount-dec').on('click', (e) => {
+			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
 			let amountVal = amount.val();
 			amountVal--;
 			if (amountVal >= 0) {
@@ -165,51 +151,43 @@ window.Products_Tree_Js = class {
 		});
 	}
 	registerButtonAddToCart() {
-		this.container.find(".js-add-to-cart").on("click", e => {
+		this.container.find('.js-add-to-cart').on('click', (e) => {
 			let product = this.getCartItem(e.currentTarget);
-			let amount = product.find(".js-amount").val();
+			let amount = product.find('.js-amount').val();
 			if (parseInt(amount) <= 0) {
-				return
+				return;
 			}
-			let amountInShoppingCart = parseFloat(
-				product.data("amountInShoppingCart")
-			);
-			let qtyinstock = parseFloat(product.data("qtyinstock"));
-			if (
-				this.checkStockLevels &&
-				qtyinstock - amountInShoppingCart - amount < 0
-			) {
-				Vtiger_Helper_Js.showPnotify({
-					text: app.translate("JS_NO_SUCH_QUANTITY"),
-					type: "error"
+			let amountInShoppingCart = parseFloat(product.data('amountInShoppingCart'));
+			let qtyinstock = parseFloat(product.data('qtyinstock'));
+			if (this.checkStockLevels && qtyinstock - amountInShoppingCart - amount < 0) {
+				app.showNotify({
+					text: app.translate('JS_NO_SUCH_QUANTITY'),
+					type: 'error'
 				});
 			} else {
-				const amount = product.find(".js-amount").val()
-				this.cartMethod("addToCart", product.data("id"), {
+				const amount = product.find('.js-amount').val();
+				this.cartMethod('addToCart', product.data('id'), {
 					amount: amount,
-					priceNetto: product.data("priceNetto"),
-					priceGross: product.data("priceGross")
-				}).done(data => {
-					if (data["result"]['error']) {
-						Vtiger_Helper_Js.showPnotify({
-							text: data["result"]['error'],
-							type: "error"
+					priceNetto: product.data('priceNetto'),
+					priceGross: product.data('priceGross')
+				}).done((data) => {
+					if (data['result']['error']) {
+						app.showNotify({
+							text: data['result']['error'],
+							type: 'error'
 						});
 					} else {
-						this.shoppingCartBadge.text(
-							data["result"]["numberOfItems"]
-						);
-						const notifyText = amount > 1 ? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amount) : app.translate('JS_ADDED_ITEM_TO_CART')
-						Vtiger_Helper_Js.showPnotify({
+						this.shoppingCartBadge.text(data['result']['numberOfItems']);
+						const notifyText =
+							amount > 1
+								? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amount)
+								: app.translate('JS_ADDED_ITEM_TO_CART');
+						app.showNotify({
 							text: notifyText,
-							type: "success"
+							type: 'success'
 						});
-						product.data(
-							"amountInShoppingCart",
-							amountInShoppingCart + amount
-						);
+						product.data('amountInShoppingCart', amountInShoppingCart + amount);
 					}
-
 				});
 			}
 		});
@@ -220,18 +198,18 @@ window.Products_Tree_Js = class {
 			$.extend(
 				{
 					module: app.getModuleName(),
-					action: "ShoppingCart",
+					action: 'ShoppingCart',
 					mode: mode,
 					record: recordId
 				},
 				params
 			)
-		).done(data => {
+		).done((data) => {
 			deferred.resolve(data);
 		});
 		return deferred.promise();
 	}
 	getCartItem(element) {
-		return $(element).closest(".js-cart-item");
+		return $(element).closest('.js-cart-item');
 	}
 };

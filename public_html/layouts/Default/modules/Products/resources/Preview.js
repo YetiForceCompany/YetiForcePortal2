@@ -3,7 +3,7 @@
 window.Products_Preview_Js = class {
 	constructor(container = $('.js-preview')) {
 		this.container = container;
-		this.checkStockLevels = this.container.data("check-stock-levels");
+		this.checkStockLevels = this.container.data('check-stock-levels');
 		this.shoppingCartBadge = $('.js-body-header .js-shopping-cart .js-badge');
 	}
 	cartMethod(mode, recordId, params = {}) {
@@ -18,7 +18,7 @@ window.Products_Preview_Js = class {
 				},
 				params
 			)
-		).done(data => {
+		).done((data) => {
 			deferred.resolve(data);
 		});
 		return deferred.promise();
@@ -27,13 +27,13 @@ window.Products_Preview_Js = class {
 		return $(element).closest('.js-cart-item');
 	}
 	registerAmountChange() {
-		this.container.find('.js-amount-inc').on('click', e => {
+		this.container.find('.js-amount-inc').on('click', (e) => {
 			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
 			let amountVal = amount.val();
 			amountVal++;
 			amount.val(amountVal);
 		});
-		this.container.find('.js-amount-dec').on('click', e => {
+		this.container.find('.js-amount-dec').on('click', (e) => {
 			let amount = this.getCartItem(e.currentTarget).find('.js-amount');
 			let amountVal = amount.val();
 			amountVal--;
@@ -43,7 +43,7 @@ window.Products_Preview_Js = class {
 		});
 	}
 	registerButtonAddToCart() {
-		this.container.find('.js-add-to-cart').on('click', e => {
+		this.container.find('.js-add-to-cart').on('click', (e) => {
 			let product = this.container;
 			let amountVal = product.find('.js-amount').val();
 			if (parseInt(amountVal) <= 0) {
@@ -52,7 +52,7 @@ window.Products_Preview_Js = class {
 			let amountInShoppingCart = parseFloat(product.data('amountInShoppingCart'));
 			let qtyinstock = parseFloat(product.data('qtyinstock'));
 			if (this.checkStockLevels && qtyinstock - amountInShoppingCart - amountVal < 0) {
-				Vtiger_Helper_Js.showPnotify({
+				app.showNotify({
 					text: app.translate('JS_NO_SUCH_QUANTITY'),
 					type: 'error'
 				});
@@ -62,9 +62,9 @@ window.Products_Preview_Js = class {
 					amount: product.find('.js-amount').val(),
 					priceNetto: product.data('priceNetto'),
 					priceGross: product.data('priceGross')
-				}).done(data => {
+				}).done((data) => {
 					if (data['result']['error']) {
-						Vtiger_Helper_Js.showPnotify({
+						app.showNotify({
 							text: data['result']['error'],
 							type: 'error'
 						});
@@ -74,7 +74,7 @@ window.Products_Preview_Js = class {
 							amountVal > 1
 								? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amountVal)
 								: app.translate('JS_ADDED_ITEM_TO_CART');
-						Vtiger_Helper_Js.showPnotify({
+						app.showNotify({
 							text: notifyText,
 							type: 'success'
 						});
@@ -85,7 +85,7 @@ window.Products_Preview_Js = class {
 		});
 	}
 	registerButtonAddToCartForBundles() {
-		this.container.find('.js-add-to-cart-bundles').on('click', e => {
+		this.container.find('.js-add-to-cart-bundles').on('click', (e) => {
 			let product = this.getCartItem(e.currentTarget);
 			let amount = product.find('.js-amount').val();
 			if (parseInt(amount) <= 0) {
@@ -94,7 +94,7 @@ window.Products_Preview_Js = class {
 			let amountInShoppingCart = parseFloat(product.data('amountInShoppingCart'));
 			let qtyinstock = parseFloat(product.data('qtyinstock'));
 			if (this.checkStockLevels && qtyinstock - amountInShoppingCart - amount < 0) {
-				Vtiger_Helper_Js.showPnotify({
+				app.showNotify({
 					text: app.translate('JS_NO_SUCH_QUANTITY'),
 					type: 'error'
 				});
@@ -104,9 +104,9 @@ window.Products_Preview_Js = class {
 					amount: amount,
 					priceNetto: product.data('priceNetto'),
 					priceGross: product.data('priceGross')
-				}).done(data => {
+				}).done((data) => {
 					if (data['result']['error']) {
-						Vtiger_Helper_Js.showPnotify({
+						app.showNotify({
 							text: data['result']['error'],
 							type: 'error'
 						});
@@ -116,7 +116,7 @@ window.Products_Preview_Js = class {
 							amount > 1
 								? app.translate('JS_ADDED_ITEMS_TO_CART').replace('${amount}', amount)
 								: app.translate('JS_ADDED_ITEM_TO_CART');
-						Vtiger_Helper_Js.showPnotify({
+						app.showNotify({
 							text: notifyText,
 							type: 'success'
 						});

@@ -6,12 +6,12 @@ window.Install_Install_Js = class {
 			params.module = app.getModuleName();
 			params.action = 'Install';
 			const progressInstance = $.progressIndicatorShow();
-			AppConnector.request(params).done(data => {
-				progressInstance.progressIndicator({ mode: "hide" });
+			AppConnector.request(params).done((data) => {
+				progressInstance.progressIndicator({ mode: 'hide' });
 				if (typeof data.result.error !== 'undefined') {
-					Vtiger_Helper_Js.showPnotify({
+					app.showNotify({
 						text: data.result.error,
-						type: "error"
+						type: 'error'
 					});
 				} else if (typeof data.result.url !== 'undefined') {
 					app.openUrl(data.result.url);
@@ -22,8 +22,8 @@ window.Install_Install_Js = class {
 	registerEvents() {
 		this.registerSave();
 		$('select[name="lang"]').change((e) => {
-			$('input[name="mode"]').val("step1");
-			$("form").submit();
+			$('input[name="mode"]').val('step1');
+			$('form').submit();
 		});
-	};
+	}
 };
