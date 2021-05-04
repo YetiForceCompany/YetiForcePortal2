@@ -21,6 +21,9 @@
 <img width="20%" src="https://support.crowdin.com/assets/badges/localization-at-transparent@1x.svg" alt="crowdin Localization Management Platform">
 </a>
 
+When you implement YetiForce CRM, then you will find yourself wanting to communicate with your customers through a professional customer portal. That is why we created for you YetiForcePortal that integrates with CRM and has a wide range of functionalities.
+
+
 ## YetiForcePortal2
 Installation
 
