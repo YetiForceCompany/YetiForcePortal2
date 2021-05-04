@@ -5,6 +5,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace App\Controller;
@@ -17,18 +18,10 @@ use App\Request;
  */
 abstract class View extends Base
 {
-	/**
-	 * Viewer object.
-	 *
-	 * @var \App\Viewer
-	 */
+	/** @var \App\Viewer Viewer object. */
 	protected $viewer;
 
-	/**
-	 * Module name.
-	 *
-	 * @var string
-	 */
+	/** @var string Module name. */
 	protected $moduleName;
 
 	/**
@@ -60,7 +53,7 @@ abstract class View extends Base
 
 	public function preProcess($display = true)
 	{
-		$this->viewer->assign('PAGETITLE', $this->getPageTitle());
+		$this->viewer->assign('PAGE_TITLE', $this->getPageTitle());
 		$this->viewer->assign('STYLES', $this->getHeaderCss());
 		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
 		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());

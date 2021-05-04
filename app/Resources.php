@@ -6,7 +6,7 @@
  *
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace App;
@@ -27,13 +27,15 @@ class Resources
 	 */
 	public static function resourcePath(string $name, string $moduleName, string $type = 'images'): string
 	{
-		$filePath = PUBLIC_DIRECTORY . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
+		$fileURL = 'layouts/' . Viewer::getLayoutName() . "/modules/$moduleName/$type/$name";
+		$filePath = ROOT_DIRECTORY . '/public_html/' . $fileURL;
 		if (file_exists($filePath)) {
-			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
+			return PUBLIC_DIRECTORY . $fileURL;
 		}
-		$filePath = PUBLIC_DIRECTORY . 'layouts' . \DIRECTORY_SEPARATOR . Viewer::getLayoutName() . \DIRECTORY_SEPARATOR . 'skins' . \DIRECTORY_SEPARATOR . $type . \DIRECTORY_SEPARATOR . $name;
+		$fileURL = 'layouts/' . Viewer::getLayoutName() . "/skins/$type/$name";
+		$filePath = ROOT_DIRECTORY . '/public_html/' . $fileURL;
 		if (file_exists($filePath)) {
-			return str_replace(\DIRECTORY_SEPARATOR, '/', $filePath);
+			return PUBLIC_DIRECTORY . $fileURL;
 		}
 		return $name;
 	}
@@ -48,6 +50,6 @@ class Resources
 	 */
 	public static function templatePath(string $templateName, string $moduleName = ''): string
 	{
-		return call_user_func_array([new Viewer(), 'getTemplatePath'], [$templateName, $moduleName]);
+		return \call_user_func_array([new Viewer(), 'getTemplatePath'], [$templateName, $moduleName]);
 	}
 }
