@@ -730,6 +730,27 @@ var AppConnector,
 				}
 			});
 		},
+
+		showNotify: function (customParams) {
+			let params = {
+				hide: false
+			};
+			let userParams = customParams;
+			let type = 'info';
+			if (typeof customParams === 'string') {
+				userParams = {
+					title: customParams
+				};
+			}
+			if (typeof customParams.type !== 'undefined') {
+				type = customParams.type;
+			}
+			if (type !== 'error') {
+				params.hide = true;
+			}
+			return PNotify[type]($.extend(params, userParams));
+		},
+
 		/**
 		 * Set Pnotify defaults options
 		 */
