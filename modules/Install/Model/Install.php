@@ -22,7 +22,7 @@ class Install
 {
 	protected $configPath = 'config/Config.php';
 	protected $config = [
-		'apiUrl' => '__CRM_PATH__',
+		'apiUrl' => '__API_PATH__',
 		'apiKey' => '__API_KEY__',
 		'serverName' => '__SERVER_NAME__',
 		'serverPass' => '__SERVER_PASS__',
@@ -36,7 +36,7 @@ class Install
 
 	public static function isInstalled()
 	{
-		return '__CRM_PATH__' !== Config::get('apiUrl');
+		return '__API_PATH__' !== Config::get('apiUrl');
 	}
 
 	/**

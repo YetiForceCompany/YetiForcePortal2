@@ -98,7 +98,7 @@ class WebUI
 
 	public function isInstalled(): bool
 	{
-		return '__CRM_PATH__' != Config::$apiUrl;
+		return '__API_PATH__' != Config::$apiUrl;
 	}
 
 	protected function triggerPreProcess($handler, $request)
