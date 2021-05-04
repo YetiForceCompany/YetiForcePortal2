@@ -53,7 +53,7 @@ class Install extends \App\Controller\View
 	 */
 	protected function preProcessTplName(): string
 	{
-		return 'Header.tpl';
+		return 'InstallPreProcess.tpl';
 	}
 
 	public function process()
@@ -92,17 +92,13 @@ class Install extends \App\Controller\View
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function getPageTitle(): string
 	{
 		return \App\Language::translate('LBL_INSTALLATION_WIZARD', $this->moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function validateRequest()
 	{
 		$mode = $this->request->getMode();

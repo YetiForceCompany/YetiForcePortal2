@@ -13,9 +13,7 @@ use App\Purifier;
 
 class Delete extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'Delete')) {
@@ -23,9 +21,7 @@ class Delete extends \App\Controller\Action
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$module = $this->request->getModule();

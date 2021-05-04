@@ -14,17 +14,13 @@ use App\Response;
 
 class Install extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function loginRequired(): bool
 	{
 		return false;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission(): bool
 	{
 		if (\YF\Modules\Install\Model\Install::isInstalled()) {
@@ -33,9 +29,7 @@ class Install extends \App\Controller\Action
 		return true;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		try {

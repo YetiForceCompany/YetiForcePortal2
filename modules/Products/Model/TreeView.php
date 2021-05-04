@@ -16,9 +16,7 @@ use YF\Modules\Base\Model\AbstractListView;
  */
 class TreeView extends AbstractListView
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected $actionName = 'RecordsTree';
 
 	/**

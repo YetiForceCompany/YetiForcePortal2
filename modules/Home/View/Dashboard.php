@@ -35,9 +35,7 @@ class Dashboard extends \App\Controller\View
 		return $this->dashboardData;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function preProcess($display = true)
 	{
 		parent::preProcess();
@@ -49,9 +47,7 @@ class Dashboard extends \App\Controller\View
 		$this->viewer->view('Dashboard/PreDashboard.tpl', $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
@@ -65,19 +61,16 @@ class Dashboard extends \App\Controller\View
 		$this->viewer->view('Dashboard/Dashboard.tpl', $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getFooterScripts()
+	/** {@inheritdoc} */
+	public function getFooterScripts(): array
 	{
-		$headerScriptInstances = parent::getFooterScripts();
-		$jsFileNames = [
-			PUBLIC_DIRECTORY . 'libraries/chart.js/dist/Chart.js',
-			PUBLIC_DIRECTORY . 'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
-			PUBLIC_DIRECTORY . 'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
-		];
-		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
-		return array_merge($headerScriptInstances, $jsScriptInstances);
+		return array_merge(
+			parent::getFooterScripts(),
+			$this->convertScripts([
+				'libraries/chart.js/dist/Chart.js',
+				'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
+				'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
+				'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
+			], 'js'));
 	}
 }

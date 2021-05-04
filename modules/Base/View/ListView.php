@@ -21,9 +21,7 @@ class ListView extends \App\Controller\View
 	 */
 	protected $listViewModel;
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$this->getListViewModel()->loadRecordsList();
@@ -37,9 +35,7 @@ class ListView extends \App\Controller\View
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function processTplName(): string
 	{
 		return 'ListView.tpl';

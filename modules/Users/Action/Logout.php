@@ -11,17 +11,13 @@ namespace YF\Modules\Users\Action;
  */
 class Logout extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		return true;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		\App\Api::getInstance()->call('Users/Logout', [], 'put');

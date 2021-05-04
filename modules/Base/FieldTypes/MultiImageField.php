@@ -11,17 +11,13 @@ namespace YF\Modules\Base\FieldTypes;
 
 class MultiImageField extends BaseField
 {
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritdoc} */
 	public function isEditable()
 	{
 		return false;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritdoc} */
 	public function getDisplayValue(): string
 	{
 		if (empty($this->value)) {

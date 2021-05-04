@@ -14,14 +14,10 @@ namespace App\Log;
  */
 class Api extends AbstractBase
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'api.log';
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public static function display($value, string $type): string
 	{
 		$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;

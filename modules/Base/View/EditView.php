@@ -14,9 +14,7 @@ use App\Purifier;
 
 class EditView extends \App\Controller\View
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		parent::checkPermission($this->request);
@@ -29,9 +27,7 @@ class EditView extends \App\Controller\View
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
@@ -78,17 +74,14 @@ class EditView extends \App\Controller\View
 		$this->viewer->view('EditView.tpl', $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getFooterScripts()
+	/** {@inheritdoc} */
+	public function getFooterScripts(): array
 	{
-		$jsFileNames = [
-			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
-		];
 		return array_merge(
 			parent::getFooterScripts(),
-			$this->convertScripts($jsFileNames, 'js')
+			$this->convertScripts([
+				'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
+			], 'js')
 		);
 	}
 }

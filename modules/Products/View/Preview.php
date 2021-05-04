@@ -17,9 +17,7 @@ use YF\Modules\Products\Model\Cart;
 
 class Preview extends \App\Controller\View
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();

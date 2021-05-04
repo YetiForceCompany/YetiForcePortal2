@@ -20,9 +20,7 @@ use YF\Modules\Products\Model\ReferenceCart;
  */
 class Buy extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$response = new \App\Response();

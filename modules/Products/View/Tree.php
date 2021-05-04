@@ -33,9 +33,7 @@ class Tree extends View\ListView
 		'description'
 	];
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$this->getListViewModel()
@@ -66,9 +64,7 @@ class Tree extends View\ListView
 		parent::process();
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function preProcess($display = true)
 	{
 		$moduleName = $this->request->getModule();
@@ -101,33 +97,25 @@ class Tree extends View\ListView
 		parent::preProcess($display);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function processTplName(): string
 	{
 		return $this->request->getAction() . '/Tree.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function preProcessTplName(): string
 	{
 		return $this->request->getAction() . '/TreePreProcess.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function postProcessTplName(): string
 	{
 		return $this->request->getAction() . '/TreePostProcess.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function getListViewModel()
 	{
 		if (empty($this->listViewModel)) {

@@ -18,9 +18,7 @@ use App\Purifier;
  */
 class ProceedToCheckout extends ShoppingCart
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		if ($this->request->isEmpty('reference_id')) {
@@ -33,9 +31,7 @@ class ProceedToCheckout extends ShoppingCart
 		parent::process();
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function processTplName(): string
 	{
 		return 'ProceedToCheckout/ProceedToCheckout.tpl';

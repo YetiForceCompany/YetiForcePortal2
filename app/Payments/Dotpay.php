@@ -171,9 +171,7 @@ class Dotpay extends AbstractPayments implements PaymentsSystemInterface, Paymen
 			->setParameter('id', $config->get('id'));
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function getPicklistValue(): string
 	{
 		return 'PLL_DOTPAY';

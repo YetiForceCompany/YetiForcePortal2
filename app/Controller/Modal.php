@@ -42,12 +42,12 @@ abstract class Modal extends View
 		return $this->convertScripts($cssFileNames, 'css');
 	}
 
+	/** {@inheritdoc} */
 	protected function getModalJs()
 	{
 		$action = $this->request->getAction();
-		$jsFileNames = [
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
-		];
-		return $this->convertScripts($jsFileNames, 'js');
+		return $this->convertScripts([
+			'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+		], 'js');
 	}
 }

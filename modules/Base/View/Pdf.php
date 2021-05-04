@@ -14,25 +14,19 @@ namespace YF\Modules\Base\View;
  */
 class Pdf extends \App\Controller\Modal
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function getTitle()
 	{
 		return \App\Language::translate('LBL_AVAILABLE_PDF_TEMPLATES', $this->request->getModule());
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function getModalSize()
 	{
 		return 'modal-md';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
@@ -43,16 +37,12 @@ class Pdf extends \App\Controller\Modal
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function postProcessAjax()
 	{
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function processTplName(): string
 	{
 		return 'Modal/Pdf.tpl';

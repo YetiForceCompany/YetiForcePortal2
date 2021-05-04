@@ -14,14 +14,10 @@ namespace App\Log;
  */
 class System extends AbstractBase
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'system.log';
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public static function display($value, string $type): string
 	{
 		return date('Y-m-d H:i:s') . ' [' . $type . '] ' . $value . PHP_EOL . \App\Debug::getBacktrace(4);

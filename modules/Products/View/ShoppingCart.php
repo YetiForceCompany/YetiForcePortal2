@@ -34,9 +34,7 @@ class ShoppingCart extends View\ListView
 		'description'
 	];
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
@@ -77,20 +75,16 @@ class ShoppingCart extends View\ListView
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getFooterScripts()
+	/** {@inheritdoc} */
+	public function getFooterScripts(): array
 	{
 		return array_merge(
-			$this->convertScripts([PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
-			parent::getFooterScripts()
+			parent::getFooterScripts(),
+			$this->convertScripts(['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
 		);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function getListViewModel()
 	{
 		if (empty($this->listViewModel)) {
@@ -99,25 +93,19 @@ class ShoppingCart extends View\ListView
 		return $this->listViewModel;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function processTplName(): string
 	{
 		return 'ShoppingCart/ShoppingCart.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function preProcessTplName(): string
 	{
 		return 'Tree/TreePreProcess.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected function postProcessTplName(): string
 	{
 		return 'Tree/TreePostProcess.tpl';

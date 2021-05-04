@@ -13,9 +13,7 @@ use YF\Modules\Base\Model\ListView as ListViewModel;
 
 class RecordList extends \App\Controller\Modal
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
@@ -27,9 +25,7 @@ class RecordList extends \App\Controller\Modal
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function processTplName(): string
 	{
 		return 'RecordList/RecordList.tpl';

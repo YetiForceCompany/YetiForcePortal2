@@ -13,9 +13,7 @@ use App\Purifier;
 
 class Save extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		$actionName = 'EditView';
@@ -27,9 +25,7 @@ class Save extends \App\Controller\Action
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$module = $this->request->getModule();

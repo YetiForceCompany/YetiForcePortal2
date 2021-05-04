@@ -11,25 +11,19 @@ namespace YF\Modules\Users\View;
 
 class Login extends \App\Controller\View
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function loginRequired(): bool
 	{
 		return false;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		return true;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$module = $this->request->getModule();

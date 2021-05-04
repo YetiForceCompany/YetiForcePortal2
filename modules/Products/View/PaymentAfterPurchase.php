@@ -18,9 +18,7 @@ use YF\Modules\Base\Model\Record;
  */
 class PaymentAfterPurchase extends \App\Controller\View
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$paymentSystem = \App\Payments::getInstance($this->request->getByType('paymentSystem'));

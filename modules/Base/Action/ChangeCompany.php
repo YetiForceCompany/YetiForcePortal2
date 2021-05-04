@@ -13,9 +13,7 @@ use App\Purifier;
 
 class ChangeCompany extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$userInstance = \App\User::getUser();

@@ -24,7 +24,7 @@ class AppException extends \Exception
 	public $tplName = 'Exception.tpl';
 
 	/**
-	 *Construct the exception.
+	 * Construct the exception.
 	 *
 	 * @param string     $message
 	 * @param int        $code
@@ -36,28 +36,29 @@ class AppException extends \Exception
 		$this->backtrace = \App\Debug::getBacktrace();
 	}
 
-	public static function view(\Throwable $e)
+	/**
+	 * Show view.
+	 *
+	 * @param \Throwable $e
+	 *
+	 * @return void
+	 */
+	public static function view(\Throwable $e): void
 	{
-		if (empty($e->backtrace)) {
-			$backtrace = $e->getTraceAsString();
-		} else {
-			$backtrace = $e->backtrace;
+		$viewer = new \App\Viewer();
+		if (Config::get('displayDetailsException')) {
+			$viewer->assign('MESSAGE', $e->getMessage());
+			$viewer->assign('BACKTRACE', empty($e->backtrace) ? $e->getTraceAsString() : $e->backtrace);
+			$viewer->assign('SESSION', $_SESSION);
 		}
-		$cssFileNames = [
+		$viewer->assign('CODE', $e->getCode());
+		$viewer->assign('CSS_FILE', [
 			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
 			PUBLIC_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
 			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
 			PUBLIC_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
 			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
-		];
-		$viewer = new \App\Viewer();
-		if (Config::get('displayDetailsException')) {
-			$viewer->assign('MESSAGE', $e->getMessage());
-			$viewer->assign('BACKTRACE', $backtrace);
-			$viewer->assign('SESSION', $_SESSION);
-		}
-		$viewer->assign('CODE', $e->getCode());
-		$viewer->assign('CSS_FILE', $cssFileNames);
+		]);
 		$viewer->view($e->tplName);
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));

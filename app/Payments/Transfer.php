@@ -16,9 +16,7 @@ class Transfer extends AbstractPayments implements PaymentsInterface
 {
 	const ALLOWED_PARAMETERS = ['orderId'];
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function __construct(ConfigInterface $config, string $type)
 	{
 		$this->config = $config;
@@ -47,17 +45,13 @@ class Transfer extends AbstractPayments implements PaymentsInterface
 		];
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function setCrmOrderId(int $crmId)
 	{
 		$this->setParameter('orderId', $crmId);
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function getPicklistValue(): string
 	{
 		return 'PLL_TRANSFER';

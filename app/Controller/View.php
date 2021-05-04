@@ -96,33 +96,45 @@ abstract class View extends Base
 		return false;
 	}
 
-	public function convertScripts($fileNames, $fileExtension)
+	/**
+	 * Convert scripts path.
+	 *
+	 * @param string[] $fileNames
+	 * @param string   $fileExtension
+	 *
+	 * @return array
+	 */
+	public function convertScripts($fileNames, $fileExtension): array
 	{
 		$scriptsInstances = [];
 		foreach ($fileNames as $fileName) {
+			$path = ROOT_DIRECTORY . "/public_html/$fileName";
 			$script = new \App\Script();
 			$script->set('type', $fileExtension);
-			// external javascript source file handling
-			if (0 === strpos($fileName, 'http://') || 0 === strpos($fileName, 'https://')) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
-				continue;
-			}
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
 			if (\App\Config::$minScripts && file_exists($minFilePath)) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($minFilePath));
-			} elseif (file_exists($fileName)) {
-				$scriptsInstances[] = $script->set('src', self::resourceUrl($fileName));
+				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $minFilePath . self::getTime($path));
+			} elseif (file_exists($path)) {
+				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $fileName . self::getTime($path));
 			} else {
-				\App\Log::warning('Asset not found: ' . $fileName);
+				\App\Log::warning('File not found: ' . $path);
 			}
 		}
 		return $scriptsInstances;
 	}
 
-	public function resourceUrl($url)
+	/**
+	 * Gets file modification time.
+	 *
+	 * @param string $path
+	 *
+	 * @return string
+	 */
+	public static function getTime(string $path): string
 	{
-		if (false === stripos($url, '://') && $fs = @filemtime($url)) {
-			$url = $url . '?s=' . $fs;
+		$url = '';
+		if ($fs = filemtime($path)) {
+			$url = '?s=' . $fs;
 		}
 		return $url;
 	}
@@ -132,37 +144,36 @@ abstract class View extends Base
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getHeaderCss()
+	public function getHeaderCss(): array
 	{
-		$cssFileNames = [
-			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
-			PUBLIC_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
-			PUBLIC_DIRECTORY . 'libraries/chosen-js/chosen.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-chosen/bootstrap-chosen.css',
-			PUBLIC_DIRECTORY . 'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
-			PUBLIC_DIRECTORY . 'libraries/select2/dist/css/select2.css',
-			PUBLIC_DIRECTORY . 'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-daterangepicker/daterangepicker.css',
-			PUBLIC_DIRECTORY . 'libraries/clockpicker/dist/bootstrap4-clockpicker.css',
-			PUBLIC_DIRECTORY . 'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
-			PUBLIC_DIRECTORY . 'libraries/jstree/dist/themes/default/style.css',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/core/dist/PNotify.css',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/confirm/dist/PNotifyConfirm.css',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/mobile/dist/PNotifyMobile.css',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/desktop/dist/PNotifyDesktop.css',
-			PUBLIC_DIRECTORY . 'layouts/resources/icons/adminIcon.css',
-			PUBLIC_DIRECTORY . 'layouts/resources/icons/additionalIcons.css',
-			PUBLIC_DIRECTORY . 'layouts/resources/icons/yfm.css',
-			PUBLIC_DIRECTORY . 'layouts/resources/icons/yfi.css',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
-		];
-		return $this->convertScripts($cssFileNames, 'css');
+		return $this->convertScripts([
+			'libraries/@fortawesome/fontawesome-free/css/all.css',
+			'libraries/@mdi/font/css/materialdesignicons.css',
+			'libraries/bootstrap/dist/css/bootstrap.css',
+			'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
+			'libraries/chosen-js/chosen.css',
+			'libraries/bootstrap-chosen/bootstrap-chosen.css',
+			'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
+			'libraries/select2/dist/css/select2.css',
+			'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
+			'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
+			'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
+			'libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+			'libraries/bootstrap-daterangepicker/daterangepicker.css',
+			'libraries/clockpicker/dist/bootstrap4-clockpicker.css',
+			'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
+			'libraries/jstree/dist/themes/default/style.css',
+			'libraries/@pnotify/core/dist/PNotify.css',
+			'libraries/@pnotify/confirm/dist/PNotifyConfirm.css',
+			'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css',
+			'libraries/@pnotify/mobile/dist/PNotifyMobile.css',
+			'libraries/@pnotify/desktop/dist/PNotifyDesktop.css',
+			'layouts/resources/icons/adminIcon.css',
+			'layouts/resources/icons/additionalIcons.css',
+			'layouts/resources/icons/yfm.css',
+			'layouts/resources/icons/yfi.css',
+			'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
+		], 'css');
 	}
 
 	protected function preProcessDisplay()
@@ -196,9 +207,7 @@ abstract class View extends Base
 		return 'Footer.tpl';
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function postProcess()
 	{
 		$this->viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
@@ -215,80 +224,73 @@ abstract class View extends Base
 	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts()
+	public function getFooterScripts(): array
 	{
 		$moduleName = $this->getModuleNameFromRequest();
 		$action = $this->request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
-		$fileName = "~libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
-		if (!file_exists($fileName)) {
-			$fileName = PUBLIC_DIRECTORY . 'libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js';
+		$fileName = "libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
+		if (!file_exists(PUBLIC_DIRECTORY . $fileName)) {
+			$fileName = 'libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js';
 		}
-		$jsFileNames = [
-			PUBLIC_DIRECTORY . 'libraries/jquery/dist/jquery.js',
-			PUBLIC_DIRECTORY . 'libraries/jquery.class.js/jquery.class.js',
-			PUBLIC_DIRECTORY . 'libraries/block-ui/jquery.blockUI.js',
-			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome/index.js',
-			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-regular/index.js',
-			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-solid/index.js',
-			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free-brands/index.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/core/dist/PNotify.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/mobile/dist/PNotifyMobile.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/desktop/dist/PNotifyDesktop.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/confirm/dist/PNotifyConfirm.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js',
-			PUBLIC_DIRECTORY . 'libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js',
-			PUBLIC_DIRECTORY . 'libraries/popper.js/dist/umd/popper.js',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/js/bootstrap.js',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-daterangepicker/daterangepicker.js',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
-			PUBLIC_DIRECTORY . 'libraries/bootbox/dist/bootbox.min.js',
-			PUBLIC_DIRECTORY . 'libraries/chosen-js/chosen.jquery.js',
-			PUBLIC_DIRECTORY . 'libraries/select2/dist/js/select2.full.js',
-			PUBLIC_DIRECTORY . 'libraries/moment/min/moment.min.js',
-			PUBLIC_DIRECTORY . 'libraries/inputmask/dist/jquery.inputmask.bundle.js',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net/js/jquery.dataTables.js',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net-responsive/js/dataTables.responsive.js',
-			PUBLIC_DIRECTORY . 'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
-			PUBLIC_DIRECTORY . 'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
+		return $this->convertScripts([
+			'libraries/jquery/dist/jquery.js',
+			'libraries/jquery.class.js/jquery.class.js',
+			'libraries/block-ui/jquery.blockUI.js',
+			'libraries/@fortawesome/fontawesome/index.js',
+			'libraries/@fortawesome/fontawesome-free-regular/index.js',
+			'libraries/@fortawesome/fontawesome-free-solid/index.js',
+			'libraries/@fortawesome/fontawesome-free-brands/index.js',
+			'libraries/@pnotify/core/dist/PNotify.js',
+			'libraries/@pnotify/mobile/dist/PNotifyMobile.js',
+			'libraries/@pnotify/desktop/dist/PNotifyDesktop.js',
+			'libraries/@pnotify/confirm/dist/PNotifyConfirm.js',
+			'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js',
+			'libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js',
+			'libraries/popper.js/dist/umd/popper.js',
+			'libraries/bootstrap/dist/js/bootstrap.js',
+			'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+			'libraries/bootstrap-daterangepicker/daterangepicker.js',
+			'libraries/bootstrap-material-design/dist/js/bootstrap-material-design.js',
+			'libraries/bootbox/dist/bootbox.min.js',
+			'libraries/chosen-js/chosen.jquery.js',
+			'libraries/select2/dist/js/select2.full.js',
+			'libraries/moment/min/moment.min.js',
+			'libraries/inputmask/dist/jquery.inputmask.bundle.js',
+			'libraries/datatables.net/js/jquery.dataTables.js',
+			'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
+			'libraries/datatables.net-responsive/js/dataTables.responsive.js',
+			'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
+			'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
 			$fileName,
-			PUBLIC_DIRECTORY . 'libraries/jstree/dist/jstree.js',
-			PUBLIC_DIRECTORY . 'libraries/clockpicker/dist/bootstrap4-clockpicker.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/helper.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Field.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/resources/ProgressIndicator.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
-			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",
-		];
-		return $this->convertScripts($jsFileNames, 'js');
+			'libraries/jstree/dist/jstree.js',
+			'libraries/clockpicker/dist/bootstrap4-clockpicker.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/BaseValidator.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/validator/FieldValidator.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/helper.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Field.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Connector.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/app.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/Fields.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/resources/ProgressIndicator.js',
+			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
+			'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
+			'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",
+		], 'js');
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function validateRequest()
 	{
 		$this->request->validateReadAccess();
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function postProcessAjax()
 	{
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function preProcessAjax()
 	{
 	}

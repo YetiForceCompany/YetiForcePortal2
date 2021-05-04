@@ -11,9 +11,7 @@ namespace YF\Modules\Base\FieldTypes;
 
 class TextField extends BaseField
 {
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritdoc} */
 	public function getDisplayValue(): string
 	{
 		if (empty($this->value)) {

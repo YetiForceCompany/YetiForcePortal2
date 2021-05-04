@@ -13,9 +13,7 @@ use App\Purifier;
 
 class Pdf extends \App\Controller\Action
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function checkPermission()
 	{
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'ExportPdf')) {
@@ -23,9 +21,7 @@ class Pdf extends \App\Controller\Action
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();

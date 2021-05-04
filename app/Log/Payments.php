@@ -18,14 +18,10 @@ use App\Payments\Utilities\TransactionState;
  */
 class Payments extends AbstractBase
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected static $fileName = 'cache' . \DIRECTORY_SEPARATOR . 'logs' . \DIRECTORY_SEPARATOR . 'payments.log';
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public static function display($value, string $type): string
 	{
 		if ($value instanceof TransactionState) {

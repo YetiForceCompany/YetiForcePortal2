@@ -14,18 +14,10 @@ namespace Conf;
  */
 class Config
 {
-	/**
-	 * Crm URL.
-	 *
-	 * @var string
-	 */
+	/** @var string Crm URL. */
 	public static $crmUrl = '__CRM_PATH__';
 
-	/**
-	 * Portal URL.
-	 *
-	 * @var string
-	 */
+	/** @var string Portal URL. */
 	public static $portalUrl = '__PORTAL_PATH__';
 
 	/**
@@ -80,8 +72,8 @@ class Config
 	 */
 	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
 	public static $minScripts = false;
-	public static $debugApi = false;
-	public static $debugConsole = false;
+	public static $debugApi = true;
+	public static $debugConsole = true;
 	public static $logs = false;
 	public static $apiKey = '__API_KEY__';
 	public static $serverName = '__SERVER_NAME__';

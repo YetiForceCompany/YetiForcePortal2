@@ -113,9 +113,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		return static::ERROR_MESSAGES[$errorCode] ?? null;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function __construct(ConfigInterface $config, string $type)
 	{
 		$this->config = $config;
@@ -126,9 +124,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 		$this->setParameterFromConfig();
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function getPicklistValue(): string
 	{
 		return 'PLL_REDSYS';

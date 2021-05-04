@@ -36,14 +36,10 @@ class CartView extends ListViewModel
 	 */
 	private $recordsListModel = [];
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	protected $actionName = 'RecordsTree';
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function __construct(string $moduleName)
 	{
 		$this->setModuleName($moduleName);
@@ -55,9 +51,7 @@ class CartView extends ListViewModel
 		$this->cart = $cart;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function loadRecordsList(): AbstractListView
 	{
 		$this->setConditions([
@@ -68,9 +62,7 @@ class CartView extends ListViewModel
 		return parent::loadRecordsList();
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function getRecordsListModel(): array
 	{
 		$this->recordsListModel = parent::getRecordsListModel();

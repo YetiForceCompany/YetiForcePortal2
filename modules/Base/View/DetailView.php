@@ -19,9 +19,7 @@ use YF\Modules\Base\Model\Record;
 
 class DetailView extends \App\Controller\View
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
