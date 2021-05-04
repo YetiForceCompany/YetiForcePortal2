@@ -3,26 +3,24 @@
 namespace App\Installer;
 
 /**
- * Get info about libraries.
+ * Get info about libraries file.
+ *
+ * @package App
  *
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Arkadiusz Dudek <a.dudek@yetiforce.com>
+ * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
+ */
+
+/**
+ * Get info about libraries class.
  */
 class Credits
 {
-	/**
-	 * Library json files.
-	 *
-	 * @var string[]
-	 */
+	/** @var array Library json files. */
 	public static $jsonFiles = ['package.json', 'composer.json', 'bower.json'];
 
-	/**
-	 * Information about libraries license.
-	 *
-	 * @var array
-	 */
+	/** @var array Information about libraries license. */
 	public static $licenses = [
 		'html5shiv' => 'MIT',
 		'@fortawesome/fontawesome-free-regular' => 'MIT',
@@ -33,21 +31,15 @@ class Credits
 		'jquery-mousewheel' => 'MIT'
 	];
 
-	/**
-	 * Information about forks CRM.
-	 *
-	 * @var array
-	 */
+	/** @var array Information about forks CRM. */
 	public static $libraries = ['YetiForce' => ['name' => 'Yetiforce', 'version' => '4.4', 'license' => 'YetiForce Public License v3', 'homepage' => 'https://yetiforce.com/en/', 'notPackageFile' => true, 'showLicenseModal' => true]];
 
 	/**
 	 * Function gets libraries from vendor.
 	 *
-	 * @throws \App\Exceptions\AppException
-	 *
 	 * @return array
 	 */
-	public static function getVendorLibraries()
+	public static function getVendorLibraries(): array
 	{
 		$libraries = [];
 		if (file_exists(ROOT_DIRECTORY . '/composer.lock')) {
@@ -85,11 +77,9 @@ class Credits
 	/**
 	 * Function gets libraries name from public_html.
 	 *
-	 * @throws \App\Exceptions\AppException
-	 *
 	 * @return array
 	 */
-	public static function getPublicLibraries()
+	public static function getPublicLibraries(): array
 	{
 		$libraries = [];
 		$dir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'public_html' . \DIRECTORY_SEPARATOR . 'libraries' . \DIRECTORY_SEPARATOR;
@@ -118,11 +108,9 @@ class Credits
 	 * @param string $name
 	 * @param string $dir
 	 *
-	 * @throws \App\Exceptions\AppException
-	 *
 	 * @return array
 	 */
-	public static function getLibraryValues($name, $dir)
+	public static function getLibraryValues(string $name, string $dir): array
 	{
 		$library = ['name' => $name, 'version' => '', 'license' => '', 'homepage' => ''];
 		$existJsonFiles = true;
@@ -160,7 +148,7 @@ class Credits
 	 *
 	 * @return array
 	 */
-	public static function getLicenseInformation($dir, $libraryName)
+	public static function getLicenseInformation(string $dir, string $libraryName): array
 	{
 		$licenseError = false;
 		$returnLicense = '';
@@ -219,7 +207,7 @@ class Credits
 	 *
 	 * @return bool
 	 */
-	public static function validateLicenseName($license)
+	public static function validateLicenseName($license): bool
 	{
 		if (!$license) {
 			return true;
@@ -243,7 +231,7 @@ class Credits
 	 *
 	 * @return bool
 	 */
-	public static function checkIfLicenseFileExists($license)
+	public static function checkIfLicenseFileExists(string $license): bool
 	{
 		$filePath = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'licenses' . \DIRECTORY_SEPARATOR . $license . '.txt';
 		return file_exists($filePath) ? true : false;
@@ -252,11 +240,9 @@ class Credits
 	/**
 	 * Function returns information abouts libraries.
 	 *
-	 * @throws \App\Exceptions\AppException
-	 *
 	 * @return array
 	 */
-	public static function getCredits()
+	public static function getCredits(): array
 	{
 		return ['static' => static::$libraries, 'vendor' => self::getVendorLibraries(), 'public' => self::getPublicLibraries()];
 	}
