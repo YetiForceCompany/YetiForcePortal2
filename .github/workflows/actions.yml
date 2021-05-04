@@ -1,0 +1,74 @@
+name: PHP actions
+
+on: push
+
+jobs:
+  composer:
+    name: Composer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+  code:
+    name: Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: PHP VarDump Check Action
+        uses: umutphp/php-var-dump-check-action@v1
+        with:
+          exclude: 'vendor,tests'
+
+      - name: Check PHP syntax errors
+        uses: overtrue/phplint@2.3.5
+
+      - name: DevSkim
+        uses: microsoft/DevSkim-Action@v1
+
+      - name: codecov.io/validate
+        run: curl --data-binary @codecov.yml https://codecov.io/validate
+
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: PHP Security Checker
+        uses: StephaneBour/actions-php-security-checker@1.1
+        with:
+          composer-lock: './composer.lock'
+
+  copilot:
+    name: CoPilot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Upload to CoPilot
+        run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)
