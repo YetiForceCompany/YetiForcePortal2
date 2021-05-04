@@ -50,7 +50,6 @@ jQuery.Class(
 				let element = $(this);
 				AppConnector.request({
 					module: app.getModuleName(),
-					parent: app.getParentModuleName(),
 					view: 'LibraryMoreInfo',
 					type: element.attr('data-type'),
 					libraryName: element.attr('data-library-name')
@@ -67,7 +66,6 @@ jQuery.Class(
 			container.find('.js-show-license').on('click', function (e) {
 				AppConnector.request({
 					module: app.getModuleName(),
-					parent: app.getParentModuleName(),
 					view: 'LibraryLicense',
 					license: $(this).attr('data-license')
 				}).done(function (data) {
