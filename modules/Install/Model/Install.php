@@ -54,7 +54,7 @@ class Install
 	 */
 	public function save(\App\Request $request)
 	{
-		$path = YF_ROOT . \DIRECTORY_SEPARATOR . $this->configPath;
+		$path = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . $this->configPath;
 		$configFile = file_get_contents($path);
 		foreach ($this->config as $key => $value) {
 			$configFile = str_replace('\'' . $value . '\'', var_export($request->getByType($key, Purifier::TEXT), true), $configFile);

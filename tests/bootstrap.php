@@ -7,15 +7,15 @@
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  */
-chdir(dirname(__FILE__) . '/../');
+chdir(\dirname(__FILE__) . '/../');
 
 $startTime = microtime(true);
-define('YF_ROOT', __DIR__);
+\define('ROOT_DIRECTORY', __DIR__);
 
 session_start();
 
 if (!file_exists('vendor/autoload.php')) {
-	die('Please install dependencies via composer install.');
+	exit('Please install dependencies via composer install.');
 }
 require_once 'vendor/autoload.php';
 

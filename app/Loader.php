@@ -45,11 +45,11 @@ class Loader
 	 */
 	public static function getModuleClassName(string $moduleName, string $moduleType, string $fieldName): string
 	{
-		$filePath = YF_ROOT . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
+		$filePath = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . $moduleName . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
 		if (file_exists($filePath)) {
 			return '\\YF\\Modules' . '\\' . $moduleName . '\\' . $moduleType . '\\' . $fieldName;
 		}
-		$filePath = YF_ROOT . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . 'Base' . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
+		$filePath = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'modules' . \DIRECTORY_SEPARATOR . 'Base' . \DIRECTORY_SEPARATOR . $moduleType . \DIRECTORY_SEPARATOR . $fieldName . '.php';
 		if (file_exists($filePath)) {
 			return '\\YF\\Modules\\Base' . '\\' . $moduleType . '\\' . $fieldName;
 		}

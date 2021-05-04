@@ -202,10 +202,10 @@ class BaseField extends \App\BaseModel
 	{
 		$type = ucfirst($this->get('type'));
 		$module = $this->getModuleName();
-		if (file_exists(YF_ROOT . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
+		if (file_exists(ROOT_DIRECTORY . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
 			return "fieldtypes/$type.tpl";
 		}
-		if (file_exists(YF_ROOT . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
+		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
 			return "fieldtypes/$type.tpl";
 		}
 		return 'fieldtypes/String.tpl';

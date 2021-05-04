@@ -61,7 +61,7 @@ abstract class AbstractBase
 			$content = static::preContent();
 			$content .= PHP_EOL . implode(PHP_EOL, static::$messages[static::class]);
 			$content .= static::postContent();
-			file_put_contents(YF_ROOT . \DIRECTORY_SEPARATOR . static::$fileName, $content, FILE_APPEND);
+			file_put_contents(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . static::$fileName, $content, FILE_APPEND);
 		}
 	}
 

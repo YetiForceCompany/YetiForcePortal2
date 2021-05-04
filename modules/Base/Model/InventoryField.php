@@ -24,7 +24,7 @@ class InventoryField extends \App\BaseModel
 	public static function getInstance($module, $field)
 	{
 		$type = ucfirst($field['type']);
-		if (file_exists(YF_ROOT . '/modules/Base/InventoryFields/' . $type . 'Field.php')) {
+		if (file_exists(ROOT_DIRECTORY . '/modules/Base/InventoryFields/' . $type . 'Field.php')) {
 			$handlerModule = Loader::getModuleClassName($module, 'InventoryFields', $type . 'Field');
 		} else {
 			$handlerModule = Loader::getModuleClassName($module, 'InventoryFields', 'Basic');

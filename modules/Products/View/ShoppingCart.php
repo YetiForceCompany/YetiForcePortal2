@@ -83,7 +83,7 @@ class ShoppingCart extends View\ListView
 	public function getFooterScripts()
 	{
 		return array_merge(
-			$this->convertScripts([ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
+			$this->convertScripts([PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
 			parent::getFooterScripts()
 		);
 	}

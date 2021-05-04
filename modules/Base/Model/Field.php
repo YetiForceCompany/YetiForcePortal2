@@ -25,7 +25,7 @@ class Field extends \App\BaseModel
 	public static function getInstance($module, $field)
 	{
 		$type = ucfirst($field['type']);
-		if (file_exists(YF_ROOT . '/modules/Base/FieldTypes/' . $type . 'Field.php')) {
+		if (file_exists(ROOT_DIRECTORY . '/modules/Base/FieldTypes/' . $type . 'Field.php')) {
 			$handlerModule = Loader::getModuleClassName($module, 'FieldTypes', $type . 'Field');
 		} else {
 			$handlerModule = Loader::getModuleClassName($module, 'FieldTypes', 'BaseField');

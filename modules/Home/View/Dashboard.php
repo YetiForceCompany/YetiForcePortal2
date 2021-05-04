@@ -72,10 +72,10 @@ class Dashboard extends \App\Controller\View
 	{
 		$headerScriptInstances = parent::getFooterScripts();
 		$jsFileNames = [
-			ROOT_DIRECTORY . 'libraries/chart.js/dist/Chart.js',
-			ROOT_DIRECTORY . 'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
-			ROOT_DIRECTORY . 'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
+			PUBLIC_DIRECTORY . 'libraries/chart.js/dist/Chart.js',
+			PUBLIC_DIRECTORY . 'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
+			PUBLIC_DIRECTORY . 'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
+			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
 		];
 		$jsScriptInstances = $this->convertScripts($jsFileNames, 'js');
 		return array_merge($headerScriptInstances, $jsScriptInstances);

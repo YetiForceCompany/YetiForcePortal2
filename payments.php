@@ -6,16 +6,15 @@
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  */
-\define('YF_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '.');
-\define('YF_ROOT_WEB', __DIR__);
-\define('ROOT_DIRECTORY', '');
+\define('ROOT_DIRECTORY', __DIR__ . DIRECTORY_SEPARATOR . '.');
+\define('PUBLIC_DIRECTORY', '');
 
-if (!file_exists(YF_ROOT . '/vendor/autoload.php')) {
-	die('Please install dependencies via composer install.');
+if (!file_exists(ROOT_DIRECTORY . '/vendor/autoload.php')) {
+	exit('Please install dependencies via composer install.');
 }
-require_once YF_ROOT . '/vendor/autoload.php';
+require_once ROOT_DIRECTORY . '/vendor/autoload.php';
 set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
-session_save_path(YF_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
+session_save_path(ROOT_DIRECTORY . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'session');
 session_start();
 
 use App\Log;

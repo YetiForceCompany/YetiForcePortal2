@@ -28,9 +28,9 @@ class Viewer extends \SmartyBC
 		parent::__construct();
 
 		self::$currentLayout = self::getLayoutName();
-		$templatesDir = YF_ROOT . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
-		$customTemplate = YF_ROOT . \DIRECTORY_SEPARATOR . 'custom' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
-		$compileDir = YF_ROOT . \DIRECTORY_SEPARATOR . 'cache' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
+		$templatesDir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
+		$customTemplate = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'custom' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
+		$compileDir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'cache' . \DIRECTORY_SEPARATOR . 'layouts' . \DIRECTORY_SEPARATOR . self::getLayoutName();
 
 		if (!file_exists($compileDir)) {
 			mkdir($compileDir, 0777, true);

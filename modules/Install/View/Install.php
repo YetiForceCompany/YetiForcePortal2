@@ -39,10 +39,21 @@ class Install extends \App\Controller\View
 
 	public function preProcess($display = true)
 	{
-		$module = $this->request->getModule();
 		$this->setLanguage();
 		parent::preProcess(false);
-		$this->viewer->view('InstallPreProcess.tpl', $module);
+		if ($display) {
+			$this->preProcessDisplay();
+		}
+	}
+
+	/**
+	 * Get preprocess tpl name.
+	 *
+	 * @return string
+	 */
+	protected function preProcessTplName(): string
+	{
+		return 'Header.tpl';
 	}
 
 	public function process()
@@ -96,7 +107,7 @@ class Install extends \App\Controller\View
 	{
 		$mode = $this->request->getMode();
 		if (!empty($mode) && $this->isMethodExposed($mode)) {
-			if ($mode === 'step1') {
+			if ('step1' === $mode) {
 				$this->request->validateReadAccess();
 			} else {
 				$this->request->validateWriteAccess();

@@ -1,7 +1,6 @@
 <?php
 /**
- * <b>AppException</b> is the base class for
- * all Exceptions.
+ * Exceptions file.
  *
  * @see      http://php.net/manual/en/class.exception.php
  *
@@ -12,12 +11,25 @@
 
 namespace App;
 
+/**
+ * Exceptions class.
+ */
 class AppException extends \Exception
 {
+	/**
+	 * Default error exception template.
+	 *
+	 * @var string
+	 */
 	public $tplName = 'Exception.tpl';
 
-	private $backtrace;
-
+	/**
+	 *Construct the exception.
+	 *
+	 * @param string     $message
+	 * @param int        $code
+	 * @param \Throwable $previous
+	 */
 	public function __construct($message, $code = 200, \Throwable $previous = null)
 	{
 		parent::__construct($message, $code, $previous);
@@ -26,32 +38,27 @@ class AppException extends \Exception
 
 	public static function view(\Throwable $e)
 	{
-		if (Config::get('displayDetailsException')) {
-			$tplName = 'Exception.tpl';
-			if (!empty($e->tplName)) {
-				$tplName = $e->tplName;
-			}
-		} else {
-			$tplName = 'ShortException.tpl';
-		}
-
 		if (empty($e->backtrace)) {
 			$backtrace = $e->getTraceAsString();
 		} else {
 			$backtrace = $e->backtrace;
 		}
 		$cssFileNames = [
-			ROOT_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
-			ROOT_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
-			ROOT_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
+			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
+			PUBLIC_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
+			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
+			PUBLIC_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
+			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 		];
 		$viewer = new \App\Viewer();
-		$viewer->assign('MESSAGE', $e->getMessage());
+		if (Config::get('displayDetailsException')) {
+			$viewer->assign('MESSAGE', $e->getMessage());
+			$viewer->assign('BACKTRACE', $backtrace);
+			$viewer->assign('SESSION', $_SESSION);
+		}
 		$viewer->assign('CODE', $e->getCode());
-		$viewer->assign('BACKTRACE', nl2br($backtrace));
-		$viewer->assign('SESSION', $_SESSION);
 		$viewer->assign('CSS_FILE', $cssFileNames);
-		$viewer->view($tplName);
+		$viewer->view($e->tplName);
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$viewer->assign('COLLAPSE', true);
