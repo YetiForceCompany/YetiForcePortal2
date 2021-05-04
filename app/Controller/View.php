@@ -161,7 +161,6 @@ abstract class View extends Base
 			'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css',
 			'libraries/@pnotify/mobile/dist/PNotifyMobile.css',
 			'libraries/@pnotify/desktop/dist/PNotifyDesktop.css',
-			'layouts/resources/icons/adminIcon.css',
 			'layouts/resources/icons/additionalIcons.css',
 			'layouts/resources/icons/yfm.css',
 			'layouts/resources/icons/yfi.css',

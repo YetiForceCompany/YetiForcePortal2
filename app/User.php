@@ -63,13 +63,17 @@ class User extends BaseModel
 	 */
 	public function login(string $email, string $password): bool
 	{
-		$params = [
-			'version' => Config::$version,
-			'language' => Language::getLanguage(),
-			'ip' => Server::getRemoteIp(),
-			'fromUrl' => Config::$portalUrl
-		];
-		$response = Api::getInstance()->call('Users/Login', ['userName' => $email, 'password' => $password, 'params' => $params], 'post');
+		$response = Api::getInstance()
+			->call('Users/Login', [
+				'userName' => $email,
+				'password' => $password,
+				'params' => [
+					'version' => Config::$version,
+					'language' => Language::getLanguage(),
+					'ip' => Server::getRemoteIp(),
+					'fromUrl' => Config::$portalUrl
+				]
+			], 'post');
 		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
 			session_regenerate_id(true);
 			foreach ($response as $key => $value) {

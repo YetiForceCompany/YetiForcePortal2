@@ -1,18 +1,23 @@
 <?php
-
-namespace YF\Modules\Users\Action;
-
 /**
- * User action logout class.
+ * User action logout file.
+ *
+ * @package Action
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
+
+namespace YF\Modules\Users\Action;
+
+/**
+ * User action logout class.
+ */
 class Logout extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): bool
 	{
 		return true;
 	}

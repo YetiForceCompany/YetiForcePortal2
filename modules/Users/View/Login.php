@@ -1,6 +1,8 @@
 <?php
 /**
- * Users view class.
+ * Users login view file.
+ *
+ * @package View
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -9,6 +11,9 @@
 
 namespace YF\Modules\Users\View;
 
+/**
+ * Users login view class.
+ */
 class Login extends \App\Controller\View
 {
 	/** {@inheritdoc} */
@@ -18,7 +23,7 @@ class Login extends \App\Controller\View
 	}
 
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): bool
 	{
 		return true;
 	}
