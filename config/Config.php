@@ -16,6 +16,9 @@ namespace Conf;
  */
 class Config
 {
+	/** @var string portal version. */
+	public static $version = '1.1';
+
 	/** @var string CRM API URL ex. https://gitdeveloper.yetiforce.com/webservice/. */
 	public static $apiUrl = '__API_PATH__';
 
@@ -37,24 +40,6 @@ class Config
 	/** @var string The path to the logo in menu */
 	public static $logoMenu = 'layouts/logo_menu.png';
 
-	/** @var string Header alert message */
-	public static $headerAlertMessage = '11111111 222222222 3333333';
-
-	/** @var string Header alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
-	public static $headerAlertType = 'alert-primary';
-
-	/** @var string Header alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
-	public static $headerAlertIcon = 'fas fa-exclamation-triangle';
-
-	/** @var string Login page alert message */
-	public static $loginPageAlertMessage = '11111111 222222222 3333333';
-
-	/** @var string Login page alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
-	public static $loginPageAlertType = 'alert-primary';
-
-	/** @var string Login page alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
-	public static $loginPageAlertIcon = 'fas fa-info-circle';
-
 	/** @var string Default module. */
 	public static $defaultModule = 'HelpDesk';
 
@@ -64,7 +49,7 @@ class Config
 	/** @var string[] Languages. */
 	public static $languages = [
 		'en-US' => 'English',
-		'pl-PL' => 'Polski',
+		//'pl-PL' => 'Polski',
 	];
 
 	/** @var bool Allow the user to choose a language. */
@@ -79,6 +64,10 @@ class Config
 	/** @var array Available record display options in listview for datatable element - [[values],[labels]]. */
 	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
 
+	/**
+	 * Debugging.
+	 */
+
 	/** @var bool Enable minimize JS files. */
 	public static $minScripts = false;
 
@@ -88,8 +77,15 @@ class Config
 	/** @var bool Display main debug console. */
 	public static $debugConsole = true;
 
+	/** @var bool Displays information about the tracking code when an error occurs. */
+	public static $displayDetailsException = true;
+
 	/** @var bool Enable saving logs to file. */
 	public static $logs = false;
+
+	/**
+	 * Security.
+	 */
 
 	/** @var bool Webservice config. */
 	public static $encryptDataTransfer = false;
@@ -100,8 +96,12 @@ class Config
 	/** @var bool Webservice config. */
 	public static $publicKey = 'config/public.key';
 
-	/** @var string portal version. */
-	public static $version = '1.1';
+	/** @var bool Enable CSRF protection. */
+	public static $csrfProtection = true;
+
+	/**
+	 * Performance.
+	 */
 
 	/** @var string Data caching is about storing some PHP variables in cache and retrieving it later from cache. Drivers: Base, Apcu. */
 	public static $cachingDriver = 'Base';
@@ -109,11 +109,31 @@ class Config
 	/** @var string Default charset: default value = "UTF-8". */
 	public static $defaultCharset = 'UTF-8';
 
-	/** @var bool Enable CSRF protection. */
-	public static $csrfProtection = true;
+	/**
+	 * Alert messages.
+	 */
 
-	/** @var bool Displays information about the tracking code when an error occurs. */
-	public static $displayDetailsException = true;
+	/** @var string Header alert message */
+	public static $headerAlertMessage = 'Development version';
+
+	/** @var string Header alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
+	public static $headerAlertType = 'alert-primary';
+
+	/** @var string Header alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
+	public static $headerAlertIcon = 'fas fa-exclamation-triangle';
+
+	/** @var string Login page alert message */
+	public static $loginPageAlertMessage = 'Development version';
+
+	/** @var string Login page alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
+	public static $loginPageAlertType = 'alert-primary';
+
+	/** @var string Login page alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
+	public static $loginPageAlertIcon = 'fas fa-info-circle';
+
+	/**
+	 * Payments.
+	 */
 
 	/** @var string[] Type of payment. */
 	public static $paymentType = ['CashOnDelivery', 'Transfer'];
@@ -126,6 +146,10 @@ class Config
 
 	/** @var string Api key for payment server. */
 	public static $paymentApiKey = '';
+
+	/**
+	 * Store functionality.
+	 */
 
 	/** @var string Add Delivery. */
 	public static $addDelivery = false;
