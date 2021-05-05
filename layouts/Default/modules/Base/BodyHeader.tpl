@@ -6,7 +6,7 @@
 			<span class="fas fa-bars fa-fw" title="{\App\Language::translate('LBL_MENU')}"></span>
 		</a>
 		{if !empty(\Conf\Config::$headerAlertMessage)}
-			<div class="alert {if empty(\Conf\Config::$headerAlertType)}alert-danger{else}{\Conf\Config::$headerAlertType}{/if} m-auto mb-0 px-3 py-1 text-center u-font-size-19px text-nowrap" role="alert">
+			<div class="alert {if empty(\Conf\Config::$headerAlertType)}alert-danger{else}{\Conf\Config::$headerAlertType}{/if} ml-auto mb-0 px-3 py-1 text-center u-font-size-19px text-nowrap" role="alert">
 				<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
 				<span class="font-weight-bold mx-3">{\Conf\Config::$headerAlertMessage}</span>
 				<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
@@ -15,7 +15,7 @@
 		<div class="d-flex ml-auto align-items-center">
 			{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
 			{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
-				<div class="ml-auto mr-2 text-truncate text-white">
+				<div class="badge badge-info mr-2 text-truncate text-white">
 					{if !empty($COMPANY_DETAILS['sum_open_orders'])}
 						<i class="fas fa-file-alt mr-2"></i><span class="u-fs-12px">{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}</span>
 					{/if}
