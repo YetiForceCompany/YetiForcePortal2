@@ -172,11 +172,17 @@ class Language
 	/**
 	 * Function to returns all language information.
 	 *
-	 * @return string[]
+	 * @return array
 	 */
-	public static function getAllLanguages()
+	public static function getAllLanguages(): array
 	{
-		return Config::$languages;
+		$languagess = [];
+		foreach (new \DirectoryIterator(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'languages' . \DIRECTORY_SEPARATOR) as $level) {
+			if ($level->isDir() && !$level->isDot()) {
+				$languagess[$level->getFileName()] = self::getDisplayName($level->getFileName());
+			}
+		}
+		return $languagess;
 	}
 
 	/**
@@ -223,5 +229,17 @@ class Language
 			self::$modules = $userInstance->getModulesList();
 		}
 		return self::$modules[$module] ?? $module;
+	}
+
+	/**
+	 * Get display language name.
+	 *
+	 * @param string $prefix
+	 *
+	 * @return string
+	 */
+	public static function getDisplayName(string $prefix): string
+	{
+		return Utils::mbUcfirst(locale_get_region($prefix) === strtoupper(locale_get_primary_language($prefix)) ? locale_get_display_language($prefix, $prefix) : locale_get_display_name($prefix, $prefix));
 	}
 }

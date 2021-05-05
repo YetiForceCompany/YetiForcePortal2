@@ -56,4 +56,17 @@ class Utils
 	{
 		return \App\Config::get('portalUrl') . $url;
 	}
+
+	/**
+	 * Replacement for the ucfirst function for proper Multibyte String operation.
+	 * Delete function will exist as mb_ucfirst.
+	 *
+	 * @param string $string
+	 *
+	 * @return string
+	 */
+	public static function mbUcfirst(string $string): string
+	{
+		return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
+	}
 }

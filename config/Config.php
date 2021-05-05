@@ -46,12 +46,6 @@ class Config
 	/** @var string Default language. */
 	public static $language = 'en-US';
 
-	/** @var string[] Languages. */
-	public static $languages = [
-		'en-US' => 'English',
-		//'pl-PL' => 'Polski',
-	];
-
 	/** @var bool Allow the user to choose a language. */
 	public static $allowLanguageSelection = true;
 
