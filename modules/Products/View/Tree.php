@@ -65,7 +65,7 @@ class Tree extends View\ListView
 	}
 
 	/** {@inheritdoc} */
-	public function preProcess($display = true)
+	public function preProcess($display = true): void
 	{
 		$moduleName = $this->request->getModule();
 		$fields = \App\Api::getInstance()->call('Products/Fields');
