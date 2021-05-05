@@ -19,7 +19,7 @@
 								</div>
 								<div id="request{$KEY}" class="collapse {if !empty($COLLAPSE)}show{/if}" aria-labelledby="headingOne" data-parent="#accordionExample">
 									<div class="card-body">
-										<div class="col-3 px-0">
+										<div class="px-0">
 											<table class="table">
 												<thead>
 													<tr>

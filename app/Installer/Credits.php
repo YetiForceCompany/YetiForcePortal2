@@ -27,11 +27,19 @@ class Credits
 		'@fortawesome/fontawesome-free-brands' => 'MIT',
 		'bootstrap-tabdrop' => 'Apache-2.0',
 		'respond.js' => 'MIT',
-		'jquery-mousewheel' => 'MIT'
 	];
 
 	/** @var array Information about forks CRM. */
-	public static $libraries = ['YetiForce' => ['name' => 'Yetiforce', 'version' => '4.4', 'license' => 'YetiForce Public License v3', 'homepage' => 'https://yetiforce.com/en/', 'notPackageFile' => true, 'showLicenseModal' => true]];
+	public static $libraries = [
+		'YetiForce' => [
+			'name' => 'YetiForcePortal2',
+			'version' => '',
+			'license' => 'YetiForce Public License v3',
+			'homepage' => 'https://yetiforce.com/en/yetiforce/license',
+			'notPackageFile' => true,
+			'showLicenseModal' => true
+		],
+	];
 
 	/**
 	 * Function gets libraries from vendor.
