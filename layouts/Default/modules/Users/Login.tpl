@@ -18,33 +18,37 @@
 			{/foreach}
 		{/if}
 		{if !empty(\Conf\Config::$loginPageAlertMessage)}
-			<div class="alert {if empty(\Conf\Config::$loginPageAlertType)}alert-danger{else}{\Conf\Config::$loginPageAlertType}{/if} mb-3 px-3 py-2 text-center" role="alert">
+			<div class="alert {if empty(\Conf\Config::$loginPageAlertType)}alert-danger{else}{\Conf\Config::$loginPageAlertType}{/if} mb-2 px-3 py-2 text-center" role="alert">
 				<i class="{if empty(\Conf\Config::$loginPageAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$loginPageAlertIcon}{/if}"></i>
 				<span class="font-weight-bold mx-2">{\Conf\Config::$loginPageAlertMessage}</span>
 				<i class="{if empty(\Conf\Config::$loginPageAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$loginPageAlertIcon}{/if}"></i>
 			</div>
 		{/if}
-		<div class="form-group">
-			<label for="inputEmail" class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+		<label for="inputEmail" class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
+		<div class="input-group mb-2 first-group">
 			<input name="email" type="text" id="inputEmail" class="form-control" placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="" required="" autofocus="" />
+			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-user"></span></div></div>
 		</div>
-		<div class="form-group">
-			<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+		<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+		<div class="input-group mb-2 first-group">
 			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="" required="">
+			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-briefcase"></span></div></div>
 		</div>
 		{if \App\Config::getBool('allowLanguageSelection') }
-			<div class="form-group">
-				<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+		<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+			<div class="input-group mb-2 form-group first-group">
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}
 						<option value="{$PREFIX}">{$LANG}</option>
 					{/foreach}
 				</select>
+				<div class="input-group-append"><div class="input-group-text"><span class="fas fa-language"></span></div></div>
 			</div>
 		{else}
 			<input type="hidden" name="language" value="{\App\Config::get('language')}" />
 		{/if}
-		<button class="btn btn-lg btn-outline-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)}</button>
+		<button class="btn btn-lg btn-outline-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)} <strong><span class="fas fa-chevron-right ml-2"></span></strong></button>
+
 	</form>
 </div>
 {include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}

@@ -56,7 +56,6 @@ class AppException extends \Exception
 			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
 			PUBLIC_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
 			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap-material-design/dist/css/bootstrap-material-design.css',
 			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 		]);
 		$viewer->view($e->tplName);
