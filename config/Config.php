@@ -31,6 +31,12 @@ class Config
 	/** @var string Web service - Application password. */
 	public static $serverPass = '__SERVER_PASS__';
 
+	/** @var string The path to the logo on the login page */
+	public static $logoLoginPage = 'layouts/logo_login.png';
+
+	/** @var string The path to the logo in menu */
+	public static $logoMenu = 'layouts/logo_menu.png';
+
 	/** @var string Header alert message */
 	public static $headerAlertMessage = '11111111 222222222 3333333';
 
@@ -87,7 +93,6 @@ class Config
 	public static $encryptDataTransfer = false;
 	public static $privateKey = 'config/private.key';
 	public static $publicKey = 'config/public.key';
-	public static $logo = 'layouts/Default/skins/images/logo.png';
 	public static $version = '1.0';
 	public static $cachingDriver = 'Base';
 	public static $defaultCharset = 'UTF-8';

@@ -4,7 +4,7 @@
 <div class="container loginContainer">
 	<form action="index.php?module=Users&action=Login" method="POST">
 		<div class="text-center">
-			<img src="{\App\Config::$logo}" class="img-responsive logo" alt="Logo" title="Logo">
+			<img src="{\App\Config::$logoLoginPage}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		{if isset($ERRORS)}
 			<br/>
