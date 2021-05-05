@@ -6,7 +6,7 @@ window.Base_Dashboard_Js = class {
 			const typeWidget = $(this).data('type');
 			var classname = 'Base_Dashboard_' + typeWidget + '_Js';
 			if (typeof window[classname] != 'undefined') {
-				return (new window[classname]()).registerEvents($(this));
+				return new window[classname]().registerEvents($(this));
 			}
 		});
 	}
@@ -19,7 +19,7 @@ window.Base_Dashboard_Js = class {
 			let id = $(this).data('id');
 			const progressInstance = $.progressIndicatorShow();
 			AppConnector.requestPjax('index.php?module=Home&view=Dashboard&dashboard=' + id).done(function (data) {
-				progressInstance.progressIndicator({ 'mode': 'hide' });
+				progressInstance.progressIndicator({ mode: 'hide' });
 				$('.js-dashboard-container').html(data);
 				self.registerBasicEvents();
 			});
@@ -37,6 +37,5 @@ window.Base_Dashboard_Js = class {
 	registerEvents() {
 		this.registerSelectDashboard();
 		this.registerBasicEvents();
-
 	}
-}
+};

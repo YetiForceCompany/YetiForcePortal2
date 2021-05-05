@@ -6,7 +6,7 @@ window.Base_Dashboard_MiniList_Js = class {
 			window.location.href = $(this).data('url');
 		});
 	}
-}
+};
 
 window.Base_Dashboard_ChartFilter_Js = class {
 	constructor() {
@@ -22,7 +22,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						return App.Fields.Double.formatToDisplay(value);
 					}
 					return value;
-				},
+				}
 			},
 			/**
 			 * Functions for datalabels
@@ -33,12 +33,16 @@ window.Base_Dashboard_ChartFilter_Js = class {
 					return meta.hidden !== true;
 				},
 				formatter: function datalabelsFormatter(value, context) {
-					if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+					if (
+						typeof this.widgetData !== 'undefined' &&
+						typeof this.widgetData.valueType !== 'undefined' &&
+						this.widgetData.valueType === 'count'
+					) {
 						return App.Fields.Double.formatToDisplay(value, 0);
 					}
 					if (
-						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted !== "undefined" &&
-						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex] !== "undefined"
+						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted !== 'undefined' &&
+						typeof context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex] !== 'undefined'
 					) {
 						// data presented in different format usually exists in alternative dataFormatted array
 						return context.chart.data.datasets[context.datasetIndex].dataFormatted[context.dataIndex];
@@ -55,13 +59,26 @@ window.Base_Dashboard_ChartFilter_Js = class {
 			tooltips: {
 				label: function tooltipLabelCallback(tooltipItem, data) {
 					// get already formatted data if exists
-					if (typeof data.datasets[tooltipItem.datasetIndex].dataFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index] !== "undefined") {
+					if (
+						typeof data.datasets[tooltipItem.datasetIndex].dataFormatted !== 'undefined' &&
+						data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index] !== 'undefined'
+					) {
 						return data.datasets[tooltipItem.datasetIndex].dataFormatted[tooltipItem.index];
 					}
 					// if there is no formatted data so try to format it
-					if (String(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).length > 0 && !isNaN(Number(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]))) {
-						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
-							return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index], 0);
+					if (
+						String(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).length > 0 &&
+						!isNaN(Number(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]))
+					) {
+						if (
+							typeof this.widgetData !== 'undefined' &&
+							typeof this.widgetData.valueType !== 'undefined' &&
+							this.widgetData.valueType === 'count'
+						) {
+							return App.Fields.Double.formatToDisplay(
+								data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index],
+								0
+							);
 						}
 						return App.Fields.Double.formatToDisplay(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
 					}
@@ -71,12 +88,19 @@ window.Base_Dashboard_ChartFilter_Js = class {
 				title: function tooltipTitleCallback(tooltipItems, data) {
 					const tooltipItem = tooltipItems[0];
 					// get already formatted title if exists
-					if (typeof data.datasets[tooltipItem.datasetIndex].titlesFormatted !== "undefined" && data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index] !== "undefined") {
+					if (
+						typeof data.datasets[tooltipItem.datasetIndex].titlesFormatted !== 'undefined' &&
+						data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index] !== 'undefined'
+					) {
 						return data.datasets[tooltipItem.datasetIndex].titlesFormatted[tooltipItem.index];
 					}
 					// if there is no formatted title so try to format it
 					if (String(data.labels[tooltipItem.index]).length > 0 && !isNaN(Number(data.labels[tooltipItem.index]))) {
-						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+						if (
+							typeof this.widgetData !== 'undefined' &&
+							typeof this.widgetData.valueType !== 'undefined' &&
+							this.widgetData.valueType === 'count'
+						) {
 							return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index], 0);
 						}
 						return App.Fields.Double.formatToDisplay(data.labels[tooltipItem.index]);
@@ -89,7 +113,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 			legend: {
 				onClick(e, legendItem) {
 					let type = this.chartInstance.config.type;
-					if (typeof Chart.defaults[type] !== "undefined") {
+					if (typeof Chart.defaults[type] !== 'undefined') {
 						return Chart.defaults[type].legend.onClick.apply(this.chartInstance, [e, legendItem]);
 					}
 					return Chart.defaults.global.legend.onClick.apply(this.chartInstance, [e, legendItem]);
@@ -97,7 +121,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 				generateLabels(chart) {
 					let type = chart.config.type;
 					let labels;
-					if (typeof Chart.defaults[type] !== "undefined") {
+					if (typeof Chart.defaults[type] !== 'undefined') {
 						labels = Chart.defaults[type].legend.labels.generateLabels(chart);
 					} else {
 						labels = Chart.defaults.global.legend.labels.generateLabels(chart);
@@ -133,10 +157,10 @@ window.Base_Dashboard_ChartFilter_Js = class {
 					let getDatasetsMeta = function (chart) {
 						const datasets = [];
 						const data = chart.data;
-						if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
+						if (typeof data !== 'undefined' && typeof data.datasets !== 'undefined' && Array.isArray(data.datasets)) {
 							for (let i = 0, len = data.datasets.length; i < len; i++) {
 								const meta = chart.getDatasetMeta(i);
-								if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
+								if (typeof meta.data !== 'undefined' && Array.isArray(meta.data)) {
 									datasets.push(meta);
 								}
 							}
@@ -152,22 +176,22 @@ window.Base_Dashboard_ChartFilter_Js = class {
 							continue;
 						}
 						const metaData = meta.data;
-						if (typeof dataset._models === "undefined") {
+						if (typeof dataset._models === 'undefined') {
 							dataset._models = {};
 						}
-						if (typeof dataset.datalabels === "undefined") {
+						if (typeof dataset.datalabels === 'undefined') {
 							dataset.datalabels = {};
 						}
-						if (typeof dataset.datalabels.display === "undefined") {
+						if (typeof dataset.datalabels.display === 'undefined') {
 							dataset.datalabels.display = true;
 						}
 						for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
 							const dataItem = metaData[iItem];
-							if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
+							if (typeof dataItem.$datalabels !== 'undefined' && typeof dataItem.$datalabels._model !== 'undefined') {
 								let model = dataItem.$datalabels._model;
-								if (model !== null && typeof model !== "undefined") {
+								if (model !== null && typeof model !== 'undefined') {
 									dataset._models[iItem] = model;
-								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
+								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== 'undefined') {
 									model = dataset._models[iItem];
 								} else {
 									return false;
@@ -182,7 +206,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 								if (dataItem._view.width + threshold < labelWidth || barHeight + threshold < labelHeight) {
 									dataItem.$datalabels._model.positioner = () => {
 										return false;
-									}
+									};
 								} else {
 									dataItem.$datalabels._model = model;
 								}
@@ -199,10 +223,10 @@ window.Base_Dashboard_ChartFilter_Js = class {
 					let getDatasetsMeta = function (chart) {
 						const datasets = [];
 						const data = chart.data;
-						if (typeof data !== "undefined" && typeof data.datasets !== "undefined" && Array.isArray(data.datasets)) {
+						if (typeof data !== 'undefined' && typeof data.datasets !== 'undefined' && Array.isArray(data.datasets)) {
 							for (let i = 0, len = data.datasets.length; i < len; i++) {
 								const meta = chart.getDatasetMeta(i);
-								if (typeof meta.data !== "undefined" && Array.isArray(meta.data)) {
+								if (typeof meta.data !== 'undefined' && Array.isArray(meta.data)) {
 									datasets.push(meta);
 								}
 							}
@@ -218,22 +242,22 @@ window.Base_Dashboard_ChartFilter_Js = class {
 							continue;
 						}
 						const metaData = meta.data;
-						if (typeof dataset._models === "undefined") {
+						if (typeof dataset._models === 'undefined') {
 							dataset._models = {};
 						}
-						if (typeof dataset.datalabels === "undefined") {
+						if (typeof dataset.datalabels === 'undefined') {
 							dataset.datalabels = {};
 						}
-						if (typeof dataset.datalabels.display === "undefined") {
+						if (typeof dataset.datalabels.display === 'undefined') {
 							dataset.datalabels.display = true;
 						}
 						for (let iItem = 0, lenItem = metaData.length; iItem < lenItem; iItem++) {
 							const dataItem = metaData[iItem];
-							if (typeof dataItem.$datalabels !== "undefined" && typeof dataItem.$datalabels._model !== "undefined") {
+							if (typeof dataItem.$datalabels !== 'undefined' && typeof dataItem.$datalabels._model !== 'undefined') {
 								let model = dataItem.$datalabels._model;
-								if (model !== null && typeof model !== "undefined") {
+								if (model !== null && typeof model !== 'undefined') {
 									dataset._models[iItem] = model;
-								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== "undefined") {
+								} else if (dataset._models[iItem] !== null && typeof dataset._models[iItem] !== 'undefined') {
 									model = dataset._models[iItem];
 								} else {
 									return false;
@@ -248,7 +272,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 								if (dataItem._view.height + threshold < labelHeight || barWidth + threshold < labelWidth) {
 									dataItem.$datalabels._model.positioner = () => {
 										return false;
-									}
+									};
 								} else {
 									dataItem.$datalabels._model = model;
 								}
@@ -263,14 +287,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 				 */
 				fixXAxisLabels: function fixXAxisLabels(chart) {
 					let shortenXTicks = function shortenXTicks(data, options) {
-						if (typeof options.scales === "undefined") {
+						if (typeof options.scales === 'undefined') {
 							options.scales = {};
 						}
-						if (typeof options.scales.xAxes === "undefined") {
+						if (typeof options.scales.xAxes === 'undefined') {
 							options.scales.xAxes = [{}];
 						}
 						options.scales.xAxes.forEach((axis) => {
-							if (typeof axis.ticks === "undefined") {
+							if (typeof axis.ticks === 'undefined') {
 								axis.ticks = {};
 							}
 							axis.ticks.callback = function xAxisTickCallback(value, index, values) {
@@ -283,14 +307,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						return options;
 					};
 					let rotateXLabels90 = function rotateXLabels90(data, options) {
-						if (typeof options.scales === "undefined") {
+						if (typeof options.scales === 'undefined') {
 							options.scales = {};
 						}
-						if (typeof options.scales.xAxes === "undefined") {
+						if (typeof options.scales.xAxes === 'undefined') {
 							options.scales.xAxes = [{}];
 						}
 						options.scales.xAxes.forEach((axis) => {
-							if (typeof axis.ticks === "undefined") {
+							if (typeof axis.ticks === 'undefined') {
 								axis.ticks = {};
 							}
 							axis.ticks.minRotation = 90;
@@ -309,13 +333,13 @@ window.Base_Dashboard_ChartFilter_Js = class {
 									const label = metaDataItem._xScale.ticks[i];
 									const ctx = metaDataItem._xScale.ctx;
 									let categoryWidth = metaDataItem._xScale.width / dataset._meta[prop].data.length;
-									if (typeof metaDataItem._xScale.options.categoryPercentage !== "undefined") {
+									if (typeof metaDataItem._xScale.options.categoryPercentage !== 'undefined') {
 										// if it is bar chart there is category percentage option that we should use
 										categoryWidth *= metaDataItem._xScale.options.categoryPercentage;
 									}
 									const fullWidth = ctx.measureText(label).width;
 									if (categoryWidth < fullWidth) {
-										const shortened = label.substr(0, 10) + "...";
+										const shortened = label.substr(0, 10) + '...';
 										const shortenedWidth = ctx.measureText(shortened).width;
 										if (categoryWidth < shortenedWidth) {
 											chart.options = rotateXLabels90(chart.data, chart.options);
@@ -331,7 +355,10 @@ window.Base_Dashboard_ChartFilter_Js = class {
 												dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
 													metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
 													metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
-													metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
+													metaDataItem._view.width =
+														(metaDataItem._xScale.width / dataset._meta[prop].data.length) *
+														metaDataItem._xScale.options.categoryPercentage *
+														metaDataItem._xScale.options.barPercentage;
 												});
 											});
 											break;
@@ -350,14 +377,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 				 */
 				fixYAxisLabels: function fixYAxisLabels(chart) {
 					let shortenYTicks = function shortenYTicks(data, options) {
-						if (typeof options.scales === "undefined") {
+						if (typeof options.scales === 'undefined') {
 							options.scales = {};
 						}
-						if (typeof options.scales.yAxes === "undefined") {
+						if (typeof options.scales.yAxes === 'undefined') {
 							options.scales.yAxes = [{}];
 						}
 						options.scales.yAxes.forEach((axis) => {
-							if (typeof axis.ticks === "undefined") {
+							if (typeof axis.ticks === 'undefined') {
 								axis.ticks = {};
 							}
 							axis.ticks.callback = function yAxisTickCallback(value, index, values) {
@@ -365,7 +392,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 									return value.substr(0, 10) + '...';
 								}
 								return value;
-							}
+							};
 						});
 						return options;
 					};
@@ -387,10 +414,13 @@ window.Base_Dashboard_ChartFilter_Js = class {
 											// recalculate positions for smooth animation (for all datasets)
 											chart.data.datasets.forEach((dataset, index) => {
 												dataset._meta[prop].data.forEach((metaDataItem, dataIndex) => {
-													if (typeof metaDataItem._xScale !== "undefined") {
+													if (typeof metaDataItem._xScale !== 'undefined') {
 														metaDataItem._view.x = metaDataItem._xScale.getPixelForValue(index, dataIndex);
 														metaDataItem._view.base = metaDataItem._xScale.getBasePixel();
-														metaDataItem._view.width = (metaDataItem._xScale.width / dataset._meta[prop].data.length) * metaDataItem._xScale.options.categoryPercentage * metaDataItem._xScale.options.barPercentage;
+														metaDataItem._view.width =
+															(metaDataItem._xScale.width / dataset._meta[prop].data.length) *
+															metaDataItem._xScale.options.categoryPercentage *
+															metaDataItem._xScale.options.barPercentage;
 													}
 												});
 											});
@@ -402,29 +432,28 @@ window.Base_Dashboard_ChartFilter_Js = class {
 							}
 						}
 					});
-				},
+				}
 			}
-		}
+		};
 	}
 	setChartContainer(container) {
 		this.container = container;
-	};
+	}
 	getChartContainer() {
 		return this.container;
-	};
+	}
 	getWidgetData() {
 		if (typeof this.widgetData !== 'undefined' && this.widgetData !== '') {
 			return this.widgetData;
 		}
 		let widgetDataEl = this.getChartContainer().find('[name="widgetData"]');
 		if (widgetDataEl.length) {
-			return this.widgetData = JSON.parse(widgetDataEl.val());
+			return (this.widgetData = JSON.parse(widgetDataEl.val()));
 		}
 		return false;
-	};
+	}
 	getGlobalDefaultChartsOptions(chartSubType) {
 		const options = {
-
 			bar: {
 				basic: {
 					maintainAspectRatio: false,
@@ -442,22 +471,26 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels'
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}],
-						yAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					datalabels: {
@@ -472,14 +505,17 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'center',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels',
-				}, {
-					beforeDraw: 'function:plugins.hideVerticalBarDatalabelsIfNeeded',
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					},
+					{
+						beforeDraw: 'function:plugins.hideVerticalBarDatalabelsIfNeeded'
+					}
+				]
 			},
 			barStacked: {
 				basic: {
@@ -498,24 +534,28 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels',
+						xAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels',
+						],
+						yAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					datalabels: {
@@ -530,14 +570,17 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'center',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels',
-				}, {
-					beforeDraw: 'function:plugins.hideVerticalBarDatalabelsIfNeeded',
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					},
+					{
+						beforeDraw: 'function:plugins.hideVerticalBarDatalabelsIfNeeded'
+					}
+				]
 			},
 			horizontalBar: {
 				basic: {
@@ -556,22 +599,26 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels'
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}],
-						yAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					datalabels: {
@@ -586,14 +633,17 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'center',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixYAxisLabels'
-				}, {
-					beforeDraw: 'function:plugins.hideHorizontalBarDatalabelsIfNeeded',
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixYAxisLabels'
+					},
+					{
+						beforeDraw: 'function:plugins.hideHorizontalBarDatalabelsIfNeeded'
+					}
+				]
 			},
 			horizontalBarStacked: {
 				basic: {
@@ -612,24 +662,28 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels'
+						xAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					datalabels: {
@@ -644,14 +698,17 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'center',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixYAxisLabels'
-				}, {
-					beforeDraw: 'function:plugins.hideHorizontalBarDatalabelsIfNeeded',
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixYAxisLabels'
+					},
+					{
+						beforeDraw: 'function:plugins.hideHorizontalBarDatalabelsIfNeeded'
+					}
+				]
 			},
 			line: {
 				basic: {
@@ -670,23 +727,27 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels',
-								labelOffset: 0,
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels',
+									labelOffset: 0
+								}
 							}
-						}],
-						yAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					fill: false,
@@ -702,12 +763,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'bottom',
 						align: 'bottom',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels'
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					}
+				]
 			},
 			lineStacked: {
 				basic: {
@@ -726,24 +789,28 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels',
-								labelOffset: 0,
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels',
+									labelOffset: 0
+								}
 							}
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					fill: false,
@@ -759,12 +826,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'bottom',
 						align: 'bottom',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels'
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					}
+				]
 			},
 			linePlain: {
 				basic: {
@@ -783,23 +852,27 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels',
-								labelOffset: 0,
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels',
+									labelOffset: 0
+								}
 							}
-						}],
-						yAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					lineTension: 0,
@@ -816,12 +889,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'bottom',
 						align: 'bottom',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels'
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					}
+				]
 			},
 			linePlainStacked: {
 				basic: {
@@ -840,24 +915,28 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						xAxes: [{
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								maxRotation: 90,
-								callback: 'function:scales.formatAxesLabels',
-								labelOffset: 0,
+						xAxes: [
+							{
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									maxRotation: 90,
+									callback: 'function:scales.formatAxesLabels',
+									labelOffset: 0
+								}
 							}
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								autoSkip: false,
-								beginAtZero: true,
-								callback: 'function:scales.formatAxesLabels'
+						],
+						yAxes: [
+							{
+								stacked: true,
+								ticks: {
+									autoSkip: false,
+									beginAtZero: true,
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}]
-					},
+						]
+					}
 				},
 				dataset: {
 					fill: false,
@@ -874,12 +953,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'bottom',
 						align: 'bottom',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixXAxisLabels'
-				}],
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixXAxisLabels'
+					}
+				]
 			},
 			pie: {
 				basic: {
@@ -890,7 +971,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 					legend: {
 						display: true,
 						labels: {
-							generateLabels: 'function:legend.generateLabels',
+							generateLabels: 'function:legend.generateLabels'
 						}
 					},
 					cutoutPercentage: 0,
@@ -906,7 +987,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 							title: 'function:tooltips.title'
 						}
 					},
-					scales: {},
+					scales: {}
 				},
 				dataset: {
 					datalabels: {
@@ -921,10 +1002,10 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'end',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [],
+				plugins: []
 			},
 			doughnut: {
 				basic: {
@@ -936,7 +1017,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						display: true,
 						onClick: 'function:legend.onClick',
 						labels: {
-							generateLabels: 'function:legend.generateLabels',
+							generateLabels: 'function:legend.generateLabels'
 						}
 					},
 					cutoutPercentage: 50,
@@ -952,7 +1033,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 							title: 'function:tooltips.title'
 						}
 					},
-					scales: {},
+					scales: {}
 				},
 				dataset: {
 					datalabels: {
@@ -967,10 +1048,10 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						anchor: 'end',
 						align: 'center',
 						formatter: 'function:datalabels.formatter',
-						display: 'function:datalabels.display',
-					},
+						display: 'function:datalabels.display'
+					}
 				},
-				plugins: [],
+				plugins: []
 			},
 			funnel: {
 				basic: {
@@ -990,56 +1071,66 @@ window.Base_Dashboard_ChartFilter_Js = class {
 						}
 					},
 					scales: {
-						yAxes: [{
-							display: true,
-							beginAtZero: true,
-							ticks: {
-								callback: 'function:scales.formatAxesLabels'
+						yAxes: [
+							{
+								display: true,
+								beginAtZero: true,
+								ticks: {
+									callback: 'function:scales.formatAxesLabels'
+								}
 							}
-						}],
-					},
+						]
+					}
 				},
 				dataset: {
 					datalabels: {
 						display: false
 					}
 				},
-				plugins: [{
-					beforeDraw: 'function:plugins.fixYAxisLabels',
-				}],
-			},
+				plugins: [
+					{
+						beforeDraw: 'function:plugins.fixYAxisLabels'
+					}
+				]
+			}
 		};
-		if (typeof options[chartSubType] !== "undefined") {
+		if (typeof options[chartSubType] !== 'undefined') {
 			return options[chartSubType];
 		}
 		// if divided and standard chart types are equal
 		const notStackedChartSubType = this.removeStackedFromName(chartSubType);
-		if (typeof options[notStackedChartSubType] !== "undefined") {
+		if (typeof options[notStackedChartSubType] !== 'undefined') {
 			return options[notStackedChartSubType];
 		}
 		app.errorLog(new Error(chartSubType + ' chart does not exists!'));
-	};
+	}
 	getDefaultDatasetOptions(chartSubType) {
 		return this.getGlobalDefaultChartsOptions(chartSubType).dataset;
-	};
+	}
 	mergeOptionsArray(to, fromArray) {
-		if (typeof to !== "undefined") {
+		if (typeof to !== 'undefined') {
 			return to;
 		}
 		to = [];
-		let result = fromArray.map((from, index) => {
-			if (Array.isArray(from) && !to.hasOwnProperty(key)) {
-				return this.mergeOptionsArray(to[index], from);
-			}
-			if (typeof from === 'object' && from !== null && (typeof to[index] === "undefined" || (typeof to[index] === 'object' && to[index] !== null))) {
-				return this.mergeOptionsObject(to[index], from);
-			}
-			return to[index];
-		}).filter((item) => typeof item !== "undefined");
+		let result = fromArray
+			.map((from, index) => {
+				if (Array.isArray(from) && !to.hasOwnProperty(key)) {
+					return this.mergeOptionsArray(to[index], from);
+				}
+				if (
+					typeof from === 'object' &&
+					from !== null &&
+					(typeof to[index] === 'undefined' || (typeof to[index] === 'object' && to[index] !== null))
+				) {
+					return this.mergeOptionsObject(to[index], from);
+				}
+				return to[index];
+			})
+			.filter((item) => typeof item !== 'undefined');
 		return result;
 	}
 	mergeOptionsObject(to, from) {
-		if (typeof to === "undefined") {
+		if (typeof to === 'undefined') {
 			to = {};
 		}
 		for (let key in from) {
@@ -1048,7 +1139,11 @@ window.Base_Dashboard_ChartFilter_Js = class {
 					if (!to.hasOwnProperty(key)) {
 						to[key] = this.mergeOptionsArray(undefined, from[key]);
 					}
-				} else if (typeof from[key] === 'object' && from[key] !== null && (!to.hasOwnProperty(key) || (typeof to[key] === 'object' && to[key] !== null && !Array.isArray(to[key])))) {
+				} else if (
+					typeof from[key] === 'object' &&
+					from[key] !== null &&
+					(!to.hasOwnProperty(key) || (typeof to[key] === 'object' && to[key] !== null && !Array.isArray(to[key])))
+				) {
 					// if property is an object - merge recursively
 					to[key] = this.mergeOptionsObject(to[key], from[key]);
 				} else {
@@ -1059,12 +1154,19 @@ window.Base_Dashboard_ChartFilter_Js = class {
 			}
 		}
 		return to;
-	};
+	}
 	mergeOptions(to = {}, ...fromArray) {
 		for (let i = 0, len = fromArray.length; i < len; i++) {
 			if (typeof fromArray[i] !== 'object' || Array.isArray(fromArray[i])) {
-				app.errorLog(new Error('Options argument should be an object! Chart subType: ' + this.getSubType() + ' [' + fromArray[i].toString() + ']'));
-
+				app.errorLog(
+					new Error(
+						'Options argument should be an object! Chart subType: ' +
+							this.getSubType() +
+							' [' +
+							fromArray[i].toString() +
+							']'
+					)
+				);
 			} else {
 				to = this.mergeOptionsObject(to, fromArray[i]);
 			}
@@ -1073,23 +1175,23 @@ window.Base_Dashboard_ChartFilter_Js = class {
 	}
 	loadDatasetOptions(chartData) {
 		return chartData.datasets.map((dataset, index) => {
-			let result = this.mergeOptions(
-				dataset,
-				{},
-				this.getDefaultDatasetOptions(this.getSubType())
-			);
+			let result = this.mergeOptions(dataset, {}, this.getDefaultDatasetOptions(this.getSubType()));
 			return result;
 		});
-	};
+	}
 
 	formatTooltipLabels(data) {
 		data.datasets.forEach((dataset) => {
-			if (typeof dataset.dataFormatted === "undefined") {
+			if (typeof dataset.dataFormatted === 'undefined') {
 				dataset.dataFormatted = [];
 				dataset.data.forEach((dataItem, index) => {
 					let dataFormatted = dataItem;
 					if (String(dataItem).length > 0 && !isNaN(Number(dataItem))) {
-						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+						if (
+							typeof this.widgetData !== 'undefined' &&
+							typeof this.widgetData.valueType !== 'undefined' &&
+							this.widgetData.valueType === 'count'
+						) {
 							dataFormatted = App.Fields.Double.formatToDisplay(dataItem, 0);
 						} else {
 							dataFormatted = App.Fields.Double.formatToDisplay(dataItem);
@@ -1102,21 +1204,29 @@ window.Base_Dashboard_ChartFilter_Js = class {
 	}
 	formatTooltipTitles(data) {
 		data.datasets.forEach((dataset) => {
-			if (typeof dataset.titlesFormatted === "undefined") {
+			if (typeof dataset.titlesFormatted === 'undefined') {
 				dataset.titlesFormatted = [];
 				dataset.data.forEach((dataItem, index) => {
 					let defaultLabel = data.labels[index];
 					if (String(defaultLabel).length > 0 && !isNaN(Number(defaultLabel))) {
-						if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+						if (
+							typeof this.widgetData !== 'undefined' &&
+							typeof this.widgetData.valueType !== 'undefined' &&
+							this.widgetData.valueType === 'count'
+						) {
 							defaultLabel = App.Fields.Double.formatToDisplay(defaultLabel, 0);
 						} else {
 							defaultLabel = App.Fields.Double.formatToDisplay(defaultLabel);
 						}
 					}
-					if (typeof dataset.label !== "undefined") {
+					if (typeof dataset.label !== 'undefined') {
 						let label = dataset.label;
 						if (String(label).length > 0 && !isNaN(Number(label))) {
-							if (typeof this.widgetData !== 'undefined' && typeof this.widgetData.valueType !== 'undefined' && this.widgetData.valueType === 'count') {
+							if (
+								typeof this.widgetData !== 'undefined' &&
+								typeof this.widgetData.valueType !== 'undefined' &&
+								this.widgetData.valueType === 'count'
+							) {
 								label = App.Fields.Double.formatToDisplay(label, 0);
 							} else {
 								label = App.Fields.Double.formatToDisplay(label);
@@ -1128,23 +1238,21 @@ window.Base_Dashboard_ChartFilter_Js = class {
 				});
 			}
 		});
-	};
+	}
 	getBasicOptions() {
 		return {
 			responsive: true,
-			maintainAspectRatio: false,
+			maintainAspectRatio: false
 		};
 	}
 	getDefaultBasicOptions(chartSubType) {
 		return this.getGlobalDefaultChartsOptions(chartSubType).basic;
-	};
+	}
 	loadBasicOptions(chartData) {
 		this.formatTooltipTitles(chartData);
 		this.formatTooltipLabels(chartData);
-		return this.mergeOptions(
-			this.getBasicOptions(),
-			this.getDefaultBasicOptions(this.getSubType()));
-	};
+		return this.mergeOptions(this.getBasicOptions(), this.getDefaultBasicOptions(this.getSubType()));
+	}
 	getSubType() {
 		return this.getType();
 	}
@@ -1155,14 +1263,14 @@ window.Base_Dashboard_ChartFilter_Js = class {
 		return str.substr(0, 9) === 'function:';
 	}
 	isMultiFilter() {
-		if (typeof this.filterIds !== "undefined") {
+		if (typeof this.filterIds !== 'undefined') {
 			return this.filterIds.length > 1;
 		}
 		return false;
 	}
 	areColorsFromDividingField() {
 		return !!Number(this.getChartContainer().find('[name="colorsFromDividingField"]').val());
-	};
+	}
 
 	getFunctionFromReplacementString(replacementStr) {
 		let assignResult = false;
@@ -1172,13 +1280,17 @@ window.Base_Dashboard_ChartFilter_Js = class {
 		}
 		const splitted = replacementStr.split(':');
 		if (splitted.length !== 2) {
-			app.errorLog(new Error("Function replacement string should look like 'function:path.to.fn' not like '" + replacementStr + "'"));
+			app.errorLog(
+				new Error(
+					"Function replacement string should look like 'function:path.to.fn' not like '" + replacementStr + "'"
+				)
+			);
 		}
 		let finalFunction = splitted[1].split('.').reduce((previous, current) => {
 			return previous[current];
 		}, this.globalChartFunctions);
 		if (typeof finalFunction !== 'function') {
-			app.errorLog(new Error("Global function does not exists: " + splitted[1]));
+			app.errorLog(new Error('Global function does not exists: ' + splitted[1]));
 		}
 		if (!assignResult) {
 			return finalFunction.bind(this);
@@ -1236,10 +1348,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 		app.errorLog(new Error('Unknown options format [' + typeof options + '] - should be object.'));
 	}
 	loadPlugins(chartData) {
-		return this.mergeOptionsArray(
-			this.getPlugins(chartData),
-			this.getDefaultPlugins(this.getSubType(), chartData)
-		);
+		return this.mergeOptionsArray(this.getPlugins(chartData), this.getDefaultPlugins(this.getSubType(), chartData));
 	}
 	/**
 	 * Load and display chart into the view
@@ -1247,31 +1356,29 @@ window.Base_Dashboard_ChartFilter_Js = class {
 	 * @return {Chart} chartInstance
 	 */
 	loadChart() {
-		if (typeof this.getChartContainer() === "undefined") {
+		if (typeof this.getChartContainer() === 'undefined') {
 			return false;
 		}
-		let data = this.getWidgetData();// load widget data for label formatters
+		let data = this.getWidgetData(); // load widget data for label formatters
 		const type = this.getType();
 
 		data.datasets = this.loadDatasetOptions(data);
 		const options = this.parseOptions(this.loadBasicOptions(data));
 		const plugins = [];
 		data = this.parseOptions(data);
-		const chart = this.chartInstance = new Chart(
-			this.getChartContainer().find('canvas').get(0).getContext("2d"), {
-				type,
-				data,
-				options,
-				plugins
-			}
-		);
+		const chart = (this.chartInstance = new Chart(this.getChartContainer().find('canvas').get(0).getContext('2d'), {
+			type,
+			data,
+			options,
+			plugins
+		}));
 		// parse chart one more time after it was mounted - some options need to have chart loaded
 		data.datasets = data.datasets.map((dataset, index) => {
 			dataset.datasetIndex = index;
 			return this.parseOptions(dataset, dataset, true);
 		});
 		return chart;
-	};
+	}
 	readData() {
 		let container = this.getChartContainer();
 		this.filterIds = JSON.parse(container.find('[name="filterIds"]').val());
@@ -1284,37 +1391,37 @@ window.Base_Dashboard_ChartFilter_Js = class {
 		}
 		var classname = 'Base_Dashboard_ChartFilter_' + type + '_Js';
 		if (typeof window[classname] != 'undefined') {
-			let instance = (new window[classname]());
+			let instance = new window[classname]();
 			instance.setChartContainer(container);
 			instance.readData();
 			return instance.loadChart();
 		} else {
 			console.log('Nie znaleziono ' + classname);
 		}
-	};
-}
+	}
+};
 
 window.Base_Dashboard_ChartFilter_Pie_Js = class extends Base_Dashboard_ChartFilter_Js {
 	getType() {
 		return 'pie';
 	}
-}
+};
 window.Base_Dashboard_ChartFilter_Bar_Js = class extends Base_Dashboard_ChartFilter_Js {
 	getType() {
 		return 'bar';
 	}
-}
+};
 window.Base_Dashboard_ChartFilter_BarStacked_Js = class extends Base_Dashboard_ChartFilter_Js {
 	getType() {
 		return 'barStacked';
 	}
-}
+};
 
 window.Base_Dashboard_ChartFilter_Horizontal_Js = class extends Base_Dashboard_ChartFilter_Bar_Js {
 	getType() {
 		return 'horizontalBar';
 	}
-}
+};
 window.Base_Dashboard_ChartFilter_HorizontalStacked_Js = class extends Base_Dashboard_ChartFilter_Horizontal_Js {
 	getType() {
 		return 'horizontalBar';
@@ -1322,23 +1429,23 @@ window.Base_Dashboard_ChartFilter_HorizontalStacked_Js = class extends Base_Dash
 	getSubType() {
 		return 'horizontalBarStacked';
 	}
-}
+};
 window.Base_Dashboard_ChartFilter_Funnel_Js = class extends Base_Dashboard_ChartFilter_Js {
 	getType() {
 		return 'funnel';
 	}
-}
+};
 window.Base_Dashboard_ChartFilter_Donut_Js = class extends Base_Dashboard_ChartFilter_Pie_Js {
 	getType() {
 		return 'doughnut';
 	}
-}
+};
 
 window.Base_Dashboard_ChartFilter_Line_Js = class extends Base_Dashboard_ChartFilter_Js {
 	getType() {
 		return 'line';
 	}
-}
+};
 
 window.Base_Dashboard_ChartFilter_LineStacked_Js = class extends Base_Dashboard_ChartFilter_Line_Js {
 	getType() {
@@ -1347,17 +1454,16 @@ window.Base_Dashboard_ChartFilter_LineStacked_Js = class extends Base_Dashboard_
 	getSubType() {
 		return 'lineStacked';
 	}
-}
-
+};
 
 window.Base_Dashboard_ChartFilter_LinePlain_Js = class extends Base_Dashboard_ChartFilter_Line_Js {
 	getSubType() {
 		return 'linePlain';
 	}
-}
+};
 
 window.Base_Dashboard_ChartFilter_LinePlainStacked_Js = class extends Base_Dashboard_ChartFilter_Line_Js {
 	getSubType() {
 		return 'linePlainStacked';
 	}
-}
+};

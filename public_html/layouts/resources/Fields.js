@@ -1,7 +1,7 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 window.App.Fields = {
-	'Picklist': {
+	Picklist: {
 		/**
 		 * Function which will convert ui of select boxes.
 		 * @params parent - select element
@@ -10,10 +10,10 @@ window.App.Fields = {
 		 * @returns jquery object list which represents changed select elements
 		 */
 		changeSelectElementView: function (parent, view, viewParams) {
-			if (typeof parent === "undefined") {
+			if (typeof parent === 'undefined') {
 				parent = $('body');
 			}
-			if (typeof view === "undefined") {
+			if (typeof view === 'undefined') {
 				const select2Elements = $('select.select2', parent).toArray();
 				select2Elements.forEach((elem) => {
 					this.changeSelectElementView($(elem), 'select2', viewParams);
@@ -26,15 +26,14 @@ window.App.Fields = {
 			} else {
 				app.errorLog(new Error(`Unknown select type [${view}]`));
 			}
-		}
-		,
+		},
 		/**
 		 * Function which will show the select2 element for select boxes . This will use select2 library
 		 */
 		showSelect2ElementView: function (selectElement, params) {
 			let self = this;
 			selectElement = $(selectElement);
-			if (typeof params === "undefined") {
+			if (typeof params === 'undefined') {
 				params = {};
 			}
 			if ($(selectElement).length > 1) {
@@ -53,31 +52,34 @@ window.App.Fields = {
 				params = $.extend(data, params);
 			}
 			params.language = {};
-			params.theme = "bootstrap";
+			params.theme = 'bootstrap';
 			const width = $(selectElement).data('width');
-			if (typeof width !== "undefined") {
+			if (typeof width !== 'undefined') {
 				params.width = width;
 			} else {
 				params.width = '100%';
 			}
 			params.containerCssClass = 'form-control w-100';
 			const containerCssClass = selectElement.data('containerCssClass');
-			if (typeof containerCssClass !== "undefined") {
-				params.containerCssClass += " " + containerCssClass;
+			if (typeof containerCssClass !== 'undefined') {
+				params.containerCssClass += ' ' + containerCssClass;
 			}
 			params.language.noResults = function (msn) {
 				return app.translate('JS_NO_RESULTS_FOUND');
 			};
 
 			// Sort DOM nodes alphabetically in select box.
-			if (typeof params['customSortOptGroup'] !== "undefined" && params['customSortOptGroup']) {
+			if (typeof params['customSortOptGroup'] !== 'undefined' && params['customSortOptGroup']) {
 				$('optgroup', selectElement).each(function () {
 					var optgroup = $(this);
-					var options = optgroup.children().toArray().sort(function (a, b) {
-						var aText = $(a).text();
-						var bText = $(b).text();
-						return aText < bText ? 1 : -1;
-					});
+					var options = optgroup
+						.children()
+						.toArray()
+						.sort(function (a, b) {
+							var aText = $(a).text();
+							var bText = $(b).text();
+							return aText < bText ? 1 : -1;
+						});
 					$.each(options, function (i, v) {
 						optgroup.prepend(v);
 					});
@@ -87,25 +89,25 @@ window.App.Fields = {
 
 			//formatSelectionTooBig param is not defined even it has the maximumSelectionLength,
 			//then we should send our custom function for formatSelectionTooBig
-			if (typeof params.maximumSelectionLength !== "undefined" && typeof params.formatSelectionTooBig === "undefined") {
+			if (typeof params.maximumSelectionLength !== 'undefined' && typeof params.formatSelectionTooBig === 'undefined') {
 				var limit = params.maximumSelectionLength;
 				//custom function which will return the maximum selection size exceeds message.
 				var formatSelectionExceeds = function (limit) {
 					// return app.translate('JS_YOU_CAN_SELECT_ONLY') + ' ' + limit.maximum + ' ' + app.translate('JS_ITEMS');
-				}
+				};
 				params.language.maximumSelected = formatSelectionExceeds;
 			}
-			if (typeof selectElement.attr('multiple') !== "undefined" && !params.placeholder) {
+			if (typeof selectElement.attr('multiple') !== 'undefined' && !params.placeholder) {
 				//params.placeholder = app.translate('JS_SELECT_SOME_OPTIONS');
 			} else if (!params.placeholder) {
 				//params.placeholder = app.translate('JS_SELECT_AN_OPTION');
 			}
-			if (typeof params.templateResult === "undefined") {
+			if (typeof params.templateResult === 'undefined') {
 				params.templateResult = function (data, container) {
 					if (data.element && data.element.className) {
 						$(container).addClass(data.element.className);
 					}
-					if (typeof data.name === "undefined") {
+					if (typeof data.name === 'undefined') {
 						return data.text;
 					}
 					if (data.type == 'optgroup') {
@@ -115,7 +117,7 @@ window.App.Fields = {
 					}
 				};
 			}
-			if (typeof params.templateSelection === "undefined") {
+			if (typeof params.templateSelection === 'undefined') {
 				params.templateSelection = function (data, container) {
 					if (data.element && data.element.className) {
 						$(container).addClass(data.element.className);
@@ -151,13 +153,13 @@ window.App.Fields = {
 						};
 					},
 					processResults: function (data, params) {
-						var items = new Array;
+						var items = new Array();
 						if (data.success == true) {
 							selectElement.find('option').each(function () {
 								var currentTarget = $(this);
 								items.push({
 									label: currentTarget.html(),
-									value: currentTarget.val(),
+									value: currentTarget.val()
 								});
 							});
 							items = items.concat(data.result.items);
@@ -172,16 +174,15 @@ window.App.Fields = {
 					cache: false
 				};
 				params.escapeMarkup = function (markup) {
-					if (markup !== "undefined")
-						return markup;
+					if (markup !== 'undefined') return markup;
 				};
 				var minimumInputLength = 3;
-				if (selectElement.data('minimumInput') !== "undefined") {
+				if (selectElement.data('minimumInput') !== 'undefined') {
 					minimumInputLength = selectElement.data('minimumInput');
 				}
 				params.minimumInputLength = minimumInputLength;
 				params.templateResult = function (data) {
-					if (typeof data.name === "undefined") {
+					if (typeof data.name === 'undefined') {
 						return data.text;
 					}
 					if (data.type == 'optgroup') {
@@ -207,12 +208,13 @@ window.App.Fields = {
 				let htmlBoolParams = select.data('select');
 				if (htmlBoolParams === 'tags') {
 					params.tags = true;
-					params.tokenSeparators = [","]
+					params.tokenSeparators = [','];
 				} else {
 					params[htmlBoolParams] = true;
 				}
-				select.select2(params)
-					.on("select2:open", function (e) {
+				select
+					.select2(params)
+					.on('select2:open', function (e) {
 						if (select.data('unselecting')) {
 							select.removeData('unselecting');
 							setTimeout(function (e) {
@@ -224,25 +226,24 @@ window.App.Fields = {
 						var element = $(e.currentTarget);
 						var instance = element.data('select2');
 						instance.$dropdown.css('z-index', 1000002);
-					}).on("select2:unselect", function (e) {
+					})
+					.on('select2:unselect', function (e) {
 						select.data('unselecting', true);
 					});
 
 				if (select.hasClass('js-select2-sortable')) {
 					self.registerSelect2Sortable(select, params.sortableCb);
 				}
-			})
+			});
 
 			return selectElement;
-		}
-		,
+		},
 		/**
 		 * Register select2 drag and drop sorting
 		 * @param {jQuery} select2 element
 		 * @param {function} callback function
 		 */
-		registerSelect2Sortable(select, cb = () => {
-		}) {
+		registerSelect2Sortable(select, cb = () => {}) {
 			let ul = select.next('.select2-container').first('ul.select2-selection__rendered');
 			ul.sortable({
 				items: 'li:not(.select2-search__field)',
@@ -261,7 +262,7 @@ window.App.Fields = {
 			});
 		}
 	},
-	'Tree': class {
+	Tree: class {
 		constructor(treeContainer = $('.js-tree-container')) {
 			if (treeContainer.length > 0) {
 				this.treeInstance = treeContainer;
@@ -283,13 +284,13 @@ window.App.Fields = {
 		}
 		generateTree(treeData) {
 			this.treeInstance.jstree({
-				'core': {
+				core: {
 					data: treeData,
 					multiple: false,
 					themes: {
 						name: 'proton',
 						responsive: true
-					},
+					}
 				}
 			});
 		}
@@ -311,15 +312,18 @@ window.App.Fields = {
 			let integer = value.toString().split('.')[0];
 			if (integer.length > 3) {
 				if (groupingPattern === '123,456,789') {
-					integer = integer.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + groupSeparator);
+					integer = integer.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + groupSeparator);
 				} else if (groupingPattern === '123456,789') {
 					integer = integer.slice(0, -3) + groupSeparator + integer.slice(-3);
 				} else if (groupingPattern === '12,34,56,789') {
-					integer = integer.slice(0, -3).replace(/(\d)(?=(\d\d)+(?!\d))/g, "$1" + groupSeparator) + groupSeparator + integer.slice(-3);
+					integer =
+						integer.slice(0, -3).replace(/(\d)(?=(\d\d)+(?!\d))/g, '$1' + groupSeparator) +
+						groupSeparator +
+						integer.slice(-3);
 				}
 			}
 			return integer;
-		},
+		}
 	},
 	Double: {
 		/**

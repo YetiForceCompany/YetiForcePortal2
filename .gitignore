@@ -1,3 +1,6 @@
+# Other languages 
+languages/pl-PL/*
+
 # dependencies COMPOSER
 /vendor
 
@@ -6,6 +9,7 @@ yarn-error.log
 /node_modules/
 /public_html/libraries/*
 /public_html/vendor/*
+
 
 # IDEs and editors
 /.buildpath

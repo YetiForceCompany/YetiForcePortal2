@@ -3,22 +3,22 @@
 class ProgressIndicatorHelper {
 	constructor() {
 		this.defaults = {
-			'position': 'append',
-			'mode': 'show',
-			'blockInfo': {
-				'elementToBlock': 'body'
+			position: 'append',
+			mode: 'show',
+			blockInfo: {
+				elementToBlock: 'body'
 			},
-			'message': ''
+			message: ''
 		};
 		this.imageContainerCss = {
 			'text-align': 'center'
 		};
 		this.blockOverlayCSS = {
-			'opacity': '0.2',
+			opacity: '0.2',
 			'z-index': '1030'
 		};
 		this.blockCss = {
-			'border': '',
+			border: '',
 			'background-color': '',
 			'background-clip': 'border-box',
 			'border-radius': '2px',
@@ -34,13 +34,13 @@ class ProgressIndicatorHelper {
 		this.showOnTop = false;
 	}
 	init(element, options) {
-		if (typeof options === "undefined") {
+		if (typeof options === 'undefined') {
 			options = {};
 		}
 		this.options = $.extend(true, this.defaults, options);
 		this.container = element;
 		this.position = options.position;
-		if (typeof options.imageContainerCss !== "undefined") {
+		if (typeof options.imageContainerCss !== 'undefined') {
 			this.imageContainerCss = $.extend(true, this.imageContainerCss, options.imageContainerCss);
 		}
 		if (this.isBlockMode()) {
@@ -56,13 +56,13 @@ class ProgressIndicatorHelper {
 		}
 	}
 	isPageBlockMode() {
-		if ((typeof this.elementToBlock !== "undefined") && this.elementToBlock.is('body')) {
+		if (typeof this.elementToBlock !== 'undefined' && this.elementToBlock.is('body')) {
 			return true;
 		}
 		return false;
 	}
 	isBlockMode() {
-		if ((typeof this.options.blockInfo !== "undefined") && (this.options.blockInfo.enabled === true)) {
+		if (typeof this.options.blockInfo !== 'undefined' && this.options.blockInfo.enabled === true) {
 			return true;
 		}
 		return false;
@@ -75,7 +75,10 @@ class ProgressIndicatorHelper {
 		if (this.isBlockMode()) {
 			className = className + ' blockProgressContainer';
 		}
-		let imageHtml = '<div class="imageHolder ' + className + '">' +
+		let imageHtml =
+			'<div class="imageHolder ' +
+			className +
+			'">' +
 			'<div class="sk-cube-grid"><div class="sk-cube sk-cube1"></div>' +
 			'<div class="sk-cube sk-cube2"></div>' +
 			'<div class="sk-cube sk-cube3"></div><div class="sk-cube sk-cube4"></div><div class="sk-cube sk-cube5"></div>' +
@@ -87,7 +90,7 @@ class ProgressIndicatorHelper {
 			jQMessage = app.translate('JS_LOADING_PLEASE_WAIT');
 		}
 		if (!(jQMessage instanceof jQuery)) {
-			jQMessage = $('<span></span>').html(jQMessage)
+			jQMessage = $('<span></span>').html(jQMessage);
 		}
 		let messageContainer = $('<div class="message"></div>').append(jQMessage);
 		jQImageHtml.append(messageContainer);
@@ -95,13 +98,13 @@ class ProgressIndicatorHelper {
 			jQImageHtml.addClass('blockMessageContainer');
 		}
 		switch (this.position) {
-			case "prepend":
+			case 'prepend':
 				this.container.prepend(jQImageHtml);
 				break;
-			case "html":
+			case 'html':
 				this.container.html(jQImageHtml);
 				break;
-			case "replace":
+			case 'replace':
 				this.container.replaceWith(jQImageHtml);
 				break;
 			default:
@@ -130,7 +133,7 @@ class ProgressIndicatorHelper {
 	}
 	hide() {
 		$('.imageHolder', this.container).remove();
-		if (typeof this.blockedElement !== "undefined") {
+		if (typeof this.blockedElement !== 'undefined') {
 			if (this.isPageBlockMode()) {
 				$.unblockUI();
 			} else {
@@ -156,14 +159,14 @@ $.extend({
 	},
 	progressIndicatorShow() {
 		return $.progressIndicator({
-			'position': 'html',
-			'blockInfo': {
-				'enabled': true
+			position: 'html',
+			blockInfo: {
+				enabled: true
 			}
 		});
 	},
 	progressIndicatorHide() {
-		$('.js-progress-image-container').progressIndicator({ 'mode': 'hide' });
+		$('.js-progress-image-container').progressIndicator({ mode: 'hide' });
 	}
 });
 /**
@@ -178,7 +181,7 @@ $.fn.extend({
 		return element.each((index, element) => {
 			let jQueryObject = $(element),
 				progressIndicatorInstance;
-			if (typeof jQueryObject.data('progressIndicator') !== "undefined") {
+			if (typeof jQueryObject.data('progressIndicator') !== 'undefined') {
 				progressIndicatorInstance = jQueryObject.data('progressIndicator');
 			} else {
 				progressIndicatorInstance = new ProgressIndicatorHelper();
