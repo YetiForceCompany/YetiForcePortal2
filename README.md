@@ -36,6 +36,17 @@ Installation
 
 4. Adjust configuration
 
-## Customer Portal Languages
+## 🏳️ Customer Portal Languages
 
 Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
+
+## 💻 Demo
+
+https://gitdeveloper.yetiforce.com/portal/
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/YetiForceCompany/YetiForcePortal2/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=YetiForceCompany/YetiForcePortal2" />
+</a>
