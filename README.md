@@ -35,3 +35,7 @@ Installation
 - composer install
 
 4. Adjust configuration
+
+## Customer Portal Languages
+
+Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
