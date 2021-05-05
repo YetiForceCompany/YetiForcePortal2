@@ -22,7 +22,7 @@ abstract class Action extends Base
 		$userInstance = \App\User::getUser();
 		$modulePermission = $userInstance->isPermitted($moduleName);
 		if (!$modulePermission) {
-			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 		return true;
 	}

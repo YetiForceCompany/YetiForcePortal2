@@ -26,7 +26,7 @@ class Install extends \App\Controller\Action
 	public function checkPermission(): bool
 	{
 		if (\YF\Modules\Install\Model\Install::isInstalled()) {
-			throw new \App\AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
+			throw new \App\Exceptions\AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
 		}
 		return true;
 	}
@@ -41,7 +41,7 @@ class Install extends \App\Controller\Action
 			\Conf\Config::$serverName = $this->request->getByType('serverName', Purifier::TEXT);
 			\Conf\Config::$serverPass = $this->request->getByType('serverPass', Purifier::TEXT);
 			if (empty(\Conf\Config::$apiKey) || empty(\Conf\Config::$apiUrl) || empty(\Conf\Config::$serverName) || empty(\Conf\Config::$serverPass)) {
-				throw new \App\AppException('ERR_NOT_ENTERED_REQUIRED_DATA', 500);
+				throw new \App\Exceptions\AppException('ERR_NOT_ENTERED_REQUIRED_DATA', 500);
 			}
 			$install = \YF\Modules\Install\Model\Install::getInstance($this->request->getModule());
 			if ($install->check()) {

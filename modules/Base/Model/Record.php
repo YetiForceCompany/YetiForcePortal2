@@ -149,7 +149,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getRawData(): array
 	{
-		return isset($this->valueMap['rawData']) ? $this->valueMap['rawData'] : [];
+		return $this->valueMap['rawData'] ?? [];
 	}
 
 	/**
@@ -174,7 +174,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getRawValue(string $key)
 	{
-		return isset($this->valueMap['rawData'][$key]) ? $this->valueMap['rawData'][$key] : '';
+		return $this->valueMap['rawData'][$key] ?? '';
 	}
 
 	/**

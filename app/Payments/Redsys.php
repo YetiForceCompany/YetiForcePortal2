@@ -141,7 +141,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$order = $this->config->get('orderPrefix') . $order;
 		if (!\preg_match('/^[0-9]{4}[a-zA-Z0-9]{0,8}$/i', $order)) {
-			throw new \App\Exception\Payments('Invalid order ID format');
+			throw new \App\Exceptions\Payments('Invalid order ID format');
 		}
 		$this->setParameter('DS_MERCHANT_ORDER', $order);
 	}
@@ -188,32 +188,32 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 */
 	public function requestHandlingFromPaymentsSystem(array $dataFromRequest): Utilities\TransactionState
 	{
-		$dataFromRequest = array_change_key_case($dataFromRequest, \CASE_UPPER);
+		$dataFromRequest = array_change_key_case($dataFromRequest, CASE_UPPER);
 		if (!$this->validateRequestFromPaymentsSystem($dataFromRequest)) {
-			throw new \App\Exception\Payments('Signature error, incorrect data');
+			throw new \App\Exceptions\Payments('Signature error, incorrect data');
 		}
 		$data = $this->decodeMerchantParameters($dataFromRequest['DS_MERCHANTPARAMETERS']);
 		$currencyInfo = Utilities\CurrencyISO4217::getInfoFromCode($data['DS_CURRENCY']);
 		if (empty($currencyInfo)) {
-			throw new \App\Exception\Payments('Unknown currency');
+			throw new \App\Exceptions\Payments('Unknown currency');
 		}
 		if (\App\Json::isEmpty($data['DS_MERCHANTDATA'])) {
-			throw new \App\Exception\Payments('Empty DS_MERCHANTDATA');
+			throw new \App\Exceptions\Payments('Empty DS_MERCHANTDATA');
 		}
 		$merchantDataParameters = \App\Json::decode(htmlspecialchars_decode($data['DS_MERCHANTDATA']));
 		if (!\is_array($merchantDataParameters)) {
-			throw new \App\Exception\Payments('DS_MERCHANTDATA, incorrect data');
+			throw new \App\Exceptions\Payments('DS_MERCHANTDATA, incorrect data');
 		}
 		$transactionState = new Utilities\TransactionState();
 		$transactionState->originalAmount = $transactionState->amount =
-			round((float) $data['DS_AMOUNT'] / pow(10, $currencyInfo['numberOfDigitsAfter']), $currencyInfo['numberOfDigitsAfter']);
+			round((float) $data['DS_AMOUNT'] / 10 ** $currencyInfo['numberOfDigitsAfter'], $currencyInfo['numberOfDigitsAfter']);
 		$transactionState->transactionId = $transactionState->orderNumber = $data['DS_ORDER'];
 		$transactionState->datetime = \DateTime::createFromFormat('d/m/Y H:i', $data['DS_DATE'] . $data['DS_HOUR']);
 		$transactionState->crmOrderId = (int) $merchantDataParameters['crmId'];
 		$transactionState->status = $this->getTransactionStatus($data['DS_RESPONSE']);
 		$transactionState->description = $merchantDataParameters['description'];
 		if (false === $transactionState->datetime) {
-			throw new \App\Exception\Payments('Invalid date format');
+			throw new \App\Exceptions\Payments('Invalid date format');
 		}
 		$transactionState->originalCurrency = $transactionState->currency = $currencyInfo['symbol'];
 		$responseCode = $data['DS_ERRORCODE'] ?? null;
@@ -229,11 +229,11 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	public function handlingReturn(array $dataFromRequest)
 	{
 		if (empty($dataFromRequest['status']) || !\in_array($dataFromRequest['status'], ['OK', 'ERROR'])) {
-			throw new \App\Exception\Payments('Invalid status');
+			throw new \App\Exceptions\Payments('Invalid status');
 		}
-		$dataFromRequestCaseUpper = array_change_key_case($dataFromRequest, \CASE_UPPER);
+		$dataFromRequestCaseUpper = array_change_key_case($dataFromRequest, CASE_UPPER);
 		if (!empty($dataFromRequestCaseUpper['DS_SIGNATUREVERSION']) && !$this->validateRequestFromPaymentsSystem($dataFromRequestCaseUpper)) {
-			throw new \App\Exception\Payments('Signature error, incorrect data');
+			throw new \App\Exceptions\Payments('Signature error, incorrect data');
 		}
 		return [
 			'crmOrderId' => empty($dataFromRequest['crmOrderId']) ? null : (int) $dataFromRequest['crmOrderId'],
@@ -330,7 +330,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	public function createMerchantSignature(): string
 	{
 		if (empty($this->parameters['DS_MERCHANT_ORDER'])) {
-			throw new \App\Exception\Payments('No parameter DS_MERCHANT_ORDER');
+			throw new \App\Exceptions\Payments('No parameter DS_MERCHANT_ORDER');
 		}
 		return \base64_encode($this->calculateSha256(
 			$this->createMerchantParameters(),
@@ -342,7 +342,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$data = $this->decodeMerchantParameters($merchantParameters);
 		if (empty($data['DS_ORDER'])) {
-			throw new \App\Exception\Payments("No parameter 'DS_ORDER'");
+			throw new \App\Exceptions\Payments("No parameter 'DS_ORDER'");
 		}
 		return $this->base64UrlEncode($this->calculateSha256(
 			$merchantParameters,
@@ -356,8 +356,8 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 */
 	public function validateRequestFromPaymentsSystem(array $requestParameters): bool
 	{
-		return (!empty($requestParameters['DS_SIGNATUREVERSION']) && 'HMAC_SHA256_V1' === $requestParameters['DS_SIGNATUREVERSION']) &&
-			$this->createMerchantSignatureFromParameters($requestParameters['DS_MERCHANTPARAMETERS']) === $requestParameters['DS_SIGNATURE'];
+		return (!empty($requestParameters['DS_SIGNATUREVERSION']) && 'HMAC_SHA256_V1' === $requestParameters['DS_SIGNATUREVERSION'])
+			&& $this->createMerchantSignatureFromParameters($requestParameters['DS_MERCHANTPARAMETERS']) === $requestParameters['DS_SIGNATURE'];
 	}
 
 	/**
@@ -396,11 +396,11 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	{
 		$decodeParameters = $this->base64UrlDecode($merchantParameters);
 		if (empty($decodeParameters)) {
-			throw new \App\Exception\Payments('Problem with decode merchant parameters.');
+			throw new \App\Exceptions\Payments('Problem with decode merchant parameters.');
 		}
 		$parameters = array_change_key_case(
 			json_decode($decodeParameters, true),
-			\CASE_UPPER
+			CASE_UPPER
 		);
 		foreach ($parameters as &$value) {
 			$value = \urldecode($value);

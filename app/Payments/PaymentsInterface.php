@@ -20,6 +20,7 @@ interface PaymentsInterface
 	 * Construct.
 	 *
 	 * @param ConfigInterface $config
+	 * @param string          $type
 	 */
 	public function __construct(ConfigInterface $config, string $type);
 

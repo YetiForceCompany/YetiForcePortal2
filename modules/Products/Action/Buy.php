@@ -65,7 +65,7 @@ class Buy extends \App\Controller\Action
 				}
 			}
 			$response->setResult($responseFromApi);
-		} catch (\App\AppException $e) {
+		} catch (\App\Exceptions\AppException $e) {
 			$response->setError($e->getCode(), $e->getMessage());
 		}
 		$response->emit();
@@ -94,7 +94,7 @@ class Buy extends \App\Controller\Action
 		$requestParams['ssingleorders_method_payments'] = \App\Payments::getInstance($cart->getPayment())->getPicklistValue();
 		$requestParams['ssingleorders_source'] = 'PLL_PORTAL';
 		$requestParams['attention'] = $cart->getAttention();
-		if ($cart instanceof  ReferenceCart) {
+		if ($cart instanceof ReferenceCart) {
 			$requestParams['reference_id'] = $cart->recordId;
 			$requestParams['reference_module'] = $cart->moduleName;
 		}

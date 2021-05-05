@@ -9,8 +9,6 @@
 
 namespace YF\Modules\Base\Dashboard;
 
-use App\AppException;
-
 /**
  * Base class for widget.
  */
@@ -35,7 +33,7 @@ class Base extends \App\BaseModel
 	public static function getInstance(string $type, array $data): self
 	{
 		if (!isset(static::WIDGETS_TYPE[$type])) {
-			throw new AppException('ERR_NOT_FOUND_DASHBOARD', 500);
+			throw new \App\Exceptions\AppException('ERR_NOT_FOUND_DASHBOARD', 500);
 		}
 		$class = '\\YF\\Modules\\Base\\Dashboard\\' . static::WIDGETS_TYPE[$type];
 		$widget = new $class();

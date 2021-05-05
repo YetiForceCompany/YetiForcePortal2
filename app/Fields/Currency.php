@@ -27,7 +27,7 @@ class Currency
 		if (false === strpos($value, $seperator)) {
 			return $value;
 		}
-		for ($i = strlen($value) - 1; $i >= 0; --$i) {
+		for ($i = \strlen($value) - 1; $i >= 0; --$i) {
 			if ($value[$i] === $seperator) {
 				--$i;
 				break;

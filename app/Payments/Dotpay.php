@@ -229,21 +229,21 @@ class Dotpay extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	public function requestHandlingFromPaymentsSystem(array $dataFromRequest): Utilities\TransactionState
 	{
 		if (!$this->validateRequestFromPaymentsSystem($dataFromRequest)) {
-			throw new \App\Exception\Payments('Signature error, incorrect data');
+			throw new \App\Exceptions\Payments('Signature error, incorrect data');
 		}
 		$transactionState = new Utilities\TransactionState();
 		$transactionState->amount = (float) $dataFromRequest['operation_amount'];
 		$transactionState->originalAmount = (float) $dataFromRequest['operation_original_amount'];
 		$transactionState->datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $dataFromRequest['operation_datetime']);
 		if (false === $transactionState->datetime) {
-			throw new \App\Exception\Payments('Invalid date format');
+			throw new \App\Exceptions\Payments('Invalid date format');
 		}
 		$transactionState->currency = $dataFromRequest['operation_currency'];
 		$transactionState->originalCurrency = $dataFromRequest['operation_original_currency'];
 		$transactionState->crmOrderId = (int) $dataFromRequest['control'];
 		$transactionState->description = $dataFromRequest['description'];
 		if (empty(static::AVAILABLE_STATUSES[$dataFromRequest['operation_status']])) {
-			throw new \App\Exception\Payments('Unknown status');
+			throw new \App\Exceptions\Payments('Unknown status');
 		}
 		$transactionState->status = static::AVAILABLE_STATUSES[$dataFromRequest['operation_status']];
 		return $transactionState;
@@ -256,7 +256,7 @@ class Dotpay extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	public function handlingReturn(array $dataFromRequest)
 	{
 		if (empty($dataFromRequest['status']) || !\in_array($dataFromRequest['status'], ['OK', 'ERROR'])) {
-			throw new \App\Exception\Payments('Invalid status');
+			throw new \App\Exceptions\Payments('Invalid status');
 		}
 		return [
 			'crmOrderId' => empty($dataFromRequest['crmOrderId']) ? null : (int) $dataFromRequest['crmOrderId'],

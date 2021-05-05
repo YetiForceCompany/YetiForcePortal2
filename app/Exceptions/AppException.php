@@ -1,6 +1,8 @@
 <?php
 /**
- * Exceptions file.
+ * Main exceptions file.
+ *
+ * @package App
  *
  * @see      http://php.net/manual/en/class.exception.php
  *
@@ -9,18 +11,14 @@
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
-namespace App;
+namespace App\Exceptions;
 
 /**
- * Exceptions class.
+ * Main exceptions class.
  */
 class AppException extends \Exception
 {
-	/**
-	 * Default error exception template.
-	 *
-	 * @var string
-	 */
+	/** @var string Default error exception template. */
 	public $tplName = 'Exception.tpl';
 
 	/**
@@ -46,7 +44,7 @@ class AppException extends \Exception
 	public static function view(\Throwable $e): void
 	{
 		$viewer = new \App\Viewer();
-		if (Config::get('displayDetailsException')) {
+		if (\App\Config::get('displayDetailsException')) {
 			$viewer->assign('MESSAGE', $e->getMessage());
 			$viewer->assign('BACKTRACE', empty($e->backtrace) ? $e->getTraceAsString() : $e->backtrace);
 			$viewer->assign('SESSION', $_SESSION);

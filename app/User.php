@@ -151,7 +151,7 @@ class User extends BaseModel
 	 *
 	 * @param mixed $key
 	 *
-	 * @throws AppException
+	 * @throws \App\Exceptions\AppException
 	 *
 	 * @return mixed
 	 */
@@ -159,7 +159,7 @@ class User extends BaseModel
 	{
 		$preferences = $this->get('preferences');
 		if (empty($preferences)) {
-			throw new AppException('lack of user preferences');
+			throw new Exceptions\AppException('lack of user preferences');
 		}
 		if ($key && isset($preferences[$key])) {
 			return $preferences[$key];

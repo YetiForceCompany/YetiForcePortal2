@@ -37,7 +37,7 @@ class Purifier
 	 */
 	public static function purifyByType($input, $type)
 	{
-		if (is_array($input)) {
+		if (\is_array($input)) {
 			$value = [];
 			foreach ($input as $k => $v) {
 				$value[$k] = static::purifyByType($v, $type);
@@ -62,7 +62,7 @@ class Purifier
 					break;
 			}
 			if (null === $value) {
-				throw new \App\Exception\IllegalValue('ERR_NOT_ALLOWED_VALUE||' . $input, 406);
+				throw new \App\Exceptions\IllegalValue('ERR_NOT_ALLOWED_VALUE||' . $input, 406);
 			}
 		}
 		return $value;

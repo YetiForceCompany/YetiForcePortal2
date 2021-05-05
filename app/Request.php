@@ -229,7 +229,7 @@ class Request
 
 	public function getModule()
 	{
-		return  $this->getByType('module', Purifier::ALNUM);
+		return $this->getByType('module', Purifier::ALNUM);
 	}
 
 	public function getAction()
@@ -237,7 +237,7 @@ class Request
 		if ($this->isEmpty('action')) {
 			return $this->getByType('view', Purifier::ALNUM);
 		}
-		return  $this->getByType('action', Purifier::ALNUM);
+		return $this->getByType('action', Purifier::ALNUM);
 	}
 
 	public function isAjax(): bool
@@ -254,17 +254,17 @@ class Request
 	public function validateWriteAccess()
 	{
 		if ('POST' !== $_SERVER['REQUEST_METHOD']) {
-			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
+			throw new \App\Exceptions\BadRequest('ERR_BAD_REQUEST');
 		}
 		if (class_exists('CSRFConfig') && !\CsrfMagic\Csrf::check(false)) {
-			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
+			throw new \App\Exceptions\BadRequest('ERR_BAD_REQUEST');
 		}
 	}
 
 	public function validateReadAccess()
 	{
 		if ('GET' !== $_SERVER['REQUEST_METHOD']) {
-			throw new \App\Exception\BadRequest('ERR_BAD_REQUEST');
+			throw new \App\Exceptions\BadRequest('ERR_BAD_REQUEST');
 		}
 	}
 }

@@ -19,7 +19,7 @@ class Loader
 			return true;
 		}
 		if (!file_exists($name)) {
-			throw new AppException('FILE_NOT_FOUND: ' . $name);
+			throw new Exceptions\AppException('FILE_NOT_FOUND: ' . $name);
 		}
 		$status = -1;
 		if ($supressWarning) {
@@ -53,6 +53,6 @@ class Loader
 		if (file_exists($filePath)) {
 			return '\\YF\\Modules\\Base' . '\\' . $moduleType . '\\' . $fieldName;
 		}
-		throw new AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
+		throw new Exceptions\AppException("HANDLER_NOT_FOUND: $moduleName, $moduleType, $fieldName");
 	}
 }

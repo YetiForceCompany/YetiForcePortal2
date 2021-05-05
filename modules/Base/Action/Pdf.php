@@ -17,7 +17,7 @@ class Pdf extends \App\Controller\Action
 	public function checkPermission()
 	{
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'ExportPdf')) {
-			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 	}
 

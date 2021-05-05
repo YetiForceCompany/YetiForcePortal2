@@ -102,7 +102,7 @@ class Log
 	private static function log($value, string $type, string $category)
 	{
 		if (!\in_array($category, static::$category)) {
-			throw new AppException('Category not found', 500);
+			throw new Exceptions\AppException('Category not found', 500);
 		}
 		$className = '\\App\Log\\' . $category;
 		$className::log($value, $type);

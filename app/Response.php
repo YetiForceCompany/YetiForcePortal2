@@ -106,7 +106,7 @@ class Response
 	 * Set error data to send.
 	 *
 	 * @param mixed      $code
-	 * @param null|mixed $message
+	 * @param mixed|null $message
 	 * @param mixed      $trace
 	 */
 	public function setError($code, $message = null, $trace = false)
@@ -229,13 +229,13 @@ class Response
 	protected function emitText()
 	{
 		if (null === $this->result) {
-			if (is_string($this->error)) {
+			if (\is_string($this->error)) {
 				echo $this->error;
 			} else {
 				echo Json::encode($this->prepareResponse());
 			}
 		} else {
-			if (is_string($this->result)) {
+			if (\is_string($this->result)) {
 				echo $this->result;
 			} else {
 				echo Json::encode($this->prepareResponse());
@@ -249,7 +249,7 @@ class Response
 	protected function emitRaw()
 	{
 		if (null === $this->result) {
-			echo (is_string($this->error)) ? $this->error : var_export($this->error, true);
+			echo (\is_string($this->error)) ? $this->error : var_export($this->error, true);
 		}
 		echo $this->result;
 	}

@@ -97,7 +97,7 @@ abstract class AbstractPayments
 	public function setParameter(string $key, $value): self
 	{
 		if (!\in_array($key, static::ALLOWED_PARAMETERS)) {
-			throw new \App\Exception\Payments('Not allowed parameter');
+			throw new \App\Exceptions\Payments('Not allowed parameter');
 		}
 		$this->parameters[$key] = $value;
 		return $this;
@@ -113,7 +113,7 @@ abstract class AbstractPayments
 	public function getParameter(string $key)
 	{
 		if (!\in_array($key, static::ALLOWED_PARAMETERS)) {
-			throw new \App\Exception\Payments('Not allowed parameter');
+			throw new \App\Exceptions\Payments('Not allowed parameter');
 		}
 		return $this->parameters[$key] ?? null;
 	}

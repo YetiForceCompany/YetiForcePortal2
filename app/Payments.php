@@ -27,11 +27,11 @@ class Payments
 	{
 		$classConfig = "\\Conf\\Payments\\{$typeOfPayments}";
 		if (!\class_exists($classConfig)) {
-			throw new \App\Exception\Payments("There is no configuration file for this type of payment: {$typeOfPayments}");
+			throw new \App\Exceptions\Payments("There is no configuration file for this type of payment: {$typeOfPayments}");
 		}
 		$classPayment = "\\App\\Payments\\{$typeOfPayments}";
 		if (!\class_exists($classPayment)) {
-			throw new \App\Exception\Payments("Unknown payment type: {$typeOfPayments}");
+			throw new \App\Exceptions\Payments("Unknown payment type: {$typeOfPayments}");
 		}
 		return new $classPayment(new $classConfig(), $typeOfPayments);
 	}

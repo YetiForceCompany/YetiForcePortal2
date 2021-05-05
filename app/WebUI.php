@@ -18,7 +18,7 @@ class WebUI
 	 *
 	 * @param Request $request
 	 *
-	 * @throws AppException
+	 * @throws \App\Exceptions\AppException
 	 */
 	public function process(Request $request)
 	{
@@ -72,7 +72,7 @@ class WebUI
 				$handler->process();
 				$this->triggerPostProcess($handler, $request);
 			} else {
-				throw new AppException("HANDLER_NOT_FOUND: $handlerClass");
+				throw new Exceptions\AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
 			Log::error($e->getMessage());
@@ -91,7 +91,7 @@ class WebUI
 				$response->setResult($result);
 				$response->emit();
 			} else {
-				\App\AppException::view($e);
+				Exceptions\AppException::view($e);
 			}
 		}
 	}
@@ -125,7 +125,7 @@ class WebUI
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
 		if (empty($moduleModel)) {
-			throw new AppException(Language::translate('LBL_HANDLER_NOT_FOUND'));
+			throw new Exceptions\AppException(Language::translate('LBL_HANDLER_NOT_FOUND'));
 		}
 
 		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -135,6 +135,6 @@ class WebUI
 			$handler->checkPermission();
 			return;
 		}
-		throw new AppException(Language::translate($moduleName) . ' ' . Language::translate('LBL_NOT_ACCESSIBLE'));
+		throw new Exceptions\AppException(Language::translate($moduleName) . ' ' . Language::translate('LBL_NOT_ACCESSIBLE'));
 	}
 }

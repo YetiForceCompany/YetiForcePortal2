@@ -27,7 +27,7 @@ class Basic extends \App\BaseModel
 	/**
 	 * Function to display data.
 	 *
-	 * @param null|string $value
+	 * @param string|null $value
 	 *
 	 * @return string
 	 */

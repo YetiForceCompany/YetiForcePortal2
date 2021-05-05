@@ -34,7 +34,7 @@ class Transfer extends AbstractPayments implements PaymentsInterface
 	}
 
 	/**
-	 * Returns bank account info array
+	 * Returns bank account info array.
 	 */
 	public function getBankAccountInfo(): array
 	{

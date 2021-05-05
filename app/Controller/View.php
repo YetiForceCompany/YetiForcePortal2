@@ -10,9 +10,6 @@
 
 namespace App\Controller;
 
-use App\Purifier;
-use App\Request;
-
 /**
  * Controller class for views.
  */
@@ -27,26 +24,33 @@ abstract class View extends Base
 	/**
 	 * Construct.
 	 *
-	 * @param Request $request
+	 * @param \App\Request $request
 	 */
-	public function __construct(Request $request)
+	public function __construct(\App\Request $request)
 	{
 		parent::__construct($request);
 		$this->moduleName = $request->getModule();
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
-		$this->viewer->assign('VIEW', $this->request->getByType('view', Purifier::ALNUM));
+		$this->viewer->assign('VIEW', $this->request->getByType('view', \App\Purifier::ALNUM));
 		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('ACTION_NAME', $this->request->getAction());
 	}
 
+	/**
+	 * Function to check permission.
+	 *
+	 * @param \App\Request $request
+	 *
+	 * @throws \App\Exceptions\NoPermitted
+	 */
 	public function checkPermission()
 	{
 		$this->getModuleNameFromRequest($this->request);
 		$userInstance = \App\User::getUser();
 		$modulePermission = $userInstance->isPermitted($this->moduleName);
 		if (!$modulePermission) {
-			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 		return true;
 	}

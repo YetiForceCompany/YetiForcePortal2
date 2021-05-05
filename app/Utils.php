@@ -18,8 +18,8 @@ class Utils
 {
 	public static function recurseDelete(string $src)
 	{
-		$vendorDir = \dirname(\dirname(__FILE__));
-		$rootDir = \dirname(\dirname($vendorDir)) . \DIRECTORY_SEPARATOR;
+		$vendorDir = \dirname(__FILE__, 2);
+		$rootDir = \dirname($vendorDir, 2) . \DIRECTORY_SEPARATOR;
 		if (!file_exists($rootDir . $src)) {
 			return;
 		}

@@ -81,7 +81,7 @@ class Viewer extends \SmartyBC
 			$this->display($templatePath);
 			return true;
 		}
-		throw new AppException("LBL_FILE_TEMPLATE_NOT_FOUND||{$templatePath}");
+		throw new Exceptions\AppException("LBL_FILE_TEMPLATE_NOT_FOUND||{$templatePath}");
 	}
 
 	/**

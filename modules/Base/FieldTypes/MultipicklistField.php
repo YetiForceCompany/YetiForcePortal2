@@ -32,7 +32,7 @@ class MultipicklistField extends BaseField
 	 */
 	public function getNotDisplayValuesList()
 	{
-		if (!is_array($this->notDisplayValuesList)) {
+		if (!\is_array($this->notDisplayValuesList)) {
 			if (!$this->isNewRecord) {
 				$this->notDisplayValuesList = array_diff_key(array_flip($this->getFieldValuesList()), $this->getPicklistValues());
 			} else {
@@ -49,7 +49,7 @@ class MultipicklistField extends BaseField
 	 */
 	public function getFieldValuesList()
 	{
-		if (!is_array($this->fieldValuesList)) {
+		if (!\is_array($this->fieldValuesList)) {
 			if (!$this->isNewRecord) {
 				$this->fieldValuesList = explode(' |##| ', $this->rawValue);
 			} else {

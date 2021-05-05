@@ -25,7 +25,7 @@ class MultiImageField extends BaseField
 		}
 		$values = '';
 		$data = \is_array($this->value) ? $this->value : [$this->value];
-		foreach($data as $value){
+		foreach ($data as $value) {
 			$values .= "<div style=\"width:80px\" class=\"ml-1\"><img src=\"data:image/jpeg;base64,{$value}\"/></div>";
 		}
 		return $values;

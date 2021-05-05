@@ -18,7 +18,7 @@ class CSRFConfig
 		//Override the default expire time of token
 		\CsrfMagic\Csrf::$expires = 259200;
 		\CsrfMagic\Csrf::$callback = function ($tokens) {
-			throw new \App\Exception\BadRequest('Invalid request - Response For Illegal Access');
+			throw new \App\Exceptions\BadRequest('Invalid request - Response For Illegal Access');
 		};
 		$js = PUBLIC_DIRECTORY . 'vendor/yetiforce/csrf-magic/src/Csrf.min.js';
 		\CsrfMagic\Csrf::$dirSecret = __DIR__;

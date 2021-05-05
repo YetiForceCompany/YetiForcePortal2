@@ -12,7 +12,6 @@
 namespace YF\Modules\Products\Model;
 
 use App\Api;
-use App\AppException;
 use App\Session;
 
 /**
@@ -181,7 +180,7 @@ class Cart
 	public function subtract(int $recordId, int $amount)
 	{
 		if (!$this->has($recordId)) {
-			throw new AppException('Acting on a non-existent element');
+			throw new \App\Exceptions\AppException('Acting on a non-existent element');
 		}
 		$this->check($amount);
 		$currentAmount = $this->getAmount($recordId) - $amount;
@@ -297,7 +296,7 @@ class Cart
 	private function check(int $amount)
 	{
 		if ($amount < 1) {
-			throw new AppException('Invalid argument');
+			throw new \App\Exceptions\AppException('Invalid argument');
 		}
 	}
 

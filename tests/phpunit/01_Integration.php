@@ -49,10 +49,10 @@ final class Integration extends TestCase
 	 */
 	public function testIntegration()
 	{
-		$this->expectException(\App\AppException::class);
+		$this->expectException(\App\Exceptions\AppException::class);
 		$response = (new Api())->call('');
 		$result = (isset($response['code']) && 401 != $response['code']);
-		$this->assertTrue($result);
+		static::assertTrue($result);
 	}
 
 	public function testLangAfterLogin()
@@ -64,21 +64,21 @@ final class Integration extends TestCase
 			'fromUrl' => Config::$portalUrl
 		];
 		$response = Api::getInstance()->call('Users/Login', ['userName' => static::EMAIL, 'password' => static::PASSWORD, 'params' => $params], 'post');
-		$this->assertNotFalse($response);
-		$this->assertTrue($response['logged']);
-		$this->assertSame(Language::getLanguage(), $response['language']);
+		static::assertNotFalse($response);
+		static::assertTrue($response['logged']);
+		static::assertSame(Language::getLanguage(), $response['language']);
 		static::$token = $response['token'];
 	}
 
 	public function testModulesLang()
 	{
 		$response = (new User())->login(static::EMAIL, static::PASSWORD);
-		$this->assertTrue($response);
+		static::assertTrue($response);
 		$modulesList = Api::getInstance()->call('Modules');
-		$this->assertIsArray($modulesList);
-		$this->assertSame('Contacts', $modulesList['Contacts']);
-		$this->assertSame('Accounts', $modulesList['Accounts']);
-		$this->assertSame('Leads', $modulesList['Leads']);
+		static::assertIsArray($modulesList);
+		static::assertSame('Contacts', $modulesList['Contacts']);
+		static::assertSame('Accounts', $modulesList['Accounts']);
+		static::assertSame('Leads', $modulesList['Leads']);
 	}
 
 	/**
@@ -87,7 +87,7 @@ final class Integration extends TestCase
 	public function testLogin()
 	{
 		$response = (new User())->login(static::EMAIL, static::PASSWORD);
-		$this->assertTrue($response);
+		static::assertTrue($response);
 	}
 
 	/**
@@ -95,7 +95,7 @@ final class Integration extends TestCase
 	 */
 	public function testLoginBadData()
 	{
-		$this->expectException(\App\AppException::class);
+		$this->expectException(\App\Exceptions\AppException::class);
 		(new User())->login(static::EMAIL, 'wrongpassword');
 	}
 }

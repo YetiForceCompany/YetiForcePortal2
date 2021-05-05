@@ -11,7 +11,6 @@
 
 namespace YF\Modules\Install\View;
 
-use App\AppException;
 use App\Purifier;
 use App\Request;
 
@@ -40,7 +39,7 @@ class Install extends \App\Controller\View
 	public function checkPermission()
 	{
 		if (\YF\Modules\Install\Model\Install::isInstalled()) {
-			throw new AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
+			throw new \App\Exceptions\AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
 		}
 		return true;
 	}

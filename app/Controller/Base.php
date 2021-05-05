@@ -104,6 +104,6 @@ abstract class Base
 	 */
 	public static function exceptionErrorHandler(int $errno, string $errstr, $errfile, $errline, $errcontext)
 	{
-		throw new \App\AppException($errstr, $errno);
+		throw new \App\Exceptions\AppException($errstr, $errno);
 	}
 }

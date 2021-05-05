@@ -76,7 +76,7 @@ class Menu
 	{
 		$methodName = 'getItem' . ucfirst($row['type']);
 		if (method_exists($this, $methodName)) {
-			return  $this->{$methodName}($row);
+			return $this->{$methodName}($row);
 		}
 		return [
 			'id' => $row['id'],

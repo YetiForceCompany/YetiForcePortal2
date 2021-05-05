@@ -21,7 +21,7 @@ class Save extends \App\Controller\Action
 			$actionName = 'CreateView';
 		}
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
-			throw new \App\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
 		}
 	}
 

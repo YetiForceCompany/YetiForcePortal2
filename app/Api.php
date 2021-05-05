@@ -118,7 +118,7 @@ class Api
 					'trace' => Debug::getBacktrace()
 				];
 			}
-			throw new \App\AppException('An error occurred while communicating with the CRM', 500, $e);
+			throw new Exceptions\AppException('An error occurred while communicating with the CRM', 500, $e);
 		}
 		if (\App\Config::$debugApi) {
 			$_SESSION['debugApi'][] = [
@@ -137,11 +137,11 @@ class Api
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
 		if (empty($response)) {
-			throw new \App\AppException($rawResponse, 500);
+			throw new Exceptions\AppException($rawResponse, 500);
 		}
 		if (isset($response['error'])) {
 			$_SESSION['systemError'][] = $response['error'];
-			throw new \App\AppException($response['error']['message'], $response['error']['code'] ?? 500);
+			throw new Exceptions\AppException($response['error']['message'], $response['error']['code'] ?? 500);
 		}
 		if (isset($response['result'])) {
 			return $response['result'];
@@ -183,7 +183,7 @@ class Api
 	/**
 	 * @param array $data
 	 *
-	 * @throws AppException
+	 * @throws \App\Exceptions\AppException
 	 *
 	 * @return array Decrypted string
 	 */
@@ -191,7 +191,7 @@ class Api
 	{
 		$privateKey = 'file://' . ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . Config::$privateKey;
 		if (!$privateKey = openssl_pkey_get_private($privateKey)) {
-			throw new AppException('Private Key failed');
+			throw new Exceptions\AppException('Private Key failed');
 		}
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
