@@ -9,11 +9,11 @@
 [![Depfu](https://badges.depfu.com/badges/4affeca7559c22dbeba7653979a51d29/status.svg)](https://depfu.com)
 [![SecurityHeaders.io](https://img.shields.io/security-headers?url=https%3A%2F%2Fgitdeveloper.yetiforce.com/portal/)](https://securityheaders.io/?q=https://gitdeveloper.yetiforce.com/portal/)
 [![Snyk - Known Vulnerabilities](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2/badge.svg)](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2)
-[![sonarcloud.io status alert](https://sonarcloud.io/api/project_badges/measure?project=YetiForcePortal2&metric=alert_status)](https://sonarcloud.io/dashboard?id=YetiForcePortal2)
-[![sonarcloud.io bugs](https://sonarcloud.io/api/project_badges/measure?project=YetiForcePortal2&metric=bugs)](https://sonarcloud.io/dashboard?id=YetiForcePortal2)
-[![sonarcloud.io sqale](https://sonarcloud.io/api/project_badges/measure?project=YetiForcePortal2&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=YetiForcePortal2)
-[![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForcePortal2)
-[![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForcePortal2)
+[![sonarcloud.io status alert](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=alert_status)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
+[![sonarcloud.io bugs](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=bugs)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
+[![sonarcloud.io sqale](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
+[![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
+[![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 
 
 [![SymfonyInsight](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9/big.png)](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9)
