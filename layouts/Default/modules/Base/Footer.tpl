@@ -11,10 +11,10 @@
 		{assign var=COMPANIES value=$USER->getCompanies()}
 		{if $COMPANIES}
 			<div class="modal fade" id="modalSelectCompanies" tabindex="-1" role="dialog" aria-labelledby="selectCompanies">
-				<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
+							<h5 class="modal-title">
 								<span class="fas fa-exchange-alt mr-2"></span>{\App\Language::translate('LBL_CHANGE_COMPANY')}
 							</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">

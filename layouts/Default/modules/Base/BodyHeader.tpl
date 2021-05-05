@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	<header class="tpl-Base-BodyHeader bodyHeader d-flex align-items-center px-3 js-body-header c-header" data-js="container">
-		<a class="btn btn-outline-light btn-sm mr-2 c-header__btn c-header__btn--sidebar mb-0 js-sidebar-btn" role="button" href="#" data-js="click"
+		<a class="btn btn-light btn-sm mr-2 c-header__btn c-header__btn--sidebar mb-0 js-sidebar-btn" role="button" href="#" data-js="click"
 					aria-haspopup="true" aria-expanded="false">
 			<span class="fas fa-bars fa-fw" title="{\App\Language::translate('LBL_MENU')}"></span>
 		</a>
@@ -24,25 +24,25 @@
 					{/if}
 				</div>
 			{/if}
-			<a class="js-shopping-cart btn btn-outline-light active btn-sm mr-2 mb-0" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
+			<a class="js-shopping-cart btn btn-light active btn-sm mr-2 mb-0" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
 				<span class="fas fa-shopping-cart"></span>
 				<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
 			</a>
 			<div class="dropdown historyBtn">
-				<a class="btn btn-outline-light active btn-sm showHistoryBtn mr-2 mb-0" role="button" href="#" data-placement="left"
+				<a class="btn btn-light active btn-sm showHistoryBtn mr-2 mb-0" role="button" href="#" data-placement="left"
 					data-toggle="dropdown"
 					aria-expanded="false">
 					<span class="fas fa-history"></span>
 				</a>
 			</div>
 			{if $USER->getCompanies()}
-				<a class="btn btn-outline-info active btn-sm mr-2 mb-0" role="button" href="#" data-toggle="modal"
+				<a class="btn btn-info active btn-sm mr-2 mb-0" role="button" href="#" data-toggle="modal"
 					data-target="#modalSelectCompanies">
 					<span class="fas fa-exchange-alt"></span>
 				</a>
 			{/if}
 			<form class="noSpaces" method="POST" action="index.php?module=Users&action=Logout">
-				<button type="submit" class="loadPage btn btn-outline-danger active btn-sm mb-0" role="button">
+				<button type="submit" class="loadPage btn btn-danger active btn-sm mb-0" role="button">
 					<span class="fas fa-power-off" aria-hidden="true"></span>
 				</button>
 			</form>

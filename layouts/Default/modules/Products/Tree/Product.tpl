@@ -29,17 +29,17 @@
         <div class="row price-content">
             <div class="col-6 d-flex align-items-center quantity-content">
                 <div class="col-5 px-0 ">
-                    <button type="button" class="btn btn-outline-success js-add-to-cart u-border-radius mb-0" title="{\App\Language::translate('LBL_ADD_TO_CART', $MODULE_NAME)}" data-js="click">
+                    <button type="button" class="btn btn-success js-add-to-cart u-border-radius mb-0" title="{\App\Language::translate('LBL_ADD_TO_CART', $MODULE_NAME)}" data-js="click">
                         <i class="fas fa-cart-plus mr-1"></i>
                     </button>
                 </div>
                 <div class="input-group input-group-sm col-7 d-flex align-items-center px-0 c-cart-quantity">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
+                        <button class="btn btn-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
                     </div>
                     <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+                        <button class="btn btn-sm btn-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
                     </div>
                 </div>
             </div>

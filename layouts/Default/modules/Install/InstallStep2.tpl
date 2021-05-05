@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<div class="button-container float-right">
-		<button class="btn btn-sm btn-outline-primary js-install" type="button" data-js="click">
+		<button class="btn btn-sm btn-primary js-install" type="button" data-js="click">
 			<span class="fas fa-angle-double-right mr-3"></span>
 			{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}
 		</button>

@@ -47,7 +47,7 @@
 		{else}
 			<input type="hidden" name="language" value="{\App\Config::get('language')}" />
 		{/if}
-		<button class="btn btn-lg btn-outline-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)} <strong><span class="fas fa-chevron-right ml-2"></span></strong></button>
+		<button class="btn btn-lg btn-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)} <strong><span class="fas fa-chevron-right ml-2"></span></strong></button>
 
 	</form>
 </div>

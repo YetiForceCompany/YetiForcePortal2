@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-outline-success js-add-to-cart-bundles u-border-radius mb-0" title="{\App\Language::translate('LBL_ADD_TO_CART', $MODULE_NAME)}" data-js="click">
+                    <button type="button" class="btn btn-success js-add-to-cart-bundles u-border-radius mb-0" title="{\App\Language::translate('LBL_ADD_TO_CART', $MODULE_NAME)}" data-js="click">
                         <i class="fas fa-cart-plus mr-1"></i>
                     </button>
                 </div>
@@ -45,11 +45,11 @@
                     <div class="input-group input-group-sm c-cart-quantity d-flex align-items-center">
                         {if !$READONLY}
                             <div class="input-group-prepend">
-                                <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-dec mr-2 mb-0" type="button">-</button>
+                                <button class="btn btn-sm btn-secondary c-cart-quantity__btn-circle js-amount-dec mr-2 mb-0" type="button">-</button>
                             </div>
                             <input class="form-control js-amount c-cart-quantity__input border text-center" type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">
                             <div class="input-group-append">
-                                <button class="btn btn-sm btn-outline-secondary c-cart-quantity__btn-circle js-amount-inc ml-2 mb-0" type="button">+</button>
+                                <button class="btn btn-sm btn-secondary c-cart-quantity__btn-circle js-amount-inc ml-2 mb-0" type="button">+</button>
                             </div>
                         {else}
                             <input class="form-control c-cart-quantity__input border text-center js-amount" disabled type="text" value="{if $RECORD->has('amountInShoppingCart')}{$RECORD->getDisplayValue('amountInShoppingCart')}{else}1{/if}">

@@ -77,14 +77,14 @@
                 </div>
             {else}
                 <div class="col-12 row">
-                    <button class="btn btn-outline-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
+                    <button class="btn btn-success u-border-radius js-add-to-cart mb-0 mr-2" data-js="click"><i class="fas fa-cart-plus mr-1"></i></button>
                     <div class="input-group input-group-sm col-2 d-flex align-items-center px-0 c-cart-quantity">
                         <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
+                            <button class="btn btn-secondary js-amount-dec mr-2 c-cart-quantity__btn-circle mb-0" type="button">-</button>
                         </div>
                         <input class="input-group-prepend form-control js-amount text-center c-cart-quantity__input product-input-quantity border" type="text" value="1">
                         <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
+                            <button class="btn btn-sm btn-secondary js-amount-inc ml-2 c-cart-quantity__btn-circle mb-0" type="button">+</button>
                         </div>
                     </div>
                 </div>

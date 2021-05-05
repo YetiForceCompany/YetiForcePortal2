@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="button-container float-right">
-		<button class="btn btn-sm btn-outline-primary" type="submit">
+		<button class="btn btn-sm btn-primary" type="submit">
 			<span class="fas fa-angle-double-right mr-3"></span>
 			{\App\Language::translate('LBL_INSTALL_BUTTON', $MODULE_NAME)}
 		</button>

@@ -10,11 +10,11 @@
 						{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 					</div>
 					<div class="contentHeader">
-						<button class="btn btn-outline-success btn-sm mr-1" type="submit">
+						<button class="btn btn-success btn-sm mr-1" type="submit">
 							<span class="fas fa-check mr-1"></span>
 							{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
 						</button>
-						<button class="btn btn-outline-warning btn-sm" type="reset"
+						<button class="btn btn-warning btn-sm" type="reset"
 								onclick="javascript:window.history.back();">
 							<span class="fas fa-times mr-1"></span>
 							{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}
