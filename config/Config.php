@@ -31,8 +31,23 @@ class Config
 	/** @var string Web service - Application password. */
 	public static $serverPass = '__SERVER_PASS__';
 
-	/** @var string Additional message in the header */
-	public static $headerMessage = '';
+	/** @var string Header alert message */
+	public static $headerAlertMessage = '11111111 222222222 3333333';
+
+	/** @var string Header alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
+	public static $headerAlertType = 'alert-primary';
+
+	/** @var string Header alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
+	public static $headerAlertIcon = 'fas fa-exclamation-triangle';
+
+	/** @var string Login page alert message */
+	public static $loginPageAlertMessage = '11111111 222222222 3333333';
+
+	/** @var string Login page alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
+	public static $loginPageAlertType = 'alert-primary';
+
+	/** @var string Login page alert icon, ex.  fas fa-exclamation-triangle, fas fa-exclamation-circle, fas fa-exclamation, far fa-question-circle, fas fa-info-circle */
+	public static $loginPageAlertIcon = 'fas fa-info-circle';
 
 	/** @var string Default module. */
 	public static $defaultModule = 'HelpDesk';
@@ -47,7 +62,7 @@ class Config
 	];
 
 	/** @var bool Allow the user to choose a language. */
-	public static $allowLanguageSelection = false;
+	public static $allowLanguageSelection = true;
 
 	/** @var string Theme. */
 	public static $theme = 'Default';

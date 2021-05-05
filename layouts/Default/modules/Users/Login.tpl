@@ -17,6 +17,13 @@
 				</div>
 			{/foreach}
 		{/if}
+		{if !empty(\Conf\Config::$loginPageAlertMessage)}
+			<div class="alert {if empty(\Conf\Config::$loginPageAlertType)}alert-danger{else}{\Conf\Config::$loginPageAlertType}{/if} mb-3 px-3 py-2 text-center" role="alert">
+				<i class="{if empty(\Conf\Config::$loginPageAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$loginPageAlertIcon}{/if}"></i>
+				<span class="font-weight-bold mx-2">{\Conf\Config::$loginPageAlertMessage}</span>
+				<i class="{if empty(\Conf\Config::$loginPageAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$loginPageAlertIcon}{/if}"></i>
+			</div>
+		{/if}
 		<div class="form-group">
 			<label for="inputEmail" class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 			<input name="email" type="text" id="inputEmail" class="form-control" placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="" required="" autofocus="" />

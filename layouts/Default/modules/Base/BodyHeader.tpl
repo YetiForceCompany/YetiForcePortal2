@@ -5,9 +5,11 @@
 					aria-haspopup="true" aria-expanded="false">
 			<span class="fas fa-bars fa-fw" title="{\App\Language::translate('LBL_MENU')}"></span>
 		</a>
-		{if \App\Config::get('headerMessage')}
-			<div class="ml-auto mr-2 text-truncate text-white u-fs-12px">
-				{\App\Config::get('headerMessage')}
+		{if !empty(\Conf\Config::$headerAlertMessage)}
+			<div class="alert {if empty(\Conf\Config::$headerAlertType)}alert-danger{else}{\Conf\Config::$headerAlertType}{/if} m-auto mb-0 px-3 py-1 text-center u-font-size-19px text-nowrap" role="alert">
+				<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
+				<span class="font-weight-bold mx-3">{\Conf\Config::$headerAlertMessage}</span>
+				<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
 			</div>
 		{/if}
 		<div class="d-flex ml-auto align-items-center">
