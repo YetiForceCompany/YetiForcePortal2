@@ -3,6 +3,8 @@
 /**
  * Credits view file.
  *
+ * @package View
+ *
  * @copyright YetiForce Sp. z o.o
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author  Arkadiusz Sołek <a.solek@yetiforce.com>
@@ -15,7 +17,6 @@ namespace YF\Modules\YetiForce\View;
  */
 class Credits extends \App\Controller\View
 {
-	
 	/** {@inheritdoc} */
 	public function checkPermission(): bool
 	{
@@ -31,8 +32,8 @@ class Credits extends \App\Controller\View
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-		$qualifiedModuleName = $this->request->getModule(false);
-		$this->viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
-		$this->viewer->view('Credits.tpl', $qualifiedModuleName);
+		$moduleName = $this->request->getModule(false);
+		$this->viewer->assign('QUALIFIED_MODULE', $moduleName);
+		$this->viewer->view('Credits.tpl', $moduleName);
 	}
 }

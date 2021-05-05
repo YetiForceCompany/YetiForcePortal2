@@ -3,6 +3,8 @@
 /**
  * Library more info view file.
  *
+ * @package View
+ *
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
@@ -72,10 +74,10 @@ class LibraryMoreInfo extends \App\Controller\Modal
 				$result = false;
 			}
 		}
-		$qualifiedModuleName = $this->request->getModule(false);
-		$this->viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
+		$moduleName = $this->request->getModule(false);
+		$this->viewer->assign('QUALIFIED_MODULE', $moduleName);
 		$this->viewer->assign('RESULT', $result);
 		$this->viewer->assign('FILE_CONTENT', $fileContent);
-		$this->viewer->view('LibraryMoreInfo.tpl', $qualifiedModuleName);
+		$this->viewer->view('LibraryMoreInfo.tpl', $moduleName);
 	}
 }

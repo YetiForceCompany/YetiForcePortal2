@@ -1,7 +1,6 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 window.App = {};
 var AppConnector,
-	App = { Fields: { Picklist: {} } },
 	app = {
 		/**
 		 * Events in application
@@ -538,6 +537,11 @@ var AppConnector,
 			thisInstance.registerDataTables(modalContainer.find('.dataTable'));
 		},
 
+		/**
+		 * Register modal events.
+		 * @param {object} container
+		 * @param {function} sendByAjaxCb
+		 */
 		registerModalEvents: function (container, sendByAjaxCb) {
 			var form = container.find('form');
 			var validationForm = false;
@@ -581,6 +585,15 @@ var AppConnector,
 			}
 		},
 
+		/**
+		 * Show modal window.
+		 * @param {object} data
+		 * @param {string} url
+		 * @param {function} cb
+		 * @param {object} paramsObject
+		 *
+		 * @return {object}
+		 */
 		showModalWindow: function (data, url, cb, paramsObject) {
 			if (window.parent !== window) {
 				this.childFrame = true;
