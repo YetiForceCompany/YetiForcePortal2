@@ -36,7 +36,7 @@ class Dashboard extends \App\Controller\View
 	}
 
 	/** {@inheritdoc} */
-	public function preProcess($display = true)
+	public function preProcess($display = true): void
 	{
 		parent::preProcess();
 		$moduleName = $this->request->getModule();
