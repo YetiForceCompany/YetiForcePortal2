@@ -4,7 +4,7 @@
 <div class="settingsIndexPage">
 	<div class="widget_header row">
 		<div class="col-12">
-			{include file=\App\Functions::templatePath("BreadCrumbs.tpl",$MODULE_NAME)}
+			 {include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 		</div>
 		<div class="col-12">
 			{\App\Language::translate('LBL_CREDITS_DESCRIPTION', $QUALIFIED_MODULE)}

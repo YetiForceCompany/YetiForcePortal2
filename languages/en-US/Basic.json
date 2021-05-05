@@ -54,8 +54,7 @@
     "BTN_GENERATE_PDF": "Generate",
     "LBL_SUM_OPEN_ORDERS": "Sum of open sales orders",
     "LBL_CREDIT_LIMIT": "Merchant limits",
-    "LBL_HOME": "Dashboard",
-    "LBL_VIEW_PREVIEW": "Details"
+    "LBL_HOME": "Dashboard"
   },
   "js": {
     "JS_TODAY": "Today",
