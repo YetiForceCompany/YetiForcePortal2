@@ -100,9 +100,6 @@ class Config
 	/** @var bool Webservice config. */
 	public static $publicKey = 'config/public.key';
 
-	/** @var string Set the path of the default logo. */
-	public static $logo = 'layouts/Default/skins/images/logo.png';
-
 	/** @var string portal version. */
 	public static $version = '1.1';
 
