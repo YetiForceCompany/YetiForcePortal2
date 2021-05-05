@@ -43,8 +43,9 @@
 	</div>
 	<footer class="footerContainer d-print-none w-100">
 		<div class="footer">
-			Copyright &copy; YetiForce.com All rights reserved.<br/>
-			{\App\Language::translate('LBL_FOOTER_CONTENT', '_Base', 'open source project')}
+			 Copyright &copy; YetiForce.com All rights reserved.<br/>
+			{assign var=FOOTOSP value= '<em><a class="u-text-underline" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
+			<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', 'Basic', $FOOTOSP)}</p>
 		</div>
 	</footer>
 	<div class="d-print-none">
