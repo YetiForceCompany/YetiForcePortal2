@@ -24,7 +24,7 @@
 When you implement YetiForce CRM, then you will find yourself wanting to communicate with your customers through a professional customer portal. That is why we created for you YetiForcePortal that integrates with CRM and has a wide range of functionalities.
 
 
-## YetiForcePortal2
+## YetiForce Customer Portal
 Installation
 
 1. Put files on web server
