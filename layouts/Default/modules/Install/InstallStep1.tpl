@@ -5,7 +5,7 @@
 	<input type="hidden" name="mode" value="step2"/>
 	<div class="row">
 		<div class="col-md-9">
-			<h3>{\App\Language::translate('LBL_INSTALLATION_WIZARD', $MODULE_NAME)}</h3>
+			<h3>{\App\Language::translate('LBL_INSTALLATION_WIZARD_TITLE', $MODULE_NAME)}</h3>
 		</div>
 		<div class="col-md-3">
 			<select name="lang" class="select2" style="width: 250px;">

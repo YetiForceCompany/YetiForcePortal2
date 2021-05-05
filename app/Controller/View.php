@@ -53,7 +53,7 @@ abstract class View extends Base
 
 	public function preProcess($display = true): void
 	{
-		$this->viewer->assign('PAGE_TITLE', $this->getPageTitle());
+		$this->viewer->assign('PAGE_TITLE', (\Conf\Config::$siteName ?: \App\Language::translate('LBL_CUSTOMER_PORTAL')) . ' ' . $this->getPageTitle());
 		$this->viewer->assign('STYLES', $this->getHeaderCss());
 		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
 		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());
@@ -70,16 +70,13 @@ abstract class View extends Base
 	 */
 	public function getPageTitle(): string
 	{
-		$title = '';
-		if ('Login' !== $this->request->getByType('view', Purifier::ALNUM) && 'Users' !== $this->moduleName) {
-			$title = \App\Language::translateModule($this->moduleName);
-			$pageTitle = $this->getBreadcrumbTitle();
-			if (isset($this->pageTitle)) {
-				$pageTitle = \App\Language::translate($this->pageTitle);
-			}
-			if ($pageTitle) {
-				$title .= ' - ' . $pageTitle;
-			}
+		$title = \App\Language::translateModule($this->moduleName);
+		$pageTitle = $this->getBreadcrumbTitle();
+		if (isset($this->pageTitle)) {
+			$pageTitle = \App\Language::translate($this->pageTitle);
+		}
+		if ($pageTitle) {
+			$title .= ' - ' . $pageTitle;
 		}
 		return $title;
 	}
@@ -208,6 +205,9 @@ abstract class View extends Base
 	/** {@inheritdoc} */
 	public function postProcess(): void
 	{
+		if (null === $this->viewer->getTemplateVars('SHOW_FOOTER_BAR')) {
+			$this->viewer->assign('SHOW_FOOTER_BAR', true);
+		}
 		$this->viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$this->viewer->assign('DEBUG_API', \App\Session::get('debugApi'));

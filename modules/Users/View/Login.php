@@ -29,9 +29,22 @@ class Login extends \App\Controller\View
 	}
 
 	/** {@inheritdoc} */
+	public function getPageTitle(): string
+	{
+		return \App\Language::translate('LBL_LOGIN_PAGE', $this->moduleName);
+	}
+
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$module = $this->request->getModule();
 		$this->viewer->view('Login.tpl', $module);
+	}
+
+	/** {@inheritdoc} */
+	public function postProcess(): void
+	{
+		$this->viewer->assign('SHOW_FOOTER_BAR', false);
+		parent::postProcess();
 	}
 }

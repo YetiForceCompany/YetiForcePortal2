@@ -19,6 +19,9 @@ class Config
 	/** @var string portal version. */
 	public static $version = '1.1';
 
+	/** @var string Portal name. */
+	public static $siteName = '';
+
 	/** @var string CRM API URL ex. https://gitdeveloper.yetiforce.com/webservice/. */
 	public static $apiUrl = '__API_PATH__';
 

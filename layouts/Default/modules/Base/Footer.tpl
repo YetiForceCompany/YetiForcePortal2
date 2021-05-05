@@ -41,13 +41,15 @@
 			</div>
 		{/if}
 	</div>
-	<footer class="footerContainer d-print-none w-100">
-		<div class="footer">
-			 Copyright &copy; YetiForce.com All rights reserved.<br/>
-			{assign var=FOOTOSP value= '<em><a class="u-text-underline" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
-			<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', 'Basic', $FOOTOSP)}</p>
-		</div>
-	</footer>
+	{if $SHOW_FOOTER_BAR}
+		<footer class="footerContainer d-print-none w-100">
+			<div class="footer">
+				Copyright &copy; YetiForce.com All rights reserved.<br/>
+				{assign var=FOOTOSP value= '<em><a class="u-text-underline" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
+				<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', 'Basic', $FOOTOSP)}</p>
+			</div>
+		</footer>
+	{/if}
 	<div class="d-print-none">
 		{foreach item=SCRIPT from=$FOOTER_SCRIPTS}
 			<script src="{$SCRIPT->getSrc()}"></script>
