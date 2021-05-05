@@ -73,42 +73,66 @@ class Config
 	/** @var string Theme. */
 	public static $theme = 'Default';
 
-	/**
-	 * The number of items on the pageUndocumented variable.
-	 *
-	 * @var int
-	 */
+	/**  The number of items on the pageUndocumented variable. */
 	public static $itemsPrePage = 12;
 
-	/**
-	 * Available record display options in listview for datatable element - [[values],[labels]].
-	 *
-	 * @var array
-	 */
+	/** @var array Available record display options in listview for datatable element - [[values],[labels]]. */
 	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
+
+	/** @var bool Enable minimize JS files. */
 	public static $minScripts = false;
+
+	/** @var bool Enable api debug. */
 	public static $debugApi = true;
+
+	/** @var bool Display main debug console. */
 	public static $debugConsole = true;
+
+	/** @var bool Enable saving logs to file. */
 	public static $logs = false;
+
+	/** @var bool Webservice config. */
 	public static $encryptDataTransfer = false;
+
+	/** @var bool Webservice config. */
 	public static $privateKey = 'config/private.key';
+
+	/** @var bool Webservice config. */
 	public static $publicKey = 'config/public.key';
-	public static $version = '1.0';
+
+	/** @var string portal version. */
+	public static $version = '1.1';
+
+	/** @var string Data caching is about storing some PHP variables in cache and retrieving it later from cache. Drivers: Base, Apcu. */
 	public static $cachingDriver = 'Base';
+
+	/** @var string Default charset: default value = "UTF-8". */
 	public static $defaultCharset = 'UTF-8';
+
+	/** @var bool Enable CSRF protection. */
 	public static $csrfProtection = true;
+
+	/** @var bool Displays information about the tracking code when an error occurs. */
 	public static $displayDetailsException = true;
 
-	/**
-	 * Type of payment.
-	 *
-	 * @var string
-	 */
+	/** @var string[] Type of payment. */
 	public static $paymentType = ['CashOnDelivery', 'Transfer'];
+
+	/** @var string Name of the payment server. */
 	public static $paymentServerName = '';
+
+	/** @var string Payment server password. */
 	public static $paymentServerPass = '';
+
+	/** @var string Api key for payment server. */
 	public static $paymentApiKey = '';
+
+	/** @var string Add Delivery. */
 	public static $addDelivery = false;
+
+	/** @var string[] Set filtering by field names in products. */
 	public static $filterInProducts = [];
+
+	/** @var string Subject prefix for a single order from the cart. */
 	public static $subjectPrefixForSingleOrderFromCart = 'SSingleOrders - ';
 }
