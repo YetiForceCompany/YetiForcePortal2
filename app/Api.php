@@ -46,7 +46,7 @@ class Api
 	 *
 	 * @return self instance
 	 */
-	public static function getInstance()
+	public static function getInstance(): self
 	{
 		if (!isset(self::$instance)) {
 			$userInstance = User::getUser();
@@ -65,7 +65,6 @@ class Api
 				'auth' => [Config::$serverName, Config::$serverPass]
 			]);
 		}
-
 		return self::$instance;
 	}
 

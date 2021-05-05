@@ -1,23 +1,40 @@
 <?php
 /**
- * Delete action class.
+ * Change company action file.
+ *
+ * @package Action
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Action;
 
-use App\Purifier;
-
+/**
+ * Change company action class.
+ */
 class ChangeCompany extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
-	public function process()
+	public function checkPermission(): void
 	{
-		$userInstance = \App\User::getUser();
-		$userInstance->set('companyId', $this->request->getByType('record', Purifier::INTEGER));
+		parent::checkPermission();
+		$companies = \App\User::getUser()->getCompanies();
+		if (!isset($companies[$this->request->getInteger('record')])) {
+			throw new \App\Exceptions\NoPermitted('ERR_ACTION_PERMISSION_DENIED');
+		}
+	}
+
+	/** {@inheritdoc} */
+	public function process(): void
+	{
+		$user = \App\User::getUser();
+		$user->set('companyId', $this->request->getInteger('record'));
+		$companies = $user->getCompanies();
+		$user->set('parentName', $companies[$this->request->getInteger('record')]['name']);
+
 		$response = new \App\Response();
 		$response->setResult(true);
 		$response->emit();

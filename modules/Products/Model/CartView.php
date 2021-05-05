@@ -111,7 +111,6 @@ class CartView extends ListViewModel
 		}
 		$accountRecordDetail = Api::getInstance()->setCustomHeaders(['x-raw-data' => 1])->call("Accounts/Record/{$userModel->get('companyId')}", [], 'get');
 		$address = [];
-
 		foreach (['a', 'b', 'c'] as $typeAddress) {
 			if (empty($accountRecordDetail['data']['addresslevel5' . $typeAddress])) {
 				continue;

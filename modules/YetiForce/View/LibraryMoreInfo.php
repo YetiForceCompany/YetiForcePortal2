@@ -21,9 +21,8 @@ class LibraryMoreInfo extends \App\Controller\Modal
 	public $packageFiles = ['package.json', 'composer.json', 'bower.json'];
 
 	/** {@inheritdoc} */
-	public function checkPermission(): bool
+	public function checkPermission(): void
 	{
-		return true;
 	}
 
 	/**  {@inheritdoc}  */

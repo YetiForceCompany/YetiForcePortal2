@@ -56,13 +56,10 @@ class ShoppingCart extends View\ListView
 		}
 		$listViewModel->loadRecordsList();
 		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
-		$this->viewer->assign('MODULE_NAME', $moduleName);
 		$this->viewer->assign('COUNT', $this->getListViewModel()->getCount());
 		$this->viewer->assign('LIST_VIEW_MODEL', $this->getListViewModel());
-		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('TOTAL_PRICE', $this->getListViewModel()->calculateTotalPriceNetto());
 		$this->viewer->assign('TOTAL_PRICE_GROSS', $this->getListViewModel()->calculateTotalPriceGross());
-
 		$this->viewer->assign('ADDRESSES', $this->getListViewModel()->getAddresses());
 		$this->viewer->assign('SELECTED_ADDRESS', $this->getListViewModel()->getSelectedAddress());
 		$this->viewer->assign('PROCCED_URL', $proceedUrl);

@@ -15,7 +15,7 @@ use App\Purifier;
 class EditView extends \App\Controller\View
 {
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
 		parent::checkPermission($this->request);
 		$actionName = 'EditView';
@@ -23,7 +23,7 @@ class EditView extends \App\Controller\View
 			$actionName = 'CreateView';
 		}
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
-			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}
 

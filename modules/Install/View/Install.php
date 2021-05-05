@@ -36,12 +36,11 @@ class Install extends \App\Controller\View
 	}
 
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
 		if (\YF\Modules\Install\Model\Install::isInstalled()) {
 			throw new \App\Exceptions\AppException('ERR_SYSTEM_HAS_BEEN_INSTALLED', 500);
 		}
-		return true;
 	}
 
 	/** {@inheritdoc} */

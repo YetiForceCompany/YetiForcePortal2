@@ -20,6 +20,11 @@ abstract class Base
 	 */
 	protected $request;
 
+	/**
+	 * Construct.
+	 *
+	 * @param \App\Request $request
+	 */
 	public function __construct(Request $request)
 	{
 		if (\App\Config::get('csrfProtection')) {
@@ -30,7 +35,12 @@ abstract class Base
 		self::setHeaders();
 	}
 
-	public function setHeaders()
+	/**
+	 * Set headers.
+	 *
+	 * @return void
+	 */
+	public function setHeaders(): void
 	{
 		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
@@ -44,6 +54,11 @@ abstract class Base
 		}
 	}
 
+	/**
+	 * Login required.
+	 *
+	 * @return bool
+	 */
 	public function loginRequired(): bool
 	{
 		return true;

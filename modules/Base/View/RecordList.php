@@ -20,7 +20,6 @@ class RecordList extends \App\Controller\Modal
 		$listViewModel = ListViewModel::getInstance($moduleName)->loadRecordsList();
 		$this->viewer->assign('HEADERS', $listViewModel->getHeaders());
 		$this->viewer->assign('RECORDS', $listViewModel->getRecordsListModel());
-		$this->viewer->assign('MODULE_NAME', $moduleName);
 		$this->viewer->assign('COUNT', $listViewModel->getCount());
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}

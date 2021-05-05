@@ -14,17 +14,15 @@ abstract class Action extends Base
 	/**
 	 * Check permission.
 	 *
-	 * @return bool
+	 * @throws \App\Exceptions\NoPermitted
+	 *
+	 * @return void
 	 */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
-		$moduleName = $this->request->getModule();
-		$userInstance = \App\User::getUser();
-		$modulePermission = $userInstance->isPermitted($moduleName);
-		if (!$modulePermission) {
-			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
+		if (!\App\User::getUser()->isPermitted($this->request->getModule())) {
+			throw new \App\Exceptions\NoPermitted('ERR_MODULE_PERMISSION_DENIED');
 		}
-		return true;
 	}
 
 	/** {@inheritdoc} */

@@ -14,10 +14,10 @@ use App\Purifier;
 class Delete extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
 		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'Delete')) {
-			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
+			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}
 

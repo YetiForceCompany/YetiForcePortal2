@@ -21,11 +21,7 @@ abstract class View extends Base
 	/** @var string Module name. */
 	protected $moduleName;
 
-	/**
-	 * Construct.
-	 *
-	 * @param \App\Request $request
-	 */
+	/** {@inheritdoc} */
 	public function __construct(\App\Request $request)
 	{
 		parent::__construct($request);
@@ -33,35 +29,32 @@ abstract class View extends Base
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
 		$this->viewer->assign('VIEW', $this->request->getByType('view', \App\Purifier::ALNUM));
+		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
+		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());
 		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->assign('ACTION_NAME', $this->request->getAction());
 	}
 
 	/**
-	 * Function to check permission.
-	 *
-	 * @param \App\Request $request
+	 * Check permission.
 	 *
 	 * @throws \App\Exceptions\NoPermitted
+	 *
+	 * @return void
 	 */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
 		$this->getModuleNameFromRequest($this->request);
-		$userInstance = \App\User::getUser();
-		$modulePermission = $userInstance->isPermitted($this->moduleName);
-		if (!$modulePermission) {
-			throw new \App\Exceptions\AppException('LBL_MODULE_PERMISSION_DENIED');
+		if (!\App\User::getUser()->isPermitted($this->moduleName)) {
+			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
-		return true;
 	}
 
+	/** {@inheritdoc} */
 	public function preProcess($display = true): void
 	{
 		$this->viewer->assign('PAGE_TITLE', (\Conf\Config::$siteName ?: \App\Language::translate('LBL_CUSTOMER_PORTAL')) . ' ' . $this->getPageTitle());
 		$this->viewer->assign('STYLES', $this->getHeaderCss());
-		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
-		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());
-		$this->viewer->assign('USER', \App\User::getUser());
 		if ($display) {
 			$this->preProcessDisplay();
 		}
@@ -85,12 +78,17 @@ abstract class View extends Base
 		return $title;
 	}
 
-	public function getBreadcrumbTitle()
+	/**
+	 * Get breadcrumb title.
+	 *
+	 * @return string
+	 */
+	public function getBreadcrumbTitle(): string
 	{
 		if (!empty($this->pageTitle)) {
 			return $this->pageTitle;
 		}
-		return false;
+		return '';
 	}
 
 	/**
@@ -171,7 +169,12 @@ abstract class View extends Base
 		], 'css');
 	}
 
-	protected function preProcessDisplay()
+	/**
+	 * Pre process display.
+	 *
+	 * @return void
+	 */
+	protected function preProcessDisplay(): void
 	{
 		if (\App\Session::has('systemError')) {
 			$this->viewer->assign('ERRORS', \App\Session::get('systemError'));

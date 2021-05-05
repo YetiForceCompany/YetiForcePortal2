@@ -23,9 +23,8 @@ class Login extends \App\Controller\View
 	}
 
 	/** {@inheritdoc} */
-	public function checkPermission(): bool
+	public function checkPermission(): void
 	{
-		return true;
 	}
 
 	/** {@inheritdoc} */

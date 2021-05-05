@@ -17,9 +17,8 @@ namespace YF\Modules\Users\Action;
 class Login extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
-	public function checkPermission()
+	public function checkPermission(): void
 	{
-		return true;
 	}
 
 	/** {@inheritdoc} */

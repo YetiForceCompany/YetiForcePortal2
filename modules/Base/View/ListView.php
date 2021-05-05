@@ -1,6 +1,8 @@
 <?php
 /**
- * List view class.
+ * Records list view file.
+ *
+ * @package View
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -10,15 +12,12 @@
 
 namespace YF\Modules\Base\View;
 
-use YF\Modules\Base\Model\ListView as ListViewModel;
-
+/**
+ * Records list view class.
+ */
 class ListView extends \App\Controller\View
 {
-	/**
-	 * List view model.
-	 *
-	 * @var ListViewModel
-	 */
+	/** @var \YF\Modules\Base\Model\ListView List view model. */
 	protected $listViewModel;
 
 	/** {@inheritdoc} */
@@ -28,10 +27,8 @@ class ListView extends \App\Controller\View
 		$moduleName = $this->request->getModule();
 		$this->viewer->assign('HEADERS', $this->listViewModel->getHeaders());
 		$this->viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
-		$this->viewer->assign('MODULE_NAME', $moduleName);
 		$this->viewer->assign('COUNT', $this->listViewModel->getCount());
 		$this->viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
-		$this->viewer->assign('USER', \App\User::getUser());
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
@@ -46,10 +43,10 @@ class ListView extends \App\Controller\View
 	 *
 	 * @return \YF\Modules\Base\Model\ListView
 	 */
-	protected function getListViewModel()
+	protected function getListViewModel(): \YF\Modules\Base\Model\ListView
 	{
 		if (empty($this->listViewModel)) {
-			$this->listViewModel = ListViewModel::getInstance($this->moduleName, $this->request->getAction());
+			$this->listViewModel = \YF\Modules\Base\Model\ListView::getInstance($this->moduleName, $this->request->getAction());
 		}
 		return $this->listViewModel;
 	}

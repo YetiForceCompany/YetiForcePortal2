@@ -32,7 +32,6 @@ class Pdf extends \App\Controller\Modal
 		$moduleName = $this->request->getModule();
 		$recordId = $this->request->getInteger('record');
 		$this->viewer->assign('TEMPLATES', \App\Pdf::getTemplates($this->moduleName, $recordId));
-		$this->viewer->assign('MODULE_NAME', $moduleName);
 		$this->viewer->assign('RECORD_ID', $recordId);
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}

@@ -18,9 +18,8 @@ namespace YF\Modules\YetiForce\View;
 class LibraryLicense extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
-	public function checkPermission(): bool
+	public function checkPermission(): void
 	{
-		return true;
 	}
 
 	/**  {@inheritdoc}  */

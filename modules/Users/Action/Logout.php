@@ -17,9 +17,8 @@ namespace YF\Modules\Users\Action;
 class Logout extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
-	public function checkPermission(): bool
+	public function checkPermission(): void
 	{
-		return true;
 	}
 
 	/** {@inheritdoc} */
