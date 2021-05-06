@@ -1,15 +1,17 @@
-## No directory listings
-Options -Indexes
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteRule ^favicon\.(gif|ico|png|jpe?g)$ public_html/layouts/main/skins/images/favicon.ico [L,NC]
+RedirectMatch 403 (?i).*\.log$
+<IfModule mod_autoindex.c>
+	Options -Indexes -MultiViews
+</IfModule>
+<IfModule mod_headers.c>
+	Header unset Server
+	Header unset X-Powered-By
+	<IfModule mod_env.c>
+		SetEnv modHeadersAvailable true
+	</IfModule>
+</IfModule>
+<ifModule ModSecurity.c>
+	SecServerSignature ''
 </ifModule>
-<IfModule mod_php5.c>
-	php_flag	log_errors					On
-	php_flag	display_errors				On
-	php_flag	display_startup_errors		On
-	php_flag	file_uploads				On
-	php_flag	magic_quotes_gpc			Off
-	php_flag	magic_quotes_runtime		Off
-	php_value	error_log					cache/logs/php.log
+<IfModule mod_dir.c>
+	DirectoryIndex index.php
 </IfModule>

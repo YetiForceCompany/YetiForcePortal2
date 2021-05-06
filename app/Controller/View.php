@@ -54,7 +54,7 @@ abstract class View extends Base
 	public function preProcess($display = true): void
 	{
 		$this->viewer->assign('PAGE_TITLE', (\Conf\Config::$siteName ?: \App\Language::translate('LBL_CUSTOMER_PORTAL')) . ' ' . $this->getPageTitle());
-		$this->viewer->assign('STYLES', $this->getHeaderCss());
+		$this->viewer->assign('CSS_FILE', $this->getHeaderCss());
 		if ($display) {
 			$this->preProcessDisplay();
 		}
@@ -215,7 +215,7 @@ abstract class View extends Base
 		if (null === $this->viewer->getTemplateVars('SHOW_FOOTER_BAR')) {
 			$this->viewer->assign('SHOW_FOOTER_BAR', true);
 		}
-		$this->viewer->assign('FOOTER_SCRIPTS', $this->getFooterScripts());
+		$this->viewer->assign('JS_FILE', $this->getFooterScripts());
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$this->viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$this->viewer->view('DebugApi.tpl', $this->moduleName);
@@ -242,10 +242,6 @@ abstract class View extends Base
 			'libraries/jquery/dist/jquery.js',
 			'libraries/jquery.class.js/jquery.class.js',
 			'libraries/block-ui/jquery.blockUI.js',
-			'libraries/@fortawesome/fontawesome/index.js',
-			'libraries/@fortawesome/fontawesome-free-regular/index.js',
-			'libraries/@fortawesome/fontawesome-free-solid/index.js',
-			'libraries/@fortawesome/fontawesome-free-brands/index.js',
 			'libraries/@pnotify/core/dist/PNotify.js',
 			'libraries/@pnotify/mobile/dist/PNotifyMobile.js',
 			'libraries/@pnotify/desktop/dist/PNotifyDesktop.js',

@@ -51,7 +51,7 @@
 		</footer>
 	{/if}
 	<div class="d-print-none">
-		{foreach item=SCRIPT from=$FOOTER_SCRIPTS}
+		{foreach item=SCRIPT from=$JS_FILE}
 			<script src="{$SCRIPT->getSrc()}"></script>
 		{/foreach}
 	</div>

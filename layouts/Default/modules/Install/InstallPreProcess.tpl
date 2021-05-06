@@ -11,7 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="robots" content="noindex"/>
 	<link rel="icon" href="{\App\Resources::resourcePath("favicon.ico", $MODULE_NAME)}">
-	{foreach item=SCRIPT from=$STYLES}
+	{foreach item=SCRIPT from=$CSS_FILE}
 		<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}"/>
 	{/foreach}
 </head>

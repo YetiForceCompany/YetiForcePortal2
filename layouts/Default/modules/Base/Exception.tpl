@@ -1,6 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
-<!DOCTYPE html>
 {strip}
+<!DOCTYPE html>
+<!-- tpl-Base-Exception -->
 <html>
 	<head>
 		<title>YetiForce Portal:  {\App\Language::translate('LBL_EXCEPTION')} {\App\Purifier::encodeHtml($CODE)}</title>
@@ -9,6 +10,9 @@
         {foreach item=SCRIPT from=$CSS_FILE}
             <link rel="stylesheet" href="{$SCRIPT}">
         {/foreach}
+		{foreach item=SCRIPT from=$JS_FILE}
+			<script src="{$SCRIPT}"></script>
+		{/foreach}
 	</head>
     <body class="h-100 c-exception">
         <div class="container pt-5 u-word-break">
@@ -71,4 +75,5 @@
         </div>
     </body>
 </html>
+<!-- /tpl-Base-Exception -->
 {/strip}
