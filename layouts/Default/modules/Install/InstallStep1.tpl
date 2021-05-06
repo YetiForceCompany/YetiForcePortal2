@@ -8,7 +8,7 @@
 			<h3>{\App\Language::translate('LBL_INSTALLATION_WIZARD_TITLE', $MODULE_NAME)}</h3>
 		</div>
 		<div class="col-md-3">
-			<select name="lang" class="select2" style="width: 250px;">
+			<select name="lang" class="select form-control ml-auto" style="width: 250px;">
 				{foreach key=key item=item from=\App\Language::getAllLanguages()}
 					<option value="{$key}" {if $LANGUAGE eq $key}selected{/if}>{$item}</option>
 				{/foreach}
