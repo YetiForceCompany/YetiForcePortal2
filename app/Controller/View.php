@@ -2,6 +2,8 @@
 /**
  * Controller class for views.
  *
+ * @package App
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
@@ -53,6 +55,9 @@ abstract class View extends Base
 	/** {@inheritdoc} */
 	public function preProcess($display = true): void
 	{
+		if ($this->loginRequired()) {
+			$this->viewer->assign('MENU', \YF\Modules\Base\Model\Menu::getInstance($this->viewer->getTemplateVars('MODULE_NAME'))->getMenu());
+		}
 		$this->viewer->assign('PAGE_TITLE', (\Conf\Config::$siteName ?: \App\Language::translate('LBL_CUSTOMER_PORTAL')) . ' ' . $this->getPageTitle());
 		$this->viewer->assign('CSS_FILE', $this->getHeaderCss());
 		if ($display) {

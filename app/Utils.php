@@ -69,4 +69,68 @@ class Utils
 	{
 		return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
 	}
+
+	/**
+	 * Parse bytes.
+	 *
+	 * @param mixed $str
+	 *
+	 * @return float
+	 */
+	public static function parseBytes($str): float
+	{
+		if (is_numeric($str)) {
+			return (float) $str;
+		}
+		$bytes = 0;
+		if (preg_match('/([0-9\.]+)\s*([a-z]*)/i', $str, $regs)) {
+			$bytes = (float) ($regs[1]);
+			switch (strtolower($regs[2])) {
+				case 'g':
+				case 'gb':
+					$bytes *= 1073741824;
+					break;
+				case 'm':
+				case 'mb':
+					$bytes *= 1048576;
+					break;
+				case 'k':
+				case 'kb':
+					$bytes *= 1024;
+					break;
+				default:
+					break;
+			}
+		}
+		return (float) $bytes;
+	}
+
+	/**
+	 * Show bytes.
+	 *
+	 * @param mixed       $bytes
+	 * @param string|null $unit
+	 *
+	 * @return string
+	 */
+	public static function showBytes($bytes, &$unit = null): string
+	{
+		$bytes = self::parseBytes($bytes);
+		if ($bytes >= 1073741824) {
+			$unit = 'GB';
+			$gb = $bytes / 1073741824;
+			$str = sprintf($gb >= 10 ? '%d ' : '%.2f ', $gb) . $unit;
+		} elseif ($bytes >= 1048576) {
+			$unit = 'MB';
+			$mb = $bytes / 1048576;
+			$str = sprintf($mb >= 10 ? '%d ' : '%.2f ', $mb) . $unit;
+		} elseif ($bytes >= 1024) {
+			$unit = 'KB';
+			$str = sprintf('%d ', round($bytes / 1024)) . $unit;
+		} else {
+			$unit = 'B';
+			$str = sprintf('%d ', $bytes) . $unit;
+		}
+		return $str;
+	}
 }

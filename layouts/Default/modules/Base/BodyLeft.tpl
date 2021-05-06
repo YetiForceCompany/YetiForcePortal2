@@ -17,7 +17,7 @@
 	<div class="menuContainer c-menu__body ps ps--active-y">
 		<nav class="tpl-Menu js-menu__content c-menu__content" id="submenu-0">
 			<ul class="nav flex-column modulesList"   >
-				{foreach item=ITEM_MENU key=KEY from=YF\Modules\Base\Model\Menu::getInstance($MODULE_NAME)->getMenu()}
+				{foreach item=ITEM_MENU key=KEY from=$MENU}
 					{include file=\App\Resources::templatePath('Menu/'|cat:$ITEM_MENU.type|cat:'.tpl', $MODULE_NAME)}
 				{/foreach}
 			</ul>

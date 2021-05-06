@@ -1,4 +1,13 @@
 <?php
+/**
+ * APC caching file.
+ *
+ * @package App
+ *
+ * @copyright YetiForce Sp. z o.o
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 
 namespace App\Cache;
 
@@ -6,10 +15,6 @@ use App\Exceptions\CacheException;
 
 /**
  * APC caching class.
- *
- * @copyright YetiForce Sp. z o.o
- * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 class Apcu
 {
@@ -38,9 +43,9 @@ class Apcu
 	/**
 	 * Returns a cache item representing the specified key.
 	 *
-	 * @param string|array $key Cache ID
+	 * @param array|string $key Cache ID
 	 *
-	 * @return string|array
+	 * @return array|string
 	 */
 	public function get($key)
 	{
@@ -50,7 +55,7 @@ class Apcu
 	/**
 	 * Confirms if the cache contains specified cache item.
 	 *
-	 * @param string|array $key Cache ID
+	 * @param array|string $key Cache ID
 	 *
 	 * @return bool
 	 */
@@ -63,10 +68,10 @@ class Apcu
 	 * Cache save.
 	 *
 	 * @param string       $key      Cache ID
-	 * @param string|array $value    Data to store
+	 * @param array|string $value    Data to store
 	 * @param int          $duration Cache TTL (in seconds)
 	 *
-	 * @return bool|array
+	 * @return array|bool
 	 */
 	public function save($key, $value, $duration)
 	{
@@ -76,7 +81,7 @@ class Apcu
 	/**
 	 * Removes the item from the cache.
 	 *
-	 * @param string|array $key Cache ID
+	 * @param array|string $key Cache ID
 	 *
 	 * @return bool
 	 */

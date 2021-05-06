@@ -1,13 +1,18 @@
 <?php
+/**
+ * Cache main file.
+ *
+ * @package App
+ *
+ * @copyright YetiForce Sp. z o.o
+ * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 
 namespace App;
 
 /**
  * Cache main class.
- *
- * @copyright YetiForce Sp. z o.o
- * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 class Cache
 {
@@ -220,5 +225,15 @@ class Cache
 		static::clearOpcache();
 		static::clear();
 		clearstatcache();
+	}
+
+	/**
+	 * Check whether it's the primary driver.
+	 *
+	 * @return bool
+	 */
+	public static function isBase(): bool
+	{
+		return 'App\Cache\Base' === \get_class(static::$staticPool);
 	}
 }

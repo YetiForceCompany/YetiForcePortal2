@@ -2,6 +2,8 @@
 /**
  * Basic communication file.
  *
+ * @package App
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com))
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
@@ -12,33 +14,28 @@ namespace App;
 
 class Api
 {
-	/**
-	 * Instance.
-	 *
-	 * @var self
-	 */
+	/** @var self API Instance */
 	protected static $instance;
-	protected $url;
+
+	/** @var array Headers. */
 	protected $header = [];
 
-	/**
-	 * Options.
-	 *
-	 * @var array
-	 */
+	/** @var \GuzzleHttp\Client Guzzle http client */
+	protected $httpClient;
+
+	/** @var array The default configuration of GuzzleHttp. */
 	protected $options = [];
 
 	/**
 	 * Api class constructor.
 	 *
-	 * @param mixed $options
 	 * @param array $header
+	 * @param array $options
 	 */
 	public function __construct(array $header, array $options)
 	{
-		$this->url = Config::$apiUrl;
-		$this->options = $options;
 		$this->header = $header;
+		$this->httpClient = new \GuzzleHttp\Client(array_merge($options, Config::$options));
 	}
 
 	/**
@@ -51,17 +48,20 @@ class Api
 		if (!isset(self::$instance)) {
 			$userInstance = User::getUser();
 			$header = [
+				'User-Agent' => 'YetiForcePortal2',
+				'X-Encrypted' => Config::$encryptDataTransfer ? 1 : 0,
+				'X-Api-Key' => Config::$apiKey,
 				'Content-Type' => 'application/json',
-				'X-ENCRYPTED' => Config::$encryptDataTransfer ? 1 : 0,
-				'X-API-KEY' => Config::$apiKey,
 			];
 			if ($userInstance->has('logged')) {
-				$header['X-TOKEN'] = $userInstance->get('token');
+				$header['X-Token'] = $userInstance->get('token');
 			}
 			if ($userInstance->has('companyId')) {
-				$header['X-PARENT-ID'] = $userInstance->get('companyId');
+				$header['X-Parent-Id'] = $userInstance->get('companyId');
 			}
 			self::$instance = new self($header, [
+				'http_errors' => false,
+				'base_uri' => Config::$apiUrl,
 				'auth' => [Config::$serverName, Config::$serverPass]
 			]);
 		}
@@ -73,77 +73,61 @@ class Api
 	 *
 	 * @param string $method
 	 * @param array  $data
-	 * @param string $requestType
+	 * @param string $requestType Default get
 	 *
 	 * @return array|false
 	 */
 	public function call(string $method, array $data = [], string $requestType = 'get')
 	{
-		$crmPath = $this->url . $method;
 		$rawRequest = $data;
 		$startTime = microtime(true);
 		$headers = $this->getHeaders();
-		$options = $this->getOptions();
 		try {
 			if (\in_array($requestType, ['get', 'delete'])) {
-				$request = (new \GuzzleHttp\Client($options))->request($requestType, $crmPath, ['headers' => $headers]);
+				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers]);
 			} else {
 				$data = Json::encode($data);
 				if (Config::$encryptDataTransfer) {
 					$data = $this->encryptData($data);
 				}
-				$request = (new \GuzzleHttp\Client($options))->request($requestType, $crmPath, ['headers' => $headers, 'body' => $data]);
+				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers, 'body' => $data]);
 			}
-			$rawResponse = (string) $request->getBody();
-			$encryptedHeader = $request->getHeader('encrypted');
-			if ($encryptedHeader && 1 == $request->getHeader('encrypted')[0]) {
+			$rawResponse = (string) $response->getBody();
+			$encryptedHeader = $response->getHeader('encrypted');
+			if ($encryptedHeader && 1 == $response->getHeader('encrypted')[0]) {
 				$rawResponse = $this->decryptData($rawResponse);
 			}
-			$response = Json::decode($rawResponse);
+			$responseBody = Json::decode($rawResponse);
 		} catch (\Throwable $e) {
 			if (Config::$logs) {
 				$this->addLogs($method, $data, '', $e->__toString());
-			}
-			if (\App\Config::$debugApi) {
-				$_SESSION['debugApi'][] = [
-					'date' => date('Y-m-d H:i:s', $startTime),
-					'time' => round(microtime(true) - $startTime, 4),
-					'method' => $method,
-					'requestType' => strtoupper($requestType),
-					'rawRequest' => [$headers, $rawRequest],
-					'rawResponse' => $e->getMessage(),
-					'response' => '',
-					'request' => '',
-					'trace' => Debug::getBacktrace()
-				];
 			}
 			throw new Exceptions\AppException('An error occurred while communicating with the CRM', 500, $e);
 		}
 		if (\App\Config::$debugApi) {
 			$_SESSION['debugApi'][] = [
 				'date' => date('Y-m-d H:i:s', $startTime),
-				'time' => round(microtime(true) - $startTime, 4),
+				'time' => round(microtime(true) - $startTime, 2),
 				'method' => $method,
 				'requestType' => strtoupper($requestType),
 				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
-				'response' => $response,
-				'request' => (string) $request->getBody(),
+				'response' => $responseBody,
 				'trace' => Debug::getBacktrace()
 			];
 		}
 		if (Config::$logs) {
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
-		if (empty($response)) {
-			throw new Exceptions\AppException($rawResponse, 500);
+		if (empty($responseBody) || 200 !== $response->getStatusCode()) {
+			throw new Exceptions\AppException('API returned an error: ' . $response->getReasonPhrase(), $response->getStatusCode());
 		}
-		if (isset($response['error'])) {
-			$_SESSION['systemError'][] = $response['error'];
-			throw new Exceptions\AppException($response['error']['message'], $response['error']['code'] ?? 500);
+		if (isset($responseBody['error'])) {
+			$_SESSION['systemError'][] = $responseBody['error'];
+			throw new Exceptions\AppException($responseBody['error']['message'], $responseBody['error']['code'] ?? 500);
 		}
-		if (isset($response['result'])) {
-			return $response['result'];
+		if (isset($responseBody['result'])) {
+			return $responseBody['result'];
 		}
 	}
 
@@ -155,16 +139,6 @@ class Api
 	public function getHeaders(): array
 	{
 		return $this->header;
-	}
-
-	/**
-	 * Get options.
-	 *
-	 * @return array
-	 */
-	public function getOptions(): array
-	{
-		return $this->options;
 	}
 
 	/**

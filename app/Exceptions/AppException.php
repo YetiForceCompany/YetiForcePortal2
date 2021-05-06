@@ -19,7 +19,7 @@ namespace App\Exceptions;
 class AppException extends \Exception
 {
 	/** @var string Default error exception template. */
-	public $tplName = 'Exception.tpl';
+	public static $tplName = 'Exception.tpl';
 
 	/**
 	 * Construct the exception.
@@ -60,7 +60,7 @@ class AppException extends \Exception
 			PUBLIC_DIRECTORY . 'libraries/jquery/dist/jquery.js',
 			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/js/bootstrap.js',
 		]);
-		$viewer->view($e->tplName);
+		$viewer->view($e->tplName ?? self::$tplName);
 		if (\App\Config::$debugApi && \App\Session::has('debugApi') && \App\Session::get('debugApi')) {
 			$viewer->assign('DEBUG_API', \App\Session::get('debugApi'));
 			$viewer->assign('COLLAPSE', true);

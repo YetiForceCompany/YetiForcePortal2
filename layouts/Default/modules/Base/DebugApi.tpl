@@ -8,37 +8,21 @@
 				<span class="font-weight-bold">{\App\Language::translate('LBL_DEBUG_CONSOLE')}</span>
 			</div>
 			<div id="debugApi" class="collapse {if !empty($COLLAPSE)}show{/if}"  aria-labelledby="headingDebugApi">
-				<div class="card-body">
+				<div class="card-body p-1">
 					<div class="accordion c-card__accordion" id="accordionExample">
 						{foreach item=ITEM key=KEY from=$DEBUG_API}
-							<div class="card">
-								<div class="card-header noSpaces  c-card__header" id="headingOne">
-									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#request{$KEY}" aria-expanded="true" aria-controls="collapseOne">
-										<span class="font-weight-bold">{$ITEM['method']}</span>
-									</button>
+							<div class="card mt-2">
+								<div class="card-header noSpaces  c-card__header" id="headingOne{$KEY}">
+									<span class="btn btn-link" type="button" data-toggle="collapse" data-target="#request{$KEY}" aria-expanded="true" aria-controls="collapseOne">
+										<span class="font-weight-bold mr-3">{$ITEM['method']}</span>
+										<span class="text-secondary mr-3">Request type: {$ITEM['requestType']}</span>
+										<span class="text-secondary mr-3">Start time: {$ITEM['date']}</span>
+										<span class="text-secondary mr-3">Execution time: {$ITEM['time']}</span>
+										<span class="text-secondary mr-3">Size: {\App\Utils::showBytes(\strlen($ITEM['rawResponse']))}</span>
+									</span>
 								</div>
-								<div id="request{$KEY}" class="collapse {if !empty($COLLAPSE)}show{/if}" aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div id="request{$KEY}" class="collapse {if !empty($COLLAPSE)}show{/if}" aria-labelledby="headingOne{$KEY}" data-parent="#accordionExample">
 									<div class="card-body">
-										<div class="px-0">
-											<table class="table">
-												<thead>
-													<tr>
-														<th scope="col"><span class="u-fs-12px"><strong>Start time:</strong></span></th>
-														<th scope="col"><span class="u-fs-12px"><strong>Execution time:</strong></span></th>
-														<th scope="col"><span class="u-fs-12px"><strong>API method:</strong></span></th>
-														<th scope="col"><span class="u-fs-12px"><strong>Request type:</strong></span></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="u-fs-10px">{$ITEM['date']}</td>
-														<td class="u-fs-10px">{$ITEM['time']}</td>
-														<td class="u-fs-10px">{$ITEM['method']}</td>
-														<td class="u-fs-10px">{$ITEM['requestType']}</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
 										<ul class="nav nav-tabs c-nav" role="tablist">
 											<li role="nav-item c-nav__item">
 												<a class="nav-link c-nav__link active" href="#rawRequest{$KEY}" aria-controls="rawRequest{$KEY}" role="tab"
@@ -64,7 +48,7 @@
 												<pre>{App\Purifier::encodeHTML(print_r($ITEM['rawRequest'][1],true))}</pre>
 											</div>
 											<div role="tabpanel" class="tab-pane" id="rawResponse{$KEY}">
-												{if isset($ITEM['request'])}<pre>{App\Purifier::encodeHTML(print_r($ITEM['request'],true))}</pre>{/if}
+												{if isset($ITEM['rawResponse'])}<pre>{App\Purifier::encodeHTML(print_r($ITEM['rawResponse'],true))}</pre>{/if}
 											</div>
 											<div role="tabpanel" class="tab-pane " id="response{$KEY}">
 												{if isset($ITEM['response'])}<pre>{App\Purifier::encodeHTML(print_r($ITEM['response'],true))}</pre>{/if}

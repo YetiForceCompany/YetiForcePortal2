@@ -44,9 +44,9 @@ class Config
 	public static $logoMenu = 'layouts/logo_menu.png';
 
 	/** @var string Default module. */
-	public static $defaultModule = 'HelpDesk';
+	public static $defaultModule = 'Accounts';
 
-	/** @var string Default language. */
+	/** @var string Default language, ex. en-US , pl-PL */
 	public static $language = 'en-US';
 
 	/** @var bool Allow the user to choose a language. */
@@ -95,6 +95,15 @@ class Config
 
 	/** @var bool Enable CSRF protection. */
 	public static $csrfProtection = true;
+
+	/** @var bool Check whether brute force is enabled */
+	public static $bruteForceIsEnabled = false;
+
+	/** @var bool Daily limit of failed login attempts. */
+	public static $bruteForceDayLimit = 100;
+
+	/** @var string[] Trusted IPs, are not verified by brute force */
+	public static $bruteForceTrustedIp = [];
 
 	/**
 	 * Performance.
@@ -156,4 +165,14 @@ class Config
 
 	/** @var string Subject prefix for a single order from the cart. */
 	public static $subjectPrefixForSingleOrderFromCart = 'SSingleOrders - ';
+
+	/**
+	 * Additional configuration of API connection.
+	 */
+
+	/** @var array The default configuration of GuzzleHttp. */
+	public static $options = [
+		'timeout' => 10,
+		'connect_timeout' => 2,
+	];
 }

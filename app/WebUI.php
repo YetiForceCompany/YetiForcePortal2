@@ -2,6 +2,8 @@
 /**
  * WebUI class.
  *
+ * @package App
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
@@ -44,7 +46,6 @@ class WebUI
 			}
 			$request->set('module', $module);
 			$request->set('view', $view);
-
 			if (!empty($action)) {
 				$componentType = 'Action';
 				$componentName = $action;
@@ -60,7 +61,6 @@ class WebUI
 				return false;
 			}
 			$handlerClass = Loader::getModuleClassName($module, $componentType, $componentName);
-
 			if (class_exists($handlerClass)) {
 				$handler = new $handlerClass($request);
 				$handler->validateRequest();
@@ -75,6 +75,12 @@ class WebUI
 				throw new Exceptions\AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
+			if (401 === $e->getCode()) {
+				unset($_SESSION);
+				session_destroy();
+				header('Location: ' . \App\Config::$portalUrl);
+				return;
+			}
 			Log::error($e->getMessage());
 			if ($request->isAjax() && $request->isEmpty('view')) {
 				$response = new \App\Response();
