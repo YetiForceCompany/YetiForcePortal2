@@ -49,7 +49,7 @@
 				{if 'Install' eq $MODULE_NAME}
 					{assign var=FOOTOSP value='open source project'}
 				{/if}
-				<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', $MODULE_NAME, $FOOTOSP)}</p>
+				<p>{\App\Language::translateArgs('LBL_FOOTER_CONTENT', 'Basic', $FOOTOSP)}</p>
 			</div>
 		</footer>
 	{/if}

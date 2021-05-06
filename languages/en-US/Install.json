@@ -10,8 +10,7 @@
     "LBL_SERVER_NAME": "Login",
     "LBL_SERVER_PASS": "Password",
     "LBL_WRONG_PROPERTIES": "Wrong parameters",
-    "ERR_NOT_ENTERED_REQUIRED_DATA": "The required data has not been entered",
-    "LBL_FOOTER_CONTENT": "YetiForce was created thanks to %s called Vtiger CRM and other open source projects."
+    "ERR_NOT_ENTERED_REQUIRED_DATA": "The required data has not been entered"
   },
   "js": {}
 }
