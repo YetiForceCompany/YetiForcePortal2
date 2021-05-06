@@ -11,8 +11,6 @@
 
 namespace App\Cache;
 
-use App\Exceptions\CacheException;
-
 /**
  * APC caching class.
  */
@@ -21,12 +19,12 @@ class Apcu
 	/**
 	 * Class constructor.
 	 *
-	 * @throws CacheException
+	 * @throws \App\Exceptions\AppException
 	 */
 	public function __construct()
 	{
 		if (!static::isSupported()) {
-			throw new CacheException('APCu is not enabled');
+			throw new \App\Exceptions\AppException('APCu is not enabled');
 		}
 	}
 

@@ -13,27 +13,6 @@ class Loader
 {
 	protected static $includeCache = [];
 
-	public static function import($name, $supressWarning = false): bool
-	{
-		if (isset(self::$includeCache[$name])) {
-			return true;
-		}
-		if (!file_exists($name)) {
-			throw new Exceptions\AppException('FILE_NOT_FOUND: ' . $name);
-		}
-		$status = -1;
-		if ($supressWarning) {
-			$status = @include_once $name;
-		} else {
-			$status = include_once $name;
-		}
-		$success = (0 === $status) ? false : true;
-		if ($success) {
-			self::$includeCache[$name] = $name;
-		}
-		return $success;
-	}
-
 	/**
 	 * Get the class name for the module.
 	 *

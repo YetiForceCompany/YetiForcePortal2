@@ -14,7 +14,8 @@ if (!\defined('PUBLIC_DIRECTORY')) {
 }
 
 if (!file_exists(ROOT_DIRECTORY . '/vendor/autoload.php')) {
-	exit('Please install dependencies via composer install.');
+	echo 'Please install dependencies via composer install.';
+	return;
 }
 require_once ROOT_DIRECTORY . '/vendor/autoload.php';
 

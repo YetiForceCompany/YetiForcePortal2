@@ -292,7 +292,7 @@ abstract class AbstractListView
 	 */
 	public function getNumberOfPages(): int
 	{
-		return (int) \ceil($this->getCount() / Config::getInt('itemsPrePage'));
+		return (int) \ceil($this->getCount() / \App\Config::getInt('itemsPrePage'));
 	}
 
 	/**

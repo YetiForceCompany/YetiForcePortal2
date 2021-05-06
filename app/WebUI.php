@@ -124,23 +124,4 @@ class WebUI
 		}
 		$handler->postProcess();
 	}
-
-	protected function triggerCheckPermission($handler, $request)
-	{
-		$moduleName = $request->getModule();
-		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
-
-		if (empty($moduleModel)) {
-			throw new Exceptions\AppException(Language::translate('LBL_HANDLER_NOT_FOUND'));
-		}
-
-		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		$permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
-
-		if ($permission) {
-			$handler->checkPermission();
-			return;
-		}
-		throw new Exceptions\AppException(Language::translate($moduleName) . ' ' . Language::translate('LBL_NOT_ACCESSIBLE'));
-	}
 }

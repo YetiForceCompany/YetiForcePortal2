@@ -5,12 +5,14 @@
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 \define('ROOT_DIRECTORY', __DIR__ . DIRECTORY_SEPARATOR . '.');
 \define('PUBLIC_DIRECTORY', '');
 
 if (!file_exists(ROOT_DIRECTORY . '/vendor/autoload.php')) {
-	exit('Please install dependencies via composer install.');
+	echo 'Please install dependencies via composer install.';
+	return;
 }
 require_once ROOT_DIRECTORY . '/vendor/autoload.php';
 set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
