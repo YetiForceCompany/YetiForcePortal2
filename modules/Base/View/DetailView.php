@@ -1,6 +1,8 @@
 <?php
 /**
- * List view class.
+ * Base detail view file.
+ *
+ * @package View
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -17,6 +19,9 @@ use YF\Modules\Base\Model\Field;
 use YF\Modules\Base\Model\InventoryField;
 use YF\Modules\Base\Model\Record;
 
+/**
+ * Base detail view class.
+ */
 class DetailView extends \App\Controller\View
 {
 	/** {@inheritdoc} */

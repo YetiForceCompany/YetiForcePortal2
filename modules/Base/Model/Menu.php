@@ -66,6 +66,7 @@ class Menu
 			'type' => $row['type'],
 			'childs' => array_map([$this, 'getItemModule'], $row['childs']),
 			'name' => $row['name'],
+			'label' => $row['label'],
 			'icon' => 'yfm-' . $row['mod'],
 			'link' => Module::getInstance($row['mod'])->getDefaultUrl(),
 			'parent' => $row['parent']
@@ -83,6 +84,7 @@ class Menu
 			'type' => $row['type'],
 			'childs' => array_map([$this, 'getItem'], $row['childs']),
 			'name' => $row['name'],
+			'label' => $row['label'],
 			'icon' => $row['icon'],
 			'link' => $row['dataurl'],
 			'parent' => $row['parent']
@@ -105,7 +107,8 @@ class Menu
 					'type' => 'Module',
 					'id' => '',
 					'childs' => [],
-					'name' => Language::translateModule($defaultModule),
+					'name' => $defaultModule,
+					'label' => Language::translateModule($defaultModule),
 					'icon' => 'yfm-' . $defaultModule,
 					'link' => "index.php?module={$defaultModule}&view=ListView"
 				]
