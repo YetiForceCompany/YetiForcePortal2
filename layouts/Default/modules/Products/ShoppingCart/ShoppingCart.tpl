@@ -31,7 +31,7 @@
 										{App\Language::translate('LBL_ADDRESS_IS_EMPTY', $MODULE_NAME)}
 									</div>
 								{else}
-									<select class="select2 js-select-address form-control-sm" data-js="change">
+									<select class="form-control js-select-address form-control-sm" data-js="change">
 										{foreach from=$ADDRESSES['data'] key=TYPE_ADDRESS item=ADDRESS}
 											<option value={$TYPE_ADDRESS}>{$ADDRESS['addresslevel5'|cat:$TYPE_ADDRESS]}-{$ADDRESS['addresslevel8'|cat:$TYPE_ADDRESS]}-{$ADDRESS['buildingnumber'|cat:$TYPE_ADDRESS]}</option>
 										{/foreach}
