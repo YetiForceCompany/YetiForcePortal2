@@ -52,7 +52,6 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-
 		$detailViewModel = DetailViewModel::getInstance($moduleName);
 		$detailViewModel->setRecordModel($recordModel);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
