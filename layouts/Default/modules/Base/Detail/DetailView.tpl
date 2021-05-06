@@ -45,7 +45,7 @@
 											{$FIELD->get('label')}
 										</label>
 									</div>
-									<div class="fieldValue col-xl-8 col-lg-9 col-md-12 form-control-plaintext d-flex align-items-center">
+									<div class="fieldValue col-xl-8 col-lg-9 col-md-12 form-control-plaintext d-flex align-items-center ml-3">
 										{$FIELD->getDisplayValue()}
 									</div>
 									{assign var=COUNTER value=$COUNTER+1}
