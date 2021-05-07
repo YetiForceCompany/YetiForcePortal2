@@ -16,7 +16,6 @@
 			</div>
 		</div>
 	</div>
-	{assign var=POSITION_INVENTORY value=\Conf\Inventory::$showInventoryColumnRight}
 	<div class="row">
 		<div class="{if !empty($INVENTORY_FIELDS) && $POSITION_INVENTORY}col-4{else}col-12{/if}">
 			{assign var=ITERATION value=0}
