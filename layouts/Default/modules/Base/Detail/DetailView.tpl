@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <!-- tpl-Base-Detail-DetailView -->
-<div class="contentsDiv" id="detailView">
+
 	<div class="widget_header row">
 		<div class="col-sm-12">
 			<div class="float-left">
@@ -18,37 +18,41 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="{if !empty($INVENTORY_FIELDS)}col-4{else}col-12{/if}">
+		<div class="col-12">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
 					{assign var=COUNTER value=0}
 					{assign var=COUNT value=0}
-					<div class="card c-card col-sm-12 px-0 blockContainer my-3">
-						<div class="card-header c-card__header{if $ITERATION} collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
+					<div class="c-card card col-sm-12 px-0 blockContainer my-3">
+						<div class="blockHeader c-card__header card-header p-2 {if $ITERATION} collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
 							<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 							<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
-							{$BLOCK['name']}
+							<h5>{if !empty($BLOCK['icon'])}<span class="{$BLOCK['icon']} mr-2"></span>{/if}{$BLOCK['name']}</h5>
 						</div>
-						<div class="col-md-12 px-0 card-body py-0 blockContent collapse {if !$ITERATION}show{/if}" id="block_{$BLOCK['id']}">
-							<div class="col-sm-12 px-0 row m-0">
+						<div class="c-card__body card-body col-md-12 collapse {if !$ITERATION}show{/if}" id="block_{$BLOCK['id']}">
+							<div class="c-card__row form-row border-bottom ">
 								{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								{if $COUNTER eq 2}
 							</div>
-							<div class="col-sm-12 px-0 row m-0">
+							<div class="c-card__row form-row border-bottom">
 								{assign var=COUNTER value=0}
 								{/if}
-								<div class="col-sm-12 {if empty($INVENTORY_FIELDS)}col-md-6{/if} px-0 borderTop row m-0">
-									<div class="col-xl-3  col-lg-4 col-md-12 fieldLabel pl-2 form-control-plaintext text-xl-right text-md-left">
+								<div class="col-sm border-left">
+									<div class="form-row align-items-start">
+									<div class="fieldLabel border-right c-card__label text-lg-right text-md-left col-lg-6">
 										<label class="col-form-label font-weight-bold">
 											{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 											{$FIELD->get('label')}
 										</label>
 									</div>
-									<div class="fieldValue col-xl-8 col-lg-9 col-md-12 form-control-plaintext d-flex align-items-center ml-3">
-										{$FIELD->getDisplayValue()}
+									<div class="fieldValue c-card__value justify-content-between col-lg-6 px-0">
+										<div class="value px-2">
+											{$FIELD->getDisplayValue()}
+										</div>
 									</div>
 									{assign var=COUNTER value=$COUNTER+1}
+								</div>
 								</div>
 								{assign var=COUNT value=$COUNT+1}
 								{/foreach}
@@ -65,11 +69,11 @@
 				{/if}
 			{/foreach}
 		</div>
-		<div class="col-8">
+		<div class="col-12">
 			{include file=\App\Resources::templatePath("Detail\Inventory.tpl", $MODULE_NAME)}
 		</div>
 	</div>
 	{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
-</div>
+
 <!-- /tpl-Base-Detail-DetailView -->
 {/strip}
