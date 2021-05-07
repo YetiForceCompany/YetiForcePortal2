@@ -112,7 +112,7 @@ abstract class View extends Base
 			$script = new \App\Script();
 			$script->set('type', $fileExtension);
 			$minFilePath = str_replace('.' . $fileExtension, '.min.' . $fileExtension, $fileName);
-			if (\App\Config::$minScripts && file_exists($minFilePath)) {
+			if (\App\Config::$minScripts && file_exists(ROOT_DIRECTORY . "/public_html/$minFilePath")) {
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $minFilePath . self::getTime($path));
 			} elseif (file_exists($path)) {
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $fileName . self::getTime($path));
