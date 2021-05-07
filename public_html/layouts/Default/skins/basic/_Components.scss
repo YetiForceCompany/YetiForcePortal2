@@ -18,20 +18,16 @@
 		}
 	}
 
-	&__icon-right {
-		display: none;
-	}
-
-	&__icon-down {
-		display: inline;
-	}
-
 	&__accordion {
 		background-color: #f7f7f7 !important;
 	}
 
 	&__body {
 		padding: 0 0.25rem;
+	}
+
+	&__body.show {
+		display: flex !important;
 	}
 
 	&__label {
