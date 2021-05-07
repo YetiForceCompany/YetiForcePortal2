@@ -1,193 +1,193 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .bodyHeader {
-  .leftHeader {
-    background-color: #969696;
-    color: #fff;
-    height: $h-header;
-  }
+	.leftHeader {
+		background-color: #969696;
+		color: #fff;
+		height: $h-header;
+	}
 
-  .rightHeader {
-    background-color: #696969;
-    color: #fff;
-    height: 40px;
-  }
+	.rightHeader {
+		background-color: #696969;
+		color: #fff;
+		height: 40px;
+	}
 
-  .moduleIcon {
-    max-width: 30px;
-    margin: 5px 10px 0 0;
-  }
+	.moduleIcon {
+		max-width: 30px;
+		margin: 5px 10px 0 0;
+	}
 
-  position: fixed;
-  height: $h-header;
-  background: #4a5364;
-  right: 0;
-  top: 0;
-  left: $w-menu-mini-state;
-  z-index: $z-index-header;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+	position: fixed;
+	height: $h-header;
+	background: #4a5364;
+	right: 0;
+	top: 0;
+	left: $w-menu-mini-state;
+	z-index: $z-index-header;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 
-  .leftSide {
-    padding-left: 10px;
-    padding-top: 7px;
-    width: 450px;
-  }
+	.leftSide {
+		padding-left: 10px;
+		padding-top: 7px;
+		width: 450px;
+	}
 
-  .rightSide {
-    position: relative;
-    min-height: 1px;
-    float: right;
+	.rightSide {
+		position: relative;
+		min-height: 1px;
+		float: right;
 
-    img {
-      height: 22px;
-      margin: 0;
-    }
+		img {
+			height: 22px;
+			margin: 0;
+		}
 
-    .rightHeaderBtn {
-      padding: 7px 5px;
+		.rightHeaderBtn {
+			padding: 7px 5px;
 
-      a {
-        line-height: 20px;
-        font-size: 18px;
-      }
-    }
-  }
+			a {
+				line-height: 20px;
+				font-size: 18px;
+			}
+		}
+	}
 }
 
 .historyList {
-  overflow: auto;
-  left: -500px !important;
+	overflow: auto;
+	left: -500px !important;
 }
 
 .selectorHistory {
-  font-weight: 900 !important;
-  text-align: center;
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #111;
-  white-space: nowrap;
-  cursor: default;
-  min-width: 500px;
-  max-width: calc(100vh - 100px);
+	font-weight: 900 !important;
+	text-align: center;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #111;
+	white-space: nowrap;
+	cursor: default;
+	min-width: 500px;
+	max-width: calc(100vh - 100px);
 }
 
 .historyHour {
-  font-weight: 600 !important;
+	font-weight: 600 !important;
 }
 
 .historyList a {
-  color: #222 !important;
-  font-size: 15px !important;
+	color: #222 !important;
+	font-size: 15px !important;
 }
 
 .clearHistory {
-  font-weight: 900 !important;
-  text-align: center;
+	font-weight: 900 !important;
+	text-align: center;
 }
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
-  font-size: 15px;
+	font-size: 15px;
 
-  a {
-    color: #000;
-  }
+	a {
+		color: #000;
+	}
 }
 
 .actionMenu {
-  position: fixed;
-  top: $h-header;
-  right: 0px;
-  z-index: 1500;
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid #eee;
-  padding: 5px;
-  display: none;
+	position: fixed;
+	top: $h-header;
+	right: 0px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 5px;
+	display: none;
 
-  > div {
-    position: relative;
-    width: 100%;
-    padding-bottom: 5px;
-  }
+	> div {
+		position: relative;
+		width: 100%;
+		padding-bottom: 5px;
+	}
 
-  img {
-    height: 19px;
-  }
+	img {
+		height: 19px;
+	}
 
-  .iconContainer {
-    padding-left: 15px;
-  }
+	.iconContainer {
+		padding-left: 15px;
+	}
 
-  .labelContainer {
-    padding-top: 5px;
-  }
+	.labelContainer {
+		padding-top: 5px;
+	}
 
-  .commonActionsButtonDropDown,
-  .historyList {
-    position: fixed;
-    top: $h-header;
-    left: 5px;
-    right: 5px;
-    bottom: 17px;
-  }
+	.commonActionsButtonDropDown,
+	.historyList {
+		position: fixed;
+		top: $h-header;
+		left: 5px;
+		right: 5px;
+		bottom: 17px;
+	}
 }
 
 .showActionMenu {
-  display: block;
+	display: block;
 }
 
 .searchMenu {
-  position: fixed;
-  top: $h-header;
-  right: -300px;
-  z-index: 1500;
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid #eee;
-  padding: 10px;
-  width: 300px;
-  -webkit-transition: right 0.5s ease;
-  -moz-transition: right 0.5s ease;
-  -o-transition: right 0.5s ease;
-  transition: right 0.5s ease;
+	position: fixed;
+	top: $h-header;
+	right: -300px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 10px;
+	width: 300px;
+	-webkit-transition: right 0.5s ease;
+	-moz-transition: right 0.5s ease;
+	-o-transition: right 0.5s ease;
+	transition: right 0.5s ease;
 }
 
 .showSearchMenu {
-  right: 0px;
+	right: 0px;
 }
 
 .widget_header {
-  background: #eee;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  position: relative;
-  h2 {
-    margin-bottom: 7px;
-    margin-top: 7px;
-  }
+	background: #eee;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: relative;
+	h2 {
+		margin-bottom: 7px;
+		margin-top: 7px;
+	}
 }
 
 .breadcrumbsLinks a {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .c-header__btn--sidebar {
-  display: none;
+	display: none;
 }
 @media only screen and (max-width: 1200px) {
-  .bodyHeader {
-    .leftSide {
-      width: auto;
-    }
-    left: 0px;
-  }
-  .c-header__btn--sidebar {
-    display: inline-block;
-  }
+	.bodyHeader {
+		.leftSide {
+			width: auto;
+		}
+		left: 0px;
+	}
+	.c-header__btn--sidebar {
+		display: inline-block;
+	}
 }

@@ -1,130 +1,127 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .chosen-container {
-  min-height: 32px;
-  line-height: 34px;
+	min-height: 32px;
+	line-height: 34px;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice {
-  line-height: 20px;
-  margin: 3px 5px 3px;
-  .search-choice-close {
-    top: 8px;
-  }
+	line-height: 20px;
+	margin: 3px 5px 3px;
+	.search-choice-close {
+		top: 8px;
+	}
 }
 
 .referenceGroup .referenceModulesListGroup .chosen-container {
-  min-width: 100px !important;
-  text-align: left;
-  height: 32px;
-  .chosen-single {
-    border: 0;
-    height: 32px;
-    border-radius: 0;
-  }
+	min-width: 100px !important;
+	text-align: left;
+	height: 32px;
+	.chosen-single {
+		border: 0;
+		height: 32px;
+		border-radius: 0;
+	}
 }
 
-.quickCreateContent
-  .referenceGroup
-  .referenceModulesListGroup
-  .chosen-container {
-  min-width: 80px !important;
+.quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
+	min-width: 80px !important;
 }
 
 .chosen-container-single .chosen-single {
-  background: #fff;
+	background: #fff;
 }
 
 .select2-selection--single {
-  @at-root .input-group > .input-group-prepend #{&} {
-    border-right: unset !important;
-    border-radius: 0.25rem 0 0 0.25rem !important;
-  }
-  // Border correction for select2 sm
-  @at-root .input-group #{&} {
-    border-top-right-radius: 0.25rem !important;
-    border-bottom-right-radius: 0.25rem !important;
-  }
+	@at-root .input-group > .input-group-prepend #{&} {
+		border-right: unset !important;
+		border-radius: 0.25rem 0 0 0.25rem !important;
+	}
+	// Border correction for select2 sm
+	@at-root .input-group #{&} {
+		border-top-right-radius: 0.25rem !important;
+		border-bottom-right-radius: 0.25rem !important;
+	}
 }
 
 .select2-selection--single {
-  height: auto !important;
+	height: auto !important;
 
-  .select2-selection__rendered {
-    line-height: 40px !important;
-  }
+	.select2-selection__rendered {
+		line-height: 40px !important;
+	}
 
-  .select2-selection__arrow {
-    top: 7px !important;
-  }
+	.select2-selection__arrow {
+		top: 7px !important;
+	}
 }
 
 .select2-selection--multiple {
-  height: auto !important;
+	height: auto !important;
 
-  .select2-selection__rendered {
-    line-height: 28px !important;
-  }
+	.select2-selection__rendered {
+		line-height: 28px !important;
+	}
 }
 
 .form-control:focus {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .dropdown-menu {
-  opacity: 1 !important;
-  transform: none !important;
+	opacity: 1 !important;
+	transform: none !important;
 }
 
 .pagination {
-  align-items: center !important;
-  display: flex !important;
-  .page-item {
-    &.active {
-      .page-link {
-        background-color: #fff;
-        color: #404952;
-        font-size: 18px;
-        font-weight: bold;
-      }
-    }
+	align-items: center !important;
+	display: flex !important;
+	.page-item {
+		&.active {
+			.page-link {
+				background-color: #fff;
+				color: #404952;
+				font-size: 18px;
+				font-weight: bold;
+			}
+		}
 
-    &.previous {
-      .page-link {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-      }
-    }
-    &.next {
-      .page-link {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-      }
-    }
-    &.disabled {
-      .page-link {
-        color: #9ca2a9;
-      }
-    }
-    .page-link {
-      padding: 0px;
-      min-width: 1.6em;
-      border-radius: 2em;
-      color: #404952;
-      margin-right: 4px;
-      padding-top: 5px;
-      padding-bottom: 5px;
+		&.previous {
+			.page-link {
+				padding-left: 5px !important;
+				padding-right: 5px !important;
+			}
+		}
+		&.next {
+			.page-link {
+				padding-left: 5px !important;
+				padding-right: 5px !important;
+			}
+		}
+		&.disabled {
+			.page-link {
+				color: #9ca2a9;
+			}
+		}
+		.page-link {
+			padding: 0px;
+			min-width: 1.6em;
+			border-radius: 2em;
+			color: #404952;
+			margin-right: 4px;
+			padding-top: 5px;
+			padding-bottom: 5px;
 
-      &:hover {
-        background-color: #eee;
-        color: #404952;
-      }
-      &:focus {
-        box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 1);
-      }
-    }
-  }
+			&:hover {
+				background-color: #eee;
+				color: #404952;
+			}
+			&:focus {
+				box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 1);
+			}
+		}
+	}
 }
 .dataTables_info {
-  color: white;
+	color: white;
 }

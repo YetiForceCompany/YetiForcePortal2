@@ -2,75 +2,75 @@
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  display: block;
-  background: #fff;
+	height: 100%;
+	width: 100%;
+	display: block;
+	background: #fff;
 }
 .mainContent,
 #page,
 .mainContainer {
-  height: 100%;
+	height: 100%;
 }
 
 .bodyContainer {
-  background-color: #eee;
-  padding-top: $h-header;
-  padding-bottom: $h-footer;
+	background-color: #eee;
+	padding-top: $h-header;
+	padding-bottom: $h-footer;
 }
 
 .mainPage {
-  height: 100%;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin-left: $w-menu-mini-state;
-  background: #fff;
-  overflow-y: auto;
-  overflow-x: hidden;
+	height: 100%;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin-left: $w-menu-mini-state;
+	background: #fff;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .mainBody {
-  background: #fff;
-  position: relative;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: $z-index-body;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+	background: #fff;
+	position: relative;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: $z-index-body;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 .bodyContent {
-  position: relative;
-  height: 100%;
-  overflow-x: hidden;
-  width: 100%;
-  background: #fff;
+	position: relative;
+	height: 100%;
+	overflow-x: hidden;
+	width: 100%;
+	background: #fff;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 1200px) {
-  .bodyContainer {
-    padding-bottom: $h-footer-mini;
-  }
-  .bodyContent {
-    padding-left: 10px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
+	.bodyContainer {
+		padding-bottom: $h-footer-mini;
+	}
+	.bodyContent {
+		padding-left: 10px;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
 
-  .mainPage {
-    margin-left: 0px;
-  }
+	.mainPage {
+		margin-left: 0px;
+	}
 }
