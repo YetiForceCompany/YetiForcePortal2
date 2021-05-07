@@ -23,5 +23,5 @@ class Inventory
 	public static $columnsByModule = [];
 
 	/** @var bool Sets up the inventory columns on the right side of the screen. */
-	public static $showInventoryColumnRight = true;
+	public static $showInventoryRightColumn = true;
 }

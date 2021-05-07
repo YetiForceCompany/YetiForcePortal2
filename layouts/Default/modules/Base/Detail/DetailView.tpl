@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="{if !empty($INVENTORY_FIELDS) && $POSITION_INVENTORY}col-4{else}col-12{/if}">
+		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4{else}col-12{/if}">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
@@ -68,7 +68,7 @@
 				{/if}
 			{/foreach}
 		</div>
-		<div class="{if $POSITION_INVENTORY} col-8 {else} col-12 {/if}">
+		<div class="{if $SHOW_INVENTORY_RIGHT_COLUMN} col-8 {else} col-12 {/if}">
 			{include file=\App\Resources::templatePath("Detail\Inventory.tpl", $MODULE_NAME)}
 		</div>
 	</div>
