@@ -1,7 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <!-- tpl-Base-Detail-DetailView -->
-
 	<div class="widget_header row">
 		<div class="col-sm-12">
 			<div class="float-left">
@@ -17,8 +16,9 @@
 			</div>
 		</div>
 	</div>
+	{assign var=POSITION_INVENTORY value=\Conf\Inventory::$showInventoryColumnRight}
 	<div class="row">
-		<div class="col-12">
+		<div class="{if !empty($INVENTORY_FIELDS) && $POSITION_INVENTORY}col-4{else}col-12{/if}">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS[$BLOCK['id']])}
@@ -69,7 +69,7 @@
 				{/if}
 			{/foreach}
 		</div>
-		<div class="col-12">
+		<div class="{if $POSITION_INVENTORY} col-8 {else} col-12 {/if}">
 			{include file=\App\Resources::templatePath("Detail\Inventory.tpl", $MODULE_NAME)}
 		</div>
 	</div>

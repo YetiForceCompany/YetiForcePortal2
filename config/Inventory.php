@@ -21,4 +21,7 @@ class Inventory
 
 	/** @var string[] Custom inventory columns by module name, if empty then it loads like in crm. */
 	public static $columnsByModule = [];
+
+	/** @var bool Sets up the inventory columns on the right side of the screen. */
+	public static $showInventoryColumnRight = true;
 }
