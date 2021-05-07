@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 	{assign var=PICKLIST_VALUES value=$FIELD_MODEL->getPicklistValues()}
-	<select class="form-control" title="{$FIELD_MODEL->getLabel()}" name="{$FIELD_MODEL->getName()}"
+	<select class="select2 form-control" title="{$FIELD_MODEL->getLabel()}" name="{$FIELD_MODEL->getName()}"
 			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()}required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			data-selected-value="{$FIELD_MODEL->getEditViewDisplayValue()}"

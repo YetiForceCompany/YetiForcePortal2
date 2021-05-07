@@ -31,7 +31,7 @@
 		{if $REFERENCE_LIST_COUNT > 1}
 			<div class="input-group-prepend referenceModulesListGroup">
 				<select id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_dropDown"
-						class="referenceModulesList form-control"
+						class="referenceModulesList select2 form-control"
 						title="{\App\Language::translate('LBL_RELATED_MODULE_TYPE')}" required="required">
 					{foreach key=index item=REFERENCE from=$REFERENCE_LIST}
 						{assign var="REFERENCED_MODULE_TRANSLATE" value=\App\Language::translateModule($REFERENCE)}

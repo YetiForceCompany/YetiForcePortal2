@@ -22,7 +22,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<select class="form-control" id="companyId">
+							<select class="select2 form-control" id="companyId">
 								{foreach item=ITEM key=KEY from=$COMPANIES}
 									<option value="{$KEY}" {if $USER->get('companyId') eq $KEY}selected{/if}>{$ITEM['name']}</option>
 								{/foreach}
