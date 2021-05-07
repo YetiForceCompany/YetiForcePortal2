@@ -1,171 +1,223 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 .c-card {
-  &__header {
-    background-color: #f7f7f7 !important;
-    cursor: pointer;
-    .btn-link {
-      color: #006cdf;
-    }
-  }
-  &__icon-right {
-    display: none;
-  }
-  &__icon-down {
-    display: inline;
-  }
-  &__accordion {
-    background-color: #f7f7f7 !important;
-  }
+	&__header {
+		cursor: pointer;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		.btn-link {
+			color: #006cdf;
+		}
+		h5 {
+			margin: 0 0 0 0.75rem;
+		}
+		& > h5,
+		& > .c-panel__title {
+			margin-right: auto;
+		}
+	}
+
+	&__icon-right {
+		display: none;
+	}
+
+	&__icon-down {
+		display: inline;
+	}
+
+	&__accordion {
+		background-color: #f7f7f7 !important;
+	}
+
+	&__body {
+		padding: 0 0.25rem;
+	}
+
+	&__label {
+		align-items: center;
+		label {
+			line-height: 1.7;
+			margin-bottom: 0;
+		}
+	}
+
+	&__value {
+		.value {
+			line-height: 2.5;
+			margin-bottom: 0;
+		}
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.c-card {
+		&__label {
+			border-right: none !important;
+			border-bottom: 1px solid #dee2e6 !important;
+		}
+	}
+}
+
+@media only screen and (max-width: 575px) {
+	.c-card {
+		&__row {
+			border-bottom: none !important;
+		}
+
+		&__value {
+			border-bottom: 1px solid #dee2e6 !important;
+		}
+	}
 }
 
 .collapsed {
-  .c-card {
-    &__icon-right {
-      display: inline !important;
-    }
-    &__icon-down {
-      display: none !important;
-    }
-  }
+	.c-card {
+		&__icon-right {
+			display: inline !important;
+		}
+		&__icon-down {
+			display: none !important;
+		}
+	}
 }
 
 .c-nav {
-  border-bottom: 1px solid #dee2e6;
-  &__item {
-    margin-bottom: -1px;
-  }
+	border-bottom: 1px solid #dee2e6;
+	&__item {
+		margin-bottom: -1px;
+	}
 
-  &__link {
-    border: 1px solid transparent !important;
-    border-top-left-radius: 0.25rem !important;
-    border-top-right-radius: 0.25rem !important;
-    color: #006cdf !important;
-    &:hover {
-      color: #004793 !important;
-      border: 1px solid #dee2e6 !important;
-    }
-  }
+	&__link {
+		border: 1px solid transparent !important;
+		border-top-left-radius: 0.25rem !important;
+		border-top-right-radius: 0.25rem !important;
+		color: #006cdf !important;
+		&:hover {
+			color: #004793 !important;
+			border: 1px solid #dee2e6 !important;
+		}
+	}
 
-  &__link.active {
-    background-color: #f8f9fa !important;
-    color: #495057 !important;
-  }
+	&__link.active {
+		background-color: #f8f9fa !important;
+		color: #495057 !important;
+	}
 }
 
 .c-exception {
-  background-color: #fff8e1;
+	background-color: #fff8e1;
 
-  &__card-header {
-    color: #ff5252;
-    background-color: #ffebee !important;
-  }
-  &__card-body {
-    overflow-y: auto;
-    height: 300px !important;
-    background-color: #fafafa;
-  }
-  &__card-footer {
-    a {
-      color: #212529;
-      background-color: #ddd;
-      border-color: #ddd;
+	&__card-header {
+		color: #ff5252;
+		background-color: #ffebee !important;
+	}
+	&__card-body {
+		overflow-y: auto;
+		height: 300px !important;
+		background-color: #fafafa;
+	}
+	&__card-footer {
+		a {
+			color: #212529;
+			background-color: #ddd;
+			border-color: #ddd;
 
-      &:hover {
-        color: #212529;
-        background-color: #cacaca;
-        border-color: #c4c4c4;
-      }
-    }
-  }
+			&:hover {
+				color: #212529;
+				background-color: #cacaca;
+				border-color: #c4c4c4;
+			}
+		}
+	}
 }
 
 $c-input-rounded-border-radius: 100px;
 $c-input-rounded-border-color: #dee2e6;
 .c-input-rounded {
-  &__prepend {
-    border: 1px solid $c-input-rounded-border-color;
-    border-right: none;
-    &,
-    .btn {
-      border-top-left-radius: $c-input-rounded-border-radius !important;
-      border-bottom-left-radius: $c-input-rounded-border-radius !important;
-    }
-  }
-  &__append {
-    border: 1px solid $c-input-rounded-border-color;
-    border-left: none;
-    &,
-    .btn {
-      border-top-right-radius: $c-input-rounded-border-radius;
-      border-bottom-right-radius: $c-input-rounded-border-radius;
-    }
-  }
-  &__input {
-    border: 1px solid $c-input-rounded-border-color;
-    border-left: none;
-    border-right: none;
-    background-image: none;
-    line-height: 2 !important;
-    &:focus {
-      & ~ .c-input-rounded__prepend,
-      & ~ .c-input-rounded__append {
-        border-color: #17ffe9;
-      }
-    }
-  }
-  .btn {
-    margin-bottom: 0;
-  }
+	&__prepend {
+		border: 1px solid $c-input-rounded-border-color;
+		border-right: none;
+		&,
+		.btn {
+			border-top-left-radius: $c-input-rounded-border-radius !important;
+			border-bottom-left-radius: $c-input-rounded-border-radius !important;
+		}
+	}
+	&__append {
+		border: 1px solid $c-input-rounded-border-color;
+		border-left: none;
+		&,
+		.btn {
+			border-top-right-radius: $c-input-rounded-border-radius;
+			border-bottom-right-radius: $c-input-rounded-border-radius;
+		}
+	}
+	&__input {
+		border: 1px solid $c-input-rounded-border-color;
+		border-left: none;
+		border-right: none;
+		background-image: none;
+		line-height: 2 !important;
+		&:focus {
+			& ~ .c-input-rounded__prepend,
+			& ~ .c-input-rounded__append {
+				border-color: #17ffe9;
+			}
+		}
+	}
+	.btn {
+		margin-bottom: 0;
+	}
 }
 
 .c-cart-quantity {
-  min-width: 114px;
-  max-width: 150px;
-  &__btn-circle {
-    border-radius: 100% !important;
-    width: calc(1.5rem + 2px) !important;
-    height: calc(1.5rem + 2px) !important;
-    line-height: normal !important;
-    font-family: initial !important;
-    padding: 0px !important;
-    min-width: 0px !important;
-  }
+	min-width: 114px;
+	max-width: 150px;
+	&__btn-circle {
+		border-radius: 100% !important;
+		width: calc(1.5rem + 2px) !important;
+		height: calc(1.5rem + 2px) !important;
+		line-height: normal !important;
+		font-family: initial !important;
+		padding: 0px !important;
+		min-width: 0px !important;
+	}
 
-  &__input {
-    border-radius: 0.5rem !important;
-    background-image: none;
-  }
+	&__input {
+		border-radius: 0.5rem !important;
+		background-image: none;
+	}
 }
 
 .hideBlock.show {
-  display: flex !important;
+	display: flex !important;
 }
 //blocks
 @media only screen and (max-width: 992px) {
-  .blockContainer .blockContent {
-    .fieldLabel {
-      text-align: left;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      min-height: 1px;
-    }
-    .fieldValue {
-      min-height: 1px;
-    }
-  }
+	.blockContainer .blockContent {
+		.fieldLabel {
+			text-align: left;
+			margin-bottom: 0;
+			padding-bottom: 0;
+			min-height: 1px;
+		}
+		.fieldValue {
+			min-height: 1px;
+		}
+	}
 }
 
 @media only screen and (min-width: 992px) {
-  .blockContainer .blockContent .fieldLabel {
-    text-align: right;
-  }
+	.blockContainer .blockContent .fieldLabel {
+		text-align: right;
+	}
 }
 
 #EditView .blockContainer .blockContent .fieldLabel label {
-  padding-top: 8px;
+	padding-top: 8px;
 }
 
 .blockContainer .blockContent .fieldLabel label {
-  font-size: 12px !important;
+	font-size: 12px !important;
 }

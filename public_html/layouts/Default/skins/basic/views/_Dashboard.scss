@@ -1,36 +1,36 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .o-dashboard-container {
-    list-style: none;
-    padding-left: 0;
-    .o-dashboard-widget {
-        width: 32%;
-        float: left;
-        height: 300px;
-        border: 1px #ddd solid;
-        margin: 5px;
-        overflow: hidden;
-        border-radius: 5px;
-    }
-    .o-dashboard-widget-header {
-        float: left;
-        width: 100%;
-        padding: 5px 15px;
-        border-bottom: 1px #eee solid;
-        background-color: #eee;
-        height: 35px;
-    }
-    .o-dashboard-widget-content {
-        float: left;
-        width: 100%;
-        font-size: 10px;
-        overflow: auto;
-        height: calc(100% - 35px);
-        .table {
-            cursor: pointer;
-        }
-    }
+	list-style: none;
+	padding-left: 0;
+	.o-dashboard-widget {
+		width: 32%;
+		float: left;
+		height: 300px;
+		border: 1px #ddd solid;
+		margin: 5px;
+		overflow: hidden;
+		border-radius: 5px;
+	}
+	.o-dashboard-widget-header {
+		float: left;
+		width: 100%;
+		padding: 5px 15px;
+		border-bottom: 1px #eee solid;
+		background-color: #eee;
+		height: 35px;
+	}
+	.o-dashboard-widget-content {
+		float: left;
+		width: 100%;
+		font-size: 10px;
+		overflow: auto;
+		height: calc(100% - 35px);
+		.table {
+			cursor: pointer;
+		}
+	}
 
-    .o-chartfilter-container {
-        height: 100%;
-    }
+	.o-chartfilter-container {
+		height: 100%;
+	}
 }

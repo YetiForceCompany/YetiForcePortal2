@@ -1,5 +1,5 @@
-$blue:    #007bff !default;
-$primary:       $blue !default;
+$blue: #007bff !default;
+$primary: $blue !default;
 
 .imageHolder {
 	margin: 0 auto;
@@ -8,15 +8,15 @@ $primary:       $blue !default;
 	width: 70%;
 }
 
-.bigLoading{
-
+.bigLoading {
 }
 
-.smallLoading{
-
+.smallLoading {
 }
 @-webkit-keyframes sk-cubeGridScaleDelay {
-	0%, 70%, 100% {
+	0%,
+	70%,
+	100% {
 		-webkit-transform: scale3D(1, 1, 1);
 		transform: scale3D(1, 1, 1);
 	}
@@ -28,7 +28,9 @@ $primary:       $blue !default;
 }
 
 @keyframes sk-cubeGridScaleDelay {
-	0%, 70%, 100% {
+	0%,
+	70%,
+	100% {
 		-webkit-transform: scale3D(1, 1, 1);
 		transform: scale3D(1, 1, 1);
 	}

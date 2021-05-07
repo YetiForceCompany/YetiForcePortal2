@@ -9,7 +9,7 @@ yarn-error.log
 /node_modules/
 /public_html/libraries/*
 /public_html/vendor/*
-
+/public_html/src/
 
 # IDEs and editors
 /.buildpath
