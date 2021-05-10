@@ -261,7 +261,7 @@ abstract class View extends Base
 			'libraries/chosen-js/chosen.jquery.js',
 			'libraries/select2/dist/js/select2.full.js',
 			'libraries/moment/min/moment.min.js',
-			'libraries/inputmask/dist/jquery.inputmask.bundle.js',
+			'libraries/inputmask/dist/jquery.inputmask.js',
 			'libraries/datatables.net/js/jquery.dataTables.js',
 			'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
 			'libraries/datatables.net-responsive/js/dataTables.responsive.js',
