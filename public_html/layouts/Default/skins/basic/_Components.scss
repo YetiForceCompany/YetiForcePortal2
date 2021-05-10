@@ -27,7 +27,7 @@
 	}
 
 	&__body.show {
-		display: flex !important;
+		display: block !important;
 	}
 
 	&__label {
@@ -43,6 +43,12 @@
 			line-height: 2.5;
 			margin-bottom: 0;
 		}
+	}
+}
+
+.recordEditView {
+	.c-card__body.show {
+		display: flex !important;
 	}
 }
 
@@ -64,6 +70,15 @@
 		&__value {
 			border-bottom: 1px solid #dee2e6 !important;
 		}
+	}
+}
+
+.c-card {
+	&__icon-right {
+		display: none !important;
+	}
+	&__icon-down {
+		display: inline !important;
 	}
 }
 
@@ -186,9 +201,6 @@ $c-input-rounded-border-color: #dee2e6;
 	}
 }
 
-.hideBlock.show {
-	display: flex !important;
-}
 //blocks
 @media only screen and (max-width: 992px) {
 	.blockContainer .blockContent {

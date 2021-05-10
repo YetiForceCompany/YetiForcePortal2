@@ -35,12 +35,12 @@
 						{assign var=IS_HIDDEN value=false}
 					{/if}
 					<div class="c-card card my-3 blockContainer">
-						<div class="c-card__header card-header p-2" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
-							<span class="fas fa-angle-right mr-2 c-card__icon-right {if !$IS_HIDDEN} d-none {/if}"></span>
-							<span class="fas fa-angle-down mr-2 c-card__icon-down {if $IS_HIDDEN} d-none {/if}"></span>
+						<div class="c-card__header card-header p-2 {if $IS_HIDDEN}collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
+							<span class="fas fa-angle-right mr-2 c-card__icon-right {if !$IS_HIDDEN}d-none{/if}"></span>
+							<span class="fas fa-angle-down mr-2 c-card__icon-down {if $IS_HIDDEN}d-none{/if}"></span>
 							<h5>{if !empty($BLOCK['icon'])}<span class="{$BLOCK['icon']} mr-2"></span>{/if}{$BLOCK['name']}</h5>
 						</div>
-						<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN} d-none {else} show {/if}" id="block_{$BLOCK['id']}">
+						<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
 								<div class="editFields col-sm-12 col-md-6 row m-0 {if !$FIELD->isEditable()} d-none{/if}">
 									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold d-flex align-items-center justify-content-lg-end justify-content-md-start">
