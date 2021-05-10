@@ -1,8 +1,8 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-	<div class="col-sm-12 px-0 mt-4">
+	<div class="col-sm-12 px-0 mt-4 pb-4">
 		<div class="card c-card">
-			<div class="card-header collapsed c-card__header"  id="headingDebugApi" data-toggle="collapse" data-target="#debugApi" aria-expanded="true" aria-controls="collapseOne">
+			<div class="card-header collapsed c-card__header p-2"  id="headingDebugApi" data-toggle="collapse" data-target="#debugApi" aria-expanded="true" aria-controls="collapseOne">
 				<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 				<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 				<span class="font-weight-bold">{\App\Language::translate('LBL_DEBUG_CONSOLE')}</span>
