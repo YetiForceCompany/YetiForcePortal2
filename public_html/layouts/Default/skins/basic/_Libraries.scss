@@ -126,3 +126,16 @@
 .dataTables_info {
 	color: white;
 }
+
+.input-group {
+	> {
+		.input-group-append,
+		.input-group-prepend {
+			> {
+				.btn-light {
+					border-color: #dee2e6;
+				}
+			}
+		}
+	}
+}

@@ -49,12 +49,12 @@
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->isEditable()}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH', $MODULE_NAME)}"{/if} {if $REFERENCED_MODULE_NAME == false}disabled{/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if} {if $FIELD_MODEL->isEditableReadOnly() || !$FIELD_MODEL->get('fieldvalue')}readonly="readonly"{/if}>
 		<div class="input-group-append">
-			<button class="btn btn-dark clearReferenceSelection mb-0" type="button"
+			<button class="btn btn-light clearReferenceSelection mb-0" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
 					  title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
-			<button class="btn btn-dark relatedPopup mb-0" type="button"
+			<button class="btn btn-light relatedPopup mb-0" type="button"
 					{if $REFERENCED_MODULE_NAME == false || $FIELD_MODEL->isEditableReadOnly()}disabled{/if}>
 				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
 					  title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
