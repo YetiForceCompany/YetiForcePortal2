@@ -229,3 +229,18 @@ $c-input-rounded-border-color: #dee2e6;
 .blockContainer .blockContent .fieldLabel label {
 	font-size: 12px !important;
 }
+
+.table th {
+	background-color: #f8f9fa;
+	border-top: 1px solid transparent !important;
+	border-bottom: 1px solid transparent !important;
+	background-image: -moz-linear-gradient(top, #f6f6f6, #f3f3f4);
+	background-image: -ms-linear-gradient(top, #f6f6f6, #f3f3f4);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f6f6f6), to(#f3f3f4));
+	background-image: -webkit-linear-gradient(top, #f6f6f6, #f3f3f4);
+	background-image: -o-linear-gradient(top, #f6f6f6, #f3f3f4);
+	background-image: linear-gradient(top, #f6f6f6, #f3f3f4);
+	background-repeat: repeat-x;
+	padding-top: 0.5rem !important;
+	padding-bottom: 0.5rem !important;
+}

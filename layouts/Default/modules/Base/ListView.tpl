@@ -29,7 +29,7 @@
 				<tr class="listViewHeaders">
 					<th></th>
 					{foreach item=HEADER from=$HEADERS}
-						<th>{$HEADER}</th>
+						<th class="text-nowrap">{$HEADER}</th>
 					{/foreach}
 				</tr>
 				</thead>
