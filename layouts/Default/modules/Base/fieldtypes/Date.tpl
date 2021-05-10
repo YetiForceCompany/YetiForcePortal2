@@ -7,7 +7,7 @@
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()},required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
 			   {if $FIELD_MODEL->isEditableReadOnly()}readonly {/if} data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 			   value="{$FIELD_MODEL->getEditViewDisplayValue()}"/>
-		<span class="input-group-append dateFieldButton border border-dark px-3">
+		<span class="input-group-append dateFieldButton">
 			<span class="input-group-text py-1">
 				<span class="fas fa-calendar"></span>
 			</span>

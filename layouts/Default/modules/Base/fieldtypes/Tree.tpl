@@ -10,11 +10,11 @@
 					value="{$FIELD_MODEL->getDisplayValue()}" readonly="readonly"
 					data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required{/if}]">
 				<div class="input-group-append">
-					<button class="btn btn-dark js-tree-clear" type="button" data-js="click">
+					<button class="btn btn-light js-tree-clear" type="button" data-js="click">
 						<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
 							title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 					</button>
-					<button class="btn btn-dark js-tree-select" type="button" data-js="click">
+					<button class="btn btn-light js-tree-select" type="button" data-js="click">
 						<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
 							title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 					</button>
