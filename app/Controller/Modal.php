@@ -18,7 +18,17 @@ abstract class Modal extends View
 
 	protected function getModalSize()
 	{
-		return 'modal-lg';
+		return 'modal-xl';
+	}
+
+	/**
+	* Modal icon.
+	*
+	* @return string
+	*/
+	protected function getModalIcon(): string
+	{
+		return '';
 	}
 
 	public function preProcessAjax()
@@ -27,6 +37,7 @@ abstract class Modal extends View
 		$this->viewer->assign('MODAL_CSS', $this->getModalCss());
 		$this->viewer->assign('MODAL_JS', $this->getModalJs());
 		$this->viewer->assign('MODAL_TITLE', $this->getTitle());
+		$this->viewer->assign('MODAL_ICON', $this->getModalIcon());
 		$this->viewer->assign('VIEW', $this->request->getAction());
 		$this->viewer->view('Modal/Header.tpl');
 	}

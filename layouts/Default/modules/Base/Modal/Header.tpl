@@ -13,6 +13,9 @@
 			<script type="text/javascript">app.registerModalController();</script>
 			<div class="modal-header">
 				<h5 class="modal-title">
+					{if $MODAL_ICON}
+						<span class="{$MODAL_ICON} mr-2"></span>
+					{/if}
 					{$MODAL_TITLE}
 				</h5>
 					<button type="button" class="close" data-dismiss="modal"

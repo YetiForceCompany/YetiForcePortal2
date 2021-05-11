@@ -41,6 +41,12 @@ class LibraryLicense extends \App\Controller\Modal
 	}
 
 	/** {@inheritdoc} */
+	public function getModalIcon(): string
+	{
+		return 'fab fa-wpforms';
+	}
+
+	/** {@inheritdoc} */
 	public function process(): void
 	{
 		$fileContent = '';
