@@ -16,7 +16,7 @@ class RecordList extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	protected function getModalSize(): string
 	{
-		return 'modal-xl';
+		return 'modal-fullscreen';
 	}
 
 	/** {@inheritdoc} */
