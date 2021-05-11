@@ -116,7 +116,7 @@ class Tree extends View\ListView
 	}
 
 	/** {@inheritdoc} */
-	protected function getListViewModel()
+	protected function getListViewModel(): ListViewModel
 	{
 		if (empty($this->listViewModel)) {
 			$this->listViewModel = ListViewModel::getInstance($this->moduleName, 'TreeView');

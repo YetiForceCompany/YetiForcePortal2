@@ -9,12 +9,10 @@
 
 namespace YF\Modules\Products\Model;
 
-use YF\Modules\Base\Model\AbstractListView;
-
 /**
  * Class TreeView.
  */
-class TreeView extends AbstractListView
+class TreeView extends \YF\Modules\Base\Model\ListView
 {
 	/** {@inheritdoc} */
 	protected $actionName = 'RecordsTree';

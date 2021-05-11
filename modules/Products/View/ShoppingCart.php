@@ -82,7 +82,7 @@ class ShoppingCart extends View\ListView
 	}
 
 	/** {@inheritdoc} */
-	protected function getListViewModel()
+	protected function getListViewModel(): \YF\Modules\Base\Model\ListView
 	{
 		if (empty($this->listViewModel)) {
 			$this->listViewModel = CartView::getInstance($this->moduleName, 'CartView');
