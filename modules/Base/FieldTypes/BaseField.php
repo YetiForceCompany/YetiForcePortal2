@@ -34,6 +34,12 @@ class BaseField extends \App\BaseModel
 	 */
 	protected $isNewRecord = false;
 
+	/** @var int TabIndex last sequence number. */
+	public static $tabIndexLastSeq = 0;
+
+	/** @var int TabIndex default sequence number. */
+	public static $tabIndexDefaultSeq = 0;
+
 	/**
 	 * Function to get the view value.
 	 *
@@ -277,5 +283,21 @@ class BaseField extends \App\BaseModel
 	public function isEmptyPicklistOptionAllowed()
 	{
 		return $this->get('isEmptyPicklistOptionAllowed');
+	}
+
+	/**
+	 * Get TabIndex.
+	 *
+	 * @return int
+	 */
+	public function getTabIndex(): int
+	{
+		$tabindex = 0;
+		if (0 !== $this->get('tabindex')) {
+			$tabindex = $this->get('tabindex');
+		} elseif (self::$tabIndexLastSeq) {
+			$tabindex = self::$tabIndexLastSeq;
+		}
+		return $tabindex + self::$tabIndexDefaultSeq;
 	}
 }
