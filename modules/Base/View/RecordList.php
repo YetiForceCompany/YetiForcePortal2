@@ -14,6 +14,18 @@ use YF\Modules\Base\Model\ListView as ListViewModel;
 class RecordList extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
+	protected function getModalSize(): string
+	{
+		return 'modal-fullscreen';
+	}
+
+	/** {@inheritdoc} */
+	protected function getModalIcon(): string
+	{
+		return "yfm-{$this->request->getModule()}";
+	}
+
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();

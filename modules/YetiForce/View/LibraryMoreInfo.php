@@ -31,6 +31,12 @@ class LibraryMoreInfo extends \App\Controller\Modal
 		return \App\Language::translate('LBL_MORE_LIBRARY_INFO', $this->moduleName);
 	}
 
+	/**  {@inheritdoc}  */
+	public function getModalIcon(): string
+	{
+		return 'fas fa-info-circle';
+	}
+
 	/** {@inheritdoc} */
 	public function validateRequest(): void
 	{

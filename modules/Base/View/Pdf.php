@@ -27,6 +27,12 @@ class Pdf extends \App\Controller\Modal
 	}
 
 	/** {@inheritdoc} */
+	protected function getModalIcon(): string
+	{
+		return 'fas fa-file-pdf';
+	}
+
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
