@@ -105,6 +105,15 @@ class Config
 	/** @var string[] Trusted IPs, are not verified by brute force */
 	public static $bruteForceTrustedIp = [];
 
+	/** @var string Session name */
+	public static $sessionName = '';
+
+	/** @var bool Force the use of https only for cookie. Values: true, false, null */
+	public static $cookieForceHttpOnly = true;
+
+	/** @var string Same-site cookie attribute allows a web application to advise the browser that cookies should only be sent if the request originates from the website the cookie came from. Values: None, Lax, Strict. */
+	public static $cookieSameSite = 'Strict';
+
 	/**
 	 * Performance.
 	 */

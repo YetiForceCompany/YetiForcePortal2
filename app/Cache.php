@@ -42,7 +42,6 @@ class Cache
 		if ($driver) {
 			$className = '\App\Cache\\' . $driver;
 			static::$pool = new $className();
-
 			return;
 		}
 		static::$pool = static::$staticPool;

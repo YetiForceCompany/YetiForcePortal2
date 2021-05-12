@@ -21,8 +21,7 @@ require_once ROOT_DIRECTORY . '/vendor/autoload.php';
 
 set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
 
-session_save_path(ROOT_DIRECTORY . '/cache/session');
-session_start();
+\App\Session::init();
 
 \App\Config::$startTime = microtime(true);
 \App\Cache::init();

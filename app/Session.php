@@ -12,6 +12,33 @@ namespace App;
 class Session
 {
 	/**
+	 * Session and cookie init.
+	 *
+	 * @return void
+	 */
+	public static function init(): void
+	{
+		if (PHP_SESSION_ACTIVE === session_status()) {
+			return;
+		}
+		$cookie = session_get_cookie_params();
+		$cookie['secure'] = \App\RequestUtil::isHttps();
+		if (isset($_SERVER['HTTP_HOST'])) {
+			$cookie['domain'] = strtok($_SERVER['HTTP_HOST'], ':');
+		}
+		if (isset(\App\Config::$cookieForceHttpOnly)) {
+			$cookie['httponly'] = \App\Config::$cookieForceHttpOnly;
+		}
+		if ($cookie['secure']) {
+			$cookie['samesite'] = \App\Config::$cookieSameSite;
+		}
+		session_name(\App\Config::$sessionName ?: 'YFPSID');
+		session_set_cookie_params($cookie);
+		session_save_path(ROOT_DIRECTORY . '/cache/session');
+		session_start();
+	}
+
+	/**
 	 * Get value from session.
 	 *
 	 * @param string $key
