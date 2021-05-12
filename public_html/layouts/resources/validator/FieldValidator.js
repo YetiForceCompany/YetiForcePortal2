@@ -895,25 +895,37 @@ Vtiger_Integer_Validator_Js(
 	{},
 	{
 		/**
+		 * Function which invokes field validation
+		 * @param accepts field element as parameter
+		 * @return error if validation fails true on success
+		 */
+		invokeValidation: function (field, rules, i, options) {
+			let GreaterThanZeroInstance = new Vtiger_GreaterThanZero_Validator_Js();
+			GreaterThanZeroInstance.setElement(field);
+			let response = GreaterThanZeroInstance.validate();
+			if (response != true) {
+				return GreaterThanZeroInstance.getError();
+			}
+		},
+
+		/**
 		 * Function to validate the Decimal field data
 		 * @return true if validation is successfull
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
 			var response = this._super();
-			if (response == false) {
+			if (response !== true) {
+				return response;
+			} else {
 				var fieldValue = this.getFieldValue();
-				if (fieldValue !== '') {
-					var doubleRegex = /(^[-+]?\d+)[,.]\d+$/;
-					if (!fieldValue.match(doubleRegex)) {
-						var errorInfo = app.translate('JS_PLEASE_ENTER_DECIMAL_VALUE');
-						this.setError(errorInfo);
-						return false;
-					}
+				if (fieldValue <= 0) {
+					var errorInfo = app.vtranslate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
+					this.setError(errorInfo);
+					return false;
 				}
-				return true;
 			}
-			return response;
+			return true;
 		}
 	}
 );
