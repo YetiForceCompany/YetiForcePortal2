@@ -90,3 +90,7 @@
 		}
 	}
 }
+
+.select2-dropdown ul[aria-multiselectable="true"] [aria-selected="true"] {
+	display: none;
+}
