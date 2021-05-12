@@ -31,6 +31,7 @@
     "BTN_CANCEL": "Cancel",
     "BTN_EDIT": "Edit",
     "BTN_SAVE": "Save",
+    "BTN_EXPORT_PDF": "Export PDF",
     "PLL_SELECT_OPTION": "Select",
     "LBL_ADDRESS_ADDRESSLEVEL1": "Country",
     "LBL_ADDRESS_ADDRESSLEVEL2": "State",

@@ -798,11 +798,24 @@ var AppConnector,
 				console.error(errorThrown);
 			}
 		},
-		registerModalController: function () {
-			let modalContainer = $('#globalmodal .js-modal-data');
-			let modalClass = 'Base_' + modalContainer.data('view') + '_Js';
-			if (typeof window[modalClass] !== 'undefined') {
-				let instance = new window[modalClass]();
+		registerModalController: function (modalId, modalContainer, cb) {
+			let windowParent = this.childFrame ? window.parent : window;
+			if (!modalId) {
+				modalId = Window.lastModalId;
+			}
+			if (!modalContainer) {
+				modalContainer = $('#' + modalId + ' .js-modal-data');
+			}
+			let moduleName = modalContainer.data('module') || 'Base';
+			let modalClass = moduleName.replace(':', '_') + '_' + modalContainer.data('view') + '_JS';
+			if (typeof windowParent[modalClass] === 'undefined') {
+				modalClass = 'Base_' + modalContainer.data('view') + '_JS';
+			}
+			if (typeof windowParent[modalClass] !== 'undefined') {
+				let instance = new windowParent[modalClass]();
+				if (typeof cb === 'function') {
+					cb(modalContainer, instance);
+				}
 				instance.registerEvents(modalContainer);
 			}
 		},

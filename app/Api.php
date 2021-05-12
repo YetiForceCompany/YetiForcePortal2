@@ -61,7 +61,7 @@ class Api
 			}
 			self::$instance = new self($header, [
 				'http_errors' => false,
-				'base_uri' => Config::$apiUrl,
+				'base_uri' => Config::$apiUrl . 'Portal/',
 				'auth' => [Config::$serverName, Config::$serverPass]
 			]);
 		}
