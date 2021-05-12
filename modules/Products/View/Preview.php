@@ -80,6 +80,10 @@ class Preview extends \App\Controller\View
 		$products = [];
 		foreach ($productBundles as $key => $row) {
 			$recordModel = Record::getInstance($moduleName);
+			if (isset($value['recordLabel'])) {
+				$recordModel->setName($value['recordLabel']);
+				unset($value['recordLabel']);
+			}
 			$recordModel->setData($row['data']);
 			$recordModel->setRawData($row['rawData']);
 			$products[$key] = $recordModel;
