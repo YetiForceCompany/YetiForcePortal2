@@ -300,4 +300,14 @@ class BaseField extends \App\BaseModel
 		}
 		return $tabindex + self::$tabIndexDefaultSeq;
 	}
+
+	/**
+	 * Get field label.
+	 *
+	 * @return string
+	 */
+	public function getFieldLabel(): string
+	{
+		return $this->get('label');
+	}
 }
