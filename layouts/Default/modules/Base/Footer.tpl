@@ -45,7 +45,7 @@
 		<footer class="footerContainer d-print-none w-100">
 			<div class="footer">
 				Copyright &copy; YetiForce.com All rights reserved.<br/>
-				{assign var=FOOTOSP value='<em><a class="u-text-underline" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
+				{assign var=FOOTOSP value='<em><a class="u-text-underline text-info" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
 				{if 'Install' eq $MODULE_NAME}
 					{assign var=FOOTOSP value='open source project'}
 				{/if}
