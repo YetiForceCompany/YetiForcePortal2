@@ -42,8 +42,8 @@ Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
 
 ## 💻 Demo
 
-https://gitdeveloper.yetiforce.com/customerPortal/
-https://gitdeveloper.yetiforce.com/vendorPortal/
+https://gitdeveloper.yetiforce.com/portal/
+https://gitdevportal.yetiforce.com/
 
 ## Contributors
 
