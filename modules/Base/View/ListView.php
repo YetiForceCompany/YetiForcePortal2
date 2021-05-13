@@ -28,14 +28,9 @@ class ListView extends \App\Controller\View
 		$this->viewer->assign('HEADERS', $this->listViewModel->getHeaders());
 		$this->viewer->assign('RECORDS', $this->listViewModel->getRecordsListModel());
 		$this->viewer->assign('COUNT', $this->listViewModel->getCount());
+		$this->viewer->assign('PAGE_NUMBER', 11);
 		$this->viewer->assign('LIST_VIEW_MODEL', $this->listViewModel);
-		$this->viewer->view($this->processTplName(), $moduleName);
-	}
-
-	/** {@inheritdoc} */
-	protected function processTplName(): string
-	{
-		return 'List/ListView.tpl';
+		$this->viewer->view('List/ListView.tpl', $moduleName);
 	}
 
 	/**

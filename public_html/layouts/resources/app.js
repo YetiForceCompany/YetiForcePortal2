@@ -386,14 +386,14 @@ var AppConnector,
 			}
 			return key;
 		},
-		registerDataTables: function (table, customParams) {
+		registerDataTables: function (table, options = {}) {
 			if ($.fn.dataTable == undefined) {
 				return false;
 			}
 			if (table.length == 0) {
 				return false;
 			}
-			var params = {
+			$.extend($.fn.dataTable.defaults, {
 				language: {
 					sLengthMenu: app.translate('JS_S_LENGTH_MENU'),
 					sZeroRecords: app.translate('JS_NO_RESULTS_FOUND'),
@@ -415,12 +415,8 @@ var AppConnector,
 						sSortDescending: app.translate('JS_S_SORT_DESCENDING')
 					}
 				}
-			};
-			if (customParams != undefined) {
-				params = jQuery.extend(params, customParams);
-			}
-			$.extend($.fn.dataTable.defaults, params);
-			return table.DataTable();
+			});
+			return table.DataTable(options);
 		},
 		getMainParams: function (param, json) {
 			if (app.cacheParams[param] == undefined) {

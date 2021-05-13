@@ -1,7 +1,9 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-<!-- tpl-Base-ListView -->
-<div class="contentsDiv">
+<!-- tpl-Base-List-ListView -->
+<form class="js-form-container" data-js="container">
+	<input type="hidden" name="module" value="{$MODULE_NAME}">
+	<input type="hidden" name="action" value="{$VIEW}">
 	<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 	<div class="widget_header row py-1">
 		<div class="col-sm-8 col-6">
@@ -11,44 +13,39 @@
 		</div>
 		<div class="col-sm-4 col-6 listViewAction">
 			<div class="float-right">
-					{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
-					{if $IS_CREATEVIEW}
-						<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
-							<span class="fas fa-plus"></span>
-							&nbsp;
-							<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
-						</a>
-					{/if}
+				{assign var=IS_CREATEVIEW value=\YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+				{if $IS_CREATEVIEW}
+					<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
+						<span class="fas fa-plus mr-2"></span>
+						<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+					</a>
+				{/if}
 			</div>
 		</div>
 	</div>
-	<div class="row listViewContents mt-2">
+	<div class="row mt-2">
 		<div class="table-responsive col-sm-12">
-			<table class="table listViewEntries d-none">
+			<table class="table listViewEntries js-list-view-table" data-js="dataTable">
 				<thead>
-				<tr class="listViewHeaders">
-					<th></th>
-					{foreach item=HEADER from=$HEADERS}
-						<th class="text-nowrap">{$HEADER}</th>
-					{/foreach}
-				</tr>
-				</thead>
-				<tbody>
-				{foreach item=RECORD key=ID from=$RECORDS}
-					<tr data-record="{$ID}" data-name="{\App\Purifier::encodeHtml($RECORD->getName())}">
-						<td class="leftRecordActions">
-							{include file=\App\Resources::templatePath("List/ListViewActions.tpl", $MODULE_NAME)}
-						</td>
-						{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
-							<td>{$RECORD->getDisplayValue($FIELD_NAME)}</td>
+					<tr class="listViewHeaders">
+						<th></th>
+						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
+							<th data-name="{$HEADER_NAME}" data-orderable="1" class="text-nowrap">{$HEADER_LABEL}</th>
 						{/foreach}
 					</tr>
-				{/foreach}
-				</tbody>
+					<tr>
+						<td></td>
+						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
+							<td>
+								<input type="text" name="filters[{$HEADER_NAME}]" class="form-control">
+							</td>
+						{/foreach}
+					</tr>
+				</thead>
 			</table>
 		</div>
 	</div>
-</div>
+</form>
 {include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
-<!-- /tpl-Base-ListView -->
+<!-- /tpl-Base-List-ListView -->
 {/strip}
