@@ -103,7 +103,7 @@
     "JS_DATE_WEEK_DAY_SHORT_THURSDAY": "Th",
     "JS_DATE_WEEK_DAY_SHORT_FRIDAY": "Fr",
     "JS_DATE_WEEK_DAY_SHORT_SATURDAY": "Sa",
-	"JS_ERROR_MAX_VALUE": "Entered value is out of allowed range",
+    "JS_ERROR_MAX_VALUE": "Entered value is out of allowed range",
     "INVALID_NUMBER": "Invalid number",
     "INVALID_NUMBER_OF": "Invalid number of",
     "JS_INVALID_LENGTH": "Added value is incomplete",
