@@ -73,7 +73,8 @@ class DetailView
 				'linklabel' => \App\Language::translate('BTN_EDIT', $this->moduleName),
 				'linkurl' => $this->record->getEditViewUrl(),
 				'linkicon' => 'fas fa-pencil-alt',
-				'linkclass' => 'btn btn-success btn-sm'
+				'linkclass' => 'btn btn-success btn-sm',
+				'showLabel' => 1
 			];
 		}
 		if ($this->record->isInventory()) {
