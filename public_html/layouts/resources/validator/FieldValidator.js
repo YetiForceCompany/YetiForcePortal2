@@ -161,20 +161,32 @@ Vtiger_Base_Validator_Js(
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
-			var fieldValue = this.getFieldValue();
-			var integerRegex = /(^[-+]?\d+)$/;
-			var decimalIntegerRegex = /(^[-+]?\d?).\d+$/;
+			let fieldValue = this.getFieldValue(),
+				integerRegex = /(^[-+]?\d+)$/;
 			if (!fieldValue.match(integerRegex)) {
-				if (!fieldValue.match(decimalIntegerRegex)) {
-					var errorInfo = app.translate('JS_PLEASE_ENTER_INTEGER_VALUE');
-					this.setError(errorInfo);
-					return false;
-				} else {
-					return true;
-				}
-			} else {
+				var errorInfo = app.translate('JS_PLEASE_ENTER_INTEGER_VALUE');
+				this.setError(errorInfo);
+				return false;
+			}
+			let fieldInfo = this.getElement().data().fieldinfo;
+			if (!fieldInfo || !fieldInfo.maximumlength) {
 				return true;
 			}
+			let ranges = fieldInfo.maximumlength.split(',');
+			if (ranges.length === 2) {
+				if (fieldValue > parseFloat(ranges[1]) || fieldValue < parseFloat(ranges[0])) {
+					errorInfo = app.translate('JS_ERROR_MAX_VALUE');
+					this.setError(errorInfo);
+					return false;
+				}
+			} else {
+				if (fieldValue > parseFloat(ranges[0]) || fieldValue < 0) {
+					errorInfo = app.translate('JS_ERROR_MAX_VALUE');
+					this.setError(errorInfo);
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 );
