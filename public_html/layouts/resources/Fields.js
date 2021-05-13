@@ -361,6 +361,21 @@ window.App.Fields = {
 				}
 			}
 			return integer;
+		},
+
+		/**
+		 * Function to get value for db format.
+		 * @param {string} value
+		 * @returns {number}
+		 */
+		formatToDb(value) {
+			if (value == undefined || value == '') {
+				value = 0;
+			}
+			value = value.toString();
+			value = value.split(app.getMainParams('currencyGroupingSeparator')).join('');
+			value = value.replace(/\s/g, '').replace(app.getMainParams('currencyDecimalSeparator'), '.');
+			return parseFloat(value);
 		}
 	}
 };

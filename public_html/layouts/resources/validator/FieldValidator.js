@@ -202,15 +202,13 @@ Vtiger_PositiveNumber_Validator_Js(
 		 * @return true if validation is successfull
 		 * @return false if validation error occurs
 		 */
-		validate: function () {
-			var response = this._super();
+		validate() {
+			const response = this._super();
 			if (response != true) {
 				return response;
 			} else {
-				var fieldValue = this.getFieldValue();
-				if (fieldValue > 100) {
-					var errorInfo = app.translate('JS_PERCENTAGE_VALUE_SHOULD_BE_LESS_THAN_100');
-					this.setError(errorInfo);
+				if (App.Fields.Double.formatToDb(this.getFieldValue()) > 100) {
+					this.setError(app.translate('JS_PERCENTAGE_VALUE_SHOULD_BE_LESS_THAN_100'));
 					return false;
 				}
 				return true;
@@ -890,42 +888,65 @@ Vtiger_Base_Validator_Js(
 	}
 );
 
-Vtiger_Integer_Validator_Js(
+Vtiger_Base_Validator_Js(
 	'Vtiger_Double_Validator_Js',
-	{},
 	{
 		/**
-		 * Function which invokes field validation
-		 * @param accepts field element as parameter
+		 *Function which invokes field validation
+		 *@param accepts field element as parameter
 		 * @return error if validation fails true on success
 		 */
 		invokeValidation: function (field, rules, i, options) {
-			let GreaterThanZeroInstance = new Vtiger_GreaterThanZero_Validator_Js();
-			GreaterThanZeroInstance.setElement(field);
-			let response = GreaterThanZeroInstance.validate();
+			let doubleValidator = new Vtiger_Double_Validator_Js();
+			doubleValidator.setElement(field);
+			let response = doubleValidator.validate();
 			if (response != true) {
-				return GreaterThanZeroInstance.getError();
+				return doubleValidator.getError();
 			}
-		},
-
+		}
+	},
+	{
 		/**
 		 * Function to validate the Decimal field data
 		 * @return true if validation is successfull
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
-			var response = this._super();
-			if (response !== true) {
-				return response;
-			} else {
-				var fieldValue = this.getFieldValue();
-				if (fieldValue <= 0) {
-					var errorInfo = app.vtranslate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO');
+			let response = this._super();
+			if (response === true) {
+				let fieldValue = this.getFieldValue();
+				let doubleRegex = /(^[-+]?\d+)(\.\d+)?$/;
+				if (!fieldValue.toString().match(doubleRegex)) {
+					let errorInfo = app.translate('JS_PLEASE_ENTER_DECIMAL_VALUE');
+					this.setError(errorInfo);
+					return false;
+				}
+				let fieldInfo = this.getElement().data().fieldinfo;
+				if (!fieldInfo || !fieldInfo.maximumlength) {
+					return true;
+				}
+				let maximumLength = fieldInfo.maximumlength,
+					minimumLength = -maximumLength;
+				fieldValue = parseFloat(fieldValue);
+				let ranges = maximumLength.split(',');
+				if (ranges.length === 2) {
+					maximumLength = ranges[1];
+					minimumLength = ranges[0];
+				}
+				if (fieldValue > parseFloat(maximumLength) || fieldValue < parseFloat(minimumLength)) {
+					errorInfo = app.translate('JS_ERROR_MAX_VALUE');
 					this.setError(errorInfo);
 					return false;
 				}
 			}
-			return true;
+			return response;
+		},
+		/**
+		 * Overwrites base function to avoid trimming and validate white spaces
+		 * @return fieldValue
+		 * */
+		getFieldValue: function () {
+			return App.Fields.Double.formatToDb(this.getElement().val());
 		}
 	}
 );
@@ -1281,3 +1302,4 @@ Vtiger_Base_Validator_Js(
 		}
 	}
 );
+Vtiger_Double_Validator_Js('Vtiger_Advpercentage_Validator_Js', {});
