@@ -125,6 +125,7 @@
     "JS_SHOULD_BE_LESS_THAN_CURRENT_DATE": "should be less than current date",
     "JS_SHOULD_BE_LESS_THAN_OR_EQUAL_TO": "should be less than or equal to",
     "JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO": "value should be greater than zero",
+    "JS_LOADING_OF_RECORDS": "Loading records list...",
     "JS_LOADING_PLEASE_WAIT": "Loading, please wait.",
     "JS_NO_SUCH_QUANTITY": "There is no such quantity of product",
     "JS_FULL_TEXT": "Full text",
