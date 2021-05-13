@@ -20,6 +20,9 @@ abstract class Base
 	 */
 	protected $request;
 
+	/** @var string Module name. */
+	protected $moduleName;
+
 	/**
 	 * Construct.
 	 *
@@ -33,6 +36,7 @@ abstract class Base
 		}
 		$this->request = $request;
 		self::setHeaders();
+		$this->moduleName = $request->getModule();
 	}
 
 	/**
@@ -40,7 +44,7 @@ abstract class Base
 	 *
 	 * @return void
 	 */
-	public function setHeaders(): void
+	public static function setHeaders(): void
 	{
 		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');

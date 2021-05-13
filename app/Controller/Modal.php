@@ -22,10 +22,10 @@ abstract class Modal extends View
 	}
 
 	/**
-	* Modal icon.
-	*
-	* @return string
-	*/
+	 * Modal icon.
+	 *
+	 * @return string
+	 */
 	protected function getModalIcon(): string
 	{
 		return '';
@@ -49,8 +49,7 @@ abstract class Modal extends View
 
 	protected function getModalCss()
 	{
-		$cssFileNames = [];
-		return $this->convertScripts($cssFileNames, 'css');
+		return $this->convertScripts([], 'css');
 	}
 
 	/** {@inheritdoc} */
@@ -58,7 +57,7 @@ abstract class Modal extends View
 	{
 		$action = $this->request->getAction();
 		return $this->convertScripts([
-			'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js",
+			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/$action.js"],
 		], 'js');
 	}
 }

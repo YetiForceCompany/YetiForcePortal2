@@ -16,12 +16,11 @@ namespace App;
  */
 class RequestUtil
 {
-	/**
-	 * Cache https check variable.
-	 *
-	 * @var bool
-	 */
+	/** @var bool Cache https check variable. */
 	protected static $httpsCache;
+
+	/** @var string Cache request id variable. */
+	protected static $requestId;
 
 	/**
 	 * Check that the connection is https.
@@ -35,5 +34,18 @@ class RequestUtil
 				|| (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && 'https' === strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']));
 		}
 		return self::$httpsCache;
+	}
+
+	/**
+	 * Get request id.
+	 *
+	 * @return string
+	 */
+	public static function requestId(): string
+	{
+		if (empty(self::$requestId)) {
+			self::$requestId = sprintf('%08x', abs(crc32($_SERVER['REMOTE_ADDR'] . $_SERVER['REQUEST_TIME'] . $_SERVER['REMOTE_PORT'])));
+		}
+		return self::$requestId;
 	}
 }

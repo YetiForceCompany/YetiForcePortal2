@@ -110,6 +110,7 @@ class Api
 				'time' => round(microtime(true) - $startTime, 2),
 				'method' => $method,
 				'requestType' => strtoupper($requestType),
+				'requestId' => RequestUtil::requestId(),
 				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
 				'response' => $responseBody,

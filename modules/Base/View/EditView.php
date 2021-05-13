@@ -80,7 +80,7 @@ class EditView extends \App\Controller\View
 		return array_merge(
 			parent::getFooterScripts(),
 			$this->convertScripts([
-				'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js',
+				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/EditView.js'],
 			], 'js')
 		);
 	}

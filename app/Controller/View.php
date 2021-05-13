@@ -20,14 +20,10 @@ abstract class View extends Base
 	/** @var \App\Viewer Viewer object. */
 	protected $viewer;
 
-	/** @var string Module name. */
-	protected $moduleName;
-
 	/** {@inheritdoc} */
 	public function __construct(\App\Request $request)
 	{
 		parent::__construct($request);
-		$this->moduleName = $request->getModule();
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
 		$this->viewer->assign('VIEW', $this->request->getByType('view', \App\Purifier::ALNUM));
@@ -99,15 +95,16 @@ abstract class View extends Base
 	/**
 	 * Convert scripts path.
 	 *
-	 * @param string[] $fileNames
-	 * @param string   $fileExtension
+	 * @param array  $files
+	 * @param string $fileExtension
 	 *
 	 * @return array
 	 */
-	public function convertScripts($fileNames, $fileExtension): array
+	public function convertScripts(array $files, string $fileExtension): array
 	{
 		$scriptsInstances = [];
-		foreach ($fileNames as $fileName) {
+		foreach ($files as $file) {
+			[$fileName, $isOptional] = array_pad($file, 2, false);
 			$path = ROOT_DIRECTORY . "/public_html/$fileName";
 			$script = new \App\Script();
 			$script->set('type', $fileExtension);
@@ -116,6 +113,8 @@ abstract class View extends Base
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $minFilePath . self::getTime($path));
 			} elseif (file_exists($path)) {
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $fileName . self::getTime($path));
+			} elseif ($isOptional) {
+				\App\Log::info('File not found: ' . $path);
 			} else {
 				\App\Log::warning('File not found: ' . $path);
 			}
@@ -147,30 +146,30 @@ abstract class View extends Base
 	public function getHeaderCss(): array
 	{
 		return $this->convertScripts([
-			'libraries/@fortawesome/fontawesome-free/css/all.css',
-			'libraries/@mdi/font/css/materialdesignicons.css',
-			'libraries/bootstrap/dist/css/bootstrap.css',
-			'libraries/chosen-js/chosen.css',
-			'libraries/bootstrap-chosen/bootstrap-chosen.css',
-			'libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css',
-			'libraries/select2/dist/css/select2.css',
-			'libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css',
-			'libraries/datatables.net-bs4/css/dataTables.bootstrap4.css',
-			'libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
-			'libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-			'libraries/bootstrap-daterangepicker/daterangepicker.css',
-			'libraries/clockpicker/dist/bootstrap4-clockpicker.css',
-			'libraries/jstree-bootstrap-theme/dist/themes/proton/style.css',
-			'libraries/jstree/dist/themes/default/style.css',
-			'libraries/@pnotify/core/dist/PNotify.css',
-			'libraries/@pnotify/confirm/dist/PNotifyConfirm.css',
-			'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css',
-			'libraries/@pnotify/mobile/dist/PNotifyMobile.css',
-			'libraries/@pnotify/desktop/dist/PNotifyDesktop.css',
-			'layouts/resources/icons/additionalIcons.css',
-			'layouts/resources/icons/yfm.css',
-			'layouts/resources/icons/yfi.css',
-			'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
+			['libraries/@fortawesome/fontawesome-free/css/all.css'],
+			['libraries/@mdi/font/css/materialdesignicons.css'],
+			['libraries/bootstrap/dist/css/bootstrap.css'],
+			['libraries/chosen-js/chosen.css'],
+			['libraries/bootstrap-chosen/bootstrap-chosen.css'],
+			['libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css'],
+			['libraries/select2/dist/css/select2.css'],
+			['libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css'],
+			['libraries/datatables.net-bs4/css/dataTables.bootstrap4.css'],
+			['libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css'],
+			['libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css'],
+			['libraries/bootstrap-daterangepicker/daterangepicker.css'],
+			['libraries/clockpicker/dist/bootstrap4-clockpicker.css'],
+			['libraries/jstree-bootstrap-theme/dist/themes/proton/style.css'],
+			['libraries/jstree/dist/themes/default/style.css'],
+			['libraries/@pnotify/core/dist/PNotify.css'],
+			['libraries/@pnotify/confirm/dist/PNotifyConfirm.css'],
+			['libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.css'],
+			['libraries/@pnotify/mobile/dist/PNotifyMobile.css'],
+			['libraries/@pnotify/desktop/dist/PNotifyDesktop.css'],
+			['layouts/resources/icons/additionalIcons.css'],
+			['layouts/resources/icons/yfm.css'],
+			['layouts/resources/icons/yfi.css'],
+			['layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css'],
 		], 'css');
 	}
 
@@ -239,48 +238,48 @@ abstract class View extends Base
 		$moduleName = $this->getModuleNameFromRequest();
 		$action = $this->request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
-		$fileName = "libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js";
-		if (!file_exists(PUBLIC_DIRECTORY . $fileName)) {
-			$fileName = 'libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js';
+		$fileName = ["libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js"];
+		if (!file_exists(PUBLIC_DIRECTORY . $fileName[0])) {
+			$fileName = ['libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js'];
 		}
 		return $this->convertScripts([
-			'libraries/jquery/dist/jquery.js',
-			'libraries/jquery.class.js/jquery.class.js',
-			'libraries/block-ui/jquery.blockUI.js',
-			'libraries/@pnotify/core/dist/PNotify.js',
-			'libraries/@pnotify/mobile/dist/PNotifyMobile.js',
-			'libraries/@pnotify/desktop/dist/PNotifyDesktop.js',
-			'libraries/@pnotify/confirm/dist/PNotifyConfirm.js',
-			'libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js',
-			'libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js',
-			'libraries/popper.js/dist/umd/popper.js',
-			'libraries/bootstrap/dist/js/bootstrap.js',
-			'libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-			'libraries/bootstrap-daterangepicker/daterangepicker.js',
-			'libraries/bootbox/dist/bootbox.min.js',
-			'libraries/chosen-js/chosen.jquery.js',
-			'libraries/select2/dist/js/select2.full.js',
-			'libraries/moment/min/moment.min.js',
-			'libraries/inputmask/dist/jquery.inputmask.js',
-			'libraries/datatables.net/js/jquery.dataTables.js',
-			'libraries/datatables.net-bs4/js/dataTables.bootstrap4.js',
-			'libraries/datatables.net-responsive/js/dataTables.responsive.js',
-			'libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js',
-			'libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js',
+			['libraries/jquery/dist/jquery.js'],
+			['libraries/jquery.class.js/jquery.class.js'],
+			['libraries/block-ui/jquery.blockUI.js'],
+			['libraries/@pnotify/core/dist/PNotify.js'],
+			['libraries/@pnotify/mobile/dist/PNotifyMobile.js'],
+			['libraries/@pnotify/desktop/dist/PNotifyDesktop.js'],
+			['libraries/@pnotify/confirm/dist/PNotifyConfirm.js'],
+			['libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js'],
+			['libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js'],
+			['libraries/popper.js/dist/umd/popper.js'],
+			['libraries/bootstrap/dist/js/bootstrap.js'],
+			['libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js'],
+			['libraries/bootstrap-daterangepicker/daterangepicker.js'],
+			['libraries/bootbox/dist/bootbox.min.js'],
+			['libraries/chosen-js/chosen.jquery.js'],
+			['libraries/select2/dist/js/select2.full.js'],
+			['libraries/moment/min/moment.min.js'],
+			['libraries/inputmask/dist/jquery.inputmask.js'],
+			['libraries/datatables.net/js/jquery.dataTables.js'],
+			['libraries/datatables.net-bs4/js/dataTables.bootstrap4.js'],
+			['libraries/datatables.net-responsive/js/dataTables.responsive.js'],
+			['libraries/datatables.net-responsive-bs4/js/responsive.bootstrap4.js'],
+			['libraries/jQuery-Validation-Engine/js/jquery.validationEngine.js'],
 			$fileName,
-			'libraries/jstree/dist/jstree.js',
-			'libraries/clockpicker/dist/bootstrap4-clockpicker.js',
-			'layouts/resources/validator/BaseValidator.js',
-			'layouts/resources/validator/FieldValidator.js',
-			'layouts/resources/helper.js',
-			'layouts/resources/Field.js',
-			'layouts/resources/Connector.js',
-			'layouts/resources/app.js',
-			'layouts/resources/Fields.js',
-			'layouts/resources/ProgressIndicator.js',
-			'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js',
-			'layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js",
-			'layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js",
+			['libraries/jstree/dist/jstree.js'],
+			['libraries/clockpicker/dist/bootstrap4-clockpicker.js'],
+			['layouts/resources/validator/BaseValidator.js'],
+			['layouts/resources/validator/FieldValidator.js'],
+			['layouts/resources/helper.js'],
+			['layouts/resources/Field.js'],
+			['layouts/resources/Connector.js'],
+			['layouts/resources/app.js'],
+			['layouts/resources/Fields.js'],
+			['layouts/resources/ProgressIndicator.js'],
+			['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js'],
+			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js"],
+			['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true],
 		], 'js');
 	}
 

@@ -19,6 +19,9 @@
 										<span class="text-secondary mr-3">Start time: {$ITEM['date']}</span>
 										<span class="text-secondary mr-3">Execution time: {$ITEM['time']}</span>
 										<span class="text-secondary mr-3">Size: {\App\Utils::showBytes(\strlen($ITEM['rawResponse']))}</span>
+										{if isset($ITEM['requestId'])}
+											<span class="text-secondary mr-3">Request ID: {$ITEM['requestId']}</span>
+										{/if}
 									</span>
 								</div>
 								<div id="request{$KEY}" class="collapse {if !empty($COLLAPSE)}show{/if}" aria-labelledby="headingOne{$KEY}" data-parent="#accordionExample">

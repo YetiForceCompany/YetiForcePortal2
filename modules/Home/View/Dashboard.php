@@ -67,10 +67,10 @@ class Dashboard extends \App\Controller\View
 		return array_merge(
 			parent::getFooterScripts(),
 			$this->convertScripts([
-				'libraries/chart.js/dist/Chart.js',
-				'libraries/chartjs-plugin-funnel/dist/chart.funnel.js',
-				'libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js',
-				'layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js',
+				['libraries/chart.js/dist/Chart.js'],
+				['libraries/chartjs-plugin-funnel/dist/chart.funnel.js'],
+				['libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js'],
+				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widgets.js'],
 			], 'js'));
 	}
 }
