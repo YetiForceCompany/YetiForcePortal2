@@ -35,7 +35,7 @@ class ListView extends \App\Controller\View
 	/** {@inheritdoc} */
 	protected function processTplName(): string
 	{
-		return 'ListView.tpl';
+		return 'List/ListView.tpl';
 	}
 
 	/**

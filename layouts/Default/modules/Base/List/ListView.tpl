@@ -37,7 +37,7 @@
 				{foreach item=RECORD key=ID from=$RECORDS}
 					<tr data-record="{$ID}" data-name="{\App\Purifier::encodeHtml($RECORD->getName())}">
 						<td class="leftRecordActions">
-							{include file=\App\Resources::templatePath("ListViewActions.tpl", $MODULE_NAME)}
+							{include file=\App\Resources::templatePath("List/ListViewActions.tpl", $MODULE_NAME)}
 						</td>
 						{foreach item=HEADER key=FIELD_NAME from=$HEADERS}
 							<td>{$RECORD->getDisplayValue($FIELD_NAME)}</td>

@@ -71,7 +71,7 @@ class EditView extends \App\Controller\View
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
-		$this->viewer->view('EditView.tpl', $moduleName);
+		$this->viewer->view('Edit/EditView.tpl', $moduleName);
 	}
 
 	/** {@inheritdoc} */
