@@ -73,7 +73,8 @@ class DetailView
 				'linklabel' => \App\Language::translate('BTN_EDIT', $this->moduleName),
 				'linkurl' => $this->record->getEditViewUrl(),
 				'linkicon' => 'fas fa-pencil-alt',
-				'linkclass' => 'btn btn-success btn-sm'
+				'linkclass' => 'btn btn-success btn-sm',
+				'showLabel' => 1
 			];
 		}
 		if ($this->record->isInventory()) {
@@ -82,7 +83,8 @@ class DetailView
 				'linklabel' => \App\Language::translate('BTN_EDIT', $this->moduleName),
 				'linkurl' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
 				'linkicon' => 'fas fa-shopping-cart',
-				'linkclass' => 'btn btn-success btn-sm'
+				'linkclass' => 'btn btn-success btn-sm',
+				'showLabel' => 1
 			];
 		}
 		if ($this->record->isPermitted('ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
@@ -93,6 +95,7 @@ class DetailView
 				'linkicon' => 'fas fa-file-pdf',
 				'linkclass' => 'btn-dark btn-sm js-show-modal js-pdf',
 				'title' => \App\Language::translate('BTN_EXPORT_PDF', $this->moduleName),
+				'showLabel' => 1
 			];
 		}
 		return $links;
