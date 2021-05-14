@@ -118,43 +118,65 @@ var AppConnector,
 			this.registerChznSelectField(container);
 			App.Fields.Picklist.changeSelectElementView(container);
 		},
-		registerTimeField: function (container) {
-			var thisInstance = this;
-			if (typeof container === 'undefined') {
-				container = jQuery('body');
+
+		/**
+		 * Register time field.
+		 */
+		registerTimeField() {
+			this.registerEventForClockPicker();
+		},
+
+		/**
+		 * Register event for clock picker.
+		 * @param {object} timeInputs
+		 */
+		registerEventForClockPicker(timeInputs = $('.clockPicker')) {
+			if (!timeInputs.hasClass('clockPicker')) {
+				timeInputs = timeInputs.find('.clockPicker');
 			}
-			if (typeof params === 'undefined') {
-				params = {};
+			if (!timeInputs.length) {
+				return;
 			}
-			var timeFieldElements = jQuery('.timeField', container);
-			params.autoclose = true;
-			timeFieldElements.each(function () {
-				var element = $(this);
-				var input = element.find('.timeFieldInput');
-				var button = element.find('.timeFieldButton');
-				if (!input.attr('id')) {
-					input.attr(
-						'id',
-						'timeFieldInput' +
-							thisInstance.generateRandomChar() +
-							thisInstance.generateRandomChar() +
-							thisInstance.generateRandomChar()
-					);
+			let params = {
+				placement: 'bottom',
+				autoclose: true,
+				minutestep: 5
+			};
+			$('.js-clock__btn').on('click', (e) => {
+				e.stopPropagation();
+				let tempElement = $(e.currentTarget).closest('.time').find('input.clockPicker');
+				if (tempElement.attr('disabled') !== 'disabled' && tempElement.attr('readonly') !== 'readonly') {
+					tempElement.clockpicker('show');
 				}
-				var params_custom = params;
-				var fieldInfo = app.parseFieldInfo(input.attr('data-fieldinfo'));
-				if (fieldInfo['time-format'] == 12) {
-					params_custom.twelvehour = true;
-				} else if (fieldInfo['time-format'] == 24) {
-					params_custom.twelvehour = false;
+			});
+			let formatTimeString = (timeInput) => {
+				if (params.twelvehour) {
+					let meridiemTime = '';
+					params.afterDone = () => {
+						//format time string after picking a value
+						let timeString = timeInput.val(),
+							timeStringFormatted = timeString.slice(0, timeString.length - 2) + ' ' + meridiemTime;
+						timeInput.val(timeStringFormatted);
+						app.event.trigger('Clockpicker.changed', timeInput);
+					};
+					params.beforeHide = () => {
+						meridiemTime = $('.clockpicker-buttons-am-pm:visible').find('a:not(.text-white-50)').text();
+					};
+				} else {
+					params.afterDone = () => {
+						app.event.trigger('Clockpicker.changed', timeInput);
+					};
 				}
-				input.clockpicker(params_custom);
-				button.click(function (e) {
-					e.stopPropagation();
-					input.clockpicker('toggle');
-				});
+			};
+			timeInputs.each((i, e) => {
+				let timeInput = $(e);
+				let formatTime = timeInputs.data('format') || app.getMainParams('hourFormat');
+				params.twelvehour = parseInt(formatTime) === 12 ? true : false;
+				formatTimeString(timeInput);
+				timeInput.clockpicker(params);
 			});
 		},
+
 		registerDatePicker: function () {
 			$('input.datepicker').datepicker({
 				todayBtn: 'linked',
