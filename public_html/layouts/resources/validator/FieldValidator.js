@@ -1049,11 +1049,21 @@ Vtiger_Base_Validator_Js(
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
-			var fieldValue = this.getFieldValue();
-			var time = fieldValue.replace(fieldValue.match(/[AP]M/i), '');
-			var timeValue = time.split(':');
-			if (isNaN(timeValue[0]) && isNaN(timeValue[1])) {
-				var errorInfo = app.translate('JS_PLEASE_ENTER_VALID_TIME');
+			let format = app.getMainParams('hourFormat');
+			if (this.field.data('format') && [12, 24].indexOf(this.field.data('format')) != -1) {
+				format = this.field.data('format');
+			}
+			let regexp = '';
+			switch (format) {
+				case 12:
+					regexp = new RegExp('^([0][0-9]|1[0-2]):([0-5][0-9])([ ]PM|[ ]AM|PM|AM)$');
+					break;
+				default:
+					regexp = new RegExp('^(2[0-3]|[0][0-9]|1[0-9]):([0-5][0-9])$');
+					break;
+			}
+			if (!regexp.test(this.getFieldValue())) {
+				let errorInfo = app.translate('JS_PLEASE_ENTER_VALID_TIME');
 				this.setError(errorInfo);
 				return false;
 			}
