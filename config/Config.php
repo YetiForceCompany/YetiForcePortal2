@@ -124,6 +124,9 @@ class Config
 	/** @var string Default charset: default value = "UTF-8". */
 	public static $defaultCharset = 'UTF-8';
 
+	/** Number of items displayed in picklists. */
+	public static $picklistLimit = 50;
+
 	/**
 	 * Alert messages.
 	 */
