@@ -310,4 +310,14 @@ class BaseField extends \App\BaseModel
 	{
 		return $this->get('label');
 	}
+
+	/**
+	 * Get uitype.
+	 *
+	 * @return int
+	 */
+	public function getUIType(): int
+	{
+		return  $this->get('uitype');
+	}
 }
