@@ -231,7 +231,23 @@ Vtiger_PositiveNumber_Validator_Js(
 
 Vtiger_Base_Validator_Js(
 	'Vtiger_Url_Validator_Js',
-	{},
+	{
+		/**
+		 * Function which invokes field validation
+		 * @param accepts field element as parameter
+		 * @return error if validation fails true on success
+		 */
+		invokeValidation: function (field, rules, i, options) {
+			let validatorInstance = new Vtiger_Url_Validator_Js();
+			validatorInstance.setElement(field);
+			const result = validatorInstance.validate();
+			if (result === true) {
+				return result;
+			} else {
+				return validatorInstance.getError();
+			}
+		}
+	},
 	{
 		/**
 		 * Function to validate the Url
@@ -239,21 +255,24 @@ Vtiger_Base_Validator_Js(
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
-			var fieldValue = this.getFieldValue();
-			var regexp = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-			var result = regexp.test(fieldValue);
-
+			let fieldValue = this.getFieldValue();
+			let regexp = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+			let result = regexp.test(fieldValue);
 			if (!result) {
 				if (
 					fieldValue.indexOf('http://') === 0 ||
 					fieldValue.indexOf('https://') === 0 ||
+					fieldValue.indexOf('ftp://') === 0 ||
+					fieldValue.indexOf('ftps://') === 0 ||
+					fieldValue.indexOf('telnet://') === 0 ||
+					fieldValue.indexOf('smb://') === 0 ||
 					fieldValue.indexOf('www.') === 0
 				) {
 					result = true;
 				}
 			}
 			if (!result) {
-				var errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS'); //"Please enter valid url";
+				let errorInfo = app.translate('JS_CONTAINS_ILLEGAL_CHARACTERS'); //"Please enter valid url";
 				this.setError(errorInfo);
 				return false;
 			}
