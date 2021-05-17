@@ -121,9 +121,13 @@ var AppConnector,
 
 		/**
 		 * Register time field.
+		 *
+		 * @param {object} container
 		 */
-		registerTimeField() {
+		registerTimeField(container) {
 			this.registerEventForClockPicker();
+			App.Fields.Date.register(container);
+			App.Fields.Date.registerRange(container);
 		},
 
 		/**
@@ -177,86 +181,6 @@ var AppConnector,
 			});
 		},
 
-		registerDatePicker: function () {
-			$('input.datepicker').datepicker({
-				todayBtn: 'linked',
-				clearBtn: true,
-				autoclose: true,
-				todayHighlight: false,
-				enableOnReadonly: false
-			});
-		},
-		registerDateField: function (container) {
-			var thisInstance = this;
-			if (typeof container === 'undefined') {
-				container = jQuery('body');
-			}
-			if (typeof params === 'undefined') {
-				params = {};
-			}
-			var dateFieldElements = jQuery('.dateField', container);
-			params.width = '100%';
-			params.singleDatePicker = true;
-			params.showDropdowns = true;
-			params.linkedCalendars = false;
-			params.autoApply = true;
-			params.autoUpdateInput = false;
-			params.locale = {};
-			params.locale.format = 'YYYY-MM-DD';
-			params.locale.daysOfWeek = [
-				app.translate('JS_DATE_WEEK_DAY_SHORT_SUNDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_MONDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_TUESDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_WEDNESDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_THURSDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_FRIDAY'),
-				app.translate('JS_DATE_WEEK_DAY_SHORT_SATURDAY')
-			];
-			params.locale.monthNames = [
-				app.translate('JS_DATE_MONTH_JANUARY'),
-				app.translate('JS_DATE_MONTH_FEBRUARY'),
-				app.translate('JS_DATE_MONTH_MARCH'),
-				app.translate('JS_DATE_MONTH_APRIL'),
-				app.translate('JS_DATE_MONTH_MAY'),
-				app.translate('JS_DATE_MONTH_JUNE'),
-				app.translate('JS_DATE_MONTH_JULY'),
-				app.translate('JS_DATE_MONTH_AUGUST'),
-				app.translate('JS_DATE_MONTH_SEPTEMBER'),
-				app.translate('JS_DATE_MONTH_OCTOBER'),
-				app.translate('JS_DATE_MONTH_NOVEMBER'),
-				app.translate('JS_DATE_MONTH_DECEMBER')
-			];
-
-			dateFieldElements.each(function () {
-				var element = $(this);
-				var input = element.find('.dateFieldInput');
-				var button = element.find('.dateFieldButton');
-				if (!input.attr('id')) {
-					input.attr(
-						'id',
-						'dateFieldInput' +
-							thisInstance.generateRandomChar() +
-							thisInstance.generateRandomChar() +
-							thisInstance.generateRandomChar()
-					);
-				}
-				var params_custom = params;
-				var fieldInfo = app.parseFieldInfo(input.attr('data-fieldinfo'));
-				if (fieldInfo['date-format-js2']) {
-					params_custom.locale.format = fieldInfo['date-format-js2'];
-				}
-				if (fieldInfo['day-of-the-week-int']) {
-					params_custom.locale.firstDay = fieldInfo['day-of-the-week-int'];
-				}
-				input.daterangepicker(params_custom);
-				button.click(function () {
-					input.focus();
-				});
-				input.on('apply.daterangepicker', function (ev, picker) {
-					$(this).val(picker.startDate.format(params_custom.locale.format));
-				});
-			});
-		},
 		registerChznSelectField: function (parent, view, params) {
 			var thisInstance = this;
 			if (typeof parent == 'undefined') {
@@ -911,9 +835,7 @@ var AppConnector,
 $(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
-	app.registerDatePicker();
 	app.setPnotifyDefaultOptions();
-	app.registerDateField(container);
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
 	app.registerSubMenu();
