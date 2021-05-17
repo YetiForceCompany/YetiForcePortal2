@@ -650,25 +650,6 @@ window.App.Fields = {
 				picker.drops = 'down';
 			}
 			picker.move();
-		},
-		/**
-		 * Set value
-		 *
-		 * @param   {object}  fieldElement  jQuery
-		 * @param   {string|boolean}  value
-		 */
-		setValue(fieldElement, value) {
-			if (fieldElement.is('select')) {
-				App.Fields.Picklist.setValue(fieldElement, value);
-			} else {
-				fieldElement.val(value);
-			}
-			fieldElement.trigger('change');
-			let fieldValue = fieldElement.closest('.fieldValue');
-			fieldValue.addClass('border border-info');
-			setTimeout(function () {
-				fieldValue.removeClass('border border-info');
-			}, 5000);
 		}
 	}
 };
