@@ -37,7 +37,8 @@ Vtiger_Base_Validator_Js(
 		 * @return false if validation error occurs
 		 */
 		validateValue: function (fieldValue) {
-			var emailFilter = /^[_/a-zA-Z0-9*]+([!"#$%&'()*+,./:;<=>?\^_`{|}~-]?[a-zA-Z0-9/_/-])*@[a-zA-Z0-9]+([\_\-\.]?[a-zA-Z0-9]+)*\.([\-\_]?[a-zA-Z0-9])+(\.?[a-zA-Z0-9]+)?$/;
+			var emailFilter =
+				/^[_/a-zA-Z0-9*]+([!"#$%&'()*+,./:;<=>?\^_`{|}~-]?[a-zA-Z0-9/_/-])*@[a-zA-Z0-9]+([\_\-\.]?[a-zA-Z0-9]+)*\.([\-\_]?[a-zA-Z0-9])+(\.?[a-zA-Z0-9]+)?$/;
 			var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
 
 			if (!emailFilter.test(fieldValue)) {
@@ -986,14 +987,14 @@ Vtiger_Base_Validator_Js(
 	'Vtiger_Date_Validator_Js',
 	{
 		/**
-		 *Function which invokes field validation
-		 *@param accepts field element as parameter
+		 * Function which invokes field validation
+		 * @param accepts field element as parameter
 		 * @return error if validation fails true on success
 		 */
 		invokeValidation: function (field, rules, i, options) {
-			var dateValidatorInstance = new Vtiger_Date_Validator_Js();
+			let dateValidatorInstance = new Vtiger_Date_Validator_Js();
 			dateValidatorInstance.setElement(field);
-			var response = dateValidatorInstance.validate();
+			let response = dateValidatorInstance.validate();
 			if (response != true) {
 				return dateValidatorInstance.getError();
 			}
@@ -1007,14 +1008,25 @@ Vtiger_Base_Validator_Js(
 		 * @return false if validation error occurs
 		 */
 		validate: function () {
-			var field = this.getElement();
-			var fieldData = field.data();
-			var fieldDateFormat = fieldData.fieldinfo['date-format'];
-			var fieldValue = this.getFieldValue();
+			let field = this.getElement();
+			let fieldData = field.data();
+			let fieldDateFormat = fieldData.dateFormat;
+			let fieldValue = this.getFieldValue();
+			console.log(field, fieldData, fieldDateFormat, fieldValue);
 			try {
-				Vtiger_Helper_Js.getDateInstance(fieldValue, fieldDateFormat);
+				if (fieldData.calendarType === 'range') {
+					fieldValue = fieldValue.split(',');
+					if (fieldValue.length !== 2) {
+						throw new Error();
+					}
+				} else {
+					fieldValue = [fieldValue];
+				}
+				fieldValue.forEach((key) => {
+					Vtiger_Helper_Js.getDateInstance(key, fieldDateFormat);
+				});
 			} catch (err) {
-				var errorInfo = app.translate('JS_PLEASE_ENTER_VALID_DATE');
+				let errorInfo = app.translate('JS_PLEASE_ENTER_VALID_DATE');
 				this.setError(errorInfo);
 				return false;
 			}

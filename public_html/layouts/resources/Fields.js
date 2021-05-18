@@ -1,6 +1,261 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 window.App.Fields = {
+	Date: {
+		months: [
+			'JS_JAN',
+			'JS_FEB',
+			'JS_MAR',
+			'JS_APR',
+			'JS_MAY_SHORT',
+			'JS_JUN',
+			'JS_JUL',
+			'JS_AUG',
+			'JS_SEP',
+			'JS_OCT',
+			'JS_NOV',
+			'JS_DEC'
+		],
+		monthsTranslated: [
+			'JS_JAN',
+			'JS_FEB',
+			'JS_MAR',
+			'JS_APR',
+			'JS_MAY_SHORT',
+			'JS_JUN',
+			'JS_JUL',
+			'JS_AUG',
+			'JS_SEP',
+			'JS_OCT',
+			'JS_NOV',
+			'JS_DEC'
+		].map((monthName) => app.translate(monthName)),
+		fullMonths: [
+			'JS_JANUARY',
+			'JS_FEBRUARY',
+			'JS_MARCH',
+			'JS_APRIL',
+			'JS_MAY',
+			'JS_JUNE',
+			'JS_JULY',
+			'JS_AUGUST',
+			'JS_SEPTEMBER',
+			'JS_OCTOBER',
+			'JS_NOVEMBER',
+			'JS_DECEMBER'
+		],
+		fullMonthsTranslated: [
+			'JS_JANUARY',
+			'JS_FEBRUARY',
+			'JS_MARCH',
+			'JS_APRIL',
+			'JS_MAY',
+			'JS_JUNE',
+			'JS_JULY',
+			'JS_AUGUST',
+			'JS_SEPTEMBER',
+			'JS_OCTOBER',
+			'JS_NOVEMBER',
+			'JS_DECEMBER'
+		].map((monthName) => app.translate(monthName)),
+		days: ['JS_SUN', 'JS_MON', 'JS_TUE', 'JS_WED', 'JS_THU', 'JS_FRI', 'JS_SAT'],
+		daysTranslated: ['JS_SUN', 'JS_MON', 'JS_TUE', 'JS_WED', 'JS_THU', 'JS_FRI', 'JS_SAT'].map((monthName) =>
+			app.translate(monthName)
+		),
+		fullDays: ['JS_SUNDAY', 'JS_MONDAY', 'JS_TUESDAY', 'JS_WEDNESDAY', 'JS_THURSDAY', 'JS_FRIDAY', 'JS_SATURDAY'],
+		fullDaysTranslated: [
+			'JS_SUNDAY',
+			'JS_MONDAY',
+			'JS_TUESDAY',
+			'JS_WEDNESDAY',
+			'JS_THURSDAY',
+			'JS_FRIDAY',
+			'JS_SATURDAY'
+		].map((monthName) => app.translate(monthName)),
+
+		/**
+		 * Register DatePicker
+		 * @param {$} parentElement
+		 * @param {boolean} registerForAddon
+		 * @param {object} customParams
+		 */
+		register(parentElement, registerForAddon, customParams, className = 'dateField') {
+			if (typeof parentElement === 'undefined') {
+				parentElement = $('body');
+			} else {
+				parentElement = $(parentElement);
+			}
+			if (typeof registerForAddon === 'undefined') {
+				registerForAddon = true;
+			}
+			let elements = $('.' + className, parentElement);
+			if (parentElement.hasClass(className)) {
+				elements = parentElement;
+			}
+			if (elements.length === 0) {
+				return;
+			}
+			if (registerForAddon === true) {
+				const parentDateElem = elements.closest('.date');
+				$('.js-date__btn', parentDateElem).on('click', function inputGroupAddonClickHandler(e) {
+					// Using focus api of DOM instead of jQuery because show api of datePicker is calling e.preventDefault
+					// which is stopping from getting focus to input element
+					$(e.currentTarget)
+						.closest('.date')
+						.find('input.' + className)
+						.get(0)
+						.focus();
+				});
+			}
+			let format = app.getMainParams('dateFormat');
+			const elementDateFormat = elements.data('dateFormat');
+			if (typeof elementDateFormat !== 'undefined') {
+				format = elementDateFormat;
+			}
+			if (typeof $.fn.datepicker.dates[app.getMainParams('langKey')] === 'undefined') {
+				$.fn.datepicker.dates[app.getMainParams('langKey')] = {
+					days: App.Fields.Date.fullDaysTranslated,
+					daysShort: App.Fields.Date.daysTranslated,
+					daysMin: App.Fields.Date.daysTranslated,
+					months: App.Fields.Date.fullMonthsTranslated,
+					monthsShort: App.Fields.Date.monthsTranslated,
+					today: app.translate('JS_TODAY'),
+					clear: app.translate('JS_CLEAR'),
+					format: format,
+					titleFormat: 'MM yyyy' /* Leverages same syntax as 'format' */,
+					weekStart: app.getMainParams('firstDayOfWeekNo')
+				};
+			}
+			let params = {
+				todayBtn: 'linked',
+				clearBtn: true,
+				language: app.getMainParams('langKey'),
+				weekStart: app.getMainParams('firstDayOfWeekNo'),
+				autoclose: true,
+				todayHighlight: true,
+				format: format
+			};
+			if (typeof customParams !== 'undefined') {
+				params = $.extend(params, customParams);
+			}
+			elements.each((index, element) => {
+				$(element).datepicker(
+					$.extend(
+						true,
+						Object.assign(params, { enableOnReadonly: !element.hasAttribute('readonly') }),
+						$(element).data('params')
+					)
+				);
+			});
+			return elements;
+		},
+
+		/**
+		 * Register dateRangePicker
+		 * @param {jQuery} parentElement
+		 * @param {object} customParams
+		 */
+		registerRange(parentElement, customParams = {}) {
+			if (typeof parentElement === 'undefined') {
+				parentElement = $('body');
+			} else {
+				parentElement = $(parentElement);
+			}
+			let elements = $('.dateRangeField', parentElement);
+			if (parentElement.hasClass('dateRangeField')) {
+				elements = parentElement;
+			}
+			if (elements.length === 0) {
+				return;
+			}
+			let format = app.getMainParams('dateFormat').toUpperCase();
+			const elementDateFormat = elements.data('dateFormat');
+			if (typeof elementDateFormat !== 'undefined') {
+				format = elementDateFormat.toUpperCase();
+			}
+			let ranges = {};
+			ranges[app.translate('JS_TODAY')] = [moment(), moment()];
+			ranges[app.translate('JS_TOMORROW')] = [moment().add(1, 'days'), moment().add(1, 'days')];
+			ranges[app.translate('JS_YESTERDAY')] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+			ranges[app.translate('JS_LAST_7_DAYS')] = [moment().subtract(6, 'days'), moment()];
+			ranges[app.translate('JS_NEXT_7_DAYS')] = [moment(), moment().add(6, 'days')];
+			ranges[app.translate('JS_CURRENT_MONTH')] = [moment().startOf('month'), moment().endOf('month')];
+			ranges[app.translate('JS_NEXT_MONTH')] = [
+				moment().add(1, 'month').startOf('month'),
+				moment().add(1, 'month').endOf('month')
+			];
+			ranges[app.translate('JS_LAST_MONTH')] = [
+				moment().subtract(1, 'month').startOf('month'),
+				moment().subtract(1, 'month').endOf('month')
+			];
+			ranges[app.translate('JS_NEXT_MONTH')] = [
+				moment().add(1, 'month').startOf('month'),
+				moment().add(1, 'month').endOf('month')
+			];
+			ranges[app.translate('JS_LAST_3_MONTHS')] = [
+				moment().subtract(3, 'month').startOf('month'),
+				moment().subtract(1, 'month').endOf('month')
+			];
+			ranges[app.translate('JS_NEXT_3_MONTHS')] = [moment().startOf('month'), moment().add(3, 'month').endOf('month')];
+			ranges[app.translate('JS_LAST_6_MONTHS')] = [
+				moment().subtract(6, 'month').startOf('month'),
+				moment().subtract(1, 'month').endOf('month')
+			];
+			ranges[app.translate('JS_NEXT_6_MONTHS')] = [moment().startOf('month'), moment().add(6, 'month').endOf('month')];
+			let params = {
+				autoUpdateInput: false,
+				autoApply: true,
+				ranges: ranges,
+				locale: {
+					format: format,
+					separator: ',',
+					applyLabel: app.translate('JS_APPLY'),
+					cancelLabel: app.translate('JS_CANCEL'),
+					fromLabel: app.translate('JS_FROM'),
+					toLabel: app.translate('JS_TO'),
+					customRangeLabel: app.translate('JS_CUSTOM'),
+					weekLabel: app.translate('JS_WEEK').substr(0, 1),
+					firstDay: app.getMainParams('firstDayOfWeekNo'),
+					daysOfWeek: App.Fields.Date.daysTranslated,
+					monthNames: App.Fields.Date.fullMonthsTranslated
+				}
+			};
+
+			if (typeof customParams !== 'undefined') {
+				params = $.extend(params, customParams);
+			}
+			parentElement
+				.find('.js-date__btn')
+				.off()
+				.on('click', (e) => {
+					$(e.currentTarget).parent().next('.dateRangeField')[0].focus();
+				});
+			elements.each((index, element) => {
+				let el = $(element);
+				let currentParams = $.extend(true, params, el.data('params'));
+				el.daterangepicker(currentParams)
+					.on('apply.daterangepicker', function (ev, picker) {
+						$(this).val(
+							picker.startDate.format(currentParams.locale.format) +
+								',' +
+								picker.endDate.format(currentParams.locale.format)
+						);
+						$(this).trigger('change');
+					})
+					.on('show.daterangepicker', (ev, picker) => {
+						App.Fields.Utils.positionPicker(ev, picker);
+					})
+					.on('showCalendar.daterangepicker', (ev, picker) => {
+						App.Fields.Utils.positionPicker(ev, picker);
+						picker.container.addClass('js-visible');
+					})
+					.on('hide.daterangepicker', (ev, picker) => {
+						picker.container.removeClass('js-visible');
+					});
+			});
+		}
+	},
+
 	Picklist: {
 		/**
 		 * Function which will convert ui of select boxes.
@@ -376,6 +631,25 @@ window.App.Fields = {
 			value = value.split(app.getMainParams('currencyGroupingSeparator')).join('');
 			value = value.replace(/\s/g, '').replace(app.getMainParams('currencyDecimalSeparator'), '.');
 			return parseFloat(value);
+		}
+	},
+
+	Utils: {
+		positionPicker(ev, picker) {
+			let offset = picker.element.offset();
+			let $window = $(window);
+			if (offset.left - $window.scrollLeft() + picker.container.outerWidth() > $window.width()) {
+				picker.opens = 'left';
+			} else {
+				picker.opens = 'right';
+			}
+			picker.move();
+			if (offset.top - $window.scrollTop() + picker.container.outerHeight() > $window.height()) {
+				picker.drops = 'up';
+			} else {
+				picker.drops = 'down';
+			}
+			picker.move();
 		}
 	}
 };
