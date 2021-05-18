@@ -200,19 +200,22 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record.
+	 * Gets template.
 	 *
-	 * @return bool
+	 * @return string
 	 */
-	public function getTemplate()
+	public function getTemplate(): string
 	{
 		$type = ucfirst($this->get('type'));
 		$module = $this->getModuleName();
-		if (file_exists(ROOT_DIRECTORY . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
-			return "fieldtypes/$type.tpl";
+		if (\in_array($type, ['ReferenceLink', 'ReferenceProcess', 'ReferenceExtend'])) {
+			$type = 'Reference';
 		}
-		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
-			return "fieldtypes/$type.tpl";
+		if (file_exists(ROOT_DIRECTORY . '/layouts/Default/modules/' . $module . "/Edit/Field/$type.tpl")) {
+			return "Edit/Field/$type.tpl";
+		}
+		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/Edit/Field/$type.tpl")) {
+			return "Edit/Field/$type.tpl";
 		}
 		return 'fieldtypes/String.tpl';
 	}
@@ -318,6 +321,6 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getUIType(): int
 	{
-		return  $this->get('uitype');
+		return $this->get('uitype');
 	}
 }
