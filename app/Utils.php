@@ -11,6 +11,7 @@
 
 namespace App;
 
+\define('IS_PUBLIC_DIR', true);
 /**
  * Utils class.
  */
@@ -55,6 +56,26 @@ class Utils
 	public static function absoluteUrl(string $url): string
 	{
 		return \App\Config::get('portalUrl') . $url;
+	}
+
+	/**
+	 * Get public url from file.
+	 *
+	 * @param string $name
+	 * @param bool   $full
+	 *
+	 * @return string
+	 */
+	public static function getPublicUrl($name, $full = false): string
+	{
+		$basePath = '';
+		if ($full) {
+			$basePath .= \App\Config::get('portalUrl');
+		}
+		if (!IS_PUBLIC_DIR) {
+			$basePath .= 'public_html/';
+		}
+		return $basePath . $name;
 	}
 
 	/**
