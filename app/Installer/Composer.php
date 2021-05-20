@@ -27,18 +27,23 @@ class Composer
 	 * @var array
 	 */
 	public static $copyDirectories = [
-		'public_html/libraries/ckeditor-image-to-base' => 'public_html/vendor/ckeditor/ckeditor/plugins/ckeditor-image-to-base'
+		'libraries/ckeditor-image-to-base' => 'vendor/ckeditor/ckeditor/plugins/ckeditor-image-to-base'
 	];
 
 	/**
 	 * Custom copy.
+	 *
+	 * @param string $rootDir
 	 */
-	public static function customCopy(): void
+	public static function customCopy(string $rootDir): void
 	{
+		if (!\defined('ROOT_DIRECTORY')) {
+			\define('ROOT_DIRECTORY', $rootDir);
+		}
 		$list = '';
 		foreach (static::$copyDirectories as $src => $dest) {
-			if (!file_exists(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . $dest)) {
-				mkdir(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . $dest, 0755, true);
+			if (!file_exists(ROOT_DIRECTORY . $dest)) {
+				mkdir(ROOT_DIRECTORY . $dest, 0755, true);
 			}
 			$i = static::recurseCopy($src, $dest);
 			$list .= PHP_EOL . "{$src}  >>>  {$dest} | Files: $i";
@@ -54,18 +59,17 @@ class Composer
 	 *
 	 * @return int
 	 */
-	public static function recurseCopy($src, $dest): int
+	public static function recurseCopy(string $src, string $dest): int
 	{
-		$rootDir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR;
-		if (!file_exists($rootDir . $src)) {
+		if (!file_exists(ROOT_DIRECTORY . $src)) {
 			return 0;
 		}
 		if ($dest && '/' !== substr($dest, -1) && '\\' !== substr($dest, -1)) {
 			$dest = $dest . \DIRECTORY_SEPARATOR;
 		}
 		$i = 0;
-		$dest = $rootDir . $dest;
-		foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
+		$dest = ROOT_DIRECTORY . $dest;
+		foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(ROOT_DIRECTORY . $src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
 			if ($item->isDir() && !file_exists($dest . $iterator->getSubPathName())) {
 				mkdir($dest . $iterator->getSubPathName(), 0755);
 			} elseif (!$item->isDir()) {
@@ -184,7 +188,7 @@ class Composer
 				}
 			}
 		}
-		self::customCopy();
+		self::customCopy($rootDir);
 	}
 
 	/**
