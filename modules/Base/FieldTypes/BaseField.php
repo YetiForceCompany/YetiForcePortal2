@@ -204,20 +204,28 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return string
 	 */
-	public function getTemplate(): string
+	public function getTemplateName(): string
+
 	{
 		$type = ucfirst($this->get('type'));
+		return "Field/$type.tpl";
+	}
+
+	/**
+	 * Function checks if there are permissions to edit record.
+	 *
+	 * @param string $view
+	 *
+	 * @return string
+	 */
+	public function getTemplatePath(string $view): string
+	{
+		$name = $this->getTemplateName();
 		$module = $this->getModuleName();
-		if (\in_array($type, ['ReferenceLink', 'ReferenceProcess', 'ReferenceExtend'])) {
-			$type = 'Reference';
+		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/{$module}/{$view}/{$name}") || file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/{$view}/{$name}")) {
+			return "{$view}/{$name}";
 		}
-		if (file_exists(ROOT_DIRECTORY . '/layouts/Default/modules/' . $module . "/Edit/Field/$type.tpl")) {
-			return "Edit/Field/$type.tpl";
-		}
-		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/Edit/Field/$type.tpl")) {
-			return "Edit/Field/$type.tpl";
-		}
-		return 'fieldtypes/String.tpl';
+		return $view . '/Field/String.tpl';
 	}
 
 	/**
@@ -225,7 +233,7 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return string - Record Module Name
 	 */
-	public function getModuleName()
+	public function getModuleName(): string
 	{
 		return $this->module;
 	}

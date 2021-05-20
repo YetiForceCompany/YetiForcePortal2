@@ -8,7 +8,7 @@
         {foreach from=$FILTER_FIELDS item=FIELD_MODEL}
             <div class="mt-1 js-advance-filter product-border p-2" data-js="container">
                 <b>{$FIELD_MODEL->getLabel()}:</b>
-                {include file=\App\Resources::templatePath($FIELD_MODEL->getTemplate(), $MODULE_NAME)}
+                {include file=\App\Resources::templatePath($FIELD_MODEL->getTemplatePath('Edit'), $MODULE_NAME)}
             </div>
         {/foreach}
     </div>
