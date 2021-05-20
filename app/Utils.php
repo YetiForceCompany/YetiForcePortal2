@@ -11,7 +11,6 @@
 
 namespace App;
 
-\define('IS_PUBLIC_DIR', true);
 /**
  * Utils class.
  */
@@ -72,9 +71,7 @@ class Utils
 		if ($full) {
 			$basePath .= \App\Config::get('portalUrl');
 		}
-		if (!IS_PUBLIC_DIR) {
-			$basePath .= 'public_html/';
-		}
+		$basePath .= PUBLIC_DIRECTORY;
 		return $basePath . $name;
 	}
 

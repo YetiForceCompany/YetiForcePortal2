@@ -257,47 +257,6 @@ window.App.Fields = {
 	},
 
 	Text: {
-		/**
-		 * Register clip
-		 * @param {HTMLElement|jQuery} container
-		 * @param {string} key
-		 * @returns {ClipboardJS|undefined}
-		 */
-		registerCopyClipboard: function (container, key = '.clipboard') {
-			if (typeof container !== 'object') {
-				return;
-			}
-			container = $(container).get(0);
-			let elements = container.querySelectorAll(key);
-			if (elements.length === 0) {
-				elements = key;
-				container = '';
-			}
-			return new ClipboardJS(elements, {
-				container: container,
-				text: function (trigger) {
-					app.showNotify({
-						text: app.vtranslate('JS_NOTIFY_COPY_TEXT'),
-						type: 'success'
-					});
-					trigger = $(trigger);
-					const element = $(trigger.data('copyTarget'), container);
-					let val;
-					if (typeof trigger.data('copyType') !== 'undefined') {
-						if (element.is('select')) {
-							val = element.find('option:selected').data(trigger.data('copyType'));
-						} else {
-							val = element.data(trigger.data('copyType'));
-						}
-					} else if (typeof trigger.data('copy-attribute') !== 'undefined') {
-						val = trigger.data(trigger.data('copy-attribute'));
-					} else {
-						val = element.val();
-					}
-					return val;
-				}
-			});
-		},
 		Editor: class {
 			constructor(container, params) {
 				this.container = container;
@@ -529,110 +488,10 @@ window.App.Fields = {
 					config = $.extend(config, customConfig);
 				}
 				config = Object.assign(config, element.data());
-				if (config.emojiEnabled) {
-					let emojiToolbar = { name: 'links', items: ['EmojiPanel'] };
-					if (typeof config.toolbar === 'string') {
-						config[`toolbar_${config.toolbar}`].push(emojiToolbar);
-					} else if (Array.isArray(config.toolbar)) {
-						config.toolbar.push(emojiToolbar);
-					}
-					config.extraPlugins = config.extraPlugins + ',emoji';
-					config.outputTemplate = '{id}';
-				}
-				if (config.mentionsEnabled) {
-					config.extraPlugins = config.extraPlugins + ',mentions';
-					config.mentions = this.registerMentions();
-				}
 				if (instance) {
 					CKEDITOR.remove(instance);
 				}
 				element.ckeditor(config);
-			}
-
-			/**
-			 * Register mentions
-			 * @returns {Array}
-			 */
-			registerMentions() {
-				let minSerchTextLength = app.getMainParams('gsMinLength');
-				return [
-					{
-						feed: this.getMentionUsersData.bind(this),
-						itemTemplate: `<li data-id="{id}" class="row no-gutters">
-											<div class="col-2 c-img__completion__container">
-												<div class="{icon} m-auto u-w-fit u-fs-14px"></div>
-												<img src="{image}" class="c-img__completion mr-2" alt="{label}" title="{label}">
-											</div>
-											<div class="col row-10 no-gutters u-overflow-x-hidden">
-												<strong class="u-text-ellipsis--no-hover col-12">{label}</strong>
-												<div class="fullname col-12 u-text-ellipsis--no-hover text-muted small">{category}</div>
-											</div>
-										</li>`,
-						outputTemplate: '<a href="#" data-id="@{id}" data-module="{module}">{label}</a>',
-						minChars: minSerchTextLength
-					},
-					{
-						feed: App.Fields.Text.getMentionData,
-						marker: '#',
-						pattern: /#[wа-я]{1,}|#\w{3,}$/,
-						itemTemplate: `<li data-id="{id}" class="row no-gutters">
-											<div class="col-2 c-circle-icon">
-												<span class="yfm-{module}"></span>
-											</div>
-											<div class="col-10 row no-gutters pl-1 u-overflow-x-hidden">
-												<strong class="u-text-ellipsis--no-hover col-12">{label}</strong>
-												<div class="fullname col-12 u-text-ellipsis--no-hover text-muted small">{category}</div>
-											</div>
-										</li>`,
-						outputTemplate: '<a href="#" data-id="#{id}" data-module="{module}">{label}</a>',
-						minChars: minSerchTextLength
-					}
-				];
-			}
-
-			/**
-			 * Get mention Users data (invoked by ck editor mentions plugin)
-			 * @param {object} opts
-			 * @param {function} callback
-			 */
-			getMentionUsersData(opts, callback) {
-				App.Fields.Text.getMentionData(opts, callback, 'owners');
-			}
-		},
-
-		/**
-		 * Get mention data (invoked by ck editor mentions plugin and tribute.js)
-		 * @param {object} opts
-		 * @param {function} callback
-		 * @param {string} searchModule
-		 */
-		getMentionData(text, callback, searchModule = '-') {
-			let basicSearch = new Vtiger_BasicSearch_Js();
-			basicSearch.reduceNumberResults = app.getMainParams('gsAmountResponse');
-			basicSearch.returnHtml = false;
-			basicSearch.searchModule = searchModule;
-			if (typeof text === 'object') {
-				text = text.query.toLowerCase();
-			}
-			if (searchModule === 'owners') {
-				AppConnector.request({
-					action: 'Search',
-					mode: 'owners',
-					value: text
-				}).done((data) => {
-					callback(data.result);
-				});
-			} else {
-				basicSearch.search(text).done(function (data) {
-					data = JSON.parse(data);
-					let serverDataFormat = data.result,
-						reponseDataList = [];
-					for (let id in serverDataFormat) {
-						let responseData = serverDataFormat[id];
-						reponseDataList.push(responseData);
-					}
-					callback(reponseDataList);
-				});
 			}
 		},
 

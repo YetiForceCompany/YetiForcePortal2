@@ -328,7 +328,6 @@ abstract class View extends Base
 			'langKey' => \App\Language::getShortLanguageName(),
 			'parentModule' => $request->getByType('parent', 2),
 		];
-
 		foreach ($jsEnv as $key => $value) {
 			\App\Config::setJsEnv($key, $value);
 		}
