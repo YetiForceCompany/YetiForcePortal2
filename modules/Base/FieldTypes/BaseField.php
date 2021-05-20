@@ -202,19 +202,29 @@ class BaseField extends \App\BaseModel
 	/**
 	 * Function checks if there are permissions to edit record.
 	 *
-	 * @return bool
+	 * @return string
 	 */
-	public function getTemplate()
+	public function getTemplateName(): string
 	{
 		$type = ucfirst($this->get('type'));
+		return "Field/$type.tpl";
+	}
+
+	/**
+	 * Function checks if there are permissions to edit record.
+	 *
+	 * @param string $view
+	 *
+	 * @return string
+	 */
+	public function getTemplatePath(string $view): string
+	{
+		$name = $this->getTemplateName();
 		$module = $this->getModuleName();
-		if (file_exists(ROOT_DIRECTORY . '/layouts/Default/modules/' . $module . "/fieldtypes/$type.tpl")) {
-			return "fieldtypes/$type.tpl";
+		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/{$module}/{$view}/{$name}") || file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/{$view}/{$name}")) {
+			return "{$view}/{$name}";
 		}
-		if (file_exists(ROOT_DIRECTORY . "/layouts/Default/modules/Base/fieldtypes/$type.tpl")) {
-			return "fieldtypes/$type.tpl";
-		}
-		return 'fieldtypes/String.tpl';
+		return $view . '/Field/String.tpl';
 	}
 
 	/**
@@ -222,7 +232,7 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return string - Record Module Name
 	 */
-	public function getModuleName()
+	public function getModuleName(): string
 	{
 		return $this->module;
 	}
@@ -318,6 +328,6 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getUIType(): int
 	{
-		return  $this->get('uitype');
+		return $this->get('uitype');
 	}
 }

@@ -51,7 +51,7 @@
 									</div>
 									<div class="fieldValue col-xl-9 col-lg-8 col-md-12 px-1">
 										{assign var=FIELD value=$FIELD->set('fieldvalue', $RECORD->getRawValue($FIELD->getName()))}
-										{include file=\App\Resources::templatePath($FIELD->getTemplate(), $MODULE_NAME) FIELD_MODEL=$FIELD}
+										{include file=\App\Resources::templatePath($FIELD->getTemplatePath('Edit'), $MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
 								</div>
 							{/foreach}
