@@ -200,7 +200,7 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record.
+	 * Gets template name.
 	 *
 	 * @return string
 	 */
@@ -211,7 +211,7 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record.
+	 * Gets template path.
 	 *
 	 * @param string $view
 	 *
