@@ -205,7 +205,6 @@ class BaseField extends \App\BaseModel
 	 * @return string
 	 */
 	public function getTemplateName(): string
-
 	{
 		$type = ucfirst($this->get('type'));
 		return "Field/$type.tpl";
