@@ -130,7 +130,6 @@
     "JS_LOADING_PLEASE_WAIT": "Loading, please wait.",
     "JS_NO_SUCH_QUANTITY": "There is no such quantity of product",
     "JS_FULL_TEXT": "Full text",
-    "JS_CLOSE": "Close",
-    "JS_MAXIMUM_TEXT_SIZE_IN_BYTES": "Exceeded the maximum text size in bytes"
+    "JS_CLOSE": "Close"
   }
 }
