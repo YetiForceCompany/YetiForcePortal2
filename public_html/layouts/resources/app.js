@@ -604,22 +604,33 @@ var AppConnector,
 			}
 			return container;
 		},
+
+		/**
+		* Function which you can use to hide the modal
+		* This api assumes that we are using block ui plugin and uses unblock api to unblock it
+		*
+		*  @param {function} callback
+		*  @param {integer} id
+		*/
 		hideModalWindow: function (callback, id) {
-			if (id == undefined) {
-				id = 'globalmodal';
+			let container;
+			if (callback && typeof callback === 'object') {
+				container = callback;
+			} else if (id == undefined) {
+				container = $('.modalContainer');
+			} else {
+				container = $('#' + id);
 			}
-			var container = jQuery('#' + id);
 			if (container.length <= 0) {
 				return;
 			}
-			if (typeof callback != 'function') {
+			if (typeof callback !== 'function') {
 				callback = function () {};
 			}
-			var modalContainer = container.find('.modal');
+			let modalContainer = container.find('.modal');
 			modalContainer.modal('hide');
-			var backdrop = jQuery('.modal-backdrop:last');
-			var modalContainers = jQuery('.modalContainer');
-			if (modalContainers.length == 0 && backdrop.length) {
+			let backdrop = $('.modal-backdrop:last');
+			if ($('.modalContainer').length == 0 && backdrop.length) {
 				backdrop.remove();
 			}
 			modalContainer.one('hidden.bs.modal', callback);
