@@ -149,10 +149,10 @@ chartjs-color@^2.1.0:
     chartjs-color-string "^0.6.0"
     color-convert "^1.9.3"
 
-chartjs-plugin-datalabels@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-0.7.0.tgz#f72e44edb2db45ef68913e9320bcc50398a205e6"
-  integrity sha512-PKVUX14nYhH0wcdCpgOoC39Gbzvn6cZ7O9n+bwc02yKD9FTnJ7/TSrBcfebmolFZp1Rcicr9xbT0a5HUbigS7g==
+chartjs-plugin-datalabels@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-1.0.0.tgz#5a3d21dde1ed12602dd48c634985a39f431165f1"
+  integrity sha512-rqaAFrZT++7OoCJgRCPjugTR4kYpdmrTeX7qHTAZoNQaOaMdx4g6o0Eo9J7n3qLRQrhWjh9l731JsrbkJxL7Vg==
 
 chartjs-plugin-funnel@^1.1.5:
   version "1.1.5"
@@ -165,6 +165,11 @@ chosen-js@^1.8.7:
   version "1.8.7"
   resolved "https://registry.yarnpkg.com/chosen-js/-/chosen-js-1.8.7.tgz#9bfa5597f5081d602ff4ae904af9aef33265bb1d"
   integrity sha512-eVdrZJ2U5ISdObkgsi0od5vIJdLwq1P1Xa/Vj/mgxkMZf14DlgobfB6nrlFi3kW4kkvKLsKk4NDqZj1MU1DCpw==
+
+ckeditor-image-to-base@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ckeditor-image-to-base/-/ckeditor-image-to-base-0.0.3.tgz#c99b5c835251833452e7881f18813f16aed85972"
+  integrity sha512-ybLbACTNaDOuidqsdsHgJ/cnQDqrbmMUlbfqLG5kqNeKCeAE7MLEVqpOCids3cWMXqUgdKw7JuOy+8SqgtjnXQ==
 
 "clockpicker@https://github.com/djibe/clockpicker#gh-pages":
   version "0.0.7"
