@@ -58,6 +58,24 @@ class Utils
 	}
 
 	/**
+	 * Get public url from file.
+	 *
+	 * @param string $name
+	 * @param bool   $full
+	 *
+	 * @return string
+	 */
+	public static function getPublicUrl($name, $full = false): string
+	{
+		$basePath = '';
+		if ($full) {
+			$basePath .= \App\Config::get('portalUrl');
+		}
+		$basePath .= PUBLIC_DIRECTORY;
+		return $basePath . $name;
+	}
+
+	/**
 	 * Replacement for the ucfirst function for proper Multibyte String operation.
 	 * Delete function will exist as mb_ucfirst.
 	 *

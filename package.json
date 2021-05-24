@@ -59,6 +59,7 @@
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
     "chartjs-plugin-funnel": "^1.1.5",
+    "ckeditor-image-to-base": "^0.0.3",
     "bootstrap-chosen": "^1.4.2",
     "chosen-js": "^1.8.7"
   },

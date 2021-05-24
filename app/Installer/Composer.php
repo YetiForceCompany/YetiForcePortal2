@@ -17,8 +17,69 @@ class Composer
 	 * @var atring[]
 	 */
 	public static $publicPackage = [
-		'yetiforce/csrf-magic' => 'move'
+		'yetiforce/csrf-magic' => 'move',
+		'ckeditor/ckeditor' => 'move',
 	];
+
+	/**
+	 * Copy directories.
+	 *
+	 * @var array
+	 */
+	public static $copyDirectories = [
+		'libraries/ckeditor-image-to-base' => 'vendor/ckeditor/ckeditor/plugins/ckeditor-image-to-base'
+	];
+
+	/**
+	 * Custom copy.
+	 *
+	 * @param string $rootDir
+	 */
+	public static function customCopy(string $rootDir): void
+	{
+		if (!\defined('ROOT_DIRECTORY')) {
+			\define('ROOT_DIRECTORY', $rootDir);
+		}
+		$list = '';
+		foreach (static::$copyDirectories as $src => $dest) {
+			if (!file_exists(ROOT_DIRECTORY . $dest)) {
+				mkdir(ROOT_DIRECTORY . $dest, 0755, true);
+			}
+			$i = static::recurseCopy($src, $dest);
+			$list .= PHP_EOL . "{$src}  >>>  {$dest} | Files: $i";
+		}
+		echo "Copy custom directories: $list" . PHP_EOL;
+	}
+
+	/**
+	 * The function copies files.
+	 *
+	 * @param string $src
+	 * @param string $dest
+	 *
+	 * @return int
+	 */
+	public static function recurseCopy(string $src, string $dest): int
+	{
+		if (!file_exists(ROOT_DIRECTORY . $src)) {
+			return 0;
+		}
+		if ($dest && '/' !== substr($dest, -1) && '\\' !== substr($dest, -1)) {
+			$dest = $dest . \DIRECTORY_SEPARATOR;
+		}
+		$i = 0;
+		$dest = ROOT_DIRECTORY . $dest;
+		foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(ROOT_DIRECTORY . $src, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
+			if ($item->isDir() && !file_exists($dest . $iterator->getSubPathName())) {
+				mkdir($dest . $iterator->getSubPathName(), 0755);
+			} elseif (!$item->isDir()) {
+				copy($item->getRealPath(), $dest . $iterator->getSubPathName());
+				++$i;
+			}
+		}
+		return $i;
+	}
+
 	/**
 	 * List of redundant files.
 	 *
@@ -127,6 +188,7 @@ class Composer
 				}
 			}
 		}
+		self::customCopy($rootDir);
 	}
 
 	/**

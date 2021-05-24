@@ -256,6 +256,256 @@ window.App.Fields = {
 		}
 	},
 
+	Text: {
+		Editor: class {
+			constructor(container, params) {
+				this.container = container;
+				this.init(container, params);
+			}
+			/**
+			 * Register function
+			 * @param {jQuery} container
+			 * @param {Object} params
+			 */
+			static register(container, params) {
+				if (typeof container === 'undefined') {
+					container = $('body');
+				}
+				if (container.hasClass('js-editor') && !container.prop('disabled')) {
+					return new App.Fields.Text.Editor(container, $.extend(params, container.data()));
+				}
+				const instances = [];
+				container.find('.js-editor:not([disabled])').each((_, e) => {
+					let element = $(e);
+					instances.push(new App.Fields.Text.Editor(element, $.extend(params, element.data())));
+				});
+				return instances;
+			}
+			/**
+			 * Initiation
+			 * @param {jQuery} element
+			 * @param {Object} params
+			 */
+			init(element, params) {
+				let config = {};
+				if (element.hasClass('js-editor--basic')) {
+					config.toolbar = 'Min';
+				}
+				if (element.data('height')) {
+					config.height = element.data('height');
+				}
+				params = $.extend(config, params);
+				this.isModal = element.closest('.js-modal-container').length;
+				if (this.isModal) {
+					let self = this;
+					this.progressInstance = $.progressIndicator({
+						blockInfo: {
+							enabled: true,
+							onBlock: () => {
+								self.loadEditor(element, params);
+							}
+						}
+					});
+				} else {
+					App.Fields.Text.destroyEditor(element);
+					this.loadEditor(element, params);
+				}
+			}
+
+			/*
+			 *Function to set the textArea element
+			 */
+			setElement(element) {
+				this.element = $(element);
+				return this;
+			}
+
+			/*
+			 *Function to get the textArea element
+			 */
+			getElement() {
+				return this.element;
+			}
+
+			/*
+			 * Function to return Element's id atrribute value
+			 */
+			getElementId() {
+				return this.getElement().attr('id');
+			}
+
+			/*
+			 * Function to get the instance of ckeditor
+			 */
+			getEditorInstanceFromName() {
+				return CKEDITOR.instances[this.getElementId()];
+			}
+
+			/*
+			 * Function to load CkEditor
+			 * @param {HTMLElement|jQuery} element on which CkEditor has to be loaded
+			 * @param {Object} customConfig custom configurations for ckeditor
+			 */
+			loadEditor(element, customConfig) {
+				this.setElement(element);
+				const instance = this.getEditorInstanceFromName(),
+					self = this;
+				let config = {
+					language: CONFIG.langKey,
+					allowedContent: true,
+					disableNativeSpellChecker: false,
+					extraAllowedContent: 'div{page-break-after*}',
+					format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div',
+					removeButtons: '',
+					enterMode: CKEDITOR.ENTER_BR,
+					shiftEnterMode: CKEDITOR.ENTER_P,
+					emojiEnabled: false,
+					mentionsEnabled: false,
+					on: {
+						instanceReady: function (evt) {
+							evt.editor.on('blur', function () {
+								evt.editor.updateElement();
+							});
+							if (self.isModal) {
+								self.progressInstance.progressIndicator({ mode: 'hide' });
+							}
+						}
+					},
+					removePlugins: 'scayt',
+					extraPlugins:
+						'colorbutton,pagebreak,colordialog,find,selectall,showblocks,div,print,font,justify,bidi,ckeditor-image-to-base',
+					toolbar: 'Full',
+					toolbar_Full: [
+						{
+							name: 'clipboard',
+							items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+						},
+						{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll'] },
+						{ name: 'links', items: ['Link', 'Unlink'] },
+						{
+							name: 'insert',
+							items: ['ckeditor-image-to-base', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak']
+						},
+						{ name: 'tools', items: ['Maximize', 'ShowBlocks'] },
+						{ name: 'paragraph', items: ['Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv'] },
+						{ name: 'document', items: ['Source', 'Print'] },
+						'/',
+						{ name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+						{
+							name: 'basicstyles',
+							items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']
+						},
+						{ name: 'colors', items: ['TextColor', 'BGColor'] },
+						{
+							name: 'paragraph',
+							items: [
+								'NumberedList',
+								'BulletedList',
+								'-',
+								'JustifyLeft',
+								'JustifyCenter',
+								'JustifyRight',
+								'JustifyBlock',
+								'-',
+								'BidiLtr',
+								'BidiRtl'
+							]
+						},
+						{ name: 'basicstyles', items: ['CopyFormatting', 'RemoveFormat'] }
+					],
+					toolbar_Min: [
+						{
+							name: 'basicstyles',
+							items: ['Bold', 'Italic', 'Underline', 'Strike']
+						},
+						{ name: 'colors', items: ['TextColor', 'BGColor'] },
+						{ name: 'tools', items: ['Maximize'] },
+						{
+							name: 'paragraph',
+							items: [
+								'NumberedList',
+								'BulletedList',
+								'-',
+								'JustifyLeft',
+								'JustifyCenter',
+								'JustifyRight',
+								'JustifyBlock',
+								'-',
+								'BidiLtr',
+								'BidiRtl'
+							]
+						},
+						{ name: 'basicstyles', items: ['CopyFormatting', 'RemoveFormat', 'Source'] }
+					],
+					toolbar_Micro: [
+						{
+							name: 'basicstyles',
+							items: ['Bold', 'Italic', 'Underline', 'Strike']
+						},
+						{ name: 'colors', items: ['TextColor', 'BGColor'] },
+						{
+							name: 'paragraph',
+							items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+						},
+						{ name: 'basicstyles', items: ['CopyFormatting', 'RemoveFormat'] }
+					],
+					toolbar_Clipboard: [
+						{ name: 'document', items: ['Print'] },
+						{ name: 'basicstyles', items: ['CopyFormatting', 'RemoveFormat'] },
+						{
+							name: 'clipboard',
+							items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+						}
+					],
+					toolbar_PDF: [
+						{
+							name: 'clipboard',
+							items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+						},
+						{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-'] },
+						{ name: 'links', items: ['Link', 'Unlink'] },
+						{
+							name: 'insert',
+							items: ['ckeditor-image-to-base', 'Table', 'HorizontalRule', 'PageBreak']
+						},
+						{ name: 'tools', items: ['Maximize', 'ShowBlocks'] },
+						{ name: 'document', items: ['Source'] },
+						'/',
+						{ name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+						{
+							name: 'basicstyles',
+							items: ['Bold', 'Italic', 'Underline', 'Strike']
+						},
+						{ name: 'colors', items: ['TextColor', 'BGColor'] },
+						{
+							name: 'paragraph',
+							items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight']
+						},
+						{ name: 'basicstyles', items: ['CopyFormatting', 'RemoveFormat'] }
+					]
+				};
+				if (typeof customConfig !== 'undefined') {
+					config = $.extend(config, customConfig);
+				}
+				config = Object.assign(config, element.data());
+				if (instance) {
+					CKEDITOR.remove(instance);
+				}
+				element.ckeditor(config);
+			}
+		},
+
+		/**
+		 * Destroy ckEditor
+		 * @param {jQuery} element
+		 */
+		destroyEditor(element) {
+			if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances && element.attr('id') in CKEDITOR.instances) {
+				CKEDITOR.instances[element.attr('id')].destroy();
+			}
+		}
+	},
+
 	Picklist: {
 		/**
 		 * Function which will convert ui of select boxes.

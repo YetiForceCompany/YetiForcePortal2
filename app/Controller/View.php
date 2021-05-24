@@ -24,6 +24,7 @@ abstract class View extends Base
 	public function __construct(\App\Request $request)
 	{
 		parent::__construct($request);
+		$this->loadJsConfig($request);
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
 		$this->viewer->assign('VIEW', $this->request->getByType('view', \App\Purifier::ALNUM));
@@ -253,6 +254,8 @@ abstract class View extends Base
 			['libraries/@pnotify/bootstrap4/dist/PNotifyBootstrap4.js'],
 			['libraries/@pnotify/font-awesome5/dist/PNotifyFontAwesome5.js'],
 			['libraries/popper.js/dist/umd/popper.js'],
+			['vendor/ckeditor/ckeditor/ckeditor.js'],
+			['vendor/ckeditor/ckeditor/adapters/jquery.js'],
 			['libraries/bootstrap/dist/js/bootstrap.js'],
 			['libraries/bootstrap-datepicker/dist/js/bootstrap-datepicker.js'],
 			['libraries/bootstrap-daterangepicker/daterangepicker.js'],
@@ -310,5 +313,23 @@ abstract class View extends Base
 			$this->moduleName = $this->request->getModule();
 		}
 		return $this->moduleName;
+	}
+
+	/**
+	 * Load js config.
+	 *
+	 * @param \App\Request $request
+	 */
+	public function loadJsConfig(\App\Request $request): void
+	{
+		$jsEnv = [
+			'siteUrl' => \App\Utils::getPublicUrl('', true),
+			'langPrefix' => \App\Language::getLanguage(),
+			'langKey' => \App\Language::getShortLanguageName(),
+			'parentModule' => $request->getByType('parent', 2),
+		];
+		foreach ($jsEnv as $key => $value) {
+			\App\Config::setJsEnv($key, $value);
+		}
 	}
 }

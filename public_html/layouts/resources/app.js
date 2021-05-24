@@ -364,6 +364,27 @@ var AppConnector,
 			});
 			return table.DataTable(options);
 		},
+
+		/**
+		 * Function to register event for ckeditor for description field
+		 *
+		 * @param {object} container
+		 */
+		registerEventForEditor(container) {
+			$.each(container.find('.js-editor:not(.js-inventory-item-comment)'), (key, data) => {
+				this.loadEditorElement($(data));
+			});
+		},
+
+		/**
+		 * Load editor element.
+		 *
+		 * @param {object} noteContentElement
+		 */
+		loadEditorElement(noteContentElement) {
+			App.Fields.Text.Editor.register(noteContentElement);
+		},
+
 		getMainParams: function (param, json) {
 			if (app.cacheParams[param] == undefined) {
 				var value = $('#' + param).val();
@@ -842,6 +863,7 @@ $(function () {
 	app.registerModal(container);
 	app.registerMobileMenu(container);
 	app.registerIframeAndMoreContent();
+	app.registerEventForEditor(container);
 	//	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

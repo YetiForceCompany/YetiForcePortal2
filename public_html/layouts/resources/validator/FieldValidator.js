@@ -1360,4 +1360,38 @@ Vtiger_Base_Validator_Js(
 		}
 	}
 );
+
+Vtiger_Base_Validator_Js(
+	'Vtiger_MaxSizeInByte_Validator_Js',
+	{
+		invokeValidation(field, rules, i, options) {
+			const instance = new Vtiger_MaxSizeInByte_Validator_Js();
+			instance.setElement(field);
+			if (instance.validate() != true) {
+				return instance.getError();
+			}
+		}
+	},
+	{
+		validate() {
+			let response = this._super();
+			if (response != true) {
+				return response;
+			}
+			const field = this.getElement();
+			const fieldValue = field.val();
+			if (
+				field.data('fieldinfo').maximumlength &&
+				(typeof TextEncoder === 'function'
+					? new TextEncoder().encode(fieldValue).byteLength > field.data('fieldinfo').maximumlength
+					: fieldValue.length > field.data('fieldinfo').maximumlength)
+			) {
+				this.setError(app.translate('JS_MAXIMUM_TEXT_SIZE_IN_BYTES') + ' ' + field.data('fieldinfo').maximumlength);
+				return false;
+			}
+			return true;
+		}
+	}
+);
+
 Vtiger_Double_Validator_Js('Vtiger_Advpercentage_Validator_Js', {});
