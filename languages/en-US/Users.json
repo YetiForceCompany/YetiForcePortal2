@@ -4,7 +4,10 @@
     "LBL_LOGIN_PAGE": "Login page",
     "LBL_EMAIL_ADDRESS": "E-mail",
     "LBL_PASSWORD": "Password",
-    "LBL_SINGN_IN": "Sign in"
+    "LBL_SINGN_IN": "Sign in",
+    "LBL_ACCOUNT_SETTINGS": "Account settings",
+    "LBL_SWITCH_USERS": "Switch users",
+    "LBL_SIGN_OUT": "Sign out"
   },
   "js": {}
 }
