@@ -253,14 +253,13 @@ class Language
 	 *
 	 * @return \App\Request
 	 */
-	public static function setLanguage(Request $request): \App\Request
+	public static function setLanguage(Request $request): Request
 	{
 		if (!$request->getByType('lang', 1)) {
 			$lang = '';
 			if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-				$languages = static::getAllLanguages();
 				foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $code) {
-					if (isset($languages[$code])) {
+					if (isset(static::getAllLanguages()[$code])) {
 						$lang = $code;
 						break;
 					}
