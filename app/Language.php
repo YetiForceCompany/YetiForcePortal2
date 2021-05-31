@@ -16,9 +16,6 @@ class Language
 	 */
 	const FORMAT = 'json';
 
-	/** @var string Default language code. */
-	public const DEFAULT_LANG = 'en-US';
-
 	//Contains module language translations
 	protected static $languageContainer = [];
 	protected static $modules = false;
@@ -86,6 +83,13 @@ class Language
 		$language = '';
 		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
 			$language = $userInstance->get('language');
+		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+			foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $code) {
+				if (isset(static::getAllLanguages()[$code])) {
+					$language = $code;
+				}
+				break;
+			}
 		} else {
 			$language = Config::get('language');
 		}
@@ -246,30 +250,4 @@ class Language
 		return Utils::mbUcfirst(locale_get_region($prefix) === strtoupper(locale_get_primary_language($prefix)) ? locale_get_display_language($prefix, $prefix) : locale_get_display_name($prefix, $prefix));
 	}
 
-	/**
-	 * Set language.
-	 *
-	 * @param \App\Request $request
-	 *
-	 * @return \App\Request
-	 */
-	public static function setLanguage(Request $request): Request
-	{
-		if (!$request->getByType('lang', 1)) {
-			$lang = '';
-			if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-				foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $code) {
-					if (isset(static::getAllLanguages()[$code])) {
-						$lang = $code;
-						break;
-					}
-				}
-			}
-			if (!$lang) {
-				$lang = self::DEFAULT_LANG;
-			}
-			$request->set('lang', $lang);
-		}
-		return $request;
-	}
 }

@@ -37,7 +37,6 @@ class Login extends \App\Controller\View
 	public function process()
 	{
 		$module = $this->request->getModule();
-		$this->viewer->assign('LANGUAGE_CODE', \App\Language::setLanguage($this->request)->getByType('lang', 1));
 		$this->viewer->view('Login.tpl', $module);
 	}
 
