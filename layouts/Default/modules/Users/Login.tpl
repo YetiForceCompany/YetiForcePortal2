@@ -39,7 +39,7 @@
 			<div class="input-group mb-2 form-group first-group">
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}
-						<option value="{$PREFIX}">{$LANG}</option>
+						<option value="{$PREFIX}" {if $LANGUAGE_CODE eq $PREFIX} selected="true"{/if}>{$LANG}</option>
 					{/foreach}
 				</select>
 				<div class="input-group-append"><div class="input-group-text"><span class="fas fa-language"></span></div></div>
