@@ -249,5 +249,4 @@ class Language
 	{
 		return Utils::mbUcfirst(locale_get_region($prefix) === strtoupper(locale_get_primary_language($prefix)) ? locale_get_display_language($prefix, $prefix) : locale_get_display_name($prefix, $prefix));
 	}
-
 }
