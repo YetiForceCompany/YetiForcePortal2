@@ -37,6 +37,7 @@ class Login extends \App\Controller\View
 	public function process()
 	{
 		$module = $this->request->getModule();
+		$this->viewer->assign('LANGUAGE_CODE', \App\Language::setLanguage($this->request)->getByType('lang', 1));
 		$this->viewer->view('Login.tpl', $module);
 	}
 
@@ -45,15 +46,5 @@ class Login extends \App\Controller\View
 	{
 		$this->viewer->assign('SHOW_FOOTER_BAR', false);
 		parent::postProcess();
-	}
-
-	/** {@inheritdoc} */
-	public function getFooterScripts(): array
-	{
-		return array_merge(
-			parent::getFooterScripts(),
-			$this->convertScripts([
-				['layouts/resources/Login.js']
-			], 'js'));
 	}
 }
