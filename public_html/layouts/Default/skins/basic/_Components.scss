@@ -244,3 +244,8 @@ $c-input-rounded-border-color: #dee2e6;
 	padding-top: 0.5rem !important;
 	padding-bottom: 0.5rem !important;
 }
+
+.o-detail__icon {
+	font-size: calculate-rem(48px);
+	margin-right: calculate-rem(10px);
+}

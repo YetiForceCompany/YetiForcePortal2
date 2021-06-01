@@ -55,6 +55,19 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" role="list"
 						data-js="perfectscrollbar">
+						<div class="user-info-body container-fluid m-0 pl-2 pr-2 pt-2">
+							<div class="user-info row w-100 m-0 p-0">
+								<div class="col-12 p-1">
+									<div class="user-photo mr-2 float-left">
+										<span class="o-detail__icon yfm-Users"></span>
+									</div>
+									<div class="user-detail">
+										<h6 class="mb-0 pb-0 u-text-ellipsis">{$USER->get('name')}</h6>
+										<span class="u-fs-xs text-gray">{$USER->get('parentName')}</span>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="user-links container-fluid d-block mt-2 p-0 u-max-w-xsm-100">
 							<div class="user-menu-element row p-0 m-0">
 								<div class="col-12 pt-1 pb-1 bg-light border text-center border-light">
@@ -64,12 +77,25 @@
 							</div>
 							<div class="user-menu-element row px-2 m-0">
 								{if $USER->getCompanies()}
-									<a class="text-decoration-none u-fs-sm text-secondary showModal d-block" role="button"
+									<a class="text-decoration-none u-fs-sm text-secondary d-block active" role="button"
 										href="#" data-toggle="modal" data-target="#modalSelectCompanies">
 										<span class="fas fa-exchange-alt" title="{\App\Language::translate('LBL_SWITCH_USERS', 'Users')}"></span>
 										<span class="ml-2">{\App\Language::translate('LBL_SWITCH_USERS', 'Users')}</span>
 									</a>
 								{/if}
+							</div>
+							<div class="dropdown-divider d-none d-sm-none d-md-block"></div>
+							<div class="user-menu-element row px-2 m-0">
+								<a class="text-decoration-none u-fs-sm text-secondary py-2 showModal d-block" href="#" data-url="index.php?module=Users&view=PasswordChangeModal">
+									<span class="yfi yfi-change-passowrd" title="{\App\Language::translate('LBL_CHANGE_PASSWORD', 'Users')}" aria-hidden="true"></span>
+									<span class="ml-2">{\App\Language::translate('LBL_CHANGE_PASSWORD', 'Users')}</span>
+								</a>
+							</div>
+							<div class="user-menu-element row px-2 m-0">
+								<a class="text-decoration-none u-fs-sm text-secondary py-2 showModal d-block" href="#" data-url="index.php?module=Users&view=LoginHistoryModal">
+									<span class="yfi yfi-login-history" title="{\App\Language::translate('BTN_YOUR_ACCOUNT_ACCESS_HISTORY', 'Users')}" aria-hidden="true"></span>
+									<span class="ml-2">{\App\Language::translate('BTN_YOUR_ACCOUNT_ACCESS_HISTORY', 'Users')}</span>
+								</a>
 							</div>
 							<div class="dropdown-divider d-none d-sm-none d-md-block"></div>
 							<div class="user-menu-element row px-2 m-0">
