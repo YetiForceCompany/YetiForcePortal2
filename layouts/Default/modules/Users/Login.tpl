@@ -34,12 +34,12 @@
 			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="" required="">
 			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-briefcase"></span></div></div>
 		</div>
-		{if \App\Config::getBool('allowLanguageSelection') }
+		{if \App\Config::getBool('allowLanguageSelection')}
 		<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 			<div class="input-group mb-2 form-group first-group">
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}
-						<option value="{$PREFIX}">{$LANG}</option>
+						<option value="{$PREFIX}" {if $LANGUAGE eq $PREFIX}selected="true"{/if}>{$LANG}</option>
 					{/foreach}
 				</select>
 				<div class="input-group-append"><div class="input-group-text"><span class="fas fa-language"></span></div></div>

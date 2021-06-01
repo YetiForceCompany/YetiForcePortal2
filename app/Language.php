@@ -83,6 +83,14 @@ class Language
 		$language = '';
 		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
 			$language = $userInstance->get('language');
+		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+			$allLanguages = static::getAllLanguages();
+			foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $code) {
+				if (isset($allLanguages[$code])) {
+					$language = $code;
+				}
+				break;
+			}
 		} else {
 			$language = Config::get('language');
 		}
