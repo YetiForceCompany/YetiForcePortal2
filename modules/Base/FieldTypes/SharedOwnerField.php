@@ -12,7 +12,7 @@ namespace YF\Modules\Base\FieldTypes;
 /**
  * Shared owner field class.
  */
-class SharedOwner extends BaseField
+class SharedOwnerField extends BaseField
 {
 	/** {@inheritdoc} */
 	public function getTemplateName(): string
