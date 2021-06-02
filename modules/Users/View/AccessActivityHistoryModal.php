@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Login history modal view file.
+ * Access activity history modal view file.
  *
  * @package   View
  *
@@ -13,9 +13,9 @@
 namespace YF\Modules\Users\View;
 
 /**
- * Login history modal view class.
+ * Access activity history modal view class.
  */
-class LoginHistoryModal extends \App\Controller\Modal
+class AccessActivityHistoryModal extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
 	public function checkPermission(): void
@@ -43,6 +43,6 @@ class LoginHistoryModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-		$this->viewer->view('Modal/LoginHistoryModal.tpl', $this->request->getModule());
+		$this->viewer->view('Modal/AccessActivityHistoryModal.tpl', $this->request->getModule());
 	}
 }
