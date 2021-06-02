@@ -92,7 +92,7 @@
 								</a>
 							</div>
 							<div class="user-menu-element row px-2 m-0">
-								<a class="text-decoration-none u-fs-sm text-secondary py-2 showModal d-block" href="#" data-url="index.php?module=Users&view=AccessActivityHistoryModal">
+								<a class="text-decoration-none u-fs-sm text-secondary py-2 showModal d-block" href="#" data-url="index.php?module=Users&view=AccessActivityHistory">
 									<span class="yfi yfi-login-history" title="{\App\Language::translate('BTN_YOUR_ACCOUNT_ACCESS_HISTORY', 'Users')}" aria-hidden="true"></span>
 									<span class="ml-2">{\App\Language::translate('BTN_YOUR_ACCOUNT_ACCESS_HISTORY', 'Users')}</span>
 								</a>
