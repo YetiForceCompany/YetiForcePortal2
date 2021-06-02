@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Access activity history view file.
+ * Access activity history modal view file.
  *
  * @package   View
  *
@@ -13,9 +13,9 @@
 namespace YF\Modules\Users\View;
 
 /**
- * Access activity history view class.
+ * Access activity history modal view class.
  */
-class AccessActivityHistory extends \App\Controller\Modal
+class AccessActivityHistoryModal extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
 	public function checkPermission(): void
