@@ -59,7 +59,7 @@
 
 .historyList {
 	overflow: auto;
-	left: -500px !important;
+	left: calculate-rem(-490px) !important;
 }
 
 .selectorHistory {
@@ -99,21 +99,37 @@
 	}
 }
 
-.actionMenu {
-	position: fixed;
-	top: $h-header;
-	right: 0px;
-	z-index: 1500;
-	background: #fff;
-	border-radius: 5px;
-	border: 1px solid #eee;
-	padding: 5px;
-	display: none;
+.historyBtn {
+	.dropdown-menu {
+		top: calculate-rem(33px) !important;
+	}
+}
 
-	> div {
+.actionMenu {
+	.o-action-menu__container {
 		position: relative;
+		max-height: calc(100vh - 50px);
 		width: 100%;
-		padding-bottom: 5px;
+		color: #fff;
+		z-index: 2000;
+		-webkit-transition: right ease-in-out 0.35s;
+		transition: right ease-in-out 0.35s;
+		text-align: center;
+	}
+
+	.dropdown-menu {
+		float: none;
+		margin-bottom: 5px;
+	}
+	.o-action-menu__item {
+		display: inline-block;
+	}
+
+	.dropdown-menu.show {
+		z-index: 3000;
+		left: -202px !important;
+		top: 40px !important;
+		min-width: 18.75rem !important;
 	}
 
 	img {
