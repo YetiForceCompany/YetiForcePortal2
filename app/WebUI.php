@@ -107,7 +107,15 @@ class WebUI
 		return '__API_PATH__' != Config::$apiUrl;
 	}
 
-	protected function triggerPreProcess($handler, $request)
+	/**
+	 * Trigger pre process function.
+	 *
+	 * @param Controller\Base $handler
+	 * @param Request         $request
+	 *
+	 * @return void
+	 */
+	protected function triggerPreProcess(Controller\Base $handler, Request $request): void
 	{
 		if ($request->isAjax()) {
 			$handler->preProcessAjax();
@@ -116,7 +124,15 @@ class WebUI
 		$handler->preProcess();
 	}
 
-	protected function triggerPostProcess($handler, $request)
+	/**
+	 * Trigger post process function.
+	 *
+	 * @param Controller\Base $handler
+	 * @param Request         $request
+	 *
+	 * @return void
+	 */
+	protected function triggerPostProcess(Controller\Base $handler, Request $request): void
 	{
 		if ($request->isAjax()) {
 			$handler->postProcessAjax();

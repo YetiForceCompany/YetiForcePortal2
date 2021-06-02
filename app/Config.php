@@ -15,7 +15,7 @@ namespace App;
 class Config extends \Conf\Config
 {
 	/**
-	 * Requesrt start time.
+	 * Request start time.
 	 *
 	 * @var int
 	 */
@@ -56,7 +56,7 @@ class Config extends \Conf\Config
 	 */
 	public static function getJsEnv()
 	{
-		return Json::encode(static::$jsEnv);
+		return Json::encode(self::$jsEnv);
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Config extends \Conf\Config
 	 */
 	public static function setJsEnv($key, $value)
 	{
-		static::$jsEnv[$key] = $value;
+		self::$jsEnv[$key] = $value;
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Config extends \Conf\Config
 	 */
 	public static function getBool(string $key, bool $default = false): bool
 	{
-		return static::get($key, $default);
+		return self::get($key, $default);
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Config extends \Conf\Config
 	 */
 	public static function getInt(string $key, int $default = 0): int
 	{
-		return static::get($key, $default);
+		return self::get($key, $default);
 	}
 
 	/**
@@ -106,6 +106,6 @@ class Config extends \Conf\Config
 	 */
 	public static function get(string $key, $default = null)
 	{
-		return property_exists(static::class, $key) ? static::${$key} : $default;
+		return property_exists(self::class, $key) ? self::${$key} : $default;
 	}
 }
