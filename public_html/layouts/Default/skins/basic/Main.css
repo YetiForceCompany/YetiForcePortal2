@@ -154,6 +154,10 @@
 .u-min-w-0 {
   min-width: 0; }
 
+.u-cursor-pointer {
+  cursor: pointer;
+  text-decoration: none !important; }
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
@@ -189,12 +193,13 @@
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important; }
 
-.select2-selection--single {
-  height: auto !important; }
-  .select2-selection--single .select2-selection__rendered {
-    line-height: 40px !important; }
-  .select2-selection--single .select2-selection__arrow {
-    top: 7px !important; }
+.select2-selection--single .select2-selection__rendered {
+  line-height: 40px !important; }
+
+.select2-selection--single .select2-selection__arrow {
+  top: 7px !important; }
+  .select2-selection--single .select2-selection__arrow b {
+    margin-left: 0.125rem !important; }
 
 .select2-selection--multiple {
   height: auto !important; }
@@ -388,6 +393,10 @@
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important; }
 
+.o-detail__icon {
+  font-size: 3rem;
+  margin-right: 0.625rem; }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;
@@ -531,7 +540,7 @@ hr {
 
 .historyList {
   overflow: auto;
-  left: -500px !important; }
+  left: -30.625rem !important; }
 
 .selectorHistory {
   font-weight: 900 !important;
@@ -563,33 +572,48 @@ hr {
   .widget_header .breadCrumbs .breadcrumbsLinks a {
     color: #000; }
 
-.actionMenu {
+.historyBtn .dropdown-menu {
+  top: 2.0625rem !important; }
+
+.actionMenu .o-action-menu__container {
+  position: relative;
+  max-height: calc(100vh - 50px);
+  width: 100%;
+  color: #fff;
+  z-index: 2000;
+  -webkit-transition: right ease-in-out 0.35s;
+  transition: right ease-in-out 0.35s;
+  text-align: center; }
+
+.actionMenu .dropdown-menu {
+  float: none;
+  margin-bottom: 5px; }
+
+.actionMenu .o-action-menu__item {
+  display: inline-block; }
+
+.actionMenu .dropdown-menu.show {
+  z-index: 3000;
+  left: -202px !important;
+  top: 40px !important;
+  min-width: 18.75rem !important; }
+
+.actionMenu img {
+  height: 19px; }
+
+.actionMenu .iconContainer {
+  padding-left: 15px; }
+
+.actionMenu .labelContainer {
+  padding-top: 5px; }
+
+.actionMenu .commonActionsButtonDropDown,
+.actionMenu .historyList {
   position: fixed;
   top: 50px;
-  right: 0px;
-  z-index: 1500;
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid #eee;
-  padding: 5px;
-  display: none; }
-  .actionMenu > div {
-    position: relative;
-    width: 100%;
-    padding-bottom: 5px; }
-  .actionMenu img {
-    height: 19px; }
-  .actionMenu .iconContainer {
-    padding-left: 15px; }
-  .actionMenu .labelContainer {
-    padding-top: 5px; }
-  .actionMenu .commonActionsButtonDropDown,
-  .actionMenu .historyList {
-    position: fixed;
-    top: 50px;
-    left: 5px;
-    right: 5px;
-    bottom: 17px; }
+  left: 5px;
+  right: 5px;
+  bottom: 17px; }
 
 .showActionMenu {
   display: block; }
