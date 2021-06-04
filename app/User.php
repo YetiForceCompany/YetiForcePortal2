@@ -76,6 +76,7 @@ class User extends BaseModel
 			], 'post');
 		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
 			session_regenerate_id(true);
+			$this->set('userName', $email);
 			foreach ($response as $key => $value) {
 				$this->set($key, $value);
 			}

@@ -57,6 +57,7 @@ abstract class View extends Base
 		}
 		$this->viewer->assign('PAGE_TITLE', (\Conf\Config::$siteName ?: \App\Language::translate('LBL_CUSTOMER_PORTAL')) . ' ' . $this->getPageTitle());
 		$this->viewer->assign('CSS_FILE', $this->getHeaderCss());
+		$this->viewer->assign('USER_QUICK_MENU', $this->getUserQuickMenuLinks());
 		if ($display) {
 			$this->preProcessDisplay();
 		}
@@ -331,5 +332,50 @@ abstract class View extends Base
 		foreach ($jsEnv as $key => $value) {
 			\App\Config::setJsEnv($key, $value);
 		}
+	}
+
+	/**
+	 * Get the list of user quick menu links.
+	 *
+	 * @return array
+	 */
+	protected function getUserQuickMenuLinks(): array
+	{
+		$user = \App\User::getUser();
+		$links = [
+			[
+				'label' => 'LBL_CHANGE_PASSWORD',
+				'moduleName' => 'Users',
+				'data' => ['url' => 'index.php?module=Users&view=PasswordChangeModal'],
+				'icon' => 'yfi yfi-change-passowrd',
+				'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
+				'btnClass' => ' ',
+				'href' => '#',
+				'showLabel' => true,
+			],
+			[
+				'label' => 'BTN_YOUR_ACCOUNT_ACCESS_HISTORY',
+				'moduleName' => 'Users',
+				'data' => ['url' => 'index.php?module=Users&view=AccessActivityHistoryModal'],
+				'icon' => 'yfi yfi-login-history',
+				'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
+				'btnClass' => ' ',
+				'href' => '#',
+				'showLabel' => true,
+			],
+		];
+		if ('PLL_PASSWORD_2FA' === $user->get('login_method') && !$user->isEmpty('authy_methods')) {
+			$links[] = [
+				'label' => 'BTN_2FA_TOTP_QR_CODE',
+				'moduleName' => 'Users',
+				'data' => ['url' => 'index.php?module=Users&view=TwoFactorAuthenticationModal'],
+				'icon' => 'fas fa-key',
+				'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
+				'btnClass' => ' ',
+				'href' => '#',
+				'showLabel' => true,
+			];
+		}
+		return $links;
 	}
 }

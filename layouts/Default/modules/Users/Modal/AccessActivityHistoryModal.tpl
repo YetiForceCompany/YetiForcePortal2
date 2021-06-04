@@ -2,6 +2,7 @@
 {strip}
 <!-- tpl-Users-Modal-AccessActivityHistoryModal -->
 <div class="modal-body">
+
 </div>
 <!-- /tpl-Users-Modal-AccessActivityHistoryModal -->
 {/strip}

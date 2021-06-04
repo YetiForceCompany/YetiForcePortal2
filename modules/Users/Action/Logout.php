@@ -28,4 +28,10 @@ class Logout extends \App\Controller\Action
 		session_destroy();
 		header('Location: ' . \App\Config::$portalUrl);
 	}
+
+	/** {@inheritdoc} */
+	public function validateRequest()
+	{
+		$this->request->validateReadAccess();
+	}
 }

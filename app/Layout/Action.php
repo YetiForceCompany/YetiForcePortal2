@@ -49,7 +49,7 @@ class Action
 		} else {
 			$btn .= '<button type="button" ';
 		}
-		$class = 'btn ';
+		$class = $link['btnClass'] ?? 'btn ';
 		if (isset($link['class'])) {
 			$class .= $link['class'];
 		}
@@ -64,6 +64,9 @@ class Action
 		}
 		$btn .= '>';
 		if (isset($link['icon'])) {
+			if ($showLabel) {
+				$link['icon'] .= ' mr-2';
+			}
 			$btn .= "<span class=\"{$link['icon']}\"></span>";
 		}
 		if ($showLabel && isset($link['label'])) {

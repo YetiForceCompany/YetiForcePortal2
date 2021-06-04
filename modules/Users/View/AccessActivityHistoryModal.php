@@ -8,6 +8,7 @@
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Users\View;
@@ -29,12 +30,6 @@ class AccessActivityHistoryModal extends \App\Controller\Modal
 	}
 
 	/** {@inheritdoc} */
-	public function getModalSize(): string
-	{
-		return 'modal-full';
-	}
-
-	/** {@inheritdoc} */
 	public function getModalIcon(): string
 	{
 		return 'yfi yfi-login-history';
@@ -43,6 +38,7 @@ class AccessActivityHistoryModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
+		$this->viewer->assign('ACTIVITY_HISTORY', \App\Api::getInstance()->call('Users/AccessActivityHistory'));
 		$this->viewer->view('Modal/AccessActivityHistoryModal.tpl', $this->request->getModule());
 	}
 }

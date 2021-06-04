@@ -418,46 +418,44 @@ var AppConnector,
 			if (typeof container === 'undefined') {
 				container = $('body');
 			}
-			container
-				.off('click', 'button.showModal, a.showModal, .js-show-modal')
-				.on('click', 'button.showModal, a.showModal, .js-show-modal', function (e) {
-					e.preventDefault();
-					var currentElement = $(e.currentTarget);
-					var url = currentElement.data('url');
+			container.off('click', '.js-show-modal').on('click', '.js-show-modal', function (e) {
+				e.preventDefault();
+				var currentElement = $(e.currentTarget);
+				var url = currentElement.data('url');
 
-					if (typeof url !== 'undefined') {
-						if (currentElement.hasClass('js-popover-tooltip')) {
-							currentElement.popover('hide');
-						}
-						if (currentElement.hasClass('disabledOnClick')) {
-							currentElement.attr('disabled', true);
-						}
-						var modalWindowParams = {
-							url: url,
-							cb: function (container) {
-								var call = currentElement.data('cb');
-								if (typeof call !== 'undefined') {
-									if (call.indexOf('.') !== -1) {
-										var callerArray = call.split('.');
-										if (typeof window[callerArray[0]] === 'object' || typeof window[callerArray[0]] === 'function') {
-											window[callerArray[0]][callerArray[1]](container);
-										}
-									} else {
-										if (typeof window[call] === 'function') {
-											window[call](container);
-										}
+				if (typeof url !== 'undefined') {
+					if (currentElement.hasClass('js-popover-tooltip')) {
+						currentElement.popover('hide');
+					}
+					if (currentElement.hasClass('disabledOnClick')) {
+						currentElement.attr('disabled', true);
+					}
+					var modalWindowParams = {
+						url: url,
+						cb: function (container) {
+							var call = currentElement.data('cb');
+							if (typeof call !== 'undefined') {
+								if (call.indexOf('.') !== -1) {
+									var callerArray = call.split('.');
+									if (typeof window[callerArray[0]] === 'object' || typeof window[callerArray[0]] === 'function') {
+										window[callerArray[0]][callerArray[1]](container);
+									}
+								} else {
+									if (typeof window[call] === 'function') {
+										window[call](container);
 									}
 								}
-								currentElement.removeAttr('disabled');
 							}
-						};
-						if (currentElement.data('modalid')) {
-							modalWindowParams['id'] = currentElement.data('modalid');
+							currentElement.removeAttr('disabled');
 						}
-						app.showModalWindow(modalWindowParams);
+					};
+					if (currentElement.data('modalid')) {
+						modalWindowParams['id'] = currentElement.data('modalid');
 					}
-					e.stopPropagation();
-				});
+					app.showModalWindow(modalWindowParams);
+				}
+				e.stopPropagation();
+			});
 			container.off('click', '.js-show-modal-content').on('click', '.js-show-modal-content', function (e) {
 				e.preventDefault();
 				let currentElement = $(e.currentTarget);

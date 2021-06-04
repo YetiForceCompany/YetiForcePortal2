@@ -9,7 +9,11 @@
     "LBL_SWITCH_USERS": "Switch users",
     "LBL_SIGN_OUT": "Sign out",
     "LBL_CHANGE_PASSWORD": "Change password",
-    "BTN_YOUR_ACCOUNT_ACCESS_HISTORY": "Activity history"
+    "BTN_YOUR_ACCOUNT_ACCESS_HISTORY": "Activity history",
+    "LBL_2FA_TOTP_DESC": "In order to generate single use codes you need the appropriate application.\nIt can be used on a computer or on a phone.",
+    "LBL_AUTHENTICATION_CODE": "Authentication code",
+    "LBL_2FA_SECRET": "Secret code",
+    "BTN_2FA_TOTP_QR_CODE": "2FA TOTP activation key"
   },
   "js": {}
 }
