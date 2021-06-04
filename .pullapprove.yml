@@ -9,7 +9,5 @@ groups:
     reset_on_push:
       enabled: true
     users:
-    - bpabiszczak
-    - mariuszkrzaczkowski
-    - rskrzypczak
-    - tomaszqr
+      - mariuszkrzaczkowski
+      - rskrzypczak

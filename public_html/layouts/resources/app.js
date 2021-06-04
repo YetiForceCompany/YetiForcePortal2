@@ -348,6 +348,7 @@ var AppConnector,
 				}
 			};
 			$.extend($.fn.dataTable.defaults, {
+				dom: '<"float-left"B><"float-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
 				language: {
 					sLengthMenu: app.translate('JS_S_LENGTH_MENU'),
 					sZeroRecords: app.translate('JS_NO_RESULTS_FOUND'),

@@ -242,7 +242,7 @@ class Request
 
 	public function isAjax(): bool
 	{
-		if (!empty($_SERVER['HTTP_X_PJAX']) && true == $_SERVER['HTTP_X_PJAX']) {
+		if (!empty($_SERVER['HTTP_X_PJAX']) && true === $_SERVER['HTTP_X_PJAX']) {
 			return true;
 		}
 		if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
