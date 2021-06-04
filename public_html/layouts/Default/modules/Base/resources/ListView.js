@@ -36,25 +36,29 @@ window.Base_ListView_Js = class {
 	 * Register record events
 	 */
 	registerRecordEvents() {
+		const self = this;
 		this.table.on('click', '.js-delete-record', (e) => {
-			AppConnector.request({
-				data: {},
-				url: $(e.currentTarget).data('url')
-			})
-				.done((data) => {
-					if (data.result) {
-						this.dataTable.ajax.reload();
-					}
-				})
-				.fail(function () {
-					console.log(e, err);
-				});
+			app.showNotifyConfirm(
+				{
+					title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE')
+				},
+				function () {
+					AppConnector.request({
+						data: {},
+						url: $(e.currentTarget).data('url')
+					}).done((data) => {
+						if (data.result) {
+							self.dataTable.ajax.reload();
+						}
+					});
+				}
+			);
 		});
-		this.table.on('click', '.js-search-records', (e) => {
+		this.table.on('click', '.js-search-records', () => {
 			this.dataTable.ajax.reload();
 		});
-		this.table.on('click', '.js-clear-search', (e) => {
-			this.table.find('.js-filter-field').each(function (k, v) {
+		this.table.on('click', '.js-clear-search', () => {
+			this.table.find('.js-filter-field').each(function () {
 				this.value = '';
 			});
 			this.dataTable.ajax.reload();

@@ -60,6 +60,8 @@
     "LBL_HOME": "Dashboard"
   },
   "js": {
+    "JS_YES": "Yes",
+    "JS_NO": "No",
     "JS_TODAY": "Today",
     "JS_CLEAR_HISTORY": "Clear history",
     "JS_YESTERDAY": "Yestarday",
@@ -132,6 +134,7 @@
     "JS_NO_SUCH_QUANTITY": "There is no such quantity of product",
     "JS_FULL_TEXT": "Full text",
     "JS_CLOSE": "Close",
+    "JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE": "Are you sure that you want to delete?",
     "JS_MAXIMUM_TEXT_SIZE_IN_BYTES": "Exceeded the maximum text size in bytes"
   }
 }

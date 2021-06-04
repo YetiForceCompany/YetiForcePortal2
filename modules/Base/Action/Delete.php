@@ -1,16 +1,20 @@
 <?php
 /**
- * Delete action class.
+ * Delete record action file.
+ *
+ * @package Action
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
+ * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Action;
 
-use App\Purifier;
-
+/**
+ * Delete record action class.
+ */
 class Delete extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
@@ -25,7 +29,7 @@ class Delete extends \App\Controller\Action
 	public function process()
 	{
 		$module = $this->request->getModule();
-		$record = $this->request->getByType('record', Purifier::INTEGER);
+		$record = $this->request->getInteger('record');
 		$result = false;
 		if ($record) {
 			$api = \App\Api::getInstance();
@@ -36,7 +40,7 @@ class Delete extends \App\Controller\Action
 			$response->setResult($result);
 			$response->emit();
 		} else {
-			return $result;
+			header('Refresh:0');
 		}
 	}
 }

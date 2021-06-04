@@ -818,6 +818,41 @@ var AppConnector,
 			});
 		},
 
+		showNotifyConfirm: function (customParams, confirmFn, cancelFn) {
+			let params = {
+				title: '???',
+				icon: 'fas fa-question-circle',
+				hide: false,
+				closer: false,
+				sticker: false,
+				destroy: true,
+				stack: new PNotify.Stack({
+					dir1: 'down',
+					modal: true,
+					firstpos1: 25,
+					overlayClose: false
+				}),
+				modules: new Map([
+					...PNotify.defaultModules,
+					[
+						PNotifyConfirm,
+						{
+							confirm: true,
+							align: 'center'
+						}
+					]
+				])
+			};
+
+			let notice = PNotify.info($.extend(params, customParams));
+			if (typeof confirmFn === 'function') {
+				notice.on('pnotify:confirm', confirmFn);
+			}
+			if (typeof cancelFn === 'function') {
+				notice.on('pnotify:cancel', cancelFn);
+			}
+		},
+
 		showNotify: function (customParams) {
 			let params = {
 				hide: false
@@ -855,6 +890,35 @@ var AppConnector,
 			PNotify.defaultModules.set(PNotifyBootstrap4, {});
 			PNotify.defaultModules.set(PNotifyFontAwesome5, {});
 			PNotify.defaultModules.set(PNotifyMobile, {});
+			PNotifyConfirm.defaults.buttons = [
+				{
+					text: app.translate('JS_YES'),
+					addClass: 'btn-success',
+					primary: true,
+					promptTrigger: true,
+					click: (notice, value) => {
+						notice.close();
+						notice.fire('pnotify:confirm', { notice, value });
+					}
+				},
+				{
+					text: app.translate('JS_NO'),
+					addClass: 'btn-warning',
+					click: (notice) => {
+						notice.close();
+						notice.fire('pnotify:cancel', { notice });
+					}
+				}
+			];
+			if (typeof window.stackContextModal === 'undefined') {
+				window.stackPage = new PNotify.Stack({
+					dir1: 'down',
+					firstpos1: 25,
+					context: document.getElementById('page'),
+					modal: true,
+					maxOpen: Infinity
+				});
+			}
 			if (typeof window.stackContextModal === 'undefined') {
 				window.stackPage = new PNotify.Stack({
 					dir1: 'down',
