@@ -1,16 +1,22 @@
 <?php
 /**
- * Basic field model class.
+ * Basic field model file.
+ *
+ * @package FieldTypes
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
+ * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
 
 use App\Json;
 
+/**
+ * Basic field model class.
+ */
 class BaseField extends \App\BaseModel
 {
 	/**

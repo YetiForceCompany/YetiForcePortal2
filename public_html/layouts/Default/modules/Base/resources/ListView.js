@@ -12,6 +12,7 @@ window.Base_ListView_Js = class {
 			serverSide: true,
 			searching: false,
 			orderCellsTop: true,
+			deferRender: true,
 			ajax: {
 				url: 'index.php',
 				type: 'POST',
