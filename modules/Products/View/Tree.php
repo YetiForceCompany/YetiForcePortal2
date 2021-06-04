@@ -38,9 +38,8 @@ class Tree extends View\ListView
 	{
 		$this->getListViewModel()
 			->setRawData(true)
-			->setCustomFields(static::CUSTOM_FIELDS)
-			->setLimit(\App\Config::get('itemsPrePage'))
-			->setPage($this->request->getInteger('page', 1));
+			->setFields(static::CUSTOM_FIELDS)
+			->setOffset($this->request->getInteger('page', 1));
 		$search = [];
 		$searchText = '';
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {

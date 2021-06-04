@@ -59,7 +59,7 @@ class Debug
 				}
 				$args = rtrim($args, ',');
 			}
-			$trace .= "$sep$l {$v['file']} ({$v['line']})  >>  " . (isset($v['class']) ? $v['class'] . '->' : '') . "{$v['function']}($args)" . PHP_EOL;
+			$trace .= "$sep$l {$v['file']}:{$v['line']}  >>  " . (isset($v['class']) ? $v['class'] . '->' : '') . "{$v['function']}($args)" . PHP_EOL;
 			if (0 !== $maxLevel && $l >= $maxLevel) {
 				break;
 			}

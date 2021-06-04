@@ -339,6 +339,14 @@ var AppConnector,
 			if (table.length == 0) {
 				return false;
 			}
+			$.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
+				if (settings.jqXHR.responseJSON.error.message) {
+					alert(settings.jqXHR.statusText + '\r\n' + settings.jqXHR.responseJSON.error.message);
+					console.error(settings.jqXHR.responseJSON.error);
+				} else {
+					console.error(settings.jqXHR.responseJSON);
+				}
+			};
 			$.extend($.fn.dataTable.defaults, {
 				language: {
 					sLengthMenu: app.translate('JS_S_LENGTH_MENU'),
@@ -833,7 +841,7 @@ var AppConnector,
 		/**
 		 * Set Pnotify defaults options
 		 */
-		setPnotifyDefaultOptions() {
+		setNotifyDefaultOptions() {
 			PNotify.defaults.textTrusted = true; // *Trusted option enables html as parameter's value
 			PNotify.defaults.titleTrusted = true;
 			PNotify.defaults.sticker = false;
@@ -847,6 +855,15 @@ var AppConnector,
 			PNotify.defaultModules.set(PNotifyBootstrap4, {});
 			PNotify.defaultModules.set(PNotifyFontAwesome5, {});
 			PNotify.defaultModules.set(PNotifyMobile, {});
+			if (typeof window.stackContextModal === 'undefined') {
+				window.stackPage = new PNotify.Stack({
+					dir1: 'down',
+					firstpos1: 25,
+					context: document.getElementById('page'),
+					modal: true,
+					maxOpen: Infinity
+				});
+			}
 		},
 		registerIframeAndMoreContent() {
 			let showMoreModal = (e) => {
@@ -876,7 +893,7 @@ var AppConnector,
 $(function () {
 	var container = jQuery('body');
 	app.registerSelectField(container);
-	app.setPnotifyDefaultOptions();
+	app.setNotifyDefaultOptions();
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
 	app.registerSubMenu();

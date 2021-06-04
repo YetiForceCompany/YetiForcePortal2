@@ -2,9 +2,12 @@
 /**
  * The file contains: Abstract class ListView.
  *
+ * @package Model
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Model;
@@ -14,73 +17,34 @@ namespace YF\Modules\Base\Model;
  */
 abstract class AbstractListView
 {
-	/**
-	 * Module name.
-	 *
-	 * @var string
-	 */
-	private $moduleName;
+	/** @var string Module name. */
+	protected $moduleName;
 
-	/**
-	 * Custom fields.
-	 *
-	 * @var array
-	 */
-	private $fields = [];
+	/** @var string[] Column fields */
+	protected $fields = [];
 
-	/**
-	 * Records list from api.
-	 *
-	 * @var array
-	 */
+	/** @var array Records list from api. */
 	protected $recordsList = [];
 
-	/**
-	 * Limit.
-	 *
-	 * @var int
-	 */
-	private $limit = 0;
+	/** @var int The number of items on the page. */
+	protected $limit = 0;
 
-	/**
-	 * Offset.
-	 *
-	 * @var int
-	 */
-	private $offset = 0;
+	/** @var int Offset. */
+	protected $offset = 0;
 
-	/**
-	 * Current page.
-	 *
-	 * @var int
-	 */
-	private $page = 1;
+	/** @var string Sorting direction. */
+	protected $order;
 
-	/**
-	 * Conditions.
-	 *
-	 * @var array
-	 */
-	private $conditions = [];
+	/** @var string Sets the ORDER BY part of the query record list. */
+	protected $orderField;
 
-	/**
-	 * Use raw data.
-	 *
-	 * @var bool
-	 */
-	private $rawData = false;
+	/** @var array Conditions. */
+	protected $conditions = [];
+
+	/** @var bool Use raw data. */
+	protected $rawData = false;
 
 	protected $actionName = 'RecordsList';
-
-	/**
-	 * Construct.
-	 *
-	 * @param string $moduleName
-	 */
-	public function __construct(string $moduleName)
-	{
-		$this->setModuleName($moduleName);
-	}
 
 	/**
 	 * Get instance.
@@ -93,20 +57,10 @@ abstract class AbstractListView
 	public static function getInstance(string $moduleName, string $viewName = 'ListView'): self
 	{
 		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', $viewName);
-		return new $handlerModule($moduleName);
-	}
-
-	/**
-	 * Function to set the name of the module to which the record belongs.
-	 *
-	 * @param string $value
-	 *
-	 * @return \self
-	 */
-	public function setModuleName($value): self
-	{
-		$this->moduleName = $value;
-		return $this;
+		$self = new $handlerModule();
+		$self->moduleName = $moduleName;
+		$self->limit = \App\Config::$itemsPrePage ?: 15;
+		return $self;
 	}
 
 	/**
@@ -139,7 +93,7 @@ abstract class AbstractListView
 	 *
 	 * @return self
 	 */
-	public function setCustomFields(array $fields): self
+	public function setFields(array $fields): self
 	{
 		$this->fields = $fields;
 		return $this;
@@ -159,40 +113,31 @@ abstract class AbstractListView
 	}
 
 	/**
-	 * Set current page.
-	 *
-	 * @param int $page
-	 *
-	 * @return self
-	 */
-	public function setPage(int $page): self
-	{
-		$this->page = $page < 1 ? 1 : $page;
-		$this->offset = $this->limit * ($this->page - 1);
-		return $this;
-	}
-
-	/**
-	 * Set offsett.
+	 * Set offset.
 	 *
 	 * @param int $offset
 	 *
 	 * @return self
 	 */
-	public function setOffsett(int $offset): self
+	public function setOffset(int $offset): self
 	{
 		$this->offset = $offset;
 		return $this;
 	}
 
 	/**
-	 * Get current page.
+	 * Set order.
 	 *
-	 * @return int
+	 * @param string $field
+	 * @param string $direction
+	 *
+	 * @return self
 	 */
-	public function getPage(): int
+	public function setOrder(string $field, string $direction): self
 	{
-		return $this->page;
+		$this->orderField = $field;
+		$this->order = $direction;
+		return $this;
 	}
 
 	/**
@@ -214,16 +159,13 @@ abstract class AbstractListView
 	 */
 	public function loadRecordsList(): self
 	{
-		$api = \App\Api::getInstance();
-		$headers = [];
+		$headers = [
+			'x-row-count' => 1,
+			'x-row-limit' => $this->limit,
+			'x-row-offset' => $this->offset,
+		];
 		if (!empty($this->fields)) {
 			$headers['x-fields'] = \App\Json::encode($this->fields);
-		}
-		if (!empty($this->limit)) {
-			$headers['x-row-limit'] = $this->limit;
-		}
-		if (!empty($this->offset)) {
-			$headers['x-row-offset'] = $this->offset;
 		}
 		if (!empty($this->conditions)) {
 			$headers['x-condition'] = \App\Json::encode($this->conditions);
@@ -231,11 +173,26 @@ abstract class AbstractListView
 		if ($this->rawData) {
 			$headers['x-raw-data'] = 1;
 		}
-		if (!empty($headers)) {
-			$api->setCustomHeaders($headers);
+		if (!empty($this->order)) {
+			$headers['x-row-order-field'] = $this->orderField;
+			$headers['x-row-order'] = $this->order;
 		}
-		$this->recordsList = $api->call($this->getModuleName() . '/' . $this->actionName);
+		$this->recordsList = $this->getFromApi($headers);
 		return $this;
+	}
+
+	/**
+	 * Get data from api.
+	 *
+	 * @param array $headers
+	 *
+	 * @return array
+	 */
+	protected function getFromApi(array $headers): array
+	{
+		$api = \App\Api::getInstance();
+		$api->setCustomHeaders($headers);
+		return $api->call($this->getModuleName() . '/' . $this->actionName);
 	}
 
 	/**
@@ -245,24 +202,24 @@ abstract class AbstractListView
 	 */
 	public function getRecordsListModel(): array
 	{
-		$recordsListModel = [];
+		$recordsModel = [];
 		if (!empty($this->recordsList['records'])) {
-			foreach ($this->recordsList['records'] as $key => $value) {
+			foreach ($this->recordsList['records'] as $id => $value) {
 				$recordModel = Record::getInstance($this->getModuleName());
 				if (isset($value['recordLabel'])) {
 					$recordModel->setName($value['recordLabel']);
 					unset($value['recordLabel']);
 				}
-				$recordModel->setData($value)->setId($key);
-				$recordsListModel[$key] = $recordModel;
+				$recordModel->setData($value)->setId($id);
+				$recordsModel[$id] = $recordModel;
 			}
 		}
 		if (!empty($this->recordsList['rawData'])) {
-			foreach ($this->recordsList['rawData'] as $key => $value) {
-				$recordsListModel[$key]->setRawData($value);
+			foreach ($this->recordsList['rawData'] as $id => $value) {
+				$recordsModel[$id]->setRawData($value);
 			}
 		}
-		return $recordsListModel;
+		return $recordsModel;
 	}
 
 	/**
@@ -272,36 +229,21 @@ abstract class AbstractListView
 	 */
 	public function getHeaders(): array
 	{
+		if (empty($this->recordsList)) {
+			$this->recordsList = $this->getFromApi([
+				'x-only-column' => 1
+			]);
+		}
 		return $this->recordsList['headers'] ?? [];
 	}
 
 	/**
-	 * Get count.
+	 *  Get all rows count.
 	 *
 	 * @return int
 	 */
 	public function getCount(): int
 	{
-		return $this->recordsList['count'] ?? 0;
-	}
-
-	/**
-	 * Get number of pages.
-	 *
-	 * @return int
-	 */
-	public function getNumberOfPages(): int
-	{
-		return (int) \ceil($this->getCount() / \App\Config::getInt('itemsPrePage'));
-	}
-
-	/**
-	 * Is there more pages.
-	 *
-	 * @return bool
-	 */
-	public function isMorePages(): bool
-	{
-		return $this->recordsList['isMorePages'];
+		return $this->recordsList['numberOfAllRecords'] ?? 0;
 	}
 }

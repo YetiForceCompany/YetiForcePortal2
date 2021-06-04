@@ -108,14 +108,45 @@ class Response
 	 * @param mixed      $code
 	 * @param mixed|null $message
 	 * @param mixed      $trace
+	 *
+	 * @return void
 	 */
-	public function setError($code, $message = null, $trace = false)
+	public function setError($code = 500, $message = null, $trace = false): void
 	{
 		if (null === $message) {
 			$message = $code;
 		}
 		$error = ['code' => $code, 'message' => $message, 'trace' => $trace];
 		$this->error = $error;
+		if (is_numeric($code)) {
+			http_response_code($code);
+		}
+	}
+
+	/**
+	 * Set exception error to send.
+	 *
+	 * @param Throwable $e
+	 *
+	 * @return void
+	 */
+	public function setException(\Throwable $e): void
+	{
+		$reasonPhrase = \App\Language::translate('ERR_OCCURRED_ERROR');
+		$message = $e->getMessage();
+		$error = [
+			'message' => $reasonPhrase,
+			'code' => $e->getCode(),
+		];
+		if (\Conf\Config::$displayTrackingException) {
+			$error['message'] = (Config::get('displayDetailsException') || 0 === strpos($message, 'ERR_')) ? $message : \App\Language::translate('ERR_OCCURRED_ERROR');
+		}
+		if (\Conf\Config::$displayTrackingException) {
+			$error['trace'] = str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $e->getTraceAsString());
+		}
+		$this->setHeader($_SERVER['SERVER_PROTOCOL'] . ' ' . $e->getCode() . ' ' . str_ireplace(["\r\n", "\r", "\n"], ' ', $reasonPhrase));
+		$this->error = $error;
+		http_response_code($e->getCode());
 	}
 
 	/**

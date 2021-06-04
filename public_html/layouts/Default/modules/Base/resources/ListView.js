@@ -17,6 +17,14 @@ window.Base_ListView_Js = class {
 				type: 'POST',
 				data: (data) => {
 					$.extend(data, this.listForm.serializeFormData());
+				},
+				error: function (jqXHR, ajaxOptions, thrownError) {
+					app.errorLog(jqXHR, thrownError);
+					app.showNotify({
+						text: thrownError,
+						type: 'error',
+						stack: window.stackPage
+					});
 				}
 			}
 		});
@@ -28,39 +36,29 @@ window.Base_ListView_Js = class {
 	 * Register record events
 	 */
 	registerRecordEvents() {
-		// table.$('.deleteRecordButton').on('click', function (e) {
-		// 	e.stopPropagation();
-		// 	e.preventDefault();
-		// 	var element = jQuery(e.currentTarget);
-		// 	AppConnector.request({
-		// 		data: {},
-		// 		url: element.data('url')
-		// 	}).then(
-		// 		function (data) {
-		// 			if (data.result) {
-		// 				table.row(element.closest('tr')).remove().draw();
-		// 			}
-		// 		},
-		// 		function (e, err) {
-		// 			console.log([e, err]);
-		// 		}
-		// 	);
-		// });
-		// table.$('.listViewEntries tbody tr').on('click', function (e) {
-		// 	e.stopPropagation();
-		// 	e.preventDefault();
-		// 	if ($.contains(jQuery(e.currentTarget).find('td:first-child').get(0), e.target)) {
-		// 		return;
-		// 	}
-		// 	jQuery(e.currentTarget).find('.detailLink').trigger('click');
-		// });
-		// var listViewContentDiv = this.getListViewContentContainer();
-		// 	listViewContentDiv.on('click', '.deleteRecordButton', function (e) {
-		// 		var elem = jQuery(e.currentTarget);
-		// 		var recordId = elem.closest('tr').data('id');
-		// 		Vtiger_List_Js.deleteRecord(recordId);
-		// 		e.stopPropagation();
-		// 	});
+		this.table.on('click', '.js-delete-record', (e) => {
+			AppConnector.request({
+				data: {},
+				url: $(e.currentTarget).data('url')
+			})
+				.done((data) => {
+					if (data.result) {
+						this.dataTable.ajax.reload();
+					}
+				})
+				.fail(function () {
+					console.log(e, err);
+				});
+		});
+		this.table.on('click', '.js-search-records', (e) => {
+			this.dataTable.ajax.reload();
+		});
+		this.table.on('click', '.js-clear-search', (e) => {
+			this.table.find('.js-filter-field').each(function (k, v) {
+				this.value = '';
+			});
+			this.dataTable.ajax.reload();
+		});
 	}
 	/**
 	 * Register modal events.
@@ -69,5 +67,6 @@ window.Base_ListView_Js = class {
 		this.listForm = $('.js-form-container');
 		this.table = this.listForm.find('.js-list-view-table');
 		this.registerDataTable();
+		this.registerRecordEvents();
 	}
 };

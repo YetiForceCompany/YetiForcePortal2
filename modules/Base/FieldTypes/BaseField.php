@@ -51,19 +51,6 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function getDisplayValue(): string
-	{
-		if (empty($this->value)) {
-			return '';
-		}
-		return \App\Purifier::encodeHtml($this->value);
-	}
-
-	/**
 	 * Function to set the view value.
 	 *
 	 * @param string $value
@@ -238,21 +225,9 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
-	 * Gets value to edit.
-	 *
-	 * @param mixed $value
-	 *
-	 * @return mixed
-	 */
-	public function getEditViewDisplayValue()
-	{
-		return \App\Purifier::encodeHtml($this->getRawValue());
-	}
-
-	/**
 	 * Function to get the raw value.
 	 *
-	 * @return Value for the given key
+	 * @return mixed for the given key
 	 */
 	public function getRawValue()
 	{
@@ -329,5 +304,40 @@ class BaseField extends \App\BaseModel
 	public function getUIType(): int
 	{
 		return $this->get('uitype');
+	}
+
+	/**
+	 * Gets value to edit.
+	 *
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
+	public function getEditViewDisplayValue()
+	{
+		return \App\Purifier::encodeHtml($this->getRawValue());
+	}
+
+	/**
+	 * Function to get the view value.
+	 *
+	 * @return string
+	 */
+	public function getDisplayValue(): string
+	{
+		if (empty($this->value)) {
+			return '';
+		}
+		return \App\Purifier::encodeHtml($this->value);
+	}
+
+	/**
+	 * Function to get the view value.
+	 *
+	 * @return string
+	 */
+	public function getListDisplayValue(): string
+	{
+		return $this->getDisplayValue();
 	}
 }

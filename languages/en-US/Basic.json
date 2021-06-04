@@ -25,6 +25,7 @@
     "LBL_MESSAGE": "Message",
     "LBL_ERROR_CODE": "Error code",
     "LBL_EXCEPTION": "Exception",
+    "ERR_OCCURRED_ERROR": "Error occurred, please inform the administrator",
     "LBL_SELECT": "Search",
     "LBL_CLEAR": "Clear",
     "LBL_RELATED_MODULE_TYPE": "Select module",

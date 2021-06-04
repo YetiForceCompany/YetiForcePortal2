@@ -55,7 +55,7 @@ class Config
 	/** @var string Theme. */
 	public static $theme = 'Default';
 
-	/**  The number of items on the pageUndocumented variable. */
+	/**  The number of items on the page. */
 	public static $itemsPrePage = 12;
 
 	/** @var array Available record display options in listview for datatable element - [[values],[labels]]. */
@@ -74,8 +74,11 @@ class Config
 	/** @var bool Display main debug console. */
 	public static $debugConsole = true;
 
-	/** @var bool Displays information about the tracking code when an error occurs. */
+	/** @var bool Show detailed information about error exceptions */
 	public static $displayDetailsException = true;
+
+	/** @var bool Show path tracking for error exceptions. */
+	public static $displayTrackingException = true;
 
 	/** @var bool Enable saving logs to file. */
 	public static $logs = false;

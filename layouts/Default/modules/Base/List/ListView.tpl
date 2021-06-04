@@ -34,10 +34,13 @@
 						{/foreach}
 					</tr>
 					<tr>
-						<td></td>
+						<td class="p-0">
+							<button type="button" class="btn btn-light btn-sm mr-1 js-search-records" data-js="click"><span class="fas fa-search"></span></button>
+							<button type="button" class="btn btn-light btn-sm js-clear-search" data-js="click"><span class="fas fa-times"></button>
+						</td>
 						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
 							<td>
-								<input type="text" name="filters[{$HEADER_NAME}]" class="form-control">
+								<input type="text" name="filters[{$HEADER_NAME}]" class="form-control js-filter-field">
 							</td>
 						{/foreach}
 					</tr>

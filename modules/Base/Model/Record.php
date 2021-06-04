@@ -2,6 +2,8 @@
 /**
  * Basic record model class.
  *
+ * @package Model
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
@@ -11,19 +13,18 @@ namespace YF\Modules\Base\Model;
 
 class Record extends \App\BaseModel
 {
-	/**
-	 * Module name.
-	 *
-	 * @var string
-	 */
-	private $module;
+	/** @var string Module name. */
+	protected $moduleName;
+
+	/** @var \YF\Modules\Base\Model\Module Module model instance. */
+	protected $moduleModel;
 
 	/**
 	 * Record name.
 	 *
 	 * @var string
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * Privileges.
@@ -37,14 +38,14 @@ class Record extends \App\BaseModel
 	 *
 	 * @var array
 	 */
-	private $inventoryData = [];
+	protected $inventoryData = [];
 
 	/**
 	 * 	Information about summary inventory.
 	 *
 	 * @var array
 	 */
-	private $inventorySummaryData = [];
+	protected $inventorySummaryData = [];
 
 	/**
 	 * Static Function to get the instance of a clean Record for the given module name.
@@ -53,7 +54,7 @@ class Record extends \App\BaseModel
 	 *
 	 * @return \self
 	 */
-	public static function getInstance(string $module)
+	public static function getInstance(string $module): self
 	{
 		$handlerModule = \App\Loader::getModuleClassName($module, 'Model', 'Record');
 		$instance = new $handlerModule();
@@ -143,6 +144,29 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Get list display value.
+	 *
+	 * @param string $key
+	 *
+	 * @return string
+	 */
+	public function getListDisplayValue(string $key): string
+	{
+		$fieldModel = $this->getModuleModel()->getFieldModel($key);
+		$value = '';
+		if ($fieldModel->isViewable()) {
+			if ($this->has($key)) {
+				$fieldModel->setDisplayValue($this->get($key));
+				if (isset($this->valueMap['rawData'][$key])) {
+					$fieldModel->setRawValue($this->valueMap['rawData'][$key]);
+				}
+			}
+			$value = $fieldModel->getListDisplayValue();
+		}
+		return \App\Purifier::encodeHtml($value);
+	}
+
+	/**
 	 * Function to get the raw value.
 	 *
 	 * @return array
@@ -194,14 +218,35 @@ class Record extends \App\BaseModel
 	/**
 	 * Function to set the name of the module to which the record belongs.
 	 *
-	 * @param string $value
+	 * @param string $moduleName
 	 *
 	 * @return \self
 	 */
-	public function setModuleName($value)
+	public function setModuleName(string $moduleName): self
 	{
-		$this->module = $value;
+		$this->moduleName = $moduleName;
+		$this->moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
 		return $this;
+	}
+
+	/**
+	 * Function to get the name of the module to which the record belongs.
+	 *
+	 * @return string - Record Module Name
+	 */
+	public function getModuleName(): string
+	{
+		return $this->moduleName;
+	}
+
+	/**
+	 * Get record module model instance.
+	 *
+	 * @return \YF\Modules\Base\Model\Module - Record module model instance
+	 */
+	public function getModuleModel(): Module
+	{
+		return $this->moduleModel;
 	}
 
 	/**
@@ -229,39 +274,39 @@ class Record extends \App\BaseModel
 	/**
 	 * Function to get the list view actions for the record.
 	 *
-	 * @return array
+	 * @return string
 	 */
-	public function getRecordListViewActions()
+	public function getRecordListViewActions(): string
 	{
 		$recordLinks = [];
 		if ($this->isViewable()) {
 			$recordLinks[] = [
-				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
-				'linklabel' => 'LBL_SHOW_COMPLETE_DETAILS',
-				'linkurl' => $this->getDetailViewUrl(),
-				'linkicon' => 'fas fa-th-list',
-				'linkclass' => 'btn-sm btn-info active detailLink'
+				'label' => 'LBL_SHOW_COMPLETE_DETAILS',
+				'moduleName' => $this->getModuleName(),
+				'href' => $this->getDetailViewUrl(),
+				'icon' => 'fas fa-th-list',
+				'class' => 'btn-sm btn-info active'
 			];
 		}
 		if ($this->isEditable()) {
 			$recordLinks[] = [
-				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
-				'linklabel' => 'BTN_EDIT',
-				'linkurl' => $this->getEditViewUrl(),
-				'linkicon' => 'fas fa-edit',
-				'linkclass' => 'btn-sm btn-success active'
+				'label' => 'BTN_EDIT',
+				'moduleName' => $this->getModuleName(),
+				'href' => $this->getEditViewUrl(),
+				'icon' => 'fas fa-edit',
+				'class' => 'btn-sm btn-success active'
 			];
 		}
 		if ($this->isDeletable()) {
 			$recordLinks[] = [
-				'linktype' => 'LIST_VIEW_ACTIONS_RECORD_LEFT_SIDE',
-				'linklabel' => 'LBL_DELETE',
-				'linkdata' => ['url' => $this->getDeleteUrl()],
-				'linkicon' => 'fas fa-trash-alt',
-				'linkclass' => 'btn-sm btn-danger active deleteRecordButton'
+				'label' => 'LBL_DELETE',
+				'moduleName' => $this->getModuleName(),
+				'data' => ['url' => $this->getDeleteUrl()],
+				'icon' => 'fas fa-trash-alt',
+				'class' => 'btn-sm btn-danger active js-delete-record'
 			];
 		}
-		return $recordLinks;
+		return \App\Layout\Action::getListViewActions($recordLinks);
 	}
 
 	/**
@@ -282,16 +327,6 @@ class Record extends \App\BaseModel
 	public function getDetailViewUrl()
 	{
 		return 'index.php?module=' . $this->getModuleName() . '&view=DetailView&record=' . $this->getId();
-	}
-
-	/**
-	 * Function to get the name of the module to which the record belongs.
-	 *
-	 * @return string - Record Module Name
-	 */
-	public function getModuleName()
-	{
-		return $this->module;
 	}
 
 	/**

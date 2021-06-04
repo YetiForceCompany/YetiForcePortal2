@@ -16,27 +16,36 @@ namespace App;
  */
 class Cache
 {
-	/**
-	 * The prefix for cache keys.
-	 */
-	const PREFIX = 'portal';
+	/** @var int Long time data storage */
 	const LONG = 3600;
+
+	/** @var int Medium time data storage */
 	const MEDIUM = 300;
+
+	/** @var int Short time data storage */
 	const SHORT = 60;
+
+	/** @var int The prefix for cache keys. */
+	private static $prefix = 'YTP-';
+
+	/** @var \App\Cache\Base Cache instance */
 	public static $pool;
+
+	/** @var \App\Cache\Base Static cache instance */
 	public static $staticPool;
-	/**
-	 * Clean the opcache after the script finishes.
-	 *
-	 * @var bool
-	 */
+
+	/** @var bool Clean the opcache after the script finishes. */
 	public static $clearOpcache = false;
 
 	/**
 	 * Initialize cache class.
+	 *
+	 * @return void
 	 */
-	public static function init()
+	public static function init(): void
 	{
+		$token = $_SESSION['user']['token'] ?? '';
+		static::$prefix .= ($token ? substr($token, -36) : '') . '-';
 		$driver = \App\Config::get('cachingDriver');
 		static::$staticPool = new \App\Cache\Base();
 		if ($driver) {
@@ -57,7 +66,7 @@ class Cache
 	 */
 	public static function get($nameSpace, $key)
 	{
-		return static::$pool->get(static::PREFIX . "{$nameSpace}-{$key}");
+		return static::$pool->get(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -70,7 +79,7 @@ class Cache
 	 */
 	public static function has($nameSpace, $key): bool
 	{
-		return static::$pool->has(static::PREFIX . "{$nameSpace}-{$key}");
+		return static::$pool->has(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -85,7 +94,7 @@ class Cache
 	 */
 	public static function save($nameSpace, $key, $value = null, $duration = self::MEDIUM)
 	{
-		if (!static::$pool->save(static::PREFIX . "{$nameSpace}-{$key}", $value, $duration)) {
+		if (!static::$pool->save(static::$prefix . "{$nameSpace}-{$key}", $value, $duration)) {
 			Log::warning("Error writing to cache. Key: $nameSpace-$key | Value: " . var_export($value, true));
 		}
 		return $value;
@@ -101,7 +110,7 @@ class Cache
 	 */
 	public static function delete($nameSpace, $key)
 	{
-		static::$pool->delete(static::PREFIX . "{$nameSpace}-{$key}");
+		static::$pool->delete(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -124,7 +133,7 @@ class Cache
 	 */
 	public static function staticGet($nameSpace, $key)
 	{
-		return static::$staticPool->get(static::PREFIX . "{$nameSpace}-{$key}");
+		return static::$staticPool->get(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -137,7 +146,7 @@ class Cache
 	 */
 	public static function staticHas($nameSpace, $key)
 	{
-		return static::$staticPool->has(static::PREFIX . "{$nameSpace}-{$key}");
+		return static::$staticPool->has(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**
@@ -152,7 +161,7 @@ class Cache
 	 */
 	public static function staticSave($nameSpace, $key, $value = null)
 	{
-		return static::$staticPool->save(static::PREFIX . "{$nameSpace}-{$key}", $value);
+		return static::$staticPool->save(static::$prefix . "{$nameSpace}-{$key}", $value);
 	}
 
 	/**
@@ -165,7 +174,7 @@ class Cache
 	 */
 	public static function staticDelete($nameSpace, $key)
 	{
-		static::$staticPool->delete(static::PREFIX . "{$nameSpace}-{$key}");
+		static::$staticPool->delete(static::$prefix . "{$nameSpace}-{$key}");
 	}
 
 	/**

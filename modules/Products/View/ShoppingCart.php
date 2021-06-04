@@ -40,9 +40,8 @@ class ShoppingCart extends View\ListView
 		$moduleName = $this->request->getModule();
 		$listViewModel = $this->getListViewModel()
 			->setRawData(true)
-			->setCustomFields(static::CUSTOM_FIELDS)
-			->setLimit(\App\Config::get('itemsPrePage'))
-			->setPage($this->request->getInteger('page', 1));
+			->setFields(static::CUSTOM_FIELDS)
+			->setOffset($this->request->getInteger('page', 0));
 		$proceedUrl = 'index.php?module=Products&view=ProceedToCheckout';
 		$readonly = false;
 		if (!$this->request->isEmpty('reference_id')) {
@@ -77,7 +76,9 @@ class ShoppingCart extends View\ListView
 	{
 		return array_merge(
 			parent::getFooterScripts(),
-			$this->convertScripts(['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'], 'js'),
+			$this->convertScripts([
+				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js']
+			], 'js'),
 		);
 	}
 

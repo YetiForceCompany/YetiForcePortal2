@@ -18,11 +18,11 @@ class Field extends \App\BaseModel
 	 * Static Function to get the instance of a clean Record for the given module name.
 	 *
 	 * @param string $module
-	 * @param []     $field
+	 * @param array  $field
 	 *
-	 * @return \self
+	 * @return \YF\Modules\Base\FieldTypes\BaseField
 	 */
-	public static function getInstance($module, $field)
+	public static function getInstance(string $module, array $field): \YF\Modules\Base\FieldTypes\BaseField
 	{
 		$type = ucfirst($field['type']);
 		if (file_exists(ROOT_DIRECTORY . '/modules/Base/FieldTypes/' . $type . 'Field.php')) {
@@ -30,7 +30,6 @@ class Field extends \App\BaseModel
 		} else {
 			$handlerModule = Loader::getModuleClassName($module, 'FieldTypes', 'BaseField');
 		}
-
 		$instance = new $handlerModule();
 		return $instance->setModuleName($module)->setData($field);
 	}

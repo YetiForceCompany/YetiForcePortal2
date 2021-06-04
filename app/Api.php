@@ -48,7 +48,7 @@ class Api
 		if (!isset(self::$instance)) {
 			$userInstance = User::getUser();
 			$header = [
-				'User-Agent' => 'YetiForcePortal2',
+				'User-Agent' => 'YetiForce Portal',
 				'X-Encrypted' => Config::$encryptDataTransfer ? 1 : 0,
 				'X-Api-Key' => Config::$apiKey,
 				'Content-Type' => 'application/json',
@@ -121,7 +121,7 @@ class Api
 			$this->addLogs($method, $data, $response, $rawResponse);
 		}
 		if (empty($responseBody) || 200 !== $response->getStatusCode()) {
-			throw new Exceptions\AppException('API returned an error: ' . $response->getReasonPhrase(), $response->getStatusCode());
+			throw new Exceptions\AppException("API returned an error:\n" . $response->getReasonPhrase(), $response->getStatusCode());
 		}
 		if (isset($responseBody['error'])) {
 			$_SESSION['systemError'][] = $responseBody['error'];

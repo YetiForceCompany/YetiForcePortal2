@@ -84,17 +84,7 @@ class WebUI
 			Log::error($e->getMessage());
 			if ($request->isAjax() && $request->isEmpty('view')) {
 				$response = new \App\Response();
-				if (Config::get('displayDetailsException')) {
-					$result = [
-						'message' => $e->getMessage(),
-						'trace' => $e->getTraceAsString()
-					];
-				} else {
-					$result = [
-						'message' => 'Error',
-					];
-				}
-				$response->setResult($result);
+				$response->setException($e);
 				$response->emit();
 			} else {
 				Exceptions\AppException::view($e);

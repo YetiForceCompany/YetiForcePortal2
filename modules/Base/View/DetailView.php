@@ -12,7 +12,6 @@
 
 namespace YF\Modules\Base\View;
 
-use App\Api;
 use App\Purifier;
 use YF\Modules\Base\Model\DetailView as DetailViewModel;
 use YF\Modules\Base\Model\Field;
@@ -29,10 +28,8 @@ class DetailView extends \App\Controller\View
 	{
 		$moduleName = $this->request->getModule();
 		$record = $this->request->getByType('record', Purifier::INTEGER);
-		$api = Api::getInstance();
 		$recordModel = Record::getInstanceById($moduleName, $record);
-
-		$moduleStructure = $api->call($moduleName . '/Fields');
+		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
