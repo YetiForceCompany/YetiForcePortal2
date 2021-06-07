@@ -82,8 +82,8 @@ jQuery.Class(
 					e.preventDefault();
 					var form = jQuery(e.currentTarget);
 					var formData = form.serializeFormData();
-					AppConnector.request(formData).then(
-						function (data) {
+					AppConnector.request(formData)
+						.done((data) => {
 							var data = JSON.parse(data);
 							var response = data.result;
 							if (response.id) {
@@ -92,11 +92,10 @@ jQuery.Class(
 							} else {
 								alert(response.message);
 							}
-						},
-						function (e, err) {
-							console.log([e, err]);
-						}
-					);
+						})
+						.fail(function (error, err) {
+							app.errorLog(error, err);
+						});
 				} else {
 					app.formAlignmentAfterValidation(formElement);
 				}
