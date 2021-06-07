@@ -23,16 +23,11 @@ jQuery.Class(
 					e.stopPropagation();
 					e.preventDefault();
 					var element = jQuery(e.currentTarget);
-					AppConnector.request(element.data('url')).then(
-						function (data) {
-							if (data.result) {
-								table.row(element.closest('tr')).remove().draw();
-							}
-						},
-						function (e, err) {
-							console.log([e, err]);
+					AppConnector.request(element.data('url')).done((data) => {
+						if (data.result) {
+							table.row(element.closest('tr')).remove().draw();
 						}
-					);
+					});
 				});
 				table.$('.listViewEntries tbody tr').on('click', function (e) {
 					e.stopPropagation();

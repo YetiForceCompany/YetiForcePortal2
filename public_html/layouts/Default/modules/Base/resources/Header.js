@@ -109,14 +109,9 @@ jQuery.Class(
 						module: app.getModuleName(),
 						action: 'ChangeCompany',
 						record: modal.find('#companyId').val()
-					}).then(
-						function (data) {
-							window.location.href = 'index.php';
-						},
-						function (e, err) {
-							console.log([e, err]);
-						}
-					);
+					}).done((data) => {
+						window.location.href = 'index.php';
+					});
 					e.preventDefault();
 				});
 			});

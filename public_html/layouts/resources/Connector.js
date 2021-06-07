@@ -100,7 +100,7 @@ AppConnector = {
 			if (data !== null && typeof data === 'object' && data.error) {
 				app.errorLog(data.error);
 				if (data.error.message) {
-					Vtiger_Helper_Js.showMessage({
+					app.showNotify({
 						text: data.error.message,
 						type: 'error'
 					});
