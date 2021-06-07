@@ -558,7 +558,10 @@ var AppConnector,
 								sendByAjaxCb(formData, responseData);
 								if (responseData.success && responseData.result) {
 									if (responseData.result.notify) {
-										Vtiger_Helper_Js.showMessage(responseData.result.notify);
+										app.showNotify({
+											text: responseData.result.notify,
+											type: 'success'
+										});
 									}
 									if (responseData.result.procesStop) {
 										progressIndicatorElement.progressIndicator({ mode: 'hide' });

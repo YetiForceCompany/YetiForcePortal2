@@ -82,20 +82,16 @@ jQuery.Class(
 					e.preventDefault();
 					var form = jQuery(e.currentTarget);
 					var formData = form.serializeFormData();
-					AppConnector.request(formData)
-						.done((data) => {
-							var data = JSON.parse(data);
-							var response = data.result;
-							if (response.id) {
-								window.location.href =
-									'index.php?module=' + app.getModuleName() + '&view=DetailView&record=' + response.id;
-							} else {
-								alert(response.message);
-							}
-						})
-						.fail(function (error, err) {
-							app.errorLog(error, err);
-						});
+					AppConnector.request(formData).done((data) => {
+						var data = JSON.parse(data);
+						var response = data.result;
+						if (response.id) {
+							window.location.href =
+								'index.php?module=' + app.getModuleName() + '&view=DetailView&record=' + response.id;
+						} else {
+							alert(response.message);
+						}
+					});
 				} else {
 					app.formAlignmentAfterValidation(formElement);
 				}
