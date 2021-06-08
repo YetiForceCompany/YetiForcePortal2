@@ -18,6 +18,15 @@ namespace YF\Modules\Users\View;
  */
 class AccessActivityHistoryModal extends \App\Controller\Modal
 {
+
+	/** @var array Columns to show on the list access activity history. */
+	public static $columnsToShow = [
+		'time' => 'FL_LOGIN_TIME',
+		'status' => 'FL_STATUS',
+		'agent' => 'LBL_USER_AGENT',
+		'ip' => 'LBL_IP_ADDRESS',
+	];
+
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
@@ -38,6 +47,8 @@ class AccessActivityHistoryModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
+
+		$this->viewer->assign('TABLE_COLUMNS', static::$columnsToShow);
 		$this->viewer->assign('ACTIVITY_HISTORY', \App\Api::getInstance()->call('Users/AccessActivityHistory'));
 		$this->viewer->view('Modal/AccessActivityHistoryModal.tpl', $this->request->getModule());
 	}

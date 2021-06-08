@@ -57,7 +57,12 @@
     "BTN_GENERATE_PDF": "Generate",
     "LBL_SUM_OPEN_ORDERS": "Sum of open sales orders",
     "LBL_CREDIT_LIMIT": "Merchant limits",
-    "LBL_HOME": "Dashboard"
+    "LBL_HOME": "Dashboard",
+    "FL_LOGIN_TIME": "Last login time",
+    "FL_STATUS": "Status",
+    "LBL_USER_AGENT": "User agent",
+    "LBL_IP_ADDRESS": "IP Address"
+
   },
   "js": {
     "JS_YES": "Yes",
