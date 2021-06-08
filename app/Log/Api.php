@@ -2,9 +2,12 @@
 /**
  * There are all requests with responses.
  *
+ * @package App
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace App\Log;
@@ -24,7 +27,7 @@ class Api extends AbstractBase
 		$content .= 'Metod: ' . $value['method'] . PHP_EOL;
 		$content .= 'Request: ' . print_r($value['data'], true) . PHP_EOL;
 		if (isset($value['rawResponse'])) {
-			$content .= 'Response (raw): ' . print_r($value['rawResponse'], true) . PHP_EOL;
+			$content .= 'Response (raw):' . PHP_EOL . print_r($value['rawResponse'], true) . PHP_EOL;
 		}
 		$content .= 'Response: ' . print_r($value['response'], true) . PHP_EOL;
 		return $content;

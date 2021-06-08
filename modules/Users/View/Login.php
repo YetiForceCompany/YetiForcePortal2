@@ -37,7 +37,19 @@ class Login extends \App\Controller\View
 	public function process()
 	{
 		$module = $this->request->getModule();
-		$this->viewer->view('Login.tpl', $module);
+		if (isset($_SESSION['login_errors'])) {
+			$this->viewer->assign('ERRORS', $_SESSION['login_errors'] ?? []);
+			unset($_SESSION['login_errors']);
+		}
+		if ($this->request->isEmpty('mode')) {
+			$this->viewer->view('Login.tpl', $module);
+		} else {
+			$mode = $this->request->getByType('mode', \App\Purifier::ALNUM);
+			if (!\in_array($mode, ['2fa'])) {
+				throw new \App\Exceptions\NoPermitted('Invalid mode');
+			}
+			$this->viewer->view($mode . '.tpl', $module);
+		}
 	}
 
 	/** {@inheritdoc} */

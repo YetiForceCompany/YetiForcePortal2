@@ -105,22 +105,15 @@ class Response
 	/**
 	 * Set error data to send.
 	 *
-	 * @param mixed      $code
-	 * @param mixed|null $message
-	 * @param mixed      $trace
+	 * @param string $message
 	 *
 	 * @return void
 	 */
-	public function setError($code = 500, $message = null, $trace = false): void
+	public function setError($message = null): void
 	{
-		if (null === $message) {
-			$message = $code;
-		}
-		$error = ['code' => $code, 'message' => $message, 'trace' => $trace];
-		$this->error = $error;
-		if (is_numeric($code)) {
-			http_response_code($code);
-		}
+		$this->error = [
+			'message' => $message,
+		];
 	}
 
 	/**

@@ -32,16 +32,32 @@ class Login extends \App\Controller\Action
 	/** {@inheritdoc} */
 	public function process()
 	{
+		$url = Config::$portalUrl;
 		$this->checkBruteForce();
-		$email = $this->request->getByType('email', \App\Purifier::TEXT);
-		$password = $this->request->getRaw('password');
-		$userInstance = \App\User::getUser();
-		$userInstance->set('language', $this->request->getByType('language', \App\Purifier::STANDARD));
 		try {
-			$userInstance->login($email, $password);
-		} finally {
-			header('Location: ' . Config::$portalUrl);
+			$email = $this->request->getByType('email', \App\Purifier::TEXT);
+			$password = $this->request->getRaw('password');
+			$userInstance = \App\User::getUser();
+			$userInstance->set('language', $this->request->getByType('language', \App\Purifier::STANDARD));
+			if ($this->request->isEmpty('mode')) {
+				$userInstance->login($email, $password);
+			} else {
+				$twoFactorAuth = $_SESSION['2fa'];
+				unset($_SESSION['2fa']);
+				$userInstance->login($twoFactorAuth['email'], $twoFactorAuth['password'], $this->request->getByType('token', \App\Purifier::ALNUM));
+			}
+		} catch (\Throwable $th) {
+			if (412 === $th->getCode()) {
+				$url .= 'index.php?module=Users&view=Login&mode=2fa';
+				$_SESSION['2fa'] = [
+					'email' => $email,
+					'password' => $password,
+				];
+			} else {
+				$_SESSION['login_errors'][] = $th->getMessage();
+			}
 		}
+		header('Location: ' . $url);
 	}
 
 	/**
@@ -59,7 +75,7 @@ class Login extends \App\Controller\Action
 			return;
 		}
 		if (\App\Cache::isBase()) {
-			throw new \App\Exceptions\NoPermitted('Cache is not working', 1101);
+			throw new \App\Exceptions\NoPermitted('Cache is not working', );
 		}
 		if (\App\Cache::has('checkBruteForce', $ip)) {
 			$row = \App\Cache::get('checkBruteForce', $ip);

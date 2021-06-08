@@ -66,7 +66,7 @@ class Buy extends \App\Controller\Action
 			}
 			$response->setResult($responseFromApi);
 		} catch (\App\Exceptions\AppException $e) {
-			$response->setError($e->getCode(), $e->getMessage());
+			$response->setException($e);
 		}
 		$response->emit();
 	}

@@ -7,13 +7,12 @@
 			<img src="{PUBLIC_DIRECTORY}{\App\Config::$logoLoginPage}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>
 		{if isset($ERRORS)}
-			<br/>
 			{foreach item=ERROR key=KEY from=$ERRORS}
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger mt-2" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					{\App\Purifier::encodeHtml($ERROR['message'])}
+					{\App\Purifier::encodeHtml($ERROR)}
 				</div>
 			{/foreach}
 		{/if}
@@ -35,7 +34,7 @@
 			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-briefcase"></span></div></div>
 		</div>
 		{if \App\Config::getBool('allowLanguageSelection')}
-		<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
+			<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 			<div class="input-group mb-2 form-group first-group">
 				<select name="language" class="form-control">
 					{foreach item=LANG key=PREFIX from=\App\Language::getAllLanguages()}

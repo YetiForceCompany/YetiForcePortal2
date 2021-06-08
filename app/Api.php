@@ -52,6 +52,7 @@ class Api
 				'X-Encrypted' => Config::$encryptDataTransfer ? 1 : 0,
 				'X-Api-Key' => Config::$apiKey,
 				'Content-Type' => 'application/json',
+				'Accept' => 'application/json',
 			];
 			if ($userInstance->has('logged')) {
 				$header['X-Token'] = $userInstance->get('token');
@@ -62,7 +63,7 @@ class Api
 			self::$instance = new self($header, [
 				'http_errors' => false,
 				'base_uri' => Config::$apiUrl . 'Portal/',
-				'auth' => [Config::$serverName, Config::$serverPass]
+				'auth' => [Config::$serverName, Config::$serverPass],
 			]);
 		}
 		return self::$instance;
@@ -92,14 +93,21 @@ class Api
 				}
 				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers, 'body' => $data]);
 			}
-			$rawResponse = (string) $response->getBody();
+			$contentType = explode(';', $response->getHeaderLine('Content-Type'));
+			if ($headers['Accept'] !== reset($contentType)) {
+				if (Config::$apiLogs) {
+					$this->addLogs($method, $data, '', "Invalid response content type\n Accept:{$headers['Accept']} <> {$response->getHeaderLine('Content-Type')}\n{$response->getBody()->getContents()}");
+				}
+				throw new Exceptions\AppException('Invalid response content type', 500);
+			}
+			$rawResponse = $response->getBody()->getContents();
 			$encryptedHeader = $response->getHeader('encrypted');
 			if ($encryptedHeader && 1 == $response->getHeader('encrypted')[0]) {
 				$rawResponse = $this->decryptData($rawResponse);
 			}
 			$responseBody = Json::decode($rawResponse);
 		} catch (\Throwable $e) {
-			if (Config::$logs) {
+			if (Config::$apiLogs) {
 				$this->addLogs($method, $data, '', $e->__toString());
 			}
 			throw new Exceptions\AppException('An error occurred while communicating with the CRM', 500, $e);
@@ -114,18 +122,18 @@ class Api
 				'rawRequest' => [$headers, $rawRequest],
 				'rawResponse' => $rawResponse,
 				'response' => $responseBody,
-				'trace' => Debug::getBacktrace()
+				'trace' => Debug::getBacktrace(),
 			];
 		}
-		if (Config::$logs) {
-			$this->addLogs($method, $data, $response, $rawResponse);
-		}
-		if (empty($responseBody) || 200 !== $response->getStatusCode()) {
-			throw new Exceptions\AppException("API returned an error:\n" . $response->getReasonPhrase(), $response->getStatusCode());
+		if (Config::$apiLogs) {
+			$this->addLogs($method, $data, $responseBody, $rawResponse);
 		}
 		if (isset($responseBody['error'])) {
 			$_SESSION['systemError'][] = $responseBody['error'];
 			throw new Exceptions\AppException($responseBody['error']['message'], $responseBody['error']['code'] ?? 500);
+		}
+		if (empty($responseBody) || 200 !== $response->getStatusCode()) {
+			throw new Exceptions\AppException("API returned an error:\n" . $response->getReasonPhrase(), $response->getStatusCode());
 		}
 		if (isset($responseBody['result'])) {
 			return $responseBody['result'];

@@ -43,8 +43,6 @@ class PasswordChangeModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-		$request = $this->request;
-		$moduleName = $request->getModule();
-		$this->viewer->view('Modal/PasswordChangeModal.tpl', $moduleName);
+		$this->viewer->view('Modal/PasswordChangeModal.tpl', $this->request->getModule());
 	}
 }

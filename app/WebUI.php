@@ -81,7 +81,7 @@ class WebUI
 				header('Location: ' . \App\Config::$portalUrl);
 				return;
 			}
-			Log::error($e->getMessage());
+			Log::error($e->__toString());
 			if ($request->isAjax() && $request->isEmpty('view')) {
 				$response = new \App\Response();
 				$response->setException($e);

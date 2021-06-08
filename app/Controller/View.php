@@ -308,7 +308,7 @@ abstract class View extends Base
 	 *
 	 * @return string
 	 */
-	private function getModuleNameFromRequest(): string
+	protected function getModuleNameFromRequest(): string
 	{
 		if (empty($this->moduleName)) {
 			$this->moduleName = $this->request->getModule();

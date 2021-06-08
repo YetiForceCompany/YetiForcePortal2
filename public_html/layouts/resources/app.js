@@ -657,10 +657,12 @@ var AppConnector,
 			return container;
 		},
 		hideModalWindow: function (callback, id) {
+			let container;
 			if (id == undefined) {
-				id = 'globalmodal';
+				container = $('.modalContainer');
+			} else {
+				container = $('#' + id);
 			}
-			var container = jQuery('#' + id);
 			if (container.length <= 0) {
 				return;
 			}

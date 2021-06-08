@@ -106,7 +106,6 @@ AppConnector = {
 					});
 				}
 			}
-			console.log(data);
 			aDeferred.resolve(data);
 		};
 		params.error = function (jqXHR, textStatus, errorThrown) {
