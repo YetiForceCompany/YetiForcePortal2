@@ -3,7 +3,7 @@
 
 window.Base_PasswordChangeModal_JS = class {
 	/**
-	 * Function to register the click event for generate button
+	 * Function to register the submit event of form.
 	 */
 	registerSubmitEvent() {
 		let formElement = this.container.find('form');
