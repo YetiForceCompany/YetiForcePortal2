@@ -18,7 +18,9 @@
     "LBL_2FA_SECRET_ALREADY_SET": "Private key (TOTP) has been already generated, in order to change it, activate a new key.",
     "LBL_2FA_OFF": "Disable two-factor authentication",
     "LBL_2FA_HAS_BEEN_DISABLED": "2FA has been disabled",
-    "LBL_2FA_HAS_BEEN_ACTIVATED": "2FA has been activated"
+    "LBL_2FA_HAS_BEEN_ACTIVATED": "2FA has been activated",
+    "LBL_PASSWORD_CHANGED": "Password changed",
+    "LBL_FAILED_PASSWORD_CHANGED": "Failed attempt to change password"
   },
   "js": {}
 }

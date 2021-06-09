@@ -13,8 +13,12 @@ window.Base_PasswordChangeModal_JS = class {
 			if (formElement.validationEngine('validate') === true) {
 				let formData = formElement.serializeFormData();
 				AppConnector.request(formData).done((data) => {
-					// let data = JSON.parse(data);
-					// let response = data.result;
+					if (data.success === true) {
+						app.showNotify({
+							text: data.result,
+							type: 'success'
+						});
+					}
 				});
 			}
 		});

@@ -21,9 +21,6 @@
 			<div class="col-sm-6 controls input-group">
 				<input type="password" name="password" id="passwordUsersFormPassword" title="{\App\Language::translate('LBL_NEW_PASSWORD', $MODULE_NAME)}" class="form-control" data-validation-engine="validate[required]" autocomplete="off" />
 				<span class="input-group-append">
-					<button class="btn btn-light js-popover-tooltip js-validate-password" data-content="{\App\Language::translate('LBL_VALIDATE_PASSWORD',$MODULE_NAME)}" type="button" data-field="password" data-js="popover|click">
-						<span class="mdi mdi-lock-question"></span>
-					</button>
 					<button class="btn btn-light js-popover-tooltip" data-content="{\App\Language::translate('LBL_SHOW_PASSWORD',$MODULE_NAME)}" type="button" onmousedown="password.type = 'text';" onmouseup="password.type = 'password';" onmouseout="password.type = 'password';" data-js="popover">
 						<span class="fas fa-eye"></span>
 					</button>
