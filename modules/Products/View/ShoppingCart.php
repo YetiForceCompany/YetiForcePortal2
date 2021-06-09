@@ -72,12 +72,15 @@ class ShoppingCart extends View\ListView
 	}
 
 	/** {@inheritdoc} */
-	public function getFooterScripts(): array
+	public function getFooterScripts(bool $loadForModule = true): array
 	{
+		$moduleName = $this->getModuleNameFromRequest();
+		$action = $this->request->getAction();
 		return array_merge(
-			parent::getFooterScripts(),
+			parent::getFooterScripts(false),
 			$this->convertScripts([
-				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js']
+				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'],
+				['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true]
 			], 'js'),
 		);
 	}

@@ -5,7 +5,7 @@
 	{if !($PAGE==1 && !$IS_MORE_PAGES) }
 		<nav aria-label="Page navigation c-page">
 			<ul class="pagination u-mb-0px js-pagination-list d-flex align-items-center" data-page="{$PAGE}">
-				<li class="page-item {if $LIST_VIEW_MODEL->getPage() < 2} disabled{/if}">
+				<li class="page-item {if $PAGE < 2} disabled{/if}">
 					<a class="page-link js-page-previous" href="#">
 						<i class="fas fa-chevron-left u-fs-22px"></i>
 					</a>

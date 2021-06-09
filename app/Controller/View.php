@@ -8,6 +8,7 @@
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace App\Controller;
@@ -231,18 +232,19 @@ abstract class View extends Base
 	/**
 	 * Scripts.
 	 *
+	 * @param bool $loadForModule
+	 *
 	 * @return \App\Script[]
 	 */
-	public function getFooterScripts(): array
+	public function getFooterScripts(bool $loadForModule = true): array
 	{
-		$moduleName = $this->getModuleNameFromRequest();
 		$action = $this->request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
 		$fileName = ["libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js"];
 		if (!file_exists(PUBLIC_DIRECTORY . $fileName[0])) {
 			$fileName = ['libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js'];
 		}
-		return $this->convertScripts([
+		$files = [
 			['libraries/jquery/dist/jquery.js'],
 			['libraries/jquery.class.js/jquery.class.js'],
 			['libraries/block-ui/jquery.blockUI.js'],
@@ -280,9 +282,13 @@ abstract class View extends Base
 			['layouts/resources/Fields.js'],
 			['layouts/resources/ProgressIndicator.js'],
 			['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js'],
-			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js"],
-			['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true],
-		], 'js');
+			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js"]
+		];
+		if ($loadForModule) {
+			$moduleName = $this->getModuleNameFromRequest();
+			$files[] = ['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true];
+		}
+		return $this->convertScripts($files, 'js');
 	}
 
 	/** {@inheritdoc} */

@@ -8,6 +8,7 @@
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\View;
@@ -38,8 +39,7 @@ class Tree extends View\ListView
 	{
 		$this->getListViewModel()
 			->setRawData(true)
-			->setFields(static::CUSTOM_FIELDS)
-			->setOffset($this->request->getInteger('page', 1));
+			->setFields(static::CUSTOM_FIELDS);
 		$search = [];
 		$searchText = '';
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
@@ -60,6 +60,7 @@ class Tree extends View\ListView
 		$this->viewer->assign('SEARCH_TEXT', $searchText);
 		$this->viewer->assign('SEARCH', $search);
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
+		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
 		parent::process();
 	}
 
@@ -67,7 +68,7 @@ class Tree extends View\ListView
 	public function preProcess($display = true): void
 	{
 		$moduleName = $this->request->getModule();
-		$fields = \App\Api::getInstance()->call('Products/Fields');
+		$fields = \App\Api::getInstance()->call('Products/Fields') ?: [];
 		$searchInfo = [];
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
 			foreach ($this->request->get('search') as $condition) {
@@ -78,7 +79,7 @@ class Tree extends View\ListView
 		$this->viewer->assign('LEFT_SIDE_TEMPLATE', 'Tree/Category.tpl');
 		$this->viewer->assign(
 			'TREE',
-			TreeModel::getInstance()
+			TreeModel::getInstance($moduleName, 'Tree')
 				->setFields($fields)
 				->setSelectedItems([$searchInfo['category_multipicklist'] ?? null])
 				->getTree()

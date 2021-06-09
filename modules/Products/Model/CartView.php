@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\Model;
@@ -22,12 +23,12 @@ use YF\Modules\Base\Model\Record;
 class CartView extends ListViewModel
 {
 	const ADDRESS_FIELDS = ['addresslevel1', 'addresslevel2', 'addresslevel3', 'addresslevel4', 'addresslevel5', 'addresslevel6',  'addresslevel7', 'addresslevel8',  'buildingnumber', 'localnumber', 'pobox'];
-	/**
-	 * Shopping cart.
-	 *
-	 * @var Cart
-	 */
+
+	/** @var Shopping cart */
 	private $cart;
+
+	/** @var int Current page. */
+	private $page = 1;
 
 	/**
 	 * List of products.
@@ -40,9 +41,8 @@ class CartView extends ListViewModel
 	protected $actionName = 'RecordsTree';
 
 	/** {@inheritdoc} */
-	public function __construct(string $moduleName)
+	public function __construct()
 	{
-		$this->setModuleName($moduleName);
 		$this->cart = new Cart();
 	}
 
@@ -54,11 +54,15 @@ class CartView extends ListViewModel
 	/** {@inheritdoc} */
 	public function loadRecordsList(): AbstractListView
 	{
-		$this->setConditions([
-			'fieldName' => 'id',
-			'value' => array_keys($this->cart->getAll()),
-			'operator' => 'e'
-		]);
+		$card = $this->cart->getAll();
+		if ($card) {
+			$this->setConditions([
+				'fieldName' => 'id',
+				'value' => array_keys($card),
+				'operator' => 'e'
+			]);
+		}
+
 		return parent::loadRecordsList();
 	}
 
@@ -165,5 +169,39 @@ class CartView extends ListViewModel
 	public function getShippingPrice()
 	{
 		return $this->cart->getShippingPrice();
+	}
+
+	/**
+	 * Set current page.
+	 *
+	 * @param int $page
+	 *
+	 * @return self
+	 */
+	public function setPage(int $page): self
+	{
+		$this->page = $page < 1 ? 1 : $page;
+		$this->offset = $this->limit * ($this->page - 1);
+		return $this;
+	}
+
+	/**
+	 * Get current page.
+	 *
+	 * @return int
+	 */
+	public function getPage(): int
+	{
+		return $this->page;
+	}
+
+	/**
+	 * Is there more pages.
+	 *
+	 * @return bool
+	 */
+	public function isMorePages(): bool
+	{
+		return $this->recordsList['isMorePages'];
 	}
 }

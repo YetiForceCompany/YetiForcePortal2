@@ -5,6 +5,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\Model;
@@ -26,12 +27,9 @@ class TreeView extends \YF\Modules\Base\Model\ListView
 
 	/**
 	 * Construct.
-	 *
-	 * @param string $moduleName
 	 */
-	public function __construct(string $moduleName)
+	public function __construct()
 	{
-		parent::__construct($moduleName);
 		$this->cart = new Cart();
 	}
 
@@ -43,6 +41,10 @@ class TreeView extends \YF\Modules\Base\Model\ListView
 	 */
 	public function getRecordsListModel(): array
 	{
+		if (!isset($this->recordsList['records'])) {
+			$this->loadRecordsList();
+		}
+
 		$recordsListModel = parent::getRecordsListModel();
 		foreach ($recordsListModel as $recordId => $recordModel) {
 			$amountInCart = 0;

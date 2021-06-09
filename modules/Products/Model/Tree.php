@@ -8,6 +8,7 @@
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\Model;
@@ -15,7 +16,7 @@ namespace YF\Modules\Products\Model;
 /**
  * Tree model class.
  */
-class Tree extends \App\BaseModel
+class Tree extends \YF\Modules\Base\Model\AbstractListView
 {
 	/**
 	 * Selected items.
@@ -25,39 +26,11 @@ class Tree extends \App\BaseModel
 	private $selectedItems = [];
 
 	/**
-	 * Fields in module.
-	 */
-	private $fields = [];
-
-	/**
-	 * Get instance.
-	 *
-	 * @return self
-	 */
-	public static function getInstance(): self
-	{
-		return new static();
-	}
-
-	/**
-	 * Sets fields.
-	 *
-	 * @param array $fields
-	 *
-	 * @return self
-	 */
-	public function setFields(array $fields): self
-	{
-		$this->fields = $fields;
-		return $this;
-	}
-
-	/**
 	 * Set selected items.
 	 *
 	 * @param array $selectedItems
 	 *
-	 * @return void
+	 * @return $this
 	 */
 	public function setSelectedItems(array $selectedItems)
 	{
@@ -88,8 +61,6 @@ class Tree extends \App\BaseModel
 	/**
 	 * Prepare tree data for jstree.
 	 *
-	 * @param mixed $cat
-	 *
 	 * @return array
 	 */
 	public function getTree(): array
@@ -102,5 +73,39 @@ class Tree extends \App\BaseModel
 			];
 		}
 		return $tree;
+	}
+
+	/**
+	 * Set current page.
+	 *
+	 * @param int $page
+	 *
+	 * @return self
+	 */
+	public function setPage(int $page): self
+	{
+		$this->page = $page < 1 ? 1 : $page;
+		$this->offset = $this->limit * ($this->page - 1);
+		return $this;
+	}
+
+	/**
+	 * Get current page.
+	 *
+	 * @return int
+	 */
+	public function getPage(): int
+	{
+		return $this->page ?? 1;
+	}
+
+	/**
+	 * Is there more pages.
+	 *
+	 * @return bool
+	 */
+	public function isMorePages(): bool
+	{
+		return $this->recordsList['isMorePages'] ?? false;
 	}
 }
