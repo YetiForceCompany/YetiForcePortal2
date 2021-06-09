@@ -115,9 +115,7 @@ abstract class View extends Base
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $minFilePath . self::getTime($path));
 			} elseif (file_exists($path)) {
 				$scriptsInstances[] = $script->set('src', PUBLIC_DIRECTORY . $fileName . self::getTime($path));
-			} elseif ($isOptional) {
-				\App\Log::info('File not found: ' . $path);
-			} else {
+			} elseif (!$isOptional) {
 				\App\Log::warning('File not found: ' . $path);
 			}
 		}

@@ -19,13 +19,22 @@ window.Base_TwoFactorAuthenticationModal_JS = class {
 					method: methods.val(),
 					code: code.val(),
 					secret: secret.val()
-				}).done(function (responseData) {
-					app.showNotify({
-						text: responseData['result'],
-						type: 'success'
+				})
+					.done(function (responseData) {
+						if (responseData['result']) {
+							app.showNotify({
+								text: responseData['result'],
+								type: 'success'
+							});
+							app.hideModalWindow();
+						}
+					})
+					.fail((error, title) => {
+						app.showNotify({
+							text: title,
+							type: 'error'
+						});
 					});
-					app.hideModalWindow();
-				});
 			}
 		});
 	}

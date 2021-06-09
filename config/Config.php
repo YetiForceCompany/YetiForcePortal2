@@ -80,8 +80,11 @@ class Config
 	/** @var bool Show path tracking for error exceptions. */
 	public static $displayTrackingException = true;
 
-	/** @var bool Enable saving API logs to file. */
-	public static $apiLogs = true;
+	/** @var bool Enable saving all API logs to file. */
+	public static $apiAllLogs = false;
+
+	/** @var bool Enable saving error API logs to file. */
+	public static $apiErrorLogs = true;
 
 	/**
 	 * Security.

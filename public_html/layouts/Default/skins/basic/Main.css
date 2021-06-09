@@ -213,9 +213,6 @@
   opacity: 1 !important;
   transform: none !important; }
 
-.dataTables_info {
-  color: white; }
-
 .input-group > .input-group-append > .btn-light,
 .input-group > .input-group-prepend > .btn-light {
   border-color: #dee2e6; }
@@ -866,8 +863,6 @@ a {
 .listViewEntries {
   background: #fff;
   font-weight: 400 !important; }
-  .listViewEntries tbody tr {
-    cursor: pointer; }
 
 table tbody tr:hover td .actions span {
   opacity: 1; }

@@ -23,13 +23,33 @@ class Api extends AbstractBase
 	/** {@inheritdoc} */
 	public static function display($value, string $type): string
 	{
-		$content = '============ ' . date('Y-m-d H:i:s') . ' ============' . PHP_EOL;
-		$content .= 'Metod: ' . $value['method'] . PHP_EOL;
-		$content .= 'Request: ' . print_r($value['data'], true) . PHP_EOL;
-		if (isset($value['rawResponse'])) {
-			$content .= 'Response (raw):' . PHP_EOL . print_r($value['rawResponse'], true) . PHP_EOL;
+		$content = str_repeat('-', 50) . '  ' . $value['request']['date'] . '  ' . str_repeat('-', 50) . PHP_EOL;
+		$content .= 'Trace: ' . PHP_EOL . print_r(\App\Debug::getBacktrace(), true) . PHP_EOL;
+		$content .= "Method: [{$value['request']['requestType']}] {$value['request']['method']}\n";
+		$content .= 'Headers: ' . print_r($value['request']['headers'], true) . PHP_EOL;
+		if (!empty($value['request']['rawBody'])) {
+			$content .= "RawBody: \n" . print_r($value['request']['rawBody'], true) . PHP_EOL;
 		}
-		$content .= 'Response: ' . print_r($value['response'], true) . PHP_EOL;
+		if (!empty($value['request']['body'])) {
+			$content .= 'Body: ' . print_r($value['request']['body'], true) . PHP_EOL . PHP_EOL;
+		}
+		$content .= "Status: {$value['response']['status']}\n";
+		$content .= "Reason phrase: {$value['response']['reasonPhrase']}\n";
+		$content .= "Time: {$value['response']['time']} sec.\n";
+		if (!empty($value['response']['error'])) {
+			$content .= "Error: {$value['response']['error']}\n";
+		}
+		$headers = [];
+		foreach ($value['response']['headers'] as $key => $header) {
+			$headers[$key] = implode("\n", $header);
+		}
+		$content .= 'Headers: ' . print_r($headers, true) . PHP_EOL;
+		if (!empty($value['response']['rawBody'])) {
+			$content .= "RawBody: \n" . print_r($value['response']['rawBody'], true) . PHP_EOL;
+		}
+		if (!empty($value['response']['body'])) {
+			$content .= 'Body: ' . print_r($value['response']['body'], true) . PHP_EOL;
+		}
 		return $content;
 	}
 }

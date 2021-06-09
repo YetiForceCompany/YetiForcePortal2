@@ -94,21 +94,27 @@ class Api
 				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers, 'body' => $data]);
 			}
 			$contentType = explode(';', $response->getHeaderLine('Content-Type'));
+			$rawResponse = $response->getBody()->getContents();
 			if ($headers['Accept'] !== reset($contentType)) {
-				if (Config::$apiLogs) {
-					$this->addLogs($method, $data, '', "Invalid response content type\n Accept:{$headers['Accept']} <> {$response->getHeaderLine('Content-Type')}\n{$response->getBody()->getContents()}");
+				if (Config::$apiErrorLogs || Config::$apiAllLogs) {
+					\App\Log::info([
+						'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+						'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => $response->getStatusCode(), 'reasonPhrase' => $response->getReasonPhrase(), 'error' => "Invalid response content type\n Accept:{$headers['Accept']} <> {$response->getHeaderLine('Content-Type')}", 'headers' => $response->getHeaders(), 'rawBody' => $rawResponse],
+					], 'Api');
 				}
 				throw new Exceptions\AppException('Invalid response content type', 500);
 			}
-			$rawResponse = $response->getBody()->getContents();
 			$encryptedHeader = $response->getHeader('encrypted');
 			if ($encryptedHeader && 1 == $response->getHeader('encrypted')[0]) {
 				$rawResponse = $this->decryptData($rawResponse);
 			}
 			$responseBody = Json::decode($rawResponse);
 		} catch (\Throwable $e) {
-			if (Config::$apiLogs) {
-				$this->addLogs($method, $data, '', $e->__toString());
+			if (Config::$apiErrorLogs || Config::$apiAllLogs) {
+				\App\Log::info([
+					'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+					'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => (method_exists($response, 'getStatusCode') ? $response->getStatusCode() : '-'), 'reasonPhrase' => (method_exists($response, 'getReasonPhrase') ? $response->getReasonPhrase() : '-'), 'error' => $e->__toString(), 'headers' => (method_exists($response, 'getHeaders') ? $response->getHeaders() : '-'), 'rawBody' => ($rawResponse ?? '')],
+				], 'Api');
 			}
 			throw new Exceptions\AppException('An error occurred while communicating with the CRM', 500, $e);
 		}
@@ -125,8 +131,11 @@ class Api
 				'trace' => Debug::getBacktrace(),
 			];
 		}
-		if (Config::$apiLogs) {
-			$this->addLogs($method, $data, $responseBody, $rawResponse);
+		if (Config::$apiAllLogs || (Config::$apiErrorLogs && (isset($responseBody['error']) || empty($responseBody) || 200 !== $response->getStatusCode()))) {
+			\App\Log::info([
+				'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+				'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => $response->getStatusCode(), 'reasonPhrase' => $response->getReasonPhrase(), 'headers' => $response->getHeaders(),	'rawBody' => $rawResponse, 'body' => $responseBody],
+			], 'Api');
 		}
 		if (isset($responseBody['error'])) {
 			$_SESSION['systemError'][] = $responseBody['error'];
@@ -178,23 +187,6 @@ class Api
 		$privateKey = openssl_pkey_get_private($privateKey);
 		openssl_private_decrypt($data, $decrypted, $privateKey, OPENSSL_PKCS1_OAEP_PADDING);
 		return $decrypted;
-	}
-
-	/**
-	 * @param string $method
-	 * @param array  $data
-	 * @param array  $response
-	 * @param mixed  $rawResponse
-	 */
-	public function addLogs($method, $data, $response, $rawResponse = false)
-	{
-		$value['method'] = $method;
-		$value['data'] = $data;
-		if ($rawResponse) {
-			$value['rawResponse'] = $rawResponse;
-		}
-		$value['response'] = $response;
-		\App\Log::info($value, 'Api');
 	}
 
 	/**
