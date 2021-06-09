@@ -3,7 +3,7 @@ window.Install_Install_Js = class {
 	registerSave() {
 		$('.js-install').on('click', () => {
 			if ($('form').validationEngine('validate')) {
-				params = $('form').serializeFormData();
+				let params = $('form').serializeFormData();
 				params.module = app.getModuleName();
 				params.action = 'Install';
 				const progressInstance = $.progressIndicatorShow();
