@@ -19,7 +19,7 @@
 		<div class="form-group">
 			<label class="col-sm-4 col-form-label">{\App\Language::translate('LBL_NEW_PASSWORD', $MODULE_NAME)}</label>
 			<div class="col-sm-6 controls input-group">
-				<input type="password" name="password" id="passwordUsersFormPassword" title="{\App\Language::translate('LBL_NEW_PASSWORD', $MODULE_NAME)}" class="form-control" data-validation-engine="validate[required]" autocomplete="off" />
+				<input type="password" name="password" id="passwordUsersFormPassword" title="{\App\Language::translate('LBL_NEW_PASSWORD', $MODULE_NAME)}" class="form-control" data-validation-engine="validate[required,minSize[4],maxSize[32]]" autocomplete="off" />
 				<span class="input-group-append">
 					<button class="btn btn-light js-popover-tooltip" data-content="{\App\Language::translate('LBL_SHOW_PASSWORD',$MODULE_NAME)}" type="button" onmousedown="password.type = 'text';" onmouseup="password.type = 'password';" onmouseout="password.type = 'password';" data-js="popover">
 						<span class="fas fa-eye"></span>
@@ -30,13 +30,20 @@
 		<div class="form-group">
 			<label class="col-sm-4 col-form-label">{\App\Language::translate('LBL_CONFIRM_PASSWORD', $MODULE_NAME)}</label>
 			<div class="col-sm-6 controls input-group">
-				<input type="password" name="confirm_password" id="confirmPasswordUsersFormPassword" title="{\App\Language::translate('LBL_CONFIRM_PASSWORD', $MODULE_NAME)}" class="form-control" data-validation-engine="validate[required,equals[passwordUsersFormPassword]]" autocomplete="off" />
+				<input type="password" name="confirm_password" id="confirmPasswordUsersFormPassword" title="{\App\Language::translate('LBL_CONFIRM_PASSWORD', $MODULE_NAME)}" class="form-control" data-validation-engine="validate[required,minSize[4],maxSize[32],equals[passwordUsersFormPassword]]" autocomplete="off" />
 				<span class="input-group-append">
 					<button class="btn btn-light js-popover-tooltip" data-content="{\App\Language::translate('LBL_SHOW_PASSWORD',$MODULE_NAME)}" type="button" onmousedown="confirm_password.type = 'text';" onmouseup="confirm_password.type = 'password';" onmouseout="confirm_password.type = 'password';" data-js="popover">
 						<span class="fas fa-eye"></span>
 					</button>
 				</span>
 			</div>
+		</div>
+		<div class="alert alert-info alert-dismissible mb-0" role="alert">
+			<strong>{\App\Language::translate('LBL_NEW_PASSWORD_CRITERIA', $MODULE_NAME)}</strong><br />
+			<ul class="mb-0">
+				<li>{\App\Language::translate('LBL_MINIMUM_PASSWORD_LENGTH', $MODULE_NAME)}: 4</li>
+				<li>{\App\Language::translate('LBL_MAXIMUM_PASSWORD_LENGTH', $MODULE_NAME)}: 32</li>
+			</ul>
 		</div>
 	</div>
 <!-- /tpl-Users-Modal-PasswordChangeModal -->

@@ -10,6 +10,7 @@ window.Base_PasswordChangeModal_JS = class {
 		formElement.validationEngine(app.validationEngineOptions);
 		formElement.on('submit', function (e) {
 			e.preventDefault();
+			formElement.validationEngine('showPrompt', resultOfValidation, '', 'topLeft', true);
 			if (formElement.validationEngine('validate') === true) {
 				let formData = formElement.serializeFormData();
 				AppConnector.request(formData).done((data) => {

@@ -18,6 +18,9 @@ namespace YF\Modules\Users\View;
 class PasswordChangeModal extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
+	public $successBtn = 'LBL_CHANGE_PASSWORD';
+
+	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
 	}
@@ -43,15 +46,6 @@ class PasswordChangeModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-		$request = $this->request;
-		$moduleName = $request->getModule();
-		$this->viewer->view('Modal/PasswordChangeModal.tpl', $moduleName);
-	}
-
-	/** {@inheritdoc} */
-	public function postProcessAjax(): void
-	{
-		$request = $this->request;
-		$this->viewer->view('Modal/PasswordChangeModalFooter.tpl', $request->getModule());
+		$this->viewer->view('Modal/PasswordChangeModal.tpl', $this->request->getModule());
 	}
 }
