@@ -37,9 +37,13 @@ class Tree extends View\ListView
 	/** {@inheritdoc} */
 	public function process()
 	{
+		$this->page = $this->request->getInteger('page', 1);
+		$offset = ($this->page - 1) * (\App\Config::$itemsPrePage ?: 15);
 		$this->getListViewModel()
 			->setRawData(true)
-			->setFields(static::CUSTOM_FIELDS);
+			->setFields(static::CUSTOM_FIELDS)
+			->setPage($this->page)
+			->setOffset($offset);
 		$search = [];
 		$searchText = '';
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
@@ -61,6 +65,7 @@ class Tree extends View\ListView
 		$this->viewer->assign('SEARCH', $search);
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
+		$this->viewer->assign('LIST_VIEW_MODEL', $this->getListViewModel());
 		parent::process();
 	}
 

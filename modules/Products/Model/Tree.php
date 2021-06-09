@@ -76,30 +76,6 @@ class Tree extends \YF\Modules\Base\Model\AbstractListView
 	}
 
 	/**
-	 * Set current page.
-	 *
-	 * @param int $page
-	 *
-	 * @return self
-	 */
-	public function setPage(int $page): self
-	{
-		$this->page = $page < 1 ? 1 : $page;
-		$this->offset = $this->limit * ($this->page - 1);
-		return $this;
-	}
-
-	/**
-	 * Get current page.
-	 *
-	 * @return int
-	 */
-	public function getPage(): int
-	{
-		return $this->page ?? 1;
-	}
-
-	/**
 	 * Is there more pages.
 	 *
 	 * @return bool

@@ -27,9 +27,6 @@ class CartView extends ListViewModel
 	/** @var Shopping cart */
 	private $cart;
 
-	/** @var int Current page. */
-	private $page = 1;
-
 	/**
 	 * List of products.
 	 *
@@ -169,39 +166,5 @@ class CartView extends ListViewModel
 	public function getShippingPrice()
 	{
 		return $this->cart->getShippingPrice();
-	}
-
-	/**
-	 * Set current page.
-	 *
-	 * @param int $page
-	 *
-	 * @return self
-	 */
-	public function setPage(int $page): self
-	{
-		$this->page = $page < 1 ? 1 : $page;
-		$this->offset = $this->limit * ($this->page - 1);
-		return $this;
-	}
-
-	/**
-	 * Get current page.
-	 *
-	 * @return int
-	 */
-	public function getPage(): int
-	{
-		return $this->page;
-	}
-
-	/**
-	 * Is there more pages.
-	 *
-	 * @return bool
-	 */
-	public function isMorePages(): bool
-	{
-		return $this->recordsList['isMorePages'];
 	}
 }

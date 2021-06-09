@@ -22,7 +22,6 @@ class ListView extends \App\Controller\View
 	{
 		$listViewModel = \YF\Modules\Base\Model\ListView::getInstance($this->moduleName, $this->request->getAction());
 		$this->viewer->assign('HEADERS', $listViewModel->getHeaders());
-		$this->viewer->assign('LIST_VIEW_MODEL', $listViewModel);
 		$this->viewer->view($this->processTplName(), $this->moduleName);
 	}
 

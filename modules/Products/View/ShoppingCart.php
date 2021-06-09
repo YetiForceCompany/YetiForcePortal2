@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Adach <a.adach@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\View;
@@ -37,11 +38,14 @@ class ShoppingCart extends View\ListView
 	/** {@inheritdoc} */
 	public function process()
 	{
+		$this->page = $this->request->getInteger('page', 1);
+		$offset = ($this->page - 1) * (\App\Config::$itemsPrePage ?: 15);
 		$moduleName = $this->request->getModule();
 		$listViewModel = $this->getListViewModel()
 			->setRawData(true)
 			->setFields(static::CUSTOM_FIELDS)
-			->setOffset($this->request->getInteger('page', 0));
+			->setPage($this->page)
+			->setOffset($offset);
 		$proceedUrl = 'index.php?module=Products&view=ProceedToCheckout';
 		$readonly = false;
 		if (!$this->request->isEmpty('reference_id')) {

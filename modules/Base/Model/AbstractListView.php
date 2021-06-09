@@ -8,6 +8,7 @@
  * @license YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Model;
@@ -25,6 +26,9 @@ abstract class AbstractListView
 
 	/** @var array Records list from api. */
 	protected $recordsList = [];
+
+	/** @var int Current page. */
+	private $page = 1;
 
 	/** @var int The number of items on the page. */
 	protected $limit = 0;
@@ -245,5 +249,41 @@ abstract class AbstractListView
 	public function getCount(): int
 	{
 		return $this->recordsList['numberOfAllRecords'] ?? 0;
+	}
+
+	/**
+	 * Get current page.
+	 *
+	 * @return int
+	 */
+	public function getPage(): int
+	{
+		if (!$this->page) {
+			$this->page = floor($this->recordsList['numberOfRecords'] / ($this->recordsList['numberOfAllRecords'] ?: 1)) ?: 1;
+		}
+		return $this->page;
+	}
+
+	/**
+	 * Sets page number.
+	 *
+	 * @param int $page
+	 *
+	 * @return $this
+	 */
+	public function setPage(int $page)
+	{
+		$this->page = $page;
+		return $this;
+	}
+
+	/**
+	 * Is there more pages.
+	 *
+	 * @return bool
+	 */
+	public function isMorePages(): bool
+	{
+		return $this->recordsList['isMorePages'] ?? false;
 	}
 }
