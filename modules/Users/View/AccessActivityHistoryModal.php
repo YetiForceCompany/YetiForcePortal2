@@ -18,7 +18,6 @@ namespace YF\Modules\Users\View;
  */
 class AccessActivityHistoryModal extends \App\Controller\Modal
 {
-
 	/** @var array Columns to show on the list access activity history. */
 	public static $columnsToShow = [
 		'time' => 'FL_LOGIN_TIME',
@@ -47,7 +46,6 @@ class AccessActivityHistoryModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-
 		$this->viewer->assign('TABLE_COLUMNS', static::$columnsToShow);
 		$this->viewer->assign('ACTIVITY_HISTORY', \App\Api::getInstance()->call('Users/AccessActivityHistory'));
 		$this->viewer->view('Modal/AccessActivityHistoryModal.tpl', $this->request->getModule());

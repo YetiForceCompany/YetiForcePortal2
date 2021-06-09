@@ -18,6 +18,9 @@ namespace YF\Modules\Users\View;
 class PasswordChangeModal extends \App\Controller\Modal
 {
 	/** {@inheritdoc} */
+	public $successBtn = 'LBL_CHANGE_PASSWORD';
+
+	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
 	}
