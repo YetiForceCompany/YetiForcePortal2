@@ -15,34 +15,6 @@ namespace App;
 class Config extends \Conf\Config
 {
 	/**
-	 * Request start time.
-	 *
-	 * @var int
-	 */
-	public static $startTime;
-
-	/**
-	 * CRM root directory.
-	 *
-	 * @var string
-	 */
-	public static $rootDirectory;
-
-	/**
-	 * Request process type.
-	 *
-	 * @var string
-	 */
-	public static $processType;
-
-	/**
-	 * Request process name.
-	 *
-	 * @var string
-	 */
-	public static $processName;
-
-	/**
 	 * Js environment variables.
 	 *
 	 * @var array

@@ -123,6 +123,8 @@ class Log
 
 	public static function display()
 	{
-		return Log\AbstractBase::$messages;
+		$messages = Log\AbstractBase::$messages;
+		unset($messages['App\Log\Api']);
+		return $messages;
 	}
 }

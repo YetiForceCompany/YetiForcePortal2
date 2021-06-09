@@ -231,14 +231,14 @@ abstract class AbstractListView
 	{
 		if (empty($this->recordsList)) {
 			$this->recordsList = $this->getFromApi([
-				'x-only-column' => 1
+				'x-only-column' => 1,
 			]);
 		}
 		return $this->recordsList['headers'] ?? [];
 	}
 
 	/**
-	 *  Get all rows count.
+	 * Get all rows count.
 	 *
 	 * @return int
 	 */

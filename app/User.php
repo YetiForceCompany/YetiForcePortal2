@@ -82,6 +82,15 @@ class User extends BaseModel
 			foreach ($response as $key => $value) {
 				$this->set($key, $value);
 			}
+			if ($response['2faObligatory'] && 'PLL_AUTHY_TOTP' === $response['authy_methods']) {
+				\App\Process::addEvent([
+					'name' => 'ShowAuthy2faModal',
+					'priority' => 7,
+					'execution' => 'constant',
+					'type' => 'modal',
+					'url' => 'index.php?module=Users&view=TwoFactorAuthenticationModal',
+				]);
+			}
 			return true;
 		}
 		return false;

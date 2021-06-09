@@ -44,6 +44,9 @@ class TwoFactorAuthenticationModal extends \App\Controller\Action
 				} else {
 					$response->setError($api);
 				}
+				if (\App\Process::hasEvent('ShowAuthy2faModal')) {
+					\App\Process::removeEvent('ShowAuthy2faModal');
+				}
 			} catch (\Throwable $th) {
 				$response->setError($th->getMessage());
 			}

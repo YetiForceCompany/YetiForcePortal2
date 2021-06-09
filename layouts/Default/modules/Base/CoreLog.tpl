@@ -13,7 +13,7 @@
 			<div id="coreLog" class="collapse" aria-labelledby="headingCoreLog">
 				<div class="col-md-12 px-0 card-body">
 					<ol id="CoreLogList">
-						{foreach item=MESSAGES from=$LOGS}
+						{foreach item=MESSAGES key=LOG_TYPE from=$LOGS}
 							{foreach item=MESSAGE from=$MESSAGES}
 								<li>{$MESSAGE}</li>;
 							{/foreach}

@@ -24,7 +24,6 @@ class WebUI
 	 */
 	public function process(Request $request)
 	{
-		\App\Log::init();
 		try {
 			$module = $request->getModule();
 			$view = $request->getByType('view', Purifier::ALNUM);

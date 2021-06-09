@@ -957,6 +957,43 @@ var AppConnector,
 			};
 			$('.js-more').on('click', showMoreModal);
 			$(document).on('click', '.js-more', showMoreModal);
+		},
+		processEvents: false,
+		registerAfterLoginEvents: function () {
+			if (this.processEvents === false) {
+				let processEvents = $('#processEvents');
+				if (processEvents.length === 0) {
+					return;
+				}
+				this.processEvents = JSON.parse(processEvents.val());
+			}
+			if (this.processEvents.length === 0) {
+				return;
+			}
+			let event = this.processEvents.shift();
+			switch (event.type) {
+				case 'modal':
+					AppConnector.request(event.url)
+						.done(function (requestData) {
+							app.showModalWindow(requestData).one('hidden.bs.modal', function () {
+								app.registerAfterLoginEvents();
+							});
+						})
+						.fail(function (textStatus, errorThrown) {
+							app.showNotify({
+								title: app.vtranslate('JS_ERROR'),
+								text: errorThrown,
+								type: 'error'
+							});
+						});
+					break;
+				case 'notify':
+					app.showNotify(event.notify);
+					app.registerAfterLoginEvents();
+					break;
+				default:
+					return;
+			}
 		}
 	};
 $(function () {
@@ -970,6 +1007,7 @@ $(function () {
 	app.registerMobileMenu(container);
 	app.registerIframeAndMoreContent();
 	app.registerEventForEditor(container);
+	app.registerAfterLoginEvents(container);
 	//	app.registerSideLoading(container);
 	// Instantiate Page Controller
 	var pageController = app.getPageController();

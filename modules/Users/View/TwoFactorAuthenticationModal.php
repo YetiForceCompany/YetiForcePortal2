@@ -37,6 +37,9 @@ class TwoFactorAuthenticationModal extends \App\Controller\Modal
 		if ('PLL_PASSWORD_2FA' !== $user->get('login_method') || $user->isEmpty('authy_methods')) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
+		if ($user->get('2faObligatory') && 'PLL_AUTHY_TOTP' === $user->get('authy_methods')) {
+			$this->lockExit = true;
+		}
 	}
 
 	/**  {@inheritdoc}  */

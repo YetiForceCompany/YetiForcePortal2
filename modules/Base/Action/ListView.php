@@ -62,8 +62,9 @@ class ListView extends \App\Controller\Action
 		}
 		$response = [
 			'draw' => $this->request->getInteger('draw'),
-			'iTotalDisplayRecords' => $listViewModel->getCount(),
-			'aaData' => $rows
+			'iTotalDisplayRecords' => \count($rows),
+			'iTotalRecords' => $listViewModel->getCount(),
+			'aaData' => $rows,
 		];
 		header('content-type: text/json; charset=UTF-8');
 		echo \App\Json::encode($response);

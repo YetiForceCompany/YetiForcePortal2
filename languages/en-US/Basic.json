@@ -61,8 +61,8 @@
     "FL_LOGIN_TIME": "Last login time",
     "FL_STATUS": "Status",
     "LBL_USER_AGENT": "User agent",
-    "LBL_IP_ADDRESS": "IP Address"
-
+    "LBL_IP_ADDRESS": "IP Address",
+    "LBL_WEB_LOAD_TIME": "Page loading time"
   },
   "js": {
     "JS_YES": "Yes",

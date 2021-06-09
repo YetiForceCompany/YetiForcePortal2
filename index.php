@@ -22,9 +22,10 @@ require_once ROOT_DIRECTORY . '/vendor/autoload.php';
 set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
 
 \App\Session::init();
-
-\App\Config::$startTime = microtime(true);
+\App\Process::$startTime = microtime(true);
 \App\Cache::init();
+\App\Log::init();
+\App\Process::init();
 
 $coreUI = new \App\WebUI();
 $coreUI->process(new \App\Request($_REQUEST));
