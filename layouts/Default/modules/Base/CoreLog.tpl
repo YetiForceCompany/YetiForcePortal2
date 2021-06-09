@@ -5,7 +5,7 @@
 	{assign var=LOGS value=\App\Log::display()}
 	{if $LOGS}
 		<div id="CoreLog" class="c-card card  col-sm-12 px-0 blockContainer mt-4">
-			<div class="card-header c-card__header collapsed" id="headingCoreLog"  data-toggle="collapse" data-target="#coreLog" aria-expanded="true" aria-controls="coreLog">
+			<div class="card-header c-card__header collapsed p-2" id="headingCoreLog"  data-toggle="collapse" data-target="#coreLog" aria-expanded="true" aria-controls="coreLog">
 				<span class="fas fa-angle-right mr-2 c-card__icon-right"></span>
 				<span class="fas fa-angle-down mr-2 c-card__icon-down"></span>
 				<span class="font-weight-bold">{\App\Language::translate('LBL_CORE_LOG')}</span>
