@@ -111,7 +111,7 @@ jQuery.Class(
 						});
 						container.find('.js-tree-text').val(selectedCategories[0]['text']);
 						container.find('.js-tree-value').val(selectedCategories[0]['original']['tree']);
-						app.hideModalWindow(modalContainer);
+						app.hideModalWindow();
 					});
 				});
 			});
