@@ -54,49 +54,6 @@ class User extends BaseModel
 	}
 
 	/**
-	 * Login to portal.
-	 *
-	 * @param string $email
-	 * @param string $password
-	 * @param string $token
-	 *
-	 * @return bool
-	 */
-	public function login(string $email, string $password, string $token = ''): bool
-	{
-		$response = Api::getInstance()
-			->call('Users/Login', [
-				'userName' => $email,
-				'password' => $password,
-				'code' => $token,
-				'params' => [
-					'version' => Config::$version,
-					'language' => Language::getLanguage(),
-					'ip' => Server::getRemoteIp(),
-					'fromUrl' => Config::$portalUrl,
-				],
-			], 'post');
-		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
-			session_regenerate_id(true);
-			$this->set('userName', $email);
-			foreach ($response as $key => $value) {
-				$this->set($key, $value);
-			}
-			if ($response['2faObligatory'] && 'PLL_AUTHY_TOTP' === $response['authy_methods']) {
-				\App\Process::addEvent([
-					'name' => 'ShowAuthy2faModal',
-					'priority' => 7,
-					'execution' => 'constant',
-					'type' => 'modal',
-					'url' => 'index.php?module=Users&view=TwoFactorAuthenticationModal',
-				]);
-			}
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Function to set the value for a given key.
 	 *
 	 * @param $key

@@ -3,6 +3,7 @@
 <!-- tpl-Users-LoginPassReset -->
 <div class="container loginContainer">
 	<form action="index.php?module=Users&action=LoginPassReset" method="POST">
+		<input name="fingerprint" type="hidden" id="fingerPrint" />
 		<div class="text-center">
 			<img src="{PUBLIC_DIRECTORY}{\App\Config::$logoLoginPage}" class="img-responsive logo" alt="Logo" title="Logo">
 		</div>

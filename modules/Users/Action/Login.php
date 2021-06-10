@@ -35,29 +35,70 @@ class Login extends \App\Controller\Action
 		$url = Config::$portalUrl;
 		$this->checkBruteForce();
 		try {
-			$email = $this->request->getByType('email', \App\Purifier::TEXT);
-			$password = $this->request->getRaw('password');
-			$userInstance = \App\User::getUser();
-			$userInstance->set('language', $this->request->getByType('language', \App\Purifier::STANDARD));
 			if ($this->request->isEmpty('mode')) {
-				$userInstance->login($email, $password);
+				$this->login($this->request->getByType('email', \App\Purifier::TEXT), $this->request->getRaw('password'));
 			} else {
 				$twoFactorAuth = $_SESSION['2fa'];
 				unset($_SESSION['2fa']);
-				$userInstance->login($twoFactorAuth['email'], $twoFactorAuth['password'], $this->request->getByType('token', \App\Purifier::ALNUM));
+				$this->login($twoFactorAuth['email'], $twoFactorAuth['password'], $this->request->getByType('token', \App\Purifier::ALNUM));
 			}
 		} catch (\Throwable $th) {
 			if (412 === $th->getCode()) {
 				$url .= 'index.php?module=Users&view=Login&mode=2fa';
 				$_SESSION['2fa'] = [
-					'email' => $email,
-					'password' => $password,
+					'email' => $this->request->getByType('email', \App\Purifier::TEXT),
+					'password' => $this->request->getRaw('password'),
 				];
 			} else {
 				$_SESSION['login_errors'][] = $th->getMessage();
 			}
 		}
 		header('Location: ' . $url);
+	}
+
+	/**
+	 * Login to portal.
+	 *
+	 * @param string $email
+	 * @param string $password
+	 * @param string $token
+	 *
+	 * @return void
+	 */
+	public function login(string $email, string $password, string $token = ''): void
+	{
+		$userInstance = \App\User::getUser();
+		$userInstance->set('language', $this->request->getByType('language', \App\Purifier::STANDARD));
+		$response = \App\Api::getInstance()
+			->call('Users/Login', [
+				'userName' => $email,
+				'password' => $password,
+				'code' => $token,
+				'params' => [
+					'version' => \App\Config::$version,
+					'language' => \App\Language::getLanguage(),
+					'ip' => \App\Server::getRemoteIp(),
+					'fromUrl' => \App\Config::$portalUrl,
+					'deviceId' => $this->request->getByType('fingerprint', \App\Purifier::ALNUM_EXTENDED),
+				],
+			], 'post');
+		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
+			session_regenerate_id(true);
+			$userInstance->set('userName', $email);
+			$userInstance->set('deviceId', $this->request->getByType('fingerprint', \App\Purifier::ALNUM_EXTENDED));
+			foreach ($response as $key => $value) {
+				$userInstance->set($key, $value);
+			}
+			if ($response['2faObligatory'] && 'PLL_AUTHY_TOTP' === $response['authy_methods']) {
+				\App\Process::addEvent([
+					'name' => 'ShowAuthy2faModal',
+					'priority' => 7,
+					'execution' => 'constant',
+					'type' => 'modal',
+					'url' => 'index.php?module=Users&view=TwoFactorAuthenticationModal',
+				]);
+			}
+		}
 	}
 
 	/**
@@ -75,7 +116,7 @@ class Login extends \App\Controller\Action
 			return;
 		}
 		if (\App\Cache::isBase()) {
-			throw new \App\Exceptions\NoPermitted('Cache is not working', );
+			throw new \App\Exceptions\NoPermitted('Cache is not working');
 		}
 		if (\App\Cache::has('checkBruteForce', $ip)) {
 			$row = \App\Cache::get('checkBruteForce', $ip);

@@ -59,6 +59,7 @@ class LoginPassReset extends Login
 	{
 		$response = \App\Api::getInstance()->call('Users/ResetPassword', [
 			'userName' => $this->request->getByType('email', \App\Purifier::TEXT),
+			'deviceId' => $this->request->getByType('fingerprint', \App\Purifier::ALNUM_EXTENDED),
 		], 'post');
 		if ($response['mailerStatus']) {
 			$_SESSION['reset_errors'][] = \App\Language::translateArgs('LBL_RESET_PASSWORD_LINK_SENT', 'Users', $response['expirationDate']);
@@ -78,6 +79,7 @@ class LoginPassReset extends Login
 		$response = \App\Api::getInstance()->call('Users/ResetPassword', [
 			'token' => $this->request->getByType('token', \App\Purifier::ALNUM),
 			'password' => $this->request->getRaw('password'),
+			'deviceId' => $this->request->getByType('fingerprint', \App\Purifier::ALNUM_EXTENDED),
 		], 'put');
 		if ($response) {
 			$_SESSION['login_errors'][] = \App\Language::translate('LBL_PASSWORD_CHANGED', 'Users');

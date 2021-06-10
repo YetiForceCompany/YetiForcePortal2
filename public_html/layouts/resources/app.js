@@ -311,13 +311,6 @@ var AppConnector,
 			rand = Math.floor(Math.random() * chars.length);
 			return (newchar = chars.substring(rand, rand + 1));
 		},
-		registerSideLoading: function (body) {
-			$(document).pjax('a[href]:not(.loadPage)', 'div.bodyContent');
-			$(document).on('pjax:complete', function () {
-				var pageController = app.getPageController();
-				if (pageController) pageController.registerEvents();
-			});
-		},
 		translate: function (key) {
 			if (app.languageString[key] != undefined) {
 				return app.languageString[key];
@@ -997,7 +990,7 @@ var AppConnector,
 		}
 	};
 $(function () {
-	var container = jQuery('body');
+	var container = $('body');
 	app.registerSelectField(container);
 	app.setNotifyDefaultOptions();
 	app.registerTimeField(container);
@@ -1008,7 +1001,9 @@ $(function () {
 	app.registerIframeAndMoreContent();
 	app.registerEventForEditor(container);
 	app.registerAfterLoginEvents(container);
-	//	app.registerSideLoading(container);
+	if ($('#fingerPrint').length && typeof DeviceUUID === 'function') {
+		$('#fingerPrint').val(new DeviceUUID().get());
+	}
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController) pageController.registerEvents();

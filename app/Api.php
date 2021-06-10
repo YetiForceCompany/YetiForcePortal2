@@ -48,7 +48,7 @@ class Api
 		if (!isset(self::$instance)) {
 			$userInstance = User::getUser();
 			$header = [
-				'User-Agent' => 'YetiForce Portal',
+				'User-Agent' => 'YetiForce Portal | ' . \App\Purifier::purifyByType($_SERVER['HTTP_USER_AGENT'], 'Text'),
 				'X-Encrypted' => Config::$encryptDataTransfer ? 1 : 0,
 				'X-Api-Key' => Config::$apiKey,
 				'Content-Type' => 'application/json',

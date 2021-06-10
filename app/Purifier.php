@@ -25,6 +25,7 @@ class Purifier
 	const TEXT = 'Text';
 	const STANDARD = 'Standard';
 	const ALNUM = 'Alnum';
+	const ALNUM_EXTENDED = 'AlnumExtended';
 	const INTEGER = 'Integer';
 
 	/**
@@ -50,6 +51,9 @@ class Purifier
 					break;
 				case static::ALNUM:
 					$value = preg_match('/^[[:alnum:]_]+$/', $input) ? $input : null;
+					break;
+				case static::ALNUM_EXTENDED:
+					$value = preg_match('/^[\sA-Za-z0-9\-]+$/', $input) ? $input : null;
 					break;
 				case static::INTEGER:
 					if (false !== ($input = filter_var($input, FILTER_VALIDATE_INT))) {

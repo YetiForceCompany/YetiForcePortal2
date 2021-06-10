@@ -58,4 +58,14 @@ class Login extends \App\Controller\View
 		$this->viewer->assign('SHOW_FOOTER_BAR', false);
 		parent::postProcess();
 	}
+
+	/** {@inheritdoc} */
+	public function getFooterScripts(bool $loadForModule = true): array
+	{
+		return array_merge(
+			parent::getFooterScripts(),
+			$this->convertScripts([
+				['libraries/device-uuid/lib/device-uuid.js'],
+			], 'js'));
+	}
 }
