@@ -173,6 +173,10 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		}
 		this.formElement.validationEngine(app.validationEngineOptions);
 	}
+	registerEventsAfterLoad() {
+		super.registerEventsAfterLoad();
+		this.registerButtonRemoveFromCart();
+	}
 	registerEvents() {
 		super.registerEvents();
 		this.registerButtonRemoveFromCart();

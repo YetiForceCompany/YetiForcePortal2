@@ -109,10 +109,13 @@ window.Products_Tree_Js = class {
 			let container = $('.js-main-container');
 			container.html(data);
 			this.container = container;
-			this.registerAmountChange();
-			this.registerButtonAddToCart();
-			this.registerPagination();
+			this.registerEventsAfterLoad();
 		});
+	}
+	registerEventsAfterLoad() {
+		this.registerAmountChange();
+		this.registerButtonAddToCart();
+		this.registerPagination();
 	}
 	registerSearch() {
 		$('.js-search-button').on('click', (e) => {
