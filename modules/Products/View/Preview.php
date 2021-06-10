@@ -5,6 +5,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Tomasz Kur <t.kur@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Products\View;
@@ -31,7 +32,6 @@ class Preview extends \App\Controller\View
 		])->call("$moduleName/Record/$record");
 		$recordModel = Record::getInstance($moduleName);
 		$recordModel->setData($recordDetail['data']);
-
 		$amountInCart = 0;
 		$cart = new Cart();
 		if ($cart->has($record)) {
@@ -54,7 +54,7 @@ class Preview extends \App\Controller\View
 		$recordModel->set('unit_gross', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_gross']));
 		$recordModel->setRawValue('unit_price', $recordDetail['ext']['unit_price']);
 		$recordModel->setRawValue('unit_gross', $recordDetail['ext']['unit_gross']);
-		$recordModel->setRawValue('qtyinstock', $recordDetail['ext']['qtyinstock']);
+		$recordModel->setRawValue('qtyinstock', $recordDetail['ext']['qtyinstock'] ?? 0);
 		$recordModel->setId($record);
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordDetail['name']);
 		$this->viewer->assign('RECORD', $recordModel);

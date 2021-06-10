@@ -70,11 +70,13 @@ class CartView extends ListViewModel
 		foreach ($this->recordsListModel as $recordId => $recordModel) {
 			$amount = $this->cart->getAmount($recordId);
 			$recordDetail = $this->cart->get($recordId);
+			$priceNet = (float) ($recordDetail['param']['priceNetto'] ?? 0);
+			$priceGross = (float) ($recordDetail['param']['priceGross'] ?? 0);
 			$recordModel->set('amountInShoppingCart', $amount);
-			$recordModel->set('totalPriceNetto', $amount * (float) $recordDetail['param']['priceNetto']);
-			$recordModel->set('totalPriceGross', $amount * (float) $recordDetail['param']['priceGross']);
-			$recordModel->set('priceNetto', $recordDetail['param']['priceNetto']);
-			$recordModel->set('priceGross', $recordDetail['param']['priceGross']);
+			$recordModel->set('totalPriceNetto', $amount * $priceNet);
+			$recordModel->set('totalPriceGross', $amount * $priceGross);
+			$recordModel->set('priceNetto', $priceNet);
+			$recordModel->set('priceGross', $priceGross);
 		}
 		return $this->recordsListModel;
 	}
