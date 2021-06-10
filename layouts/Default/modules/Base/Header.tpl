@@ -14,10 +14,10 @@
 		{foreach item=SCRIPT from=$CSS_FILE}
 			<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}"/>
 		{/foreach}
+		<script type="text/javascript">
+			let CONFIG = {\App\Config::getJsEnv()};
+		</script>
 	</head>
-	<script type="text/javascript">
-		let CONFIG = {\App\Config::getJsEnv()};
-	</script>
 	<body data-language="{$LANGUAGE}" class="bodyContainer {$MODULE_NAME}_{$ACTION_NAME}">
 	{include file=\App\Resources::templatePath("Body.tpl", $MODULE_NAME)}
 <!-- /tpl-Base-Header -->
