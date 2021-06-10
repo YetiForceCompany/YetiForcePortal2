@@ -75,13 +75,5 @@ class Tree extends \YF\Modules\Base\Model\AbstractListView
 		return $tree;
 	}
 
-	/**
-	 * Is there more pages.
-	 *
-	 * @return bool
-	 */
-	public function isMorePages(): bool
-	{
-		return $this->recordsList['isMorePages'] ?? false;
-	}
+	
 }
