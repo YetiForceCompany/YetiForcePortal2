@@ -58,9 +58,11 @@ class CartView extends ListViewModel
 				'value' => array_keys($card),
 				'operator' => 'e'
 			]);
+			return parent::loadRecordsList();
 		}
+		$this->recordsList = [];
 
-		return parent::loadRecordsList();
+		return $this;
 	}
 
 	/** {@inheritdoc} */
