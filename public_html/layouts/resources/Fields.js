@@ -784,9 +784,16 @@ window.App.Fields = {
 			}
 			return window.App.Fields.Tree.instance;
 		}
+		/**
+		 * Load tree.
+		 */
 		loadTree() {
 			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
 		}
+		/**
+		 * Generate tree.
+		 * @param {object} treeData
+		 */
 		generateTree(treeData) {
 			this.treeInstance.jstree({
 				core: {
@@ -797,6 +804,53 @@ window.App.Fields = {
 						responsive: true
 					}
 				}
+			});
+		}
+	},
+	MultiTree: class {
+		constructor(treeContainer = $('.js-tree-container')) {
+			if (treeContainer.length > 0) {
+				this.treeInstance = treeContainer;
+				this.loadTree();
+			}
+		}
+		/**
+		 * Get instance of Tree.
+		 * @returns {Tree}
+		 */
+		static getInstance(container = $('.js-tree-container')) {
+			if (typeof window.App.Fields.MultiTree.instance === 'undefined') {
+				window.App.Fields.MultiTree.instance = new window.App.Fields.MultiTree(container);
+			}
+			return window.App.Fields.MultiTree.instance;
+		}
+		/**
+		 * Load tree.
+		 */
+		loadTree() {
+			this.generateTree(JSON.parse(this.treeInstance.find('.js-tree-data').val()));
+		}
+		/**
+		 * Generate tree.
+		 * @param {object} treeData
+		 */
+		generateTree(treeData) {
+			let plugins = [];
+			plugins.push('category');
+			plugins.push('checkbox');
+			this.treeInstance.jstree({
+				core: {
+					data: treeData,
+					multiple: true,
+					themes: {
+						name: 'proton',
+						responsive: true
+					}
+				},
+				checkbox: {
+					three_state: false
+				},
+				plugins: plugins
 			});
 		}
 	},

@@ -52,10 +52,15 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger mr-2"
-						data-dismiss="modal">{App\Language::translate('BTN_CANCEL')}</button>
-					<button type="button"
-						class="btn btn-success js-tree-modal-select">{App\Language::translate('PLL_SELECT_OPTION')}</button>
+					<button type="button" class="btn btn-success js-tree-modal-select" data-js="click">
+						<span class="fas fa-check mr-1"></span>
+						{App\Language::translate('PLL_SELECT_OPTION')}
+					</button>
+					<button type="button" class="btn btn-danger mr-2" data-dismiss="modal">
+						<span class="fas fa-times mr-2"></span>
+						{App\Language::translate('BTN_CANCEL')}
+					</button>
+
 				</div>
 			</div>
 		</div>
