@@ -890,14 +890,13 @@ table.dataTable.listViewEntries tbody td {
   padding: 3px 10px !important; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-.Users_Login img.logo {
-  margin: 10px auto;
-  max-height: 200px; }
-
-.Users_Login .loginContainer {
+.loginContainer {
   max-width: 400px;
   margin-top: 5vh;
   margin-bottom: 15px; }
+  .loginContainer img.logo {
+    margin: 10px auto;
+    max-height: 200px; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .Install_Install .logo {

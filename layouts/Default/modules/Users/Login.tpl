@@ -25,12 +25,12 @@
 		{/if}
 		<label for="inputEmail" class="sr-only">{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}</label>
 		<div class="input-group mb-2 first-group">
-			<input name="email" type="text" id="inputEmail" class="form-control" placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" value="" required="" autofocus="" />
+			<input name="email" type="text" id="inputEmail" class="form-control" placeholder="{\App\Language::translate('LBL_EMAIL_ADDRESS', $MODULE_NAME)}" required="" autofocus="" />
 			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-user"></span></div></div>
 		</div>
 		<label for="inputPassword" class="sr-only">{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}</label>
 		<div class="input-group mb-2 first-group">
-			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" value="" required="">
+			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="{\App\Language::translate('LBL_PASSWORD', $MODULE_NAME)}" required="">
 			<div class="input-group-append"><div class="input-group-text"><span class="fas fa-briefcase"></span></div></div>
 		</div>
 		{if \App\Config::getBool('allowLanguageSelection')}
@@ -46,8 +46,17 @@
 		{else}
 			<input type="hidden" name="language" value="{\App\Config::get('language')}" />
 		{/if}
-		<button class="btn btn-lg btn-info btn-block" type="submit">{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)} <strong><span class="fas fa-chevron-right ml-2"></span></strong></button>
-
+		<button class="btn btn-lg btn-info btn-block" type="submit">
+			{\App\Language::translate('LBL_SINGN_IN', $MODULE_NAME)} <strong><span class="fas fa-chevron-right ml-2"></span></strong>
+		</button>
+		<div class="form-group">
+			<div class="mt-2">
+				<a href="index.php?module=Users&view=LoginPassReset" class="btn btn-lg btn-outline-warning btn-block">
+				{\App\Language::translate('LBL_FORGOT_PASSWORD_PAGE',$MODULE_NAME)}
+				<span class="fas fa-lock-open ml-2"></span>
+				</a>
+			</div>
+		</div>
 	</form>
 </div>
 {include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
