@@ -2,6 +2,7 @@
 {strip}
 <!-- tpl-Users-Login -->
 <div class="container loginContainer">
+	<input type="hidden" id="view" value="{$VIEW}"/>
 	<form action="index.php?module=Users&action=Login" method="POST">
 		<input name="fingerprint" type="hidden" id="fingerPrint" />
 		<div class="text-center">

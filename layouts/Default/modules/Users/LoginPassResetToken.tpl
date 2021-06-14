@@ -2,7 +2,8 @@
 {strip}
 <!-- tpl-Users-LoginPassResetToken -->
 <div class="container loginContainer">
-	<form class="js-change-password" data-js="container">
+	<input type="hidden" id="view" value="{$VIEW}"/>
+	<form action="index.php?module=Users&action=LoginPassReset&mode=token" method="POST">
 		<input name="fingerprint" type="hidden" id="fingerPrint" />
 		<div class="text-center">
 			<img src="{PUBLIC_DIRECTORY}{\App\Config::$logoLoginPage}" class="img-responsive logo" alt="Logo" title="Logo">

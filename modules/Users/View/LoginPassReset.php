@@ -42,4 +42,14 @@ class LoginPassReset extends Login
 			$this->viewer->view('LoginPassResetToken.tpl', $module);
 		}
 	}
+
+	/** {@inheritdoc} */
+	public function getFooterScripts(bool $loadForModule = true): array
+	{
+		return array_merge(
+				parent::getFooterScripts(),
+				$this->convertScripts([
+					['layouts/resources/LoginPassReset.js']
+				], 'js'));
+	}
 }

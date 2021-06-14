@@ -31,7 +31,8 @@
     "BTN_FORGOT_PASSWORD_PAGE": "Forgot password",
     "LBL_FORGOT_PASSWORD_TOKEN": "Password reset token",
     "LBL_RESET_PASSWORD_LINK_SENT": "The link for password change is waiting to be sent, it can take a few minutes. Please check your inbox. The token is valid until %s",
-    "LBL_RESET_PASSWORD_SMTP_ERROR": "Problem sending the password reset e-mail, please contact the administrator."
+    "LBL_RESET_PASSWORD_SMTP_ERROR": "Problem sending the password reset e-mail, please contact the administrator.",
+    "LBL_PASSWORD_SHOULD_BE_SAME": "Both passwords must match."
   },
   "js": {}
 }
