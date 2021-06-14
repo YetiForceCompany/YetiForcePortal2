@@ -47,7 +47,34 @@ class AccessActivityHistoryModal extends \App\Controller\Modal
 	public function process(): void
 	{
 		$this->viewer->assign('TABLE_COLUMNS', static::$columnsToShow);
-		$this->viewer->assign('ACTIVITY_HISTORY', \App\Api::getInstance()->call('Users/AccessActivityHistory'));
+		$this->viewer->assign('ACTIVITY_HISTORY', $this->getFormatLoginHistory(\App\Api::getInstance()->call('Users/AccessActivityHistory')));
 		$this->viewer->view('Modal/AccessActivityHistoryModal.tpl', $this->request->getModule());
+	}
+
+	/**
+	 * Get format data access activity history.
+	 *
+	 * @param array $row
+	 *
+	 * @return array
+	 */
+	public function getFormatLoginHistory(array $row): array
+	{
+		foreach ($row as $keyRow => $values) {
+			foreach ($values as $key => $value) {
+				switch ($key) {
+					case 'agent':
+						$values[$key] = \App\Viewer::truncateText($value, 20, true);
+						break;
+					default:
+						break;
+				}
+				if ('agent' !== $key) {
+					$values[$key] = \App\Purifier::encodeHtml($value);
+				}
+			}
+			$row[$keyRow] = $values;
+		}
+		return $row;
 	}
 }
