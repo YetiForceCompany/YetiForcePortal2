@@ -19,7 +19,6 @@ window.Base_LoginPassReset_Js = class {
 	 * Register events.
 	 */
 	registerEvents() {
-		console.log('dddd');
 		this.container = $('form');
 		this.registerSubmitEvent();
 	}
