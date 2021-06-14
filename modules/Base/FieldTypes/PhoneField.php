@@ -1,8 +1,8 @@
 <?php
 /**
- * Phone field model file.
+ * Phone UIType field file.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -12,7 +12,7 @@
 namespace YF\Modules\Base\FieldTypes;
 
 /**
- * Phone field model class.
+ * Phone UIType field class.
  */
 class PhoneField extends BaseField
 {

@@ -1,8 +1,8 @@
 <?php
 /**
- * Reference process field file.
+ * Reference process UIType field file.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -13,13 +13,8 @@
 namespace YF\Modules\Base\FieldTypes;
 
 /**
- * Reference process field class.
+ * Reference process UIType field class.
  */
-class ReferenceProcessField extends BaseField
+class ReferenceProcessField extends ReferenceField
 {
-	/** {@inheritdoc} */
-	public function getTemplateName(): string
-	{
-		return 'Field/Edit/Reference.tpl';
-	}
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * Image field class.
+ * Image UIType field class.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -12,6 +12,9 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
+/**
+ * Image UIType field class.
+ */
 class ImageField extends MultiImageField
 {
 }

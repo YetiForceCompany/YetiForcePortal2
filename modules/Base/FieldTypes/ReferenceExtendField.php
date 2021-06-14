@@ -1,8 +1,8 @@
 <?php
 /**
- * Reference extend field file.
+ * Reference extend UIType field file.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -13,13 +13,8 @@
 namespace YF\Modules\Base\FieldTypes;
 
 /**
- * Reference extend field class.
+ * Reference extend UIType field class.
  */
-class ReferenceExtendField extends BaseField
+class ReferenceExtendField extends ReferenceField
 {
-	/** {@inheritdoc} */
-	public function getTemplateName(): string
-	{
-		return 'Field/Edit/Reference.tpl';
-	}
 }

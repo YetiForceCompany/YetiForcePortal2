@@ -1,8 +1,8 @@
 <?php
 /**
- * Boolean field class.
+ * Boolean UIType field file.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -12,6 +12,9 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
+/**
+ * Boolean UIType field class.
+ */
 class BooleanField extends BaseField
 {
 	/**

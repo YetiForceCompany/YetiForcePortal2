@@ -1,8 +1,8 @@
 <?php
 /**
- * Reference link field file.
+ * Reference link UIType field file.
  *
- * @package FieldTypes
+ * @package UIType
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
@@ -13,13 +13,8 @@
 namespace YF\Modules\Base\FieldTypes;
 
 /**
- * Reference link field class.
+ * Reference link UIType field class.
  */
-class ReferenceLinkField extends BaseField
+class ReferenceLinkField extends ReferenceField
 {
-	/** {@inheritdoc} */
-	public function getTemplateName(): string
-	{
-		return 'Field/Edit/Reference.tpl';
-	}
 }
