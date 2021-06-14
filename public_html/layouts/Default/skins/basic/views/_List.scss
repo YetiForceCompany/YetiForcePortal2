@@ -13,32 +13,11 @@ table tbody tr:hover td .actions span {
 	opacity: 1;
 }
 
-.leftRecordActions {
-	background: inherit;
-
-	.actions {
-		background: inherit;
-
-		&:hover {
-			.toolsAction {
-				visibility: hidden;
-			}
-
-			.actionImages {
-				white-space: nowrap;
-				position: absolute;
-				z-index: 1;
-				display: inline-block !important;
-			}
-		}
-
-		.actionImages a {
-			color: inherit;
-		}
-	}
-
-	> div {
-		display: inline-block !important;
+.actions {
+	.dropdown-menu {
+		min-width: calculate-rem(123px) !important;
+		top: -11px !important;
+		left: 45px !important;
 	}
 }
 
