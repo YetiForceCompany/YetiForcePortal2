@@ -66,6 +66,7 @@ class Login extends \App\Controller\View
 			parent::getFooterScripts(),
 			$this->convertScripts([
 				['libraries/device-uuid/lib/device-uuid.js'],
+				['layouts/resources/Login.js']
 			], 'js'));
 	}
 }

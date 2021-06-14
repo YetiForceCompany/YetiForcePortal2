@@ -2,10 +2,14 @@
 {strip}
 <!-- tpl-Users-LoginPassResetToken -->
 <div class="container loginContainer">
+	<input type="hidden" id="view" value="{$VIEW}"/>
 	<form action="index.php?module=Users&action=LoginPassReset&mode=token" method="POST">
 		<input name="fingerprint" type="hidden" id="fingerPrint" />
 		<div class="text-center">
 			<img src="{PUBLIC_DIRECTORY}{\App\Config::$logoLoginPage}" class="img-responsive logo" alt="Logo" title="Logo">
+		</div>
+		<div class="alert d-none js-alert-confirm-password alert-danger mt-2" role="alert" data-js="container">
+			{\App\Language::translate('LBL_PASSWORD_SHOULD_BE_SAME', $MODULE_NAME)}
 		</div>
 		{if isset($ERRORS)}
 			{foreach item=ERROR key=KEY from=$ERRORS}
