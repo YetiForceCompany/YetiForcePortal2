@@ -100,24 +100,42 @@ jQuery.Class(
 		registerTree: function () {
 			let container = this.getContainer();
 			container.find('.js-tree-select').on('click', function () {
-				let containerField = $(this).closest('.js-tree-content');
+				let containerField = $(this).closest('.js-tree-content'),
+					treeValueField = containerField.find('.js-tree-value'),
+					fieldDisplayElement = containerField.find('input[name="' + treeValueField.attr('name') + '_display"]'),
+					multiple = treeValueField.data('multiple');
 				app.showModalWindow(containerField.find('.js-tree-modal-window').clone(), function (modalContainer) {
 					let jstreeInstance = modalContainer.find('.js-tree-jstree');
-					new window.App.Fields.Tree(jstreeInstance);
+					if (multiple === 1) {
+						new window.App.Fields.MultiTree(jstreeInstance);
+					} else {
+						new window.App.Fields.Tree(jstreeInstance);
+					}
 					modalContainer.find('.js-tree-modal-select').on('click', function () {
 						let selectedCategories = [];
 						$.each(jstreeInstance.jstree('get_selected', true), (index, value) => {
 							selectedCategories.push(value);
 						});
-						container.find('.js-tree-text').val(selectedCategories[0]['text']);
-						container.find('.js-tree-value').val(selectedCategories[0]['original']['tree']);
-						app.hideModalWindow(modalContainer);
+						let treeText = [];
+						let treeValue = [];
+						$.each(selectedCategories, (index, value) => {
+							treeValue.push(value['original']['tree']);
+							treeText.push(value['text']);
+						});
+						fieldDisplayElement.val(treeText.join(','));
+						fieldDisplayElement.attr('readonly', true);
+						treeValueField.val(treeValue.join(','));
+						app.hideModalWindow();
 					});
 				});
 			});
 			container.find('.js-tree-clear').on('click', function (e) {
-				container.find('.js-tree-text').val('');
-				container.find('.js-tree-value').val('');
+				let containerField = $(this).closest('.js-tree-content'),
+					treeValueField = containerField.find('.js-tree-value'),
+					fieldDisplayElement = containerField.find('input[name="' + treeValueField.attr('name') + '_display"]');
+				fieldDisplayElement.val('');
+				fieldDisplayElement.attr('readonly', false);
+				treeValueField.val('');
 			});
 		},
 		registerEvents: function () {
