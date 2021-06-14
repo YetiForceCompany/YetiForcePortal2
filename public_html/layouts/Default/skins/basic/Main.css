@@ -566,8 +566,6 @@ hr {
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
   font-size: 15px; }
-  .widget_header .breadCrumbs .breadcrumbsLinks a {
-    color: #000; }
 
 .historyBtn .dropdown-menu {
   top: 2.0625rem !important; }
@@ -867,21 +865,10 @@ a {
 table tbody tr:hover td .actions span {
   opacity: 1; }
 
-.leftRecordActions {
-  background: inherit; }
-  .leftRecordActions .actions {
-    background: inherit; }
-    .leftRecordActions .actions:hover .toolsAction {
-      visibility: hidden; }
-    .leftRecordActions .actions:hover .actionImages {
-      white-space: nowrap;
-      position: absolute;
-      z-index: 1;
-      display: inline-block !important; }
-    .leftRecordActions .actions .actionImages a {
-      color: inherit; }
-  .leftRecordActions > div {
-    display: inline-block !important; }
+.actions .dropdown-menu {
+  min-width: 7.6875rem !important;
+  top: -11px !important;
+  left: 45px !important; }
 
 table.listViewEntries td {
   vertical-align: middle !important; }
