@@ -53,7 +53,7 @@ class Action
 		if (isset($link['class'])) {
 			$class .= $link['class'];
 		}
-		$btn .= "class=\"$class\" ";
+		$btn .= "class=\"$class ml-1\" ";
 		if (isset($link['data']) && \is_array($link['data'])) {
 			foreach ($link['data'] as $key => $value) {
 				$btn .= "data-{$key}=\"{$value}\" ";
@@ -94,7 +94,7 @@ class Action
 		if (isset($link['icon'])) {
 			$html .= "<span class=\"{$link['icon']}\"></span>";
 		}
-		$html .= '</button><div class="dropdown-menu">';
+		$html .= '</button><div class="dropdown-menu pl-1 pr-2 text-right">';
 		foreach ($link['items'] as $item) {
 			$html .= self::getButton($item);
 		}
