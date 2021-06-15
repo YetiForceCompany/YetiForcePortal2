@@ -91,3 +91,9 @@
 .select2-dropdown ul[aria-multiselectable="true"] [aria-selected="true"] {
 	display: none;
 }
+
+.pnotify .bootstrap4-icon > * {
+	font-size: 2rem;
+	line-height: 2rem;
+	margin-right: 10px;
+}
