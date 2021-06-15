@@ -14,7 +14,7 @@
 		{foreach item=SCRIPT from=$CSS_FILE}
 			<link rel="{$SCRIPT->getRel()}" href="{$SCRIPT->getSrc()}"/>
 		{/foreach}
-		<script type="text/javascript">
+		<script type="text/javascript" {if $NONCE}nonce="{$NONCE}"{/if}>
 			let CONFIG = {\App\Config::getJsEnv()};
 		</script>
 	</head>

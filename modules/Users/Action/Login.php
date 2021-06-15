@@ -84,6 +84,7 @@ class Login extends \App\Controller\Action
 			], 'post');
 		if ($response && !(isset($response['code']) && 401 === $response['code'])) {
 			session_regenerate_id(true);
+			\App\Controller\Headers::generateCspToken();
 			$userInstance->set('userName', $email);
 			$userInstance->set('deviceId', $this->request->getByType('fingerprint', \App\Purifier::ALNUM_EXTENDED));
 			foreach ($response as $key => $value) {

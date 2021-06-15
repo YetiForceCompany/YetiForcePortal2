@@ -10,7 +10,7 @@
 			{foreach item=MODEL from=$MODAL_JS}
 				<script type="{$MODEL->getType()}" src="{$MODEL->getSrc()}"></script>
 			{/foreach}
-			<script type="text/javascript">app.registerModalController();</script>
+			<script type="text/javascript" {if $NONCE}nonce="{$NONCE}"{/if}>app.registerModalController();</script>
 			<div class="modal-header">
 				<h5 class="modal-title">
 					{if $MODAL_ICON}

@@ -13,11 +13,10 @@ use App\Request;
 
 abstract class Base
 {
-	/**
-	 * Request object.
-	 *
-	 * @var Request
-	 */
+	/** @var \App\Headers Headers instance. */
+	public $headers;
+
+	/** @var Request Request object. */
 	protected $request;
 
 	/** @var string Module name. */
@@ -30,32 +29,13 @@ abstract class Base
 	 */
 	public function __construct(Request $request)
 	{
+		$this->headers = \App\Controller\Headers::getInstance();
 		if (\App\Config::get('csrfProtection')) {
-			require_once ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'config/csrf_config.php';
+			require_once ROOT_DIRECTORY . '/config/csrf_config.php';
 			\CsrfMagic\Csrf::init();
 		}
 		$this->request = $request;
-		self::setHeaders();
 		$this->moduleName = $request->getModule();
-	}
-
-	/**
-	 * Set headers.
-	 *
-	 * @return void
-	 */
-	public static function setHeaders(): void
-	{
-		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-
-		if ((!empty($_SERVER['HTTPS']) && 'off' != strtolower($_SERVER['HTTPS'])) || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && 'https' == strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']))) {
-			header('Pragma: private');
-			header('Cache-Control: private, must-revalidate');
-		} else {
-			header('Cache-Control: private, no-cache, no-store, must-revalidate, post-check=0, pre-check=0');
-			header('Pragma: no-cache');
-		}
 	}
 
 	/**
@@ -109,6 +89,14 @@ abstract class Base
 	 * @return void
 	 */
 	abstract public function postProcessAjax();
+
+	/**
+	 * Send headers.
+	 */
+	public function sendHeaders()
+	{
+		$this->headers->send();
+	}
 
 	/**
 	 * Error handler.

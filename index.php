@@ -26,7 +26,6 @@ set_error_handler(['\\App\\Controller\\Base', 'exceptionErrorHandler']);
 \App\Cache::init();
 \App\Log::init();
 \App\Process::init();
-\App\Controller\Headers::getInstance()->send();
 
 $coreUI = new \App\WebUI();
 $coreUI->process(new \App\Request($_REQUEST));

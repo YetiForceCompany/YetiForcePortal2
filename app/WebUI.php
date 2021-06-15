@@ -66,6 +66,7 @@ class WebUI
 				if ($handler->loginRequired() && !$userInstance->hasLogin()) {
 					header('Location:index.php');
 				}
+				$handler->sendHeaders();
 				$handler->checkPermission();
 				$this->triggerPreProcess($handler, $request);
 				$handler->process();
@@ -74,6 +75,7 @@ class WebUI
 				throw new Exceptions\AppException("HANDLER_NOT_FOUND: $handlerClass");
 			}
 		} catch (\Throwable $e) {
+			\App\Controller\Headers::getInstance()->send();
 			if (401 === $e->getCode()) {
 				unset($_SESSION);
 				session_destroy();

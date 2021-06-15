@@ -30,7 +30,7 @@ class Headers
 		'Cache-Control' => 'private, no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
 		'Content-Type' => 'text/html; charset=UTF-8',
 		'Referrer-Policy' => 'no-referrer',
-		'Permissions-Policy' => 'fullscreen=(self),	geolocation=(), camera=()',
+		'Permissions-Policy' => 'fullscreen=(self), camera=(), geolocation=()',
 		'Cross-Origin-Embedder-Policy' => 'require-corp',
 		'Cross-Origin-Opener-Policy: ' => 'same-origin',
 		'Cross-Origin-Resource-Policy: ' => 'same-origin',
@@ -61,7 +61,7 @@ class Headers
 	 *
 	 * @var string[]
 	 */
-	protected $headersToDelete = ['x-powered-by', 'server'];
+	protected $headersToDelete = ['X-Powered-By', 'Server'];
 
 	/**
 	 * Headers instance..
@@ -80,6 +80,9 @@ class Headers
 		if (isset(self::$instance)) {
 			return self::$instance;
 		}
+		if (!\App\Session::get('CSP_TOKEN')) {
+			self::generateCspToken();
+		}
 		return self::$instance = new self();
 	}
 
@@ -89,25 +92,28 @@ class Headers
 	public function __construct()
 	{
 		$browser = \App\RequestUtil::getBrowserInfo();
-		$this->headers['expires'] = gmdate('D, d M Y H:i:s') . ' GMT';
-		$this->headers['last-modified'] = gmdate('D, d M Y H:i:s') . ' GMT';
+		$this->headers['Expires'] = gmdate('D, d M Y H:i:s') . ' GMT';
+		$this->headers['Last-Modified'] = gmdate('D, d M Y H:i:s') . ' GMT';
 		if ($browser->ie) {
-			$this->headers['x-ua-compatible'] = 'IE=11,edge';
+			$this->headers['X-Ua-Compatible'] = 'IE=11,edge';
 			if ($browser->https) {
-				$this->headers['pragma'] = 'private';
-				$this->headers['cache-control'] = 'private, must-revalidate';
+				$this->headers['Pragma'] = 'private';
+				$this->headers['Cache-Control'] = 'private, must-revalidate';
 			}
 		}
 		if ($browser->https) {
-			$this->headers['strict-transport-security'] = 'max-age=31536000; includeSubDomains; preload';
+			$this->headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload';
 		}
 		if (\App\Config::$cspHeaderActive ?? false) {
 			$this->loadCsp();
 		}
 		if ($keys = (\App\Config::$hpkpKeysHeader ?? [])) {
-			$this->headers['public-key-pins'] = 'pin-sha256="' . implode('"; pin-sha256="', $keys) . '"; max-age=10000;';
+			$this->headers['Public-Key-Pins'] = 'pin-sha256="' . implode('"; pin-sha256="', $keys) . '"; max-age=10000;';
 		}
-		$this->headers['access-control-allow-origin'] = \App\Config::$portalUrl;
+		if ($nonce = \App\Session::get('CSP_TOKEN')) {
+			$this->csp['script-src'] .= " 'nonce-{$nonce}'";
+		}
+		$this->headers['Access-Control-Allow-Origin'] = \App\Config::$portalUrl;
 	}
 
 	/**
@@ -126,7 +132,7 @@ class Headers
 	 *
 	 * @return void
 	 */
-	public function send()
+	public function send(): void
 	{
 		if (headers_sent()) {
 			return;
@@ -177,5 +183,15 @@ class Headers
 			$scp .= "$key $value; ";
 		}
 		return $scp;
+	}
+
+	/**
+	 * Generate Content Security Policy token.
+	 *
+	 * @return void
+	 */
+	public static function generateCspToken(): void
+	{
+		\App\Session::set('CSP_TOKEN', \base64_encode(\random_bytes(16)));
 	}
 }

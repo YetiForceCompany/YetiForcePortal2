@@ -29,6 +29,7 @@ abstract class View extends Base
 		$this->viewer = new \App\Viewer();
 		$this->viewer->assign('MODULE_NAME', $this->getModuleNameFromRequest($this->request));
 		$this->viewer->assign('VIEW', $this->request->getByType('view', \App\Purifier::ALNUM));
+		$this->viewer->assign('NONCE', \App\Session::get('CSP_TOKEN'));
 		$this->viewer->assign('LANGUAGE', \App\Language::getLanguage());
 		$this->viewer->assign('LANG', \App\Language::getShortLanguageName());
 		$this->viewer->assign('USER', \App\User::getUser());
@@ -282,7 +283,7 @@ abstract class View extends Base
 			['layouts/resources/Fields.js'],
 			['layouts/resources/ProgressIndicator.js'],
 			['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Header.js'],
-			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js"]
+			['layouts/' . \App\Viewer::getLayoutName() . "/modules/Base/resources/{$action}.js"],
 		];
 		if ($loadForModule) {
 			$moduleName = $this->getModuleNameFromRequest();
