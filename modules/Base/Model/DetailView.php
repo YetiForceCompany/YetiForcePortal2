@@ -60,42 +60,51 @@ class DetailView
 	}
 
 	/**
-	 * Get header links.
+	 * Get detail view header links.
 	 *
 	 * @return array
 	 */
 	public function getLinksHeader(): array
 	{
 		$links = [];
-		if (Module::isPermitted($this->moduleName, 'EditView')) {
+		if ($this->record->isPermitted('ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
 			$links[] = [
-				'linktype' => 'DETAILVIEW_HEADER',
-				'linklabel' => \App\Language::translate('BTN_EDIT', $this->moduleName),
-				'linkurl' => $this->record->getEditViewUrl(),
-				'linkicon' => 'fas fa-pencil-alt',
-				'linkclass' => 'btn btn-success btn-sm',
-				'showLabel' => 1
+				'label' => 'BTN_EXPORT_PDF',
+				'moduleName' => $this->moduleName,
+				'data' => ['url' => 'index.php?module=' . $this->moduleName . '&view=Pdf&&record=' . $this->record->getId()],
+				'icon' => 'fas fa-file-pdf',
+				'class' => 'btn-sm btn-dark js-show-modal js-pdf',
+				'showLabel' => 1,
+			];
+		}
+		if ($this->record->isEditable()) {
+			$links[] = [
+				'label' => 'BTN_EDIT',
+				'moduleName' => $this->moduleName,
+				'href' => $this->record->getEditViewUrl(),
+				'icon' => 'fas fa-edit',
+				'class' => 'btn-sm btn-success',
+				'showLabel' => 1,
 			];
 		}
 		if ($this->record->isInventory()) {
 			$links[] = [
-				'linktype' => 'DETAILVIEW_HEADER',
-				'linklabel' => \App\Language::translate('BTN_EDIT', $this->moduleName),
-				'linkurl' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
-				'linkicon' => 'fas fa-shopping-cart',
-				'linkclass' => 'btn btn-success btn-sm',
-				'showLabel' => 1
+				'label' => 'BTN_EDIT',
+				'moduleName' => $this->moduleName,
+				'href' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
+				'icon' => 'fas fa-shopping-cart',
+				'class' => 'btn-sm btn-success',
+				'showLabel' => 1,
 			];
 		}
-		if ($this->record->isPermitted('ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
+		if ($this->record->isDeletable()) {
 			$links[] = [
-				'linktype' => 'DETAIL_VIEW_ADDITIONAL',
-				'linklabel' => \App\Language::translate('BTN_EXPORT_PDF', $this->moduleName),
-				'linkdata' => ['url' => 'index.php?module=' . $this->moduleName . '&view=Pdf&&record=' . $this->record->getId()],
-				'linkicon' => 'fas fa-file-pdf',
-				'linkclass' => 'btn-dark btn-sm js-show-modal js-pdf',
-				'title' => \App\Language::translate('BTN_EXPORT_PDF', $this->moduleName),
-				'showLabel' => 1
+				'label' => 'LBL_DELETE',
+				'moduleName' => $this->moduleName,
+				'data' => ['url' => $this->record->getDeleteUrl()],
+				'icon' => 'fas fa-trash-alt',
+				'class' => 'btn-sm btn-danger js-delete-record',
+				'showLabel' => 1,
 			];
 		}
 		return $links;
