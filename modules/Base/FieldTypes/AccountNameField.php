@@ -6,23 +6,13 @@
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
- * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
 
-class TextField extends BaseField
+class AccountNameField extends BaseField
 {
-	/** {@inheritdoc} */
-	public function getDisplayValue(): string
-	{
-		if (empty($this->value)) {
-			return '';
-		}
-		return $this->value;
-	}
-
 	/**
 	 * Function to get the view value.
 	 *
@@ -32,7 +22,7 @@ class TextField extends BaseField
 	{
 		$value = $this->getDisplayValue();
 		if (\strlen($value) > \App\Config::$lengthFildList) {
-			$value = \App\Viewer::truncateText($this->getDisplayValue(), \App\Config::$lengthFildList, true);
+			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), \App\Config::$lengthFildList) . '</span>';
 		}
 		return $value;
 	}

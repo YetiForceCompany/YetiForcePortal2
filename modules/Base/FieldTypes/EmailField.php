@@ -25,4 +25,17 @@ class EmailField extends BaseField
 		$value = \App\Purifier::encodeHtml($this->value);
 		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$value}</a>";
 	}
+
+	/** {@inheritdoc} */
+	public function getListDisplayValue(): string
+	{
+		if (empty($this->value)) {
+			return '';
+		}
+		$value = \App\Purifier::encodeHtml($this->value);
+		if (\strlen($value) > \App\Config::$lengthFildList) {
+			$tuncateValue = \App\TextParser::textTruncate($value, \App\Config::$lengthFildList);
+		}
+		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$tuncateValue}</a>";
+	}
 }

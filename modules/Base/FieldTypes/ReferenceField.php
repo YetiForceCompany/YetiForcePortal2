@@ -45,5 +45,33 @@ class ReferenceField extends BaseField
 		return $value;
 	}
 
-	 }
+	/**
+	 * Function to get the view value.
+	 *
+	 * @return string
+	 */
+	public function getListDisplayValue(): string
+	{
+		if (empty($this->value)) {
+			return '';
+		}
+		$value = $this->value;
+		if (\is_array($value)) {
+			if ($value['isPermitted']) {
+				$url = "index.php?module={$value['referenceModule']}&view=DetailView&record={$value['record']}";
+				$label = $value['value'];
+				$title = \App\Language::translateModule($value['referenceModule']) . ' - ' . $value['value'];
+				if ('Active' !== $value['state']) {
+					$label = '<s>' . $label . '</s>';
+				}
+				if (\strlen($label) > \App\Config::$lengthFildList) {
+					$label = \App\TextParser::textTruncate($label, \App\Config::$lengthFildList);
+				}
+				$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . $label . '</a>';
+			} else {
+				$value = $value['value'];
+			}
+		}
+		return $value;
+	}
 }
