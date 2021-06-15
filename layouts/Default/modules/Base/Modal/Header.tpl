@@ -8,7 +8,7 @@
 				<link rel="{$MODEL->getRel()}" href="{$MODEL->getHref()}"/>
 			{/foreach}
 			{foreach item=MODEL from=$MODAL_JS}
-				<script type="{$MODEL->getType()}" src="{$MODEL->getSrc()}"></script>
+				<script type="{$MODEL->getType()}" src="{$MODEL->getSrc()}" {if $NONCE}nonce="{$NONCE}"{/if}></script>
 			{/foreach}
 			<script type="text/javascript" {if $NONCE}nonce="{$NONCE}"{/if}>app.registerModalController();</script>
 			<div class="modal-header">
