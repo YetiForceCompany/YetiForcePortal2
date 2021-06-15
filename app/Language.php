@@ -23,6 +23,8 @@ class Language
 	 */
 	protected static $languageContainer = [];
 
+	protected static $modules = [];
+
 	/** @var string Current language. */
 	private static $language = '';
 
