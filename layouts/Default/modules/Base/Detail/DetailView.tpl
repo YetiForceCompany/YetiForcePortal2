@@ -42,7 +42,7 @@
 							<div class="c-card__row form-row border-bottom">
 								{assign var=COUNTER value=0}
 								{/if}
-								<div class="col-sm border-left">
+								<div class="col-sm border-left" data-name="{$FIELD->getName()}" data-type="{$FIELD->get('type')}"  data-uitype="{$FIELD->getUIType()}">
 									<div class="form-row align-items-start">
 									<div class="fieldLabel border-right c-card__label text-lg-right text-md-left col-lg-6">
 										<label class="col-form-label font-weight-bold">

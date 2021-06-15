@@ -120,6 +120,12 @@ class Config
 	/** @var string Same-site cookie attribute allows a web application to advise the browser that cookies should only be sent if the request originates from the website the cookie came from. Values: None, Lax, Strict. */
 	public static $cookieSameSite = 'Strict';
 
+	/** @var bool HTTP Content Security Policy response header allows website administrators to control resources the user agent is allowed to load for a given page */
+	public static $cspHeaderActive = true;
+
+	/** @var string[] HTTP Public-Key-Pins (HPKP) pin-sha256 For HPKP to work properly at least 2 keys are needed.\nhttps://scotthelme.co.uk/hpkp-http-public-key-pinning/, https://sekurak.pl/mechanizm-http-public-key-pinning/. */
+	public static $hpkpKeysHeader = [];
+
 	/**
 	 * Performance.
 	 */
