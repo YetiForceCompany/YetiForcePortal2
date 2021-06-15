@@ -16,9 +16,15 @@ class Language
 	 */
 	const FORMAT = 'json';
 
-	//Contains module language translations
+	/**
+	 * Contains module language translations.
+	 *
+	 * @var array
+	 */
 	protected static $languageContainer = [];
-	protected static $modules = false;
+
+	/** @var string Current language. */
+	private static $language = '';
 
 	/**
 	 * Functions that gets translated string.
@@ -77,10 +83,14 @@ class Language
 	 *
 	 * @return string
 	 */
-	public static function getLanguage()
+	public static function getLanguage(): string
 	{
+		if (static::$language) {
+			return static::$language;
+		}
 		$userInstance = User::getUser();
 		$language = '';
+
 		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
 			$language = $userInstance->get('language');
 		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
@@ -94,7 +104,8 @@ class Language
 		} else {
 			$language = Config::get('language');
 		}
-		return $language;
+
+		return static::$language = $language;
 	}
 
 	/**
