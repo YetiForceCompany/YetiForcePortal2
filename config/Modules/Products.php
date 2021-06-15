@@ -17,5 +17,5 @@ namespace Conf\Modules;
 class Products
 {
 	/** @var bool Shopping mode */
-	public static $shoppingMode = false;
+	public static $shoppingMode = true;
 }
