@@ -286,7 +286,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'href' => $this->getDetailViewUrl(),
 				'icon' => 'fas fa-th-list',
-				'class' => 'btn-sm btn-info active'
+				'class' => 'btn-sm btn-info active js-popover-tooltip'
 			];
 		}
 		if ($this->isEditable()) {
@@ -295,7 +295,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'href' => $this->getEditViewUrl(),
 				'icon' => 'fas fa-edit',
-				'class' => 'btn-sm btn-success active'
+				'class' => 'btn-sm btn-success active js-popover-tooltip'
 			];
 		}
 		if ($this->isDeletable()) {
@@ -304,7 +304,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'data' => ['url' => $this->getDeleteUrl()],
 				'icon' => 'fas fa-trash-alt',
-				'class' => 'btn-sm btn-danger active js-delete-record'
+				'class' => 'btn-sm btn-danger active js-delete-record js-popover-tooltip'
 			];
 		}
 		return \App\Layout\Action::getListViewActions($recordLinks);

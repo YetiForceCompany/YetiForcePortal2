@@ -407,6 +407,149 @@ var AppConnector,
 			app.cacheParams[param] = value;
 			$('#' + param).val(value);
 		},
+		/**
+		 * Hide popover.
+		 * @param {object} element
+		 */
+		hidePopover: function (element) {
+			if (typeof element === 'undefined') {
+				element = $('body .js-popover-tooltip');
+			}
+			element.popover('hide');
+		},
+		/**
+		 * Hide popovers after click.
+		 * @param {object} popoverParent
+		 */
+		hidePopoversAfterClick(popoverParent) {
+			popoverParent.on('mousedown', (e) => {
+				setTimeout(() => {
+					popoverParent.popover('hide');
+				}, 100);
+			});
+		},
+		/**
+		 * Register popover manual trigger.
+		 * @param {object} element
+		 * @param {integer} element
+		 */
+		registerPopoverManualTrigger(element, manualTriggerDelay) {
+			const hideDelay = 500;
+			element.on('mouseleave', (e) => {
+				setTimeout(() => {
+					let currentPopover = this.getBindedPopover(element);
+					if (
+						!$(':hover').filter(currentPopover).length &&
+						!currentPopover.find('.js-popover-tooltip--record[aria-describedby]').length
+					) {
+						currentPopover.popover('hide');
+					}
+				}, hideDelay);
+			});
+			element.on('mouseenter', () => {
+				setTimeout(() => {
+					if (element.is(':hover')) {
+						element.popover('show');
+						let currentPopover = this.getBindedPopover(element);
+						currentPopover.on('mouseleave', () => {
+							setTimeout(() => {
+								if (
+									!$(':hover').filter(currentPopover).length &&
+									!currentPopover.find('.js-popover-tooltip--record[aria-describedby]').length
+								) {
+									currentPopover.popover('hide'); //close current popover
+								}
+								if (!$(':hover').filter($('.popover')).length) {
+									$('.popover').popover('hide'); //close all popovers
+								}
+							}, hideDelay);
+						});
+					}
+				}, manualTriggerDelay);
+			});
+			app.hidePopoversAfterClick(element);
+		},
+		/**
+		 * Register popover.
+		 * @param {object} container
+		 */
+		registerPopover(container = $(document)) {
+			window.popoverCache = {};
+			container.on('mousemove', (e) => {
+				app.mousePosition = { x: e.pageX, y: e.pageY };
+			});
+			container.on(
+				'mouseenter',
+				'.js-popover-tooltip, .js-popover-tooltip--record, .js-popover-tooltip--ellipsis, [data-field-type="reference"], [data-field-type="multireference"]',
+				(e) => {
+					let currentTarget = $(e.currentTarget);
+					if (currentTarget.find('.js-popover-tooltip--record').length) {
+						return;
+					}
+					if (!currentTarget.hasClass('popover-triggered')) {
+						if (
+							!currentTarget.hasClass('js-popover-tooltip--record') &&
+							!currentTarget.find('.js-popover-tooltip--record').length &&
+							!currentTarget.data('field-type')
+						) {
+							app.showPopoverElementView(currentTarget);
+							currentTarget.trigger('mouseenter');
+						}
+					}
+				}
+			);
+		},
+		/**
+		 * Show popover element view.
+		 * @param {jQuery} element
+		 * @param {object} params
+		 * @param {HTMLElement}
+		 */
+		showPopoverElementView: function (selectElement = $('.js-popover-tooltip'), params = {}) {
+			let defaultParams = {
+				trigger: 'manual',
+				manualTriggerDelay: 500,
+				placement: 'auto',
+				html: true,
+				template:
+					'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+				container: 'body',
+				boundary: 'viewport',
+				delay: { show: 300, hide: 100 }
+			};
+			selectElement.each(function (index, domElement) {
+				let element = $(domElement);
+				let elementParams = $.extend(true, defaultParams, params, element.data());
+				if (element.data('class')) {
+					elementParams.template =
+						'<div class="popover ' +
+						element.data('class') +
+						'" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>';
+				}
+				if (element.hasClass('delay0')) {
+					elementParams.delay = { show: 0, hide: 0 };
+				}
+				element.popover(elementParams);
+				if (elementParams.trigger === 'manual' || typeof elementParams.trigger === 'undefined') {
+					app.registerPopoverManualTrigger(element, elementParams.manualTriggerDelay);
+				}
+				if (elementParams.callbackShown) {
+					element.on('shown.bs.popover', function (e) {
+						elementParams.callbackShown(e);
+					});
+				}
+				element.addClass('popover-triggered');
+			});
+			return selectElement;
+		},
+		/**
+		 * Get binded popover
+		 * @param {jQuery} element
+		 * @returns {Mixed|jQuery|HTMLElement}
+		 */
+		getBindedPopover(element) {
+			return $(`#${element.attr('aria-describedby')}`);
+		},
 		registerModal: function (container) {
 			if (typeof container === 'undefined') {
 				container = $('body');
@@ -1002,6 +1145,7 @@ $(function () {
 	app.setNotifyDefaultOptions();
 	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
+	app.registerPopover();
 	app.registerSubMenu();
 	app.registerModal(container);
 	app.registerMobileMenu(container);
