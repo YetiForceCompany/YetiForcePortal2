@@ -8,8 +8,8 @@
 			</div>
 			<div class="contentHeader">
 				<span class="float-right">
-					{foreach from=$LINKS item=LINK}
-						{include file=\App\Resources::templatePath("ButtonLink.tpl", $MODULE_NAME) BUTTON_VIEW='listViewBasic'}
+					{foreach from=$DETAIL_LINKS item=DETAIL_LINK}
+						{\App\Layout\Action::getButton($DETAIL_LINK)}
 					{/foreach}
 				</span>
 				<div class="clearfix"></div>

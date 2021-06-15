@@ -13,7 +13,7 @@
 			   disabled="disabled" {/if} tabindex="{$FIELD_MODEL->getTabIndex()}"
 			   title="{\App\Language::translate($FIELD_NAME, $MODULE_NAME)}"{' '}
 			   id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}" type="checkbox"{' '}
-			   data-validation-engine="validate[funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"{' '}
+			   data-validation-engine="validate[funcCall[Base_Validator_Js.invokeValidation]]"{' '}
 			   {if $FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}checked="checked" {/if}
 			   value="1" data-fieldinfo='{$FIELD_INFO}'{' '}
 			   {if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}'{/if}/>

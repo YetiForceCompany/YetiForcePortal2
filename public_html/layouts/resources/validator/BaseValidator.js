@@ -1,13 +1,6 @@
-/*+***********************************************************************************
- * The contents of this file are subject to the vtiger CRM Public License Version 1.0
- * ("License"); You may not use this file except in compliance with the License
- * The Original Code is:  vtiger CRM Open Source
- * The Initial Developer of the Original Code is vtiger.
- * Portions created by vtiger are Copyright (C) vtiger.
- * All Rights Reserved.
- *************************************************************************************/
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 jQuery.Class(
-	'Vtiger_Base_Validator_Js',
+	'Base_Validator_Js',
 	{
 		moduleName: false,
 		/**
@@ -23,7 +16,7 @@ jQuery.Class(
 					return;
 				}
 			}
-			var listOfValidators = Vtiger_Base_Validator_Js.getValidator(field);
+			var listOfValidators = Base_Validator_Js.getValidator(field);
 			for (var i = 0; i < listOfValidators.length; i++) {
 				var validatorList = listOfValidators[i];
 				var validatorName = validatorList.name;
@@ -53,12 +46,12 @@ jQuery.Class(
 			}
 			var dataValidator = 'validator';
 			var moduleEle = field.closest('form').find('[name="module"]');
-			if (Vtiger_Base_Validator_Js.moduleName == false && moduleEle.length > 0) {
-				Vtiger_Base_Validator_Js.moduleName = moduleEle.val();
+			if (Base_Validator_Js.moduleName == false && moduleEle.length > 0) {
+				Base_Validator_Js.moduleName = moduleEle.val();
 			}
 
-			var fieldInstance = Vtiger_Field_Js.getInstance(fieldInfo);
-			var validatorsOfType = Vtiger_Base_Validator_Js.getValidatorsFromFieldType(fieldInstance);
+			var fieldInstance = Base_Field_Js.getInstance(fieldInfo);
+			var validatorsOfType = Base_Validator_Js.getValidatorsFromFieldType(fieldInstance);
 			for (var key in validatorsOfType) {
 				//IE for loop fix
 				if (!validatorsOfType.hasOwnProperty(key)) {
@@ -79,7 +72,7 @@ jQuery.Class(
 					}
 					var specialValidator = specialValidators[key];
 					var tempSpecialValidator = jQuery.extend({}, specialValidator);
-					var validatorOfNames = Vtiger_Base_Validator_Js.getValidatorClassName(specialValidator.name);
+					var validatorOfNames = Base_Validator_Js.getValidatorClassName(specialValidator.name);
 					if (validatorOfNames != '') {
 						tempSpecialValidator.name = validatorOfNames;
 						if (!jQuery.isEmptyObject(tempSpecialValidator)) {
@@ -99,13 +92,13 @@ jQuery.Class(
 			var fieldType = fieldInstance.getType();
 			var validatorsOfType = new Array();
 			fieldType = fieldType.charAt(0).toUpperCase() + fieldType.slice(1).toLowerCase();
-			validatorsOfType.push(Vtiger_Base_Validator_Js.getValidatorClassName(fieldType));
+			validatorsOfType.push(Base_Validator_Js.getValidatorClassName(fieldType));
 			return validatorsOfType;
 		},
 		getValidatorClassName: function (validatorName) {
 			var validatorsOfType = '';
-			var className = Vtiger_Base_Validator_Js.getClassName(validatorName);
-			var fallBackClassName = Vtiger_Base_Validator_Js.getFallBackClassName(validatorName);
+			var className = Base_Validator_Js.getClassName(validatorName);
+			var fallBackClassName = Base_Validator_Js.getFallBackClassName(validatorName);
 			if (typeof window[className] != 'undefined') {
 				validatorsOfType = window[className];
 			} else if (typeof window[fallBackClassName] != 'undefined') {
@@ -119,8 +112,8 @@ jQuery.Class(
 		 * @return module specific validator className
 		 */
 		getClassName: function (validatorName) {
-			if (Vtiger_Base_Validator_Js.moduleName != false) {
-				var moduleName = Vtiger_Base_Validator_Js.moduleName;
+			if (Base_Validator_Js.moduleName != false) {
+				var moduleName = Base_Validator_Js.moduleName;
 			} else {
 				var moduleName = app.getModuleName();
 			}
@@ -137,7 +130,7 @@ jQuery.Class(
 		 * @return generic validator className
 		 */
 		getFallBackClassName: function (validatorName) {
-			return 'Vtiger_' + validatorName + '_Validator_Js';
+			return 'Base_' + validatorName + '_Validator_Js';
 		}
 	},
 	{

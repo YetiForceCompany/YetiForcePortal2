@@ -24,7 +24,7 @@
 					class="currencyField form-control {if $SYMBOL_PLACEMENT eq '1.0$'} textAlignRight {/if}" name="{$FIELD_NAME}" data-fieldinfo='{$FIELD_INFO}' value="{$FIELD_VALUE}" {if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}'{/if}
 					data-decimal-separator='{$USER_MODEL->getPreferences('currency_decimal_separator')}'
 					data-group-separator='{$USER_MODEL->getPreferences('currency_grouping_separator')}'
-					data-number-of-decimal-places='{$USER_MODEL->getPreferences('no_of_currency_decimals')}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{else} data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" {/if}/>
+					data-number-of-decimal-places='{$USER_MODEL->getPreferences('no_of_currency_decimals')}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{else} data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]" {/if}/>
 			{if $SYMBOL_PLACEMENT eq '1.0$'}
 				{FUN_CURRENCY_SYMBOL CURRENCY_SYMBOL=$USER_MODEL->getPreferences('currency_symbol')}
 			{/if}
@@ -42,7 +42,7 @@
 			{/if}
 			<input name="{$FIELD_NAME}" value="{$DISPLAY_FIELD_VALUE}" type="text" tabindex="{$FIELD_MODEL->getTabIndex()}"
 				   class="row-fluid currencyField form-control" data-fieldinfo='{$FIELD_INFO}'
-				   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+				   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 				   title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"
 				   {if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}'{/if} data-decimal-separator='{$USER_MODEL->getPreferences('currency_decimal_separator')}'
 				   data-group-separator='{$USER_MODEL->getPreferences('currency_grouping_separator')}'
@@ -68,7 +68,7 @@
 				<span class="col-md-7">
 					<input name="{$FIELD_NAME}" value="{$DISPLAY_FIELD_VALUE}" type="text" tabindex="{$FIELD_MODEL->getTabIndex()}"
 						   class="row-fluid currencyField form-control" data-fieldinfo='{$FIELD_INFO}'
-						   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+						   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 						   title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"
 						   {if !empty($SPECIAL_VALIDATOR)}data-validator='{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}'{/if} data-decimal-separator='{$USER_MODEL->getPreferences('currency_decimal_separator')}'
 						   data-group-separator='{$USER_MODEL->getPreferences('currency_grouping_separator')}'

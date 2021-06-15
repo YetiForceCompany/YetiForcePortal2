@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-Base-Edit-Field-Owner -->
 <select class="select2 form-control" title="{$FIELD_MODEL->getLabel()}" name="{$FIELD_MODEL->getName()}"
-		data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()}required{/if},funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+		data-validation-engine="validate[{if $FIELD_MODEL->isMandatory()}required{/if},funcCall[Base_Validator_Js.invokeValidation]]"
 		data-fieldinfo="{$FIELD_MODEL->getFieldInfo(true)}"
 		data-selected-value="{$FIELD_MODEL->getEditViewDisplayValue()}"
 		{if $FIELD_MODEL->isEditableReadOnly()}readonly {/if}>

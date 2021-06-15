@@ -23,7 +23,7 @@
 		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"
 			class="ml-0 js-tree-text form-control" {if !empty($DISPLAY_ID)}readonly="true" {/if}
 			value="{$DISPLAY_VALUE}" tabindex="{$FIELD_MODEL->getTabIndex()}"
-			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			data-fieldinfo='{$FIELD_INFO_DATA}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if}
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if}
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}/>

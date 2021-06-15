@@ -10,7 +10,7 @@
 	id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}" type="text"{' '} tabindex="{$FIELD_MODEL->getTabIndex()}"{' '}
 	title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"{' '}
 	data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true}required,{/if}{if $FIELD_MODEL->get('
-	maximumlength')}maxSize[{$FIELD_MODEL->get('maximumlength')}],{/if}funcCall[Vtiger_InputMask_Validator_Js.invokeValidation]]"{' '}
+	maximumlength')}maxSize[{$FIELD_MODEL->get('maximumlength')}],{/if}funcCall[Base_InputMask_Validator_Js.invokeValidation]]"{' '}
 	{if $FIELD_MODEL->getUIType() eq '3' || $FIELD_MODEL->getUIType() eq '4' ||
 	$FIELD_MODEL->isEditableReadOnly()} readonly="readonly" {/if} data-fieldinfo='{$FIELD_INFO}' {if
 	!empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if}{' '}

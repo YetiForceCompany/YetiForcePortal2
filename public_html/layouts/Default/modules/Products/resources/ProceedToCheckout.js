@@ -12,7 +12,7 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 	registerButtonBuy() {
 		let self = this;
 		this.container.find('.js-buy').on('click', (e) => {
-			Vtiger_Helper_Js.showConfirmationBox({
+			Base_Helper_Js.showConfirmationBox({
 				message: app.translate('LBL_VERIFY_ADDRESS')
 			}).done(function (data) {
 				self.order({

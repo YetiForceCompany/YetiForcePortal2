@@ -29,7 +29,7 @@ class Action
 			'label' => 'actions',
 			'icon' => 'fas fa-wrench',
 			'class' => 'btn-sm btn-light',
-			'items' => $links
+			'items' => $links,
 		]) . '</div>';
 	}
 

@@ -53,7 +53,7 @@
 												{if !empty($ADDRESSES)}
 												readonly
 												{elseif in_array($FIELDNAME, $REQUIRED_FIELDS)}
-												data-validation-engine="validate[required,funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+												data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]"
 												{/if} class="form-control{if !empty($ADDRESSES)}-plaintext{/if}" value=""
 												>
 											</div>
@@ -78,7 +78,7 @@
 							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
 								{foreach from=$PAYMENTS item=PAYMENT}
 									<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
-										<input type="radio" data-validation-engine="validate[required,funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off">
+										<input type="radio" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off">
 										<span class="{$PAYMENT->getIcon()} mx-1"></span>
 										{\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
 									</label>

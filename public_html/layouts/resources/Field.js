@@ -1,14 +1,6 @@
-/*+***********************************************************************************
- * The contents of this file are subject to the vtiger CRM Public License Version 1.0
- * ("License"); You may not use this file except in compliance with the License
- * The Original Code is:  vtiger CRM Open Source
- * The Initial Developer of the Original Code is vtiger.
- * Portions created by vtiger are Copyright (C) vtiger.
- * All Rights Reserved.
- * Contributor(s): YetiForce.com
- *************************************************************************************/
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 jQuery.Class(
-	'Vtiger_Field_Js',
+	'Base_Field_Js',
 	{
 		/**
 		 * Function to get Instance of the class based on moduleName
@@ -26,7 +18,7 @@ jQuery.Class(
 			if (typeof moduleFieldObj != 'undefined') {
 				fieldClass = moduleFieldObj;
 			} else {
-				fieldClass = Vtiger_Field_Js;
+				fieldClass = Base_Field_Js;
 			}
 			var fieldObj = new fieldClass();
 
@@ -111,7 +103,7 @@ jQuery.Class(
 			var type = this.getType();
 			var typeClassName = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
 			var moduleUiTypeClassName = window[currentModule + '_' + typeClassName + '_Field_Js'];
-			var BasicUiTypeClassName = window['Vtiger_' + typeClassName + '_Field_Js'];
+			var BasicUiTypeClassName = window['Base_' + typeClassName + '_Field_Js'];
 			if (typeof moduleUiTypeClassName != 'undefined') {
 				return new moduleUiTypeClassName().setData(this.getData());
 			} else if (typeof BasicUiTypeClassName != 'undefined') {
@@ -152,7 +144,7 @@ jQuery.Class(
 			if (this.isMandatory()) {
 				validationHandler += 'required,';
 			}
-			validationHandler += 'funcCall[Vtiger_Base_Validator_Js.invokeValidation]]';
+			validationHandler += 'funcCall[Base_Validator_Js.invokeValidation]]';
 			addValidationToElement
 				.attr('data-validation-engine', validationHandler)
 				.attr('data-fieldinfo', JSON.stringify(this.getData()))
@@ -162,8 +154,8 @@ jQuery.Class(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Picklist_Field_Js',
+Base_Field_Js(
+	'Base_Picklist_Field_Js',
 	{},
 	{
 		/**
@@ -196,8 +188,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Multipicklist_Field_Js',
+Base_Field_Js(
+	'Base_Multipicklist_Field_Js',
 	{},
 	{
 		/**
@@ -230,8 +222,8 @@ Vtiger_Field_Js(
 		}
 	}
 );
-Vtiger_Field_Js(
-	'Vtiger_Boolean_Field_Js',
+Base_Field_Js(
+	'Base_Boolean_Field_Js',
 	{},
 	{
 		/**
@@ -265,8 +257,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Date_Field_Js',
+Base_Field_Js(
+	'Base_Date_Field_Js',
 	{},
 	{
 		/**
@@ -297,8 +289,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Currency_Field_Js',
+Base_Field_Js(
+	'Base_Currency_Field_Js',
 	{},
 	{
 		/**
@@ -325,8 +317,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Owner_Field_Js',
+Base_Field_Js(
+	'Base_Owner_Field_Js',
 	{},
 	{
 		/**
@@ -361,24 +353,24 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Multipicklist_Field_Js('Vtiger_Multireferencevalue_Field_Js', {}, {});
+Base_Multipicklist_Field_Js('Base_Multireferencevalue_Field_Js', {}, {});
 
-Vtiger_Multipicklist_Field_Js('Vtiger_Sharedowner_Field_Js', {}, {});
+Base_Multipicklist_Field_Js('Base_Sharedowner_Field_Js', {}, {});
 
-Vtiger_Picklist_Field_Js('Vtiger_Tree_Field_Js', {}, {});
+Base_Picklist_Field_Js('Base_Tree_Field_Js', {}, {});
 
-Vtiger_Tree_Field_Js('Vtiger_Categorymultipicklist_Field_Js', {}, {});
+Base_Tree_Field_Js('Base_Categorymultipicklist_Field_Js', {}, {});
 
-Vtiger_Picklist_Field_Js('Vtiger_Modules_Field_Js', {}, {});
+Base_Picklist_Field_Js('Base_Modules_Field_Js', {}, {});
 
-Vtiger_Date_Field_Js('Vtiger_Datetime_Field_Js', {}, {});
+Base_Date_Field_Js('Base_Datetime_Field_Js', {}, {});
 
-Vtiger_Picklist_Field_Js('Vtiger_Taxs_Field_Js', {}, {});
+Base_Picklist_Field_Js('Base_Taxs_Field_Js', {}, {});
 
-Vtiger_Picklist_Field_Js('Vtiger_InventoryLimit_Field_Js', {}, {});
+Base_Picklist_Field_Js('Base_InventoryLimit_Field_Js', {}, {});
 
-Vtiger_Field_Js(
-	'Vtiger_Time_Field_Js',
+Base_Field_Js(
+	'Base_Time_Field_Js',
 	{},
 	{
 		/**
@@ -409,8 +401,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Text_Field_Js',
+Base_Field_Js(
+	'Base_Text_Field_Js',
 	{},
 	{
 		/**
@@ -432,8 +424,8 @@ Vtiger_Field_Js(
 	}
 );
 
-Vtiger_Field_Js(
-	'Vtiger_Percentage_Field_Js',
+Base_Field_Js(
+	'Base_Percentage_Field_Js',
 	{},
 	{
 		/**
@@ -455,8 +447,8 @@ Vtiger_Field_Js(
 		}
 	}
 );
-Vtiger_Field_Js(
-	'Vtiger_Recurrence_Field_Js',
+Base_Field_Js(
+	'Base_Recurrence_Field_Js',
 	{},
 	{
 		/**

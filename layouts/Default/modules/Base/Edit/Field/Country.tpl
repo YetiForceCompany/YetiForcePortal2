@@ -11,7 +11,7 @@
 	<select name="{$FIELD_MODEL->getName()}" class="select2 form-control" tabindex="{$FIELD_MODEL->getTabIndex()}"
 			{if $IS_LAZY} data-select-lazy="true"{/if}
 			title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"
-			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			{if $PLACE_HOLDER}data-select="allowClear" data-placeholder="{\App\Language::translate('LBL_SELECT_OPTION')}"{/if} data-fieldinfo='{$FIELD_INFO|escape}'
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if} {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}>
 		{if $PLACE_HOLDER}

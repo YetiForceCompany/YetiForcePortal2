@@ -11,7 +11,7 @@
 <div class="w-100">
 	<select name="{$FIELD_MODEL->getName()}" class="select2 form-control" data-fieldinfo='{$FIELD_INFO|escape}' tabindex="{$FIELD_MODEL->getTabIndex()}"
 			title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"
-			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			{if $IS_LAZY} data-select-lazy="true"{/if}
 			{if !empty($PLACE_HOLDER)}
 				data-select="allowClear"
