@@ -19,9 +19,6 @@ use App\Json;
  */
 class BaseField extends \App\BaseModel
 {
-	/** @var int Display value.  */
-	public $length = 30;
-
 	/**
 	 * Display value.
 	 *
