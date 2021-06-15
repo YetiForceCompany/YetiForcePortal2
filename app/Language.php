@@ -89,8 +89,7 @@ class Language
 			return static::$language;
 		}
 		$userInstance = User::getUser();
-		$language = '';
-
+		$language = 'en-US';
 		if ($userInstance && $userInstance->has('language') && !empty($userInstance->get('language'))) {
 			$language = $userInstance->get('language');
 		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
@@ -101,10 +100,9 @@ class Language
 				}
 				break;
 			}
-		} else {
-			$language = Config::get('language');
+		} elseif (isset(Config::$language)) {
+			$language = Config::$language;
 		}
-
 		return static::$language = $language;
 	}
 

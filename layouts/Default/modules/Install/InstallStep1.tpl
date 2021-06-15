@@ -24,6 +24,7 @@
 			<div class="welcome-div">
 				<h1>{\App\Language::translate('LBL_WELCOME_TO_SETUP_WIZARD', $MODULE_NAME)}</h1>
 				<p>{\App\Language::translate('LBL_SETUP_WIZARD_DESCRIPTION', $MODULE_NAME)}</p>
+				<p>{\App\Language::translate('LBL_LANGUAGES_PACKAGE', $MODULE_NAME)}: <a href="https://github.com/YetiForceCompany/YetiForcePortal2Languages" target="_blank" rel="noreferrer noopener">https://github.com/YetiForceCompany/YetiForcePortal2Languages</a></p>
 			</div>
 		</div>
 	</div>
