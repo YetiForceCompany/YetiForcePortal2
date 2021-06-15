@@ -446,7 +446,6 @@ var AppConnector,
 					}
 				}, hideDelay);
 			});
-
 			element.on('mouseenter', () => {
 				setTimeout(() => {
 					if (element.is(':hover')) {
@@ -468,7 +467,6 @@ var AppConnector,
 					}
 				}, manualTriggerDelay);
 			});
-
 			app.hidePopoversAfterClick(element);
 		},
 		/**
