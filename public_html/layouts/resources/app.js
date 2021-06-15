@@ -487,21 +487,12 @@ var AppConnector,
 						return;
 					}
 					if (!currentTarget.hasClass('popover-triggered')) {
-						if (currentTarget.hasClass('js-popover-tooltip--record')) {
-							app.registerPopoverRecord(currentTarget, {}, container);
-							currentTarget.trigger('mouseenter');
-						} else if (!currentTarget.hasClass('js-popover-tooltip--record') && currentTarget.data('field-type')) {
-							app.registerPopoverRecord(currentTarget.children('a'), {}, container); //popoverRecord on children doesn't need triggering
-						} else if (
+						if (
 							!currentTarget.hasClass('js-popover-tooltip--record') &&
 							!currentTarget.find('.js-popover-tooltip--record').length &&
 							!currentTarget.data('field-type')
 						) {
-							if (currentTarget.hasClass('js-popover-tooltip--ellipsis')) {
-								app.registerPopoverEllipsis({ element: currentTarget, container });
-							} else {
-								app.showPopoverElementView(currentTarget);
-							}
+							app.showPopoverElementView(currentTarget);
 							currentTarget.trigger('mouseenter');
 						}
 					}
