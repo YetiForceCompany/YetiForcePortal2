@@ -19,6 +19,9 @@ use App\Json;
  */
 class BaseField extends \App\BaseModel
 {
+	/** @var int Display value.  */
+	public $length = 30;
+
 	/**
 	 * Display value.
 	 *
@@ -344,6 +347,10 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getListDisplayValue(): string
 	{
-		return $this->getDisplayValue();
+		$value = $this->getDisplayValue();
+		if (strlen($value) > $this->length) {
+			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), $this->length) . '</span>';
+		}
+		return $value;
 	}
 }

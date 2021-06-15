@@ -25,4 +25,14 @@ class PhoneField extends BaseField
 		$value = \App\Purifier::encodeHtml($this->value);
 		return "<a class=\"u-cursor-pointer\" href=\"tel:{$value}\">{$value}</a>";
 	}
+
+	/**
+	 * Function to get the view value.
+	 *
+	 * @return string
+	 */
+	 public function getListDisplayValue(): string
+	 {
+		 return  $this->getDisplayValue();
+	 }
 }

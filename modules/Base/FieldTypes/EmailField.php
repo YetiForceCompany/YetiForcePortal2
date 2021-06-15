@@ -25,4 +25,14 @@ class EmailField extends BaseField
 		$value = \App\Purifier::encodeHtml($this->value);
 		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$value}</a>";
 	}
+
+	/**
+	 * Function to get the view value.
+	 *
+	 * @return string
+	 */
+	 public function getListDisplayValue(): string
+	 {
+		 return  $this->getDisplayValue();
+	 }
 }
