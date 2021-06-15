@@ -16,8 +16,8 @@
 			</div>
 		</div>
 	</div>
-	{if isset($FIELDS_HEADER['progress'])}
-		{include file=\App\Resources::templatePath("Detail/HeaderProgress.tpl", $MODULE_NAME) PROGRESS_FIELDS=$FIELDS_HEADER['progress']}
+	{if !empty($FIELDS_HEADER)}
+		{include file=\App\Resources::templatePath("Detail/Headers.tpl", $MODULE_NAME)}
 	{/if}
 	<div class="row">
 		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4{else}col-12{/if}">

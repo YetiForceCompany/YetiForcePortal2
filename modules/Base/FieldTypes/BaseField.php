@@ -313,6 +313,16 @@ class BaseField extends \App\BaseModel
 	}
 
 	/**
+	 * Gets header field value.
+	 *
+	 * @return array
+	 */
+	public function getHeaderValue(): array
+	{
+		return $this->get('header_field');
+	}
+
+	/**
 	 * Gets value to edit.
 	 *
 	 * @param mixed $value
