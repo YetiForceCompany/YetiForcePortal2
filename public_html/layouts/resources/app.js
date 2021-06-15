@@ -380,6 +380,17 @@ var AppConnector,
 		},
 
 		/**
+		 * Function to register event for ckeditor for description field
+		 *
+		 * @param {object} container
+		 */
+		registerBaseEvent(container) {
+			container.on('click', '.js-history-back', () => {
+				window.history.back();
+			});
+		},
+
+		/**
 		 * Load editor element.
 		 *
 		 * @param {object} noteContentElement
@@ -1151,6 +1162,7 @@ $(function () {
 	app.registerMobileMenu(container);
 	app.registerIframeAndMoreContent();
 	app.registerEventForEditor(container);
+	app.registerBaseEvent(container);
 	app.registerAfterLoginEvents(container);
 	if ($('#fingerPrint').length && typeof DeviceUUID === 'function') {
 		$('#fingerPrint').val(new DeviceUUID().get());

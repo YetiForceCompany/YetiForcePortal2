@@ -30,7 +30,7 @@ class DetailView extends \App\Controller\View
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$recordModel = Record::getInstanceById($moduleName, $record);
 		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
-		$fields = [];
+		$inventoryFields = $fields = $headerFields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
@@ -38,9 +38,11 @@ class DetailView extends \App\Controller\View
 					$fieldInstance->setDisplayValue($recordModel->get($field['name']));
 				}
 				$fields[$field['blockId']][] = $fieldInstance;
+				if (!empty($field['header_field'])) {
+					$headerFields[$field['header_field']['type']][$field['name']] = $fieldInstance;
+				}
 			}
 		}
-		$inventoryFields = [];
 		if (!empty($moduleStructure['inventory'])) {
 			$columns = \Conf\Inventory::$columnsByModule[$moduleName] ?? \Conf\Inventory::$columns ?? [];
 			$columnsIsActive = !empty($columns);
@@ -64,6 +66,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
 		$this->viewer->assign('SUMMARY_INVENTORY', $recordModel->getInventorySummary());
 		$this->viewer->assign('DETAIL_LINKS', $detailViewModel->getLinksHeader());
+		$this->viewer->assign('FIELDS_HEADER', $headerFields);
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }

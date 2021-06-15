@@ -16,6 +16,9 @@
 			</div>
 		</div>
 	</div>
+	{if isset($FIELDS_HEADER['progress'])}
+		{include file=\App\Resources::templatePath("Detail/HeaderProgress.tpl", $MODULE_NAME) PROGRESS_FIELDS=$FIELDS_HEADER['progress']}
+	{/if}
 	<div class="row">
 		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4{else}col-12{/if}">
 			{assign var=ITERATION value=0}
@@ -74,7 +77,7 @@
 			{/foreach}
 		</div>
 		<div class="{if $SHOW_INVENTORY_RIGHT_COLUMN} col-8 {else} col-12 {/if}">
-			{include file=\App\Resources::templatePath("Detail\Inventory.tpl", $MODULE_NAME)}
+			{include file=\App\Resources::templatePath("Detail/Inventory.tpl", $MODULE_NAME)}
 		</div>
 	</div>
 	{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
