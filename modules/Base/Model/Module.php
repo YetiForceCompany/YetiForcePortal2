@@ -165,6 +165,6 @@ class Module
 	 */
 	public function getDefaultUrl(): string
 	{
-		return "index.php?module={$this->moduleName}&view={$this->defaultView}";
+		return "index.php?module={$this->moduleName}&view={$this->getDefaultView()}";
 	}
 }

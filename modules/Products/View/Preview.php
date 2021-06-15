@@ -19,6 +19,15 @@ use YF\Modules\Products\Model\Cart;
 class Preview extends \App\Controller\View
 {
 	/** {@inheritdoc} */
+	public function checkPermission(): void
+	{
+		parent::checkPermission();
+		if (!\Conf\Modules\Products::$shoppingMode) {
+			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
+		}
+	}
+
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$moduleName = $this->request->getModule();

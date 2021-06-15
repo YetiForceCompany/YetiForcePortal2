@@ -35,6 +35,15 @@ class Tree extends View\ListView
 	];
 
 	/** {@inheritdoc} */
+	public function checkPermission(): void
+	{
+		parent::checkPermission();
+		if (!\Conf\Modules\Products::$shoppingMode) {
+			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
+		}
+	}
+
+	/** {@inheritdoc} */
 	public function process()
 	{
 		$this->page = $this->request->getInteger('page', 1);

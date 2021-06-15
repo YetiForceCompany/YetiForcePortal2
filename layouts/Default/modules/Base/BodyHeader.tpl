@@ -39,13 +39,15 @@
 	<nav class="actionMenu" aria-label="{\App\Language::translate('QUICK_ACCESS_MENU')}">
 		<div class="o-action-menu__container d-flex flex-md-nowrap flex-column flex-md-row"
 			id="o-action-menu__container">
-			<div class="o-action-menu__item">
-				<a class=" p-1 js-shopping-cart btn btn-light mr-2 mb-0"
-					href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
-					<span class="fas fa-shopping-cart"></span>
-					<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
-				</a>
-			</div>
+			{if \Conf\Modules\Products::$shoppingMode}
+				<div class="o-action-menu__item">
+					<a class=" p-1 js-shopping-cart btn btn-light mr-2 mb-0"
+						href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
+						<span class="fas fa-shopping-cart"></span>
+						<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
+					</a>
+				</div>
+			{/if}
 			<div class="o-action-menu__item">
 				<div class="dropdown">
 					<a class="c-header__btn btn dropdown-toggle js-popover-tooltip dropdownMenu p-1 btn-light"
