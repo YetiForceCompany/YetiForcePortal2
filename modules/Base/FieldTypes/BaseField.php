@@ -347,10 +347,6 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getListDisplayValue(): string
 	{
-		$value = $this->getDisplayValue();
-		if (strlen($value) > $this->length) {
-			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), $this->length) . '</span>';
-		}
-		return $value;
+		return $this->getDisplayValue();
 	}
 }

@@ -28,12 +28,12 @@ class TextField extends BaseField
 	 *
 	 * @return string
 	 */
-	 public function getListDisplayValue(): string
-	 {
+	public function getListDisplayValue(): string
+	{
 		$value = $this->getDisplayValue();
-		if (strlen($value) > $this->length) {
-			$value = \App\Viewer::truncateText($this->getDisplayValue(), $this->length, true);
+		if (\strlen($value) > 30) {
+			$value = \App\Viewer::truncateText($this->getDisplayValue(), 30, true);
 		}
 		return $value;
-	 }
+	}
 }

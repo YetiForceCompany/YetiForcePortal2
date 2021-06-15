@@ -45,13 +45,5 @@ class ReferenceField extends BaseField
 		return $value;
 	}
 
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	 public function getListDisplayValue(): string
-	 {
-		 return  $this->getDisplayValue();
 	 }
 }
