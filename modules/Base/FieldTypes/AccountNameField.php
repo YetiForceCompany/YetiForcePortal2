@@ -27,7 +27,7 @@ class AccountNameField extends BaseField
 		if (empty($value)) {
 			return '';
 		}
-		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+		if (\mb_strlen($value) > \App\Config::$listViewItemMaxLength) {
 			$value = '<span class="js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</span>';
 		}
 		return $value;

@@ -33,7 +33,7 @@ class EmailField extends BaseField
 		if (empty($value)) {
 			return '';
 		}
-		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+		if (\mb_strlen($value) > \App\Config::$listViewItemMaxLength) {
 			return '<a class="u-cursor-pointer js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '" href="mailto:' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</a>';
 		}
 		return $this->getDisplayValue();

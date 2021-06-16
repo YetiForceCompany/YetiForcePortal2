@@ -34,7 +34,7 @@ class TextField extends BaseField
 		if (empty($value)) {
 			return '';
 		}
-		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+		if (\mb_strlen($value) > \App\Config::$listViewItemMaxLength) {
 			$value = \App\Viewer::truncateText($value, \App\Config::$listViewItemMaxLength, true);
 		}
 		return $value;
