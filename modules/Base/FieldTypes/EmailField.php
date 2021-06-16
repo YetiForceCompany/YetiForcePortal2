@@ -29,13 +29,14 @@ class EmailField extends BaseField
 	/** {@inheritdoc} */
 	public function getListDisplayValue(): string
 	{
-		if (empty($this->value)) {
+		$value = $this->value;
+		if (empty($value)) {
 			return '';
 		}
-		$value = \App\Purifier::encodeHtml($this->value);
+		$tuncateValue = $value;
 		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
 			$tuncateValue = \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength);
 		}
-		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$tuncateValue}</a>";
+		return '<a class="u-cursor-pointer js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '" href="mailto:' . \App\Purifier::encodeHtml($value) . "\">{$tuncateValue}</a>";
 	}
 }

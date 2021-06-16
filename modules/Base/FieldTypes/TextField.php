@@ -31,8 +31,11 @@ class TextField extends BaseField
 	public function getListDisplayValue(): string
 	{
 		$value = $this->getDisplayValue();
+		if (empty($value)) {
+			return '';
+		}
 		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
-			$value = \App\Viewer::truncateText($this->getDisplayValue(), \App\Config::$listViewItemMaxLength, true);
+			$value = \App\Viewer::truncateText($value, \App\Config::$listViewItemMaxLength, true);
 		}
 		return $value;
 	}

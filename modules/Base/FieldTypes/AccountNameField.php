@@ -23,12 +23,12 @@ class AccountNameField extends BaseField
 	 */
 	public function getListDisplayValue(): string
 	{
-		if (empty($this->value)) {
+		$value = $this->value;
+		if (empty($value)) {
 			return '';
 		}
-		$value = $this->getDisplayValue();
 		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
-			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), \App\Config::$listViewItemMaxLength) . '</span>';
+			$value = '<span class="js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</span>';
 		}
 		return $value;
 	}
