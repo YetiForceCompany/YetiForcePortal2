@@ -248,16 +248,6 @@
 .c-card__body.show {
   display: block !important; }
 
-.c-card__label {
-  align-items: center; }
-  .c-card__label label {
-    line-height: 1.7;
-    margin-bottom: 0; }
-
-.c-card__value .value {
-  line-height: 2.5;
-  margin-bottom: 0; }
-
 .recordEditView .c-card__body.show {
   display: flex !important; }
 
