@@ -45,16 +45,16 @@
 							<div class="c-card__row form-row border-bottom">
 								{assign var=COUNTER value=0}
 								{/if}
-								<div class="col-sm border-left" data-name="{$FIELD->getName()}" data-type="{$FIELD->get('type')}"  data-uitype="{$FIELD->getUIType()}">
+								<div class="col-sm border-left {if $FIELD->getUIType() eq '300'} col-lg-12 border-bottom {/if}" data-name="{$FIELD->getName()}" data-type="{$FIELD->get('type')}"  data-uitype="{$FIELD->getUIType()}">
 									<div class="form-row align-items-start">
-									<div class="fieldLabel border-right c-card__label text-lg-right text-md-left col-lg-6">
+									<div class="fieldLabel c-card__label text-lg-right text-md-left {if empty($FIELD->getDisplayValue())} border-right {/if} {if $FIELD->getUIType() eq '300'} col-lg-3 {else} col-lg-6 {/if}">
 										<label class="col-form-label font-weight-bold">
 											{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 											{$FIELD->get('label')}
 										</label>
 									</div>
-									<div class="fieldValue c-card__value justify-content-between col-lg-6 px-0">
-										<div class="value px-2">
+									<div class="fieldValue justify-content-between border-left {if $FIELD->getUIType() eq '300'} col-lg-9 {else} c-card__value col-lg-6 {/if} px-0">
+										<div class="value {if $FIELD->getUIType() eq '300'} p-2 {else} px-2 {/if}">
 											{$FIELD->getDisplayValue()}
 										</div>
 									</div>
