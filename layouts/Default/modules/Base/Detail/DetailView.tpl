@@ -47,16 +47,14 @@
 								{/if}
 								<div class="col-sm border-left {if $FIELD->getUIType() eq '300'} col-lg-12 border-bottom {/if}" data-name="{$FIELD->getName()}" data-type="{$FIELD->get('type')}"  data-uitype="{$FIELD->getUIType()}">
 									<div class="form-row align-items-start">
-									<div class="fieldLabel c-card__label text-lg-right text-md-left {if empty($FIELD->getDisplayValue())} border-right {/if} {if $FIELD->getUIType() eq '300'} col-lg-3 {else} col-lg-6 {/if}">
-										<label class="col-form-label font-weight-bold">
+									<div class="fieldLabel c-card__label text-lg-right text-md-left py-2 px-1 {if empty($FIELD->getDisplayValue())}border-right{/if} {if $FIELD->getUIType() eq '300'} col-lg-3 {else} col-lg-6 {/if}">
+										<label class="col-form-label font-weight-bold p-0">
 											{if $FIELD->isMandatory() eq true}<span class="redColor">*</span>{/if}
 											{$FIELD->get('label')}
 										</label>
 									</div>
-									<div class="fieldValue justify-content-between border-left {if $FIELD->getUIType() eq '300'} col-lg-9 {else} c-card__value col-lg-6 {/if} px-0">
-										<div class="value {if $FIELD->getUIType() eq '300'} p-2 {else} px-2 {/if}">
-											{$FIELD->getDisplayValue()}
-										</div>
+									<div class="fieldValue justify-content-between c-card__value {if !empty($FIELD->getDisplayValue())}border-left{/if}  {if $FIELD->getUIType() eq '300'}col-lg-9{else}col-lg-6{/if} py-2 px-1">
+										{$FIELD->getDisplayValue()}
 									</div>
 									{assign var=COUNTER value=$COUNTER+1}
 								</div>
