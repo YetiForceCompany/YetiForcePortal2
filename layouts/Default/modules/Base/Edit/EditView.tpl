@@ -41,14 +41,14 @@
 						</div>
 						<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
 							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
-								<div class="editFields col-sm-12 col-md-6 row m-0 d-flex align-items-center {if !$FIELD->isEditable()}d-none{/if}">
-									<div class="col-xl-3 col-lg-4 col-md-12 fieldLabel paddingLeft5px font-weight-bold">
+								<div class="editFields {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-sm-12 col-md-6{/if} row m-0 d-flex align-items-center {if !$FIELD->isEditable()}d-none{/if}">
+									<div class="{if $FIELD->getUIType() eq '300'}col-lg-12 text-left{else}col-xl-3 col-lg-4 col-md-12{/if} fieldLabel paddingLeft5px font-weight-bold">
 										<label class="muted mb-0 pt-0">
 											{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}
 											{$FIELD->getLabel()}
 										</label>
 									</div>
-									<div class="fieldValue col-xl-9 col-lg-8 col-md-12 px-1">
+									<div class="fieldValue {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-xl-9 col-lg-8 col-md-12{/if}  px-1">
 										{assign var=FIELD value=$FIELD->set('fieldvalue', $RECORD->getRawValue($FIELD->getName()))}
 										{include file=\App\Resources::templatePath($FIELD->getTemplatePath('Edit'), $MODULE_NAME) FIELD_MODEL=$FIELD}
 									</div>
