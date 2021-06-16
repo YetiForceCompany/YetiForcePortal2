@@ -33,10 +33,9 @@ class EmailField extends BaseField
 		if (empty($value)) {
 			return '';
 		}
-		$tuncateValue = $value;
 		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
-			$tuncateValue = \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength);
+			return '<a class="u-cursor-pointer js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '" href="mailto:' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</a>';
 		}
-		return '<a class="u-cursor-pointer js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '" href="mailto:' . \App\Purifier::encodeHtml($value) . "\">{$tuncateValue}</a>";
+		return $this->getDisplayValue();
 	}
 }

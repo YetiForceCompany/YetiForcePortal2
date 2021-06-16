@@ -65,11 +65,15 @@ class ReferenceField extends BaseField
 					$label = '<s>' . $label . '</s>';
 				}
 				if (\strlen($label) > \App\Config::$listViewItemMaxLength) {
-					$label = \App\TextParser::textTruncate($label, \App\Config::$listViewItemMaxLength);
+					$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . \App\TextParser::textTruncate($label, \App\Config::$listViewItemMaxLength) . '</a>';
+				} else {
+					$value = "<a class=\"modCT_{$value['referenceModule']}\" href=\"$url\" title=\"$title\">$label</a>";
 				}
-				$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . $label . '</a>';
 			} else {
 				$value = $value['value'];
+				if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+					$value = '<span class="js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</span>';
+				}
 			}
 		}
 		return $value;
