@@ -21,6 +21,11 @@ class ListView extends \App\Controller\View
 	public function process()
 	{
 		$listViewModel = \YF\Modules\Base\Model\ListView::getInstance($this->moduleName, $this->request->getAction());
+		if ($this->request->has('cvId')) {
+			$listViewModel->setCvId($this->request->getByType('cvId', \App\Purifier::INTEGER));
+		}
+		$this->viewer->assign('CUSTOM_VIEWS', $listViewModel->getCustomViews());
+		$this->viewer->assign('VIEW_ID', $listViewModel->getDefaultCustomView());
 		$this->viewer->assign('HEADERS', $listViewModel->getHeaders());
 		$this->viewer->view($this->processTplName(), $this->moduleName);
 	}

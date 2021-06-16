@@ -66,12 +66,33 @@ window.Base_ListView_Js = class {
 		});
 	}
 	/**
+	 * Register custom view event
+	 */
+	registerCustomView() {
+		this.listForm.on('change', '.js-cv-list', (_) => {
+			this.reloadView();
+		});
+	}
+	/**
+	 * Reload view
+	 */
+	reloadView() {
+		let data = {
+			module: this.container.find('#module').val(),
+			view: this.container.find('#view').val(),
+			cvId: this.container.find('[name="cvId"]').val()
+		};
+		window.location.href = app.convertObjectToUrl(data);
+	}
+	/**
 	 * Register modal events.
 	 */
 	registerEvents() {
+		this.container = $('#page');
 		this.listForm = $('.js-form-container');
 		this.table = this.listForm.find('.js-list-view-table');
 		this.registerDataTable();
 		this.registerRecordEvents();
+		this.registerCustomView();
 	}
 };

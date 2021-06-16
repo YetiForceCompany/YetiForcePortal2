@@ -1148,6 +1148,28 @@ var AppConnector,
 				default:
 					return;
 			}
+		},
+		/**
+		 * Convert object to url string
+		 *
+		 * @param   {object}  urlData
+		 * @param   {string}  entryFile
+		 *
+		 * @return  {string}  url
+		 */
+		convertObjectToUrl(urlData = {}, entryFile = 'index.php?') {
+			let url = entryFile;
+			Object.keys(urlData).forEach((key, n) => {
+				let value = urlData[key];
+				if (typeof value === 'object' || (typeof value === 'string' && value.startsWith('<'))) {
+					return;
+				}
+				if (url !== entryFile) {
+					url += '&';
+				}
+				url += key + '=' + value;
+			});
+			return url;
 		}
 	};
 $(function () {
