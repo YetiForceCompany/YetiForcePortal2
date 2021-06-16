@@ -12,25 +12,25 @@
 			</div>
 		</div>
 		<div class="col-sm-4 col-6">
-				{if \YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
-					<div class="float-right">
-					<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
-						<span class="fas fa-plus mr-2"></span>
-						<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
-					</a>
-					</div>
-				{/if}
-				{if $CUSTOM_VIEWS > 1}
+			{if \YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+				<div class="float-right">
+				<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
+					<span class="fas fa-plus mr-2"></span>
+					<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+				</a>
+				</div>
+			{/if}
+			{if count($CUSTOM_VIEWS) > 1}
 				<div class="col-8 float-right">
 					<select name="cvId" id="customFilter" class="form-control form-control-sm js-cv-list">
-							{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
-								<option	value="{$CV_ID}" {if $CUSTOM_VIEW.isDefault} selected="selected" {/if}>
-									{App\Purifier::decodeHtml($CUSTOM_VIEW.viewname)}
-								</option>
-							{/foreach}
-						</select>
-						</div>
-				{/if}
+						{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
+							<option	value="{$CV_ID}" {if $CUSTOM_VIEW.isDefault} selected="selected" {/if}>
+								{App\Purifier::decodeHtml($CUSTOM_VIEW.viewname)}
+							</option>
+						{/foreach}
+					</select>
+				</div>
+			{/if}
 		</div>
 	</div>
 	<div class="row mt-2">
