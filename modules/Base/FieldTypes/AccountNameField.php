@@ -1,6 +1,6 @@
 <?php
 /**
- * Text field class.
+ * Account name field file.
  *
  * @package UIType
  *
@@ -11,6 +11,9 @@
 
 namespace YF\Modules\Base\FieldTypes;
 
+/**
+ * Account name field class.
+ */
 class AccountNameField extends BaseField
 {
 	/**
@@ -20,9 +23,12 @@ class AccountNameField extends BaseField
 	 */
 	public function getListDisplayValue(): string
 	{
+		if (empty($this->value)) {
+			return '';
+		}
 		$value = $this->getDisplayValue();
-		if (\strlen($value) > \App\Config::$lengthFildList) {
-			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), \App\Config::$lengthFildList) . '</span>';
+		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+			$value = '<span class="js-popover-tooltip" data-content="' . $value . '">' . \App\TextParser::textTruncate($this->getDisplayValue(), \App\Config::$listViewItemMaxLength) . '</span>';
 		}
 		return $value;
 	}

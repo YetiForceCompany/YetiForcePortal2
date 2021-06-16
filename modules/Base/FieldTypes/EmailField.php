@@ -33,8 +33,8 @@ class EmailField extends BaseField
 			return '';
 		}
 		$value = \App\Purifier::encodeHtml($this->value);
-		if (\strlen($value) > \App\Config::$lengthFildList) {
-			$tuncateValue = \App\TextParser::textTruncate($value, \App\Config::$lengthFildList);
+		if (\strlen($value) > \App\Config::$listViewItemMaxLength) {
+			$tuncateValue = \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength);
 		}
 		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$tuncateValue}</a>";
 	}

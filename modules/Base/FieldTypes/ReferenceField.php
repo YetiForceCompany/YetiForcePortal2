@@ -64,8 +64,8 @@ class ReferenceField extends BaseField
 				if ('Active' !== $value['state']) {
 					$label = '<s>' . $label . '</s>';
 				}
-				if (\strlen($label) > \App\Config::$lengthFildList) {
-					$label = \App\TextParser::textTruncate($label, \App\Config::$lengthFildList);
+				if (\strlen($label) > \App\Config::$listViewItemMaxLength) {
+					$label = \App\TextParser::textTruncate($label, \App\Config::$listViewItemMaxLength);
 				}
 				$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . $label . '</a>';
 			} else {
