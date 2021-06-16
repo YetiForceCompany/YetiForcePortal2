@@ -24,6 +24,7 @@ table tbody tr:hover td .actions span {
 table {
 	&.listViewEntries td {
 		vertical-align: middle !important;
+		white-space: nowrap;
 	}
 
 	&.dataTable.listViewEntries tbody td {

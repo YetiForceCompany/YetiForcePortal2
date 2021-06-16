@@ -139,6 +139,9 @@ class Config
 	/** Number of items displayed in picklists. */
 	public static $picklistLimit = 50;
 
+	/** Maximum character length in list view. */
+	public static $listViewItemMaxLength = 30;
+
 	/**
 	 * Alert messages.
 	 */

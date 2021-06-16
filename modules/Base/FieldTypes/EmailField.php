@@ -25,4 +25,17 @@ class EmailField extends BaseField
 		$value = \App\Purifier::encodeHtml($this->value);
 		return "<a class=\"u-cursor-pointer\" href=\"mailto:{$value}\">{$value}</a>";
 	}
+
+	/** {@inheritdoc} */
+	public function getListDisplayValue(): string
+	{
+		$value = $this->value;
+		if (empty($value)) {
+			return '';
+		}
+		if (\mb_strlen($value) > \App\Config::$listViewItemMaxLength) {
+			return '<a class="u-cursor-pointer js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '" href="mailto:' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</a>';
+		}
+		return $this->getDisplayValue();
+	}
 }
