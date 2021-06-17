@@ -8,7 +8,13 @@
 {assign var=PARAMS value=$FIELD_MODEL->getFieldParams()}
 {assign var=NUMBER value=$FIELD_MODEL->get('fieldvalue')}
 <div>
-	{assign var=ACTIVE_EXTRA_FIELD value=!empty($VIEW) && ($VIEW == 'Edit') && $FIELD_MODEL_EXTRA && $FIELD_MODEL_EXTRA->isWritable()}
+	{assign var=FIELD_NAME_EXTRA value=$FIELD_NAME|cat:'_extra'}
+	{foreach from=$FIELDS[$BLOCK['id']] item=FIELD_MODEL_IN_BLOCK}
+		{if $FIELD_MODEL_IN_BLOCK->getName() eq $FIELD_NAME_EXTRA}
+			{assign var=FIELD_MODEL_EXTRA value=$FIELD_MODEL_IN_BLOCK}
+		{/if}
+	{/foreach}
+	{assign var=ACTIVE_EXTRA_FIELD value=!empty($VIEW) && ($VIEW eq 'EditView') && isset($FIELD_MODEL_EXTRA)}
 	<div class="form-row">
 		<div class="{if $ACTIVE_EXTRA_FIELD}col-md-8{else}col-md-12{/if}">
 			<div class="input-group phoneGroup mb-1">

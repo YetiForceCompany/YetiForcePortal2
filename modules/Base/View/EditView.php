@@ -52,10 +52,10 @@ class EditView extends \App\Controller\View
 		}
 		$recordModel->setData($recordDetail);
 		$moduleStructure = $api->call($moduleName . '/Fields');
-		$fields = [];
+		$fields = $fieldInForm = [];
 		foreach ($moduleStructure['fields'] as $field) {
+			$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
 			if ($field['isEditable']) {
-				$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
 				if (isset($recordDetail['data'][$field['name']])) {
 					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
 					if (isset($recordDetail['rawData'][$field['name']])) {
@@ -67,11 +67,20 @@ class EditView extends \App\Controller\View
 				} else {
 					$fieldInstance->setIsNewRecord();
 				}
+				$fieldInForm[$field['blockId']][] = $fieldInstance;
+			} else {
+				if (isset($recordDetail['data'][$field['name']])) {
+					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
+					if (isset($recordDetail['rawData'][$field['name']])) {
+						$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
+					}
+				}
 				$fields[$field['blockId']][] = $fieldInstance;
 			}
 		}
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('FIELDS_IN_FORM', $fieldInForm);
 		$this->viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->view('Edit/EditView.tpl', $moduleName);
