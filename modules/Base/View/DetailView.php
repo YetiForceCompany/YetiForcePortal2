@@ -28,9 +28,9 @@ class DetailView extends \App\Controller\View
 	{
 		$moduleName = $this->request->getModule();
 		$record = $this->request->getByType('record', Purifier::INTEGER);
-		$recordModel = Record::getInstanceById($moduleName, $record);
+		$recordModel = Record::getInstanceById($moduleName, $record, ['x-header-fields' => 1]);
 		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
-		$inventoryFields = $fields = $headerFields = [];
+		$inventoryFields = $fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
@@ -38,9 +38,6 @@ class DetailView extends \App\Controller\View
 					$fieldInstance->setDisplayValue($recordModel->get($field['name']));
 				}
 				$fields[$field['blockId']][] = $fieldInstance;
-				if (!empty($field['header_field'])) {
-					$headerFields[$field['header_field']['type']][$field['name']] = $fieldInstance;
-				}
 			}
 		}
 		if (!empty($moduleStructure['inventory'])) {
@@ -66,7 +63,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
 		$this->viewer->assign('SUMMARY_INVENTORY', $recordModel->getInventorySummary());
 		$this->viewer->assign('DETAIL_LINKS', $detailViewModel->getLinksHeader());
-		$this->viewer->assign('FIELDS_HEADER', $headerFields);
+		$this->viewer->assign('FIELDS_HEADER', $recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}
 }

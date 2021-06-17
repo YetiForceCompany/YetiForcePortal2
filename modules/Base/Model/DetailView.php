@@ -21,7 +21,7 @@ class DetailView
 	/** @var string Name of module. */
 	protected $moduleName;
 
-	/** @var YF\Modules\Base\Model\Record Record model. */
+	/** @var \YF\Modules\Base\Model\Record Record model. */
 	protected $record;
 
 	/**
@@ -50,7 +50,7 @@ class DetailView
 	/**
 	 * Sets record model.
 	 *
-	 * @param YF\Modules\Base\Model\Record $recordModel
+	 * @param \YF\Modules\Base\Model\Record $recordModel
 	 *
 	 * @return void
 	 */

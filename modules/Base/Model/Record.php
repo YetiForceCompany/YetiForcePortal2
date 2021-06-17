@@ -20,33 +20,23 @@ class Record extends \App\BaseModel
 	/** @var \YF\Modules\Base\Model\Module Module model instance. */
 	protected $moduleModel;
 
-	/**
-	 * Record name.
-	 *
-	 * @var string
-	 */
-	protected $name;
-
-	/**
-	 * Privileges.
-	 *
-	 * @var array
-	 */
-	protected $privileges = [];
-
-	/**
-	 * 	Information about inventory.
-	 *
-	 * @var array
-	 */
+	/** @var array Information about inventory. */
 	protected $inventoryData = [];
 
-	/**
-	 * 	Information about summary inventory.
-	 *
-	 * @var array
-	 */
+	/** @var array Information about summary inventory. */
 	protected $inventorySummaryData = [];
+
+	/** @var string Record ID. */
+	protected $id;
+
+	/** @var string Record name. */
+	protected $name = '';
+
+	/** @var array Privileges. */
+	protected $privileges = [];
+
+	/** @var array Custom data. */
+	protected $customData = [];
 
 	/**
 	 * Static Function to get the instance of a clean Record for the given module name.
@@ -67,17 +57,24 @@ class Record extends \App\BaseModel
 	 *
 	 * @param string $moduleName
 	 * @param int    $recordId
+	 * @param array  $headers
 	 *
 	 * @return \self
 	 */
-	public static function getInstanceById(string $moduleName, int $recordId)
+	public static function getInstanceById(string $moduleName, int $recordId, array $headers = []): self
 	{
-		$result = \App\Api::getInstance()->call("{$moduleName}/Record/{$recordId}");
+		$api = \App\Api::getInstance();
+		if ($headers) {
+			$api->setCustomHeaders($headers);
+		}
+		$result = $api->call("{$moduleName}/Record/{$recordId}");
 		$instance = self::getInstance($moduleName);
 		$instance->setData($result['data'] ?? []);
 		$instance->setInventoryData($result['inventory'] ?? [], $result['summaryInventory'] ?? []);
 		$instance->privileges = $result['privileges'] ?? [];
 		$instance->name = $result['name'] ?? '';
+		unset($result['data'], $result['inventory'], $result['summaryInventory'], $result['privileges'], $result['name']);
+		$instance->customData = $result;
 		$instance->setId($recordId);
 		return $instance;
 	}
@@ -122,49 +119,26 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Function to get the id of the record.
+	 *
+	 * @return int
+	 */
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
+	/**
 	 * Function to set the id of the record.
 	 *
-	 * @param \self
-	 * @param mixed $value
+	 * @param int $value
+	 *
+	 * @return self
 	 */
-	public function setId($value)
+	public function setId(int $value): self
 	{
-		return $this->set('id', $value);
-	}
-
-	/**
-	 * Function to get the raw value for a given key.
-	 *
-	 * @param string $key
-	 *
-	 * @return string
-	 */
-	public function getDisplayValue(string $key): string
-	{
-		return \App\Purifier::encodeHtml((string) $this->get($key));
-	}
-
-	/**
-	 * Get list display value.
-	 *
-	 * @param string $key
-	 *
-	 * @return string
-	 */
-	public function getListDisplayValue(string $key): string
-	{
-		$fieldModel = $this->getModuleModel()->getFieldModel($key);
-		$value = '';
-		if ($fieldModel->isViewable()) {
-			if ($this->has($key)) {
-				$fieldModel->setDisplayValue($this->get($key));
-				if (isset($this->valueMap['rawData'][$key])) {
-					$fieldModel->setRawValue($this->valueMap['rawData'][$key]);
-				}
-			}
-			$value = $fieldModel->getListDisplayValue();
-		}
-		return $value;
+		$this->id = $value;
+		return $this;
 	}
 
 	/**
@@ -174,7 +148,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getRawData(): array
 	{
-		return $this->valueMap['rawData'] ?? [];
+		return $this->customData['rawData'] ?? [];
 	}
 
 	/**
@@ -182,11 +156,11 @@ class Record extends \App\BaseModel
 	 *
 	 * @param array $rawData
 	 *
-	 * @return void
+	 * @return self
 	 */
-	public function setRawData(array $rawData)
+	public function setRawData(array $rawData): self
 	{
-		$this->valueMap['rawData'] = $rawData;
+		$this->customData['rawData'] = $rawData;
 		return $this;
 	}
 
@@ -199,7 +173,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getRawValue(string $key)
 	{
-		return $this->valueMap['rawData'][$key] ?? '';
+		return $this->customData['rawData'][$key] ?? '';
 	}
 
 	/**
@@ -210,23 +184,9 @@ class Record extends \App\BaseModel
 	 *
 	 * @return self
 	 */
-	public function setRawValue(string $key, $value)
+	public function setRawValue(string $key, $value): self
 	{
-		$this->valueMap['rawData'][$key] = $value;
-		return $this;
-	}
-
-	/**
-	 * Function to set the name of the module to which the record belongs.
-	 *
-	 * @param string $moduleName
-	 *
-	 * @return \self
-	 */
-	public function setModuleName(string $moduleName): self
-	{
-		$this->moduleName = $moduleName;
-		$this->moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
+		$this->customData['rawData'][$key] = $value;
 		return $this;
 	}
 
@@ -273,6 +233,65 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Get custom data.
+	 *
+	 * @return array
+	 */
+	public function getCustomData(): array
+	{
+		return $this->customData;
+	}
+
+	/**
+	 * Function to get the raw value for a given key.
+	 *
+	 * @param string $key
+	 *
+	 * @return string
+	 */
+	public function getDisplayValue(string $key): string
+	{
+		return \App\Purifier::encodeHtml($this->get($key));
+	}
+
+	/**
+	 * Get list display value.
+	 *
+	 * @param string $key
+	 *
+	 * @return string
+	 */
+	public function getListDisplayValue(string $key): string
+	{
+		$fieldModel = $this->getModuleModel()->getFieldModel($key);
+		$value = '';
+		if ($fieldModel->isViewable()) {
+			if ($this->has($key)) {
+				$fieldModel->setDisplayValue($this->get($key));
+				if (isset($this->customData['rawData'][$key])) {
+					$fieldModel->setRawValue($this->customData['rawData'][$key]);
+				}
+			}
+			$value = $fieldModel->getListDisplayValue();
+		}
+		return $value;
+	}
+
+	/**
+	 * Function to set the name of the module to which the record belongs.
+	 *
+	 * @param string $moduleName
+	 *
+	 * @return \self
+	 */
+	public function setModuleName(string $moduleName): self
+	{
+		$this->moduleName = $moduleName;
+		$this->moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
+		return $this;
+	}
+
+	/**
 	 * Function to get the list view actions for the record.
 	 *
 	 * @return string
@@ -286,7 +305,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'href' => $this->getDetailViewUrl(),
 				'icon' => 'fas fa-th-list',
-				'class' => 'btn-sm btn-info active js-popover-tooltip'
+				'class' => 'btn-sm btn-info active js-popover-tooltip',
 			];
 		}
 		if ($this->isEditable()) {
@@ -295,7 +314,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'href' => $this->getEditViewUrl(),
 				'icon' => 'fas fa-edit',
-				'class' => 'btn-sm btn-success active js-popover-tooltip'
+				'class' => 'btn-sm btn-success active js-popover-tooltip',
 			];
 		}
 		if ($this->isDeletable()) {
@@ -304,7 +323,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'data' => ['url' => $this->getDeleteUrl()],
 				'icon' => 'fas fa-trash-alt',
-				'class' => 'btn-sm btn-danger active js-delete-record js-popover-tooltip'
+				'class' => 'btn-sm btn-danger active js-delete-record js-popover-tooltip',
 			];
 		}
 		return \App\Layout\Action::getListViewActions($recordLinks);
@@ -328,16 +347,6 @@ class Record extends \App\BaseModel
 	public function getDetailViewUrl()
 	{
 		return 'index.php?module=' . $this->getModuleName() . '&view=DetailView&record=' . $this->getId();
-	}
-
-	/**
-	 * Function to get the id of the record.
-	 *
-	 * @return int
-	 */
-	public function getId()
-	{
-		return $this->get('id');
 	}
 
 	/**
