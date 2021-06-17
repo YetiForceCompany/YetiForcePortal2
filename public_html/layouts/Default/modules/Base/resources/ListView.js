@@ -70,9 +70,11 @@ window.Base_ListView_Js = class {
 	 */
 	registerCustomView() {
 		this.listForm.on('change', '.js-cv-list', (_) => {
+			$.progressIndicatorShow();
 			this.reloadView();
 		});
 		this.listForm.on('click', '.js-filter-tab', (e) => {
+			$.progressIndicatorShow();
 			this.container.find('[name="cvId"]').val(e.currentTarget.dataset.cvid);
 			this.reloadView();
 		});
