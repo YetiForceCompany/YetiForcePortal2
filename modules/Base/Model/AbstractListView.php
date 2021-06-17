@@ -283,7 +283,12 @@ abstract class AbstractListView
 	public function getCustomViews(): array
 	{
 		if (null === $this->customViews) {
-			$this->customViews = []; // \App\Api::getInstance()->call($this->getModuleName() . '/CustomView') ?: [];
+			if (\App\Cache::has('CustomViews', $this->getModuleName())) {
+				$this->customViews = \App\Cache::get('CustomViews', $this->getModuleName());
+			} else {
+				$this->customViews = \App\Api::getInstance()->call($this->getModuleName() . '/CustomView') ?: [];
+				\App\Cache::save('CustomViews', $this->getModuleName(), $this->customViews, \App\Cache::LONG);
+			}
 		}
 		return $this->customViews;
 	}

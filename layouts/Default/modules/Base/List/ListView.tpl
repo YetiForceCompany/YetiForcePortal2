@@ -24,12 +24,14 @@
 				<div class="col-8 float-right">
 					<select name="cvId" id="customFilter" class="form-control form-control-sm js-cv-list">
 						{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
-							<option	value="{$CV_ID}" {if $CUSTOM_VIEW.isDefault} selected="selected" {/if}>
+							<option	value="{$CV_ID}" {if $CV_ID === $VIEW_ID} selected="selected" {/if}>
 								{App\Purifier::decodeHtml($CUSTOM_VIEW.viewname)}
 							</option>
 						{/foreach}
 					</select>
 				</div>
+			{elseif $VIEW_ID}
+				<input type="hidden" name="cvId" id="customFilter" value="{$VIEW_ID}">
 			{/if}
 		</div>
 	</div>
