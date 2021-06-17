@@ -25,7 +25,7 @@
 					<select name="cvId" id="customFilter" class="form-control form-control-sm js-cv-list">
 						{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
 							<option	value="{$CV_ID}" {if $CV_ID === $VIEW_ID} selected="selected" {/if}>
-								{App\Purifier::decodeHtml($CUSTOM_VIEW.viewname)}
+								{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
 							</option>
 						{/foreach}
 					</select>
@@ -36,6 +36,32 @@
 		</div>
 	</div>
 	<div class="row mt-2">
+		{if $CUSTOM_VIEWS|count gt 0}
+			<div class="col-sm-12">
+				<ul class="c-tab--border nav nav-tabs" role="tablist">
+					{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
+						{if $CUSTOM_VIEW.isFeatured}
+							<li class="nav-item js-filter-tab c-tab--small font-weight-bold"
+								data-cvid="{$CV_ID}" data-js="click">
+								<a class="nav-link{if $VIEW_ID == $CV_ID} active{/if}" href="#"
+									{if $CUSTOM_VIEW.color}style="color: {$CUSTOM_VIEW.color}; border-color: {$CUSTOM_VIEW.color} {$CUSTOM_VIEW.color} #fff"{/if}
+									data-toggle="tab" role="tab"
+									aria-selected="{if $VIEW_ID == $CV_ID}true{else}false{/if}">
+									{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
+									{if $CUSTOM_VIEW.description}
+										<span class="js-popover-tooltip ml-1" data-toggle="popover"
+												data-placement="top"
+												data-content="{\App\Purifier::encodeHtml($CUSTOM_VIEW.description)}" data-js="popover">
+											<span class="fas fa-info-circle"></span>
+										</span>
+									{/if}
+								</a>
+							</li>
+						{/if}
+					{/foreach}
+				</ul>
+			</div>
+		{/if}
 		<div class="table-responsive col-sm-12">
 			<table class="table listViewEntries js-list-view-table" data-js="dataTable">
 				<thead>

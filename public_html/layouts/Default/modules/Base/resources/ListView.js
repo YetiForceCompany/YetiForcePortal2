@@ -72,6 +72,10 @@ window.Base_ListView_Js = class {
 		this.listForm.on('change', '.js-cv-list', (_) => {
 			this.reloadView();
 		});
+		this.listForm.on('click', '.js-filter-tab', (e) => {
+			this.container.find('[name="cvId"]').val(e.currentTarget.dataset.cvid);
+			this.reloadView();
+		});
 	}
 	/**
 	 * Reload view

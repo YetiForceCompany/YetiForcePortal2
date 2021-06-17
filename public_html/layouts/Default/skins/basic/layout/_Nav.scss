@@ -1,0 +1,33 @@
+/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+.c-tab {
+	&--small {
+		display: flex;
+		align-items: center;
+		font-size: 80%;
+		font-weight: 400;
+	}
+
+	&--border {
+		border-bottom: 0;
+
+		.nav-link {
+			&:not(.active) {
+				border-color: transparent !important;
+			}
+
+			&.active {
+				border-bottom-color: transparent !important;
+			}
+
+			&.active:after {
+				content: "";
+				width: 100%;
+				right: 0;
+				top: calculate-rem(35px);
+				position: absolute;
+				border: solid 1px;
+				z-index: -1;
+			}
+		}
+	}
+}
