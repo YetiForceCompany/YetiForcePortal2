@@ -45,8 +45,8 @@
 				<ul class="c-progress__container js-header-progress-bar list-inline my-0 py-1 js-scrollbar c-scrollbar-x--small" data-picklist-name="{$NAME}" data-js="container">
 					{assign var=ARROW_CLASS value="before"}
 					{assign var=ICON_CLASS value="fas fa-check"}
-					{foreach from=$FIELD_HEADER['values'] key=FIELD_HEADER_LABEL item=FIELD_HEADER_VALUE name=picklistValues}
-						<li class="c-progress__item list-inline-item mx-0 {if $smarty.foreach.picklistValues.first}first{/if} {if $FIELD_HEADER_VALUE['isActive']}active{assign var=ARROW_CLASS value="after"}{else}{$ARROW_CLASS}{/if}">
+					{foreach from=$FIELD_HEADER['values'] key=FIELD_HEADER_LABEL item=FIELD_HEADER_VALUE name=fieldHeaderValues}
+						<li class="c-progress__item list-inline-item mx-0 {if $smarty.foreach.fieldHeaderValues.first}first{/if} {if $FIELD_HEADER_VALUE['isActive']}active{assign var=ARROW_CLASS value="after"}{else}{$ARROW_CLASS}{/if}">
 							<div class="c-progress__icon__container">
 								<span class="
 							 {if $FIELD_HEADER_VALUE['isLocked']}
