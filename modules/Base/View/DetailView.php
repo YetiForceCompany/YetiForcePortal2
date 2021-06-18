@@ -54,11 +54,16 @@ class DetailView extends \App\Controller\View
 		$this->detailViewModel = DetailViewModel::getInstance($this->recordModel->getModuleName());
 		$this->detailViewModel->setRecordModel($this->recordModel);
 
-		$this->loadHeder();
+		$this->loadHeader();
 		$this->invokeExposedMethod($mode);
 	}
 
-	public function loadHeder()
+	/**
+	 * Gets Header.
+	 *
+	 * @return void
+	 */
+	public function loadHeader()
 	{
 		$moduleName = $this->request->getModule();
 		$fieldsForm = $fields = [];
