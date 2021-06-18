@@ -23,8 +23,29 @@ use YF\Modules\Base\Model\Record;
  */
 class DetailView extends \App\Controller\View
 {
+	use \App\Controller\ExposeMethodTrait;
+
+	/** {@inheritdoc} */
+	public function __construct(\App\Request $request)
+	{
+		parent::__construct($request);
+		$this->exposeMethod('details');
+		$this->exposeMethod('summary');
+	}
+
 	/** {@inheritdoc} */
 	public function process()
+	{
+		$mode = $this->request->getMode() ?: 'details';
+		$this->invokeExposedMethod($mode);
+	}
+
+	/**
+	 * Details tab.
+	 *
+	 * @return void
+	 */
+	public function details()
 	{
 		$moduleName = $this->request->getModule();
 		$record = $this->request->getByType('record', Purifier::INTEGER);
@@ -67,5 +88,15 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('DETAIL_LINKS', $detailViewModel->getLinksHeader());
 		$this->viewer->assign('FIELDS_HEADER', $recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
+	}
+
+	/**
+	 * Summary tab.
+	 *
+	 * @return void
+	 */
+	public function summary()
+	{
+		// TODO add data
 	}
 }
