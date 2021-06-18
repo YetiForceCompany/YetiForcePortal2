@@ -47,11 +47,14 @@
 					{assign var=ARROW_CLASS value="before"}
 					{assign var=ICON_CLASS value="fas fa-check"}
 					{foreach from=$FIELD_MODEL->get('picklistvalues') key=PICKLIST_VALUE item=PICKLIST_LABEL name=picklistValues}
-						{assign var=IS_ACTIVE value=$PICKLIST_VALUE eq $RECORD->get($NAME)}
+						{assign var=IS_ACTIVE value=$FIELD_HEADER['values'][$PICKLIST_VALUE]['isActive']}
+						{assign var=DESCRIPTION value=$FIELD_HEADER['values'][$PICKLIST_VALUE]['description']}
 						<li class="c-progress__item list-inline-item mx-0 {if $smarty.foreach.picklistValues.first}first{/if} {if $IS_ACTIVE}active{assign var=ARROW_CLASS value="after"}{else}{$ARROW_CLASS}{/if}">
 							<div class="c-progress__icon__container">
 								<span class="
-							 {if $IS_ACTIVE}
+							 {if $FIELD_HEADER['values'][$PICKLIST_VALUE]['isLocked']}
+								fas fa-lock
+							{elseif $IS_ACTIVE}
 								far fa-dot-circle
 							{else}
 								{$ICON_CLASS}
@@ -62,8 +65,8 @@
 								{' '}c-progress__icon"></span>
 							</div>
 							<div class="c-progress__link">
-								{if !empty($VALUE_DATA['description'])}
-									<span class="c-progress__icon-info js-popover-tooltip" data-js="popover" data-trigger="hover focus" data-content="{\App\Purifier::encodeHtml($VALUE_DATA['description'])}">
+								{if !empty($DESCRIPTION)}
+									<span class="c-progress__icon-info js-popover-tooltip" data-js="popover" data-trigger="hover focus" data-content="{\App\Purifier::encodeHtml($DESCRIPTION)}">
 										<span class="fas fa-info-circle"></span>
 									</span>
 								{/if}
