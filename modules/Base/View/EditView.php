@@ -17,7 +17,7 @@ class EditView extends \App\Controller\View
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
-		parent::checkPermission($this->request);
+		parent::checkPermission();
 		$actionName = 'EditView';
 		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';

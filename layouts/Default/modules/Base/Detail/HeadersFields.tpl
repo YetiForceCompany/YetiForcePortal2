@@ -41,12 +41,12 @@
 <div class="row">
 	<div class="col-sm-12">
 		{foreach from=$FIELDS_HEADER['progress'] key=NAME item=FIELD_HEADER}
-			<div class="c-progress px-3 w-100">
+			<div class="c-progress px-2 w-100">
 				<ul class="c-progress__container js-header-progress-bar list-inline my-0 py-1 js-scrollbar c-scrollbar-x--small" data-picklist-name="{$NAME}" data-js="container">
 					{assign var=ARROW_CLASS value="before"}
 					{assign var=ICON_CLASS value="fas fa-check"}
 					{foreach from=$FIELD_HEADER['values'] key=FIELD_HEADER_LABEL item=FIELD_HEADER_VALUE name=fieldHeaderValues}
-						<li class="c-progress__item list-inline-item mx-0 {if $smarty.foreach.fieldHeaderValues.first}first{/if} {if $FIELD_HEADER_VALUE['isActive']}active{assign var=ARROW_CLASS value="after"}{else}{$ARROW_CLASS}{/if}">
+						<li class="c-progress__item list-inline-item mx-0 {if $smarty.foreach.fieldHeaderValues.first}first{/if} {if $FIELD_HEADER_VALUE['isActive']}active{assign var=ARROW_CLASS value="after"}{else}{$ARROW_CLASS}{/if}" data-value="{$FIELD_HEADER_LABEL}">
 							<div class="c-progress__icon__container">
 								<span class="
 							 {if $FIELD_HEADER_VALUE['isLocked']}
@@ -67,8 +67,8 @@
 										<span class="fas fa-info-circle"></span>
 									</span>
 								{/if}
-								<span class=" js-popover-tooltip--ellipsis" data-toggle="popover" data-content="{$FIELD_HEADER_LABEL}" data-js="popover">
-									<span class="c-progress__text">{$FIELD_HEADER_LABEL}</span>
+								<span class=" js-popover-tooltip--ellipsis" data-toggle="popover" data-content="{$FIELD_HEADER_VALUE['label']}" data-js="popover">
+									<span class="c-progress__text">{$FIELD_HEADER_VALUE['label']}</span>
 								</span>
 							</div>
 						</li>
