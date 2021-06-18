@@ -19,7 +19,5 @@
 {if !empty($FIELDS_HEADER)}
 	{include file=\App\Resources::templatePath("Detail/HeadersFields.tpl", $MODULE_NAME)}
 {/if}
-
-ss
 <!-- /tpl-Base-Detail-Header -->
 {/strip}
