@@ -25,7 +25,7 @@
 			{foreach item=TABS key=TYPE from=$TABS_GROUP}
 				{foreach item=TAB key=TYPE from=$TABS}
 					<li class="nav-item">
-						<a href="javascript:void(0);" class="nav-link u-text-ellipsis">
+						<a href="{$TAB['url']}" class="nav-link {if $MENU_ID === $TAB['tabId']}active{/if}">
 							{if $TAB['icon']}
 								<span class="{$TAB['icon']} mr-2"></span>
 							{/if}

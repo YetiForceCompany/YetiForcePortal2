@@ -36,6 +36,9 @@ class DetailView extends \App\Controller\View
 		parent::__construct($request);
 		$this->exposeMethod('details');
 		$this->exposeMethod('summary');
+		$this->exposeMethod('comments');
+		$this->exposeMethod('updates');
+		$this->exposeMethod('relatedList');
 	}
 
 	/** {@inheritdoc} */
@@ -86,6 +89,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
 		$this->viewer->assign('TABS_GROUP', $this->detailViewModel->getTabsFromApi());
+		$this->viewer->assign('MENU_ID', $this->request->has('tabId') ? $this->request->getByType('tabId', Purifier::ALNUM) : 'details');
 		$this->viewer->view('Detail/Header.tpl', $moduleName);
 	}
 
@@ -112,7 +116,6 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
@@ -126,6 +129,36 @@ class DetailView extends \App\Controller\View
 	 * @return void
 	 */
 	public function summary()
+	{
+		// TODO add data
+	}
+
+	/**
+	 * Comments tab.
+	 *
+	 * @return void
+	 */
+	public function comments()
+	{
+		// TODO add data
+	}
+
+	/**
+	 * Updates tab.
+	 *
+	 * @return void
+	 */
+	public function updates()
+	{
+		// TODO add data
+	}
+
+	/**
+	 * Related list tab.
+	 *
+	 * @return void
+	 */
+	public function relatedList()
 	{
 		// TODO add data
 	}
