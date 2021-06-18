@@ -19,5 +19,23 @@
 {if !empty($FIELDS_HEADER)}
 	{include file=\App\Resources::templatePath("Detail/HeadersFields.tpl", $MODULE_NAME)}
 {/if}
+<div class="col-md-12">
+	<div class="px-0 ml-0">
+		<ul class="nav nav-tabs">
+			{foreach item=TABS key=TYPE from=$TABS_GROUP}
+				{foreach item=TAB key=TYPE from=$TABS}
+					<li class="nav-item">
+						<a href="javascript:void(0);" class="nav-link u-text-ellipsis">
+							{if $TAB['icon']}
+								<span class="{$TAB['icon']} mr-2"></span>
+							{/if}
+							<span class="">{$TAB['label']}</span>
+						</a>
+					</li>
+				{/foreach}
+			{/foreach}
+		</ul>
+	</div>
+</div>
 <!-- /tpl-Base-Detail-Header -->
 {/strip}

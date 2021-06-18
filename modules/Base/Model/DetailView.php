@@ -109,4 +109,23 @@ class DetailView
 		}
 		return $links;
 	}
+
+	/**
+	 * Get tabs.
+	 *
+	 * @return array
+	 */
+	public function getTabsFromApi(): array
+	{
+		if (\App\Cache::has('moduleTabs', $this->moduleName)) {
+			$data = \App\Cache::get('moduleTabs', $this->moduleName);
+		} else {
+			$data = \App\Api::getInstance()->call($this->moduleName . '/RelatedModules/' . $this->record->getId());
+			\App\Cache::save('moduleTabs', $this->moduleName, $data, \App\Cache::LONG);
+		}
+		// echo '<pre>';
+		// print_r($data);
+		// exit;
+		return $data;
+	}
 }

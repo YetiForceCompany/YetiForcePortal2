@@ -59,7 +59,7 @@ class DetailView extends \App\Controller\View
 	}
 
 	/**
-	 * Gets Header.
+	 * Gets header.
 	 *
 	 * @return void
 	 */
@@ -79,11 +79,13 @@ class DetailView extends \App\Controller\View
 			}
 			$fields[$field['name']] = $fieldInstance;
 		}
+		$this->viewer->assign('RECORD', $this->recordModel);
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('FIELDS_FORM', $fieldsForm);
 		$this->viewer->assign('FIELDS_HEADER', $this->recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
+		$this->viewer->assign('TABS_GROUP', $this->detailViewModel->getTabsFromApi());
 		$this->viewer->view('Detail/Header.tpl', $moduleName);
 	}
 
@@ -110,7 +112,7 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-		$this->viewer->assign('RECORD', $this->recordModel);
+
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
