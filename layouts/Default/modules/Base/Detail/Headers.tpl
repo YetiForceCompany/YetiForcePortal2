@@ -5,36 +5,33 @@
 <div class="row">
 	<div class="col-sm-8">
 		{if isset($FIELDS_HEADER['value'])}
-			{foreach from=$FIELDS_HEADER['value'] key=NAME item=FIELD_MODEL}
-				{if !$RECORD->isEmpty($NAME)}
-					{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
-					<div class="js-popover-tooltip--ellipsis-icon d-flex flex-nowrap align-items-center" data-content="{\App\Purifier::encodeHtml($VALUE)}" data-toggle="popover" data-js="popover | mouseenter">
-						<span class="mr-1 text-muted u-white-space-nowrap">
-							{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}:
-						</span>
-						<span class="js-popover-text" data-js="clone">{$VALUE}</span>
-						<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
-					</div>
-				{/if}
+			{foreach from=$FIELDS_HEADER['value'] key=NAME item=FIELD_HEADER}
+				{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
+				{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
+				<div class="js-popover-tooltip--ellipsis-icon d-flex flex-nowrap align-items-center" data-content="{\App\Purifier::encodeHtml($VALUE)}" data-toggle="popover" data-js="popover | mouseenter">
+					<span class="mr-1 text-muted u-white-space-nowrap">
+						{$FIELD_HEADER['label']}:
+					</span>
+					<span class="js-popover-text" data-js="clone">{$VALUE}</span>
+					<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
+				</div>
 			{/foreach}
 		{/if}
 	</div>
 	<div class="col-sm-4">
 		{if isset($FIELDS_HEADER['highlights'])}
-			{foreach from=$FIELDS_HEADER['highlights'] key=NAME item=FIELD_MODEL}
-				{if !$RECORD->isEmpty($NAME)}
-					{assign var=HEADER_VALUE value=$FIELD_MODEL->getHeaderValue()}
-					{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
-					<div class="badge {if isset($HEADER_VALUE['class'])}{$HEADER_VALUE['class']}{else}badge-info{/if} d-flex flex-nowrap align-items-center justify-content-center mt-1 js-popover-tooltip--ellipsis" data-content="{\App\Purifier::encodeHtml(\App\Language::translate($FIELD_MODEL->get('label'), $MODULE_NAME))}: <string>{\App\Purifier::encodeHtml($VALUE)}</string>" data-toggle="popover" data-js="popover | mouseenter">
-						<div class="c-popover-text">
-							<span class="mr-1">
-								{\App\Language::translate($FIELD_MODEL->get('label'), $MODULE_NAME)}:
-							</span>
-							{$VALUE}
-						</div>
-						<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
+			{foreach from=$FIELDS_HEADER['highlights'] key=NAME item=FIELD_HEADER}
+				{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
+				{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
+				<div class="badge {if isset($FIELD_HEADER['class'])}{$FIELD_HEADER['class']}{else}badge-info{/if} d-flex flex-nowrap align-items-center justify-content-center mt-1 js-popover-tooltip--ellipsis" data-content="{\App\Purifier::encodeHtml(\App\Language::translate($FIELD_MODEL->get('label'), $MODULE_NAME))}: <string>{\App\Purifier::encodeHtml($VALUE)}</string>" data-toggle="popover" data-js="popover | mouseenter">
+					<div class="c-popover-text">
+						<span class="mr-1">
+							{\App\Language::translate($FIELD_MODEL->get('label'), $MODULE_NAME)}:
+						</span>
+						{$VALUE}
 					</div>
-				{/if}
+					<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
+				</div>
 			{/foreach}
 		{/if}
 	</div>
@@ -43,7 +40,8 @@
 {if isset($FIELDS_HEADER['progress'])}
 <div class="row">
 	<div class="col-sm-12">
-		{foreach from=$FIELDS_HEADER['progress'] key=NAME item=FIELD_MODEL}
+		{foreach from=$FIELDS_HEADER['progress'] key=NAME item=FIELD_HEADER}
+			{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
 			<div class="c-progress px-3 w-100">
 				<ul class="c-progress__container js-header-progress-bar list-inline my-0 py-1 js-scrollbar c-scrollbar-x--small" data-picklist-name="{$NAME}" data-js="container">
 					{assign var=ARROW_CLASS value="before"}

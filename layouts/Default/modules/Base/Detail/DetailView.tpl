@@ -23,7 +23,7 @@
 		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4{else}col-12{/if}">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
-				{if isset($FIELDS[$BLOCK['id']])}
+				{if isset($FIELDS_FORM[$BLOCK['id']])}
 					{if $BLOCK['display_status'] eq 0}
 						{assign var=IS_HIDDEN value=true}
 					{else}
@@ -39,7 +39,7 @@
 						</div>
 						<div class="c-card__body card-body col-md-12 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
 							<div class="c-card__row form-row border-bottom ">
-								{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
+								{foreach item=FIELD from=$FIELDS_FORM[$BLOCK['id']]}
 								{if $COUNTER eq 2}
 							</div>
 							<div class="c-card__row form-row border-bottom">

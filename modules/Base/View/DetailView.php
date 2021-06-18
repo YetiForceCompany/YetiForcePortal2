@@ -30,15 +30,16 @@ class DetailView extends \App\Controller\View
 		$record = $this->request->getByType('record', Purifier::INTEGER);
 		$recordModel = Record::getInstanceById($moduleName, $record, ['x-header-fields' => 1]);
 		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
-		$inventoryFields = $fields = [];
+		$inventoryFields = $fieldsForm = $fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
-			if ($field['isViewable']) {
-				$fieldInstance = Field::getInstance($moduleName, $field);
-				if ($recordModel->has($field['name'])) {
-					$fieldInstance->setDisplayValue($recordModel->get($field['name']));
-				}
-				$fields[$field['blockId']][] = $fieldInstance;
+			$fieldInstance = Field::getInstance($moduleName, $field);
+			if ($recordModel->has($field['name'])) {
+				$fieldInstance->setDisplayValue($recordModel->get($field['name']));
 			}
+			if ($field['isViewable']) {
+				$fieldsForm[$field['blockId']][] = $fieldInstance;
+			}
+			$fields[$field['name']] = $fieldInstance;
 		}
 		if (!empty($moduleStructure['inventory'])) {
 			$columns = \Conf\Inventory::$columnsByModule[$moduleName] ?? \Conf\Inventory::$columns ?? [];
@@ -58,6 +59,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
+		$this->viewer->assign('FIELDS_FORM', $fieldsForm);
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
