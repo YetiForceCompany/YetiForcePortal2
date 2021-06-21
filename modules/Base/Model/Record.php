@@ -124,9 +124,9 @@ class Record extends \App\BaseModel
 	/**
 	 * Function to get the id of the record.
 	 *
-	 * @return int
+	 * @return int|null
 	 */
-	public function getId(): int
+	public function getId(): ?int
 	{
 		return $this->id;
 	}
@@ -254,7 +254,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getDisplayValue(string $key): string
 	{
-		return $this->getModuleModel()->getFieldModel($key)->getDisplayValue($this->get($key), $this);
+		return !isset($this->getModuleModel()->getFields()[$key]) ? \App\Purifier::encodeHtml($this->get($key)) : $this->getModuleModel()->getFieldModel($key)->getDisplayValue($this->get($key), $this);
 	}
 
 	/**
@@ -269,12 +269,6 @@ class Record extends \App\BaseModel
 		$fieldModel = $this->getModuleModel()->getFieldModel($key);
 		$value = '';
 		if ($fieldModel->isViewable()) {
-			// if ($this->has($key)) {
-			// 	$fieldModel->setDisplayValue($this->get($key));
-			// 	if (isset($this->customData['rawData'][$key])) {
-			// 		$fieldModel->setRawValue($this->customData['rawData'][$key]);
-			// 	}
-			// }
 			$value = $fieldModel->getListDisplayValue($this->get($key), $this);
 		}
 		return $value;
