@@ -1,6 +1,6 @@
 <?php
 /**
- * Basic record model class.
+ * Basic record model file.
  *
  * @package Model
  *
@@ -12,6 +12,9 @@
 
 namespace YF\Modules\Base\Model;
 
+/**
+ * Basic record model class.
+ */
 class Record extends \App\BaseModel
 {
 	/** @var string Module name. */

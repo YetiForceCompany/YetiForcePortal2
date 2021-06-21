@@ -62,7 +62,9 @@
     "FL_STATUS": "Status",
     "LBL_USER_AGENT": "User agent",
     "LBL_IP_ADDRESS": "IP Address",
-    "LBL_WEB_LOAD_TIME": "Page loading time"
+    "LBL_WEB_LOAD_TIME": "Page loading time",
+    "LBL_FROM": "from",
+    "LBL_TO": "to"
   },
   "js": {
     "JS_YES": "Yes",
