@@ -40,6 +40,11 @@ Installation
 
 Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
 
+<a href="https://github.com/YetiForceCompany/YetiForcePortal2Languages">
+  <img src="https://badges.awesome-crowdin.com/translation-13499741-354003.png" />
+</a>
+
+
 ## 💻 Demo
 
 - https://gitdeveloper.yetiforce.com/portal/
