@@ -4,9 +4,9 @@
 {assign var=FIELD_NAME value=$FIELD_MODEL->getName()}
 {assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 {assign var=FIELD_INFO_DATA value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_INFO))}
-{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}
+{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 {assign var=SPECIAL_VALIDATOR value=$FIELD_MODEL->getValidator()}
-{assign var=DISPLAY_VALUE value=$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'),false,$RECORD,true)}
+{assign var=DISPLAY_VALUE value=$RECORD->getDisplayValue($FIELD_NAME)}
 <div class="js-tree-content">
 	<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" class="js-tree-value"
 		data-displayvalue='{$DISPLAY_VALUE}' data-fieldinfo='{$FIELD_INFO_DATA}'

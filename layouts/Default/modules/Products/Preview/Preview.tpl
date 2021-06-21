@@ -118,7 +118,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-md-9 px-0">
-                                                {$FIELD->getDisplayValue()}
+                                                {$RECORD->getDisplayValue($FIELD->getName())}
                                             </div>
                                         {/if}
                                     </div>

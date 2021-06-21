@@ -17,8 +17,8 @@ namespace YF\Modules\Base\FieldTypes;
 class TaxesField extends BaseField
 {
 	/** {@inheritdoc} */
-	public function getDisplayValue(): string
+	public function getDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		return empty($this->value['value']) ? '' : \App\Purifier::encodeHtml($this->value['value']);
+		return empty($value['value']) ? '' : \App\Purifier::encodeHtml($value['value']);
 	}
 }

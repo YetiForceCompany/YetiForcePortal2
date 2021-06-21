@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Arkadiusz Sołek <a.solek@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
@@ -16,14 +17,9 @@ namespace YF\Modules\Base\FieldTypes;
  */
 class AccountNameField extends BaseField
 {
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function getListDisplayValue(): string
+	/** {@inheritdoc} */
+	public function getListDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		$value = $this->value;
 		if (empty($value)) {
 			return '';
 		}

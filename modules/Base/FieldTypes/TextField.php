@@ -15,22 +15,15 @@ namespace YF\Modules\Base\FieldTypes;
 class TextField extends BaseField
 {
 	/** {@inheritdoc} */
-	public function getDisplayValue(): string
+	public function getDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		if (empty($this->value)) {
-			return '';
-		}
-		return $this->value;
+		return $value ?: '';
 	}
 
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function getListDisplayValue(): string
+	/** {@inheritdoc} */
+	public function getListDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		$value = $this->getDisplayValue();
+		$value = $this->getDisplayValue($value, $recordModel);
 		if (empty($value)) {
 			return '';
 		}

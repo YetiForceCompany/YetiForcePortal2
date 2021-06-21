@@ -6,7 +6,8 @@
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
@@ -23,12 +24,11 @@ class ReferenceField extends BaseField
 	}
 
 	/** {@inheritdoc} */
-	public function getDisplayValue(): string
+	public function getDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		if (empty($this->value)) {
+		if (empty($value)) {
 			return '';
 		}
-		$value = $this->value;
 		if (\is_array($value)) {
 			if ($value['isPermitted']) {
 				$url = "index.php?module={$value['referenceModule']}&view=DetailView&record={$value['record']}";
@@ -45,17 +45,12 @@ class ReferenceField extends BaseField
 		return $value;
 	}
 
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function getListDisplayValue(): string
+	/** {@inheritdoc} */
+	public function getListDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		if (empty($this->value)) {
+		if (empty($value)) {
 			return '';
 		}
-		$value = $this->value;
 		if (\is_array($value)) {
 			if ($value['isPermitted']) {
 				$url = "index.php?module={$value['referenceModule']}&view=DetailView&record={$value['record']}";

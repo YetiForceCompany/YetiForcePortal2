@@ -7,7 +7,7 @@
 		{if isset($FIELDS_HEADER['value'])}
 			{foreach from=$FIELDS_HEADER['value'] key=NAME item=FIELD_HEADER}
 				{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
-				{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
+				{assign var=VALUE value=$RECORD->getDisplayValue($FIELD_MODEL->getName())}
 				<div class="js-popover-tooltip--ellipsis-icon d-flex flex-nowrap align-items-center" data-content="{\App\Purifier::encodeHtml($VALUE)}" data-toggle="popover" data-js="popover | mouseenter">
 					<span class="mr-1 text-muted u-white-space-nowrap">
 						{$FIELD_HEADER['label']}:
@@ -22,7 +22,7 @@
 		{if isset($FIELDS_HEADER['highlights'])}
 			{foreach from=$FIELDS_HEADER['highlights'] key=NAME item=FIELD_HEADER}
 				{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
-				{assign var=VALUE value=$FIELD_MODEL->getDisplayValue()}
+				{assign var=VALUE value=$RECORD->getDisplayValue($FIELD_MODEL->getName())}
 				<div class="badge {if isset($FIELD_HEADER['class'])}{$FIELD_HEADER['class']}{else}badge-info{/if} d-flex flex-nowrap align-items-center justify-content-center mt-1 js-popover-tooltip--ellipsis" data-content="{\App\Purifier::encodeHtml(\App\Language::translate($FIELD_MODEL->get('label'), $MODULE_NAME))}: <string>{\App\Purifier::encodeHtml($VALUE)}</string>" data-toggle="popover" data-js="popover | mouseenter">
 					<div class="c-popover-text">
 						<span class="mr-1">

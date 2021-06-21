@@ -14,7 +14,7 @@
 	{assign var=USER_MODEL value=\App\User::getUser()}
 	{assign var=FIELD_NAME value=$FIELD_MODEL->getName()}
 	{assign var=SYMBOL_PLACEMENT value=$USER_MODEL->getPreferences('currency_symbol_placement')}
-	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD)}
+	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 	{if $FIELD_MODEL->getUIType() eq '71'}
 		<div class="input-group" data-uitype="71">
 			{if $SYMBOL_PLACEMENT neq '1.0$'}

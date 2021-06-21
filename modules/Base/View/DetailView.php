@@ -118,6 +118,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
+		$this->viewer->assign('RECORD', $this->recordModel);
 		$this->viewer->assign('SUMMARY_INVENTORY', $this->recordModel->getInventorySummary());
 		$this->viewer->view('Detail/DetailView.tpl', $moduleName);
 	}

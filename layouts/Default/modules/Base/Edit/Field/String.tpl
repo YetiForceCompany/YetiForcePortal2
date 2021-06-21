@@ -4,7 +4,7 @@
 {assign var=FIELD_INFO value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}
 {assign var=SPECIAL_VALIDATOR value=$FIELD_MODEL->getValidator()}
 {assign var=FIELD_NAME value=$FIELD_MODEL->getName()}
-{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}
+{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 {assign var=PARAMS value=$FIELD_MODEL->getFieldParams()}
 <input name="{$FIELD_NAME}" value="{$FIELD_VALUE}" class="form-control" {' '}
 	id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}" type="text"{' '} tabindex="{$FIELD_MODEL->getTabIndex()}"{' '}

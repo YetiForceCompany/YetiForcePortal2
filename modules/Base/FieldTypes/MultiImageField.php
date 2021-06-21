@@ -24,13 +24,13 @@ class MultiImageField extends BaseField
 	}
 
 	/** {@inheritdoc} */
-	public function getDisplayValue(): string
+	public function getDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		if (empty($this->value)) {
+		if (empty($value)) {
 			return '';
 		}
 		$values = '';
-		$data = \is_array($this->value) ? $this->value : [$this->value];
+		$data = \is_array($value) ? $value : [$value];
 		foreach ($data as $value) {
 			$values .= "<div style=\"width:80px\" class=\"ml-1\"><img src=\"data:image/jpeg;base64,{$value}\"/></div>";
 		}

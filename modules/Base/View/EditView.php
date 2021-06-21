@@ -41,24 +41,12 @@ class EditView extends \App\Controller\View
 		}
 		$moduleModel = $recordModel->getModuleModel();
 		$moduleStructure = $moduleModel->getFieldsFromApi();
-		$rawData = $recordModel->getRawData();
 		$fields = $fieldsForm = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			$fieldName = $field['name'];
 			$fieldInstance = $moduleModel->getFieldModel($fieldName);
-			if ($recordModel->has($fieldName)) {
-				$fieldInstance->setDisplayValue($recordModel->get($fieldName));
-				if (isset($rawData[$fieldName])) {
-					$fieldInstance->setRawValue($rawData[$fieldName]);
-				}
-			} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
-				$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));
-				$fieldInstance->setRawValue(\App\User::getUser()->get('companyId'));
-			} else {
-				$fieldInstance->setIsNewRecord();
-			}
 			if ($field['isEditable']) {
-				$fieldsForm[$field['blockId']][] = $fieldInstance;
+				$fieldsForm[$field['blockId']][$fieldInstance->getName()] = $fieldInstance;
 			}
 			$fields[$fieldName] = $fieldInstance;
 		}

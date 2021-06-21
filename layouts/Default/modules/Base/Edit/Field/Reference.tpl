@@ -19,8 +19,8 @@
 	{if {$REFERENCE_LIST_COUNT} eq 1}
 		<input name="popupReferenceModule" type="hidden" data-multi-reference="0" title="{reset($REFERENCE_LIST)}" value="{reset($REFERENCE_LIST)}"/>
 	{/if}
-	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}
-	{assign var=VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}
+	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
+	{assign var=VALUE value=$RECORD->get($FIELD_NAME)}
 	{if $REFERENCE_LIST_COUNT gt 1}
 		{assign var=REFERENCED_MODULE_NAME value=$RECORD->getRawValue($FIELD_NAME|cat:'_module')}
 		{if in_array($REFERENCED_MODULE_NAME, $REFERENCE_LIST)}

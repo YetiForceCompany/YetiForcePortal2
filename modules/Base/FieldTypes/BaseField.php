@@ -7,7 +7,8 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
- * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author	  Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
@@ -325,35 +326,44 @@ class BaseField extends \App\BaseModel
 	/**
 	 * Gets value to edit.
 	 *
-	 * @param mixed $value
+	 * @param mixed                              $value
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
 	 *
 	 * @return mixed
 	 */
-	public function getEditViewDisplayValue()
+	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
-		return \App\Purifier::encodeHtml($this->getRawValue());
-	}
-
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function getDisplayValue(): string
-	{
-		if (empty($this->value)) {
-			return '';
+		if ($recordModel && !$recordModel->getId()) {
+			$value = $recordModel->getRawValue($this->getName());
+		} else {
+			$value = $this->get('defaultvalue') ?: '';
 		}
-		return \App\Purifier::encodeHtml($this->value);
+		return \App\Purifier::encodeHtml($value);
 	}
 
 	/**
 	 * Function to get the view value.
 	 *
+	 * @param mixed                              $value
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
 	 * @return string
 	 */
-	public function getListDisplayValue(): string
+	public function getDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
 	{
-		return $this->getDisplayValue();
+		return $value ? \App\Purifier::encodeHtml($value) : '';
+	}
+
+	/**
+	 * Function to get the list view value.
+	 *
+	 * @param mixed                              $value
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
+	 * @return string
+	 */
+	public function getListDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
+	{
+		return $this->getDisplayValue($value, $recordModel);
 	}
 }

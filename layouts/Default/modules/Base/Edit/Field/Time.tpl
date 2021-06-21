@@ -3,7 +3,7 @@
 <!-- tpl-Base-Edit-Field-Time -->
 {assign var=FIELD_INFO value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}
 {assign var=SPECIAL_VALIDATOR value=$FIELD_MODEL->getValidator()}
-{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'),$RECORD)}
+{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 {assign var=TIME_FORMAT value=\App\User::getUser()->getPreferences('hour_format')}
 {assign var=FIELD_NAME value=$FIELD_MODEL->getName()}
 <div class="input-group time">

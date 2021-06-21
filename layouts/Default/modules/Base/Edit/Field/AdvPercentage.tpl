@@ -6,7 +6,7 @@
 <div class="input-group">
 	<input id="{$MODULE_NAME}_editView_fieldName_{$FIELD_MODEL->getName()}" type="text" title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $FIELD_MODEL->getModuleName())}" class="input-medium form-control"
 		   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]" name="{$FIELD_MODEL->getName()}"
-		   value="{$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD)}" tabindex="{$FIELD_MODEL->getTabIndex()}" data-fieldinfo='{$FIELD_INFO}' {if !empty($SPECIAL_VALIDATOR)}
+		   value="{$FIELD_MODEL->getEditViewDisplayValue($RECORD)}" tabindex="{$FIELD_MODEL->getTabIndex()}" data-fieldinfo='{$FIELD_INFO}' {if !empty($SPECIAL_VALIDATOR)}
 		   data-validator='{\App\Json::encode($SPECIAL_VALIDATOR)}'{/if}{if $FIELD_MODEL->isEditableReadOnly()} readonly="readonly"{/if}/>
 	<span class="input-group-append">
 		<span class="input-group-text">%</span>
