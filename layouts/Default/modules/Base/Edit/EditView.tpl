@@ -27,7 +27,7 @@
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
-				{if isset($FIELDS[$BLOCK['id']])}
+				{if isset($FIELDS_IN_FORM[$BLOCK['id']])}
 					{if $BLOCK['display_status'] eq 0}
 						{assign var=IS_HIDDEN value=true}
 					{else}
@@ -40,7 +40,7 @@
 							<h5>{if !empty($BLOCK['icon'])}<span class="{$BLOCK['icon']} mr-2"></span>{/if}{$BLOCK['name']}</h5>
 						</div>
 						<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
-							{foreach item=FIELD from=$FIELDS[$BLOCK['id']]}
+							{foreach item=FIELD from=$FIELDS_IN_FORM[$BLOCK['id']]}
 								<div class="editFields {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-sm-12 col-md-6{/if} row m-0 d-flex align-items-center {if !$FIELD->isEditable()}d-none{/if}">
 									<div class="{if $FIELD->getUIType() eq '300'}col-lg-12 text-left{else}col-xl-3 col-lg-4 col-md-12{/if} fieldLabel paddingLeft5px font-weight-bold">
 										<label class="muted mb-0 pt-0">
