@@ -8,6 +8,7 @@
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Michał Lorencik <m.lorencik@yetiforce.com>
  * @author	Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
@@ -34,13 +35,15 @@ class MultipicklistField extends BaseField
 	/**
 	 * Get not display values list.
 	 *
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
 	 * @return array
 	 */
-	public function getNotDisplayValuesList()
+	public function getNotDisplayValuesList(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
 		if (!\is_array($this->notDisplayValuesList)) {
-			if (!$this->isNewRecord) {
-				$this->notDisplayValuesList = array_diff_key(array_flip($this->getFieldValuesList()), $this->getPicklistValues());
+			if ($recordModel && $recordModel->getId()) {
+				$this->notDisplayValuesList = array_diff_key(array_flip($this->getFieldValuesList($recordModel)), $this->getPicklistValues($recordModel));
 			} else {
 				$this->notDisplayValuesList = [];
 			}
@@ -51,13 +54,15 @@ class MultipicklistField extends BaseField
 	/**
 	 * Get field values.
 	 *
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
 	 * @return array
 	 */
-	public function getFieldValuesList()
+	public function getFieldValuesList(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
 		if (!\is_array($this->fieldValuesList)) {
-			if (!$this->isNewRecord) {
-				$this->fieldValuesList = explode(' |##| ', $this->rawValue);
+			if ($recordModel && $recordModel->getId()) {
+				$this->fieldValuesList = explode(' |##| ', $recordModel->getRawValue($this->getName()));
 			} else {
 				$this->fieldValuesList = [];
 			}

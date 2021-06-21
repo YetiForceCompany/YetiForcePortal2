@@ -20,55 +20,11 @@ use App\Json;
  */
 class BaseField extends \App\BaseModel
 {
-	/**
-	 * Display value.
-	 *
-	 * @var string
-	 */
-	protected $value;
-
-	/**
-	 * Raw value.
-	 *
-	 * @var string
-	 */
-	protected $rawValue;
-
-	/**
-	 * Is new record.
-	 *
-	 * @var string
-	 */
-	protected $isNewRecord = false;
-
 	/** @var int TabIndex last sequence number. */
 	public static $tabIndexLastSeq = 0;
 
 	/** @var int TabIndex default sequence number. */
 	public static $tabIndexDefaultSeq = 0;
-
-	/**
-	 * Function to get the view value.
-	 *
-	 * @return string
-	 */
-	public function setIsNewRecord()
-	{
-		return $this->isNewRecord = true;
-	}
-
-	/**
-	 * Function to set the view value.
-	 *
-	 * @param string $value
-	 *
-	 * @return Field
-	 */
-	public function setDisplayValue($value): self
-	{
-		$this->value = $value;
-		return $this;
-	}
 
 	/**
 	 * Function to set the name of the module to which the record belongs.
@@ -181,16 +137,18 @@ class BaseField extends \App\BaseModel
 	/**
 	 * Picklist values.
 	 *
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
 	 * @return array
 	 */
-	public function getPicklistValues()
+	public function getPicklistValues(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
-		$picklist = $this->get('picklistvalues');
-		if ($this->rawValue && !\in_array($this->rawValue, array_keys($picklist))) {
-			$picklist[$this->rawValue] = $this->value;
+		$pickList = $this->get('picklistvalues');
+		if ($recordModel && ($value = $recordModel->getRawValue($this->getName())) && !\in_array($value, array_keys($pickList))) {
+			$pickList[$recordModel->getRawValue($this->getName())] = $recordModel->get($this->getName());
 			$this->set('isEditableReadOnly', true);
 		}
-		return $picklist;
+		return $pickList;
 	}
 
 	/**
@@ -229,32 +187,6 @@ class BaseField extends \App\BaseModel
 	public function getModuleName(): string
 	{
 		return $this->module;
-	}
-
-	/**
-	 * Function to get the raw value.
-	 *
-	 * @return mixed for the given key
-	 */
-	public function getRawValue()
-	{
-		if (!$this->isNewRecord) {
-			return $this->rawValue;
-		}
-		return $this->get('defaultvalue');
-	}
-
-	/**
-	 * Function to set the raw value.
-	 *
-	 * @param string $value
-	 *
-	 * @return Field
-	 */
-	public function setRawValue($value)
-	{
-		$this->rawValue = $value;
-		return $this;
 	}
 
 	/**
@@ -333,7 +265,7 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
-		if ($recordModel && !$recordModel->getId()) {
+		if ($recordModel && $recordModel->getId()) {
 			$value = $recordModel->getRawValue($this->getName());
 		} else {
 			$value = $this->get('defaultvalue') ?: '';

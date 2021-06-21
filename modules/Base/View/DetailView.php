@@ -72,14 +72,11 @@ class DetailView extends \App\Controller\View
 		$moduleModel = $this->recordModel->getModuleModel();
 		$moduleStructure = $moduleModel->getFieldsFromApi();
 		foreach ($moduleStructure['fields'] as $field) {
-			$fieldInstance = $moduleModel->getFieldModel($field['name']);
-			if ($this->recordModel->has($field['name'])) {
-				$fieldInstance->setDisplayValue($this->recordModel->get($field['name']));
-			}
+			$fieldModel = $moduleModel->getFieldModel($field['name']);
 			if ($field['isViewable']) {
-				$fieldsForm[$field['blockId']][] = $fieldInstance;
+				$fieldsForm[$field['blockId']][$fieldModel->getName()] = $fieldModel;
 			}
-			$fields[$field['name']] = $fieldInstance;
+			$fields[$field['name']] = $fieldModel;
 		}
 		$this->viewer->assign('RECORD', $this->recordModel);
 		$this->viewer->assign('FIELDS', $fields);

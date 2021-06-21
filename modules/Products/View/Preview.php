@@ -53,10 +53,7 @@ class Preview extends \App\Controller\View
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
 				$fieldInstance = Field::getInstance($moduleName, $field);
-				if (isset($recordDetail['data'][$field['name']]) && 'multiImage' !== $field['type']) {
-					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
-				}
-				$fields[$field['blockId']][] = $fieldInstance;
+				$fields[$field['blockId']][$fieldInstance->getName()] = $fieldInstance;
 			}
 		}
 		$recordModel->set('unit_price', \App\Fields\Currency::formatToDisplay($recordDetail['ext']['unit_price']));

@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-Base-Edit-Field-Country -->
 {assign var=FIELD_INFO value=\App\Json::encode($FIELD_MODEL->getFieldInfo())}
-{assign var=PICKLIST_VALUES value=$FIELD_MODEL->getPicklistValues()}
+{assign var=PICKLIST_VALUES value=$FIELD_MODEL->getPicklistValues($RECORD)}
 {assign var=SPECIAL_VALIDATOR value=$FIELD_MODEL->getValidator()}
 {assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 {assign var=PLACE_HOLDER value=($FIELD_MODEL->isEmptyPicklistOptionAllowed() && !($FIELD_MODEL->isMandatory() eq true && $FIELD_VALUE neq ''))}
