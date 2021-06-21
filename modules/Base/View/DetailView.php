@@ -15,7 +15,6 @@ namespace YF\Modules\Base\View;
 use App\Purifier;
 use YF\Modules\Base\Model\DetailView as DetailViewModel;
 use YF\Modules\Base\Model\InventoryField;
-use YF\Modules\Base\Model\Record;
 
 /**
  * Base detail view class.

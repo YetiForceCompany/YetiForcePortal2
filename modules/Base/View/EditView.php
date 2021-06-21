@@ -1,6 +1,6 @@
 <?php
 /**
- * Edit view class.
+ * Edit view file.
  *
  * @package View
  *
@@ -12,6 +12,9 @@
 
 namespace YF\Modules\Base\View;
 
+/**
+ * Edit view class.
+ */
 class EditView extends \App\Controller\View
 {
 	/** {@inheritdoc} */
@@ -36,40 +39,33 @@ class EditView extends \App\Controller\View
 		} else {
 			$recordModel = \YF\Modules\Base\Model\Record::getInstanceById($moduleName, $this->request->getInteger('record'), ['x-raw-data' => 1]);
 		}
-		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
-		$data = $recordModel->getData();
+		$moduleModel = $recordModel->getModuleModel();
+		$moduleStructure = $moduleModel->getFieldsFromApi();
 		$rawData = $recordModel->getRawData();
-		$fields = $fieldInForm = [];
+		$fields = $fieldsForm = [];
 		foreach ($moduleStructure['fields'] as $field) {
-      $fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
 			$fieldName = $field['name'];
-			if ($field['isEditable']) {
-				if (isset($data[$fieldName])) {
-					$fieldInstance->setDisplayValue($data[$fieldName]);
-					if (isset($rawData[$fieldName])) {
-						$fieldInstance->setRawValue($rawData[$fieldName]);
-					}
-				} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
-					$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));
-					$fieldInstance->setRawValue(\App\User::getUser()->get('companyId'));
-				} else {
-					$fieldInstance->setIsNewRecord();
+			$fieldInstance = $moduleModel->getFieldModel($fieldName);
+			if ($recordModel->has($fieldName)) {
+				$fieldInstance->setDisplayValue($recordModel->get($fieldName));
+				if (isset($rawData[$fieldName])) {
+					$fieldInstance->setRawValue($rawData[$fieldName]);
 				}
-				$fieldInForm[$field['blockId']][] = $fieldInstance;
+			} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
+				$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));
+				$fieldInstance->setRawValue(\App\User::getUser()->get('companyId'));
 			} else {
-				if (isset($recordDetail['data'][$field['name']])) {
-					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
-					if (isset($recordDetail['rawData'][$field['name']])) {
-						$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
-					}
-				}
-				$fields[$field['blockId']][] = $fieldInstance;
+				$fieldInstance->setIsNewRecord();
 			}
+			if ($field['isEditable']) {
+				$fieldsForm[$field['blockId']][] = $fieldInstance;
+			}
+			$fields[$fieldName] = $fieldInstance;
 		}
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $fields);
-		$this->viewer->assign('FIELDS_IN_FORM', $fieldInForm);
-		$this->viewer->assign('BREADCRUMB_TITLE', (isset($recordDetail['name'])) ? $recordDetail['name'] : '');
+		$this->viewer->assign('FIELDS_FORM', $fieldsForm);
+		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
 		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
 		$this->viewer->view('Edit/EditView.tpl', $moduleName);
 	}
