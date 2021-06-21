@@ -129,7 +129,16 @@ class DetailView extends \App\Controller\View
 	 */
 	public function summary()
 	{
-		// TODO add data
+		$moduleName = $this->request->getModule();
+		$widgets = [];
+		foreach ($this->detailViewModel->getWidgets() as $widget) {
+			if ($scripts = $widget->getScripts()) {
+				$widget->setScriptsObject($this->convertScripts($scripts, 'js'));
+			}
+			$widgets[$widget->get('wcol')][] = $widget;
+		}
+		$this->viewer->assign('DETAIL_VIEW_WIDGETS', $widgets);
+		$this->viewer->view('Detail/Summary.tpl', $moduleName);
 	}
 
 	/**

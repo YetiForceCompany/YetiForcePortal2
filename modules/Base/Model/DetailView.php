@@ -24,6 +24,9 @@ class DetailView
 	/** @var \YF\Modules\Base\Model\Record Record model. */
 	protected $record;
 
+	/** @var Widget list */
+	protected $widgets;
+
 	/**
 	 * Returns model for detail view.
 	 *
@@ -133,5 +136,22 @@ class DetailView
 			\App\Cache::save('moduleTabs', $this->moduleName, $data, \App\Cache::LONG);
 		}
 		return $data;
+	}
+
+	/**
+	 * Gets widgets.
+	 *
+	 * @return array
+	 */
+	public function getWidgets(): array
+	{
+		if (null === $this->widgets) {
+			$this->widgets = [];
+			foreach (\App\Widgets::getInstance($this->moduleName)->getAll() as $widgetObject) {
+				$widgetObject->setRecordId($this->record->getId());
+				$this->widgets[$widgetObject->getId()] = $widgetObject;
+			}
+		}
+		return $this->widgets;
 	}
 }

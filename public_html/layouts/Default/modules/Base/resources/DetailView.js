@@ -25,11 +25,22 @@ window.Base_DetailView_Js = class {
 		});
 	}
 
+	registerEventsForWidgets() {
+		$('.js-widget-container').each(function () {
+			const typeWidget = $(this).data('type');
+			var className = 'Base_Widget_' + typeWidget + '_Js';
+			if (typeof window[className] != 'undefined') {
+				return new window[className]().registerEvents($(this));
+			}
+		});
+	}
+
 	/**
 	 * Register detail view events.
 	 */
 	registerEvents() {
 		this.container = $('#page');
 		this.registerRecordEvents();
+		this.registerEventsForWidgets();
 	}
 };
