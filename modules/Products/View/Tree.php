@@ -75,7 +75,8 @@ class Tree extends View\ListView
 		$this->viewer->assign('CHECK_STOCK_LEVELS', \App\User::getUser()->get('companyDetails')['check_stock_levels'] ?? false);
 		$this->viewer->assign('RECORDS', $this->getListViewModel()->getRecordsListModel());
 		$this->viewer->assign('LIST_VIEW_MODEL', $this->getListViewModel());
-		parent::process();
+		$this->viewer->assign('HEADERS', []);
+		$this->viewer->view($this->processTplName(), $this->moduleName);
 	}
 
 	/** {@inheritdoc} */

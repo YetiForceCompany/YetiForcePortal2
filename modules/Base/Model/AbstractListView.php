@@ -50,6 +50,12 @@ abstract class AbstractListView
 
 	protected $actionName = 'RecordsList';
 
+	/** @var array Custom views */
+	protected $customViews;
+
+	/** @var int Custom view ID */
+	protected $cvId;
+
 	/**
 	 * Get instance.
 	 *
@@ -157,16 +163,40 @@ abstract class AbstractListView
 	}
 
 	/**
+	 * Undocumented function.
+	 *
+	 * @param int $cvId
+	 *
+	 * @return $this
+	 */
+	public function setCvId(int $cvId): self
+	{
+		$this->cvId = $cvId;
+		return $this;
+	}
+
+	/**
 	 * Load a list of records from the API.
 	 *
 	 * @return self
 	 */
 	public function loadRecordsList(): self
 	{
+		$this->recordsList = $this->getFromApi($this->getApiHeaders());
+		return $this;
+	}
+
+	/**
+	 * Gets headers for api.
+	 *
+	 * @return array
+	 */
+	public function getApiHeaders(): array
+	{
 		$headers = [
 			'x-row-count' => 1,
 			'x-row-limit' => $this->limit,
-			'x-row-offset' => $this->offset,
+			'x-row-offset' => $this->offset
 		];
 		if (!empty($this->fields)) {
 			$headers['x-fields'] = \App\Json::encode($this->fields);
@@ -181,8 +211,10 @@ abstract class AbstractListView
 			$headers['x-row-order-field'] = $this->orderField;
 			$headers['x-row-order'] = $this->order;
 		}
-		$this->recordsList = $this->getFromApi($headers);
-		return $this;
+		if ($cvId = $this->getDefaultCustomView()) {
+			$headers['x-cv-id'] = $cvId;
+		}
+		return $headers;
 	}
 
 	/**
@@ -234,11 +266,49 @@ abstract class AbstractListView
 	public function getHeaders(): array
 	{
 		if (empty($this->recordsList)) {
-			$this->recordsList = $this->getFromApi([
-				'x-only-column' => 1,
-			]);
+			$headers = ['x-only-column' => 1];
+			if ($cvId = $this->getDefaultCustomView()) {
+				$headers['x-cv-id'] = $cvId;
+			}
+			$this->recordsList = $this->getFromApi($headers);
 		}
 		return $this->recordsList['headers'] ?? [];
+	}
+
+	/**
+	 * Gets custom views.
+	 *
+	 * @return array
+	 */
+	public function getCustomViews(): array
+	{
+		if (null === $this->customViews) {
+			if (\App\Cache::has('CustomViews', $this->getModuleName())) {
+				$this->customViews = \App\Cache::get('CustomViews', $this->getModuleName());
+			} else {
+				$this->customViews = \App\Api::getInstance()->call($this->getModuleName() . '/CustomView') ?: [];
+				\App\Cache::save('CustomViews', $this->getModuleName(), $this->customViews, \App\Cache::LONG);
+			}
+		}
+		return $this->customViews;
+	}
+
+	/**
+	 * Get default custom view ID.
+	 *
+	 * @return int|null
+	 */
+	public function getDefaultCustomView(): ?int
+	{
+		if (!$this->cvId) {
+			foreach ($this->getCustomViews() as $cvId => $cvData) {
+				if ($cvData['isDefault']) {
+					$this->cvId = $cvId;
+					break;
+				}
+			}
+		}
+		return $this->cvId;
 	}
 
 	/**

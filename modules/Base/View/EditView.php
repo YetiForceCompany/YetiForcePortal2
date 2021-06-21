@@ -12,15 +12,12 @@
 
 namespace YF\Modules\Base\View;
 
-use App\Api;
-use App\Purifier;
-
 class EditView extends \App\Controller\View
 {
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
-		parent::checkPermission($this->request);
+		parent::checkPermission();
 		$actionName = 'EditView';
 		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';
@@ -34,32 +31,23 @@ class EditView extends \App\Controller\View
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
-		$api = Api::getInstance();
-		$recordDetail = [];
-		if (!$this->request->isEmpty('record')) {
-			$record = $this->request->getByType('record', Purifier::INTEGER);
-			$recordDetail = $api->setCustomHeaders(['x-raw-data' => 1])->call("$moduleName/Record/$record", [], 'get');
+		if ($this->request->isEmpty('record')) {
+			$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
+		} else {
+			$recordModel = \YF\Modules\Base\Model\Record::getInstanceById($moduleName, $this->request->getInteger('record'), ['x-raw-data' => 1]);
 		}
-		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
-		if (!isset($recordDetail['data'])) {
-			$recordDetail['data'] = [];
-		}
-		if (!isset($recordDetail['rawData'])) {
-			$recordDetail['rawData'] = [];
-		}
-		if (!isset($recordDetail['id'])) {
-			$recordDetail['id'] = null;
-		}
-		$recordModel->setData($recordDetail);
-		$moduleStructure = $api->call($moduleName . '/Fields');
+		$moduleStructure = $recordModel->getModuleModel()->getFieldsFromApi();
+		$data = $recordModel->getData();
+		$rawData = $recordModel->getRawData();
 		$fields = $fieldInForm = [];
 		foreach ($moduleStructure['fields'] as $field) {
-			$fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
+      $fieldInstance = \YF\Modules\Base\Model\Field::getInstance($moduleName, $field);
+			$fieldName = $field['name'];
 			if ($field['isEditable']) {
-				if (isset($recordDetail['data'][$field['name']])) {
-					$fieldInstance->setDisplayValue($recordDetail['data'][$field['name']]);
-					if (isset($recordDetail['rawData'][$field['name']])) {
-						$fieldInstance->setRawValue($recordDetail['rawData'][$field['name']]);
+				if (isset($data[$fieldName])) {
+					$fieldInstance->setDisplayValue($data[$fieldName]);
+					if (isset($rawData[$fieldName])) {
+						$fieldInstance->setRawValue($rawData[$fieldName]);
 					}
 				} elseif (!empty($field['referenceList']) && 'Accounts' === current($field['referenceList'])) {
 					$fieldInstance->setDisplayValue(\App\User::getUser()->get('parentName'));

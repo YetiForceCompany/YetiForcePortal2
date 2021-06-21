@@ -82,7 +82,7 @@ class Module
 	}
 
 	/**
-	 * Get all fields in module.
+	 * Get all fields.
 	 *
 	 * @return array
 	 */
@@ -100,7 +100,21 @@ class Module
 	}
 
 	/**
-	 * Get fields and blocks in module.
+	 * Get all fields models.
+	 *
+	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
+	 */
+	public function getFieldsModels(): array
+	{
+		$fields = [];
+		foreach (array_keys($this->getFields()) as $fieldName) {
+			$fields[$fieldName] = $this->getFieldModel($fieldName);
+		}
+		return $fields;
+	}
+
+	/**
+	 * Get fields and blocks.
 	 *
 	 * @return array
 	 */
@@ -134,7 +148,7 @@ class Module
 	}
 
 	/**
-	 * Get field by name.
+	 * Get field model by name.
 	 *
 	 * @param string $name
 	 *

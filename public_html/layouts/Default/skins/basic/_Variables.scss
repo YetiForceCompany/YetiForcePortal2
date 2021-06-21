@@ -8,8 +8,3 @@ $z-index-body: 1030;
 $w-menu: 230px;
 $w-menu-mini-state: 50px;
 $w-menu-mobile: 200px;
-
-//-------- progress bar --------//
-$progress-dot-size: calc(100% - #{calculate-rem(6px)});
-$progress-bg--active: material-color("deep-orange", "500");
-$progress-bg--inactive: material-color("blue-grey", "200");
