@@ -160,7 +160,6 @@ class DetailView extends \App\Controller\View
 		$moduleName = $this->request->getModule();
 		$recordHistory = \YF\Modules\Base\Model\RecordHistory::getInstanceById($moduleName, $this->recordModel->getId());
 		$this->viewer->assign('HISTORY_MODEL', $recordHistory);
-		$this->viewer->assign('RECORD_HISTORY', $recordHistory->getHistory());
 		$this->viewer->view('Detail/History.tpl', $moduleName);
 	}
 
