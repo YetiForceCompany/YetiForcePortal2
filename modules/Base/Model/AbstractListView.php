@@ -207,9 +207,8 @@ abstract class AbstractListView
 		if ($this->rawData) {
 			$headers['x-raw-data'] = 1;
 		}
-		if (!empty($this->order)) {
-			$headers['x-row-order-field'] = $this->orderField;
-			$headers['x-row-order'] = $this->order;
+		if (!empty($this->order) && $this->orderField) {
+			$headers['x-order-by'] = \App\Json::encode([$this->orderField => $this->order]);
 		}
 		if ($cvId = $this->getDefaultCustomView()) {
 			$headers['x-cv-id'] = $cvId;
