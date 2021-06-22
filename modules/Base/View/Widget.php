@@ -72,7 +72,11 @@ class Widget extends \App\Controller\View
 	{
 		$widget = \App\Widgets::getInstance($this->moduleName)->getAll()[$this->widgetId];
 		$widget->setRecordId($this->recordId);
+		if ($page = $this->request->getInteger('page')) {
+			$widget->setPage($page);
+		}
 		$this->viewer->assign('WIDGET', $widget);
+		$this->viewer->assign('PAGE', $widget->getPage());
 		$this->viewer->view($widget->getTemplateContentPath(), $this->moduleName);
 	}
 }

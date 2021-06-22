@@ -6,10 +6,11 @@ window.Base_Widget_RelatedModule_Js = class {
 	/**
 	 * Load widget content
 	 */
-	loadContent() {
+	loadContent(page = 1) {
 		const deferred = $.Deferred();
 		let url = this.container.data('url');
 		if (url) {
+			url += page ? `&page=${page}` : '';
 			let progressInstance = $.progressIndicator({
 				position: 'html',
 				blockInfo: {
@@ -34,6 +35,12 @@ window.Base_Widget_RelatedModule_Js = class {
 		}
 		return deferred.promise();
 	}
+	registerChangePage() {
+		this.container.on('click', '.js-change-page', (e) => {
+			let page = e.currentTarget.dataset.page;
+			this.loadContent(page);
+		});
+	}
 	/**
 	 * Register events
 	 * @param {jQuery} container
@@ -42,5 +49,6 @@ window.Base_Widget_RelatedModule_Js = class {
 	registerEvents(container) {
 		this.container = container;
 		this.loadContent();
+		this.registerChangePage();
 	}
 };

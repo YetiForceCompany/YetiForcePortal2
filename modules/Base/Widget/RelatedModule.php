@@ -27,6 +27,9 @@ class RelatedModule extends \App\BaseModel
 	/** @var int Source record ID. */
 	protected $recordId;
 
+	/** @var int Page number. */
+	protected $page = 1;
+
 	/** @var array Entries. */
 	protected $entries;
 
@@ -114,6 +117,29 @@ class RelatedModule extends \App\BaseModel
 	}
 
 	/**
+	 * Set page number.
+	 *
+	 * @param int $page
+	 *
+	 * @return $this
+	 */
+	public function setPage(int $page): self
+	{
+		$this->page = $page;
+		return $this;
+	}
+
+	/**
+	 * Get page number.
+	 *
+	 * @return int
+	 */
+	public function getPage(): int
+	{
+		return $this->page;
+	}
+
+	/**
 	 * Gets related module name.
 	 *
 	 * @return string
@@ -196,8 +222,11 @@ class RelatedModule extends \App\BaseModel
 		if ($orderBy = $this->get('data')['orderby'] ?? null) {
 			$apiHeaders['x-order-by'] = \App\Json::encode($orderBy);
 		}
-		if ($limit = (int) ($this->get('data')['limit'] ?? 0)) {
+		if ($limit = (int) ($this->get('data')['limit'] ?? 10)) {
 			$apiHeaders['x-row-limit'] = $limit;
+		}
+		if ($limit && $this->page && $this->page > 1) {
+			$apiHeaders['x-row-offset'] = $limit * $this->page;
 		}
 		$api = \App\Api::getInstance();
 		$api->setCustomHeaders($apiHeaders);
