@@ -235,11 +235,6 @@
   line-height: 2rem;
   margin-right: 10px; }
 
-.listViewEntries th,
-.listViewEntries td {
-  padding: 0.4rem;
-  font-size: 0.85rem; }
-
 table.dataTable > thead > tr > th:not(.sorting_disabled),
 table.dataTable > thead > tr > td:not(.sorting_disabled) {
   padding-right: 0.4rem; }
@@ -965,7 +960,16 @@ a {
 
 .listViewEntries {
   background: #fff;
-  font-weight: 400 !important; }
+  font-weight: 400 !important;
+  border: 1px solid rgba(0, 0, 0, 0.125); }
+
+.listViewEntries th,
+.listViewEntries td {
+  padding: 0.4rem;
+  font-size: 0.85rem; }
+
+.listViewEntries .listViewSearch td {
+  padding: 0.4rem 0.2rem !important; }
 
 table tbody tr:hover td .actions span {
   opacity: 1; }
@@ -981,6 +985,9 @@ table.listViewEntries td {
 
 table.dataTable.listViewEntries tbody td {
   padding: 3px 10px !important; }
+
+.View-ListView .nav-tabs .nav-link.active {
+  background-color: #f8f9fa; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .loginContainer {
