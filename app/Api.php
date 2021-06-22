@@ -85,7 +85,7 @@ class Api
 		$headers = $this->getHeaders();
 		try {
 			if (\in_array($requestType, ['get', 'delete'])) {
-				$method += $data ? '?' . http_build_query($data) : '';
+				$method .= $data ? ('?' . http_build_query($data)) : '';
 				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers]);
 			} else {
 				$data = Json::encode($data);
