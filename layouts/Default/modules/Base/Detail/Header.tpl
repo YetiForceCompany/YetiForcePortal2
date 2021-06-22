@@ -22,7 +22,7 @@
 	{include file=\App\Resources::templatePath("Detail/HeadersFields.tpl", $MODULE_NAME)}
 {/if}
 <div>
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs detail-tabs">
 		{foreach item=TABS key=TYPE from=$TABS_GROUP}
 			{foreach item=TAB key=TYPE from=$TABS}
 				<li class="nav-item">
