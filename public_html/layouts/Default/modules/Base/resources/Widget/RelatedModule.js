@@ -7,6 +7,7 @@ window.Base_Widget_RelatedModule_Js = class {
 	 * Load widget content
 	 */
 	loadContent() {
+		const deferred = $.Deferred();
 		let url = this.container.data('url');
 		if (url) {
 			let progressInstance = $.progressIndicator({
@@ -21,12 +22,17 @@ window.Base_Widget_RelatedModule_Js = class {
 				.done((responseData) => {
 					this.container.find('.js-widget-container_content').html(responseData);
 					progressInstance.progressIndicator({ mode: 'hide' });
+					deferred.resolve();
 				})
 				.fail(function (e, er) {
 					app.errorLog(e, er);
 					progressInstance.progressIndicator({ mode: 'hide' });
+					aDeferred.reject();
 				});
+		} else {
+			aDeferred.reject();
 		}
+		return deferred.promise();
 	}
 	/**
 	 * Register events

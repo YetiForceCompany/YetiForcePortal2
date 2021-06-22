@@ -30,6 +30,12 @@ class RelatedModule extends \App\BaseModel
 	/** @var array Entries. */
 	protected $entries;
 
+	/** @var array Field list. */
+	protected $headers;
+
+	/** @var bool More pages. */
+	protected $isMorePages;
+
 	/** @var array Scripts. */
 	public $scripts = [];
 
@@ -120,9 +126,9 @@ class RelatedModule extends \App\BaseModel
 	/**
 	 * Gets fields from related module.
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function getFields()
+	public function getFields(): array
 	{
 		return $this->get('data')['relatedfields'] ?: [];
 	}
@@ -148,6 +154,16 @@ class RelatedModule extends \App\BaseModel
 	}
 
 	/**
+	 * Check if is more pages.
+	 *
+	 * @return bool
+	 */
+	public function isMorePages(): bool
+	{
+		return $this->isMorePages;
+	}
+
+	/**
 	 * Gets entries.
 	 *
 	 * @return array
@@ -155,30 +171,56 @@ class RelatedModule extends \App\BaseModel
 	public function getEntries(): array
 	{
 		if (null === $this->entries) {
-			$this->entries = [];
-
-			$headers = ['x-fields' => \App\Json::encode($this->getFields())];
-			$api = \App\Api::getInstance();
-			$api->setCustomHeaders($headers);
-			$body = [];
-			if ($relationId = $this->getRelationId()) {
-				$body['relationId'] = $relationId;
-			}
-			if ($cvId = $this->getCvId()) {
-				$body['cvId'] = $cvId;
-			}
-
-			$response = $api->call("{$this->moduleName}/RecordRelatedList/{$this->recordId}/{$this->getRelatedModuleName()}", $body) ?: [];
-			if (!empty($response['records'])) {
-				foreach ($response['records'] as $id => $data) {
-					$recordModel = Record::getInstance($this->getRelatedModuleName());
-					$recordModel->setData($data);
-					$recordModel->setId($id);
-					$this->entries[$id] = $recordModel;
-				}
-			}
+			$this->loadData();
 		}
 		return $this->entries;
+	}
+
+	/**
+	 * Gets headers.
+	 *
+	 * @return array
+	 */
+	public function getHeaders(): array
+	{
+		if (null === $this->headers) {
+			$this->loadData();
+		}
+		return $this->headers;
+	}
+
+	public function loadData()
+	{
+		$this->headers = $this->entries = [];
+		$apiHeaders = ['x-fields' => \App\Json::encode($this->getFields())];
+		if ($orderBy = $this->get('data')['orderby'] ?? null) {
+			$apiHeaders['x-order-by'] = \App\Json::encode($orderBy);
+		}
+		if ($limit = (int) ($this->get('data')['limit'] ?? 0)) {
+			$apiHeaders['x-row-limit'] = $limit;
+		}
+		$api = \App\Api::getInstance();
+		$api->setCustomHeaders($apiHeaders);
+
+		$body = [];
+		if ($relationId = $this->getRelationId()) {
+			$body['relationId'] = $relationId;
+		}
+		if ($cvId = $this->getCvId()) {
+			$body['cvId'] = $cvId;
+		}
+
+		$response = $api->call("{$this->moduleName}/RecordRelatedList/{$this->recordId}/{$this->getRelatedModuleName()}", $body) ?: [];
+		if (!empty($response['records'])) {
+			foreach ($response['records'] as $id => $data) {
+				$recordModel = Record::getInstance($this->getRelatedModuleName());
+				$recordModel->setData($data);
+				$recordModel->setId($id);
+				$this->entries[$id] = $recordModel;
+			}
+		}
+		$this->headers = array_intersect_key($response['headers'], array_flip($this->getFields()));
+		$this->isMorePages = (bool) $response['isMorePages'];
 	}
 
 	/**
