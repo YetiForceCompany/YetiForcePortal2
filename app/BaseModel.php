@@ -62,7 +62,7 @@ class BaseModel
 	 *
 	 * @return self
 	 */
-	public function setData(array $values)
+	public function setData(array $values): self
 	{
 		$this->valueMap = $values;
 		return $this;

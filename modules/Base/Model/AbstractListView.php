@@ -246,13 +246,11 @@ abstract class AbstractListView
 					$recordModel->setName($value['recordLabel']);
 					unset($value['recordLabel']);
 				}
-				$recordModel->setData($value)->setId($id);
+				if (isset($this->recordsList['rawData'][$id])) {
+					$recordModel->setRawData($this->recordsList['rawData'][$id]);
+				}
+				$recordModel->setData($value)->setId($id)->setPrivileges($this->recordsList['permissions'][$id]);
 				$recordsModel[$id] = $recordModel;
-			}
-		}
-		if (!empty($this->recordsList['rawData'])) {
-			foreach ($this->recordsList['rawData'] as $id => $value) {
-				$recordsModel[$id]->setRawData($value);
 			}
 		}
 		return $recordsModel;

@@ -32,7 +32,7 @@ class Record extends \App\BaseModel
 	/** @var array Information about summary inventory. */
 	protected $inventorySummaryData = [];
 
-	/** @var array Privileges. */
+	/** @var string Privileges. */
 	protected $privileges = [];
 
 	/** @var array Custom data. */
@@ -74,7 +74,7 @@ class Record extends \App\BaseModel
 		$instance = self::getInstance($moduleName);
 		$instance->setData($result['data'] ?? []);
 		$instance->setInventoryData($result['inventory'] ?? [], $result['summaryInventory'] ?? []);
-		$instance->privileges = $result['privileges'] ?? [];
+		$instance->setPrivileges($result['privileges'] ?? []);
 		$instance->name = $result['name'] ?? '';
 		unset($result['data'], $result['inventory'], $result['summaryInventory'], $result['privileges'], $result['name']);
 		$instance->customData = $result;
@@ -246,6 +246,19 @@ class Record extends \App\BaseModel
 	}
 
 	/**
+	 * Set privileges.
+	 *
+	 * @param bool[] $privileges
+	 *
+	 * @return self
+	 */
+	public function setPrivileges(array $privileges): self
+	{
+		$this->privileges = $privileges;
+		return $this;
+	}
+
+	/**
 	 * Function to get the raw value for a given key.
 	 *
 	 * @param string $key
@@ -286,6 +299,48 @@ class Record extends \App\BaseModel
 		$this->moduleName = $moduleName;
 		$this->moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
 		return $this;
+	}
+
+	/**
+	 * Function checks if there are permissions to preview record.
+	 *
+	 * @return bool
+	 */
+	public function isViewable()
+	{
+		return true;
+	}
+
+	/**
+	 * Function checks if there are permissions to edit record.
+	 *
+	 * @return bool
+	 */
+	public function isEditable(): bool
+	{
+		return $this->privileges['isEditable'];
+	}
+
+	/**
+	 * Function checks if there are permissions to delete record.
+	 *
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return $this->privileges['moveToTrash'];
+	}
+
+	/**
+	 * Function checks permissions to action.
+	 *
+	 * @param string $actionName
+	 *
+	 * @return bool
+	 */
+	public function isPermitted(string $actionName): bool
+	{
+		return $this->privileges[$actionName];
 	}
 
 	/**
@@ -356,16 +411,6 @@ class Record extends \App\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to preview record.
-	 *
-	 * @return bool
-	 */
-	public function isViewable()
-	{
-		return true;
-	}
-
-	/**
 	 * Function to get the Detail View url for the record.
 	 *
 	 * @return string - Record Detail View Url
@@ -376,19 +421,6 @@ class Record extends \App\BaseModel
 	}
 
 	/**
-	 * Function checks if there are permissions to edit record.
-	 *
-	 * @return bool
-	 */
-	public function isEditable(): bool
-	{
-		if (!isset($this->privileges['isEditable'])) {
-			$this->privileges['isEditable'] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'EditView', $this->getId());
-		}
-		return $this->privileges['isEditable'];
-	}
-
-	/**
 	 * Function to get the Edit View url for the record.
 	 *
 	 * @return string - Record Edit View Url
@@ -396,34 +428,6 @@ class Record extends \App\BaseModel
 	public function getEditViewUrl()
 	{
 		return 'index.php?module=' . $this->getModuleName() . '&view=EditView&record=' . $this->getId();
-	}
-
-	/**
-	 * Function checks if there are permissions to delete record.
-	 *
-	 * @return bool
-	 */
-	public function isDeletable(): bool
-	{
-		if (!isset($this->privileges['moveToTrash'])) {
-			$this->privileges['moveToTrash'] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), 'MoveToTrash', $this->getId());
-		}
-		return $this->privileges['moveToTrash'];
-	}
-
-	/**
-	 * Function checks permissions to action.
-	 *
-	 * @param string $actionName
-	 *
-	 * @return bool
-	 */
-	public function isPermitted(string $actionName): bool
-	{
-		if (!isset($this->privileges[$actionName])) {
-			$this->privileges[$actionName] = \YF\Modules\Base\Model\Module::isPermitted($this->getModuleName(), $actionName, $this->getId());
-		}
-		return $this->privileges[$actionName];
 	}
 
 	/**

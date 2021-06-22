@@ -71,7 +71,7 @@ class RelatedList extends AbstractListView
 					$recordModel->setName($value['recordLabel']);
 					unset($value['recordLabel']);
 				}
-				$recordModel->setData($value)->setId($id);
+				$recordModel->setData($value)->setId($id)->setPrivileges($this->recordsList['permissions'][$id]);
 				$recordsModel[$id] = $recordModel;
 			}
 		}
