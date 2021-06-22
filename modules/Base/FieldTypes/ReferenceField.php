@@ -20,7 +20,7 @@ class ReferenceField extends BaseField
 	/** {@inheritdoc} */
 	public function getTemplateName(): string
 	{
-		return 'Field/Edit/Reference.tpl';
+		return 'Field/Reference.tpl';
 	}
 
 	/** {@inheritdoc} */

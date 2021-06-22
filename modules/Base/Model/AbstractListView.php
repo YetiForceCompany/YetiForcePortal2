@@ -48,6 +48,7 @@ abstract class AbstractListView
 	/** @var bool Use raw data. */
 	protected $rawData = false;
 
+	/** @var string Action name */
 	protected $actionName = 'RecordsList';
 
 	/** @var array Custom views */
@@ -163,7 +164,7 @@ abstract class AbstractListView
 	}
 
 	/**
-	 * Undocumented function.
+	 * Set custom view ID.
 	 *
 	 * @param int $cvId
 	 *
@@ -196,7 +197,7 @@ abstract class AbstractListView
 		$headers = [
 			'x-row-count' => 1,
 			'x-row-limit' => $this->limit,
-			'x-row-offset' => $this->offset
+			'x-row-offset' => $this->offset,
 		];
 		if (!empty($this->fields)) {
 			$headers['x-fields'] = \App\Json::encode($this->fields);

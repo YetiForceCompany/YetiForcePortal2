@@ -41,7 +41,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		{foreach from=$FIELDS_HEADER['progress'] key=NAME item=FIELD_HEADER}
-			<div class="c-progress px-2 w-100">
+			<div class="c-progress w-100">
 				<ul class="c-progress__container js-header-progress-bar list-inline my-0 py-1 js-scrollbar c-scrollbar-x--small" data-picklist-name="{$NAME}" data-js="container">
 					{assign var=ARROW_CLASS value="before"}
 					{assign var=ICON_CLASS value="fas fa-check"}
