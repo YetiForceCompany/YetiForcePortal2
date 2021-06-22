@@ -25,7 +25,7 @@ class Action
 	 */
 	public static function getListViewActions(array $links): string
 	{
-		return '<div class="actions p-1">' . self::getDropdownButton([
+		return '<div class="actions">' . self::getDropdownButton([
 			'label' => 'actions',
 			'icon' => 'fas fa-wrench',
 			'class' => 'btn-sm btn-light',

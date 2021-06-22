@@ -63,6 +63,16 @@ class DetailView
 	}
 
 	/**
+	 * Get record model.
+	 *
+	 * @return \YF\Modules\Base\Model\Record
+	 */
+	public function getRecordModel(): Record
+	{
+		return $this->record;
+	}
+
+	/**
 	 * Get detail view header links.
 	 *
 	 * @return array

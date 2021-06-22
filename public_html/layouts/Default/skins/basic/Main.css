@@ -235,6 +235,15 @@
   line-height: 2rem;
   margin-right: 10px; }
 
+.listViewEntries th,
+.listViewEntries td {
+  padding: 0.4rem;
+  font-size: 0.85rem; }
+
+table.dataTable > thead > tr > th:not(.sorting_disabled),
+table.dataTable > thead > tr > td:not(.sorting_disabled) {
+  padding-right: 0.4rem; }
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-card__header {
   cursor: pointer;

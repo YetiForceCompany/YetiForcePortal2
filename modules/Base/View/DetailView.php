@@ -26,7 +26,7 @@ class DetailView extends \App\Controller\View
 	/** @var \YF\Modules\Base\Model\Record Record model instance. */
 	protected $recordModel;
 
-	/** @var \YF\Modules\Base\Model\DetailView Record model instance. */
+	/** @var \YF\Modules\Base\Model\DetailView Record view model. */
 	protected $detailViewModel;
 
 	/** {@inheritdoc} */
@@ -44,7 +44,7 @@ class DetailView extends \App\Controller\View
 	public function checkPermission(): void
 	{
 		parent::checkPermission();
-		$this->recordModel = \YF\Modules\Base\Model\Record::getInstanceById($this->request->getModule(), $this->request->getByType('record', Purifier::INTEGER), [
+		$this->recordModel = \YF\Modules\Base\Model\Record::getInstanceById($this->request->getModule(), $this->request->getInteger('record'), [
 			'x-header-fields' => 1,
 		]);
 	}
@@ -170,6 +170,12 @@ class DetailView extends \App\Controller\View
 	 */
 	public function relatedList()
 	{
-		// TODO add data
+		$relatedListModel = \YF\Modules\Base\Model\RelatedList::getInstance($this->moduleName, 'RelatedList');
+		$relatedListModel->setViewModel($this->detailViewModel);
+		$relatedListModel->setRequest($this->request);
+		$this->viewer->assign('HEADERS', $relatedListModel->getHeaders());
+		$this->viewer->assign('RELATION_ID', $this->request->getInteger('relationId'));
+		$this->viewer->assign('RELATED_MODULE_NAME', $this->request->getByType('relatedModuleName', Purifier::ALNUM));
+		$this->viewer->view('Detail/RelatedList.tpl', $this->request->getModule());
 	}
 }
