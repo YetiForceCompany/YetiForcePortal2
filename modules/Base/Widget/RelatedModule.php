@@ -226,7 +226,7 @@ class RelatedModule extends \App\BaseModel
 			$apiHeaders['x-row-limit'] = $limit;
 		}
 		if ($limit && $this->page && $this->page > 1) {
-			$apiHeaders['x-row-offset'] = $limit * $this->page;
+			$apiHeaders['x-row-offset'] = $limit * ($this->page - 1);
 		}
 		$api = \App\Api::getInstance();
 		$api->setCustomHeaders($apiHeaders);
