@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\Model;
@@ -48,6 +49,15 @@ class RecordHistory extends \App\BaseModel
 		'LBL_TRANSFER_LINK' => '#000',
 	];
 
+	/** @var int Limit */
+	protected $limit = 50;
+
+	/** @var int Page number */
+	protected $page = 1;
+
+	/** @var bool More pages. */
+	public $isMorePages;
+
 	/**
 	 * Static Function to get the instance of a clean record history.
 	 *
@@ -66,6 +76,42 @@ class RecordHistory extends \App\BaseModel
 	}
 
 	/**
+	 * Set records limit.
+	 *
+	 * @param int $limit
+	 *
+	 * @return $this
+	 */
+	public function setLimit(int $limit): self
+	{
+		$this->limit = $limit;
+		return $this;
+	}
+
+	/**
+	 * Set page number.
+	 *
+	 * @param int $page
+	 *
+	 * @return $this
+	 */
+	public function setPage(int $page): self
+	{
+		$this->page = $page;
+		return $this;
+	}
+
+	/**
+	 * Check if is more pages.
+	 *
+	 * @return bool
+	 */
+	public function isMorePages(): bool
+	{
+		return $this->isMorePages;
+	}
+
+	/**
 	 * Get record history.
 	 *
 	 * @return array
@@ -75,8 +121,11 @@ class RecordHistory extends \App\BaseModel
 		$api = \App\Api::getInstance();
 		$api->setCustomHeaders([
 			'x-raw-data' => true,
-			'x-row-limit' => 50,
+			'x-row-limit' => $this->limit,
+			'x-page' => $this->page,
 		]);
-		return $api->call("{$this->get('moduleName')}/RecordHistory/{$this->get('id')}");
+		$result = $api->call("{$this->get('moduleName')}/RecordHistory/{$this->get('id')}");
+		$this->isMorePages = $result['isMorePages'];
+		return $result['records'];
 	}
 }

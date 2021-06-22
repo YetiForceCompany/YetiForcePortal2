@@ -3,7 +3,7 @@
 <!-- tpl-Base-Detail-History -->
 <div class="w-100">
 <ul class="timeline">
-	{foreach item=HISTORY from=$RECORD_HISTORY}
+	{foreach item=HISTORY from=$HISTORY_MODEL->getHistory()}
 		{if isset($HISTORY_MODEL::$iconActions[$HISTORY['rawStatus']])}
 			<li data-type="{$HISTORY['rawStatus']}">
 				<div class="d-flex">

@@ -1,6 +1,6 @@
 <?php
 /**
- * The file contains: widget of RelatedModule type.
+ * The file contains: widget of Updates type.
  *
  * @package 	Widget
  *
@@ -11,15 +11,13 @@
 
 namespace YF\Modules\Base\Widget;
 
-use YF\Modules\Base\Model\Record;
-
 /**
- * RelatedModule type widget class.
+ * Updates type widget class.
  */
-class RelatedModule extends \App\BaseModel
+class Updates extends \App\BaseModel
 {
 	/** @var string Widget type. */
-	protected $type = 'RelatedModule';
+	protected $type = 'Updates';
 
 	/** @var string Module name. */
 	protected $moduleName;
@@ -30,17 +28,17 @@ class RelatedModule extends \App\BaseModel
 	/** @var int Page number. */
 	protected $page = 1;
 
-	/** @var array Entries. */
-	protected $entries;
-
-	/** @var array Field list. */
-	protected $headers;
-
 	/** @var bool More pages. */
 	protected $isMorePages;
 
 	/** @var array Scripts. */
 	public $scripts = [];
+
+	/** @var int Limit. */
+	public $limit = 5;
+
+	/** @var \YF\Modules\Base\Model\RecordHistory Model of history record. */
+	protected $historyModel;
 
 	/**
 	 * Constructor.
@@ -140,43 +138,16 @@ class RelatedModule extends \App\BaseModel
 	}
 
 	/**
-	 * Gets related module name.
+	 * Gets history model.
 	 *
-	 * @return string
+	 * @return \YF\Modules\Base\Model\RecordHistory
 	 */
-	public function getRelatedModuleName(): string
+	public function getHistoryModel(): \YF\Modules\Base\Model\RecordHistory
 	{
-		return $this->get('data')['relatedModuleName'];
-	}
-
-	/**
-	 * Gets fields from related module.
-	 *
-	 * @return array
-	 */
-	public function getFields(): array
-	{
-		return $this->get('data')['relatedfields'] ?: [];
-	}
-
-	/**
-	 * Gets relation ID.
-	 *
-	 * @return int|null
-	 */
-	public function getRelationId()
-	{
-		return $this->get('data')['relation_id'] ?? null;
-	}
-
-	/**
-	 * Gets custom view ID.
-	 *
-	 * @return int|null
-	 */
-	public function getCvId()
-	{
-		return isset($this->get('data')['customView']) ? current($this->get('data')['customView']) : null;
+		if (null === $this->historyModel) {
+			$this->historyModel = \YF\Modules\Base\Model\RecordHistory::getInstanceById($this->getModuleName(), $this->recordId)->setLimit($this->limit)->setPage($this->page);
+		}
+		return $this->historyModel;
 	}
 
 	/**
@@ -186,70 +157,7 @@ class RelatedModule extends \App\BaseModel
 	 */
 	public function isMorePages(): bool
 	{
-		return $this->isMorePages;
-	}
-
-	/**
-	 * Gets entries.
-	 *
-	 * @return array
-	 */
-	public function getEntries(): array
-	{
-		if (null === $this->entries) {
-			$this->loadData();
-		}
-		return $this->entries;
-	}
-
-	/**
-	 * Gets headers.
-	 *
-	 * @return array
-	 */
-	public function getHeaders(): array
-	{
-		if (null === $this->headers) {
-			$this->loadData();
-		}
-		return $this->headers;
-	}
-
-	public function loadData()
-	{
-		$this->headers = $this->entries = [];
-		$apiHeaders = ['x-fields' => \App\Json::encode($this->getFields())];
-		if ($orderBy = $this->get('data')['orderby'] ?? null) {
-			$apiHeaders['x-order-by'] = \App\Json::encode($orderBy);
-		}
-		if ($limit = (int) ($this->get('data')['limit'] ?? 10)) {
-			$apiHeaders['x-row-limit'] = $limit;
-		}
-		if ($limit && $this->page && $this->page > 1) {
-			$apiHeaders['x-row-offset'] = $limit * ($this->page - 1);
-		}
-		$api = \App\Api::getInstance();
-		$api->setCustomHeaders($apiHeaders);
-
-		$body = [];
-		if ($relationId = $this->getRelationId()) {
-			$body['relationId'] = $relationId;
-		}
-		if ($cvId = $this->getCvId()) {
-			$body['cvId'] = $cvId;
-		}
-
-		$response = $api->call("{$this->moduleName}/RecordRelatedList/{$this->recordId}/{$this->getRelatedModuleName()}", $body) ?: [];
-		if (!empty($response['records'])) {
-			foreach ($response['records'] as $id => $data) {
-				$recordModel = Record::getInstance($this->getRelatedModuleName());
-				$recordModel->setData($data);
-				$recordModel->setId($id);
-				$this->entries[$id] = $recordModel;
-			}
-		}
-		$this->headers = array_intersect_key($response['headers'], array_flip($this->getFields()));
-		$this->isMorePages = (bool) $response['isMorePages'];
+		return $this->historyModel->isMorePages;
 	}
 
 	/**
@@ -259,7 +167,7 @@ class RelatedModule extends \App\BaseModel
 	 */
 	public function getTemplatePath(): string
 	{
-		return "Widget/{$this->type}.tpl";
+		return 'Widget/RelatedModule.tpl';
 	}
 
 	/**
