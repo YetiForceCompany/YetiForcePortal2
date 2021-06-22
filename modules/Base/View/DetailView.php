@@ -65,7 +65,7 @@ class DetailView extends \App\Controller\View
 	 *
 	 * @return void
 	 */
-	public function loadHeader()
+	public function loadHeader(): void
 	{
 		$moduleName = $this->request->getModule();
 		$fieldsForm = $fields = [];
@@ -86,6 +86,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
 		$this->viewer->assign('TABS_GROUP', $this->detailViewModel->getTabsFromApi());
 		$this->viewer->assign('MENU_ID', $this->request->has('tabId') ? $this->request->getByType('tabId', Purifier::ALNUM) : 'details');
+		$this->viewer->assign('MODE', $this->request->getMode() ?: 'details');
 		$this->viewer->view('Detail/Header.tpl', $moduleName);
 	}
 
@@ -125,7 +126,7 @@ class DetailView extends \App\Controller\View
 	 *
 	 * @return void
 	 */
-	public function summary()
+	public function summary(): void
 	{
 		$moduleName = $this->request->getModule();
 		$widgets = [];
@@ -144,7 +145,7 @@ class DetailView extends \App\Controller\View
 	 *
 	 * @return void
 	 */
-	public function comments()
+	public function comments(): void
 	{
 		// TODO add data
 	}
@@ -154,7 +155,7 @@ class DetailView extends \App\Controller\View
 	 *
 	 * @return void
 	 */
-	public function updates()
+	public function updates(): void
 	{
 		$moduleName = $this->request->getModule();
 		$recordHistory = \YF\Modules\Base\Model\RecordHistory::getInstanceById($moduleName, $this->recordModel->getId());
@@ -168,14 +169,25 @@ class DetailView extends \App\Controller\View
 	 *
 	 * @return void
 	 */
-	public function relatedList()
+	public function relatedList(): void
 	{
 		$relatedListModel = \YF\Modules\Base\Model\RelatedList::getInstance($this->moduleName, 'RelatedList');
-		$relatedListModel->setViewModel($this->detailViewModel);
 		$relatedListModel->setRequest($this->request);
 		$this->viewer->assign('HEADERS', $relatedListModel->getHeaders());
 		$this->viewer->assign('RELATION_ID', $this->request->getInteger('relationId'));
 		$this->viewer->assign('RELATED_MODULE_NAME', $this->request->getByType('relatedModuleName', Purifier::ALNUM));
 		$this->viewer->view('Detail/RelatedList.tpl', $this->request->getModule());
+	}
+
+	/** {@inheritdoc} */
+	public function getFooterScripts(bool $loadForModule = true): array
+	{
+		$moduleName = $this->request->getModule();
+		return array_merge(
+				parent::getFooterScripts(),
+				$this->convertScripts([
+					['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/RelatedListView.js', true],
+					['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/RelatedListView.js"],
+				], 'js'));
 	}
 }

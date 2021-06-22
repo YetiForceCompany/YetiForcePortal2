@@ -72,7 +72,7 @@
 						{/foreach}
 					</tr>
 					<tr class="listViewSearch">
-						<td class="p-0">
+						<td class="p-0 text-center">
 							<button type="button" class="btn btn-light btn-sm mr-1 js-search-records" data-js="click"><span class="fas fa-search"></span></button>
 							<button type="button" class="btn btn-light btn-sm js-clear-search" data-js="click"><span class="fas fa-times"></button>
 						</td>

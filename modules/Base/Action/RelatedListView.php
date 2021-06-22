@@ -1,6 +1,6 @@
 <?php
 /**
- * List view action file.
+ * Related list view action file.
  *
  * @package Action
  *
@@ -12,14 +12,15 @@
 namespace YF\Modules\Base\Action;
 
 /**
- * List view action class.
+ * Related list view action class.
  */
-class ListView extends \App\Controller\Action
+class RelatedListView extends \App\Controller\Action
 {
 	/** {@inheritdoc} */
 	public function process(): void
 	{
-		$listModel = \YF\Modules\Base\Model\ListView::getInstance($this->moduleName, $this->request->getAction());
+		$relatedListModel = \YF\Modules\Base\Model\RelatedList::getInstance($this->moduleName, 'RelatedList');
+		$relatedListModel->setRequest($this->request);
 		$rows = $columns = $fields = [];
 		foreach ($this->request->getArray('columns') as $key => $value) {
 			$columns[$key] = $value['name'];
@@ -29,7 +30,7 @@ class ListView extends \App\Controller\Action
 		}
 		$order = current($this->request->getArray('order', \App\Purifier::ALNUM));
 		if ($order && isset($columns[$order['column']], $columns[$order['column']])) {
-			$listModel->setOrder($columns[$order['column']], strtoupper($order['dir']));
+			$relatedListModel->setOrder($columns[$order['column']], strtoupper($order['dir']));
 		}
 		if ($this->request->has('filters') && !$this->request->isEmpty('filters')) {
 			$conditions = [];
@@ -42,13 +43,13 @@ class ListView extends \App\Controller\Action
 					];
 				}
 			}
-			$listModel->setConditions($conditions);
+			$relatedListModel->setConditions($conditions);
 		}
-		$listModel->setFields($fields);
-		$listModel->setLimit($this->request->getInteger('length'));
-		$listModel->setOffset($this->request->getInteger('start'));
-		$listModel->loadRecordsList();
-		foreach ($listModel->getRecordsListModel() as $id => $recordModel) {
+		$relatedListModel->setFields($fields);
+		$relatedListModel->setLimit($this->request->getInteger('length'));
+		$relatedListModel->setOffset($this->request->getInteger('start'));
+		$relatedListModel->loadRecordsList();
+		foreach ($relatedListModel->getRecordsListModel() as $id => $recordModel) {
 			$row = [];
 			foreach ($columns as $column) {
 				if ($column) {
@@ -63,7 +64,7 @@ class ListView extends \App\Controller\Action
 		$response = [
 			'draw' => $this->request->getInteger('draw'),
 			'iTotalDisplayRecords' => \count($rows),
-			'iTotalRecords' => $listModel->getCount(),
+			'iTotalRecords' => $relatedListModel->getCount(),
 			'aaData' => $rows,
 		];
 		header('content-type: text/json; charset=UTF-8');

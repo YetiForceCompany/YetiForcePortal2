@@ -3,6 +3,7 @@
 <!-- tpl-Base-Detail-RelatedList -->
 <form class="js-form-container row" data-js="container">
 	<input type="hidden" name="module" value="{$MODULE_NAME}">
+	<input type="hidden" name="action" value="RelatedListView">
 	<input type="hidden" name="record" value="{$RECORD->getId()}">
 	<input type="hidden" name="relationId" value="{$RELATION_ID}">
 	<input type="hidden" name="relatedModuleName" value="{$RELATED_MODULE_NAME}">
@@ -16,7 +17,7 @@
 					{/foreach}
 				</tr>
 				<tr class="listViewSearch">
-					<td class="p-0">
+					<td class="p-0 text-center">
 						<button type="button" class="btn btn-light btn-sm mr-1 js-search-records" data-js="click"><span class="fas fa-search"></span></button>
 						<button type="button" class="btn btn-light btn-sm js-clear-search" data-js="click"><span class="fas fa-times"></button>
 					</td>

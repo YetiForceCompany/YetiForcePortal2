@@ -2,6 +2,7 @@
 {strip}
 <!-- tpl-Base-Detail-Header -->
 <input type="hidden" id="recordId" value="{$RECORD->getId()}">
+<input type="hidden" id="mode" value="{$MODE}">
 <div class="widget_header row">
 	<div class="col-sm-12">
 		<div class="float-left">

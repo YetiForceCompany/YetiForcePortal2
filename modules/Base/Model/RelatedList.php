@@ -18,11 +18,11 @@ use App\Purifier;
  */
 class RelatedList extends AbstractListView
 {
-	/** @var \YF\Modules\Base\Model\DetailView Record view model. */
-	protected $detailViewModel;
-
 	/** @var \App\Request Request object. */
 	protected $request;
+
+	/** @var string Related module name. */
+	protected $relatedModuleName;
 
 	/** {@inheritdoc} */
 	protected $actionName = 'RecordRelatedList';
@@ -32,7 +32,7 @@ class RelatedList extends AbstractListView
 	{
 		$api = \App\Api::getInstance();
 		$api->setCustomHeaders($headers);
-		return $api->call("{$this->getModuleName()}/RecordRelatedList/{$this->detailViewModel->getRecordModel()->getId()}/" . $this->request->getByType('relatedModuleName', Purifier::ALNUM), [
+		return $api->call("{$this->getModuleName()}/RecordRelatedList/{$this->request->getInteger('record')}/{$this->relatedModuleName}", [
 			'relationId' => $this->request->getInteger('relationId'),
 		]);
 	}
@@ -41,18 +41,6 @@ class RelatedList extends AbstractListView
 	public function getDefaultCustomView(): ?int
 	{
 		return null;
-	}
-
-	/**
-	 * Set detail view model.
-	 *
-	 * @param \YF\Modules\Base\Model\DetailView $view
-	 *
-	 * @return void
-	 */
-	public function setViewModel(DetailView $view): void
-	{
-		$this->detailViewModel = $view;
 	}
 
 	/**
@@ -65,5 +53,33 @@ class RelatedList extends AbstractListView
 	public function setRequest(\App\Request $request): void
 	{
 		$this->request = $request;
+		$this->relatedModuleName = $request->getByType('relatedModuleName', Purifier::ALNUM);
+	}
+
+	/**
+	 * Get records list model.
+	 *
+	 * @return Record[]
+	 */
+	public function getRecordsListModel(): array
+	{
+		$recordsModel = [];
+		if (!empty($this->recordsList['records'])) {
+			foreach ($this->recordsList['records'] as $id => $value) {
+				$recordModel = Record::getInstance($this->relatedModuleName);
+				if (isset($value['recordLabel'])) {
+					$recordModel->setName($value['recordLabel']);
+					unset($value['recordLabel']);
+				}
+				$recordModel->setData($value)->setId($id);
+				$recordsModel[$id] = $recordModel;
+			}
+		}
+		if (!empty($this->recordsList['rawData'])) {
+			foreach ($this->recordsList['rawData'] as $id => $value) {
+				$recordsModel[$id]->setRawData($value);
+			}
+		}
+		return $recordsModel;
 	}
 }
