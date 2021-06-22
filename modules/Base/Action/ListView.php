@@ -54,7 +54,7 @@ class ListView extends \App\Controller\Action
 				if ($column) {
 					$value = $recordModel->getListDisplayValue($column);
 				} else {
-					$value = $recordModel->getRecordListViewActions();
+					$value = $recordModel->getListViewActions();
 				}
 				$row[] = $value;
 			}

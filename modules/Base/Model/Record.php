@@ -293,7 +293,7 @@ class Record extends \App\BaseModel
 	 *
 	 * @return string
 	 */
-	public function getRecordListViewActions(): string
+	public function getListViewActions(): string
 	{
 		$recordLinks = [];
 		if ($this->isViewable()) {
@@ -321,6 +321,35 @@ class Record extends \App\BaseModel
 				'data' => ['url' => $this->getDeleteUrl()],
 				'icon' => 'fas fa-trash-alt',
 				'class' => 'btn-sm btn-danger active js-delete-record js-popover-tooltip',
+			];
+		}
+		return \App\Layout\Action::getListViewActions($recordLinks);
+	}
+
+	/**
+	 * Function to get the list view actions for the record.
+	 *
+	 * @return string
+	 */
+	public function getRelatedListActions(): string
+	{
+		$recordLinks = [];
+		if ($this->isViewable()) {
+			$recordLinks[] = [
+				'label' => 'LBL_SHOW_COMPLETE_DETAILS',
+				'moduleName' => $this->getModuleName(),
+				'href' => $this->getDetailViewUrl(),
+				'icon' => 'fas fa-th-list',
+				'class' => 'btn-sm btn-info active js-popover-tooltip',
+			];
+		}
+		if ($this->isEditable()) {
+			$recordLinks[] = [
+				'label' => 'BTN_EDIT',
+				'moduleName' => $this->getModuleName(),
+				'href' => $this->getEditViewUrl(),
+				'icon' => 'fas fa-edit',
+				'class' => 'btn-sm btn-success active js-popover-tooltip',
 			];
 		}
 		return \App\Layout\Action::getListViewActions($recordLinks);

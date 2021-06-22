@@ -55,7 +55,7 @@ class RelatedListView extends \App\Controller\Action
 				if ($column) {
 					$value = $recordModel->getListDisplayValue($column);
 				} else {
-					$value = $recordModel->getRecordListViewActions();
+					$value = $recordModel->getRelatedListActions();
 				}
 				$row[] = $value;
 			}
