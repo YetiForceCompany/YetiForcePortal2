@@ -2,6 +2,8 @@
 /**
  * Base controller class.
  *
+ * @package   Controller
+ *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
@@ -9,14 +11,12 @@
 
 namespace App\Controller;
 
-use App\Request;
-
 abstract class Base
 {
 	/** @var \App\Headers Headers instance. */
 	public $headers;
 
-	/** @var Request Request object. */
+	/** @var \App\Request Request object. */
 	protected $request;
 
 	/** @var string Module name. */
@@ -27,7 +27,7 @@ abstract class Base
 	 *
 	 * @param \App\Request $request
 	 */
-	public function __construct(Request $request)
+	public function __construct(\App\Request $request)
 	{
 		$this->headers = \App\Controller\Headers::getInstance();
 		if (\App\Config::get('csrfProtection')) {

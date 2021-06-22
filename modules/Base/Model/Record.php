@@ -17,11 +17,14 @@ namespace YF\Modules\Base\Model;
  */
 class Record extends \App\BaseModel
 {
+	/** @var string Record ID. */
+	protected $id;
+
+	/** @var string Record name. */
+	protected $name = '';
+
 	/** @var string Module name. */
 	protected $moduleName;
-
-	/** @var \YF\Modules\Base\Model\Module Module model instance. */
-	protected $moduleModel;
 
 	/** @var array Information about inventory. */
 	protected $inventoryData = [];
@@ -29,17 +32,14 @@ class Record extends \App\BaseModel
 	/** @var array Information about summary inventory. */
 	protected $inventorySummaryData = [];
 
-	/** @var string Record ID. */
-	protected $id;
-
-	/** @var string Record name. */
-	protected $name = '';
-
 	/** @var array Privileges. */
 	protected $privileges = [];
 
 	/** @var array Custom data. */
 	protected $customData = [];
+
+	/** @var \YF\Modules\Base\Model\Module Module model instance. */
+	protected $moduleModel;
 
 	/**
 	 * Static Function to get the instance of a clean Record for the given module name.

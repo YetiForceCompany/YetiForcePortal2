@@ -40,10 +40,12 @@ class Api extends AbstractBase
 			$content .= "Error: {$value['response']['error']}\n";
 		}
 		$headers = [];
-		foreach ($value['response']['headers'] as $key => $header) {
-			$headers[$key] = implode("\n", $header);
+		if ('-' !== $value['response']['headers']) {
+			foreach ($value['response']['headers'] as $key => $header) {
+				$headers[$key] = implode("\n", $header);
+			}
+			$content .= 'Headers: ' . print_r($headers, true) . PHP_EOL;
 		}
-		$content .= 'Headers: ' . print_r($headers, true) . PHP_EOL;
 		if (!empty($value['response']['rawBody'])) {
 			$content .= "RawBody: \n" . print_r($value['response']['rawBody'], true) . PHP_EOL;
 		}

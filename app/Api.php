@@ -85,6 +85,7 @@ class Api
 		$headers = $this->getHeaders();
 		try {
 			if (\in_array($requestType, ['get', 'delete'])) {
+				$method += $data ? '?' . http_build_query($data) : '';
 				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers]);
 			} else {
 				$data = Json::encode($data);
@@ -113,7 +114,7 @@ class Api
 			if (Config::$apiErrorLogs || Config::$apiAllLogs) {
 				\App\Log::info([
 					'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
-					'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => (method_exists($response, 'getStatusCode') ? $response->getStatusCode() : '-'), 'reasonPhrase' => (method_exists($response, 'getReasonPhrase') ? $response->getReasonPhrase() : '-'), 'error' => $e->__toString(), 'headers' => (method_exists($response, 'getHeaders') ? $response->getHeaders() : '-'), 'rawBody' => ($rawResponse ?? '')],
+					'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => (isset($response) && method_exists($response, 'getStatusCode') ? $response->getStatusCode() : '-'), 'reasonPhrase' => (isset($response) && method_exists($response, 'getReasonPhrase') ? $response->getReasonPhrase() : '-'), 'error' => $e->__toString(), 'headers' => (isset($response) && method_exists($response, 'getHeaders') ? $response->getHeaders() : '-'), 'rawBody' => ($rawResponse ?? '')],
 				], 'Api');
 			}
 			throw new Exceptions\AppException('An error occurred while communicating with the CRM', 500, $e);
