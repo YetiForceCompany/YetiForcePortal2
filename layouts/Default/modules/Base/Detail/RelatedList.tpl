@@ -5,8 +5,15 @@
 	<input type="hidden" name="module" value="{$MODULE_NAME}">
 	<input type="hidden" name="action" value="RelatedListView">
 	<input type="hidden" name="record" value="{$RECORD->getId()}">
-	<input type="hidden" name="relationId" value="{$RELATION_ID}">
-	<input type="hidden" name="relatedModuleName" value="{$RELATED_MODULE_NAME}">
+	<input type="hidden" name="relationId" value="{$RELATION_MODEL->getRelation('relationId')}">
+	<input type="hidden" name="relatedModuleName" value="{$RELATION_MODEL->getRelatedModuleName()}">
+	{if $ACTIONS}
+		<div class="col-sm-6 my-1">
+			{foreach item=ACTION from=$ACTIONS}
+				{\App\Layout\Action::getButton($ACTION)}
+			{/foreach}
+		</div>
+	{/if}
 	<div class="table-responsive col-sm-12">
 		<table class="table listViewEntries js-list-view-table" data-js="dataTable">
 			<thead>

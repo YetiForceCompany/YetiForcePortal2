@@ -16,7 +16,7 @@
 				<div class="float-right">
 				<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
 					<span class="fas fa-plus mr-2"></span>
-					<strong>{\App\Language::translate('LBL_ADD_RECORD', $MODULE_NAME)}</strong>
+					<strong>{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}</strong>
 				</a>
 				</div>
 			{/if}

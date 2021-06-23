@@ -28,6 +28,8 @@ class DetailView extends \App\Controller\View
 
 	/** @var \YF\Modules\Base\Model\DetailView Record view model. */
 	protected $detailViewModel;
+	/** @var array Tabs details. */
+	protected $tabs;
 
 	/** {@inheritdoc} */
 	public function __construct(\App\Request $request)
@@ -78,13 +80,14 @@ class DetailView extends \App\Controller\View
 			}
 			$fields[$field['name']] = $fieldModel;
 		}
+		$this->tabs = $moduleModel->getTabsFromApi($this->recordModel->getId());
 		$this->viewer->assign('RECORD', $this->recordModel);
 		$this->viewer->assign('FIELDS', $fields);
 		$this->viewer->assign('FIELDS_FORM', $fieldsForm);
 		$this->viewer->assign('FIELDS_HEADER', $this->recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
-		$this->viewer->assign('TABS_GROUP', $moduleModel->getTabsFromApi($this->recordModel->getId()));
+		$this->viewer->assign('TABS_GROUP', $this->tabs);
 		$this->viewer->assign('MENU_ID', $this->request->has('tabId') ? $this->request->getByType('tabId', Purifier::ALNUM) : 'details');
 		$this->viewer->assign('MODE', $this->request->getMode() ?: 'details');
 		$this->viewer->view('Detail/Header.tpl', $moduleName);
@@ -174,11 +177,16 @@ class DetailView extends \App\Controller\View
 	 */
 	public function relatedList(): void
 	{
+		$relationId = $this->request->getInteger('relationId');
+		if (empty($this->tabs['related'][$relationId])) {
+			throw new \App\Exceptions\AppException('ERR_RELATION_NOT_FOUND||' . $relationId);
+		}
 		$relatedListModel = \YF\Modules\Base\Model\RelatedList::getInstance($this->moduleName, 'RelatedList');
 		$relatedListModel->setRequest($this->request);
+		$relatedListModel->setRelation($this->tabs['related'][$relationId]);
 		$this->viewer->assign('HEADERS', $relatedListModel->getHeaders());
-		$this->viewer->assign('RELATION_ID', $this->request->getInteger('relationId'));
-		$this->viewer->assign('RELATED_MODULE_NAME', $this->request->getByType('relatedModuleName', Purifier::ALNUM));
+		$this->viewer->assign('ACTIONS', $relatedListModel->getActions());
+		$this->viewer->assign('RELATION_MODEL', $relatedListModel);
 		$this->viewer->view('Detail/RelatedList.tpl', $this->request->getModule());
 	}
 

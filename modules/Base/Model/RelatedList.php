@@ -18,11 +18,14 @@ use App\Purifier;
  */
 class RelatedList extends AbstractListView
 {
-	/** @var \App\Request Request object. */
-	protected $request;
+	/** @var array Relation details. */
+	protected $relation;
 
 	/** @var string Related module name. */
 	protected $relatedModuleName;
+
+	/** @var \App\Request Request object. */
+	protected $request;
 
 	/** {@inheritdoc} */
 	protected $actionName = 'RecordRelatedList';
@@ -57,6 +60,40 @@ class RelatedList extends AbstractListView
 	}
 
 	/**
+	 * Set relation details.
+	 *
+	 * @param array $relation
+	 *
+	 * @return void
+	 */
+	public function setRelation(array $relation): void
+	{
+		$this->relation = $relation;
+	}
+
+	/**
+	 * Get related module name.
+	 *
+	 * @return string
+	 */
+	public function getRelatedModuleName(): string
+	{
+		return $this->relatedModuleName;
+	}
+
+	/**
+	 * Get relation detail by name.
+	 *
+	 * @param string $name
+	 *
+	 * @return mixed
+	 */
+	public function getRelation(string $name)
+	{
+		return $this->relation[$name] ?? null;
+	}
+
+	/**
 	 * Get records list model.
 	 *
 	 * @return Record[]
@@ -81,5 +118,37 @@ class RelatedList extends AbstractListView
 			}
 		}
 		return $recordsModel;
+	}
+
+	/**
+	 * Get actions.
+	 *
+	 * @return array
+	 */
+	public function getActions(): array
+	{
+		$links = [];
+		$actions = $this->getRelation('actions');
+		if (\in_array('select', $actions)) {
+			$links[] = [
+				'label' => 'BTN_SELECT_RECORD',
+				'moduleName' => $this->relatedModuleName,
+				'data' => ['moduleName' => $this->relatedModuleName, 'source_record' => $this->request->getInteger('record'), 'source_module' => $this->getModuleName()],
+				'icon' => 'fas fa-search',
+				'class' => 'btn-sm btn-outline-primary js-quick-create',
+				'showLabel' => 1,
+			];
+		}
+		if (\in_array('add', $actions)) {
+			$links[] = [
+				'label' => 'BTN_ADD_RECORD',
+				'moduleName' => $this->relatedModuleName,
+				'data' => ['moduleName' => $this->relatedModuleName, 'source_record' => $this->request->getInteger('record'), 'source_module' => $this->getModuleName()],
+				'icon' => 'fas fa-plus',
+				'class' => 'btn-sm btn-outline-success js-quick-create',
+				'showLabel' => 1,
+			];
+		}
+		return $links;
 	}
 }
