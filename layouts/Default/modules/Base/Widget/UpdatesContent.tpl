@@ -3,22 +3,6 @@
 <!-- tpl-Base-Widget-UpdatesContent -->
 	<div class="table-responsive">
 		{include file=\App\Resources::templatePath('Detail/History.tpl', $WIDGET->getModuleName()) HISTORY_MODEL=$WIDGET->getHistoryModel()}
-		{* <table class="table table-bordered mb-1">
-			<thead class="thead-light">
-				{foreach from=$WIDGET->getHeaders() key=HEADER_NAME item=HEADER_LABEL}
-					<th>{\App\Purifier::encodeHTML($HEADER_LABEL)}</th>
-				{/foreach}
-			</thead>
-			<tbody>
-				{foreach from=$WIDGET->getEntries() item=RECORD_MODEL}
-					<tr class="js-row" data-url="{$RECORD_MODEL->getDetailViewUrl()}">
-						{foreach from=$WIDGET->getHeaders() key=HEADER_NAME item=HEADER_LABEL}
-							<td>{$RECORD_MODEL->getDisplayValue($HEADER_NAME)}</td>
-						{/foreach}
-					</tr>
-				{/foreach}
-			</tbody>
-		</table> *}
 	</div>
 	<div>
 		{if $WIDGET->isMorePages() || $PAGE > 1}
