@@ -561,6 +561,27 @@ var AppConnector,
 		getBindedPopover(element) {
 			return $(`#${element.attr('aria-describedby')}`);
 		},
+		registerTabdrop: function () {
+			let tabs = $('.js-tabdrop');
+			if (!tabs.length) return;
+			let tab = tabs.find('> li');
+			tab.each(function () {
+				$(this).removeClass('d-none');
+			});
+			tabs.tabdrop({
+				text: app.translate('JS_MORE')
+			});
+			//change position to the last element (wcag keyboard navigation)
+			let dropdown = tabs.find('> li.dropdown');
+			dropdown.appendTo(tabs);
+			//fix for toggle button text not changing
+			tab.on('click', function (e) {
+				setTimeout(function () {
+					$(window).trigger('resize');
+				}, 500);
+			});
+			$(window).trigger('resize');
+		},
 		registerModal: function (container) {
 			if (typeof container === 'undefined') {
 				container = $('body');
@@ -1182,6 +1203,7 @@ $(function () {
 	app.registerSubMenu();
 	app.registerModal(container);
 	app.registerMobileMenu(container);
+	app.registerTabdrop();
 	app.registerIframeAndMoreContent();
 	app.registerEventForEditor(container);
 	app.registerBaseEvent(container);
