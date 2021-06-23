@@ -21,7 +21,7 @@
 								<div>
 									{foreach key=FIELD_NAME item=FIELD_VALUE from=$HISTORY['data']}
 										<div class='font-x-small d-flex flex-wrap'>
-											<span class="mr-1">{$FIELD_VALUE['label']}:</span><strong>{$FIELD_VALUE['value']}</strong>
+											<span class="mr-1">{$FIELD_VALUE['label']}:</span><strong>{\App\Viewer::truncateText($FIELD_VALUE['value'],100, true)}</strong>
 										</div>
 									{/foreach}
 								</div>
@@ -31,9 +31,9 @@
 										<div class='font-x-small d-flex flex-wrap'>
 											<span class="mr-1">{$FIELD_VALUE['label']}:</span>
 											{\App\Language::translate('LBL_FROM')}
-											<strong class="mx-1">{$FIELD_VALUE['from']}</strong>
+											<strong class="mx-1">{\App\Viewer::truncateText($FIELD_VALUE['from'],100, true)}</strong>
 											{\App\Language::translate('LBL_TO')}
-											<strong class="ml-1">{$FIELD_VALUE['to']}</strong>
+											<strong class="ml-1">{\App\Viewer::truncateText($FIELD_VALUE['to'],100, true)}</strong>
 										</div>
 									{/foreach}
 								</div>

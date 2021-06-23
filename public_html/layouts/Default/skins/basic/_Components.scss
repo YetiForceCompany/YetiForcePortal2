@@ -419,7 +419,7 @@ $c-input-rounded-border-color: #dee2e6;
 
 				@media (min-width: 576px) {
 					.timeline-body {
-						padding-left: calculate-rem(44px);
+						padding-left: 0.7rem;
 						font-size: 1em;
 					}
 				}

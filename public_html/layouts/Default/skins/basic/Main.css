@@ -489,6 +489,66 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
   align-self: center;
   margin-right: 0.125rem; }
 
+.c-circle-icon {
+  height: 1.875rem;
+  width: 1.875rem;
+  min-width: 1.875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; }
+  .c-circle-icon [class^="yfm-"],
+  .c-circle-icon .adminIcon-user,
+  .c-circle-icon .adminIcon-user {
+    font-size: 1.25rem; }
+
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem; }
+  .timeline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0.25rem;
+    background: #ddd;
+    left: 0.8125rem;
+    margin: 0;
+    border-radius: 2px; }
+  @media (max-width: 575.98px) {
+    .timeline:before {
+      display: none; } }
+  .timeline > li {
+    position: relative;
+    padding-bottom: 0.625rem; }
+    .timeline > li:before {
+      content: " ";
+      display: table; }
+    .timeline > li:after {
+      content: " ";
+      display: table;
+      clear: both; }
+    .timeline > li .timeline-item {
+      -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      margin-top: 0;
+      background: #fbfbfb;
+      color: #444;
+      padding: 0;
+      position: relative;
+      min-width: 0; }
+      .timeline > li .timeline-item > .timeline-body {
+        padding-left: 0;
+        font-size: 0.75em; }
+      @media (min-width: 576px) {
+        .timeline > li .timeline-item > .timeline-body {
+          padding-left: 0.7rem;
+          font-size: 1em; } }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;
