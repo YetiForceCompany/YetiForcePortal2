@@ -95,9 +95,9 @@ class Updates extends \App\BaseModel
 	 *
 	 * @param int $recordId
 	 *
-	 * @return self
+	 * @return $this
 	 */
-	public function setRecordId(int $recordId): self
+	public function setRecordId(int $recordId)
 	{
 		$this->recordId = $recordId;
 
@@ -121,7 +121,7 @@ class Updates extends \App\BaseModel
 	 *
 	 * @return $this
 	 */
-	public function setPage(int $page): self
+	public function setPage(int $page)
 	{
 		$this->page = $page;
 		return $this;
