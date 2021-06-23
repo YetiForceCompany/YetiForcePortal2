@@ -35,12 +35,47 @@ window.Base_Widget_Comments_Js = class {
 		}
 		return deferred.promise();
 	}
-	registerChangePage() {
-		this.container.on('click', '.js-change-page', (e) => {
-			let page = e.currentTarget.dataset.page;
-			this.loadContent(page);
+	getContent(url = null) {
+		const deferred = $.Deferred();
+		if (url) {
+			let progressInstance = $.progressIndicator({
+				position: 'html',
+				blockInfo: {
+					enabled: true,
+					elementToBlock: this.container
+				},
+				message: ' '
+			});
+			AppConnector.request(url)
+				.done((responseData) => {
+					progressInstance.progressIndicator({ mode: 'hide' });
+					deferred.resolve(responseData);
+				})
+				.fail(function (e, er) {
+					app.errorLog(e, er);
+					progressInstance.progressIndicator({ mode: 'hide' });
+					aDeferred.reject(false);
+				});
+		} else {
+			aDeferred.reject();
+		}
+		return deferred.promise();
+	}
+
+	/**
+	 * Show replies
+	 */
+	registerShowReplies() {
+		this.container.on('click', '.js-show-replies', (e) => {
+			let element = $(e.currentTarget);
+			let url = e.currentTarget.dataset.url;
+			this.getContent(url).done((result) => {
+				element.closest('.js-post-container_body').append(result);
+				element.remove();
+			});
 		});
 	}
+
 	/**
 	 * Register events
 	 * @param {jQuery} container
@@ -49,6 +84,6 @@ window.Base_Widget_Comments_Js = class {
 	registerEvents(container) {
 		this.container = container;
 		this.loadContent();
-		this.registerChangePage();
+		this.registerShowReplies();
 	}
 };

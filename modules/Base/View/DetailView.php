@@ -154,6 +154,7 @@ class DetailView extends \App\Controller\View
 		$relatedListModel = \YF\Modules\ModComments\Model\RelatedList::getInstance($moduleName)->setRecordId($this->recordModel->getId());
 		$relatedListModel->loadRecordsList();
 		$this->viewer->assign('ENTRIES', $relatedListModel->getRecordsTree());
+		$this->viewer->assign('SUB_COMMENT', false);
 		$this->viewer->view('Detail/Comments.tpl', 'ModComments');
 	}
 

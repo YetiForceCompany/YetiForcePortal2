@@ -65,7 +65,7 @@ abstract class AbstractListView
 	 *
 	 * @return $this
 	 */
-	public static function getInstance(string $moduleName, string $viewName = 'ListView'): object
+	public static function getInstance(string $moduleName, string $viewName = 'ListView')
 	{
 		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', $viewName);
 		$self = new $handlerModule();
@@ -156,11 +156,12 @@ abstract class AbstractListView
 	 *
 	 * @param array $conditions
 	 *
-	 * @return void
+	 * @return $this
 	 */
 	public function setConditions(array $conditions)
 	{
 		$this->conditions = $conditions;
+		return $this;
 	}
 
 	/**
@@ -179,9 +180,9 @@ abstract class AbstractListView
 	/**
 	 * Load a list of records from the API.
 	 *
-	 * @return self
+	 * @return $this
 	 */
-	public function loadRecordsList(): self
+	public function loadRecordsList()
 	{
 		$this->recordsList = $this->getFromApi($this->getApiHeaders());
 		return $this;

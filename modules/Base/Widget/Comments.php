@@ -35,7 +35,7 @@ class Comments extends RelatedModule
 	public $scripts = [];
 
 	/** @var int Limit. */
-	public $limit = 5;
+	public $limit = 15;
 
 	/**
 	 * Constructor.
@@ -142,7 +142,7 @@ class Comments extends RelatedModule
 	public function getFields(): array
 	{
 		return ['parent_comments', 'createdtime', 'modifiedtime', 'related_to', 'id',
-			'assigned_user_id', 'commentcontent', 'creator', 'customer', 'reasontoedit', 'userid', 'parents'];
+			'assigned_user_id', 'commentcontent', 'creator', 'customer', 'reasontoedit', 'userid', 'parents', 'children_count'];
 	}
 
 	/**
@@ -174,9 +174,14 @@ class Comments extends RelatedModule
 	{
 		$relatedListModel = \YF\Modules\ModComments\Model\RelatedList::getInstance($this->getModuleName())
 			->setRecordId($this->recordId)
+			->setConditions([
+				'fieldName' => 'parent_comments',
+				'value' => '',
+				'operator' => 'y'
+			])
 			->setFields($this->getFields());
 		$relatedListModel->loadRecordsList();
-		$this->entries = $relatedListModel->getRecordsTree();
+		$this->entries = $relatedListModel->getRecordsListModel();
 		$this->headers = array_intersect_key($relatedListModel->getHeaders(), array_flip($this->getFields()));
 		$this->isMorePages = $relatedListModel->isMorePages();
 		return $this;

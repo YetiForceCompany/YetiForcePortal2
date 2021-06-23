@@ -16,7 +16,7 @@ namespace YF\Modules\ModComments\Model;
  */
 class Record extends \YF\Modules\Base\Model\Record
 {
-	/** @var Sub-comments */
+	/** @var array Sub-comments */
 	private $children = [];
 
 	/**
@@ -54,5 +54,19 @@ class Record extends \YF\Modules\Base\Model\Record
 	{
 		$this->children[$recordModel->getId()] = $recordModel;
 		return $this;
+	}
+
+	/**
+	 * Get URL address.
+	 *
+	 * @return string
+	 */
+	public function getChildrenUrl(): string
+	{
+		$url = '';
+		if ($parent = $this->get('related_to')) {
+			$url = "index.php?module={$this->moduleName}&view=Comment&record={$this->getId()}&mode=getChildren&sourceId={$parent['record']}&sourceModule={$parent['referenceModule']}";
+		}
+		return $url;
 	}
 }
