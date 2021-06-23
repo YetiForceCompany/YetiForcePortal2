@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-ModComments-CommentsContent -->
 	{foreach from=$WIDGET->getEntries() item=COMMENT name=commentLoop}
-		{include file=\App\Resources::templatePath('CommentsPost.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName() SUB_COMMENT=false}
+		{include file=\App\Resources::templatePath('Detail/CommentsPost.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName() SUB_COMMENT=false}
 	{/foreach}
 <!-- /tpl-ModComments-CommentsContent -->
 {/strip}

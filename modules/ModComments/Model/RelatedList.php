@@ -31,6 +31,10 @@ class RelatedList extends \YF\Modules\Base\Model\RelatedList
 	/** {@inheritdoc} */
 	protected $actionName = 'RecordRelatedList';
 
+	/** {@inheritdoc} */
+	protected $fields = ['parent_comments', 'createdtime', 'modifiedtime', 'related_to', 'id',
+		'assigned_user_id', 'commentcontent', 'creator', 'customer', 'reasontoedit', 'userid', 'parents'];
+
 	/** @var int Record ID */
 	protected $recordId;
 

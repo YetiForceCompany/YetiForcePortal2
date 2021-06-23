@@ -147,7 +147,11 @@ class DetailView extends \App\Controller\View
 	 */
 	public function comments(): void
 	{
-		// TODO add data
+		$moduleName = $this->request->getModule();
+		$relatedListModel = \YF\Modules\ModComments\Model\RelatedList::getInstance($moduleName)->setRecordId($this->recordModel->getId());
+		$relatedListModel->loadRecordsList();
+		$this->viewer->assign('ENTRIES', $relatedListModel->getRecordsTree());
+		$this->viewer->view('Detail/Comments.tpl', 'ModComments');
 	}
 
 	/**
