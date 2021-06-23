@@ -80,7 +80,7 @@ class DetailView
 	public function getLinksHeader(): array
 	{
 		$links = [];
-		if ($this->record->isPermitted('ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
+		if (\YF\Modules\Base\Model\Module::isPermitted($this->moduleName, 'ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
 			$links[] = [
 				'label' => 'BTN_EXPORT_PDF',
 				'moduleName' => $this->moduleName,
