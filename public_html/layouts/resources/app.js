@@ -561,6 +561,9 @@ var AppConnector,
 		getBindedPopover(element) {
 			return $(`#${element.attr('aria-describedby')}`);
 		},
+		/**
+		 * Register tabdrop manual trigger.
+		 */
 		registerTabdrop: function () {
 			let tabs = $('.js-tabdrop');
 			if (!tabs.length) return;
