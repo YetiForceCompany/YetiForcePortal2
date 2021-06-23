@@ -65,7 +65,7 @@ abstract class AbstractListView
 	 *
 	 * @return self
 	 */
-	public static function getInstance(string $moduleName, string $viewName = 'ListView'): self
+	public static function getInstance(string $moduleName, string $viewName = 'ListView')
 	{
 		$handlerModule = \App\Loader::getModuleClassName($moduleName, 'Model', $viewName);
 		$self = new $handlerModule();

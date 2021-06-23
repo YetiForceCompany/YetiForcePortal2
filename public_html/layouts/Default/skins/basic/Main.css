@@ -168,6 +168,51 @@
   cursor: pointer;
   text-decoration: none !important; }
 
+.u-fs-1x {
+  font-size: 1rem !important; }
+
+.u-fs-2x {
+  font-size: 2rem !important; }
+
+.u-fs-3x {
+  font-size: 3rem !important; }
+
+.u-fs-4x {
+  font-size: 4rem !important; }
+
+.u-fs-5x {
+  font-size: 5rem !important; }
+
+.u-fs-6x {
+  font-size: 6rem !important; }
+
+.u-fs-7x {
+  font-size: 7rem !important; }
+
+.u-fs-8x {
+  font-size: 8rem !important; }
+
+.u-fs-9x {
+  font-size: 9rem !important; }
+
+.u-fs-10x {
+  font-size: 10rem !important; }
+
+.u-fs-xs {
+  font-size: 0.75rem !important; }
+
+.u-fs-sm {
+  font-size: 0.876rem !important; }
+
+.u-fs-lg {
+  font-size: 1.33rem !important; }
+
+.u-fs-xlg {
+  font-size: 1.5rem !important; }
+
+.u-border-none {
+  border: none !important; }
+
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
