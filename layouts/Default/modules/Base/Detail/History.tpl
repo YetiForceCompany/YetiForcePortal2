@@ -31,7 +31,7 @@
 										<div class='font-x-small d-flex flex-wrap'>
 											<span class="mr-1">{$FIELD_VALUE['label']}:</span>
 											{\App\Language::translate('LBL_FROM')}
-											<strong class="mx-1">{\App\Viewer::truncateText($FIELD_VALUE['from'],100, true)}</strong>
+											<strong class="mx-1">{if !empty($FIELD_VALUE['from'])}{\App\Viewer::truncateText($FIELD_VALUE['from'],100, true)}{/if}</strong>
 											{\App\Language::translate('LBL_TO')}
 											<strong class="ml-1">{\App\Viewer::truncateText($FIELD_VALUE['to'],100, true)}</strong>
 										</div>
