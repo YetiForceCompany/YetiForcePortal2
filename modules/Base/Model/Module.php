@@ -130,6 +130,33 @@ class Module
 	}
 
 	/**
+	 * Get tabs.
+	 *
+	 * @param int $record
+	 *
+	 * @return array
+	 */
+	public function getTabsFromApi(int $record): array
+	{
+		if (\App\Cache::has('moduleTabs', $this->moduleName)) {
+			$data = \App\Cache::get('moduleTabs', $this->moduleName);
+		} else {
+			$data = Api::getInstance()->call($this->moduleName . '/RelatedModules');
+			\App\Cache::save('moduleTabs', $this->moduleName, $data, \App\Cache::LONG);
+		}
+		$url = "index.php?module={$this->moduleName}&view=DetailView&record={$record}";
+		foreach ($data['base'] as &$row) {
+			$row['tabId'] = $row['type'];
+			$row['url'] = "{$url}&tabId={$row['tabId']}&mode={$row['type']}";
+		}
+		foreach ($data['related'] as &$row) {
+			$row['tabId'] = 'rel' . $row['relationId'];
+			$row['url'] = "{$url}&tabId={$row['tabId']}&mode=relatedList&relationId={$row['relationId']}&relatedModuleName={$row['relatedModuleName']}";
+		}
+		return $data;
+	}
+
+	/**
 	 * Get field by name.
 	 *
 	 * @param string $name

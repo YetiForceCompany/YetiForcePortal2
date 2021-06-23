@@ -84,7 +84,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('FIELDS_HEADER', $this->recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
-		$this->viewer->assign('TABS_GROUP', $this->detailViewModel->getTabsFromApi());
+		$this->viewer->assign('TABS_GROUP', $moduleModel->getTabsFromApi($this->recordModel->getId()));
 		$this->viewer->assign('MENU_ID', $this->request->has('tabId') ? $this->request->getByType('tabId', Purifier::ALNUM) : 'details');
 		$this->viewer->assign('MODE', $this->request->getMode() ?: 'details');
 		$this->viewer->view('Detail/Header.tpl', $moduleName);
@@ -185,8 +185,8 @@ class DetailView extends \App\Controller\View
 		return array_merge(
 				parent::getFooterScripts(),
 				$this->convertScripts([
-					['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/RelatedListView.js', true],
-					['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/RelatedListView.js"],
+					['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/RelatedListView.js'],
+					['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/RelatedListView.js", true],
 				], 'js'));
 	}
 }

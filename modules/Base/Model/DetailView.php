@@ -124,31 +124,6 @@ class DetailView
 	}
 
 	/**
-	 * Get tabs.
-	 *
-	 * @return array
-	 */
-	public function getTabsFromApi(): array
-	{
-		if (\App\Cache::has('moduleTabs', $this->moduleName)) {
-			$data = \App\Cache::get('moduleTabs', $this->moduleName);
-		} else {
-			$url = "index.php?module={$this->moduleName}&view=DetailView&record={$this->record->getId()}";
-			$data = \App\Api::getInstance()->call($this->moduleName . '/RelatedModules/' . $this->record->getId());
-			foreach ($data['base'] as &$row) {
-				$row['tabId'] = $row['type'];
-				$row['url'] = "{$url}&tabId={$row['tabId']}&mode={$row['type']}";
-			}
-			foreach ($data['related'] as &$row) {
-				$row['tabId'] = 'rel' . $row['relationId'];
-				$row['url'] = "{$url}&tabId={$row['tabId']}&mode=relatedList&relationId={$row['relationId']}&relatedModuleName={$row['relatedModuleName']}";
-			}
-			\App\Cache::save('moduleTabs', $this->moduleName, $data, \App\Cache::LONG);
-		}
-		return $data;
-	}
-
-	/**
 	 * Gets widgets.
 	 *
 	 * @return array
