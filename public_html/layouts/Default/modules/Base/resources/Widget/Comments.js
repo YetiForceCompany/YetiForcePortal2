@@ -28,10 +28,10 @@ window.Base_Widget_Comments_Js = class {
 				.fail(function (e, er) {
 					app.errorLog(e, er);
 					progressInstance.progressIndicator({ mode: 'hide' });
-					aDeferred.reject();
+					deferred.reject();
 				});
 		} else {
-			aDeferred.reject();
+			deferred.reject();
 		}
 		return deferred.promise();
 	}
@@ -54,10 +54,10 @@ window.Base_Widget_Comments_Js = class {
 				.fail(function (e, er) {
 					app.errorLog(e, er);
 					progressInstance.progressIndicator({ mode: 'hide' });
-					aDeferred.reject(false);
+					deferred.reject(false);
 				});
 		} else {
-			aDeferred.reject();
+			deferred.reject();
 		}
 		return deferred.promise();
 	}

@@ -7,7 +7,7 @@
 		</div>
 		{if \YF\Modules\Base\Model\Module::isPermittedByModule($WIDGET->getRelatedModuleName(), 'CreateView')}
 			<div class="js-add-comment-block">
-				{include file=\App\Resources::templatePath('Widget/CommentAdd.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName()  SOURCE_ID=$WIDGET->getRecordId()}
+				{include file=\App\Resources::templatePath('Detail/CommentAdd.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName()  SOURCE_ID=$WIDGET->getRecordId()}
 			</div>
 		{/if}
 		<div class="js-widget-container_content card-body p-1" data-js="container"></div>

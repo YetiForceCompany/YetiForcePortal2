@@ -141,12 +141,14 @@ class DetailView extends \App\Controller\View
 	 */
 	public function comments(): void
 	{
-		$moduleName = $this->request->getModule();
-		$relatedListModel = \YF\Modules\ModComments\Model\RelatedList::getInstance($moduleName)->setRecordId($this->recordModel->getId());
-		$relatedListModel->loadRecordsList();
-		$this->viewer->assign('ENTRIES', $relatedListModel->getRecordsTree());
+		$sourceModule = $this->request->getModule();
+		$moduleName = 'ModComments';
 		$this->viewer->assign('SUB_COMMENT', false);
-		$this->viewer->view('Detail/Comments.tpl', 'ModComments');
+		$this->viewer->assign('URL', "index.php?module={$moduleName}&view=Comment&mode=getParents&sourceId={$this->recordModel->getId()}&sourceModule={$sourceModule}&limit=10");
+		$this->viewer->assign('SCRIPTS', $this->convertScripts([['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widget/Comments.js', true]], 'js'));
+		$this->viewer->assign('SOURCE_ID', $this->recordModel->getId());
+		$this->viewer->assign('MODULE_NAME', 'ModComments');
+		$this->viewer->view('Detail/CommentsTab.tpl', 'ModComments');
 	}
 
 	/**

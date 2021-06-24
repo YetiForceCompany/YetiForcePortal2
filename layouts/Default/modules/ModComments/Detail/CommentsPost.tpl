@@ -42,7 +42,7 @@
 				</div>
 				{if $IS_CREATABLE}
 					<div class="js-reply-comment-block d-none">
-						{include file=\App\Resources::templatePath('Widget/CommentAdd.tpl', $MODULE_NAME) SOURCE_ID=$COMMENT->getRawValue('related_to') EDIT_MODE=true PARENT_ID=$COMMENT->getId()}
+						{include file=\App\Resources::templatePath('Detail/CommentAdd.tpl', $MODULE_NAME) SOURCE_ID=$COMMENT->getRawValue('related_to') EDIT_MODE=true PARENT_ID=$COMMENT->getId()}
 					</div>
 				{/if}
 			</div>

@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-<!-- tpl-Base-Widget-CommentAdd -->
+<!-- tpl-ModComments-Detail-CommentAdd -->
 	<div class="m-1" data-js="container">
 		<form>
 			<input type="hidden" name="action" value="Save"/>
