@@ -6,7 +6,6 @@
 			<input type="hidden" name="action" value="Save"/>
 			<input type="hidden" name="module" value="ModComments"/>
 			<input type="hidden" name="related_to" value="{$SOURCE_ID}"/>
-			<input type="hidden" name="view" value="Detail"/>
 			{if !empty($PARENT_ID)}
 				<input type="hidden" name="parent_comments" value="{$PARENT_ID}"/>
 			{/if}
