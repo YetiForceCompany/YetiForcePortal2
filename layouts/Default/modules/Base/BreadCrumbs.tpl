@@ -6,18 +6,17 @@
 		{else}
 			{assign var="BREADCRUMBS" value=\App\Menu::getBreadcrumbs()}
 		{/if}
-
-		{assign var=HOMEICON value='yfm-Home'}
+		{assign var=HOMEICON value='fas fa-home'}
 		{if !empty($BREADCRUMBS)}
 			<div class="breadcrumbsContainer">
 				<h2 class="breadcrumbsLinks textOverflowEllipsis">
-					<a href='{\App\Config::$portalUrl}'>
+					<a href="{\App\Config::$portalUrl}">
 						<span class="{$HOMEICON}"></span>
 					</a>
-					&nbsp;|&nbsp;
+					<span class="separator m-2">/</span>
 					{foreach key=key item=item from=$BREADCRUMBS name=breadcrumbs}
 						{if $key != 0 && $ITEM_PREV}
-							<span class="separator">&nbsp;>&nbsp;</span>
+							<span class="separator m-2">/</span>
 						{/if}
 						{if isset($item['url'])}
 							<a href="{$item['url']}">
