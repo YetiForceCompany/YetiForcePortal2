@@ -98,6 +98,7 @@ popper.js/index.d.ts
 popper.js/dist/esm
 respond.js/src
 respond.js/cross-domain
+select2-theme-bootstrap4/dist
 svg/svgBasic.html
 svg/lion.svg
 
@@ -215,7 +216,7 @@ blueimp-tmpl/src
 bootbox/src
 bootstrap/src
 bootstrap/js
-bootstrap/scss
+bootstrap/dist/css
 bootstrap-colorpicker/src
 bootstrap-datepicker/src
 bootstrap-daterangepicker/src

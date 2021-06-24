@@ -133,7 +133,7 @@ class RelatedList extends AbstractListView
 			$links[] = [
 				'label' => 'BTN_SELECT_RECORD',
 				'moduleName' => $this->relatedModuleName,
-				'data' => ['moduleName' => $this->relatedModuleName, 'source_record' => $this->request->getInteger('record'), 'source_module' => $this->getModuleName()],
+				'data' => ['module-name' => $this->relatedModuleName, 'source-record' => $this->request->getInteger('record'), 'source-module' => $this->getModuleName()],
 				'icon' => 'fas fa-search',
 				'class' => 'btn-sm btn-outline-primary js-quick-create',
 				'showLabel' => 1,
@@ -143,7 +143,7 @@ class RelatedList extends AbstractListView
 			$links[] = [
 				'label' => 'BTN_ADD_RECORD',
 				'moduleName' => $this->relatedModuleName,
-				'data' => ['moduleName' => $this->relatedModuleName, 'source_record' => $this->request->getInteger('record'), 'source_module' => $this->getModuleName()],
+				'data' => ['module-name' => $this->relatedModuleName, 'source-record' => $this->request->getInteger('record'), 'source-module' => $this->getModuleName()],
 				'icon' => 'fas fa-plus',
 				'class' => 'btn-sm btn-outline-success js-quick-create',
 				'showLabel' => 1,

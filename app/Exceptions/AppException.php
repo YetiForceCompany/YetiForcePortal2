@@ -53,7 +53,6 @@ class AppException extends \Exception
 		$viewer->assign('CSS_FILE', [
 			PUBLIC_DIRECTORY . 'libraries/@fortawesome/fontawesome-free/css/all.css',
 			PUBLIC_DIRECTORY . 'libraries/@mdi/font/css/materialdesignicons.css',
-			PUBLIC_DIRECTORY . 'libraries/bootstrap/dist/css/bootstrap.css',
 			PUBLIC_DIRECTORY . 'layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css',
 		]);
 		$viewer->assign('JS_FILE', [

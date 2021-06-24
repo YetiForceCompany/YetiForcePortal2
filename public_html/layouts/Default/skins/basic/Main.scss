@@ -1,12 +1,26 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 @charset 'UTF-8';
 
+//-------- global variables --------//
 @import "_Variables";
-@import "_ProgressIndicator";
-@import "_Utilities";
-@import "_Libraries";
+
+//-------- external --------//
+@import "../../../../libraries/bootstrap/scss/bootstrap";
+@import "../../../../libraries/bootstrap/scss/mixins/_breakpoints.scss";
+@import "../../../../libraries/bootstrap/scss/utilities/_spacing";
+@import "../../../../libraries/select2-theme-bootstrap4/src/select2-bootstrap.scss";
+@import "../../../../libraries/sass-material-colors/sass/_sass-material-colors-classes.scss";
+@import "../../../../libraries/flag-icon-css/sass/flag-icon.scss";
+
+//-------- libraries' modifications --------//
+@import "libraries/_Libraries";
+
+//-------- components --------//
+@import "components/_Utilities";
+@import "components/_Checkbox";
+@import "components/_ProgressIndicator";
 @import "_Components";
-@import "_Checkbox";
+
 //-------- layout --------//
 @import "layout/_Base";
 @import "layout/_Header";
@@ -14,6 +28,7 @@
 @import "layout/_Footer";
 @import "layout/_Menu";
 @import "layout/_Modal";
+
 //-------- pages --------//
 @import "views/_Edit";
 @import "views/_List";

@@ -150,12 +150,10 @@ abstract class View extends Base
 		return $this->convertScripts([
 			['libraries/@fortawesome/fontawesome-free/css/all.css'],
 			['libraries/@mdi/font/css/materialdesignicons.css'],
-			['libraries/bootstrap/dist/css/bootstrap.css'],
 			['libraries/chosen-js/chosen.css'],
 			['libraries/bootstrap-chosen/bootstrap-chosen.css'],
 			['libraries/jQuery-Validation-Engine/css/validationEngine.jquery.css'],
 			['libraries/select2/dist/css/select2.css'],
-			['libraries/select2-theme-bootstrap4/dist/select2-bootstrap.css'],
 			['libraries/datatables.net-bs4/css/dataTables.bootstrap4.css'],
 			['libraries/datatables.net-responsive-bs4/css/responsive.bootstrap4.css'],
 			['libraries/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css'],
