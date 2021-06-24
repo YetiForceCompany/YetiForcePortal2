@@ -65,7 +65,7 @@ class Module
 	 *
 	 * @return bool
 	 */
-	public static function isPermitted(string $module, string $action)
+	public static function isPermittedByModule(string $module, string $action)
 	{
 		if (!\App\Session::has('modulePermissions')) {
 			\App\Session::set('modulePermissions', []);
@@ -79,6 +79,18 @@ class Module
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * unction to check permission for a Module/Action.
+	 *
+	 * @param string $action
+	 *
+	 * @return bool
+	 */
+	public function isPermitted(string $action): bool
+	{
+		return self::isPermittedByModule($this->moduleName, $action);
 	}
 
 	/**

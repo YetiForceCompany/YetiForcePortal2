@@ -22,7 +22,7 @@ class Pdf extends \App\Controller\Action
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
-		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'ExportPdf')) {
+		if (!\YF\Modules\Base\Model\Module::isPermittedByModule($this->request->getModule(), 'ExportPdf')) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}

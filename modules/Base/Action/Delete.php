@@ -20,7 +20,7 @@ class Delete extends \App\Controller\Action
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
-		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'Delete')) {
+		if (!\YF\Modules\Base\Model\Module::isPermittedByModule($this->request->getModule(), 'Delete')) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}

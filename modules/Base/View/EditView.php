@@ -25,7 +25,7 @@ class EditView extends \App\Controller\View
 		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';
 		}
-		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
+		if (!\YF\Modules\Base\Model\Module::isPermittedByModule($this->request->getModule(), $actionName)) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}

@@ -25,7 +25,7 @@
 			{elseif $VIEW_ID}
 				<input type="hidden" name="cvId" id="customFilter" value="{$VIEW_ID}">
 			{/if}
-			{if \YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+			{if \YF\Modules\Base\Model\Module::isPermittedByModule($MODULE_NAME, 'CreateView')}
 				<div class="ml-1">
 				<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
 					<span class="fas fa-plus mr-2"></span>
