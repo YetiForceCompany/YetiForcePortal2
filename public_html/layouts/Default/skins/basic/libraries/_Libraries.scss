@@ -120,28 +120,7 @@ table.dataTable > thead > tr {
 	font-size: 0.9rem;
 }
 
-.detail-tabs.nav-tabs {
-	border-bottom: 3px solid #404952;
-
-	.nav-link {
-		color: #404952;
-		font-weight: 600;
-	}
-
-	.nav-link:hover,
-	.nav-link:focus {
-		background: #d8d8d8;
-	}
-
-	.nav-link.active {
-		color: #fff;
-		background-color: #495057;
-		border-color: #dee2e6 #dee2e6 #fff;
-		border-bottom: none;
-	}
-}
-
-.related {
+.detail-tabs {
 	.nav-pills {
 		border-bottom: 3px solid $border-color-rtabs;
 
