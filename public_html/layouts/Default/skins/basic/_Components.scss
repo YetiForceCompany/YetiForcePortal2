@@ -419,11 +419,50 @@ $c-input-rounded-border-color: #dee2e6;
 
 				@media (min-width: 576px) {
 					.timeline-body {
-						padding-left: 0.7rem;
+						padding-left: calculate-rem(44px);
 						font-size: 1em;
 					}
 				}
 			}
 		}
+	}
+}
+
+.c-tab {
+	&--small {
+		display: flex;
+		align-items: center;
+	}
+
+	&--border {
+		border-bottom: 0;
+
+		.nav-link {
+			&:not(.active) {
+				border-color: transparent !important;
+			}
+
+			&.active {
+				border-bottom-color: transparent !important;
+			}
+
+			&.active:after {
+				content: "";
+				width: 100%;
+				right: 0;
+				top: calculate-rem(35px);
+				position: absolute;
+				border: solid 1px;
+				z-index: -1;
+			}
+		}
+	}
+
+	&--gray {
+		background: $bg-rtabs;
+	}
+
+	&--hover:hover {
+		background: darken($bg-rtabs, 10%);
 	}
 }
