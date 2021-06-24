@@ -1172,6 +1172,7 @@ var AppConnector,
 			return url;
 		}
 	};
+CKEDITOR.disableAutoInline = true;
 $(function () {
 	var container = $('body');
 	app.registerSelectField(container);
