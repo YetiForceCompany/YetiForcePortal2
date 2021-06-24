@@ -69,7 +69,9 @@ window.Base_ListView_Js = class {
 	 * Register custom view event
 	 */
 	registerCustomView() {
-		this.listForm.on('change', '.js-cv-list', (_) => {
+		let customFiltr = this.listForm.find('.js-cv-list');
+		App.Fields.Picklist.showSelect2ElementView(customFiltr);
+		customFiltr.on('change', (_) => {
 			$.progressIndicatorShow();
 			this.reloadView();
 		});

@@ -6,23 +6,15 @@
 	<input type="hidden" name="action" value="{$VIEW}">
 	<input type="hidden" class="listEntriesPerPage" id="listEntriesPerPage" value="{\App\Json::encode(\App\Config::$listEntriesPerPage)}">
 	<div class="widget_header row py-1">
-		<div class="col-sm-8 col-6">
+		<div class="col-sm-8 col-6 d-flex align-items-center">
 			<div class="pull-left">
 				{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 			</div>
 		</div>
-		<div class="col-sm-4 col-6">
-			{if \YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
-				<div class="float-right">
-				<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
-					<span class="fas fa-plus mr-2"></span>
-					<strong>{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}</strong>
-				</a>
-				</div>
-			{/if}
+		<div class="col-sm-4 col-6 d-flex align-items-center justify-content-end">
 			{if count($CUSTOM_VIEWS) > 1}
-				<div class="col-8 float-right">
-					<select name="cvId" id="customFilter" class="form-control form-control-sm js-cv-list">
+				<div class="col-8">
+					<select name="cvId" id="customFilter" class="js-cv-list">
 						{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
 							<option	value="{$CV_ID}" {if $CV_ID === $VIEW_ID} selected="selected" {/if}>
 								{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
@@ -32,6 +24,14 @@
 				</div>
 			{elseif $VIEW_ID}
 				<input type="hidden" name="cvId" id="customFilter" value="{$VIEW_ID}">
+			{/if}
+			{if \YF\Modules\Base\Model\Module::isPermitted($MODULE_NAME, 'CreateView')}
+				<div class="ml-1">
+				<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
+					<span class="fas fa-plus mr-2"></span>
+					<strong>{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}</strong>
+				</a>
+				</div>
 			{/if}
 		</div>
 	</div>
