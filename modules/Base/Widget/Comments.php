@@ -102,6 +102,16 @@ class Comments extends RelatedModule
 	}
 
 	/**
+	 * Gets record ID.
+	 *
+	 * @return int
+	 */
+	public function getRecordId(): int
+	{
+		return $this->recordId;
+	}
+
+	/**
 	 * Get URL address.
 	 *
 	 * @return string
@@ -198,7 +208,7 @@ class Comments extends RelatedModule
 	 */
 	public function getTemplatePath(): string
 	{
-		return 'Widget/RelatedModule.tpl';
+		return "Widget/{$this->type}.tpl";
 	}
 
 	/**

@@ -85,6 +85,19 @@ window.Base_Widget_Comments_Js = class {
 			});
 		});
 	}
+	/**
+	 * Add comments
+	 */
+	registerAddComments() {
+		let form = this.container.find('.js-add-comment-block form');
+		form.validationEngine(app.validationEngineOptions);
+		form.on('submit', (e) => {
+			e.preventDefault();
+			AppConnector.request(form.serializeFormData()).done((response) => {
+				this.loadContent();
+			});
+		});
+	}
 
 	/**
 	 * Register events
@@ -96,5 +109,6 @@ window.Base_Widget_Comments_Js = class {
 		this.loadContent();
 		this.registerChangePage();
 		this.registerShowReplies();
+		this.registerAddComments();
 	}
 };

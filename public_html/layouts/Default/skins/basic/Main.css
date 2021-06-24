@@ -14602,6 +14602,9 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 .u-border-none {
   border: none !important; }
 
+.u-resize-v {
+  resize: vertical; }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;
