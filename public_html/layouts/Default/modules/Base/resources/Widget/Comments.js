@@ -120,8 +120,8 @@ window.Base_Widget_Comments_Js = class {
 	registerReply() {
 		this.container.on('click', '.js-post-reply,.js-post-cancel', (e) => {
 			let postContainer = $(e.currentTarget).closest('.js-post-container'),
-				replyBlock = postContainer.find('.js-reply-comment-block'),
-				replyBtn = postContainer.find('.js-post-reply');
+				replyBlock = postContainer.find('.js-reply-comment-block:first'),
+				replyBtn = postContainer.find('.js-post-reply:first');
 			replyBlock.toggleClass('d-none');
 			replyBtn.toggleClass('d-none');
 		});
