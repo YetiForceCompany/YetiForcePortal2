@@ -5,7 +5,11 @@
 		<div class="card-header p-2">
 			<b>{\App\Purifier::encodeHTML($WIDGET->getTitle())}</b>
 		</div>
-		{include file=\App\Resources::templatePath('Widget/CommentAdd.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName()  SOURCE_MODULE=$WIDGET->getModuleName() SOURCE_ID=$WIDGET->getRecordId()}
+		{if \YF\Modules\Base\Model\Module::isPermittedByModule($WIDGET->getRelatedModuleName(), 'CreateView')}
+			<div class="js-add-comment-block">
+				{include file=\App\Resources::templatePath('Widget/CommentAdd.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName()  SOURCE_ID=$WIDGET->getRecordId()}
+			</div>
+		{/if}
 		<div class="js-widget-container_content card-body p-1" data-js="container"></div>
 	</div>
 	{foreach item=SCRIPT from=$WIDGET->scripts}

@@ -81,7 +81,7 @@ window.Base_Widget_Comments_Js = class {
 			let url = e.currentTarget.dataset.url;
 			this.getContent(url).done((result) => {
 				element.closest('.js-post-container_body').append(result);
-				element.remove();
+				element.addClass('d-none');
 			});
 		});
 	}
@@ -90,12 +90,40 @@ window.Base_Widget_Comments_Js = class {
 	 */
 	registerAddComments() {
 		let form = this.container.find('.js-add-comment-block form');
-		form.validationEngine(app.validationEngineOptions);
+		form.validationEngine({ binded: false, ...app.validationEngineOptions });
 		form.on('submit', (e) => {
 			e.preventDefault();
-			AppConnector.request(form.serializeFormData()).done((response) => {
-				this.loadContent();
-			});
+			if (form.validationEngine('validate')) {
+				AppConnector.request(form.serializeFormData()).done((response) => {
+					this.loadContent();
+				});
+			}
+		});
+		this.container.on('submit', '.js-reply-comment-block form', (e) => {
+			e.preventDefault();
+			let formReply = $(e.currentTarget);
+			formReply.validationEngine({ binded: false, ...app.validationEngineOptions });
+			if (formReply.validationEngine('validate')) {
+				AppConnector.request(formReply.serializeFormData()).done((response) => {
+					let postContainer = formReply.closest('.js-post-container');
+					let url = postContainer.find('.js-show-replies:first').data('url');
+					this.getContent(url).done((result) => {
+						postContainer.find('.js-post-container').remove();
+						postContainer.find('.js-post-cancel').trigger('click');
+						postContainer.find('.js-post-container_body').append(result);
+						postContainer.find('.js-show-replies').addClass('d-none');
+					});
+				});
+			}
+		});
+	}
+	registerReply() {
+		this.container.on('click', '.js-post-reply,.js-post-cancel', (e) => {
+			let postContainer = $(e.currentTarget).closest('.js-post-container'),
+				replyBlock = postContainer.find('.js-reply-comment-block'),
+				replyBtn = postContainer.find('.js-post-reply');
+			replyBlock.toggleClass('d-none');
+			replyBtn.toggleClass('d-none');
 		});
 	}
 
@@ -110,5 +138,6 @@ window.Base_Widget_Comments_Js = class {
 		this.registerChangePage();
 		this.registerShowReplies();
 		this.registerAddComments();
+		this.registerReply();
 	}
 };
