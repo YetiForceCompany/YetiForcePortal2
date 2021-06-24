@@ -267,7 +267,7 @@ class Record extends \App\BaseModel
 	 */
 	public function getDisplayValue(string $key): string
 	{
-		return !isset($this->getModuleModel()->getFields()[$key]) ? \App\Purifier::encodeHtml($this->get($key)) : $this->getModuleModel()->getFieldModel($key)->getDisplayValue($this->get($key), $this);
+		return !\in_array($key, $this->getModuleModel()->getFieldNames()) ? \App\Purifier::encodeHtml($this->get($key)) : $this->getModuleModel()->getFieldModel($key)->getDisplayValue($this->get($key), $this);
 	}
 
 	/**

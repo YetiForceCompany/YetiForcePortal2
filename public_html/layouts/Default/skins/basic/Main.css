@@ -14424,14 +14424,20 @@ a.text-dark:hover, a.text-dark:focus {
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important; }
 
-.select2-selection--single {
+.select2-selection--single .select2-selection__rendered {
+  line-height: 40px !important; }
+
+.select2-selection--single .select2-selection__arrow {
+  top: 7px !important; }
+  .select2-selection--single .select2-selection__arrow b {
+    margin-left: 2px !important; }
+
+.widget_header .select2-selection--single {
   height: -webkit-calc(1.16em + 0.75rem + 2px) !important; }
-  .select2-selection--single .select2-selection__rendered {
+  .widget_header .select2-selection--single .select2-selection__rendered {
     line-height: 30px !important; }
-  .select2-selection--single .select2-selection__arrow {
-    top: calculate-rem(4px) !important; }
-    .select2-selection--single .select2-selection__arrow b {
-      margin-left: calculate-rem(2px) !important; }
+  .widget_header .select2-selection--single .select2-selection__arrow {
+    top: 4px !important; }
 
 .select2-selection--multiple {
   height: auto !important; }
@@ -14859,7 +14865,7 @@ input[type="checkbox"]:checked {
   .blockContainer .blockContent .fieldLabel {
     text-align: right; } }
 
-#EditView .blockContainer .blockContent .fieldLabel label {
+.recordEditView .blockContainer .blockContent .fieldLabel label {
   padding-top: 8px; }
 
 .blockContainer .blockContent .fieldLabel label {

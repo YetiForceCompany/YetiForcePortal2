@@ -24,7 +24,13 @@ class Module
 	protected $moduleName;
 
 	/** @var array Fields. */
-	protected $fields;
+	protected $fields = [];
+
+	/** @var array Fields. */
+	protected $fieldsForm;
+
+	/** @var array Data from API fields. */
+	protected $apiFields;
 
 	/** @var array Fields models. */
 	protected $fieldsModels;
@@ -65,7 +71,7 @@ class Module
 	 *
 	 * @return bool
 	 */
-	public static function isPermitted(string $module, string $action)
+	public static function isPermittedByModule(string $module, string $action)
 	{
 		if (!\App\Session::has('modulePermissions')) {
 			\App\Session::set('modulePermissions', []);
@@ -82,35 +88,15 @@ class Module
 	}
 
 	/**
-	 * Get all fields.
+	 * unction to check permission for a Module/Action.
 	 *
-	 * @return array
-	 */
-	public function getFields(): array
-	{
-		if (isset($this->fields)) {
-			return $this->fields;
-		}
-		$data = $this->getFieldsFromApi();
-		$fields = [];
-		foreach ($data['fields'] as $field) {
-			$fields[$field['name']] = $field;
-		}
-		return $this->fields = $fields;
-	}
-
-	/**
-	 * Get all fields models.
+	 * @param string $action
 	 *
-	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
+	 * @return bool
 	 */
-	public function getFieldsModels(): array
+	public function isPermitted(string $action): bool
 	{
-		$fields = [];
-		foreach (array_keys($this->getFields()) as $fieldName) {
-			$fields[$fieldName] = $this->getFieldModel($fieldName);
-		}
-		return $fields;
+		return self::isPermittedByModule($this->moduleName, $action);
 	}
 
 	/**
@@ -118,7 +104,7 @@ class Module
 	 *
 	 * @return array
 	 */
-	public function getFieldsFromApi(): array
+	public function loadFieldsFromApi(): void
 	{
 		if (\App\Cache::has('moduleFields', $this->moduleName)) {
 			$data = \App\Cache::get('moduleFields', $this->moduleName);
@@ -126,7 +112,140 @@ class Module
 			$data = Api::getInstance()->call($this->moduleName . '/Fields');
 			\App\Cache::save('moduleFields', $this->moduleName, $data);
 		}
-		return $data;
+		$this->apiFields = $data;
+	}
+
+	/**
+	 * Get all blocks.
+	 *
+	 * @return array
+	 */
+	public function getBlocks(): array
+	{
+		if (!isset($this->apiFields['blocks'])) {
+			$this->loadFieldsFromApi();
+		}
+		return $this->apiFields['blocks'];
+	}
+
+	/**
+	 * Get all fields.
+	 *
+	 * @return array
+	 */
+	public function getFields(): array
+	{
+		if (!isset($this->apiFields['fields'])) {
+			$this->loadFieldsFromApi();
+		}
+		return $this->apiFields['fields'];
+	}
+
+	/**
+	 * Get inventory fields.
+	 *
+	 * @return array
+	 */
+	public function getInventoryFields(): array
+	{
+		if (!isset($this->apiFields['inventory'])) {
+			$this->loadFieldsFromApi();
+		}
+		return $this->apiFields['inventory'] ?? [];
+	}
+
+	/**
+	 * Get field by name.
+	 *
+	 * @param string $name
+	 *
+	 * @return array
+	 */
+	public function getField(string $name): array
+	{
+		if (!isset($this->apiFields['fields'])) {
+			$this->loadFieldsFromApi();
+		}
+		if (empty($this->apiFields['fields'][$name])) {
+			throw new \App\Exceptions\AppException("Field not found: {$name}");
+		}
+		return $this->apiFields['fields'][$name];
+	}
+
+	/**
+	 * Get field model by name.
+	 *
+	 * @param string $name
+	 *
+	 * @return \YF\Modules\Base\FieldTypes\BaseField
+	 */
+	public function getFieldModel(string $name): \YF\Modules\Base\FieldTypes\BaseField
+	{
+		if (!isset($this->fieldsModels[$name])) {
+			$this->fieldsModels[$name] = Field::getInstance($this->moduleName, $this->getField($name));
+		}
+		return $this->fieldsModels[$name];
+	}
+
+	/**
+	 * Get all field names.
+	 *
+	 * @return string[]
+	 */
+	public function getFieldNames(): array
+	{
+		if (!isset($this->apiFields['fields'])) {
+			$this->loadFieldsFromApi();
+		}
+		return array_keys($this->apiFields['fields']);
+	}
+
+	/**
+	 * Get form fields models.
+	 *
+	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
+	 */
+	public function getFormFields(): array
+	{
+		if (empty($this->fieldsForm)) {
+			$this->loadFieldsModels();
+		}
+		return $this->fieldsForm;
+	}
+
+	/**
+	 * Get fields models.
+	 *
+	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
+	 */
+	public function getFieldsModels(): array
+	{
+		if (empty($this->fieldsForm)) {
+			$this->loadFieldsModels();
+		}
+		return $this->fieldsModels;
+	}
+
+	/**
+	 * Load all fields models.
+	 *
+	 * @return void
+	 */
+	public function loadFieldsModels(): void
+	{
+		if (!isset($this->apiFields['fields'])) {
+			$this->loadFieldsFromApi();
+		}
+		$fields = $fieldsForm = [];
+		foreach ($this->apiFields['fields'] as $fieldName => $field) {
+			$this->fieldsModels[$fieldName] = $fieldInstance = Field::getInstance($this->moduleName, $field);
+			if ($field['isEditable']) {
+				$fieldsForm[$field['blockId']][$fieldName] = $fieldInstance;
+			}
+			$fields[$fieldName] = $fieldInstance;
+		}
+		$this->fieldsModels = $fields;
+		$this->fieldsForm = $fieldsForm;
 	}
 
 	/**
@@ -157,39 +276,6 @@ class Module
 	}
 
 	/**
-	 * Get field by name.
-	 *
-	 * @param string $name
-	 *
-	 * @return array
-	 */
-	public function getField(string $name): array
-	{
-		if (empty($this->fields)) {
-			$this->getFields();
-		}
-		if (empty($this->fields[$name])) {
-			throw new \App\Exceptions\AppException("Field not found: {$name}");
-		}
-		return $this->fields[$name];
-	}
-
-	/**
-	 * Get field model by name.
-	 *
-	 * @param string $name
-	 *
-	 * @return \YF\Modules\Base\FieldTypes\BaseField
-	 */
-	public function getFieldModel(string $name): \YF\Modules\Base\FieldTypes\BaseField
-	{
-		if (!isset($this->fieldsModels[$name])) {
-			$this->fieldsModels[$name] = Field::getInstance($this->moduleName, $this->getField($name));
-		}
-		return $this->fieldsModels[$name];
-	}
-
-	/**
 	 * Returns default view for module.
 	 *
 	 * @return string
@@ -207,5 +293,15 @@ class Module
 	public function getDefaultUrl(): string
 	{
 		return "index.php?module={$this->moduleName}&view={$this->getDefaultView()}";
+	}
+
+	/**
+	 * Function to check is quick create supported.
+	 *
+	 * @return bool
+	 */
+	public function isQuickCreateSupported(): bool
+	{
+		return true;
 	}
 }

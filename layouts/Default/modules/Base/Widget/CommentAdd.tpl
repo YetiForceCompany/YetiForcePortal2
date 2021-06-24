@@ -1,12 +1,14 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <!-- tpl-Base-Widget-CommentAdd -->
-	<div class="js-add-comment-block m-1" data-js="container">
+	<div class="m-1" data-js="container">
 		<form>
 			<input type="hidden" name="action" value="Save"/>
 			<input type="hidden" name="module" value="ModComments"/>
 			<input type="hidden" name="related_to" value="{$SOURCE_ID}"/>
-			<input type="hidden" name="view" value="Detail"/>
+			{if !empty($PARENT_ID)}
+				<input type="hidden" name="parent_comments" value="{$PARENT_ID}"/>
+			{/if}
 			<div class="input-group input-group-sm">
 				<span class="input-group-prepend">
 					<div class="input-group-text"><span class="fas fa-comments"></span></div>
@@ -21,6 +23,13 @@
 						<span class="fas fa-plus"></span>
 					</button>
 				</div>
+				{if !empty($EDIT_MODE)}
+					<div class="input-group-append js-post-cancel">
+						<button class="btn btn-danger" type="button" title="{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}">
+							{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}
+						</button>
+					</div>
+				{/if}
 			</div>
 		</form>
 	</div>

@@ -1,11 +1,11 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <!-- tpl-Base-Edit-Form -->
-<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
-	<input type="hidden" value="DetailView" name="view">
+<form class="form-horizontal recordEditView js-edit-view-form" name="EditView" method="post" action="index.php" enctype="multipart/form-data" data-js="container">
 	<input type="hidden" name="module" value="{$MODULE_NAME}">
 	<input type="hidden" name="action" value="Save">
 	<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
+	<input type="hidden" name="view" value="{$ACTION_NAME}">
 	{assign var=ITERATION value=0}
 	{foreach item=BLOCK from=$BLOCKS}
 		{if isset($FIELDS_FORM[$BLOCK['id']])}

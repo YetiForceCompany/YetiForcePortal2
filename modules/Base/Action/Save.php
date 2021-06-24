@@ -23,7 +23,7 @@ class Save extends \App\Controller\Action
 		if ($this->request->isEmpty('record')) {
 			$actionName = 'CreateView';
 		}
-		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), $actionName)) {
+		if (!\YF\Modules\Base\Model\Module::isPermittedByModule($this->request->getModule(), $actionName)) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}
@@ -33,7 +33,6 @@ class Save extends \App\Controller\Action
 	{
 		$module = $this->request->getModule();
 		$record = $this->request->isEmpty('record') ? '' : $this->request->getByType('record', Purifier::INTEGER);
-		$view = $this->request->getByType('view', Purifier::ALNUM);
 		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $this->request->getAllRaw(), $record ? 'put' : 'post');
 		if ($this->request->isEmpty('record')) {
 			$record = $result['id'] ?? '';
@@ -43,7 +42,8 @@ class Save extends \App\Controller\Action
 			$response->setResult($result);
 			$response->emit();
 		} else {
-			header("Location:index.php?module=$module&view=$view&record=$record");
+			$view = $this->request->getByType('view', Purifier::ALNUM);
+			header("Location:index.php?module=$module&view={$view}&record=$record");
 		}
 	}
 }

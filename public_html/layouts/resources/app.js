@@ -1,5 +1,109 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-window.App = {};
+var App = (window.App = {
+	Components: {
+		QuickCreate: {
+			/**
+			 * module quick create data cache
+			 */
+			moduleCache: {},
+			/**
+			 * Register function
+			 */
+			register() {
+				$('body').on('click', '.js-quick-create', (e) => {
+					let element = $(e.currentTarget);
+					if (element.data('moduleName')) {
+						App.Components.QuickCreate.createRecord(element.data('moduleName'));
+					}
+					if (element.data('url')) {
+						let url = element.data('url');
+						let urlObject = app.convertUrlToObject(url);
+						let params = { callbackFunction: function () {} };
+						const progress = $.progressIndicator({ blockInfo: { enabled: true } });
+						App.Components.QuickCreate.getForm(url, urlObject.module, params).done((data) => {
+							progress.progressIndicator({
+								mode: 'hide'
+							});
+							App.Components.QuickCreate.showModal(data, params);
+							// app.registerEventForClockPicker();
+						});
+					}
+				});
+			},
+			/**
+			 * createRecord
+			 *
+			 * @param   {string}  moduleName
+			 * @param   {object}  params
+			 */
+			createRecord(moduleName, params = {}) {
+				let url = 'index.php?module=' + moduleName + '&view=QuickCreateModal';
+				if (undefined === params.callbackFunction) {
+					params.callbackFunction = function () {};
+				}
+				if (app.getViewName() === 'Detail' || (app.getViewName() === 'Edit' && app.getRecordId() !== undefined)) {
+					url += '&sourceModule=' + app.getModuleName();
+					url += '&sourceRecord=' + app.getRecordId();
+				}
+				const progress = $.progressIndicator({ blockInfo: { enabled: true } });
+				this.getForm(url, moduleName, params).done((data) => {
+					progress.progressIndicator({
+						mode: 'hide'
+					});
+					this.showModal(data, params);
+					// app.registerEventForClockPicker();
+				});
+			},
+			/**
+			 * Get quick create form
+			 *
+			 * @param   {string}  url
+			 * @param   {string}  moduleName
+			 * @param   {object}  params
+			 *
+			 * @return  {Promise} aDeferred
+			 */
+			getForm(url, moduleName, params = {}) {
+				const aDeferred = $.Deferred();
+				let requestParams;
+				requestParams = url;
+				if (typeof params.data !== 'undefined') {
+					requestParams = {};
+					requestParams['data'] = params.data;
+					requestParams['url'] = url;
+				}
+				AppConnector.request(requestParams).done(function (data) {
+					aDeferred.resolve(data);
+				});
+				return aDeferred.promise();
+			},
+			/**
+			 * Show modal
+			 *
+			 * @param   {string}  html
+			 * @param   {object}  params
+			 */
+			showModal(html, params = {}) {
+				app.showModalWindow(html, (container) => {
+					// const quickCreateForm = container.find('form.js-form');
+					// const moduleName = quickCreateForm.find('[name="module"]').val();
+					// const editViewInstance = Vtiger_Edit_Js.getInstanceByModuleName(moduleName);
+					// const moduleClassName = moduleName + '_QuickCreate_Js';
+					// editViewInstance.setForm(quickCreateForm);
+					// editViewInstance.registerBasicEvents(quickCreateForm);
+					// if (typeof window[moduleClassName] !== 'undefined') {
+					// 	new window[moduleClassName]().registerEvents(container);
+					// }
+					// quickCreateForm.validationEngine(app.validationEngineOptionsForRecord);
+					// if (typeof params.callbackPostShown !== 'undefined') {
+					// 	params.callbackPostShown(quickCreateForm);
+					// }
+					// this.registerPostLoadEvents(quickCreateForm, params);
+				});
+			}
+		}
+	}
+});
 var AppConnector,
 	app = {
 		/**
@@ -689,6 +793,10 @@ var AppConnector,
 				if (backdrop.length > 1) {
 					jQuery('.modal-backdrop:not(:first)').remove();
 				}
+				modalContainer.find('.modal-dialog').draggable({
+					handle: '.modal-title'
+				});
+				modalContainer.find('.modal-title').css('cursor', 'move');
 				cb(modalContainer);
 			});
 			$('body').append(container);
@@ -1192,6 +1300,24 @@ var AppConnector,
 				url += key + '=' + value;
 			});
 			return url;
+		},
+		/**
+		 * Convert url string to object
+		 * @param   {string}  url
+		 * @return  {object}  urlObject
+		 */
+		convertUrlToObject(url) {
+			let urlObject = {};
+			if (url.indexOf('index.php?') !== -1) {
+				url = url.split('index.php?')[1];
+			}
+			url.split('&').forEach((el) => {
+				if (el.includes('=')) {
+					let values = el.split('=');
+					urlObject[values[0]] = values[1];
+				}
+			});
+			return urlObject;
 		}
 	};
 CKEDITOR.disableAutoInline = true;
@@ -1206,8 +1332,9 @@ $(function () {
 	app.registerModal(container);
 	app.registerMobileMenu(container);
 	app.registerTabdrop();
+	App.Components.QuickCreate.register();
 	app.registerIframeAndMoreContent();
-	app.registerEventForEditor(container);
+	//app.registerEventForEditor(container);
 	app.registerBaseEvent(container);
 	app.registerAfterLoginEvents(container);
 	if ($('#fingerPrint').length && typeof DeviceUUID === 'function') {
