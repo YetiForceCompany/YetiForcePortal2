@@ -2,12 +2,17 @@
 'use strict';
 
 window.Base_EditView_Js = class {
+	constructor() {
+		this.container = undefined;
+		this.form = undefined;
+	}
 	/**
 	 * Get container.
 	 */
 	getContainer() {
 		if (this.container === undefined) {
 			this.container = jQuery('.mainContent');
+			this.form = this.container.find('form');
 		}
 		return this.container;
 	}
@@ -15,14 +20,14 @@ window.Base_EditView_Js = class {
 	 * Register reference modal events.
 	 */
 	registerReferenceModalEvent() {
-		this.container.on('click', '.relatedPopup', (e) => {
+		this.form.on('click', '.relatedPopup', (e) => {
 			let containerField = $(e.currentTarget).closest('.fieldValue');
 			let url = 'index.php?module=' + this.getReferencedModuleName(containerField) + '&view=RecordList';
 			app.getRecordList(url, function (selectedItems) {
 				this.setReferenceFieldValue(containerField, selectedItems);
 			});
 		});
-		this.container.find('.js-reference-list').on('change', (e) => {
+		this.form.find('.js-reference-list').on('change', (e) => {
 			let element = $(e.currentTarget);
 			let parentElem = element.closest('.fieldValue');
 			let popupReferenceModule = element.val();
@@ -48,7 +53,7 @@ window.Base_EditView_Js = class {
 	 * Register clear reference selection events.
 	 */
 	registerClearReferenceSelectionEvent() {
-		this.container.on('click', '.js-clear-reference', (e) => {
+		this.form.on('click', '.js-clear-reference', (e) => {
 			this.clearFieldValue($(e.currentTarget));
 			e.preventDefault();
 		});
@@ -163,8 +168,7 @@ window.Base_EditView_Js = class {
 	 * Register edit view events.
 	 */
 	registerEvents() {
-		this.container = this.getContainer();
-		this.form = this.container.find('form');
+		this.getContainer();
 		this.registerReferenceModalEvent();
 		this.registerClearReferenceSelectionEvent();
 		this.registerFieldsValidations();

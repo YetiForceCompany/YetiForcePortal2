@@ -70,20 +70,11 @@ class DetailView extends \App\Controller\View
 	public function loadHeader(): void
 	{
 		$moduleName = $this->request->getModule();
-		$fieldsForm = $fields = [];
 		$moduleModel = $this->recordModel->getModuleModel();
-		$moduleStructure = $moduleModel->getFieldsFromApi();
-		foreach ($moduleStructure['fields'] as $field) {
-			$fieldModel = $moduleModel->getFieldModel($field['name']);
-			if ($field['isViewable']) {
-				$fieldsForm[$field['blockId']][$fieldModel->getName()] = $fieldModel;
-			}
-			$fields[$field['name']] = $fieldModel;
-		}
 		$this->tabs = $moduleModel->getTabsFromApi($this->recordModel->getId());
 		$this->viewer->assign('RECORD', $this->recordModel);
-		$this->viewer->assign('FIELDS', $fields);
-		$this->viewer->assign('FIELDS_FORM', $fieldsForm);
+		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
+		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
 		$this->viewer->assign('FIELDS_HEADER', $this->recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());
@@ -101,12 +92,12 @@ class DetailView extends \App\Controller\View
 	public function details(): void
 	{
 		$moduleName = $this->request->getModule();
-		$moduleStructure = $this->recordModel->getModuleModel()->getFieldsFromApi();
+		$moduleModel = $this->recordModel->getModuleModel();
 		$inventoryFields = [];
-		if (!empty($moduleStructure['inventory'])) {
+		if ($inventory = $moduleModel->getInventoryFields()) {
 			$columns = \Conf\Inventory::$columnsByModule[$moduleName] ?? \Conf\Inventory::$columns ?? [];
 			$columnsIsActive = !empty($columns);
-			foreach ($moduleStructure['inventory'] as $fieldType => $fieldsInventory) {
+			foreach ($inventory as $fieldType => $fieldsInventory) {
 				if (1 === $fieldType) {
 					foreach ($fieldsInventory as $field) {
 						if ($field['isVisibleInDetail'] && (!$columnsIsActive || \in_array($field['columnname'], $columns))) {
@@ -116,7 +107,7 @@ class DetailView extends \App\Controller\View
 				}
 			}
 		}
-		$this->viewer->assign('BLOCKS', $moduleStructure['blocks']);
+		$this->viewer->assign('BLOCKS', $moduleModel->getBlocks());
 		$this->viewer->assign('INVENTORY_FIELDS', $inventoryFields);
 		$this->viewer->assign('SHOW_INVENTORY_RIGHT_COLUMN', \Conf\Inventory::$showInventoryRightColumn);
 		$this->viewer->assign('RECORD', $this->recordModel);
