@@ -21,8 +21,8 @@
 {if !empty($FIELDS_HEADER)}
 	{include file=\App\Resources::templatePath("Detail/HeadersFields.tpl", $MODULE_NAME)}
 {/if}
-<div class="pt-3 related">
-	<ul class="nav nav-pills detail-tabs js-tabdrop" data-js="container">
+<div class="pt-3 detail-tabs">
+	<ul class="nav nav-pills js-tabdrop" data-js="container">
 		{foreach item=TABS key=TYPE from=$TABS_GROUP}
 			{foreach item=TAB from=$TABS}
 				<li class="nav-item {if $TYPE eq 'related'}c-tab--gray{/if} mr-1">
