@@ -63,6 +63,16 @@ window.Base_Widget_Comments_Js = class {
 	}
 
 	/**
+	 * Change page event
+	 */
+	registerChangePage() {
+		this.container.on('click', '.js-change-page', (e) => {
+			let page = e.currentTarget.dataset.page;
+			this.loadContent(page);
+		});
+	}
+
+	/**
 	 * Show replies
 	 */
 	registerShowReplies() {
@@ -84,6 +94,7 @@ window.Base_Widget_Comments_Js = class {
 	registerEvents(container) {
 		this.container = container;
 		this.loadContent();
+		this.registerChangePage();
 		this.registerShowReplies();
 	}
 };

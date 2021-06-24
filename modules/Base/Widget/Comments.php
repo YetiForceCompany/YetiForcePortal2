@@ -35,7 +35,7 @@ class Comments extends RelatedModule
 	public $scripts = [];
 
 	/** @var int Limit. */
-	public $limit = 15;
+	public $limit = 5;
 
 	/**
 	 * Constructor.
@@ -172,6 +172,10 @@ class Comments extends RelatedModule
 	 */
 	public function loadData()
 	{
+		$offset = 0;
+		if ($this->limit && $this->page && $this->page > 1) {
+			$offset = $this->limit * ($this->page - 1);
+		}
 		$relatedListModel = \YF\Modules\ModComments\Model\RelatedList::getInstance($this->getModuleName())
 			->setRecordId($this->recordId)
 			->setConditions([
@@ -179,7 +183,7 @@ class Comments extends RelatedModule
 				'value' => '',
 				'operator' => 'y'
 			])
-			->setFields($this->getFields());
+			->setFields($this->getFields())->setLimit($this->limit)->setOffset($offset);
 		$relatedListModel->loadRecordsList();
 		$this->entries = $relatedListModel->getRecordsListModel();
 		$this->headers = array_intersect_key($relatedListModel->getHeaders(), array_flip($this->getFields()));
