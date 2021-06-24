@@ -21,11 +21,11 @@
 {if !empty($FIELDS_HEADER)}
 	{include file=\App\Resources::templatePath("Detail/HeadersFields.tpl", $MODULE_NAME)}
 {/if}
-<div>
-	<ul class="nav nav-tabs detail-tabs">
+<div class="pt-3 related">
+	<ul class="nav nav-pills detail-tabs js-tabdrop" data-js="container">
 		{foreach item=TABS key=TYPE from=$TABS_GROUP}
-			{foreach item=TAB key=TYPE from=$TABS}
-				<li class="nav-item">
+			{foreach item=TAB from=$TABS}
+				<li class="nav-item {if $TYPE eq 'related'}c-tab--gray{/if} mr-1">
 					<a href="{$TAB['url']}" class="nav-link {if $MENU_ID === $TAB['tabId']}active{/if}">
 						{if $TAB['icon']}
 							<span class="{$TAB['icon']} mr-2"></span>
