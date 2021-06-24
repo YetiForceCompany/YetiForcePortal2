@@ -14470,19 +14470,54 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 #DataTables_Table_0_info {
   font-size: 0.9rem; }
 
-.detail-tabs.nav-tabs {
+.detail-tabs .nav-pills {
   border-bottom: 3px solid #404952; }
-  .detail-tabs.nav-tabs .nav-link {
+  .detail-tabs .nav-pills > .nav-item {
+    position: relative;
+    margin-right: calculate-rem(2px); }
+    .detail-tabs .nav-pills > .nav-item:last-child {
+      margin-right: 0; }
+  .detail-tabs .nav-pills > .nav-item > .nav-link {
     color: #404952;
-    font-weight: 600; }
-  .detail-tabs.nav-tabs .nav-link:hover,
-  .detail-tabs.nav-tabs .nav-link:focus {
-    background: #d8d8d8; }
-  .detail-tabs.nav-tabs .nav-link.active {
-    color: #fff;
-    background-color: #495057;
-    border-color: #dee2e6 #dee2e6 #fff;
-    border-bottom: none; }
+    font-weight: bold; }
+  .detail-tabs .nav-pills .tabdrop {
+    width: auto !important; }
+    .detail-tabs .nav-pills .tabdrop .dropdown-toggle {
+      display: block;
+      font-weight: bold;
+      text-transform: capitalize;
+      padding: 0.5rem 1rem;
+      color: #404952;
+      background: #f1f1f1; }
+      .detail-tabs .nav-pills .tabdrop .dropdown-toggle:hover {
+        text-decoration: none; }
+    .detail-tabs .nav-pills .tabdrop .c-badge--top-right {
+      position: inherit;
+      margin-left: calculate-rem(5px); }
+    .detail-tabs .nav-pills .tabdrop.show .dropdown-toggle,
+    .detail-tabs .nav-pills .tabdrop.active .dropdown-toggle {
+      background: #404952;
+      color: #fff; }
+  .detail-tabs .nav-pills .active {
+    background: #404952;
+    color: #fff !important;
+    border-radius: 0; }
+    .detail-tabs .nav-pills .active > .nav-link {
+      color: #f1f1f1;
+      background: #404952; }
+  .detail-tabs .nav-pills .dropdown-menu {
+    min-width: 300px; }
+    .detail-tabs .nav-pills .dropdown-menu .nav-item {
+      margin: 0;
+      float: none !important;
+      background: none; }
+    .detail-tabs .nav-pills .dropdown-menu .nav-link {
+      border-radius: 0;
+      font-weight: bold;
+      color: #404952; }
+  .detail-tabs .nav-pills .dropdown-menu.show {
+    top: 41px !important;
+    left: -170px !important; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .u-remove-main-padding {
@@ -15015,8 +15050,33 @@ input[type="checkbox"]:checked {
         font-size: 0.75em; }
       @media (min-width: 576px) {
         .timeline > li .timeline-item > .timeline-body {
-          padding-left: 0.7rem;
+          padding-left: 2.75rem;
           font-size: 1em; } }
+
+.c-tab--small {
+  display: flex;
+  align-items: center; }
+
+.c-tab--border {
+  border-bottom: 0; }
+  .c-tab--border .nav-link:not(.active) {
+    border-color: transparent !important; }
+  .c-tab--border .nav-link.active {
+    border-bottom-color: transparent !important; }
+  .c-tab--border .nav-link.active:after {
+    content: "";
+    width: 100%;
+    right: 0;
+    top: 2.1875rem;
+    position: absolute;
+    border: solid 1px;
+    z-index: -1; }
+
+.c-tab--gray {
+  background: #f1f1f1; }
+
+.c-tab--hover:hover {
+  background: #d8d8d8; }
 
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 html,

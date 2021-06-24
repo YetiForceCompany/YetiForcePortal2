@@ -38,11 +38,16 @@
 			<input name="popupReferenceModule" type="hidden" data-multi-reference="1" value="{$REFERENCE_LIST[0]}"/>
 		{/if}
 	{/if}
+	{if $REFERENCE_LIST_COUNT}
+		{assign var=REFERENCE_MODULE_MODEL value=\YF\Modules\Base\Model\Module::getInstance($REFERENCE_LIST[0])}
+	{else}
+		{assign var=REFERENCE_MODULE_MODEL value=false}
+	{/if}
 	<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" title="{$FIELD_VALUE}" class="sourceField" data-type="entity" data-fieldtype="{$FIELD_MODEL->get('type')}" data-displayvalue="{$FIELD_VALUE}" data-fieldinfo='{$FIELD_INFO}' {if $IS_EDITABLE_READ_ONLY}readonly="readonly"{/if} />
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
 			<div class="input-group-prepend referenceModulesListGroup">
-				<select class="select2 referenceModulesList" tabindex="{$TABINDEX}" title="{\App\Language::translate('LBL_RELATED_MODULE_TYPE')}" required="required" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
+				<select class="select2 js-reference-list" tabindex="{$TABINDEX}" title="{\App\Language::translate('LBL_RELATED_MODULE_TYPE')}" required="required" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="change">
 					{foreach key=index item=REFERENCE from=$REFERENCE_LIST}
 						<option value="{$REFERENCE}" title="{\App\Language::translate($REFERENCE, $REFERENCE)}" {if $REFERENCE eq $REFERENCED_MODULE_NAME} selected {/if}>{\App\Language::translate($REFERENCE, $REFERENCE)}</option>
 					{/foreach}
@@ -55,12 +60,17 @@
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $IS_EDITABLE_READ_ONLY}disabled{/if}
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if} {if $IS_EDITABLE_READ_ONLY}readonly="readonly"{/if}/>
 		<div class="input-group-append u-cursor-pointer">
-			<button class="btn btn-light clearReferenceSelection" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
+			<button class="btn btn-light js-clear-reference" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
+				<span class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
 			<button class="btn btn-light relatedPopup" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search" title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
+				<span class="fas fa-search" title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
+			{if $REFERENCE_MODULE_MODEL && $REFERENCE_MODULE_MODEL->isQuickCreateSupported()}
+				<button class="btn btn-light js-quick-create" type="button" data-module-name="{$REFERENCE_LIST[0]}" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
+					<span class="fas fa-plus" title="{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}"></span>
+				</button>
+			{/if}
 		</div>
 	</div>
 </div>

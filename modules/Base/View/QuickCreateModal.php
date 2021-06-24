@@ -23,7 +23,7 @@ class QuickCreateModal extends \App\Controller\Modal
 	public function checkPermission(): void
 	{
 		parent::checkPermission();
-		if (!\YF\Modules\Base\Model\Module::isPermitted($this->request->getModule(), 'CreateView')) {
+		if (!\YF\Modules\Base\Model\Module::isPermittedByModule($this->request->getModule(), 'CreateView')) {
 			throw new \App\Exceptions\AppException('ERR_MODULE_PERMISSION_DENIED');
 		}
 	}
