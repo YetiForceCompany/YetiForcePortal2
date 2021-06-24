@@ -27,7 +27,7 @@
 								{assign var="CHILDREN_COUNT" value=$COMMENT->getRawValue('children_count')}
 								<button type="button" class="btn btn-sm text-info js-show-replies u-text-ellipsis mr-0 p-0 pl-1 {if !$CHILDREN_COUNT} d-none{/if}"
 										data-url="{$COMMENT->getChildrenUrl()}"
-										title="{$CHILDREN_COUNT}&nbsp;{if $CHILDREN_COUNT eq 1}{\App\Language::translate('LBL_REPLY',$MODULE_NAME)}{else}{\App\Language::translate('LBL_REPLIES',$MODULE_NAME)}{/if}"
+										title="{$CHILDREN_COUNT}&nbsp;{if $CHILDREN_COUNT eq 1}{\App\Language::translate('LBL_REPLY_SINGLE',$MODULE_NAME)}{else}{\App\Language::translate('LBL_REPLIES',$MODULE_NAME)}{/if}"
 										data-js="click">
 									<span class="js-child-comments-count">{$CHILDREN_COUNT}</span>
 									&nbsp;
