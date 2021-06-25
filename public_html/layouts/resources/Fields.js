@@ -112,20 +112,6 @@ window.App.Fields = {
 			if (typeof elementDateFormat !== 'undefined') {
 				format = elementDateFormat;
 			}
-			if (typeof $.fn.datepicker.dates[app.getMainParams('langKey')] === 'undefined') {
-				$.fn.datepicker.dates[app.getMainParams('langKey')] = {
-					days: App.Fields.Date.fullDaysTranslated,
-					daysShort: App.Fields.Date.daysTranslated,
-					daysMin: App.Fields.Date.daysTranslated,
-					months: App.Fields.Date.fullMonthsTranslated,
-					monthsShort: App.Fields.Date.monthsTranslated,
-					today: app.translate('JS_TODAY'),
-					clear: app.translate('JS_CLEAR'),
-					format: format,
-					titleFormat: 'MM yyyy' /* Leverages same syntax as 'format' */,
-					weekStart: app.getMainParams('firstDayOfWeekNo')
-				};
-			}
 			let params = {
 				todayBtn: 'linked',
 				clearBtn: true,
@@ -168,7 +154,7 @@ window.App.Fields = {
 			if (elements.length === 0) {
 				return;
 			}
-			let format = app.getMainParams('dateFormat').toUpperCase();
+			let format = app.getMainParams('userDateFormat').toUpperCase();
 			const elementDateFormat = elements.data('dateFormat');
 			if (typeof elementDateFormat !== 'undefined') {
 				format = elementDateFormat.toUpperCase();
@@ -215,9 +201,6 @@ window.App.Fields = {
 					toLabel: app.translate('JS_TO'),
 					customRangeLabel: app.translate('JS_CUSTOM'),
 					weekLabel: app.translate('JS_WEEK').substr(0, 1),
-					firstDay: app.getMainParams('firstDayOfWeekNo'),
-					daysOfWeek: App.Fields.Date.daysTranslated,
-					monthNames: App.Fields.Date.fullMonthsTranslated
 				}
 			};
 
@@ -253,6 +236,85 @@ window.App.Fields = {
 						picker.container.removeClass('js-visible');
 					});
 			});
+		}
+	},
+	DateTime: class DateTime {
+		constructor(container, params) {
+			this.container = container;
+			this.init(container, params);
+		}
+		/**
+			* Register function
+			* @param {jQuery} container
+			* @param {Object} params
+			*/
+		static register(container, params) {
+			if (typeof container === 'undefined') {
+				container = $('body');
+			}
+			if (container.hasClass('dateTime') && !container.prop('disabled')) {
+				return new DateTime(container);
+			}
+			const instances = [];
+			container.find('.dateTime:not([disabled])').each((_, e) => {
+				let element = $(e);
+				instances.push(new DateTime(element, $.extend(params, element.data())));
+			});
+			return instances;
+		}
+		/**
+		 * Initialization datetime
+		 */
+		init() {
+			$('.input-group-text', this.container).on('click', function (e) {
+				$(e.currentTarget).closest('.dateTime').find('input.dateTimePickerField').get(0).focus();
+			});
+
+			let dateFormat = app.getMainParams('userDateFormat').toUpperCase();
+			const elementDateFormat = this.container.data('dateFormat');
+			if (typeof elementDateFormat !== 'undefined') {
+				dateFormat = elementDateFormat.toUpperCase();
+			}
+			let hourFormat = app.getMainParams('userTimeFormat');
+			const elementHourFormat = this.container.data('hourFormat');
+			if (typeof elementHourFormat !== 'undefined') {
+				hourFormat = elementHourFormat;
+			}
+			let timePicker24Hour = true;
+			let timeFormat = 'HH:mm';
+			if (hourFormat != '24') {
+				timePicker24Hour = false;
+				timeFormat = 'hh:mm A';
+			}
+			const format = dateFormat + ' ' + timeFormat;
+			let isDateRangePicker = this.container.data('calendarType') !== 'range';
+			let params = {
+				parentEl: this.container,
+				singleDatePicker: isDateRangePicker,
+				showDropdowns: true,
+				timePicker: true,
+				autoUpdateInput: false,
+				timePicker24Hour: timePicker24Hour,
+				timePickerIncrement: 1,
+				autoApply: true,
+				opens: 'left',
+				locale: {
+					format: format,
+					separator: ','
+				}
+			};
+			if (typeof customParams !== 'undefined') {
+				params = $.extend(params, customParams);
+			}
+			this.container
+				.daterangepicker(params)
+				.on('apply.daterangepicker', function applyDateRangePickerHandler(ev, picker) {
+					if (isDateRangePicker) {
+						$(this).val(picker.startDate.format(format));
+					} else {
+						$(this).val(picker.startDate.format(format) + ',' + picker.endDate.format(format));
+					}
+				})
 		}
 	},
 

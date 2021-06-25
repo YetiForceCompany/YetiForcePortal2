@@ -1296,11 +1296,8 @@ var AppConnector,
 			this.registerSelectField(container);
 			this.registerEventForClockPicker(container.find('.clockPicker'));
 			App.Fields.Date.register(container);
+			App.Fields.DateTime.register(container);
 			App.Fields.Date.registerRange(container);
-			// App.Fields.Text.Editor.register(container.find('.js-editor'), {
-			// 	height: '5em',
-			// 	toolbar: 'Min'
-			// });
 		}
 	};
 CKEDITOR.disableAutoInline = true;
@@ -1324,4 +1321,24 @@ $(function () {
 	// Instantiate Page Controller
 	var pageController = app.getPageController();
 	if (pageController) pageController.registerEvents();
+	if (typeof $.fn.datepicker.dates[app.getMainParams('langKey')] === 'undefined') {
+		$.fn.datepicker.dates[app.getMainParams('langKey')] = {
+			days: App.Fields.Date.fullDaysTranslated,
+			daysShort: App.Fields.Date.daysTranslated,
+			daysMin: App.Fields.Date.daysTranslated,
+			months: App.Fields.Date.fullMonthsTranslated,
+			monthsShort: App.Fields.Date.monthsTranslated,
+			today: app.translate('JS_TODAY'),
+			clear: app.translate('JS_CLEAR'),
+			format: app.getMainParams('userDateFormat'),
+			titleFormat: 'MM yyyy' /* Leverages same syntax as 'format' */,
+			weekStart: app.getMainParams('firstDayOfWeekNo'),
+			applyLabel: app.translate('JS_APPLY'),
+			cancelLabel: app.translate('JS_CANCEL'),
+			fromLabel: app.translate('JS_FROM'),
+			toLabel: app.translate('JS_TO'),
+			customRangeLabel: app.translate('JS_CUSTOM'),
+			weekLabel: app.translate('JS_WEEK').substr(0, 1)
+		};
+	}
 });
