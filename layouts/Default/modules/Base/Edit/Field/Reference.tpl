@@ -57,7 +57,7 @@
 		<input type="text" data-display="{$FIELD_NAME}" title="{$FIELD_VALUE}" class="marginLeftZero form-control autoComplete"
 			   tabindex="{$TABINDEX}" {if !empty($VALUE)}readonly="true"{/if} value="{$DISPLAY_VALUE}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
-			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $IS_EDITABLE_READ_ONLY}disabled{/if}
+			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_SELECT_IN_MODAL',$MODULE_NAME)}"{/if} {if $IS_EDITABLE_READ_ONLY}disabled{/if}
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if} {if $IS_EDITABLE_READ_ONLY}readonly="readonly"{/if}/>
 		<div class="input-group-append u-cursor-pointer">
 			<button class="btn btn-light js-clear-reference" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">

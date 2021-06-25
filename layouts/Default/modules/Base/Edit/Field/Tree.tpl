@@ -21,7 +21,7 @@
 		{assign var=DISPLAY_ID value=$FIELD_MODEL->get('fieldvalue')}
 		<input type="text" data-display="{$FIELD_NAME}" value="{$DISPLAY_VALUE}" class="ml-0 js-tree-text form-control" {if !empty($DISPLAY_ID)}readonly="true" {/if}
 			tabindex="{$FIELD_MODEL->getTabIndex()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
-			data-fieldinfo='{$FIELD_INFO_DATA}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if}
+			data-fieldinfo='{$FIELD_INFO_DATA}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_SELECT_IN_MODAL',$MODULE_NAME)}"{/if}
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if}
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}/>
 		<div class="input-group-append">
