@@ -60,7 +60,7 @@ class Comment extends \App\Controller\View
 			'fieldName' => 'parent_comments',
 			'value' => $this->request->getInteger('record', '-1'),
 			'operator' => 'eid'
-		]);
+		])->setOrder('createdtime', 'ASC');
 		$relatedListModel->loadRecordsList();
 		$this->viewer->assign('ENTRIES', $relatedListModel->getRecordsListModel());
 		$this->viewer->assign('SUB_COMMENT', true);
