@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-Base-Widget-CommentsContent -->
 	{foreach from=$WIDGET->getEntries() item=COMMENT name=commentLoop}
-		{include file=\App\Resources::templatePath('Detail/CommentsPost.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName() SUB_COMMENT=false}
+		{include file=\App\Resources::templatePath('Detail/CommentsPost.tpl', $WIDGET->getRelatedModuleName()) MODULE_NAME=$WIDGET->getRelatedModuleName() SUB_COMMENT=false SOURCE_MODULE=$MODULE_NAME}
 	{/foreach}
 	<div>
 		{if $WIDGET->isMorePages() || $PAGE > 1}

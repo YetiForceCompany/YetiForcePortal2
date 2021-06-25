@@ -6,6 +6,9 @@
 			<input type="hidden" name="action" value="Save"/>
 			<input type="hidden" name="module" value="ModComments"/>
 			<input type="hidden" name="related_to" value="{$SOURCE_ID}"/>
+			<input type="hidden" name="relationOperation" value="true"/>
+			<input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}"/>
+			<input type="hidden" name="sourceRecord" value="{$SOURCE_ID}"/>
 			{if !empty($PARENT_ID)}
 				<input type="hidden" name="parent_comments" value="{$PARENT_ID}"/>
 			{/if}
