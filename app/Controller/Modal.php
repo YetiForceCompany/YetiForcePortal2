@@ -35,6 +35,12 @@ abstract class Modal extends View
 	/** @var bool Show modal footer. */
 	public $showFooter = true;
 
+	/** @var bool Modal ID. */
+	protected $modalId;
+
+	/** @var bool Modal data. */
+	protected $modalData = [];
+
 	/** {@inheritdoc} */
 	protected function getTitle()
 	{
@@ -59,12 +65,18 @@ abstract class Modal extends View
 	/** {@inheritdoc} */
 	public function preProcessAjax()
 	{
+		$this->modalData['view'] = $this->request->getAction();
+		if (empty($this->modalId)) {
+			$this->modalId = $this->modalData['view'] . random_int(10, 9999);
+		}
+		$this->modalData['modal-id'] = $this->modalId;
 		$this->viewer->assign('MODAL_SIZE', $this->getModalSize());
 		$this->viewer->assign('MODAL_CSS', $this->getModalCss());
 		$this->viewer->assign('MODAL_JS', $this->getModalJs());
 		$this->viewer->assign('MODAL_TITLE', $this->getTitle());
 		$this->viewer->assign('MODAL_ICON', $this->getModalIcon());
-		$this->viewer->assign('VIEW', $this->request->getAction());
+		$this->viewer->assign('MODAL_ID', $this->modalId);
+		$this->viewer->assign('MODAL_DATA', $this->modalData);
 		$this->viewer->assign('LOCK_EXIT', $this->lockExit);
 		$this->viewer->view('Modal/Header.tpl');
 	}

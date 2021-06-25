@@ -111,7 +111,6 @@ class Request
 		if (isset($this->rawValues[$key])) {
 			return $this->purifiedValuesByType[$key][$type] = Purifier::purifyByType($this->rawValues[$key], $type);
 		}
-
 		return $defaultValue;
 	}
 

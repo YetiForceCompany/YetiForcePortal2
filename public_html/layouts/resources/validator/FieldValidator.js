@@ -800,7 +800,6 @@ Base_Validator_Js(
 			if (spacePattern.test(decimalSeparator) || spacePattern.test(groupSeparator))
 				strippedValue = strippedValue.replace(/ /g, '');
 			let errorInfo;
-			console.log(spacePattern);
 			if (groupSeparator === '$') {
 				groupSeparator = '\\$';
 			}
@@ -1010,7 +1009,6 @@ Base_Validator_Js(
 			let fieldData = field.data();
 			let fieldDateFormat = fieldData.dateFormat;
 			let fieldValue = this.getFieldValue();
-			console.log(field, fieldData, fieldDateFormat, fieldValue);
 			try {
 				if (fieldData.calendarType === 'range') {
 					fieldValue = fieldValue.split(',');

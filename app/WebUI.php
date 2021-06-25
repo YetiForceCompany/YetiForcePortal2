@@ -42,9 +42,9 @@ class WebUI
 					$module = 'Users';
 					$view = 'Login';
 				}
+				$request->set('module', $module);
+				$request->set('view', $view);
 			}
-			$request->set('module', $module);
-			$request->set('view', $view);
 			if (!empty($action)) {
 				$componentType = 'Action';
 				$componentName = $action;
