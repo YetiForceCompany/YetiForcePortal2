@@ -181,6 +181,7 @@ window.Base_EditView_Js = class {
 		let formData = this.form.serializeFormData();
 		let beforeSaveResult = callbackBeforeSave(formData);
 		if (beforeSaveResult === false) {
+			progress.progressIndicator({ mode: 'hide' });
 			return;
 		}
 		AppConnector.request(formData)
