@@ -127,6 +127,7 @@ class RelatedList extends AbstractListView
 	 */
 	public function getActions(): array
 	{
+		$moduleModel = Module::getInstance($this->relatedModuleName);
 		$links = [];
 		$actions = $this->getRelation('actions');
 		if (\in_array('select', $actions)) {
@@ -139,7 +140,7 @@ class RelatedList extends AbstractListView
 				'showLabel' => 1,
 			];
 		}
-		if (\in_array('add', $actions)) {
+		if (\in_array('add', $actions) && $moduleModel->isQuickCreateSupported()) {
 			$links[] = [
 				'label' => 'BTN_ADD_RECORD',
 				'moduleName' => $this->relatedModuleName,

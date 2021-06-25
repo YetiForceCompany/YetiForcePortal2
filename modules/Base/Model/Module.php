@@ -302,6 +302,6 @@ class Module
 	 */
 	public function isQuickCreateSupported(): bool
 	{
-		return true;
+		return $this->isPermitted('IsQuickCreateSupported');
 	}
 }
