@@ -242,7 +242,7 @@ class Module
 			if ($field['isEditable']) {
 				$fieldsForm[$field['blockId']][$fieldName] = $fieldInstance;
 			}
-			$fields[$field['blockId']][$fieldName] = $fieldInstance;
+			$fields[$fieldName] = $fieldInstance;
 		}
 		$this->fieldsModels = $fields;
 		$this->fieldsForm = $fieldsForm;
