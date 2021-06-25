@@ -210,18 +210,6 @@ var AppConnector,
 			this.registerChznSelectField(container);
 			App.Fields.Picklist.changeSelectElementView(container);
 		},
-
-		/**
-		 * Register time field.
-		 *
-		 * @param {object} container
-		 */
-		registerTimeField(container) {
-			this.registerEventForClockPicker(container.find('.clockPicker'));
-			App.Fields.Date.register(container);
-			App.Fields.Date.registerRange(container);
-		},
-
 		/**
 		 * Register event for clock picker.
 		 * @param {object} timeInputs
@@ -465,30 +453,10 @@ var AppConnector,
 		 *
 		 * @param {object} container
 		 */
-		registerEventForEditor(container) {
-			$.each(container.find('.js-editor:not(.js-inventory-item-comment)'), (key, data) => {
-				this.loadEditorElement($(data));
-			});
-		},
-
-		/**
-		 * Function to register event for ckeditor for description field
-		 *
-		 * @param {object} container
-		 */
 		registerBaseEvent(container) {
 			container.on('click', '.js-history-back', () => {
 				window.history.back();
 			});
-		},
-
-		/**
-		 * Load editor element.
-		 *
-		 * @param {object} noteContentElement
-		 */
-		loadEditorElement(noteContentElement) {
-			App.Fields.Text.Editor.register(noteContentElement);
 		},
 
 		getMainParams: function (param, json) {
@@ -815,13 +783,13 @@ var AppConnector,
 				if (this.modalInstances[modalId]) {
 					instance = this.modalInstances[modalId];
 				}
+				app.registerFieldsEvents(container);
+				this.registerDataTables(modalContainer.find('.dataTable'));
 				cb(modalContainer, instance, paramsObject);
 			});
 			$('body').append(container);
 			modalContainer.modal(params);
 			this.registerModalEvents(modalContainer, sendByAjaxCb);
-			this.registerDataTables(modalContainer.find('.dataTable'));
-			app.registerTimeField(modalContainer);
 		},
 
 		/**
@@ -1323,14 +1291,23 @@ var AppConnector,
 				}
 			});
 			return urlObject;
+		},
+		registerFieldsEvents: function (container) {
+			this.registerSelectField(container);
+			this.registerEventForClockPicker(container.find('.clockPicker'));
+			App.Fields.Date.register(container);
+			App.Fields.Date.registerRange(container);
+			// App.Fields.Text.Editor.register(container.find('.js-editor'), {
+			// 	height: '5em',
+			// 	toolbar: 'Min'
+			// });
 		}
 	};
 CKEDITOR.disableAutoInline = true;
 $(function () {
 	var container = $('body');
-	app.registerSelectField(container);
+	app.registerFieldsEvents(container);
 	app.setNotifyDefaultOptions();
-	app.registerTimeField(container);
 	app.registerAdditions(jQuery);
 	app.registerPopover();
 	app.registerSubMenu();
@@ -1339,7 +1316,6 @@ $(function () {
 	app.registerTabdrop();
 	App.Components.QuickCreate.register();
 	app.registerIframeAndMoreContent();
-	//app.registerEventForEditor(container);
 	app.registerBaseEvent(container);
 	app.registerAfterLoginEvents(container);
 	if ($('#fingerPrint').length && typeof DeviceUUID === 'function') {

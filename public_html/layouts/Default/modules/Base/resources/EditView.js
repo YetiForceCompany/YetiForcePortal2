@@ -99,7 +99,7 @@ window.Base_EditView_Js = class {
 		let fieldNameElement = fieldValueContender.find('.sourceField');
 		let fieldName = fieldNameElement.attr('name');
 		fieldNameElement.val('');
-		fieldValueContender.find(`input[data-display="${fieldName}"]`).removeAttr('readonly').val('');
+		fieldValueContender.find(`input[data-display="${fieldName}"]`).val('');
 	}
 	/**
 	 * Set reference field value.
@@ -110,7 +110,7 @@ window.Base_EditView_Js = class {
 	setReferenceFieldValue(fieldContainer, params) {
 		let sourceField = fieldContainer.find('input.sourceField').attr('name');
 		fieldContainer.find('input[name="' + sourceField + '"]').val(params.id);
-		fieldContainer.find(`input[data-display="${sourceField}"]`).val(params.name).attr('readonly', true);
+		fieldContainer.find(`input[data-display="${sourceField}"]`).val(params.name);
 	}
 	/**
 	 * Register fields validations .
