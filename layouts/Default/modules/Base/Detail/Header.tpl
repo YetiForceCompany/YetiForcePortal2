@@ -25,7 +25,7 @@
 	<ul class="nav nav-pills js-tabdrop" data-js="container">
 		{foreach item=TABS key=TYPE from=$TABS_GROUP}
 			{foreach item=TAB from=$TABS}
-				<li class="nav-item {if $TYPE eq 'related'}c-tab--gray{/if} mr-1">
+				<li class="nav-item {if $TYPE eq 'related'}c-tab--gray d-none{/if} mr-1">
 					<a href="{$TAB['url']}" class="nav-link {if $MENU_ID === $TAB['tabId']}active{/if}">
 						{if $TAB['icon']}
 							<span class="{$TAB['icon']} mr-2"></span>
