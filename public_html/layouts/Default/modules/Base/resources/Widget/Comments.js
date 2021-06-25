@@ -95,6 +95,7 @@ window.Base_Widget_Comments_Js = class {
 			e.preventDefault();
 			if (form.validationEngine('validate')) {
 				AppConnector.request(form.serializeFormData()).done((response) => {
+					form.find('[name="commentcontent"]').val('');
 					this.loadContent();
 				});
 			}
@@ -105,6 +106,7 @@ window.Base_Widget_Comments_Js = class {
 			formReply.validationEngine({ binded: false, ...app.validationEngineOptions });
 			if (formReply.validationEngine('validate')) {
 				AppConnector.request(formReply.serializeFormData()).done((response) => {
+					formReply.find('[name="commentcontent"]').val('');
 					let postContainer = formReply.closest('.js-post-container');
 					let url = postContainer.find('.js-show-replies:first').data('url');
 					this.getContent(url).done((result) => {

@@ -147,6 +147,7 @@ class DetailView extends \App\Controller\View
 		$this->viewer->assign('URL', "index.php?module={$moduleName}&view=Comment&mode=getParents&sourceId={$this->recordModel->getId()}&sourceModule={$sourceModule}&limit=10");
 		$this->viewer->assign('SCRIPTS', $this->convertScripts([['layouts/' . \App\Viewer::getLayoutName() . '/modules/Base/resources/Widget/Comments.js', true]], 'js'));
 		$this->viewer->assign('SOURCE_ID', $this->recordModel->getId());
+		$this->viewer->assign('SOURCE_MODULE', $sourceModule);
 		$this->viewer->assign('MODULE_NAME', 'ModComments');
 		$this->viewer->view('Detail/CommentsTab.tpl', 'ModComments');
 	}

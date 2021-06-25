@@ -64,6 +64,7 @@ class Comment extends \App\Controller\View
 		$relatedListModel->loadRecordsList();
 		$this->viewer->assign('ENTRIES', $relatedListModel->getRecordsListModel());
 		$this->viewer->assign('SUB_COMMENT', true);
+		$this->viewer->assign('SOURCE_MODULE', $this->sourceModule);
 		$this->viewer->view('Detail/Comments.tpl', 'ModComments');
 	}
 
@@ -90,6 +91,7 @@ class Comment extends \App\Controller\View
 		$this->viewer->assign('SUB_COMMENT', false);
 		$this->viewer->assign('IS_MORE_PAGES', $relatedListModel->isMorePages());
 		$this->viewer->assign('PAGE', $page);
+		$this->viewer->assign('SOURCE_MODULE', $this->sourceModule);
 		$this->viewer->view('Detail/CommentsContent.tpl', 'ModComments');
 	}
 }
