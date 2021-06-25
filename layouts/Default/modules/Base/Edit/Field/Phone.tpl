@@ -10,8 +10,8 @@
 <div>
 	{assign var=FIELD_NAME_EXTRA value=$FIELD_NAME|cat:'_extra'}
 	{assign var=FIELD_BLOCK_ID value=$FIELD_MODEL->get('blockId')}
-	{if isset($FIELDS_FORM[$FIELD_BLOCK_ID][$FIELD_NAME_EXTRA])}
-		{assign var=FIELD_MODEL_EXTRA value=$FIELDS_FORM[$FIELD_BLOCK_ID][$FIELD_NAME_EXTRA]}
+	{if isset($FIELDS[$FIELD_BLOCK_ID][$FIELD_NAME_EXTRA])}
+		{assign var=FIELD_MODEL_EXTRA value=$FIELDS[$FIELD_BLOCK_ID][$FIELD_NAME_EXTRA]}
 	{/if}
 	{assign var=ACTIVE_EXTRA_FIELD value=!empty($VIEW) && ($VIEW eq 'EditView') && isset($FIELD_MODEL_EXTRA)}
 	<div class="form-row">
