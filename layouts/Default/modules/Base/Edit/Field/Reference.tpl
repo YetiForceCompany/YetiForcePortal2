@@ -17,7 +17,7 @@
 		<input name="modalParams" type="hidden" value="{\App\Purifier::encodeHtml($PARAMS['modalParams'])}"/>
 	{/if}
 	{if {$REFERENCE_LIST_COUNT} eq 1}
-		<input name="popupReferenceModule" type="hidden" data-multi-reference="0" title="{reset($REFERENCE_LIST)}" value="{reset($REFERENCE_LIST)}"/>
+		<input class="js-reference-module" type="hidden" data-multi-reference="0" title="{reset($REFERENCE_LIST)}" value="{reset($REFERENCE_LIST)}"/>
 	{/if}
 	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 	{assign var=VALUE value=$RECORD->get($FIELD_NAME)}
@@ -32,10 +32,10 @@
 			{assign var=REFERENCED_MODULE_NAME value=$VALUE.referenceModule}
 		{/if}
 		{if in_array($REFERENCED_MODULE_NAME, $REFERENCE_LIST)}
-			<input name="popupReferenceModule" type="hidden" data-multi-reference="1" value="{$REFERENCED_MODULE_NAME}"/>
+			<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{$REFERENCED_MODULE_NAME}"/>
 		{else}
 			{assign var=REFERENCED_MODULE_NAME value=$REFERENCE_LIST[0]}
-			<input name="popupReferenceModule" type="hidden" data-multi-reference="1" value="{$REFERENCE_LIST[0]}"/>
+			<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{$REFERENCE_LIST[0]}"/>
 		{/if}
 	{/if}
 	{if $REFERENCE_LIST_COUNT}
@@ -54,7 +54,7 @@
 				</select>
 			</div>
 		{/if}
-		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"  title="{$FIELD_VALUE}" class="marginLeftZero form-control autoComplete"
+		<input type="text" data-display="{$FIELD_NAME}" title="{$FIELD_VALUE}" class="marginLeftZero form-control autoComplete"
 			   tabindex="{$TABINDEX}" {if !empty($VALUE)}readonly="true"{/if} value="{$DISPLAY_VALUE}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if} {if $IS_EDITABLE_READ_ONLY}disabled{/if}
@@ -63,11 +63,11 @@
 			<button class="btn btn-light js-clear-reference" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
 				<span class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
-			<button class="btn btn-light relatedPopup" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
+			<button class="btn btn-light js-select-reference" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
 				<span class="fas fa-search" title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
 			{if $REFERENCE_MODULE_MODEL && $REFERENCE_MODULE_MODEL->isQuickCreateSupported()}
-				<button class="btn btn-light js-quick-create" type="button" data-module-name="{$REFERENCE_LIST[0]}" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
+				<button class="btn btn-light js-add-reference" type="button" data-module-name="{$REFERENCE_LIST[0]}" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
 					<span class="fas fa-plus" title="{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}"></span>
 				</button>
 			{/if}

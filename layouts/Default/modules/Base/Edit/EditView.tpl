@@ -8,11 +8,11 @@
 				{include file=\App\Resources::templatePath("BreadCrumbs.tpl", $MODULE_NAME)}
 			</div>
 			<div class="contentHeader">
-				<button class="btn btn-success btn-sm mr-2 js-form-submit" type="submit" data-js="click">
+				<button type="button" class="btn btn-success btn-sm mr-2 js-edit-view-submit" data-js="click">
 					<span class="fas fa-check mr-2"></span>
 					{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
 				</button>
-				<button class="btn btn-danger btn-sm js-history-back" type="reset" data-js="click">
+				<button type="reset" class="btn btn-danger btn-sm js-history-back" data-js="click">
 					<span class="fas fa-times mr-2"></span>
 					{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}
 				</button>

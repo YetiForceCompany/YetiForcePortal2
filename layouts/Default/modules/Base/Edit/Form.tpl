@@ -5,7 +5,7 @@
 	<input type="hidden" name="module" value="{$MODULE_NAME}">
 	<input type="hidden" name="action" value="Save">
 	<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
-	<input type="hidden" name="view" value="{$ACTION_NAME}">
+	<input type="hidden" name="_fromView" value="{$ACTION_NAME}">
 	{assign var=ITERATION value=0}
 	{foreach item=BLOCK from=$BLOCKS}
 		{if isset($FIELDS_FORM[$BLOCK['id']])}
@@ -41,11 +41,11 @@
 		{/if}
 	{/foreach}
 	<div class="c-form__action-panel">
-		<button class="btn btn-success mr-1" type="submit">
+		<button type="button" class="btn btn-success mr-1 js-form-submit" data-js="click">
 			<span class="fas fa-check mr-2"></span>
 			{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
 		</button>
-		<button class="btn btn-danger js-history-back" type="reset">
+		<button type="button" class="btn btn-danger js-edit-back" data-js="click">
 			<span class="fas fa-times mr-2"></span>
 			{\App\Language::translate('BTN_CANCEL', $MODULE_NAME)}
 		</button>

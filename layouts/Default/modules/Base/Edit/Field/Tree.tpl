@@ -15,22 +15,18 @@
 	<div class="input-group">
 		<div class="input-group-prepend u-cursor-pointer">
 			<button class="btn btn-light js-tree-clear" type="button" data-js="click">
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle"
-					title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
+				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 			</button>
 		</div>
 		{assign var=DISPLAY_ID value=$FIELD_MODEL->get('fieldvalue')}
-		<input id="{$FIELD_NAME}_display" name="{$FIELD_NAME}_display" type="text"
-			class="ml-0 js-tree-text form-control" {if !empty($DISPLAY_ID)}readonly="true" {/if}
-			value="{$DISPLAY_VALUE}" tabindex="{$FIELD_MODEL->getTabIndex()}"
-			data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
+		<input type="text" data-display="{$FIELD_NAME}" value="{$DISPLAY_VALUE}" class="ml-0 js-tree-text form-control" {if !empty($DISPLAY_ID)}readonly="true" {/if}
+			tabindex="{$FIELD_MODEL->getTabIndex()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			data-fieldinfo='{$FIELD_INFO_DATA}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_TYPE_SEARCH',$MODULE_NAME)}"{/if}
 			{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}"{/if}
 			{if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly"{/if}/>
 		<div class="input-group-append">
 			<button class="btn btn-light js-tree-select" type="button" data-js="click">
-				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search"
-					title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
+				<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_select" class="fas fa-search" title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
 		</div>
 	</div>
@@ -45,9 +41,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="js-tree-jstree" data-js="jstree">
-						<input type="hidden" class="js-tree-data"
-							value="{App\Purifier::encodeHtml(App\Json::encode($FIELD_INFO['treeValues']))}"
-							data-js="val">
+						<input type="hidden" class="js-tree-data" value="{App\Purifier::encodeHtml(App\Json::encode($FIELD_INFO['treeValues']))}" data-js="val">
 					</div>
 				</div>
 				<div class="modal-footer">

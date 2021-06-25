@@ -74,6 +74,7 @@
   "js": {
     "JS_YES": "Yes",
     "JS_NO": "No",
+    "JS_SAVE_NOTIFY_SUCCESS": "Saved successfully",
     "JS_TODAY": "Today",
     "JS_CLEAR_HISTORY": "Clear history",
     "JS_YESTERDAY": "Yestarday",

@@ -1396,7 +1396,7 @@ window.Base_Dashboard_ChartFilter_Js = class {
 			instance.readData();
 			return instance.loadChart();
 		} else {
-			console.log('Nie znaleziono ' + classname);
+			console.error('Nie znaleziono ' + classname);
 		}
 	}
 };

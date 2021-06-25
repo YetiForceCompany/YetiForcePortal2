@@ -33,7 +33,9 @@ class Save extends \App\Controller\Action
 	{
 		$module = $this->request->getModule();
 		$record = $this->request->isEmpty('record') ? '' : $this->request->getByType('record', Purifier::INTEGER);
-		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $this->request->getAllRaw(), $record ? 'put' : 'post');
+		$formData = $this->request->getAllRaw();
+		unset($formData['_csrf'], $formData['_fromView']);
+		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $formData, $record ? 'put' : 'post');
 		if ($this->request->isEmpty('record')) {
 			$record = $result['id'] ?? '';
 		}
@@ -42,7 +44,7 @@ class Save extends \App\Controller\Action
 			$response->setResult($result);
 			$response->emit();
 		} else {
-			$view = $this->request->getByType('view', Purifier::ALNUM);
+			$view = $this->request->has('_fromView') ? $this->request->getByType('_fromView', Purifier::ALNUM) : 'DetailView';
 			header("Location:index.php?module=$module&view={$view}&record=$record");
 		}
 	}

@@ -8,10 +8,10 @@ window.Base_QuickCreateModal_JS = class {
 	 */
 	registerEditView() {
 		let form = this.container.find('.js-edit-view-form');
-		let instance = Base_EditView_Js.getInstanceByModuleName(form.find('[name="module"]').val());
-		instance.container = form;
-		instance.form = form;
-		instance.registerEvents();
+		this.editView = Base_EditView_Js.getInstanceByModuleName(form.find('[name="module"]').val());
+		this.editView.container = form;
+		this.editView.form = form;
+		this.editView.registerFormEvents();
 	}
 	/**
 	 * Register modal events.
