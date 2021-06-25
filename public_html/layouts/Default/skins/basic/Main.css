@@ -15050,7 +15050,6 @@ input[type="checkbox"]:checked {
         font-size: 0.75em; }
       @media (min-width: 576px) {
         .timeline > li .timeline-item > .timeline-body {
-          padding-left: 2.75rem;
           font-size: 1em; } }
 
 .c-tab--small {
