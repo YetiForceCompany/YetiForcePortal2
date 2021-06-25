@@ -252,11 +252,11 @@ window.App.Fields = {
 			if (typeof container === 'undefined') {
 				container = $('body');
 			}
-			if (container.hasClass('dateTime') && !container.prop('disabled')) {
+			if (container.hasClass('dateTimePickerField') && !container.prop('disabled')) {
 				return new DateTime(container);
 			}
 			const instances = [];
-			container.find('.dateTime:not([disabled])').each((_, e) => {
+			container.find('.dateTimePickerField:not([disabled])').each((_, e) => {
 				let element = $(e);
 				instances.push(new DateTime(element, $.extend(params, element.data())));
 			});
@@ -266,7 +266,7 @@ window.App.Fields = {
 		 * Initialization datetime
 		 */
 		init() {
-			$('.input-group-text', this.container).on('click', function (e) {
+			$('.input-group-text', this.container.closest('.dateTime')).on('click', function (e) {
 				$(e.currentTarget).closest('.dateTime').find('input.dateTimePickerField').get(0).focus();
 			});
 
@@ -289,7 +289,7 @@ window.App.Fields = {
 			const format = dateFormat + ' ' + timeFormat;
 			let isDateRangePicker = this.container.data('calendarType') !== 'range';
 			let params = {
-				parentEl: this.container,
+				parentEl: this.container.closest('.dateTime'),
 				singleDatePicker: isDateRangePicker,
 				showDropdowns: true,
 				timePicker: true,
