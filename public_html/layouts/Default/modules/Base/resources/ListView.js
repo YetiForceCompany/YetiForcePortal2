@@ -29,7 +29,7 @@ window.Base_ListView_Js = class {
 				}
 			}
 		});
-		this.listForm.find('input').on('change', () => {
+		this.listForm.find('input,select').on('change', () => {
 			this.dataTable.ajax.reload();
 		});
 	}

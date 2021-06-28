@@ -16,6 +16,9 @@ namespace YF\Modules\Base\FieldTypes;
  */
 class DateTimeField extends DateField
 {
+	/** @var string Default operator. */
+	protected $defaultOperator = 'bw';
+
 	/** {@inheritdoc} */
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
