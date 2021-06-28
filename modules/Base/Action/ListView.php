@@ -63,7 +63,7 @@ class ListView extends \App\Controller\Action
 		}
 		$response = [
 			'draw' => $this->request->getInteger('draw'),
-			'iTotalDisplayRecords' => \count($rows),
+			'iTotalDisplayRecords' => $listModel->getCount(),
 			'iTotalRecords' => $listModel->getCount(),
 			'aaData' => $rows,
 		];

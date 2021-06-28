@@ -116,6 +116,27 @@ class Module
 	}
 
 	/**
+	 * Get fields and blocks.
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function loadSourceBasedData(array $data): array
+	{
+		$response = Api::getInstance()->call($this->moduleName . '/RecordSource?' . http_build_query($data));
+		$response['hiddenFields'] = $response['fieldsForm'] = [];
+		foreach ($response['data'] as $fieldName => $value) {
+			if (isset($this->fieldsModels[$fieldName])) {
+				$response['fieldsForm'][$fieldName] = $value;
+			} else {
+				$response['hiddenFields'][$fieldName] = $value;
+			}
+		}
+		return $response;
+	}
+
+	/**
 	 * Get all blocks.
 	 *
 	 * @return array

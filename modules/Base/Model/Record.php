@@ -439,4 +439,28 @@ class Record extends \App\BaseModel
 	{
 		return 'index.php?module=' . $this->getModuleName() . '&action=Delete&record=' . $this->getId();
 	}
+
+	/**
+	 * Get fields and blocks.
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function loadSourceBasedData(array $data): array
+	{
+		$moduleModel = $this->getModuleModel();
+		$source = $moduleModel->loadSourceBasedData($data);
+		foreach ($source['fieldsForm'] as $fieldName => $value) {
+			$this->set($fieldName, $value);
+			$this->setRawValue($fieldName, $source['rawData'][$fieldName]);
+			$moduleModel->getFieldModel($fieldName)->set('defaultvalue', $value);
+		}
+		$hiddenFields = [];
+		foreach ($source['hiddenFields'] as $fieldName => $value) {
+			$this->set($fieldName, $value);
+			$hiddenFields[$fieldName] = $value;
+		}
+		return $hiddenFields;
+	}
 }

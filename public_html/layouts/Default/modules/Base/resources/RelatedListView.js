@@ -51,13 +51,7 @@ window.Base_RelatedListView_Js = class {
 			const progress = $.progressIndicator({ blockInfo: { enabled: true } });
 			let params = {
 				callbackAfterSave: (response) => {
-					console.log(response);
 					this.dataTable.ajax.reload();
-				},
-				callbackAfterShownModal: (container) => {
-					let form = container.find('.js-edit-view-form');
-					console.log(container);
-					console.log(form);
 				}
 			};
 			App.Components.QuickCreate.getForm(url, params).done((data) => {

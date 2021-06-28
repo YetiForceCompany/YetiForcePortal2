@@ -19,9 +19,9 @@ class DateTimeField extends DateField
 	/** {@inheritdoc} */
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
-		if ($recordModel && $recordModel->getId()) {
+		if ($recordModel && '' !== $recordModel->get($this->getName())) {
 			$value = $recordModel->getDisplayValue($this->getName());
-		} else {
+		} elseif (empty($recordModel->getId())) {
 			$value = $this->get('defaultvalue') ?: '';
 		}
 		return \App\Purifier::encodeHtml($value);

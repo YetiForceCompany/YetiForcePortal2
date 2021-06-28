@@ -14,6 +14,9 @@
 		<input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}">
 		<input type="hidden" name="sourceRecord" value="{$SOURCE_RECORD}">
 	{/if}
+	{foreach key=KEY item=VALUE from=$HIDDEN_FIELDS}
+		<input type="hidden" name="{$KEY}" value="{$VALUE}">
+	{/foreach}
 	{assign var=ITERATION value=0}
 	{foreach item=BLOCK from=$BLOCKS}
 		{if isset($FIELDS_FORM[$BLOCK['id']])}
@@ -49,7 +52,7 @@
 		{/if}
 	{/foreach}
 	<div class="c-form__action-panel d-flex justify-content-center">
-		<button type="button" class="btn btn-success mr-1 js-form-submit" data-js="click">
+		<button type="button" class="btn btn-success mr-3 js-form-submit" data-js="click">
 			<span class="fas fa-check mr-2"></span>
 			{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
 		</button>

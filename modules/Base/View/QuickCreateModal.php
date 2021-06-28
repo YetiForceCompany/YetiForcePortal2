@@ -19,6 +19,9 @@ class QuickCreateModal extends \App\Controller\Modal
 	/** {@inheritdoc} */
 	public $showFooter = false;
 
+	/** @var array Hidden fields */
+	public $hiddenFields = [];
+
 	/** {@inheritdoc} */
 	public function checkPermission(): void
 	{
@@ -56,22 +59,32 @@ class QuickCreateModal extends \App\Controller\Modal
 		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
 		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
 		$this->viewer->assign('BLOCKS', $moduleModel->getBlocks());
-		$this->loadCustomData();
+		$this->loadCustomData($recordModel);
+		$this->viewer->assign('HIDDEN_FIELDS', $this->hiddenFields);
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/**
 	 * Load relation operation input.
 	 *
+	 * @param \YF\Modules\Base\Model\Record $recordModel
+	 *
 	 * @return void
 	 */
-	public function loadCustomData(): void
+	public function loadCustomData(\YF\Modules\Base\Model\Record $recordModel): void
 	{
 		if ($this->request->getBoolean('relationOperation')) {
+			$relationId = $this->request->getInteger('relationId');
+			$sourceModule = $this->request->getByType('sourceModule', \App\Purifier::ALNUM);
+			$sourceRecord = $this->request->getInteger('sourceRecord');
+			$this->hiddenFields = $recordModel->loadSourceBasedData([
+				'sourceModule' => $sourceModule,
+				'sourceRecord' => $sourceRecord,
+			]);
 			$this->viewer->assign('RELATION_OPERATION', 'true');
-			$this->viewer->assign('RELATION_ID', $this->request->getInteger('relationId'));
-			$this->viewer->assign('SOURCE_MODULE', $this->request->getByType('sourceModule', \App\Purifier::ALNUM));
-			$this->viewer->assign('SOURCE_RECORD', $this->request->getInteger('sourceRecord'));
+			$this->viewer->assign('RELATION_ID', $relationId);
+			$this->viewer->assign('SOURCE_MODULE', $sourceModule);
+			$this->viewer->assign('SOURCE_RECORD', $sourceRecord);
 		}
 	}
 

@@ -88,6 +88,10 @@ var App = (window.App = {
 					};
 					modalInstance.editView.registerSubmit(params);
 					callbackAfterShownModal(container);
+					callbackAfterShownModal(container);
+					container.on('click', '.js-edit-back', () => {
+						app.hideModalWindow('', container.data('modalId'));
+					});
 				});
 			}
 		}

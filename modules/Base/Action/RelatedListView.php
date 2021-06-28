@@ -63,7 +63,7 @@ class RelatedListView extends \App\Controller\Action
 		}
 		$response = [
 			'draw' => $this->request->getInteger('draw'),
-			'iTotalDisplayRecords' => \count($rows),
+			'iTotalDisplayRecords' => $relatedListModel->getCount(),
 			'iTotalRecords' => $relatedListModel->getCount(),
 			'aaData' => $rows,
 		];
