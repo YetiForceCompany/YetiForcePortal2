@@ -29,11 +29,17 @@ class MultiImageField extends BaseField
 		if (empty($value)) {
 			return '';
 		}
-		$values = '';
-		$data = \is_array($value) ? $value : [$value];
-		foreach ($data as $value) {
-			$values .= "<div style=\"width:80px\" class=\"ml-1\"><img src=\"data:image/jpeg;base64,{$value}\"/></div>";
+		$result = '';
+		if (\array_key_exists('postData', $value)) {
+			$value = [$value];
 		}
-		return $values;
+		$result = '<div class="c-multi-image__result" style="width:100%">';
+		foreach ($value as $image) {
+			$mime = $image['type'];
+			$content = \App\Api::getInstance()->setCustomHeaders(['Accept' => $mime])->call('Files', $image['postData'], 'put');
+			$base = base64_encode($content);
+			$result .= "<div style=\"width:80px\" class=\"ml-1 d-inline-block mr-1\"><img src=\"data:{$mime};base64,{$base}\"/></div>";
+		}
+		return $result . '</div>';
 	}
 }
