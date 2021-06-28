@@ -45,7 +45,23 @@ class EditView extends \App\Controller\View
 		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
 		$this->viewer->assign('BLOCKS', $moduleModel->getBlocks());
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
+		$this->loadCustomData();
 		$this->viewer->view('Edit/EditView.tpl', $moduleName);
+	}
+
+	/**
+	 * Load relation operation input.
+	 *
+	 * @return void
+	 */
+	public function loadCustomData(): void
+	{
+		if ($this->request->getBoolean('relationOperation')) {
+			$this->viewer->assign('RELATION_OPERATION', 'true');
+			$this->viewer->assign('RELATION_ID', $this->request->getInteger('relationId'));
+			$this->viewer->assign('SOURCE_MODULE', $this->request->getByType('sourceModule', \App\Purifier::ALNUM));
+			$this->viewer->assign('SOURCE_RECORD', $this->request->getInteger('sourceRecord'));
+		}
 	}
 
 	/** {@inheritdoc} */

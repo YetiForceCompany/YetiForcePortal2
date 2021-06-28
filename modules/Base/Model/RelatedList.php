@@ -133,14 +133,16 @@ class RelatedList extends AbstractListView
 		$links = [];
 		$actions = $this->getRelation('actions');
 		if (\in_array('select', $actions)) {
+			/* @todo To be completed
 			$links[] = [
 				'label' => 'BTN_SELECT_RECORD',
 				'moduleName' => $this->relatedModuleName,
 				'data' => ['url' => $this->relatedModuleName, 'source-record' => $record, 'source-module' => $this->getModuleName()],
 				'icon' => 'fas fa-search',
-				'class' => 'btn-sm btn-outline-primary js-search-records',
+				'class' => 'btn-sm btn-outline-secondary js-search-records',
 				'showLabel' => 1,
 			];
+			*/
 		}
 		if (\in_array('add', $actions)) {
 			if ($moduleModel->isPermitted('CreateView')) {
@@ -149,7 +151,7 @@ class RelatedList extends AbstractListView
 					'moduleName' => $this->relatedModuleName,
 					'data' => ['url' => "index.php?module={$this->relatedModuleName}&view=QuickCreateModal&sourceModule={$this->getModuleName()}&sourceRecord={$record}&relationOperation=true&relationId={$relationId}"],
 					'icon' => 'fas fa-plus',
-					'class' => 'btn-sm btn-outline-success js-create-related-record',
+					'class' => 'btn-sm btn-outline-secondary js-create-related-record',
 					'showLabel' => 1,
 				];
 			}

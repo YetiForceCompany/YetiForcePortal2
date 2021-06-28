@@ -6,6 +6,14 @@
 	<input type="hidden" name="action" value="Save">
 	<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 	<input type="hidden" name="_fromView" value="{$ACTION_NAME}">
+	{if isset($RELATION_OPERATION)}
+		<input type="hidden" name="relationOperation" value="true">
+		<input type="hidden" name="relationId" value="{$RELATION_ID}">
+	{/if}
+	{if isset($SOURCE_MODULE)}
+		<input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}">
+		<input type="hidden" name="sourceRecord" value="{$SOURCE_RECORD}">
+	{/if}
 	{assign var=ITERATION value=0}
 	{foreach item=BLOCK from=$BLOCKS}
 		{if isset($FIELDS_FORM[$BLOCK['id']])}

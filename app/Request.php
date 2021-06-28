@@ -115,6 +115,23 @@ class Request
 	}
 
 	/**
+	 * Function to get the boolean value for a given key.
+	 *
+	 * @param string $key
+	 * @param bool   $defaultValue Default value
+	 *
+	 * @return bool
+	 */
+	public function getBoolean(string $key, bool $defaultValue = null)
+	{
+		$value = $this->get($key, $defaultValue);
+		if (\is_bool($value)) {
+			return $value;
+		}
+		return 0 === strcasecmp('true', (string) $value) || '1' === (string) $value;
+	}
+
+	/**
 	 * Get integer.
 	 *
 	 * @param string $key

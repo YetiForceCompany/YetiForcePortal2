@@ -15,21 +15,21 @@ class ProgressIndicatorHelper {
 		};
 		this.blockOverlayCSS = {
 			opacity: '0.2',
-			'z-index': '1030'
+			'z-index': '1100'
 		};
 		this.blockCss = {
 			border: '',
 			'background-color': '',
 			'background-clip': 'border-box',
 			'border-radius': '2px',
-			'z-index': '1030'
+			'z-index': '1100'
 		};
 		this.showTopCSS = {
 			width: '25%',
 			left: '37.5%',
 			position: 'fixed',
 			top: '4.5%',
-			'z-index': '1030'
+			'z-index': '1100'
 		};
 		this.showOnTop = false;
 	}

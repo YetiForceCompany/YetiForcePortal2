@@ -63,8 +63,8 @@ window.Base_EditView_Js = class {
 		this.form.on('click', '.js-select-reference', (e) => {
 			let containerField = $(e.currentTarget).closest('.fieldValue');
 			let url = 'index.php?module=' + this.getReferencedModuleName(containerField) + '&view=RecordList';
-			app.getRecordList(url, function (selectedItems) {
-				this.setReferenceFieldValue(containerField, selectedItems);
+			app.getRecordList(url, (selectedItems) => {
+				// this.setReferenceFieldValue(containerField, selectedItems);
 			});
 		});
 		this.form.find('.js-reference-list').on('change', (e) => {
