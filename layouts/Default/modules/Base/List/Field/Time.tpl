@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-Base-List-Field-Time -->
 <input type="text" data-format="{\App\User::getUser()->getPreferences('hour_format')}" class="form-control clockPicker timefieldinput"
-	   title="{\App\Language::translate($FIELD_MODEL->getFieldLabel(), $MODULE_NAME)}"
+	   title="{$FIELD_MODEL->getFieldLabel()}"
 	   name="filters[{$FIELD_MODEL->getName()}]" data-fieldinfo='{\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}'
 	   autocomplete="off" />
 <!-- tpl-Base-List-Field-Time -->
