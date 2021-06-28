@@ -20,6 +20,9 @@ use App\Purifier;
  */
 class DateField extends BaseField
 {
+	/** @var string Default operator. */
+	protected $defaultOperator = 'bw';
+
 	/** {@inheritdoc} */
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
