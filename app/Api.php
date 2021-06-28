@@ -109,7 +109,12 @@ class Api
 			if ($encryptedHeader && 1 == $response->getHeader('encrypted')[0]) {
 				$rawResponse = $this->decryptData($rawResponse);
 			}
-			$responseBody = Json::decode($rawResponse);
+			if ('application/json' == $headers['Accept']) {
+				$responseBody = Json::decode($rawResponse);
+			} else {
+				$responseBody = [];
+				$responseBody['result'] = $rawResponse;
+			}
 		} catch (\Throwable $e) {
 			if (Config::$apiErrorLogs || Config::$apiAllLogs) {
 				\App\Log::info([
@@ -201,7 +206,7 @@ class Api
 	{
 		$this->header = $this->getHeaders();
 		foreach ($headers as $key => $value) {
-			$this->header[strtolower($key)] = $value;
+			$this->header[$key] = $value;
 		}
 		return $this;
 	}
