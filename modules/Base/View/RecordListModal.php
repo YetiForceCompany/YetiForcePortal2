@@ -1,21 +1,24 @@
 <?php
 /**
- * List view class.
+ * Record list modal view file.
  *
  * @package View
  *
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
- * @author    Tomasz Kur <t.kur@yetiforce.com>
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
 namespace YF\Modules\Base\View;
 
-use YF\Modules\Base\Model\ListView as ListViewModel;
-
-class RecordList extends \App\Controller\Modal
+/**
+ * Record list modal view class.
+ */
+class RecordListModal extends \App\Controller\Modal
 {
+	/** {@inheritdoc} */
+	public $successBtn = '';
+
 	/** {@inheritdoc} */
 	protected function getModalSize(): string
 	{
@@ -32,16 +35,14 @@ class RecordList extends \App\Controller\Modal
 	public function process()
 	{
 		$moduleName = $this->request->getModule();
-		$listViewModel = ListViewModel::getInstance($moduleName)->loadRecordsList();
-		$this->viewer->assign('HEADERS', $listViewModel->getHeaders());
-		$this->viewer->assign('RECORDS', $listViewModel->getRecordsListModel());
-		$this->viewer->assign('COUNT', $listViewModel->getCount());
+		$listModel = \YF\Modules\Base\Model\RecordList::getInstance($moduleName, 'RecordList');
+		$this->viewer->assign('HEADERS', $listModel->getHeaders());
 		$this->viewer->view($this->processTplName(), $moduleName);
 	}
 
 	/** {@inheritdoc} */
 	public function processTplName(): string
 	{
-		return 'RecordList/RecordList.tpl';
+		return 'RecordListModal/RecordList.tpl';
 	}
 }

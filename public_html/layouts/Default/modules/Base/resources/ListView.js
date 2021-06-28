@@ -34,9 +34,9 @@ window.Base_ListView_Js = class {
 		});
 	}
 	/**
-	 * Register record events
+	 * Register records events
 	 */
-	registerRecordEvents() {
+	registerListEvents() {
 		const self = this;
 		this.table.on('click', '.js-delete-record', (e) => {
 			app.showNotifyConfirm(
@@ -100,7 +100,7 @@ window.Base_ListView_Js = class {
 		this.listForm = $('.js-form-container');
 		this.table = this.listForm.find('.js-list-view-table');
 		this.registerDataTable();
-		this.registerRecordEvents();
+		this.registerListEvents();
 		this.registerCustomView();
 	}
 };

@@ -43,7 +43,7 @@
 	{else}
 		{assign var=REFERENCE_MODULE_MODEL value=false}
 	{/if}
-	<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" title="{$FIELD_VALUE}" class="sourceField" data-type="entity" data-fieldtype="{$FIELD_MODEL->get('type')}" data-displayvalue="{$FIELD_VALUE}" data-fieldinfo='{$FIELD_INFO}' {if $IS_EDITABLE_READ_ONLY}readonly="readonly"{/if} />
+	<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" class="sourceField" data-type="entity" data-fieldtype="{$FIELD_MODEL->get('type')}" data-displayvalue="{$FIELD_VALUE}" data-fieldinfo='{$FIELD_INFO}' {if $IS_EDITABLE_READ_ONLY}readonly="readonly"{/if} />
 	<div class="input-group referenceGroup">
 		{if $REFERENCE_LIST_COUNT > 1}
 			<div class="input-group-prepend referenceModulesListGroup">
@@ -54,7 +54,7 @@
 				</select>
 			</div>
 		{/if}
-		<input type="text" data-display="{$FIELD_NAME}" title="{$FIELD_VALUE}" class="marginLeftZero form-control autoComplete"
+		<input type="text" data-display="{$FIELD_NAME}" class="marginLeftZero form-control autoComplete"
 			   tabindex="{$TABINDEX}" {if !empty($VALUE)}readonly="true"{/if} value="{$DISPLAY_VALUE}"
 			   data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 			   data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_SELECT_IN_MODAL',$MODULE_NAME)}"{/if} {if $IS_EDITABLE_READ_ONLY}disabled{/if}

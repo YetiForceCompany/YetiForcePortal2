@@ -427,9 +427,11 @@ var AppConnector,
 				return false;
 			}
 			$.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-				if (settings.jqXHR.responseJSON.error.message) {
+				if (settings.jqXHR.statusText && settings.jqXHR.responseJSON.error.message) {
 					alert(settings.jqXHR.statusText + '\r\n' + settings.jqXHR.responseJSON.error.message);
 					console.error(settings.jqXHR.responseJSON.error);
+				} else if (message) {
+					alert(message);
 				} else {
 					console.error(settings.jqXHR.responseJSON);
 				}
@@ -798,7 +800,7 @@ var AppConnector,
 					instance = this.modalInstances[modalId];
 				}
 				app.registerFieldsEvents(container);
-				this.registerDataTables(modalContainer.find('.dataTable'));
+				this.registerDataTables(modalContainer.find('.js-data-table'));
 				cb(modalContainer, instance, paramsObject);
 			});
 			$('body').append(container);
@@ -908,10 +910,10 @@ var AppConnector,
 				window.lastModalId = paramsObject.modalId;
 			}
 			if (data) {
-				this.showModalData(data, paramsObject, cb, url, sendByAjaxCb);
+				app.showModalData(data, paramsObject, cb, url, sendByAjaxCb);
 			} else {
 				$.get(url).done((response) => {
-					this.showModalData(response, paramsObject, cb, url, sendByAjaxCb);
+					app.showModalData(response, paramsObject, cb, url, sendByAjaxCb);
 				});
 			}
 		},
@@ -1021,9 +1023,10 @@ var AppConnector,
 			}
 		},
 		getRecordList: function (params, callback) {
-			app.showModalWindow(null, params, function () {
-				app.event.one('AfterSelectedRecordList', function (event, item) {
-					callback(item);
+			app.showModalWindow(null, params, function (container, modalInstance) {
+				modalInstance.addSelectCallBack((e) => {
+					callback(e);
+					app.hideModalWindow();
 				});
 			});
 		},

@@ -71,9 +71,12 @@ window.Base_EditView_Js = class {
 		});
 		this.form.on('click', '.js-select-reference', (e) => {
 			let containerField = $(e.currentTarget).closest('.fieldValue');
-			let url = 'index.php?module=' + this.getReferencedModuleName(containerField) + '&view=RecordList';
-			app.getRecordList(url, (selectedItems) => {
-				// this.setReferenceFieldValue(containerField, selectedItems);
+			let url = 'index.php?module=' + this.getReferencedModuleName(containerField) + '&view=RecordListModal';
+			app.getRecordList(url, (e) => {
+				this.setReferenceFieldValue(containerField, {
+					id: e.currentTarget.dataset.id,
+					name: e.currentTarget.dataset.name
+				});
 			});
 		});
 		this.form.find('.js-reference-list').on('change', (e) => {
