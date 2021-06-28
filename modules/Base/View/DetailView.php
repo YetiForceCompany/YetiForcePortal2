@@ -71,10 +71,16 @@ class DetailView extends \App\Controller\View
 	{
 		$moduleName = $this->request->getModule();
 		$moduleModel = $this->recordModel->getModuleModel();
+		$structure = [];
+		foreach ($moduleModel->getFieldsModels() as $fieldModel) {
+			if ($fieldModel->isViewable()) {
+				$structure[$fieldModel->get('blockId')][$fieldModel->getName()] = $fieldModel;
+			}
+		}
 		$this->tabs = $moduleModel->getTabsFromApi($this->recordModel->getId());
 		$this->viewer->assign('RECORD', $this->recordModel);
 		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
-		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
+		$this->viewer->assign('FIELDS_FORM', $structure);
 		$this->viewer->assign('FIELDS_HEADER', $this->recordModel->getCustomData()['headerFields'] ?? []);
 		$this->viewer->assign('DETAIL_LINKS', $this->detailViewModel->getLinksHeader());
 		$this->viewer->assign('BREADCRUMB_TITLE', $this->recordModel->getName());

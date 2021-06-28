@@ -26,9 +26,6 @@ class Module
 	/** @var array Fields. */
 	protected $fields = [];
 
-	/** @var array Fields. */
-	protected $fieldsForm;
-
 	/** @var array Data from API fields. */
 	protected $apiFields;
 
@@ -222,26 +219,13 @@ class Module
 	}
 
 	/**
-	 * Get form fields models.
-	 *
-	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
-	 */
-	public function getFormFields(): array
-	{
-		if (empty($this->fieldsForm)) {
-			$this->loadFieldsModels();
-		}
-		return $this->fieldsForm;
-	}
-
-	/**
 	 * Get fields models.
 	 *
 	 * @return \YF\Modules\Base\FieldTypes\BaseField[]
 	 */
 	public function getFieldsModels(): array
 	{
-		if (empty($this->fieldsForm)) {
+		if (null === $this->fieldsModels) {
 			$this->loadFieldsModels();
 		}
 		return $this->fieldsModels;
@@ -257,16 +241,10 @@ class Module
 		if (!isset($this->apiFields['fields'])) {
 			$this->loadFieldsFromApi();
 		}
-		$fields = $fieldsForm = [];
+		$this->fieldsModels = [];
 		foreach ($this->apiFields['fields'] as $fieldName => $field) {
 			$this->fieldsModels[$fieldName] = $fieldInstance = Field::getInstance($this->moduleName, $field);
-			if ($field['isEditable']) {
-				$fieldsForm[$field['blockId']][$fieldName] = $fieldInstance;
-			}
-			$fields[$fieldName] = $fieldInstance;
 		}
-		$this->fieldsModels = $fields;
-		$this->fieldsForm = $fieldsForm;
 	}
 
 	/**

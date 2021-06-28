@@ -43,9 +43,15 @@ class EditView extends \App\Controller\View
 			$recordModel = \YF\Modules\Base\Model\Record::getInstanceById($moduleName, $this->request->getInteger('record'), ['x-raw-data' => 1]);
 		}
 		$moduleModel = $recordModel->getModuleModel();
+		$structure = [];
+		foreach ($moduleModel->getFieldsModels() as $fieldModel) {
+			if ($fieldModel->isEditable()) {
+				$structure[$fieldModel->get('blockId')][$fieldModel->getName()] = $fieldModel;
+			}
+		}
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
-		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
+		$this->viewer->assign('FIELDS_FORM', $structure);
 		$this->viewer->assign('BLOCKS', $moduleModel->getBlocks());
 		$this->viewer->assign('BREADCRUMB_TITLE', $recordModel->getName());
 		$this->loadCustomData($recordModel);

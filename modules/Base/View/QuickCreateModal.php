@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Rados³aw Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\View;
@@ -55,9 +56,15 @@ class QuickCreateModal extends \App\Controller\Modal
 		$moduleName = $this->request->getModule();
 		$recordModel = \YF\Modules\Base\Model\Record::getInstance($moduleName);
 		$moduleModel = $recordModel->getModuleModel();
+		$structure = [];
+		foreach ($moduleModel->getFieldsModels() as $fieldModel) {
+			if ($fieldModel->isEditable()) {
+				$structure[$fieldModel->get('blockId')][$fieldModel->getName()] = $fieldModel;
+			}
+		}
 		$this->viewer->assign('RECORD', $recordModel);
 		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
-		$this->viewer->assign('FIELDS_FORM', $moduleModel->getFormFields());
+		$this->viewer->assign('FIELDS_FORM', $structure);
 		$this->viewer->assign('BLOCKS', $moduleModel->getBlocks());
 		$this->loadCustomData($recordModel);
 		$this->viewer->assign('HIDDEN_FIELDS', $this->hiddenFields);
