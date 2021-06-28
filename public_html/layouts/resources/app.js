@@ -35,7 +35,10 @@ var App = (window.App = {
 			 */
 			createRecord(moduleName, params = {}) {
 				let url = 'index.php?module=' + moduleName + '&view=QuickCreateModal';
-				if (app.getViewName() === 'Detail' || (app.getViewName() === 'Edit' && app.getRecordId() !== undefined)) {
+				if (
+					app.getViewName() === 'DetailView' ||
+					(app.getViewName() === 'EditView' && app.getRecordId() !== undefined)
+				) {
 					url += '&sourceModule=' + app.getModuleName();
 					url += '&sourceRecord=' + app.getRecordId();
 				}
@@ -133,6 +136,16 @@ var AppConnector,
 		 */
 		getViewName: function () {
 			return app.getMainParams('view');
+		},
+		/**
+		 * Function returns the record id
+		 */
+		getRecordId: function () {
+			let recordId;
+			if ($.inArray(this.getViewName(), ['EditView', 'DetailView']) !== -1) {
+				recordId = this.getMainParams('recordId');
+			}
+			return recordId;
 		},
 		/**
 		 * Function returns the javascript controller based on the current view

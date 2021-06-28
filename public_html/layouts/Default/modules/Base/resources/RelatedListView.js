@@ -46,6 +46,29 @@ window.Base_RelatedListView_Js = class {
 			});
 			this.dataTable.ajax.reload();
 		});
+		this.container.on('click', '.js-create-related-record', (e) => {
+			let url = $(e.currentTarget).data('url');
+			const progress = $.progressIndicator({ blockInfo: { enabled: true } });
+			console.log(url);
+			let params = {
+				callbackAfterSave: (response) => {
+					console.log(response);
+					this.dataTable.ajax.reload();
+				},
+				callbackAfterShownModal: (container) => {
+					let form = container.find('.js-edit-view-form');
+					console.log(container);
+					console.log(form);
+				}
+			};
+			App.Components.QuickCreate.getForm(url, params).done((data) => {
+				console.log(data);
+				progress.progressIndicator({
+					mode: 'hide'
+				});
+				App.Components.QuickCreate.showModal(data, params);
+			});
+		});
 	}
 	/**
 	 * Register modal events.
@@ -54,6 +77,6 @@ window.Base_RelatedListView_Js = class {
 		this.container = container;
 		this.table = this.container.find('.js-list-view-table');
 		this.registerDataTable();
-		// this.registerRecordEvents();
+		this.registerRecordEvents();
 	}
 };

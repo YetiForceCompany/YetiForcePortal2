@@ -66,7 +66,7 @@
 			<button class="btn btn-light js-select-reference" type="button" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if}>
 				<span class="fas fa-search" title="{\App\Language::translate('LBL_SELECT', $MODULE_NAME)}"></span>
 			</button>
-			{if $REFERENCE_MODULE_MODEL && $REFERENCE_MODULE_MODEL->isQuickCreateSupported()}
+			{if $REFERENCE_MODULE_MODEL && $REFERENCE_MODULE_MODEL->isPermitted('CreateView')}
 				<button class="btn btn-light js-add-reference" type="button" data-module-name="{$REFERENCE_LIST[0]}" tabindex="{$TABINDEX}" {if $IS_EDITABLE_READ_ONLY}disabled{/if} data-js="click">
 					<span class="fas fa-plus" title="{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}"></span>
 				</button>

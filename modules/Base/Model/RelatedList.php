@@ -127,6 +127,8 @@ class RelatedList extends AbstractListView
 	 */
 	public function getActions(): array
 	{
+		$record = $this->request->getInteger('record');
+		$relationId = $this->request->getInteger('relationId');
 		$moduleModel = Module::getInstance($this->relatedModuleName);
 		$links = [];
 		$actions = $this->getRelation('actions');
@@ -134,21 +136,23 @@ class RelatedList extends AbstractListView
 			$links[] = [
 				'label' => 'BTN_SELECT_RECORD',
 				'moduleName' => $this->relatedModuleName,
-				'data' => ['module-name' => $this->relatedModuleName, 'source-record' => $this->request->getInteger('record'), 'source-module' => $this->getModuleName()],
+				'data' => ['url' => $this->relatedModuleName, 'source-record' => $record, 'source-module' => $this->getModuleName()],
 				'icon' => 'fas fa-search',
-				'class' => 'btn-sm btn-outline-primary js-quick-create',
+				'class' => 'btn-sm btn-outline-primary js-search-records',
 				'showLabel' => 1,
 			];
 		}
-		if (\in_array('add', $actions) && $moduleModel->isQuickCreateSupported()) {
-			$links[] = [
-				'label' => 'BTN_ADD_RECORD',
-				'moduleName' => $this->relatedModuleName,
-				'data' => ['module-name' => $this->relatedModuleName, 'source-record' => $this->request->getInteger('record'), 'source-module' => $this->getModuleName()],
-				'icon' => 'fas fa-plus',
-				'class' => 'btn-sm btn-outline-success js-quick-create',
-				'showLabel' => 1,
-			];
+		if (\in_array('add', $actions)) {
+			if ($moduleModel->isPermitted('CreateView')) {
+				$links[] = [
+					'label' => 'BTN_ADD_RECORD',
+					'moduleName' => $this->relatedModuleName,
+					'data' => ['url' => "index.php?module={$this->relatedModuleName}&view=QuickCreateModal&sourceModule={$this->getModuleName()}&sourceRecord={$record}&relationOperation=true&relationId={$relationId}"],
+					'icon' => 'fas fa-plus',
+					'class' => 'btn-sm btn-outline-success js-create-related-record',
+					'showLabel' => 1,
+				];
+			}
 		}
 		return $links;
 	}

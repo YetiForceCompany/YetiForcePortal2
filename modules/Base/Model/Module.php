@@ -294,14 +294,4 @@ class Module
 	{
 		return "index.php?module={$this->moduleName}&view={$this->getDefaultView()}";
 	}
-
-	/**
-	 * Function to check is quick create supported.
-	 *
-	 * @return bool
-	 */
-	public function isQuickCreateSupported(): bool
-	{
-		return $this->isPermitted('IsQuickCreateSupported');
-	}
 }
