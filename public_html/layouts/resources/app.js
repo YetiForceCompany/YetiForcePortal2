@@ -35,10 +35,7 @@ var App = (window.App = {
 			 */
 			createRecord(moduleName, params = {}) {
 				let url = 'index.php?module=' + moduleName + '&view=QuickCreateModal';
-				if (
-					app.getViewName() === 'DetailView' ||
-					(app.getViewName() === 'EditView' && app.getRecordId() !== undefined)
-				) {
+				if (app.getViewName() === 'DetailView' || (app.getViewName() === 'EditView' && app.getRecordId())) {
 					url += '&sourceModule=' + app.getModuleName();
 					url += '&sourceRecord=' + app.getRecordId();
 				}

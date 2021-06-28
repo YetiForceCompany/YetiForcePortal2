@@ -51,7 +51,16 @@ window.Base_EditView_Js = class {
 			let element = $(e.currentTarget);
 			let moduleName = element.data('moduleName');
 			let containerField = element.closest('.fieldValue');
+			let formData = this.form.serializeFormData();
+			for (let i in formData) {
+				if (!formData[i] || $.inArray(i, ['_csrf', 'action', '_fromView']) != -1) {
+					delete formData[i];
+				}
+			}
 			App.Components.QuickCreate.createRecord(moduleName, {
+				data: {
+					sourceRecordData: formData
+				},
 				callbackAfterSave: (response) => {
 					this.setReferenceFieldValue(containerField, response);
 				}

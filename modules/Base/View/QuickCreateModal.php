@@ -73,7 +73,7 @@ class QuickCreateModal extends \App\Controller\Modal
 	 */
 	public function loadCustomData(\YF\Modules\Base\Model\Record $recordModel): void
 	{
-		if ($this->request->getBoolean('relationOperation')) {
+		if ($this->request->has('relationOperation')) {
 			$relationId = $this->request->getInteger('relationId');
 			$sourceModule = $this->request->getByType('sourceModule', \App\Purifier::ALNUM);
 			$sourceRecord = $this->request->getInteger('sourceRecord');
@@ -85,6 +85,10 @@ class QuickCreateModal extends \App\Controller\Modal
 			$this->viewer->assign('RELATION_ID', $relationId);
 			$this->viewer->assign('SOURCE_MODULE', $sourceModule);
 			$this->viewer->assign('SOURCE_RECORD', $sourceRecord);
+		} elseif ($this->request->has('sourceRecordData')) {
+			$this->hiddenFields = $recordModel->loadSourceBasedData([
+				'sourceRecordData' => $this->request->getRaw('sourceRecordData'),
+			]);
 		}
 	}
 
@@ -108,5 +112,11 @@ class QuickCreateModal extends \App\Controller\Modal
 			$files[] = ['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true];
 		}
 		return $this->convertScripts($files, 'js');
+	}
+
+	/** {@inheritdoc} */
+	public function validateRequest()
+	{
+		$this->request->validateWriteAccess();
 	}
 }

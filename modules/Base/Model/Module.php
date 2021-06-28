@@ -124,7 +124,7 @@ class Module
 	 */
 	public function loadSourceBasedData(array $data): array
 	{
-		$response = Api::getInstance()->call($this->moduleName . '/RecordSource?' . http_build_query($data));
+		$response = Api::getInstance()->call($this->moduleName . '/RecordSource', $data, 'PUT');
 		$response['hiddenFields'] = $response['fieldsForm'] = [];
 		foreach ($response['data'] as $fieldName => $value) {
 			if (isset($this->fieldsModels[$fieldName])) {

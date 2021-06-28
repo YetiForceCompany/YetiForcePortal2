@@ -282,6 +282,7 @@ class BaseField extends \App\BaseModel
 	 */
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
+		$value = '';
 		if ($recordModel && '' !== $recordModel->get($this->getName())) {
 			$value = $recordModel->getRawValue($this->getName());
 		} elseif (empty($recordModel->getId())) {
