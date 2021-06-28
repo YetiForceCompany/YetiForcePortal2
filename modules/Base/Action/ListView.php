@@ -32,13 +32,14 @@ class ListView extends \App\Controller\Action
 			$listModel->setOrder($columns[$order['column']], strtoupper($order['dir']));
 		}
 		if ($this->request->has('filters') && !$this->request->isEmpty('filters')) {
+			$moduleModel = \YF\Modules\Base\Model\Module::getInstance($this->moduleName);
 			$conditions = [];
 			foreach ($this->request->getArray('filters') as $fieldName => $value) {
 				if ('' !== $value) {
 					$conditions[] = [
 						'fieldName' => $fieldName,
-						'value' => $value,
-						'operator' => 'a',
+						'value' => \is_array($value) ? implode('##', $value) : $value,
+						'operator' => $moduleModel->getFieldModel($fieldName)->getOperator(),
 					];
 				}
 			}

@@ -26,6 +26,9 @@ class BaseField extends \App\BaseModel
 	/** @var int TabIndex default sequence number. */
 	public static $tabIndexDefaultSeq = 0;
 
+	/** @var string Default operator. */
+	protected $defaultOperator = 'a';
+
 	/**
 	 * Function to set the name of the module to which the record belongs.
 	 *
@@ -253,6 +256,20 @@ class BaseField extends \App\BaseModel
 	public function getHeaderValue(): array
 	{
 		return $this->get('header_field');
+	}
+
+	/**
+	 * Gets operator.
+	 *
+	 * @return string
+	 */
+	public function getOperator(): string
+	{
+		$operator = $this->defaultOperator;
+		if (\in_array($this->get('type'), ['modules', 'time', 'userCreator', 'owner', 'picklist', 'tree', 'boolean', 'fileLocationType', 'userRole', 'multiReferenceValue', 'inventoryLimit'])) {
+			$operator = 'e';
+		}
+		return $operator;
 	}
 
 	/**
