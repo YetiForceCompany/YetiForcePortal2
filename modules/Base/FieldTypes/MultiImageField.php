@@ -35,11 +35,24 @@ class MultiImageField extends BaseField
 		}
 		$result = '<div class="c-multi-image__result" style="width:100%">';
 		foreach ($value as $image) {
-			$mime = $image['type'];
-			$content = \App\Api::getInstance()->setCustomHeaders(['Accept' => $mime])->call('Files', $image['postData'], 'put');
-			$base = base64_encode($content);
-			$result .= "<div style=\"width:80px\" class=\"ml-1 d-inline-block mr-1\"><img src=\"data:{$mime};base64,{$base}\"/></div>";
+			$result .= '<div style="width:80px" class="ml-1 d-inline-block mr-1">' . $this->getImg($image) . '</div>';
 		}
 		return $result . '</div>';
+	}
+
+	/**
+	 * Get IMG element.
+	 *
+	 * @param array  $image
+	 * @param string $class
+	 *
+	 * @return string
+	 */
+	public function getImg(array $image, string $class = ''): string
+	{
+		$mime = $image['type'];
+		$content = \App\Api::getInstance()->setCustomHeaders(['Accept' => $mime])->call('Files', $image['postData'], 'put');
+		$base = base64_encode($content);
+		return "<img class=\"{$class}\" src=\"data:{$mime};base64,{$base}\"/>";
 	}
 }

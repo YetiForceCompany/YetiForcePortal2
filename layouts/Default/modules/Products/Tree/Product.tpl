@@ -18,7 +18,9 @@
                         </span>
                     </div>
                 {else}
-                    <img class="product-image" src="data:image/jpeg;base64,{$IMAGES[0]}" alt="{$RECORD->getDisplayValue('productname')}" title="{$RECORD->getDisplayValue('productname')}" />
+                    <div class="product-no-image m-auto" title="{$RECORD->getDisplayValue('productname')}">
+						{$RECORD->getModuleModel()->getFieldModel('imagename')->getImg($IMAGES[0])}
+					</div>
                 {/if}
             </div>
         </div>

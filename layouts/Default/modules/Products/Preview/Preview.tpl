@@ -32,7 +32,7 @@
                     <div class="carousel-inner">
                         {foreach from=$IMAGES item=IMAGE name=images}
                              <div class="carousel-item {if $smarty.foreach.images.index eq 0}active{/if}" >
-                                <img class="d-block w-100" src="data:image/jpeg;base64,{$IMAGE}" alt="First slide">
+                            	{$RECORD->getModuleModel()->getFieldModel('imagename')->getImg($IMAGE, 'd-block w-100')}
                             </div>
                         {/foreach}
                     </div>
