@@ -40,7 +40,7 @@
 			{assign var=ITERATION value=$ITERATION+1}
 		{/if}
 	{/foreach}
-	<div class="c-form__action-panel">
+	<div class="c-form__action-panel d-flex justify-content-center">
 		<button type="button" class="btn btn-success mr-1 js-form-submit" data-js="click">
 			<span class="fas fa-check mr-2"></span>
 			{\App\Language::translate('BTN_SAVE', $MODULE_NAME)}
