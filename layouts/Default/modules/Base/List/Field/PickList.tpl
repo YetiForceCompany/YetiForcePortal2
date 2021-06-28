@@ -2,7 +2,7 @@
 {strip}
 <!-- tpl-Base-List-Field-Picklist -->
 <div class="input-group">
-	<select class="select2 form-control js-filter-field" name="filters[{$FIELD_MODEL->getName()}]" multiple="multiple" title="{$FIELD_MODEL->getFieldLabel()}" data-fieldinfo='{\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}'>
+	<select name="filters[{$FIELD_MODEL->getName()}]" class="select2 form-control js-filter-field" multiple="multiple" title="{$FIELD_MODEL->getFieldLabel()}" data-fieldinfo='{\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}'>
 		{foreach item=PICKLIST_LABEL key=PICKLIST_KEY from=$FIELD_MODEL->getPicklistValues()}
 			<option value="{\App\Purifier::encodeHtml($PICKLIST_KEY)}">{$PICKLIST_LABEL}</option>
 		{/foreach}
