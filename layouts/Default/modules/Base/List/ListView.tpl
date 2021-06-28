@@ -77,8 +77,9 @@
 							<button type="button" class="btn btn-light btn-sm js-clear-search" data-js="click"><span class="fas fa-times"></button>
 						</td>
 						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
+							{assign var=FIELD value=$FIELDS[$HEADER_NAME]}
 							<td>
-								<input type="text" name="filters[{$HEADER_NAME}]" class="form-control js-filter-field">
+								{include file=\App\Resources::templatePath($FIELD->getTemplatePath('List'), $MODULE_NAME) FIELD_MODEL=$FIELD}
 							</td>
 						{/foreach}
 					</tr>
