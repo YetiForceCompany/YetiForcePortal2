@@ -38,7 +38,7 @@ abstract class Modal extends View
 	/** @var bool Modal ID. */
 	protected $modalId;
 
-	/** @var bool Modal data. */
+	/** @var array Modal data. */
 	protected $modalData = [];
 
 	/** {@inheritdoc} */
