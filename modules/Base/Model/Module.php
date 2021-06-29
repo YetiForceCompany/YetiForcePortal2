@@ -263,13 +263,17 @@ class Module
 			\App\Cache::save('moduleTabs', $this->moduleName, $data, \App\Cache::LONG);
 		}
 		$url = "index.php?module={$this->moduleName}&view=DetailView&record={$record}";
-		foreach ($data['base'] as &$row) {
-			$row['tabId'] = $row['type'];
-			$row['url'] = "{$url}&tabId={$row['tabId']}&mode={$row['type']}";
+		if (!empty($data['base'])) {
+			foreach ($data['base'] as &$row) {
+				$row['tabId'] = $row['type'];
+				$row['url'] = "{$url}&tabId={$row['tabId']}&mode={$row['type']}";
+			}
 		}
-		foreach ($data['related'] as &$row) {
-			$row['tabId'] = 'rel' . $row['relationId'];
-			$row['url'] = "{$url}&tabId={$row['tabId']}&mode=relatedList&relationId={$row['relationId']}&relatedModuleName={$row['relatedModuleName']}";
+		if (!empty($data['related'])) {
+			foreach ($data['related'] as &$row) {
+				$row['tabId'] = 'rel' . $row['relationId'];
+				$row['url'] = "{$url}&tabId={$row['tabId']}&mode=relatedList&relationId={$row['relationId']}&relatedModuleName={$row['relatedModuleName']}";
+			}
 		}
 		return $data;
 	}
