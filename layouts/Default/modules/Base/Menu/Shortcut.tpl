@@ -11,8 +11,8 @@
 {else}
 	{assign var=HASCHILDS value='false'}
 {/if}
-<li role="presentation" class="tpl-menu-Shortcut c-menu__item js-menu__item nav-item menuShortcut" data-id="{$ITEM_MENU['id']}">
-	<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} hasIcon js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="{$ACTIVE}" aria-controls="submenu-{$ITEM_MENU['id']}">
+<li role="presentation" class="c-menu__item js-menu__item nav-item menuShortcut" data-id="{$ITEM_MENU['id']}">
+	<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} hasIcon js-submenu-toggler" {if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button"{/if} href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="{$ACTIVE}" aria-controls="submenu-{$ITEM_MENU['id']}" target="_blank" rel="noreferrer noopener">
 		<span class="c-menu__item__icon {$ITEM_MENU['icon']}" aria-hidden="true"></span>
 		<span class="c-menu__item__text" title="{App\Purifier::encodeHTML($ITEM_MENU['label'])}">
 		{App\Purifier::encodeHTML($ITEM_MENU['label'])}
