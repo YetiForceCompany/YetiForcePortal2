@@ -25,7 +25,7 @@ class Cache
 	/** @var int Short time data storage */
 	const SHORT = 60;
 
-	/** @var int The prefix for cache keys. */
+	/** @var string The prefix for cache keys. */
 	private static $prefix = 'YTP-';
 
 	/** @var \App\Cache\Base Cache instance */
