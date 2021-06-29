@@ -29,6 +29,9 @@ class BaseField extends \App\BaseModel
 	/** @var string Default operator. */
 	protected $defaultOperator = 'a';
 
+	/** @var string[] Not supported field types. */
+	protected $notSupportedToEdit = ['multiCurrency', 'serverAccess', 'multiReference', 'barcode', 'changesJson', 'iban', 'token', 'currencyInventory', 'twitter', 'multiReferenceValue', 'password', 'sharedOwner', 'taxes'];
+
 	/**
 	 * Function to set the name of the module to which the record belongs.
 	 *
@@ -69,7 +72,7 @@ class BaseField extends \App\BaseModel
 	 */
 	public function isEditable()
 	{
-		return $this->get('isEditable');
+		return $this->get('isEditable') && !\in_array($this->get('type'), $this->notSupportedToEdit);
 	}
 
 	/**
