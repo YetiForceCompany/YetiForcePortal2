@@ -36,6 +36,11 @@ Installation
 
 4. Adjust configuration
 
+## 💻 Demo
+
+- https://gitdeveloper.yetiforce.com/portal/
+- https://gitdevportal.yetiforce.com/
+
 ## 🏳️ Customer Portal Languages
 
 Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
@@ -43,12 +48,6 @@ Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
 <a href="https://github.com/YetiForceCompany/YetiForcePortal2Languages">
   <img src="https://badges.awesome-crowdin.com/translation-13499741-354003.png" />
 </a>
-
-
-## 💻 Demo
-
-- https://gitdeveloper.yetiforce.com/portal/
-- https://gitdevportal.yetiforce.com/
 
 ## 👥 Contributors
 
