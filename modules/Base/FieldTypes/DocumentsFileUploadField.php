@@ -23,19 +23,16 @@ class DocumentsFileUploadField extends BaseField
 			return '';
 		}
 		if (\is_array($value)) {
-			$value = $value['name'];
-		}
-		return $value;
-	}
-
-	/** {@inheritdoc} */
-	public function getListDisplayValue($value, \YF\Modules\Base\Model\Record $recordModel = null): string
-	{
-		if (empty($value)) {
-			return '';
-		}
-		if (\is_array($value)) {
-			$value = $value['name'];
+			if (isset($value['url'])) {
+				$url = $value['url'];
+				if (\mb_strlen($url) > 50) {
+					$url = \App\TextParser::textTruncate($url, 50);
+				}
+				$value = '<a href="' . \App\Purifier::encodeHtml($value['url']) . '" title="' . \App\Purifier::encodeHtml($value['url']) . '" target="_blank" rel="noreferrer noopener">' . $url . '</a>';
+			} else {
+				$url = 'file.php?' . http_build_query($value['postData']);
+				$value = '<a href="' . $url . '" title="' . \App\Purifier::encodeHtml($value['name']) . '">' . \App\Purifier::encodeHtml($value['name']) . '</a>';
+			}
 		}
 		return $value;
 	}

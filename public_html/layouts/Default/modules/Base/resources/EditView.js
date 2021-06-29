@@ -196,6 +196,15 @@ window.Base_EditView_Js = class {
 			progress.progressIndicator({ mode: 'hide' });
 			return;
 		}
+		// form.serializeFormData();
+		// let formData = new FormData(form[0]);
+		// AppConnector.request({
+		// 	url: 'index.php',
+		// 	type: 'POST',
+		// 	data: formData,
+		// 	processData: false,
+		// 	contentType: false
+		// })
 		AppConnector.request(formData)
 			.done((response) => {
 				progress.progressIndicator({ mode: 'hide' });
