@@ -57,14 +57,15 @@ var App = (window.App = {
 			 */
 			getForm(url, params = {}) {
 				const aDeferred = $.Deferred();
-				let requestParams;
-				requestParams = url;
+				let data = {};
 				if (typeof params.data !== 'undefined') {
-					requestParams = {};
-					requestParams['data'] = params.data;
-					requestParams['url'] = url;
+					data = params.data;
 				}
-				AppConnector.request(requestParams).done(function (data) {
+				AppConnector.request({
+					type: 'POST',
+					url: url,
+					data: data
+				}).done(function (data) {
 					aDeferred.resolve(data);
 				});
 				return aDeferred.promise();
@@ -1315,6 +1316,10 @@ var AppConnector,
 			App.Fields.Date.register(container);
 			App.Fields.DateTime.register(container);
 			App.Fields.Date.registerRange(container);
+			App.Fields.Text.Editor.register(container.find('.js-editor'), {
+				height: '5em',
+				toolbar: 'Min'
+			});
 		}
 	};
 CKEDITOR.disableAutoInline = true;

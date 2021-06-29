@@ -8,7 +8,7 @@
 				<div class="{$CSS_CARD_CONTAINER}">
 					<div class="{$CSS_CARD_CONTENT} mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h6 class="mb-0 text-truncate"><span class="fas fa-shopping-cart mr-2"></span>{\App\Language::translate('LBL_SHOPPING_CART', $MODULE_NAME)}</h6>
+							<h4 class="mb-0 text-truncate"><span class="fas fa-shopping-cart mr-2"></span>{\App\Language::translate('LBL_SHOPPING_CART', $MODULE_NAME)}</h4>
 						</div>
 						<div class="col-6 pl-3 d-flex align-items-center justify-content-end fs-80">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
@@ -24,7 +24,7 @@
 				<form class="js-form-address mb-0" data-js="container">
 					<div class="{$CSS_CARD_CONTAINER} my-3">
 						<div class="{$CSS_CARD_CONTENT}">
-							<h6 class="col-12 mb-4"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h6>
+							<h4 class="col-12 mb-4"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h4>
 							{if !empty($ADDRESSES)}
 								{if empty($ADDRESSES['data'])}
 									<div class="alert alert-warning w-100" role="alert">
@@ -64,7 +64,7 @@
 					</div>
 					<div class="{$CSS_CARD_CONTAINER} my-3">
 						<div class="{$CSS_CARD_CONTENT}">
-							<h6 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h6>
+							<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
 						</div>
 						<div class="m-2">
 							<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
@@ -72,7 +72,7 @@
 					</div>
 					<div class="{$CSS_CARD_CONTAINER}">
 						<div class="{$CSS_CARD_CONTENT}">
-							<h6 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h6>
+							<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
 						</div>
 						<div class="px-3">
 							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">

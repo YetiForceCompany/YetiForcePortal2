@@ -242,7 +242,7 @@ abstract class View extends Base
 		$action = $this->request->getAction();
 		$languageHandlerShortName = \App\Language::getShortLanguageName();
 		$fileName = ["libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-$languageHandlerShortName.js"];
-		if (!file_exists(PUBLIC_DIRECTORY . $fileName[0])) {
+		if (!file_exists(ROOT_DIRECTORY . "/public_html/{$fileName[0]}")) {
 			$fileName = ['libraries/jQuery-Validation-Engine/js/languages/jquery.validationEngine-en.js'];
 		}
 		$files = [

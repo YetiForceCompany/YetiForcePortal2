@@ -32,7 +32,7 @@ class Composer
 	 * @var array
 	 */
 	public static $copyDirectories = [
-		'libraries/ckeditor-image-to-base' => 'vendor/ckeditor/ckeditor/plugins/ckeditor-image-to-base'
+		'libraries/ckeditor-image-to-base' => 'vendor/ckeditor/ckeditor/plugins/ckeditor-image-to-base',
 	];
 
 	/**

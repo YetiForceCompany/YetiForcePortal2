@@ -2,7 +2,7 @@
 {strip}
     <div class="tpl-Products-ShoppingCart-Summary p-3 box-shadow border rounded product-summary js-summary-container">
         <div class="row">
-            <h6 class="col-12 mb-3"><span class="fas fa-list-alt mr-2"></span>{\App\Language::translate('LBL_SUMMARY', $MODULE_NAME)}</h6>
+            <h4 class="col-12 mb-3"><span class="fas fa-list-alt mr-2"></span>{\App\Language::translate('LBL_SUMMARY', $MODULE_NAME)}</h4>
         </div>
         <div class="d-flex flex-column small">
             <div class="mb-2 d-flex justify-content-between">
@@ -26,7 +26,7 @@
                 <div class="font-weight-bold text-nowrap js-total-price-gross">{\App\Fields\Currency::formatToDisplay($TOTAL_PRICE_GROSS)}</div>
             </div>
         </div>
-        <div class="row p-2">
+        <div class="row p-2 pt-5">
             {include file=\App\Resources::templatePath("components/{$VIEW}Btn.tpl", $MODULE_NAME)}
         </div>
     </div>

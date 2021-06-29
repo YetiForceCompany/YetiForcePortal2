@@ -70,7 +70,8 @@
     "LBL_TO": "to",
     "LBL_SEARCH": "Search",
     "LBL_ADD_YOUR_COMMENT_HERE": "Add your comment here...",
-    "LBL_ADD": "Add"
+    "LBL_ADD": "Add",
+    "LBL_ADD_TO_CART": "Add to cart"
   },
   "js": {
     "JS_YES": "Yes",

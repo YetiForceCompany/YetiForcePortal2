@@ -80,6 +80,16 @@ class DetailView
 	public function getLinksHeader(): array
 	{
 		$links = [];
+		if (\Conf\Modules\Products::$shoppingMode && $this->record->isInventory()) {
+			$links[] = [
+				'label' => 'LBL_ADD_TO_CART',
+				'moduleName' => $this->moduleName,
+				'href' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
+				'icon' => 'fas fa-shopping-cart',
+				'class' => 'btn-sm btn-primary mr-4',
+				'showLabel' => 1,
+			];
+		}
 		if (\YF\Modules\Base\Model\Module::isPermittedByModule($this->moduleName, 'ExportPdf') && \App\Pdf::getTemplates($this->moduleName, $this->record->getId())) {
 			$links[] = [
 				'label' => 'BTN_EXPORT_PDF',
@@ -96,16 +106,6 @@ class DetailView
 				'moduleName' => $this->moduleName,
 				'href' => $this->record->getEditViewUrl(),
 				'icon' => 'fas fa-edit',
-				'class' => 'btn-sm btn-success',
-				'showLabel' => 1,
-			];
-		}
-		if ($this->record->isInventory()) {
-			$links[] = [
-				'label' => 'BTN_EDIT',
-				'moduleName' => $this->moduleName,
-				'href' => 'index.php?module=Products&view=ShoppingCart&reference_id=' . $this->record->getId() . '&reference_module=' . $this->moduleName,
-				'icon' => 'fas fa-shopping-cart',
 				'class' => 'btn-sm btn-success',
 				'showLabel' => 1,
 			];

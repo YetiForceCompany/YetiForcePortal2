@@ -49,7 +49,7 @@ class Headers
 	public $csp = [
 		'default-src' => '\'self\' blob:',
 		'img-src' => '\'self\' data:',
-		'script-src' => '\'self\' blob:',
+		'script-src' => '\'self\' \'unsafe-inline\' blob:',
 		'form-action' => '\'self\'',
 		'frame-ancestors' => '\'self\'',
 		'frame-src' => '\'self\' mailto: tel:',
@@ -110,9 +110,9 @@ class Headers
 		if ($keys = (\App\Config::$hpkpKeysHeader ?? [])) {
 			$this->headers['Public-Key-Pins'] = 'pin-sha256="' . implode('"; pin-sha256="', $keys) . '"; max-age=10000;';
 		}
-		if ($nonce = \App\Session::get('CSP_TOKEN')) {
-			$this->csp['script-src'] .= " 'nonce-{$nonce}'";
-		}
+		// if ($nonce = \App\Session::get('CSP_TOKEN')) {
+		// 	$this->csp['script-src'] .= " 'nonce-{$nonce}'";
+		// }
 		$this->headers['Access-Control-Allow-Origin'] = \App\Config::$portalUrl;
 	}
 

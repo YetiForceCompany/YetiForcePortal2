@@ -11,7 +11,7 @@
 				<div class="{$CSS_CARD_CONTAINER}">
 					<div class="{$CSS_CARD_CONTENT} mb-4">
 						<div class="col-6 d-flex align-items-center">
-							<h6 class="mb-0"><span class="fas fa-check mr-2"></span>{\App\Language::translate('LBL_VIEW_PROCEEDTOCHECKOUT', $MODULE_NAME)}</h6>
+							<h4 class="mb-0"><span class="fas fa-check mr-2"></span>{\App\Language::translate('LBL_VIEW_PROCEEDTOCHECKOUT', $MODULE_NAME)}</h4>
 						</div>
 						<div class="col-6 d-flex align-items-center justify-content-end">
 							{include file=\App\Resources::templatePath("Pagination.tpl", $MODULE_NAME)}
@@ -26,7 +26,7 @@
 				</div>
 				<div class="{$CSS_CARD_CONTAINER} my-3">
 					<div class="{$CSS_CARD_CONTENT}">
-							<h6 class="col-12 mb-0"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h6>
+						<h4 class="col-12 mb-0"><span class="fas fa-address-card mr-2"></span>{\App\Language::translate('LBL_ADDRESS', $MODULE_NAME)}</h4>
 					</div>
 					<div class="px-3">
 						{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
@@ -44,7 +44,7 @@
 				<div class="{$CSS_CARD_CONTAINER} my-3">
 					<div class="{$CSS_CARD_CONTENT}">
 						<div class="col-6 d-flex align-items-center">
-								<h6 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h6>
+							<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
 						</div>
 					</div>
 					<div class="px-3 pt-3 pb-2">
@@ -54,7 +54,7 @@
 				<div class="{$CSS_CARD_CONTAINER}">
 					<div class="{$CSS_CARD_CONTENT}">
 						<div class="col-6 d-flex align-items-center">
-								<h6 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h6>
+							<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
 						</div>
 					</div>
 					{if $SELECTED_PAYMENTS}
