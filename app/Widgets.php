@@ -46,7 +46,7 @@ final class Widgets
 			\App\Cache::save('Widgets', $this->moduleName, $widgetsData, \App\Cache::LONG);
 		}
 		foreach ($widgetsData as $widgetData) {
-			if (!\in_array($widgetData['type'], ['RelatedModule', 'Updates', 'Comments'])) {
+			if (!\in_array($widgetData['type'], ['RelatedModule', 'Updates', 'Comments', 'DetailView'])) {
 				continue;
 			}
 			$handlerModule = \App\Loader::getModuleClassName($this->moduleName, 'Widget', $widgetData['type']);
