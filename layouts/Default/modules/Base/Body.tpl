@@ -3,7 +3,7 @@
 <!-- tpl-Base-Body -->
 <div id="js_strings" class="d-none d-print-none">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'js'))}</div>
 <div id="pjaxContainer" class="d-none d-print-none"></div>
-<div class="mainPage js-mobile-page">
+<div class="mainPage js-mobile-page js-base-container" data-js="container">
 	<div class="leftPanel c-menu__container p-0">
 		{include file=\App\Resources::templatePath("BodyLeft.tpl", $MODULE_NAME)}
 	</div>

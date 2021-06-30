@@ -14,7 +14,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="menuContainer c-menu__body ps ps--active-y">
+	<div class="menuContainer js-menu--scroll c-menu__body ps ps--active-y" data-js="perfectscrollbar">
 		<nav class="tpl-Menu js-menu__content c-menu__content" id="submenu-0">
 			<ul class="nav flex-column modulesList"   >
 				{foreach item=ITEM_MENU key=KEY from=$MENU}

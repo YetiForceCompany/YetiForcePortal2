@@ -116,10 +116,20 @@ jQuery.Class(
 				});
 			});
 		},
+		/**
+		 * Show left scrollbar for menu.
+		 */
+		registerScrolbarToMenu() {
+			const container = $('.js-base-container'),
+				menuContainer = container.find('.js-menu--scroll');
+			app.showNewScrollbarLeft(menuContainer, { suppressScrollX: true });
+		},
+
 		registerEvents: function () {
 			var thisInstance = this;
 			thisInstance.recentPageViews();
 			thisInstance.registerChangeCompany();
+			thisInstance.registerScrolbarToMenu();
 			App.Fields.Tree.getInstance();
 		}
 	}

@@ -177,6 +177,12 @@ var AppConnector,
 			useSuffix: '_chosen',
 			usePrefix: 's2id_'
 		},
+		/**
+		 * Default scroll options
+		 */
+		scrollOptions: {
+			wheelSpeed: 0.1
+		},
 		formatDate: function (date) {
 			var y = date.getFullYear(),
 				m = date.getMonth() + 1,
@@ -1126,6 +1132,26 @@ var AppConnector,
 			if (typeof cancelFn === 'function') {
 				notice.on('pnotify:cancel', cancelFn);
 			}
+		},
+		/**
+		 * Show left scrollbar.
+		 *
+		 * @param   {object}  element
+		 * @param   {object}  options
+		 */
+		showNewScrollbarLeft(element, options = { wheelPropagation: true }) {
+			if (typeof element === 'undefined' || !element.length) return;
+			options = Object.assign(this.scrollOptions, options);
+			new PerfectScrollbar(element[0], options);
+			let scrollbarLeftElement = element.children('.ps__rail-y').first();
+			scrollbarLeftElement.css({
+				left: 0,
+				right: 'auto'
+			});
+			scrollbarLeftElement.find('.ps__thumb-y').css({
+				left: 2,
+				right: 'auto'
+			});
 		},
 
 		showNotify: function (customParams) {
