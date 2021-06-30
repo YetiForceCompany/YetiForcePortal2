@@ -44,8 +44,8 @@ class AppException extends \Exception
 	public static function view(\Throwable $e): void
 	{
 		$viewer = new \App\Viewer();
+		$viewer->assign('MESSAGE', $e->getMessage());
 		if (\App\Config::get('displayDetailsException')) {
-			$viewer->assign('MESSAGE', $e->getMessage());
 			$viewer->assign('BACKTRACE', empty($e->backtrace) ? $e->getTraceAsString() : $e->backtrace);
 			$viewer->assign('SESSION', $_SESSION);
 		}

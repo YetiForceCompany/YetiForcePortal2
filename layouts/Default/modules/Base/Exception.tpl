@@ -44,7 +44,7 @@
                     </a>
                 </div>
             </div>
-            {if $SESSION}
+            {if isset($SESSION) && $SESSION}
                 <div class="card mx-auto shadow mt-4" role="alert">
                     <div class="card-header text-white bg-secondary u-cursor-default d-flex justify-content-center flex-wrap">
                         <h3 class="card-title d-flex align-items-center justify-content-center m-0">

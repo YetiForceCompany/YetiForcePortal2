@@ -14470,6 +14470,9 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 #DataTables_Table_0_info {
   font-size: 0.9rem; }
 
+.detail-tabs .dropdown.tabdrop.hide {
+  display: none; }
+
 .detail-tabs .nav-pills {
   border-bottom: 3px solid #404952; }
   .detail-tabs .nav-pills > .nav-item {
@@ -15441,6 +15444,12 @@ hr {
   height: calc(100% - 50px);
   width: 100%;
   position: relative; }
+  .c-menu__body .ps__rail-y, .c-menu__body .ps__rail-x {
+    background-color: transparent !important; }
+  .c-menu__body .ps__rail-y:hover > .ps__thumb-y {
+    width: 0.5rem; }
+  .c-menu__body .ps__rail-x:hover > .ps__thumb-x {
+    width: 0.5rem; }
 
 .c-menu__item__icon {
   padding-right: 1.125rem;
