@@ -121,9 +121,11 @@ table.dataTable > thead > tr {
 }
 
 .detail-tabs {
+	.dropdown.tabdrop.hide {
+		display: none;
+	}
 	.nav-pills {
 		border-bottom: 3px solid $border-color-rtabs;
-
 		> .nav-item {
 			position: relative;
 			margin-right: calculate-rem(2px);
