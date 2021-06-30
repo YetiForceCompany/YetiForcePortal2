@@ -130,6 +130,7 @@
     "JS_WEEK": "Week",
     "JS_WEEK_SHORT": "WK",
     "JS_ERROR_MAX_VALUE": "Entered value is out of allowed range",
+    "JS_ERROR": "Error occurred, please inform the administrator",
     "INVALID_NUMBER": "Invalid number",
     "INVALID_NUMBER_OF": "Invalid number of",
     "JS_INVALID_LENGTH": "Added value is incomplete",

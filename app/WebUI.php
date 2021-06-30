@@ -83,7 +83,7 @@ class WebUI
 				return;
 			}
 			Log::error($e->__toString());
-			if ($request->isAjax() && $request->isEmpty('view')) {
+			if ($request->isAjax()) {
 				$response = new \App\Response();
 				$response->setException($e);
 				$response->emit();

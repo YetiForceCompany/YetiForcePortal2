@@ -1,5 +1,5 @@
 /* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-AppConnector = {
+var AppConnector = {
 	/**
 	 * Sends a pjax request (push state +ajax)
 	 * The function is deferred. it will be resolved on success and error on failure
@@ -106,11 +106,22 @@ AppConnector = {
 				'%cYetiForce debug mode!!!',
 				'color: red; font-family: sans-serif; font-size: 1.5em; font-weight: bolder; text-shadow: #000 1px 1px;'
 			);
-			console.error(
-				'Error: ' + errorThrown,
-				'\n' + sep + '\nTrace:\n' + sep + '\n' + sep + '\nParams:\n' + sep + '\n' + JSON.stringify(params, null, '\t')
-			);
-			aDeferred.reject(textStatus, errorThrown);
+			let log = 'Error: ' + errorThrown + '\n';
+			log += sep + '\nParams:\n' + sep + '\n' + JSON.stringify(params, null, '\t') + '\n';
+			if (jqXHR.responseJSON) {
+				log += sep + '\nMessage: ' + jqXHR.responseJSON.error.message + '\n';
+				log += sep + '\nTrace:\n' + sep + '\n' + jqXHR.responseJSON.error.trace + '\n';
+			} else {
+				try {
+					let json = JSON.parse(jqXHR.responseText);
+					log += json.error.message ? sep + '\nMessage: ' + json.error.message + '\n' : '';
+					log += json.error.trace ? sep + '\nTrace:\n' + sep + '\n' + json.error.trace + '\n' : '';
+				} catch (e) {
+					log += sep + '\nResponse:\n' + sep + '\n' + jqXHR.responseText;
+				}
+			}
+			console.error(log);
+			aDeferred.reject(textStatus, errorThrown, jqXHR);
 		};
 		jQuery.ajax(params);
 		if (pjaxMode) {

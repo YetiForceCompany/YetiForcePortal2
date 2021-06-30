@@ -28,7 +28,7 @@ class AppException extends \Exception
 	 * @param int        $code
 	 * @param \Throwable $previous
 	 */
-	public function __construct($message, $code = 200, \Throwable $previous = null)
+	public function __construct($message, $code = 400, \Throwable $previous = null)
 	{
 		parent::__construct($message, $code, $previous);
 		$this->backtrace = \App\Debug::getBacktrace();

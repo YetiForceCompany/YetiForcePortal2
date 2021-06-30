@@ -54,10 +54,20 @@ window.Base_RelatedListView_Js = class {
 					this.dataTable.ajax.reload();
 				}
 			};
-			App.Components.QuickCreate.getForm(url, params).done((data) => {
-				progress.progressIndicator({ mode: 'hide' });
-				App.Components.QuickCreate.showModal(data, params);
-			});
+			App.Components.QuickCreate.getForm(url, params)
+				.done((data) => {
+					App.Components.QuickCreate.showModal(data, params);
+				})
+				.fail((textStatus, errorThrown) => {
+					app.showNotify({
+						text: errorThrown,
+						title: app.translate('JS_ERROR'),
+						type: 'error'
+					});
+				})
+				.always(() => {
+					progress.progressIndicator({ mode: 'hide' });
+				});
 		});
 	}
 	/**
