@@ -71,7 +71,8 @@
     "LBL_SEARCH": "Search",
     "LBL_ADD_YOUR_COMMENT_HERE": "Add your comment here...",
     "LBL_ADD": "Add",
-    "LBL_ADD_TO_CART": "Add to cart"
+    "LBL_ADD_TO_CART": "Add to cart",
+    "LBL_VIEW_PREVIEW": "Preview view"
   },
   "js": {
     "JS_YES": "Yes",
