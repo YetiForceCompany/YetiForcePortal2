@@ -93,6 +93,52 @@ window.Base_ListView_Js = class {
 		window.location.href = app.convertObjectToUrl(data);
 	}
 	/**
+	 * Register tree.
+	 */
+	registerTree() {
+		this.listForm.find('.js-tree-select').on('click', (e) => {
+			let containerField = $(e.currentTarget).closest('.js-tree-content'),
+				treeValueField = containerField.find('.js-tree-value'),
+				fieldDisplayElement = containerField.find(`input[data-display="${treeValueField.attr('date-field-name')}"]`),
+				multiple = treeValueField.data('multiple');
+			app.showModalWindow(containerField.find('.js-tree-modal-window').clone(), function (modalContainer) {
+				let jstreeInstance = modalContainer.find('.js-tree-jstree');
+				if (multiple === 1) {
+					new window.App.Fields.MultiTree(jstreeInstance);
+				} else {
+					new window.App.Fields.Tree(jstreeInstance);
+				}
+				modalContainer.find('.js-tree-modal-select').on('click', function () {
+					let selectedCategories = [];
+					$.each(jstreeInstance.jstree('get_selected', true), (index, value) => {
+						selectedCategories.push(value);
+					});
+					let treeText = [];
+					let treeValue = [];
+					$.each(selectedCategories, (index, value) => {
+						treeValue.push(value['original']['tree']);
+						treeText.push(value['text']);
+					});
+					fieldDisplayElement.val(treeText.join(','));
+					fieldDisplayElement.attr('readonly', true);
+					console.log(treeValue.join(','));
+					treeValueField.val(treeValue.join(','));
+					treeValueField.trigger('change');
+					app.hideModalWindow();
+				});
+			});
+		});
+		this.listForm.find('.js-tree-clear').on('click', (e) => {
+			let containerField = $(e.currentTarget).closest('.js-tree-content'),
+				treeValueField = containerField.find('.js-tree-value'),
+				fieldDisplayElement = containerField.find(`input[data-display="${treeValueField.attr('date-field-name')}"]`);
+			fieldDisplayElement.val('');
+			fieldDisplayElement.attr('readonly', false);
+			treeValueField.val('');
+			treeValueField.trigger('change');
+		});
+	}
+	/**
 	 * Register modal events.
 	 */
 	registerEvents() {
@@ -101,6 +147,7 @@ window.Base_ListView_Js = class {
 		this.table = this.listForm.find('.js-list-view-table');
 		this.registerDataTable();
 		this.registerListEvents();
+		this.registerTree();
 		this.registerCustomView();
 	}
 };
