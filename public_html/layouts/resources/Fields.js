@@ -1,4 +1,4 @@
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 
 window.App.Fields = {
 	Date: {
@@ -200,7 +200,7 @@ window.App.Fields = {
 					fromLabel: app.translate('JS_FROM'),
 					toLabel: app.translate('JS_TO'),
 					customRangeLabel: app.translate('JS_CUSTOM'),
-					weekLabel: app.translate('JS_WEEK').substr(0, 1),
+					weekLabel: app.translate('JS_WEEK').substr(0, 1)
 				}
 			};
 
@@ -244,10 +244,10 @@ window.App.Fields = {
 			this.init(container, params);
 		}
 		/**
-			* Register function
-			* @param {jQuery} container
-			* @param {Object} params
-			*/
+		 * Register function
+		 * @param {jQuery} container
+		 * @param {Object} params
+		 */
 		static register(container, params) {
 			if (typeof container === 'undefined') {
 				container = $('body');
@@ -314,7 +314,7 @@ window.App.Fields = {
 					} else {
 						$(this).val(picker.startDate.format(format) + ',' + picker.endDate.format(format));
 					}
-				})
+				});
 		}
 	},
 

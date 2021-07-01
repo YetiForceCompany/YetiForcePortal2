@@ -1,5 +1,5 @@
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 /**
  * Retrieves a color value from the $material-colors Sass map
  * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
@@ -14389,7 +14389,7 @@ a.text-dark:hover, a.text-dark:focus {
   .flag-icon-xk.flag-icon-squared {
     background-image: url(../../../libraries/flag-icon-css/flags//1x1/xk.svg); }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .chosen-container {
   min-height: 32px;
   line-height: 34px; }
@@ -14522,7 +14522,7 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
     top: 41px !important;
     left: -170px !important; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .u-remove-main-padding {
   margin-left: -15px;
   margin-right: -15px; }
@@ -14763,7 +14763,7 @@ input[type="checkbox"]:checked {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-card__header {
   cursor: pointer;
   padding: 0;
@@ -15080,7 +15080,7 @@ input[type="checkbox"]:checked {
 .c-tab--hover:hover {
   background: #d8d8d8; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 html,
 body {
   height: 100%;
@@ -15145,7 +15145,7 @@ hr {
   .mainPage {
     margin-left: 0px; } }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .bodyHeader {
   position: fixed;
   height: 50px;
@@ -15305,7 +15305,7 @@ hr {
   .c-header__btn--sidebar {
     display: inline-block; } }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-tab--small {
   display: flex;
   align-items: center;
@@ -15327,7 +15327,7 @@ hr {
     border: solid 1px;
     z-index: -1; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .footerContainer {
   position: fixed;
   height: 33px;
@@ -15346,7 +15346,7 @@ hr {
   .footerContainer {
     height: 17px; } }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .userDetailsContainer .row {
   padding: 5px; }
 
@@ -15515,7 +15515,7 @@ a {
   .c-menu-mobile .bodyHeader {
     transform: translate(200px); } }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .modal-content {
   -moz-box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
@@ -15605,12 +15605,12 @@ a {
 .clonedPopupUi.modal {
   top: 50px; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .editFields {
   padding-bottom: 5px;
   padding-top: 5px; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .listViewEntries {
   background: #fff;
   font-weight: 400 !important;
@@ -15642,7 +15642,7 @@ table.dataTable.listViewEntries tbody td {
 .View-ListView .nav-tabs .nav-link.active {
   background-color: #f8f9fa; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .loginContainer {
   max-width: 400px;
   margin-top: 5vh;
@@ -15651,7 +15651,7 @@ table.dataTable.listViewEntries tbody td {
     margin: 10px auto;
     max-height: 200px; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .Install_Install .logo {
   max-height: 50px; }
 
@@ -15666,7 +15666,7 @@ table.dataTable.listViewEntries tbody td {
   min-height: 375px;
   margin: 10px; }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .View-ProceedToCheckout,
 .View-ShoppingCart {
   background-color: #eeeeee; }
@@ -15759,7 +15759,7 @@ table.dataTable.listViewEntries tbody td {
   .price-content {
     display: flow-root; } }
 
-/* {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .o-dashboard-container {
   list-style: none;
   padding-left: 0; }

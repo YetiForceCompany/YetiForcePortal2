@@ -1,4 +1,4 @@
-{*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
+{*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
     <!--tpl-Products-Tree-Product-->
     <div class="m-0 p-3 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 box-shadow product js-cart-item"

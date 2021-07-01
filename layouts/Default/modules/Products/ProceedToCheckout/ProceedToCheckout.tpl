@@ -1,4 +1,4 @@
-{*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
+{*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
   {assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
     {assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}

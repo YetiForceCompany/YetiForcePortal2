@@ -5,7 +5,7 @@
  * @package Config
  *
  * @copyright YetiForce Sp. z o.o
- * @license   YetiForce Public License 3.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @license   YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
 
@@ -23,19 +23,29 @@ class Config
 	public static $siteName = '';
 
 	/** @var string CRM API URL ex. https://gitdeveloper.yetiforce.com/webservice/. */
-	public static $apiUrl = '__API_PATH__';
+	public static $apiUrl = 'http://yeti/webservice/';
+	// public static $apiUrl = '__API_PATH__';
 
 	/** @var string Portal URL. */
-	public static $portalUrl = '__PORTAL_PATH__';
+	public static $portalUrl = 'http://portal2/';
 
 	/** @var string Web service - Application KEY. */
-	public static $apiKey = '__API_KEY__';
+	public static $apiKey = 'VMUwRByXHSq1bLW485ikfvcC97P6gJsz';
 
-	/** @var string Web service - Application login. */
-	public static $serverName = '__SERVER_NAME__';
+	/**
+	 * customer@yetiforce.com
+	 * vendor@yetiforce.com
+	 * zx.
+	 * VMUwRByXHSq1bLW485ikfvcC97P6gJsz.
+	 *
+	 * @var string Web service - Application login.
+	 */
+	public static $serverName = 'portal'; //  partner,  portal
+	// public static $serverName = 'partner'; //  partner,  portal
 
 	/** @var string Web service - Application password. */
-	public static $serverPass = '__SERVER_PASS__';
+	public static $serverPass = 'portal'; //  partner,  portal
+	// public static $serverPass = 'partner'; //  partner,  portal
 
 	/** @var string The path to the logo on the login page */
 	public static $logoLoginPage = 'layouts/logo_login.png';
@@ -44,7 +54,7 @@ class Config
 	public static $logoMenu = 'layouts/logo_menu.png';
 
 	/** @var string Default module. */
-	public static $defaultModule = 'Accounts';
+	public static $defaultModule = 'Contacts';
 
 	/** @var string Default language, ex. en-US , pl-PL */
 	public static $language = 'en-US';
@@ -59,7 +69,7 @@ class Config
 	public static $itemsPrePage = 12;
 
 	/** @var array Available record display options in listview for datatable element - [[values],[labels]]. */
-	public static $listEntriesPerPage = [[10, 25, 50, 100], [10, 25, 50, 100]];
+	public static $listEntriesPerPage = [[10, 15, 30, 50, 50], [10, 15, 30, 50, 50]];
 
 	/**
 	 * Debugging.
@@ -69,22 +79,22 @@ class Config
 	public static $minScripts = false;
 
 	/** @var bool Enable api debug. */
-	public static $debugApi = true;
+	public static $debugApi = false;
 
 	/** @var bool Display main debug console. */
-	public static $debugConsole = true;
+	public static $debugConsole = false;
 
 	/** @var bool Show detailed information about error exceptions */
-	public static $displayDetailsException = true;
+	public static $displayDetailsException = false;
 
 	/** @var bool Show path tracking for error exceptions. */
-	public static $displayTrackingException = true;
+	public static $displayTrackingException = false;
 
 	/** @var bool Enable saving all API logs to file. */
 	public static $apiAllLogs = false;
 
 	/** @var bool Enable saving error API logs to file. */
-	public static $apiErrorLogs = true;
+	public static $apiErrorLogs = false;
 
 	/**
 	 * Security.
@@ -156,7 +166,7 @@ class Config
 	public static $headerAlertIcon = 'fas fa-exclamation-triangle';
 
 	/** @var string Login page alert message */
-	public static $loginPageAlertMessage = 'Development version';
+	public static $loginPageAlertMessage = "Portal - Development version \n partner@yetiforce.com/partner\n customer@yetiforce.com/customer \n vendor@yetiforce.com/vendor";
 
 	/** @var string Login page alert type, ex. alert-primary, alert-danger, alert-warning, alert-info */
 	public static $loginPageAlertType = 'alert-primary';

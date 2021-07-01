@@ -1,4 +1,4 @@
-{*<!-- {[The file is published on the basis of YetiForce Public License 3.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
+{*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
 <!-- tpl-ModComments-Detail-CommentsContent -->
 <div class="js-widget-container card mt-2 u-border-none" data-js="container" data-type="Comments" data-url="{$URL}">
