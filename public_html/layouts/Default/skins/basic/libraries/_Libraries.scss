@@ -1,0 +1,202 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+.chosen-container {
+	min-height: 32px;
+	line-height: 34px;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+	line-height: 20px;
+	margin: 3px 5px 3px;
+	.search-choice-close {
+		top: 8px;
+	}
+}
+
+.referenceGroup .referenceModulesListGroup .chosen-container {
+	min-width: 100px !important;
+	text-align: left;
+	height: 32px;
+	.chosen-single {
+		border: 0;
+		height: 32px;
+		border-radius: 0;
+	}
+}
+
+.quickCreateContent .referenceGroup .referenceModulesListGroup .chosen-container {
+	min-width: 80px !important;
+}
+
+.chosen-container-single .chosen-single {
+	background: #fff;
+}
+
+.select2-selection--single {
+	padding: 0rem 1.125rem 0rem 0.75rem !important;
+	@at-root .input-group > .input-group-prepend #{&} {
+		border-right: unset !important;
+		border-radius: 0.25rem 0 0 0.25rem !important;
+	}
+	// Border correction for select2 sm
+	@at-root .input-group #{&} {
+		border-top-right-radius: 0.25rem !important;
+		border-bottom-right-radius: 0.25rem !important;
+	}
+}
+
+.select2-selection--single {
+	.select2-selection__rendered {
+		line-height: 40px !important;
+	}
+
+	.select2-selection__arrow {
+		top: 7px !important;
+		b {
+			margin-left: 2px !important;
+		}
+	}
+}
+.widget_header {
+	.select2-selection--single {
+		height: -webkit-calc(1.16em + 0.75rem + 2px) !important;
+		.select2-selection__rendered {
+			line-height: 30px !important;
+		}
+		.select2-selection__arrow {
+			top: 4px !important;
+		}
+	}
+}
+
+.select2-selection--multiple {
+	height: auto !important;
+
+	.select2-selection__rendered {
+		line-height: 28px !important;
+	}
+}
+
+.form-control:focus {
+	box-shadow: none !important;
+}
+
+.dropdown-menu {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+.input-group {
+	> {
+		.input-group-append,
+		.input-group-prepend {
+			> {
+				.btn-light {
+					border-color: #dee2e6;
+				}
+			}
+		}
+	}
+}
+
+.select2-dropdown ul[aria-multiselectable="true"] [aria-selected="true"] {
+	display: none;
+}
+
+.pnotify .bootstrap4-icon > * {
+	font-size: 2rem;
+	line-height: 2rem;
+	margin-right: 10px;
+}
+
+table.dataTable > thead > tr {
+	> th:not(.sorting_disabled),
+	> td:not(.sorting_disabled) {
+		padding-right: 0.4rem;
+	}
+}
+
+#DataTables_Table_0_info {
+	font-size: 0.9rem;
+}
+
+.detail-tabs {
+	.dropdown.tabdrop.hide {
+		display: none;
+	}
+	.nav-pills {
+		border-bottom: 3px solid $border-color-rtabs;
+		> .nav-item {
+			position: relative;
+			margin-right: calculate-rem(2px);
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		> .nav-item > .nav-link {
+			color: $bg-rtabs-active;
+			font-weight: bold;
+		}
+
+		.tabdrop {
+			width: auto !important;
+
+			.dropdown-toggle {
+				display: block;
+				font-weight: bold;
+				text-transform: capitalize;
+				padding: 0.5rem 1rem;
+				color: $bg-rtabs-active;
+				background: $bg-rtabs;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			.c-badge--top-right {
+				position: inherit;
+				margin-left: calculate-rem(5px);
+			}
+
+			&.show .dropdown-toggle,
+			&.active .dropdown-toggle {
+				background: $bg-rtabs-active;
+				color: $color-rtabs-active;
+			}
+		}
+
+		.active {
+			background: $bg-rtabs-active;
+			color: $color-rtabs-active !important;
+			border-radius: 0;
+
+			> .nav-link {
+				color: $bg-rtabs;
+				background: $bg-rtabs-active;
+			}
+		}
+
+		.dropdown-menu {
+			min-width: 300px;
+
+			.nav-item {
+				margin: 0;
+				float: none !important;
+				background: none;
+			}
+
+			.nav-link {
+				border-radius: 0;
+				font-weight: bold;
+				color: $bg-rtabs-active;
+			}
+		}
+		.dropdown-menu.show {
+			top: 41px !important;
+			left: -170px !important;
+		}
+	}
+}

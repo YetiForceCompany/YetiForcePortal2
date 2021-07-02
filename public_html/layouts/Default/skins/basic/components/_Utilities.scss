@@ -1,0 +1,126 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+@function calculate-rem($size) {
+	$rem-size: $size / 16px;
+
+	@return #{$rem-size}rem;
+}
+
+.u-remove-main-padding {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+.u-add-main-padding {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.noPadding {
+	padding: 0;
+}
+
+.marginLRZero {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.showMainMenu {
+	right: 0px;
+}
+
+.table-responsive {
+	overflow-x: auto;
+	display: block;
+}
+
+.tableCell {
+	display: table-cell;
+}
+
+.borderRight {
+	border-right: 1px solid #ddd;
+}
+
+.borderLeft {
+	border-left: 1px solid #ddd;
+}
+
+.borderTop {
+	border-top: 1px solid #ddd;
+}
+
+.noFloat {
+	float: none;
+}
+
+.border {
+	border: 1px solid #ddd;
+}
+
+.noSpaces {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.redColor {
+	color: red;
+}
+
+.paddingLeft5px {
+	padding-left: 5px;
+}
+.u-border-radius {
+	border-radius: 0.5rem;
+}
+
+.u-h-79per {
+	height: 79%;
+}
+.u-fs-10px {
+	font-size: 10px;
+}
+.u-fs-12px {
+	font-size: 12px;
+}
+.u-word-break {
+	word-break: break-word !important;
+}
+.u-cursor-default {
+	cursor: default !important;
+}
+.shopping-cart .u-mb-0px {
+	margin-bottom: 0px;
+}
+
+.u-min-w-0 {
+	min-width: 0;
+}
+
+.u-cursor-pointer {
+	cursor: pointer;
+	text-decoration: none !important;
+}
+
+@for $i from 1 through 10 {
+	.u-fs-#{$i}x {
+		font-size: #{$i}rem !important;
+	}
+}
+.u-fs-xs {
+	font-size: 0.75rem !important;
+}
+.u-fs-sm {
+	font-size: 0.876rem !important;
+}
+.u-fs-lg {
+	font-size: 1.33rem !important;
+}
+.u-fs-xlg {
+	font-size: 1.5rem !important;
+}
+.u-border-none {
+	border: none !important;
+}
+.u-resize-v {
+	resize: vertical;
+}

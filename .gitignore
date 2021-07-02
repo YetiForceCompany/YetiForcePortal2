@@ -1,0 +1,24 @@
+# Other languages
+languages/pl-PL/*
+
+# dependencies COMPOSER
+/vendor
+
+# dependencies YARN
+yarn-error.log
+/node_modules/
+/public_html/libraries/*
+/public_html/vendor/*
+/public_html/src/
+
+# IDEs and editors
+/.buildpath
+.c9/
+.classpath
+.project
+*.launch
+.settings/
+*.sublime-workspace
+.babelrc
+.history
+/config/csrf_secret.php

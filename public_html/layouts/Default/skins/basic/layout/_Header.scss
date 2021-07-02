@@ -1,0 +1,205 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+.bodyHeader {
+	.leftHeader {
+		background-color: #969696;
+		color: #fff;
+		height: $h-header;
+	}
+
+	.rightHeader {
+		background-color: #696969;
+		color: #fff;
+		height: 40px;
+	}
+
+	.moduleIcon {
+		max-width: 30px;
+		margin: 5px 10px 0 0;
+	}
+
+	position: fixed;
+	height: $h-header;
+	background: #4a5364;
+	right: 0;
+	top: 0;
+	left: $w-menu-mini-state;
+	z-index: $z-index-header;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+
+	.leftSide {
+		padding-left: 10px;
+		padding-top: 7px;
+		width: 450px;
+	}
+
+	.rightSide {
+		position: relative;
+		min-height: 1px;
+		float: right;
+
+		img {
+			height: 22px;
+			margin: 0;
+		}
+
+		.rightHeaderBtn {
+			padding: 7px 5px;
+
+			a {
+				line-height: 20px;
+				font-size: 18px;
+			}
+		}
+	}
+}
+
+.historyList {
+	overflow: auto;
+	left: calculate-rem(-490px) !important;
+}
+
+.selectorHistory {
+	font-weight: 900 !important;
+	text-align: center;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #111;
+	white-space: nowrap;
+	cursor: default;
+	min-width: 500px;
+	max-width: calc(100vh - 100px);
+}
+
+.historyHour {
+	font-weight: 600 !important;
+}
+
+.historyList a {
+	color: #222 !important;
+	font-size: 15px !important;
+}
+
+.clearHistory {
+	font-weight: 900 !important;
+	text-align: center;
+}
+
+.widget_header .breadCrumbs .breadcrumbsLinks {
+	font-size: 15px;
+}
+
+.historyBtn {
+	.dropdown-menu {
+		top: calculate-rem(33px) !important;
+	}
+}
+
+.actionMenu {
+	.o-action-menu__container {
+		position: relative;
+		max-height: calc(100vh - 50px);
+		width: 100%;
+		color: #fff;
+		z-index: 2000;
+		-webkit-transition: right ease-in-out 0.35s;
+		transition: right ease-in-out 0.35s;
+		text-align: center;
+	}
+
+	.dropdown-menu {
+		float: none;
+		margin-bottom: 5px;
+	}
+	.o-action-menu__item {
+		display: inline-block;
+	}
+
+	.dropdown-menu.show {
+		z-index: 3000;
+		left: -202px !important;
+		top: 40px !important;
+		min-width: 18.75rem !important;
+	}
+
+	img {
+		height: 19px;
+	}
+
+	.iconContainer {
+		padding-left: 15px;
+	}
+
+	.labelContainer {
+		padding-top: 5px;
+	}
+
+	.commonActionsButtonDropDown,
+	.historyList {
+		position: fixed;
+		top: $h-header;
+		left: 5px;
+		right: 5px;
+		bottom: 17px;
+	}
+}
+
+.showActionMenu {
+	display: block;
+}
+
+.searchMenu {
+	position: fixed;
+	top: $h-header;
+	right: -300px;
+	z-index: 1500;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #eee;
+	padding: 10px;
+	width: 300px;
+	-webkit-transition: right 0.5s ease;
+	-moz-transition: right 0.5s ease;
+	-o-transition: right 0.5s ease;
+	transition: right 0.5s ease;
+}
+
+.showSearchMenu {
+	right: 0px;
+}
+
+.widget_header {
+	background: #eee;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: relative;
+	h2 {
+		margin-bottom: 7px;
+		margin-top: 7px;
+	}
+}
+
+.breadcrumbsLinks a {
+	font-weight: bold;
+}
+
+.c-header__btn--sidebar {
+	display: none;
+}
+@media only screen and (max-width: 1200px) {
+	.bodyHeader {
+		.leftSide {
+			width: auto;
+		}
+		left: 0px;
+	}
+	.c-header__btn--sidebar {
+		display: inline-block;
+	}
+}

@@ -1,0 +1,38 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+@charset 'UTF-8';
+
+//-------- global variables --------//
+@import "_Variables";
+
+//-------- external --------//
+@import "../../../../libraries/bootstrap/scss/bootstrap";
+@import "../../../../libraries/bootstrap/scss/mixins/_breakpoints.scss";
+@import "../../../../libraries/bootstrap/scss/utilities/_spacing";
+@import "../../../../libraries/select2-theme-bootstrap4/src/select2-bootstrap.scss";
+@import "../../../../libraries/sass-material-colors/sass/_sass-material-colors-classes.scss";
+@import "../../../../libraries/flag-icon-css/sass/flag-icon.scss";
+
+//-------- libraries' modifications --------//
+@import "libraries/_Libraries";
+
+//-------- components --------//
+@import "components/_Utilities";
+@import "components/_Checkbox";
+@import "components/_ProgressIndicator";
+@import "_Components";
+
+//-------- layout --------//
+@import "layout/_Base";
+@import "layout/_Header";
+@import "layout/_Nav";
+@import "layout/_Footer";
+@import "layout/_Menu";
+@import "layout/_Modal";
+
+//-------- pages --------//
+@import "views/_Edit";
+@import "views/_List";
+@import "views/_Login";
+@import "views/_Install";
+@import "views/_Product";
+@import "views/_Dashboard";

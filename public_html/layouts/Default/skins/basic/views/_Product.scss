@@ -1,0 +1,119 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+$borderColor: #eeeeee;
+$bg-product-view: #eeeeee;
+
+.View-ProceedToCheckout,
+.View-ShoppingCart {
+	background-color: $bg-product-view;
+}
+
+.product-container {
+	background-color: $bg-product-view;
+}
+
+.product-border-l {
+	border-left: 1px $borderColor solid;
+}
+
+.product-border-r {
+	border-right: 1px $borderColor solid;
+}
+
+.product-border-b {
+	border-bottom: 1px $borderColor solid;
+}
+
+.product-border {
+	border: 1px $borderColor solid;
+}
+
+.product-line {
+	border-bottom: 1px $borderColor solid;
+}
+
+.product-category {
+	background-color: white;
+}
+
+.shopping-cart {
+	background-color: white;
+	border: 1px $borderColor solid;
+	padding: 5px;
+}
+
+.product-summary {
+	background-color: white;
+	border: 1px $borderColor solid;
+	padding: 5px;
+}
+
+.product-shopping-cart {
+	/*border-bottom: 1px $borderColor solid;*/
+	background-color: white;
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.035);
+	}
+}
+
+.fs-80 {
+	font-size: 80%;
+}
+
+.fs-120 {
+	font-size: 120%;
+}
+
+.product {
+	width: 33.33%;
+	border-right: 1px $borderColor solid;
+	border-top: 1px $borderColor solid;
+	background-color: white;
+}
+
+.product-image-contener img {
+	width: 260px;
+	height: 225px;
+	padding: 5px;
+}
+.product-image-contener .product-no-image {
+	width: 260px;
+	height: 225px;
+	padding: 5px;
+	font-size: 6rem;
+}
+.product-shopping-cart-image-contener {
+	width: 100px;
+	height: 100px;
+	border: 1px $borderColor solid;
+	padding: 5px;
+}
+
+.product-no-image {
+	width: 100%;
+	height: 100%;
+	color: #eeeeee;
+}
+
+.product-image {
+	object-fit: cover;
+}
+
+.add-to-cart {
+	background-color: pink;
+}
+
+.product-btn-buy {
+	height: 48px;
+	width: 300px;
+}
+
+@media only screen and (max-width: 1600px) {
+	.quantity-content {
+		max-width: 100% !important;
+		margin-bottom: 1rem;
+	}
+	.price-content {
+		display: flow-root;
+	}
+}

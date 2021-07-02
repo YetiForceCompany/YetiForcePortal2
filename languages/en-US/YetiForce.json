@@ -1,0 +1,16 @@
+{
+  "php": {
+    "LBL_MORE_LIBRARY_INFO": "Library details",
+    "LBL_LICENSE": "License",
+    "LBL_LIBRARY_NAME": "Name",
+    "LBL_VERSION": "Version",
+    "LBL_CREDITS_DESCRIPTION": " ",
+    "LBL_VIEW_CREDITS": "Licenses",
+    "LBL_MISSING_FILE": "Missing file",
+    "LBL_MISSING_LICENSE_FILE": "Missing license file",
+    "LBL_SHOW_MORE": "Show more",
+    "LBL_LIBRARY_HOMEPAGE": "Open library\"s website",
+    "LBL_GLOBAL_SEARCH": "Type keyword and press enter"
+  },
+  "js": {}
+}

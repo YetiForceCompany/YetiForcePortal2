@@ -1,0 +1,46 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+@import "../../../../libraries/sass-material-colors/sass/_sass-material-colors.scss";
+@import "../../../../libraries/bootstrap/scss/_functions";
+@import "../../../../libraries/bootstrap/scss/_mixins";
+
+//-------- override libraries' variables --------//
+//bootstrap
+$link-color: #0072da;
+$primary: #0072da;
+$success: #3eac33;
+$danger: #d15d5d;
+$yeti: #406a95;
+$secondary: #5e666c;
+$blue: #337ab7;
+$navy: #202c40;
+$yf-gray: #f3f3f3;
+$yf-dark-gray: #b3b3b3;
+$pagination-color: $link-color;
+$grid-breakpoints: (
+	xs: 0,
+	xsm: 400px,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1300px,
+	xxxl: 1800px
+);
+
+//flag-icons
+$flag-icon-css-path: "../../../libraries/flag-icon-css/flags/";
+
+$h-header: 50px;
+$h-footer: 33px;
+$h-footer-mini: 17px;
+$z-index-header: 1031;
+$z-index-body: 1030;
+$w-menu: 230px;
+$w-menu-mini-state: 50px;
+$w-menu-mobile: 200px;
+
+//-------- related tabs --------//
+$bg-rtabs: #f1f1f1;
+$bg-rtabs-active: #404952;
+$border-color-rtabs: $bg-rtabs-active;
+$color-rtabs-active: #fff;

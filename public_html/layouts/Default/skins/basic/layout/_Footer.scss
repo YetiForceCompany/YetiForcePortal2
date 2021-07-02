@@ -1,0 +1,23 @@
+/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+
+.footerContainer {
+	position: fixed;
+	height: 33px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 1500;
+	background: #404952;
+}
+
+.footer {
+	text-align: center;
+	color: #ffffff;
+	padding: calculate-rem(1px) 0;
+	font-size: 10.88px;
+}
+
+@media only screen and (max-width: 1200px) {
+	.footerContainer {
+		height: $h-footer-mini;
+	}
+}
