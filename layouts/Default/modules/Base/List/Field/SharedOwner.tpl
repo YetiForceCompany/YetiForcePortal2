@@ -12,5 +12,5 @@
 		</optgroup>
 	{/foreach}
 </select>
-<!-- /tpl-Base-Edit-List-SharedOwner -->
+<!-- /tpl-Base-List-Field-SharedOwner -->
 {/strip}
