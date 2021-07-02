@@ -17,9 +17,25 @@ namespace YF\Modules\Base\FieldTypes;
  */
 class SharedOwnerField extends BaseField
 {
-	/** {@inheritdoc} */
-	public function getTemplateName(): string
+	/** @var array Values list. */
+	public $fieldValuesList;
+
+	/**
+	 * Get field values.
+	 *
+	 * @param \YF\Modules\Base\Model\Record|null $recordModel
+	 *
+	 * @return array
+	 */
+	public function getFieldValuesList(\YF\Modules\Base\Model\Record $recordModel = null): array
 	{
-		return 'Field/Edit/Owner.tpl';
+		if (!\is_array($this->fieldValuesList)) {
+			if ($recordModel && $recordModel->getId()) {
+				$this->fieldValuesList = explode(',', $recordModel->getRawValue($this->getName()));
+			} else {
+				$this->fieldValuesList = [];
+			}
+		}
+		return $this->fieldValuesList;
 	}
 }

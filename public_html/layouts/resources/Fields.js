@@ -665,9 +665,9 @@ window.App.Fields = {
 				params.language.maximumSelected = formatSelectionExceeds;
 			}
 			if (typeof selectElement.attr('multiple') !== 'undefined' && !params.placeholder) {
-				//params.placeholder = app.translate('JS_SELECT_SOME_OPTIONS');
+				params.placeholder = app.translate('JS_SELECT_SOME_OPTIONS');
 			} else if (!params.placeholder) {
-				//params.placeholder = app.translate('JS_SELECT_AN_OPTION');
+				params.placeholder = app.translate('JS_SELECT_AN_OPTION');
 			}
 			if (typeof params.templateResult === 'undefined') {
 				params.templateResult = function (data, container) {
