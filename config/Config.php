@@ -202,5 +202,6 @@ class Config
 	public static $options = [
 		'timeout' => 10,
 		'connect_timeout' => 2,
+		// 'verify' => false,
 	];
 }
