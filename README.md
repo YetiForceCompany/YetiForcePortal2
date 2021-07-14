@@ -23,9 +23,14 @@
 
 The Customer Portal complements YetiForce CRM and is the most effective communication tool for your customers. It’s easy to use and delivers many new functions. You can reduce operating expenses by providing support 24 hours a day. YetiForce Portal delivers also greater customer experiences as your clients can see all relevant information and the current status of their tickets in one place.
 
+## Where else can you find YetiForce?
 
-## 🍱 YetiForce Customer Portal
-Installation
+- [Sourceforge](https://sourceforge.net/projects/yetiforce/)
+- [Packagist](https://packagist.org/packages/yetiforce/yetiforce-portal)
+- [Development version](https://download.yetiforce.com/portal2-developer.zip) - full package (yarn + composer)
+
+## 🍱 Installation
+
 
 1. Put files on web server
 2. Point web server document root to public_html directory
