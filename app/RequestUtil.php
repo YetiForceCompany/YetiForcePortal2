@@ -84,7 +84,7 @@ class RequestUtil
 	public static function requestId(): string
 	{
 		if (empty(self::$requestId)) {
-			self::$requestId = sprintf('%08x', abs(crc32($_SERVER['REMOTE_ADDR'] . $_SERVER['REQUEST_TIME'] . $_SERVER['REMOTE_PORT'])));
+			self::$requestId = sprintf('%08x', abs(crc32($_SERVER['REMOTE_ADDR'] . $_SERVER['REQUEST_TIME_FLOAT'] . $_SERVER['REMOTE_PORT'])));
 		}
 		return self::$requestId;
 	}

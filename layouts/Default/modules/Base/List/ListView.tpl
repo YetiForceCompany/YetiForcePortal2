@@ -49,9 +49,7 @@
 									aria-selected="{if $VIEW_ID == $CV_ID}true{else}false{/if}">
 									{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
 									{if $CUSTOM_VIEW.description}
-										<span class="js-popover-tooltip ml-1" data-toggle="popover"
-												data-placement="top"
-												data-content="{\App\Purifier::encodeHtml($CUSTOM_VIEW.description)}" data-js="popover">
+										<span class="js-popover-tooltip ml-1" data-toggle="popover" data-placement="top" data-content="{\App\Purifier::encodeHtml($CUSTOM_VIEW.description)}" data-js="popover">
 											<span class="fas fa-info-circle"></span>
 										</span>
 									{/if}
@@ -68,7 +66,9 @@
 					<tr class="listViewHeaders">
 						<th></th>
 						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
-							<th data-name="{$HEADER_NAME}" data-orderable="1" class="text-nowrap">{$HEADER_LABEL}</th>
+							{if isset($FIELDS[$HEADER_NAME])}
+								<th data-name="{$HEADER_NAME}" data-orderable="1" class="text-nowrap">{$HEADER_LABEL}</th>
+							{/if}
 						{/foreach}
 					</tr>
 					<tr class="listViewSearch">
@@ -77,10 +77,12 @@
 							<button type="button" class="btn btn-light btn-sm js-clear-search" data-js="click"><span class="fas fa-times"></button>
 						</td>
 						{foreach item=HEADER_LABEL key=HEADER_NAME from=$HEADERS}
-							{assign var=FIELD value=$FIELDS[$HEADER_NAME]}
-							<td>
-								{include file=\App\Resources::templatePath($FIELD->getTemplatePath('List'), $MODULE_NAME) FIELD_MODEL=$FIELD}
-							</td>
+							{if isset($FIELDS[$HEADER_NAME])}
+								{assign var=FIELD value=$FIELDS[$HEADER_NAME]}
+								<td>
+									{include file=\App\Resources::templatePath($FIELD->getTemplatePath('List'), $MODULE_NAME) FIELD_MODEL=$FIELD}
+								</td>
+							{/if}
 						{/foreach}
 					</tr>
 				</thead>

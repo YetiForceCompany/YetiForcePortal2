@@ -18,6 +18,8 @@ namespace YF\Modules\Users\View;
  */
 class AccessActivityHistoryModal extends \App\Controller\Modal
 {
+	/** {@inheritdoc} */
+	public $successBtn = '';
 	/** @var array Columns to show on the list access activity history. */
 	public static $columnsToShow = [
 		'time' => 'FL_LOGIN_TIME',
