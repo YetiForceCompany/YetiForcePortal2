@@ -33,8 +33,8 @@
 		{/if}
 	</div>
 	{/if}
-	<div class="dropdown historyBtn">
-		<a class="btn btn-light showHistoryBtn mr-2 mb-0 py-1" role="button" href="#" data-placement="left" data-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown historyBtn js-popover-tooltip" data-content="{\App\Language::translate('LBL_PAGES_HISTORY')}" data-js="popover">
+		<a class="btn btn-light showHistoryBtn mr-2 mb-0 py-1" role="button" href="#" data-placement="left" data-toggle="dropdown" aria-expanded="false" >
 			<span class="fas fa-history"></span>
 		</a>
 	</div>
@@ -42,7 +42,7 @@
 		<div class="o-action-menu__container d-flex flex-md-nowrap flex-column flex-md-row" id="o-action-menu__container">
 			{if \Conf\Modules\Products::$shoppingMode}
 				<div class="o-action-menu__item">
-					<a class=" p-1 js-shopping-cart btn btn-light mr-2 mb-0" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left">
+					<a class=" p-1 js-shopping-cart btn btn-light mr-2 mb-0 js-popover-tooltip" href="index.php?module=Products&view=ShoppingCart" role="button" data-placement="left" data-content="{\App\Language::translate('LBL_SHOPPING_CART','Products')}" data-js="popover">
 						<span class="fas fa-shopping-cart"></span>
 						<span class="badge badge-danger js-badge">{\YF\Modules\Products\Model\Cart::getCount()}</span>
 					</a>
