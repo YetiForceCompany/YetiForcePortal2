@@ -15,7 +15,6 @@
 [![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 
-
 [![SymfonyInsight](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9/big.png)](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9)
 <a href="https://crowdin.com/project/yetiforceportal2" rel="nofollow">
 <img width="20%" src="https://support.crowdin.com/assets/badges/localization-at-transparent@1x.svg" alt="crowdin Localization Management Platform">
@@ -31,13 +30,24 @@ The Customer Portal complements YetiForce CRM and is the most effective communic
 
 ## 🍱 Installation
 
-
 1. Put files on web server
 2. Point web server document root to public_html directory
 3. Run:
 
 - yarn install --modules-folder "./public_html/libraries" --ignore-optional
 - composer install
+
+4. Activation of Webservice/API services (CRM file `config/Api.php`)
+
+```php
+/** List of active services. Available: dav, webservice */
+public static $enabledServices = [ 'webservice'];
+```
+
+5. Add applications and API users
+
+- My home page / Software configuration / Integration / Web service - Applications
+- My home page / Software configuration / Integration / Web service - Users
 
 4. Adjust configuration
 
@@ -50,13 +60,62 @@ The Customer Portal complements YetiForce CRM and is the most effective communic
 
 Languages package https://github.com/YetiForceCompany/YetiForcePortal2Languages
 
-<a href="https://github.com/YetiForceCompany/YetiForcePortal2Languages">
-  <img src="https://badges.awesome-crowdin.com/translation-13499741-354003.png" />
-</a>
+## 🐛 Debug
+
+### CRM `config\Debug.php`
+
+```php
+/** [WebServices/API] Show exception messages in response body */
+public static $apiShowExceptionMessages = true;
+
+/** [WebServices/API] Show exception reason phrase in response header */
+public static $apiShowExceptionReasonPhrase = true;
+
+/** [WebServices/API] Show exception backtrace in response body */
+public static $apiShowExceptionBacktrace = true;
+
+/** [WebServices/API] Log to file only exception errors in the logs */
+public static $apiLogException = true;
+
+/** [WebServices/API] Log to file all communications data (request + response) */
+public static $apiLogAllRequests = true;
+```
+
+Log files
+
+- cache/logs/webserviceErrors.log
+- cache/logs/webserviceDebug.log
+
+### Portal `config\Config.php`
+
+```php
+/** @var bool Enable api debug. */
+public static $debugApi = true;
+
+/** @var bool Display main debug console. */
+public static $debugConsole = true;
+
+/** @var bool Show detailed information about error exceptions */
+public static $displayDetailsException = true;
+
+/** @var bool Show path tracking for error exceptions. */
+public static $displayTrackingException = true;
+
+/** @var bool Enable saving all API logs to file. */
+public static $apiAllLogs = true;
+
+/** @var bool Enable saving error API logs to file. */
+public static $apiErrorLogs = true;
+```
+
+Log files
+
+- cache/logs/api.log
+- cache/logs/system.log
 
 ## 👥 Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="https://github.com/YetiForceCompany/YetiForcePortal2/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=YetiForceCompany/YetiForcePortal2" />
+<img src="https://contrib.rocks/image?repo=YetiForceCompany/YetiForcePortal2" />
 </a>
