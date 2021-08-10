@@ -34,6 +34,8 @@ The requirements are the same for the server and for CRM https://yetiforce.com/e
 
 ## 🍱 Installation
 
+https://yetiforce.com/en/knowledge-base/documentation/implementer-documentation/item/how-to-install-yetiforce-portal
+
 1. Put files on web server
 2. Point web server document root to public_html directory
 3. Run:
