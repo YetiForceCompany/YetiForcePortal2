@@ -28,7 +28,7 @@ The Customer Portal complements YetiForce CRM and is the most effective communic
 - [Packagist](https://packagist.org/packages/yetiforce/yetiforce-portal)
 - [Development version](https://download.yetiforce.com/portal2-developer.zip) - full package (yarn + composer)
 
-## 🍱 Web server requirements
+## 💻 Web server requirements
 
 The requirements are the same for the server and for CRM https://yetiforce.com/en/knowledge-base/documentation/implementer-documentation/item/web-server-requirements
 
