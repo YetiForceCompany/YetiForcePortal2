@@ -192,12 +192,12 @@ color-name@^1.0.0:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.10.23:
-  version "1.10.25"
-  resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.10.25.tgz#4474d6738bf55a25d20da79afe18e1e654cfca42"
-  integrity sha512-leoiWJWxoPKHBNC9dkFRE84PRybQcAI2Aw4UiS5zisROcYRx8YG1uQOTtID4jbqakmbwwXap/c2eH+sdVP5t2w==
+datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.11.2.tgz#ad5fbe635733f9e50710a934edf7a7d4234e90ae"
+  integrity sha512-5a61G9xhx9R1HQO87DFQ9d1pvLcWRsHc8CUobbPwiYJrPQZ5f2tbPRvgWeJMR3Ti8dmBXmCC3jm5vmnrJcoINg==
   dependencies:
-    datatables.net "1.10.25"
+    datatables.net ">=1.10.25"
     jquery ">=1.7"
 
 datatables.net-responsive-bs4@^2.2.3:
@@ -217,10 +217,10 @@ datatables.net-responsive@2.2.9:
     datatables.net "^1.10.15"
     jquery ">=1.7"
 
-datatables.net@1.10.25, datatables.net@^1.10.15, datatables.net@^1.10.23:
-  version "1.10.25"
-  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.25.tgz#fc03a239e08f91d1d64ba101aa54daf4086d162c"
-  integrity sha512-y0+C7all+MC/h1acwnjErhaJPjYGKpWTvbXrfEUbR8+P+nnhgjNn5nL1udgsTwBObMhlj1KITNBRrM/ZLSoj+Q==
+datatables.net@>=1.10.25, datatables.net@^1.10.15, datatables.net@^1.10.23:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.11.2.tgz#019b37cda35d22087a65f983afa4e876eb9202e3"
+  integrity sha512-Dg+Yeyky+BhXoooJqTDTGssLxkAxe73CljcjYd4630XQZKqqqy0akYk2r4RSHSJLyYCOGRZEZiUF/N39+5nqvg==
   dependencies:
     jquery ">=1.7"
 
