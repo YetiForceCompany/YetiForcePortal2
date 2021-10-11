@@ -34,10 +34,10 @@ class Credits
 		'YetiForce' => [
 			'name' => 'YetiForcePortal2',
 			'version' => '',
-			'license' => 'YetiForce Public License v3',
+			'license' => 'YetiForce Public License 4.0',
 			'homepage' => 'https://yetiforce.com/en/yetiforce/license',
 			'notPackageFile' => true,
-			'showLicenseModal' => true
+			'showLicenseModal' => true,
 		],
 	];
 
