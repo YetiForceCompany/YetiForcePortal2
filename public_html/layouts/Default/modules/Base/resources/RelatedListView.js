@@ -1,4 +1,10 @@
-/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/**
+ * Base related list view class
+ *
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 'use strict';
 
 window.Base_RelatedListView_Js = class {

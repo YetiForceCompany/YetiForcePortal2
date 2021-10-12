@@ -14907,7 +14907,7 @@ input[type="checkbox"]:checked {
   padding-top: 8px; }
 
 .blockContainer .blockContent .fieldLabel label {
-  font-size: 12px !important; }
+  font-size: 13px !important; }
 
 .table th {
   background-color: #f8f9fa;
@@ -15400,7 +15400,7 @@ hr {
     width: 100%;
     border-radius: 0;
     vertical-align: text-top;
-    padding: 0.5rem 1.875rem 0.5rem 3.4375rem;
+    padding: 0.5rem 1.875rem 0.5rem 0.75rem;
     word-wrap: break-word;
     font-size: 0.9375rem;
     line-height: 1.2;
@@ -15615,14 +15615,14 @@ a {
   background: #fff;
   font-weight: 400 !important;
   border: 1px solid rgba(0, 0, 0, 0.125); }
-
-.listViewEntries th,
-.listViewEntries td {
-  padding: 0.4rem;
-  font-size: 0.85rem; }
-
-.listViewEntries .listViewSearch td {
-  padding: 0.4rem 0.2rem !important; }
+  .listViewEntries th,
+  .listViewEntries td {
+    padding: 0.4rem;
+    font-size: 0.85rem; }
+  .listViewEntries tbody tr {
+    cursor: pointer; }
+  .listViewEntries .listViewSearch td {
+    padding: 0.4rem 0.2rem !important; }
 
 table tbody tr:hover td .actions span {
   opacity: 1; }

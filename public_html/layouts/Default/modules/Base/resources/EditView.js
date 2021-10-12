@@ -1,4 +1,10 @@
-/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/**
+ * Base edit view class
+ *
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 'use strict';
 
 window.Base_EditView_Js = class {
@@ -151,16 +157,24 @@ window.Base_EditView_Js = class {
 					$.each(jstreeInstance.jstree('get_selected', true), (index, value) => {
 						selectedCategories.push(value);
 					});
-					let treeText = [];
-					let treeValue = [];
-					$.each(selectedCategories, (index, value) => {
-						treeValue.push(value['original']['tree']);
-						treeText.push(value['text']);
-					});
-					fieldDisplayElement.val(treeText.join(','));
-					fieldDisplayElement.attr('readonly', true);
-					treeValueField.val(treeValue.join(','));
-					app.hideModalWindow();
+					if (selectedCategories.length != 0) {
+						let treeText = [];
+						let treeValue = [];
+						$.each(selectedCategories, (index, value) => {
+							treeValue.push(value['original']['tree']);
+							treeText.push(value['text']);
+						});
+						fieldDisplayElement.val(treeText.join(','));
+						fieldDisplayElement.attr('readonly', true);
+						treeValueField.val(treeValue.join(','));
+						app.hideModalWindow('', modalContainer.data('modalId'));
+						PNotify.defaultStack.close();
+					} else {
+						app.showNotify({
+							text: app.translate('JS_PLEASE_SELECT_ATLEAST_ONE_OPTION'),
+							type: 'error'
+						});
+					}
 				});
 			});
 		});

@@ -12,18 +12,11 @@
 
 namespace YF\Modules\Base\Model;
 
-use App\Config;
-use App\Language;
-use App\Loader;
-
 /**
  * Menu class.
  */
 class Menu
 {
-	protected $allowedModulesInMenu = [];
-	protected $additionalMenuItems = [];
-
 	/**
 	 * Get instance.
 	 *
@@ -33,16 +26,8 @@ class Menu
 	 */
 	public static function getInstance(string $module = 'Base'): self
 	{
-		$menuClassName = Loader::getModuleClassName($module, 'Model', 'Menu');
+		$menuClassName = \App\Loader::getModuleClassName($module, 'Model', 'Menu');
 		return new $menuClassName();
-	}
-
-	/**
-	 * Construct.
-	 */
-	public function __construct()
-	{
-		$this->allowedModulesInMenu = Config::get('allowedModulesInMenu');
 	}
 
 	/**
@@ -60,36 +45,37 @@ class Menu
 		return $menus;
 	}
 
-	private function getItemModule(array $row)
+	/**
+	 * Get module type menu.
+	 *
+	 * @param array $row
+	 *
+	 * @return array
+	 */
+	protected function getItemModule(array $row): array
 	{
-		return [
-			'id' => $row['id'],
-			'type' => $row['type'],
-			'childs' => array_map([$this, 'getItemModule'], $row['childs']),
-			'name' => $row['name'],
-			'label' => $row['label'],
-			'icon' => 'yfm-' . $row['mod'],
-			'link' => Module::getInstance($row['mod'])->getDefaultUrl(),
-			'parent' => $row['parent']
-		];
+		$row['link'] = Module::getInstance($row['mod'])->getDefaultUrl();
+		$row['icon'] = $row['icon'] ?? ('yfm-' . $row['mod']);
+		$row['childs'] = array_map([$this, 'getItem'], $row['childs']);
+		return $row;
 	}
 
-	private function getItem(array $row)
+	/**
+	 * Get base type menu.
+	 *
+	 * @param array $row
+	 *
+	 * @return array
+	 */
+	protected function getItem(array $row)
 	{
 		$methodName = 'getItem' . ucfirst($row['type']);
 		if (method_exists($this, $methodName)) {
 			return $this->{$methodName}($row);
 		}
-		return [
-			'id' => $row['id'],
-			'type' => $row['type'],
-			'childs' => array_map([$this, 'getItem'], $row['childs']),
-			'name' => $row['name'],
-			'label' => $row['label'],
-			'icon' => $row['icon'],
-			'link' => $row['dataurl'],
-			'parent' => $row['parent']
-		];
+		$row['link'] = $row['dataurl'];
+		$row['childs'] = array_map([$this, 'getItem'], $row['childs']);
+		return $row;
 	}
 
 	/**
@@ -102,17 +88,17 @@ class Menu
 		$items = [];
 		$menu = $this->getItemsFromSystem();
 		if (empty($menu)) {
-			$defaultModule = Config::get('defaultModule');
+			$defaultModule = \App\Config::get('defaultModule');
 			return [
 				[
 					'type' => 'Module',
 					'id' => '',
 					'childs' => [],
 					'name' => $defaultModule,
-					'label' => Language::translateModule($defaultModule),
+					'label' => \App\Language::translateModule($defaultModule),
 					'icon' => 'yfm-' . $defaultModule,
-					'link' => "index.php?module={$defaultModule}&view=ListView"
-				]
+					'link' => "index.php?module={$defaultModule}&view=ListView",
+				],
 			];
 		}
 		foreach ($menu as $values) {

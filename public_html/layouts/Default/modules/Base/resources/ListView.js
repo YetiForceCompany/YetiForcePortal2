@@ -1,4 +1,10 @@
-/* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
+/**
+ * Base list view class
+ *
+ * @copyright YetiForce Sp. z o.o.
+ * @license YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ */
 'use strict';
 
 window.Base_ListView_Js = class {
@@ -63,6 +69,14 @@ window.Base_ListView_Js = class {
 				this.value = '';
 			});
 			this.dataTable.ajax.reload();
+		});
+		this.table.on('click', 'tbody tr', function () {
+			let element = jQuery(this);
+			console.log(element.prop('tagName'));
+			if (element.prop('tagName') !== 'A') {
+				console.log(jQuery(this).find('.js-detail-view'));
+				// jQuery(this).find('.js-detail-view').trigger('click');
+			}
 		});
 	}
 	/**

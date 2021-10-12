@@ -357,7 +357,7 @@ class Record extends \App\BaseModel
 				'moduleName' => $this->getModuleName(),
 				'href' => $this->getDetailViewUrl(),
 				'icon' => 'fas fa-th-list',
-				'class' => 'btn-sm btn-info active js-popover-tooltip',
+				'class' => 'btn-sm btn-info active js-popover-tooltip js-detail-view',
 			];
 		}
 		if ($this->isEditable()) {
@@ -378,7 +378,7 @@ class Record extends \App\BaseModel
 				'class' => 'btn-sm btn-danger active js-delete-record js-popover-tooltip',
 			];
 		}
-		return \App\Layout\Action::getListViewActions($recordLinks);
+		return '<span class="js-record-data" data-id="' . $this->getId() . '"></span>' . \App\Layout\Action::getListViewActions($recordLinks);
 	}
 
 	/**

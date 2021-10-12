@@ -4,16 +4,20 @@
 	background: #fff;
 	font-weight: 400 !important;
 	border: 1px solid rgba(0, 0, 0, 0.125);
-}
 
-.listViewEntries th,
-.listViewEntries td {
-	padding: 0.4rem;
-	font-size: 0.85rem;
-}
+	th,
+	td {
+		padding: 0.4rem;
+		font-size: 0.85rem;
+	}
 
-.listViewEntries .listViewSearch td {
-	padding: 0.4rem 0.2rem !important;
+	tbody tr {
+		cursor: pointer;
+	}
+
+	.listViewSearch td {
+		padding: 0.4rem 0.2rem !important;
+	}
 }
 
 table tbody tr:hover td .actions span {

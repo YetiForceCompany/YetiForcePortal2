@@ -16,9 +16,11 @@
 	</div>
 	<div class="menuContainer js-menu--scroll c-menu__body ps ps--active-y" data-js="perfectscrollbar">
 		<nav class="tpl-Menu js-menu__content c-menu__content" id="submenu-0">
-			<ul class="nav flex-column modulesList"   >
+			<ul class="nav flex-column modulesList">
 				{foreach item=ITEM_MENU key=KEY from=$MENU}
-					{include file=\App\Resources::templatePath('Menu/'|cat:$ITEM_MENU.type|cat:'.tpl', $MODULE_NAME)}
+					{if in_array($ITEM_MENU['type'],['HomeIcon','Label','Module','QuickCreate','Seperator','Shortcut','SubMenu'])}
+						{include file=\App\Resources::templatePath('Menu/'|cat:$ITEM_MENU['type']|cat:'.tpl', $MODULE_NAME)}
+					{/if}
 				{/foreach}
 			</ul>
 		</nav>
