@@ -14,10 +14,14 @@
 [![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 
-[![SymfonyInsight](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9/big.png)](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9)
-<a href="https://crowdin.com/project/yetiforceportal2" rel="nofollow">
-<img width="20%" src="https://support.crowdin.com/assets/badges/localization-at-transparent@1x.svg" alt="crowdin Localization Management Platform">
-</a>
+<p align="center">
+	<a href="https://sourceforge.net/projects/yetiforce/files/YetiForce%20Portal%202%20for%20CRM%206.x.x/">
+		<img width="30%" src="https://a.fsdn.com/con/app/sf-download-button" srcset="https://a.fsdn.com/con/app/sf-download-button?button_size=2x 2x" alt="Download YetiForce CRM">
+	</a>
+	<a href="https://crowdin.com/project/yetiforceportal2">
+		<img width="30%" src="https://support.crowdin.com/assets/badges/localization-at-transparent@1x.svg" alt="crowdin Localization Management Platform">
+	</a>
+</p>
 
 The Customer Portal complements YetiForce CRM and is the most effective communication tool for your customers. It’s easy to use and delivers many new functions. You can reduce operating expenses by providing support 24 hours a day. YetiForce Portal delivers also greater customer experiences as your clients can see all relevant information and the current status of their tickets in one place.
 
