@@ -14,6 +14,13 @@ namespace App;
 
 class Api
 {
+	/** The request is a multi-part form request */
+	public const FORMAT_MULTIPART = 'multipart';
+	/** The request is a body form request */
+	public const FORMAT_BODY = 'body';
+	/** The request the request contains JSON */
+	public const FORMAT_JSON = 'json';
+
 	/** @var self API Instance */
 	protected static $instance;
 
@@ -25,6 +32,15 @@ class Api
 
 	/** @var array The default configuration of GuzzleHttp. */
 	protected $options = [];
+
+	/** @var string Format of the request */
+	protected $format = self::FORMAT_BODY;
+
+	/** @var array The raw body for the request */
+	private $dataBody = [];
+
+	/** @var array The pending files for the request */
+	private $dataFiles = [];
 
 	/**
 	 * Api class constructor.
@@ -66,29 +82,100 @@ class Api
 				'auth' => [Config::$serverName, Config::$serverPass],
 			]);
 		}
-		return self::$instance;
+		return clone self::$instance;
+	}
+
+	/**
+	 * Specify the body format of the request.
+	 *
+	 * @param string $format
+	 *
+	 * @return $this
+	 */
+	private function setFormat(string $format)
+	{
+		$this->format = $format;
+
+		return $this;
+	}
+
+	/**
+	 * Attach a file to the request.
+	 *
+	 * @param string      $name
+	 * @param string      $contents
+	 * @param string|null $filename
+	 *
+	 * @return $this
+	 */
+	public function attach(string $name, string $contents = '', string $filename = null)
+	{
+		$this->setFormat(self::FORMAT_MULTIPART);
+		unset($this->header['Content-Type']);
+		$this->dataFiles[] = array_filter([
+			'name' => $name,
+			'filename' => $filename,
+			'contents' => $contents
+		]);
+
+		return $this;
+	}
+
+	/**
+	 * Add body format data.
+	 *
+	 * @param array $data
+	 *
+	 * @return $this
+	 */
+	public function setDataBody(array $data)
+	{
+		$this->dataBody = array_merge($this->dataBody, $data);
+
+		return $this;
+	}
+
+	/**
+	 * Gets parsed form data.
+	 *
+	 * @return array
+	 */
+	public function getParsedData(): array
+	{
+		if (self::FORMAT_MULTIPART === $this->format) {
+			$data = $this->dataFiles;
+			foreach ($this->dataBody as $key => $value) {
+				$data[] = ['name' => $key, 'contents' => $value];
+			}
+		} else {
+			$data = $this->dataBody;
+		}
+		return $data;
 	}
 
 	/**
 	 * Call API method.
 	 *
 	 * @param string $method
-	 * @param array  $data
+	 * @param array  $data        Body format [key=>value]
 	 * @param string $requestType Default get
 	 *
 	 * @return array|false
 	 */
 	public function call(string $method, array $data = [], string $requestType = 'get')
 	{
-		$rawRequest = $data;
 		$startTime = microtime(true);
+		$this->setDataBody($data);
 		$headers = $this->getHeaders();
 		try {
 			if (\in_array($requestType, ['get', 'delete'])) {
-				$method .= $data ? ('?' . http_build_query($data)) : '';
+				$method .= $this->dataBody ? ('?' . http_build_query($this->dataBody)) : '';
 				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers]);
+			} elseif (self::FORMAT_MULTIPART === $this->format) {
+				$data = $this->getParsedData();
+				$response = $this->httpClient->request($requestType, $method, ['headers' => $headers, 'multipart' => $data]);
 			} else {
-				$data = Json::encode($data);
+				$data = Json::encode($this->dataBody);
 				if (Config::$encryptDataTransfer) {
 					$data = $this->encryptData($data);
 				}
@@ -99,7 +186,7 @@ class Api
 			if ($headers['Accept'] !== reset($contentType)) {
 				if (Config::$apiErrorLogs || Config::$apiAllLogs) {
 					\App\Log::info([
-						'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+						'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $this->dataBody, 'body' => $data],
 						'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => $response->getStatusCode(), 'reasonPhrase' => $response->getReasonPhrase(), 'error' => "Invalid response content type\n Accept:{$headers['Accept']} <> {$response->getHeaderLine('Content-Type')}", 'headers' => $response->getHeaders(), 'rawBody' => $rawResponse],
 					], 'Api');
 				}
@@ -118,7 +205,7 @@ class Api
 		} catch (\Throwable $e) {
 			if (Config::$apiErrorLogs || Config::$apiAllLogs) {
 				\App\Log::info([
-					'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+					'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $this->dataBody, 'body' => $data],
 					'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => (isset($response) && method_exists($response, 'getStatusCode') ? $response->getStatusCode() : '-'), 'reasonPhrase' => (isset($response) && method_exists($response, 'getReasonPhrase') ? $response->getReasonPhrase() : '-'), 'error' => $e->__toString(), 'headers' => (isset($response) && method_exists($response, 'getHeaders') ? $response->getHeaders() : '-'), 'rawBody' => ($rawResponse ?? '')],
 				], 'Api');
 			}
@@ -131,7 +218,7 @@ class Api
 				'method' => $method,
 				'requestType' => strtoupper($requestType),
 				'requestId' => RequestUtil::requestId(),
-				'rawRequest' => [$headers, $rawRequest],
+				'rawRequest' => [$headers, $this->dataBody],
 				'rawResponse' => $rawResponse,
 				'response' => $responseBody,
 				'trace' => Debug::getBacktrace(),
@@ -139,7 +226,7 @@ class Api
 		}
 		if (Config::$apiAllLogs || (Config::$apiErrorLogs && (isset($responseBody['error']) || empty($responseBody) || 200 !== $response->getStatusCode()))) {
 			\App\Log::info([
-				'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $rawRequest, 'body' => $data],
+				'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $this->dataBody, 'body' => $data],
 				'response' => ['time' => round(microtime(true) - $startTime, 2), 'status' => $response->getStatusCode(), 'reasonPhrase' => $response->getReasonPhrase(), 'headers' => $response->getHeaders(),	'rawBody' => $rawResponse, 'body' => $responseBody],
 			], 'Api');
 		}

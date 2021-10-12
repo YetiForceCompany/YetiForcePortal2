@@ -204,22 +204,21 @@ window.Base_EditView_Js = class {
 				enabled: true
 			}
 		});
-		let formData = this.form.serializeFormData();
-		let beforeSaveResult = callbackBeforeSave(formData);
+
+		let beforeSaveResult = callbackBeforeSave(this.form.serializeFormData());
 		if (beforeSaveResult === false) {
 			progress.progressIndicator({ mode: 'hide' });
 			return;
 		}
-		// form.serializeFormData();
-		// let formData = new FormData(form[0]);
-		// AppConnector.request({
-		// 	url: 'index.php',
-		// 	type: 'POST',
-		// 	data: formData,
-		// 	processData: false,
-		// 	contentType: false
-		// })
-		AppConnector.request(formData)
+
+		let formData = new FormData(this.form[0]);
+		AppConnector.request({
+			url: 'index.php',
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false
+		})
 			.done((response) => {
 				progress.progressIndicator({ mode: 'hide' });
 				if (response.success) {

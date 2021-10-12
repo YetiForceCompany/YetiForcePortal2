@@ -319,4 +319,20 @@ class BaseField extends \App\BaseModel
 	{
 		return $this->getDisplayValue($value, $recordModel);
 	}
+
+	/**
+	 * Set data to api container.
+	 *
+	 * @param \App\Request $request
+	 * @param \App\Api     $api
+	 *
+	 * @return $this
+	 */
+	public function setApiData(\App\Request $request, \App\Api $api)
+	{
+		if ($request->has($this->getName())) {
+			$api->setDataBody([$this->getName() => $request->getRaw($this->getName())]);
+		}
+		return $this;
+	}
 }

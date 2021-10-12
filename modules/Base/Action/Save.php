@@ -31,11 +31,16 @@ class Save extends \App\Controller\Action
 	/** {@inheritdoc} */
 	public function process()
 	{
-		$module = $this->request->getModule();
+		$moduleName = $this->request->getModule();
 		$record = $this->request->isEmpty('record') ? '' : $this->request->getByType('record', Purifier::INTEGER);
+		$api = \App\Api::getInstance();
 		$formData = $this->request->getAllRaw();
-		unset($formData['_csrf'], $formData['_fromView']);
-		$result = \App\Api::getInstance()->call($module . '/Record/' . $record, $formData, $record ? 'put' : 'post');
+		$moduleModel = \YF\Modules\Base\Model\Module::getInstance($moduleName);
+		foreach ($moduleModel->getFieldsModels() as $fieldModel) {
+			$fieldModel->setApiData($this->request, $api);
+		}
+		unset($formData['_csrf'], $formData['_fromView'], $formData['action']);
+		$result = $api->call($moduleName . '/Record/' . $record, $formData, $record ? 'put' : 'post');
 		if ($this->request->isEmpty('record')) {
 			$record = $result['id'] ?? '';
 		}
@@ -45,7 +50,7 @@ class Save extends \App\Controller\Action
 			$response->emit();
 		} else {
 			$view = $this->request->has('_fromView') ? $this->request->getByType('_fromView', Purifier::ALNUM) : 'DetailView';
-			header("Location:index.php?module=$module&view={$view}&record=$record");
+			header("Location:index.php?module={$moduleName}&view={$view}&record={$record}");
 		}
 	}
 }

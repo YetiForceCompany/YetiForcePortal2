@@ -243,7 +243,7 @@ class Module
 		}
 		$this->fieldsModels = [];
 		foreach ($this->apiFields['fields'] as $fieldName => $field) {
-			$this->fieldsModels[$fieldName] = $fieldInstance = Field::getInstance($this->moduleName, $field);
+			$this->fieldsModels[$fieldName] = Field::getInstance($this->moduleName, $field);
 		}
 	}
 

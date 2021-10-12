@@ -7,6 +7,7 @@
  * @copyright YetiForce Sp. z o.o.
  * @license   YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Base\FieldTypes;
@@ -35,5 +36,15 @@ class DocumentsFileUploadField extends BaseField
 			}
 		}
 		return $value;
+	}
+
+	/** {@inheritdoc} */
+	public function setApiData(\App\Request $request, \App\Api $api)
+	{
+		$fieldName = $this->getName();
+		if (($file = $_FILES[$fieldName] ?? []) && !empty($file['name']) && isset($file['error']) && $file['size'] > 0) {
+			$api->attach($fieldName, file_get_contents($file['tmp_name']), $file['name']);
+		}
+		return $this;
 	}
 }
