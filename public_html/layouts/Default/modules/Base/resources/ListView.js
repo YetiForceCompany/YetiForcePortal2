@@ -83,28 +83,32 @@ window.Base_ListView_Js = class {
 	 * Register custom view event
 	 */
 	registerCustomView() {
-		let customFiltr = this.listForm.find('.js-cv-list');
-		App.Fields.Picklist.showSelect2ElementView(customFiltr);
-		customFiltr.on('change', (_) => {
+		let customFilter = this.listForm.find('.js-cv-list');
+		App.Fields.Picklist.showSelect2ElementView(customFilter);
+		customFilter.on('change', (_) => {
 			$.progressIndicatorShow();
-			this.reloadView();
+			this.reloadView(false);
 		});
 		this.listForm.on('click', '.js-filter-tab', (e) => {
 			$.progressIndicatorShow();
 			this.container.find('[name="cvId"]').val(e.currentTarget.dataset.cvid);
-			this.reloadView();
+			this.reloadView(false);
 		});
 	}
 	/**
 	 * Reload view
+	 * @param   {boolean}  onlyData
 	 */
-	reloadView() {
-		let data = {
-			module: this.container.find('#module').val(),
-			view: this.container.find('#view').val(),
-			cvId: this.container.find('[name="cvId"]').val()
-		};
-		window.location.href = app.convertObjectToUrl(data);
+	reloadView(onlyData = true) {
+		if (onlyData) {
+			this.dataTable.ajax.reload();
+		} else {
+			window.location.href = app.convertObjectToUrl({
+				module: this.container.find('#module').val(),
+				view: this.container.find('#view').val(),
+				cvId: this.container.find('[name="cvId"]').val()
+			});
+		}
 	}
 	/**
 	 * Register tree.

@@ -8,7 +8,7 @@
 				<span class="fas fa-bars fa-fw" title="{\App\Language::translate('LBL_MENU')}"></span>
 			</a>
 			{if !empty(\Conf\Config::$headerAlertMessage)}
-				<div class="alert {if empty(\Conf\Config::$headerAlertType)}alert-danger{else}{\Conf\Config::$headerAlertType}{/if} mx-auto mb-0 px-3 py-1 text-center u-font-size-19px text-nowrap"
+				<div class="alert {if empty(\Conf\Config::$headerAlertType)}alert-danger{else}{\Conf\Config::$headerAlertType}{/if} mr-2 mb-0 px-3 py-1 text-center u-font-size-19px text-nowrap"
 					role="alert">
 					<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
 					<span class="font-weight-bold mx-3">{\Conf\Config::$headerAlertMessage}</span>
@@ -20,14 +20,14 @@
 				<div class="badge badge-light mr-2 p-2 text-truncate text-black">
 					{if !empty($COMPANY_DETAILS['sum_open_orders'])}
 						<i class="fas fa-file-alt mr-2"></i>
-						<span class="u-fs-12px">
+						<span class="u-font-size-19px">
 							{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}
 						</span>
 					{/if}
 					{if !empty($COMPANY_DETAILS['creditlimit'])}
 						<br>
 						<i class="fas fa-wallet mr-2"></i>
-						<span class="u-fs-12px">
+						<span class="u-font-size-19px">
 							{\App\Language::translate('LBL_CREDIT_LIMIT')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['creditlimit'])}
 						</span>
 					{/if}

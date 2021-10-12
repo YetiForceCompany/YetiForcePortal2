@@ -39,6 +39,17 @@ var App = {
 					url += '&sourceModule=' + app.getModuleName();
 					url += '&sourceRecord=' + app.getRecordId();
 				}
+				if (typeof params.callbackAfterSave === 'undefined') {
+					params.callbackAfterSave = (response) => {
+						if (
+							app.getViewName() === 'ListView' &&
+							app.getModuleName() === moduleName &&
+							typeof app.pageController.reloadView === 'function'
+						) {
+							app.pageController.reloadView();
+						}
+					};
+				}
 				const progress = $.progressIndicator({ blockInfo: { enabled: true } });
 				this.getForm(url, params).done((data) => {
 					progress.progressIndicator({
@@ -1031,7 +1042,7 @@ var app = {
 		app.showModalWindow(null, params, function (container, modalInstance) {
 			modalInstance.addSelectCallBack((e) => {
 				callback(e);
-				app.hideModalWindow();
+				app.hideModalWindow('', container.data('modalId'));
 			});
 		});
 	},
@@ -1365,8 +1376,9 @@ $(function () {
 		$('#fingerPrint').val(new DeviceUUID().get());
 	}
 	// Instantiate Page Controller
-	var pageController = app.getPageController();
-	if (pageController) pageController.registerEvents();
+	if ((app.pageController = app.getPageController())) {
+		app.pageController.registerEvents();
+	}
 	if (typeof $.fn.datepicker.dates[app.getMainParams('langKey')] === 'undefined') {
 		$.fn.datepicker.dates[app.getMainParams('langKey')] = {
 			days: App.Fields.Date.fullDaysTranslated,
