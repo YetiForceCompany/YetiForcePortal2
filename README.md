@@ -3,7 +3,6 @@
 ![PHP Version](https://img.shields.io/packagist/php-v/yetiforce/yetiforce-portal)
 [![GitHub contributors](https://img.shields.io/github/contributors/YetiForceCompany/YetiForcePortal2.svg)](https://GitHub.com/YetiForceCompany/YetiForcePortal2/graphs/contributors/)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/yetiforceportal2/localized.svg)](https://crowdin.com/project/yetiforceportal2)
-[![SymfonyInsight](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9/mini.svg)](https://insight.symfony.com/projects/3a5cf4ef-0d39-4141-91cc-8b9584cba5a9)
 [![Scrutinizer](https://scrutinizer-ci.com/g/YetiForceCompany/YetiForcePortal2/badges/quality-score.png?b=developer)](https://scrutinizer-ci.com/g/YetiForceCompany/YetiForcePortal2/)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/YetiForceCompany/YetiForcePortal2.svg)](http://isitmaintained.com/project/YetiForceCompany/YetiForcePortal2 'Percentage of issues still open')
 [![Depfu](https://badges.depfu.com/badges/4affeca7559c22dbeba7653979a51d29/status.svg)](https://depfu.com)
