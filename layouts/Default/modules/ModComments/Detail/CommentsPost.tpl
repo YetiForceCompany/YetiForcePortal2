@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-<!-- tpl-ModComments-Detail-CommentsPost -->
+	<!-- tpl-ModComments-Detail-CommentsPost -->
 	{assign var="IS_CREATABLE" value=$COMMENT->getModuleModel()->isPermitted('CreateView')}
 	<div class="js-post-container{if !$SUB_COMMENT} row{/if}">
 		<div class="col-md-12 {if $SUB_COMMENT} pr-0{/if}">
@@ -18,17 +18,17 @@
 								{$COMMENT->getDisplayValue('createdtime')}
 								{if $IS_CREATABLE}
 									<button type="button" class="btn btn-sm text-success js-post-reply u-text-ellipsis mr-0 p-0 pl-1"
-											title="{\App\Language::translate('LBL_REPLY',$MODULE_NAME)}"
-											data-js="click">
+										title="{\App\Language::translate('LBL_REPLY',$MODULE_NAME)}"
+										data-js="click">
 										&nbsp;
 										<span class="fas fa-share"></span>
 									</button>
 								{/if}
 								{assign var="CHILDREN_COUNT" value=$COMMENT->getRawValue('children_count')}
 								<button type="button" class="btn btn-sm text-info js-show-replies u-text-ellipsis mr-0 p-0 pl-1 {if !$CHILDREN_COUNT} d-none{/if}"
-										data-url="{$COMMENT->getChildrenUrl()}"
-										title="{$CHILDREN_COUNT}&nbsp;{if $CHILDREN_COUNT eq 1}{\App\Language::translate('LBL_REPLY_SINGLE',$MODULE_NAME)}{else}{\App\Language::translate('LBL_REPLIES',$MODULE_NAME)}{/if}"
-										data-js="click">
+									data-url="{$COMMENT->getChildrenUrl()}"
+									title="{$CHILDREN_COUNT}&nbsp;{if $CHILDREN_COUNT eq 1}{\App\Language::translate('LBL_REPLY_SINGLE',$MODULE_NAME)}{else}{\App\Language::translate('LBL_REPLIES',$MODULE_NAME)}{/if}"
+									data-js="click">
 									<span class="js-child-comments-count">{$CHILDREN_COUNT}</span>
 									&nbsp;
 									<span class="fas fa-share"></span>
@@ -48,5 +48,5 @@
 			</div>
 		</div>
 	</div>
-<!-- /tpl-ModComments-Detail-CommentsPost -->
+	<!-- /tpl-ModComments-Detail-CommentsPost -->
 {/strip}

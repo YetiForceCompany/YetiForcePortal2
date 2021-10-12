@@ -1,6 +1,6 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-<!-- tpl-Base-Detail-Summary -->
+	<!-- tpl-Base-Detail-Summary -->
 	<div class="o-detail-widgets row no-gutters mx-n1 mt-2">
 		{if $DETAIL_VIEW_WIDGETS}
 			{assign var=SPAN value=12/count($DETAIL_VIEW_WIDGETS)}
@@ -14,5 +14,5 @@
 		{/if}
 	</div>
 	{include file=\App\Resources::templatePath('CoreLog.tpl', $MODULE_NAME)}
-<!-- /tpl-Base-Detail-Summary -->
+	<!-- /tpl-Base-Detail-Summary -->
 {/strip}

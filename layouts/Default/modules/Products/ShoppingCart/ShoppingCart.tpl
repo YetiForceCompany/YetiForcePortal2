@@ -1,7 +1,7 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-    {assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
-    {assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}
+	{assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
+	{assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}
 	<div class="tpl-Products-ShoppingCart-ShoppingCart product-container js-products-container" data-check-stock-levels="{$CHECK_STOCK_LEVELS}" data-js="container">
 		<div class="row no-gutters">
 			<div class="col-12 col-lg-9">
@@ -42,62 +42,61 @@
 						<input type="hidden" class="js-addresses" value="{App\Purifier::encodeHTML(App\Json::encode($ADDRESSES))}">
 						{if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
 							<div class="px-2 px-sm-4">
-							{assign var=REQUIRED_FIELDS value=['addresslevel5', 'addresslevel7', 'addresslevel8', 'buildingnumber']}
-									{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
-										<div class="row small">
-											<label class="col-sm-2 col-form-label text-muted">
-												{App\Language::translate('LBL_ADDRESS_'|cat:(strtoupper($FIELDNAME)), $MODULE_NAME)}
-											</label>
-											<div class="col-sm-10">
-												<input type="text" name="{$FIELDNAME}"
+								{assign var=REQUIRED_FIELDS value=['addresslevel5', 'addresslevel7', 'addresslevel8', 'buildingnumber']}
+								{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
+									<div class="row small">
+										<label class="col-sm-2 col-form-label text-muted">
+											{App\Language::translate('LBL_ADDRESS_'|cat:(strtoupper($FIELDNAME)), $MODULE_NAME)}
+										</label>
+										<div class="col-sm-10">
+											<input type="text" name="{$FIELDNAME}"
 												{if !empty($ADDRESSES)}
-												readonly
+													readonly
 												{elseif in_array($FIELDNAME, $REQUIRED_FIELDS)}
-												data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]"
-												{/if} class="form-control{if !empty($ADDRESSES)}-plaintext{/if}" value=""
-												>
+													data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]"
+													{/if} class="form-control{if !empty($ADDRESSES)}-plaintext{/if}" value="">
 											</div>
 										</div>
 									{/foreach}
+								</div>
+							{/if}
+						</div>
+						<div class="{$CSS_CARD_CONTAINER} my-3">
+							<div class="{$CSS_CARD_CONTENT}">
+								<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
 							</div>
-						{/if}
-					</div>
-					<div class="{$CSS_CARD_CONTAINER} my-3">
-						<div class="{$CSS_CARD_CONTENT}">
-							<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
-						</div>
-						<div class="m-2">
-							<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
-						</div>
-					</div>
-					<div class="{$CSS_CARD_CONTAINER}">
-						<div class="{$CSS_CARD_CONTENT}">
-							<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
-						</div>
-						<div class="px-3">
-							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
-								{foreach from=$PAYMENTS item=PAYMENT}
-									<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
-										<input type="radio" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off">
-										<span class="{$PAYMENT->getIcon()} mx-1"></span>
-										{\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
-									</label>
-								{/foreach}
-							</div>
-							<div id="payments-info-accordion" class="js-payments-info">
-								{foreach from=$PAYMENTS item=PAYMENT}
-									<div id="collapse-{$PAYMENT->getType()}" class="collapse js-{$PAYMENT->getType()}" data-parent="#payments-info-accordion">
-										{include file=\App\Resources::templatePath("components/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
-									</div>
-								{/foreach}
+							<div class="m-2">
+								<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
 							</div>
 						</div>
-					</div>
-				</form>
-			</div>
-			<div class="col-12 col-lg-3 pl-lg-3 mt-3 mt-lg-0">
-				{include file=\App\Resources::templatePath("components/Summary.tpl", $MODULE_NAME)}
+						<div class="{$CSS_CARD_CONTAINER}">
+							<div class="{$CSS_CARD_CONTENT}">
+								<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
+							</div>
+							<div class="px-3">
+								<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
+									{foreach from=$PAYMENTS item=PAYMENT}
+										<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
+											<input type="radio" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off">
+											<span class="{$PAYMENT->getIcon()} mx-1"></span>
+											{\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
+										</label>
+									{/foreach}
+								</div>
+								<div id="payments-info-accordion" class="js-payments-info">
+									{foreach from=$PAYMENTS item=PAYMENT}
+										<div id="collapse-{$PAYMENT->getType()}" class="collapse js-{$PAYMENT->getType()}" data-parent="#payments-info-accordion">
+											{include file=\App\Resources::templatePath("components/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
+										</div>
+									{/foreach}
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-12 col-lg-3 pl-lg-3 mt-3 mt-lg-0">
+					{include file=\App\Resources::templatePath("components/Summary.tpl", $MODULE_NAME)}
+				</div>
 			</div>
 		</div>
-	</div>
-{/strip}
+	{/strip}

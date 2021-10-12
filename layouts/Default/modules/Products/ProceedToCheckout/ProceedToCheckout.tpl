@@ -1,11 +1,11 @@
 {*<!-- {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} -->*}
 {strip}
-  {assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
-    {assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}
+	{assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
+	{assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}
 	<div class="tpl-Products-ProceedToCheckout-ProceedToCheckout product-container js-products-container"
-	data-reference-id="{{$REFERENCE_ID}}"
-	data-reference-module="{{$REFERENCE_MODULE}}"
-	data-js="container">
+		data-reference-id="{{$REFERENCE_ID}}"
+		data-reference-module="{{$REFERENCE_MODULE}}"
+		data-js="container">
 		<div class="row no-gutters">
 			<div class="col-12 col-lg-9">
 				<div class="{$CSS_CARD_CONTAINER}">
@@ -58,15 +58,15 @@
 						</div>
 					</div>
 					{if $SELECTED_PAYMENTS}
-					<div class="px-3 pt-3 pb-2">
-						<div class="h6">
-							<span class="badge badge-primary">
-								<span class="{$SELECTED_PAYMENTS->getIcon()} mx-1"></span>
-								{\App\Language::translate(strtoupper("LBL_"|cat:$SELECTED_PAYMENTS->getType()), $MODULE_NAME)}
-							</span>
+						<div class="px-3 pt-3 pb-2">
+							<div class="h6">
+								<span class="badge badge-primary">
+									<span class="{$SELECTED_PAYMENTS->getIcon()} mx-1"></span>
+									{\App\Language::translate(strtoupper("LBL_"|cat:$SELECTED_PAYMENTS->getType()), $MODULE_NAME)}
+								</span>
+							</div>
+							{include file=\App\Resources::templatePath("components/Payments/"|cat:{$SELECTED_PAYMENTS->getType()}|cat:".tpl", $MODULE_NAME) PAYMENT=$SELECTED_PAYMENTS}
 						</div>
-						{include file=\App\Resources::templatePath("components/Payments/"|cat:{$SELECTED_PAYMENTS->getType()}|cat:".tpl", $MODULE_NAME) PAYMENT=$SELECTED_PAYMENTS}
-					</div>
 					{/if}
 				</div>
 			</div>
