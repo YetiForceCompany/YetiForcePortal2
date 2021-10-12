@@ -40,7 +40,7 @@ https://yetiforce.com/en/knowledge-base/documentation/implementer-documentation/
 2. Point web server document root to public_html directory
 3. Run:
 
-- yarn install --modules-folder "./public_html/libraries" --ignore-optional
+- yarn install --modules-folder "./public_html/libraries" --ignore-optional --production=true
 - composer install --no-dev  --no-interaction
 
 4. Activation of Webservice/API services (CRM file `config/Api.php`)
