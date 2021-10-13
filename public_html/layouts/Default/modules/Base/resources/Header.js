@@ -130,12 +130,62 @@ jQuery.Class(
 				menuContainer = container.find('.js-menu--scroll');
 			app.showNewScrollbarLeft(menuContainer, { suppressScrollX: true });
 		},
+		/**
+		 * Pin menu
+		 */
+		registerPinEvent: function () {
+			const self = this;
+			const container = $('.js-base-container');
+			let pinButton = container.find('.js-menu--pin');
+			let sidebar = $('.js-sidebar').first();
+
+			pinButton.on('click', () => {
+				let hideMenu = 0;
+				console.log(pinButton.attr('data-show'));
+				if (pinButton.attr('data-show') === '0') {
+					hideMenu = 1;
+					pinButton.removeClass('u-opacity-muted');
+					container.addClass('c-menu--open');
+					sidebar.off('mouseleave mouseenter');
+				} else {
+					pinButton.addClass('u-opacity-muted');
+					container.removeClass('c-menu--open');
+					sidebar.on('mouseenter', self.openSidebar.bind(self)).on('mouseleave', self.closeSidebar.bind(self));
+					//	self.closeSidebar.bind(self);
+				}
+				pinButton.attr('data-show', hideMenu);
+
+				AppConnector.request({
+					module: 'Users',
+					action: 'UserPreferences',
+					userPreferences: { menuPin: hideMenu }
+				}).done((response) => {
+					if (response.success) {
+						app.showNotify({
+							text: app.translate('JS_SAVE_NOTIFY_SUCCESS'),
+							type: 'success'
+						});
+					}
+				});
+			});
+		},
+		openSidebar: function () {
+			$('.js-sidebar').first().addClass('js-expand');
+			//this.sidebar.addClass('js-expand');
+			//this.sidebarBtn.attr('aria-expanded', true);
+		},
+		closeSidebar: function () {
+			$('.js-sidebar').first().removeClass('js-expand');
+			//	this.sidebar.removeClass('js-expand');
+			//this.sidebarBtn.attr('aria-expanded', false);
+		},
 
 		registerEvents: function () {
 			var thisInstance = this;
 			thisInstance.recentPageViews();
 			thisInstance.registerChangeCompany();
 			thisInstance.registerScrolbarToMenu();
+			thisInstance.registerPinEvent();
 			App.Fields.Tree.getInstance();
 		}
 	}

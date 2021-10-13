@@ -204,4 +204,13 @@ class Config
 		'connect_timeout' => 2,
 		// 'verify' => false,
 	];
+
+	/**
+	 * User preferences and config.
+	 */
+
+	/** @var array Default user preferences */
+	public static $userPreferences = [
+		'menuPin' => 0
+	];
 }
