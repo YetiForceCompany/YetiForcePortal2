@@ -58,7 +58,7 @@ window.Base_RecordListModal_JS = class {
 		this.table.on('click', 'tbody tr', function (e) {
 			let element = jQuery(this);
 			if (element.prop('tagName') !== 'A') {
-				jQuery(this).find('.js-select-record').off('click').trigger('click');
+				element.find('.js-select-record').off('click').trigger('click');
 			}
 		});
 	}

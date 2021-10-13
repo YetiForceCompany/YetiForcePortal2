@@ -73,7 +73,7 @@ window.Base_ListView_Js = class {
 		this.table.on('click', 'tbody tr', function () {
 			let element = jQuery(this);
 			if (element.prop('tagName') !== 'A') {
-				window.location.href = jQuery(this).find('.js-detail-view').attr('href');
+				window.location.href = element.find('.js-detail-view').attr('href');
 			}
 		});
 	}
