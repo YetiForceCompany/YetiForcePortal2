@@ -465,3 +465,23 @@ $c-input-rounded-border-color: #dee2e6;
 		background: darken($bg-rtabs, 10%);
 	}
 }
+
+.c-multi-image__preview-img {
+	height: 2rem;
+	width: 2rem;
+	cursor: pointer;
+	background-size: cover;
+	background-position: center;
+}
+
+.c-multi-image__popover-img {
+	cursor: pointer;
+}
+
+.c-multi-image__drop-effect {
+	background: rgba($blue, 0.2);
+	border: $border-width solid rgba($blue, 0.5) !important;
+}
+.c-max-h-fill {
+	max-height: -webkit-fill-available;
+}

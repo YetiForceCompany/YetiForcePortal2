@@ -999,7 +999,18 @@ window.App.Fields = {
 			return parseFloat(value);
 		}
 	},
-
+	MultiImage: {
+		currentFileUploads: 0,
+		/**
+		 * Register function
+		 * @param {jQuery} container
+		 */
+		register(container) {
+			$('.js-multi-image', container).each(function () {
+				new MultiImage($(this));
+			});
+		}
+	},
 	Utils: {
 		positionPicker(ev, picker) {
 			let offset = picker.element.offset();

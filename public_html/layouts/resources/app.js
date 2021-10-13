@@ -1355,6 +1355,7 @@ var app = {
 			height: '5em',
 			toolbar: 'Min'
 		});
+		App.Fields.MultiImage.register(container);
 	}
 };
 CKEDITOR.disableAutoInline = true;
