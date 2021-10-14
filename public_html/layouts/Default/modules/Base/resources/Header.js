@@ -134,11 +134,8 @@ jQuery.Class(
 		 * Pin menu
 		 */
 		registerPinEvent: function () {
-			const self = this;
 			const container = $('.js-base-container');
 			let pinButton = container.find('.js-menu--pin');
-			let sidebar = $('.js-sidebar').first();
-
 			pinButton.on('click', () => {
 				let hideMenu = 0;
 				console.log(pinButton.attr('data-show'));
@@ -146,12 +143,9 @@ jQuery.Class(
 					hideMenu = 1;
 					pinButton.removeClass('u-opacity-muted');
 					container.addClass('c-menu--open');
-					sidebar.off('mouseleave mouseenter');
 				} else {
 					pinButton.addClass('u-opacity-muted');
 					container.removeClass('c-menu--open');
-					sidebar.on('mouseenter', self.openSidebar.bind(self)).on('mouseleave', self.closeSidebar.bind(self));
-					//	self.closeSidebar.bind(self);
 				}
 				pinButton.attr('data-show', hideMenu);
 
@@ -167,19 +161,11 @@ jQuery.Class(
 						});
 					}
 				});
+				setTimeout(() => {
+					container.addClass('c-menu--animation');
+				}, 300);
 			});
 		},
-		openSidebar: function () {
-			$('.js-sidebar').first().addClass('js-expand');
-			//this.sidebar.addClass('js-expand');
-			//this.sidebarBtn.attr('aria-expanded', true);
-		},
-		closeSidebar: function () {
-			$('.js-sidebar').first().removeClass('js-expand');
-			//	this.sidebar.removeClass('js-expand');
-			//this.sidebarBtn.attr('aria-expanded', false);
-		},
-
 		registerEvents: function () {
 			var thisInstance = this;
 			thisInstance.recentPageViews();
