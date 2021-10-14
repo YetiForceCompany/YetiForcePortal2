@@ -161,6 +161,17 @@
     "JS_NO_SUCH_QUANTITY": "There is no such quantity of product",
     "JS_FULL_TEXT": "Full text",
     "JS_CLOSE": "Close",
+    "JS_DELETE": "Delete",
+    "JS_DELETE_FILE_CONFIRMATION": "Are you sure you want to delete this file?",
+    "JS_DELETE_FILE": "Deleting file",
+    "JS_ZOOM_IN": "Zoom in",
+    "JS_FILE_UPLOAD_ERROR": "Uploading file to server failed",
+    "JS_INVALID_FILE_HASH": "Invalid file hash",
+    "JS_DOWNLOAD": "Download",
+    "JS_INVALID_FILE_TYPE": "Invalid file type",
+    "JS_AVAILABLE_FILE_TYPES": "Available file types",
+    "JS_FILE_LIMIT": "Maximum number of files was exceeded",
+    "JS_WAIT_FOR_FILE_UPLOAD": "Wait for files to be uploaded",
     "JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE": "Are you sure that you want to delete?",
     "JS_MAXIMUM_TEXT_SIZE_IN_BYTES": "Exceeded the maximum text size in bytes"
   }
