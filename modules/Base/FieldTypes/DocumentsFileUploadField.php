@@ -31,8 +31,15 @@ class DocumentsFileUploadField extends BaseField
 				}
 				$value = '<a href="' . \App\Purifier::encodeHtml($value['url']) . '" title="' . \App\Purifier::encodeHtml($value['url']) . '" target="_blank" rel="noreferrer noopener">' . $url . '</a>';
 			} else {
-				$url = 'file.php?' . http_build_query($value['postData']);
-				$value = '<a href="' . $url . '" title="' . \App\Purifier::encodeHtml($value['name']) . '">' . \App\Purifier::encodeHtml($value['name']) . '</a>';
+				if (isset($value['postData'])) {
+					$data = $value['postData'];
+					$data['type'] = $value['type'];
+					$data['name'] = $value['name'];
+					$url = 'index.php?action=File&' . http_build_query($data);
+					$value = '<a href="' . $url . ' "target="_blank" title="' . \App\Purifier::encodeHtml($value['name']) . '">' . \App\Purifier::encodeHtml($value['name']) . '</a>';
+				} else {
+					$value = \App\Purifier::encodeHtml($value['name']);
+				}
 			}
 		}
 		return $value;
