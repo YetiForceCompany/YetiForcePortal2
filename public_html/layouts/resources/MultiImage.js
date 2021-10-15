@@ -424,7 +424,7 @@ class MultiImage {
 				title: `<i class="fa fa-trash-alt"></i> ${app.translate('JS_DELETE_FILE')}`,
 				message: `${app.translate('JS_DELETE_FILE_CONFIRMATION')} <span class="font-weight-bold">${
 					fileInfo.name
-				}</span>?`,
+				}</span>`,
 				callback: (result) => {
 					if (result) {
 						this.deleteFileCallback(hash);
