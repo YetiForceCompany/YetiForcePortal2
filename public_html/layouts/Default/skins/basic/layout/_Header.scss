@@ -203,3 +203,16 @@
 		display: inline-block;
 	}
 }
+
+.o-base-container .bodyHeader {
+	left: 230px;
+}
+
+.o-base-container:not(.c-menu--open) .bodyHeader {
+	left: 50px;
+}
+
+.o-base-container:not(.c-menu--open) .c-menu__container.js-expand + .bodyHeader,
+.o-base-container:not(.c-menu--open) .c-menu__container:hover + .bodyHeader {
+	left: 230px;
+}

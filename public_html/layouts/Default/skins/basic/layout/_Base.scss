@@ -32,7 +32,7 @@ body {
 
 .mainBody {
 	background: #fff;
-	position: relative;
+	position: absolute;
 	height: 100%;
 	top: 0;
 	left: 0;
@@ -73,4 +73,22 @@ hr {
 	.mainPage {
 		margin-left: 0px;
 	}
+}
+
+.o-base-container .basePanel {
+	position: relative;
+	margin: 0 0 0 180px;
+	padding: 0;
+	left: 0;
+	z-index: 1030;
+	min-height: 100%;
+}
+
+.o-base-container:not(.c-menu--open) .basePanel {
+	margin-left: 0px;
+}
+
+.o-base-container:not(.c-menu--open) .c-menu__container.js-expand + .bodyHeader ~ .basePanel,
+.o-base-container:not(.c-menu--open) .c-menu__container:hover + .bodyHeader ~ .basePanel {
+	margin-left: 180px;
 }

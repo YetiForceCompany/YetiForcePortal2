@@ -90,6 +90,14 @@ class Login extends \App\Controller\Action
 			foreach ($response as $key => $value) {
 				$userInstance->set($key, $value);
 			}
+			$userDefaultPreferences = \Conf\Config::$userPreferences;
+			foreach ($userDefaultPreferences as $preferenceName => $preferenceValue) {
+				if (isset($response['userPreferences'][$preferenceName])) {
+					\App\Session::set($preferenceName, $response[$preferenceName]);
+				} else {
+					\App\Session::set($preferenceName, $preferenceValue);
+				}
+			}
 			if ($response['2faObligatory'] && 'PLL_AUTHY_TOTP' === $response['authy_methods']) {
 				\App\Process::addEvent([
 					'name' => 'ShowAuthy2faModal',

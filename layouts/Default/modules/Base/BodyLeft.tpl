@@ -5,12 +5,20 @@
 		<div class="col-sm-2 p-0 pt-2 c-menu__header-logo">
 			<a href="{\App\Config::get('portalUrl')}"><img src="{PUBLIC_DIRECTORY}{\App\Config::$logoMenu}" class="img-responsive logo" alt="Logo" title="Logo"></a>
 		</div>
-		<div class="col-sm-10 userDetails c-menu__header-user">
-			<div class="userName">
-				<span class="name">{$USER->get('name')}</span>
-			</div>
-			<div class="companyName">
-				<span class="name">{$USER->get('parentName')}</span>
+		<div class="col-sm-10 pr-0 userDetails c-menu__header-user">
+			<div class="row m-0">
+				<div class="col-10 p-0 userName">
+					<p class="p-0 m-0 u-text-ellipsis userName">
+						<span class="name">{$USER->get('name')}</span>
+					</p>
+					<p class="p-0 m-0 u-text-ellipsis companyName">
+						<span class="name">{$USER->get('parentName')}</span>
+					</p>
+				</div>
+				<div class="col-2 p-0 text-center js-menu--pin {if !\App\Session::get('menuPin')}  u-opacity-muted {/if}"
+					data-show="{\App\Session::get('menuPin')}" data-js="click">
+					<span class="fas fa-thumbtack u-cursor-pointer"></span>
+				</div>
 			</div>
 		</div>
 	</div>

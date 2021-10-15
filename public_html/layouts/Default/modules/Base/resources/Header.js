@@ -130,12 +130,48 @@ jQuery.Class(
 				menuContainer = container.find('.js-menu--scroll');
 			app.showNewScrollbarLeft(menuContainer, { suppressScrollX: true });
 		},
+		/**
+		 * Pin menu
+		 */
+		registerPinEvent: function () {
+			const container = $('.js-base-container');
+			let pinButton = container.find('.js-menu--pin');
+			pinButton.on('click', () => {
+				let hideMenu = 0;
+				console.log(pinButton.attr('data-show'));
+				if (pinButton.attr('data-show') === '0') {
+					hideMenu = 1;
+					pinButton.removeClass('u-opacity-muted');
+					container.addClass('c-menu--open');
+				} else {
+					pinButton.addClass('u-opacity-muted');
+					container.removeClass('c-menu--open');
+				}
+				pinButton.attr('data-show', hideMenu);
 
+				AppConnector.request({
+					module: 'Users',
+					action: 'UserPreferences',
+					userPreferences: { menuPin: hideMenu }
+				}).done((response) => {
+					if (response.success) {
+						app.showNotify({
+							text: app.translate('JS_SAVE_NOTIFY_SUCCESS'),
+							type: 'success'
+						});
+					}
+				});
+				setTimeout(() => {
+					container.addClass('c-menu--animation');
+				}, 300);
+			});
+		},
 		registerEvents: function () {
 			var thisInstance = this;
 			thisInstance.recentPageViews();
 			thisInstance.registerChangeCompany();
 			thisInstance.registerScrolbarToMenu();
+			thisInstance.registerPinEvent();
 			App.Fields.Tree.getInstance();
 		}
 	}

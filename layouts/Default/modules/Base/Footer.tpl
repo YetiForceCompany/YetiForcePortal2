@@ -7,6 +7,7 @@
 	</div>
 	</div>
 	</div>
+	</div>
 	<div>
 		{assign var=COMPANIES value=$USER->getCompanies()}
 		{if $COMPANIES}
@@ -45,7 +46,8 @@
 		<footer class="footerContainer d-print-none w-100">
 			<div class="footer">
 				{assign var=SCRIPT_TIME value=round(microtime(true) - \App\Process::$startTime, 3)}
-				Copyright &copy; YetiForce.com All rights reserved. [{\App\Language::translate('LBL_WEB_LOAD_TIME')}: {$SCRIPT_TIME}s.]<br />
+				Copyright &copy; YetiForce.com All rights reserved. [{\App\Language::translate('LBL_WEB_LOAD_TIME')}:
+				{$SCRIPT_TIME}s.]<br />
 				{assign var=FOOTOSP value='<em><a class="u-text-underline text-info" href="index.php?module=YetiForce&view=Credits">open source project</a></em>'}
 				{if 'Install' eq $MODULE_NAME}
 					{assign var=FOOTOSP value='open source project'}
@@ -54,7 +56,8 @@
 			</div>
 		</footer>
 	{/if}
-	<input type="hidden" id="processEvents" value="{\App\Purifier::encodeHtml(\App\Json::encode(App\Process::getEvents()))}" />
+	<input type="hidden" id="processEvents"
+		value="{\App\Purifier::encodeHtml(\App\Json::encode(App\Process::getEvents()))}" />
 	<div class="d-print-none">
 		{foreach item=SCRIPT from=$JS_FILE}
 			<script src="{$SCRIPT->getSrc()}"></script>

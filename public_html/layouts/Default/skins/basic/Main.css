@@ -14649,6 +14649,9 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 .u-resize-v {
   resize: vertical; }
 
+.u-opacity-muted {
+  opacity: 0.2; }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;
@@ -15127,7 +15130,7 @@ body {
 
 .mainBody {
   background: #fff;
-  position: relative;
+  position: absolute;
   height: 100%;
   top: 0;
   left: 0;
@@ -15161,6 +15164,21 @@ hr {
     -webkit-overflow-scrolling: touch; }
   .mainPage {
     margin-left: 0px; } }
+
+.o-base-container .basePanel {
+  position: relative;
+  margin: 0 0 0 180px;
+  padding: 0;
+  left: 0;
+  z-index: 1030;
+  min-height: 100%; }
+
+.o-base-container:not(.c-menu--open) .basePanel {
+  margin-left: 0px; }
+
+.o-base-container:not(.c-menu--open) .c-menu__container.js-expand + .bodyHeader ~ .basePanel,
+.o-base-container:not(.c-menu--open) .c-menu__container:hover + .bodyHeader ~ .basePanel {
+  margin-left: 180px; }
 
 /* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .bodyHeader {
@@ -15322,6 +15340,16 @@ hr {
   .c-header__btn--sidebar {
     display: inline-block; } }
 
+.o-base-container .bodyHeader {
+  left: 230px; }
+
+.o-base-container:not(.c-menu--open) .bodyHeader {
+  left: 50px; }
+
+.o-base-container:not(.c-menu--open) .c-menu__container.js-expand + .bodyHeader,
+.o-base-container:not(.c-menu--open) .c-menu__container:hover + .bodyHeader {
+  left: 230px; }
+
 /* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .c-tab--small {
   display: flex;
@@ -15404,8 +15432,6 @@ hr {
       cursor: pointer; }
   .c-menu__container:hover ~ .mainBody {
     left: calc(230px - 50px); }
-  .c-menu__container:hover ~ .bodyHeader {
-    transform: translate(calc(230px - 50px)); }
 
 .c-menu__item {
   width: -webkit-fill-available;
@@ -15531,6 +15557,24 @@ a {
       left: 200px; }
   .c-menu-mobile .bodyHeader {
     transform: translate(200px); } }
+
+@media (min-width: 768px) {
+  .c-menu--animation .basePanel,
+  .c-menu--animation .bodyHeader {
+    -webkit-transition: left 0.35s ease-in-out 0.35s;
+    -moz-transition: left 0.35s ease-in-out 0.35s;
+    -ms-transition: left 0.35s ease-in-out 0.35s;
+    -o-transition: left 0.35s ease-in-out 0.35s;
+    transition: left 0.35s ease-in-out 0.35s; } }
+
+@media (max-width: 991.98px) {
+  .c-menu--animation .basePanel,
+  .c-menu--animation .bodyHeader {
+    -webkit-transition: left ease-in-out 0.35s;
+    -moz-transition: left ease-in-out 0.35s;
+    -ms-transition: left ease-in-out 0.35s;
+    -o-transition: left ease-in-out 0.35s;
+    transition: left ease-in-out 0.35s; } }
 
 /* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .modal-content {
