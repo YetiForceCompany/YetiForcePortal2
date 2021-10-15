@@ -15,8 +15,7 @@
 						<span class="name">{$USER->get('parentName')}</span>
 					</p>
 				</div>
-				<div class="col-2 p-0 text-center js-menu--pin {if !\App\Session::get('menuPin')}  u-opacity-muted {/if}"
-					data-show="{\App\Session::get('menuPin')}" data-js="click">
+				<div class="col-2 p-0 text-center js-menu--pin {if !\App\Session::get('menuPin')}  u-opacity-muted {/if}" data-show="{\App\Session::get('menuPin')}" data-js="click">
 					<span class="fas fa-thumbtack u-cursor-pointer"></span>
 				</div>
 			</div>

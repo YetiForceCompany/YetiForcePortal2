@@ -24,14 +24,23 @@ class UserPreferences extends \App\Controller\Action
 	/** {@inheritdoc} */
 	public function process()
 	{
-		if ($this->request->has('userPreferences')) {
-			$userPreferences = $this->request->getArray('userPreferences');
-			foreach ($userPreferences as $preferenceName => $preferenceValue) {
-				\App\Session::set($preferenceName, $preferenceValue);
-			}
-			$api = \App\Api::getInstance();
-			$result = $api->call('Users/Preferences/', $userPreferences, 'put');
+		$key = $this->request->getByType('key', \App\Purifier::ALNUM_EXTENDED);
+		if (!isset(\Conf\Config::$userPreferences[$key])) {
+			throw new \App\Exceptions\NoPermitted('Not allowed parameter');
 		}
+		switch ($key) {
+			case 'menuPin':
+				$value = $this->request->getInteger('value');
+				break;
+			default:
+				$value = $this->request->getByType('value', \App\Purifier::ALNUM_EXTENDED);
+				break;
+		}
+		\App\Session::set($key, $value);
+
+		$result = \App\Api::getInstance()
+		->call('Users/Preferences/', [$key => $value], 'put');
+
 		$response = new \App\Response();
 		$response->setResult($result);
 		$response->emit();

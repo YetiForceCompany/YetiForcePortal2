@@ -152,7 +152,8 @@ jQuery.Class(
 				AppConnector.request({
 					module: 'Users',
 					action: 'UserPreferences',
-					userPreferences: { menuPin: hideMenu }
+					key: 'menuPin',
+					value: hideMenu
 				}).done((response) => {
 					if (response.success) {
 						app.showNotify({
