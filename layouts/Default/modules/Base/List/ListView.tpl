@@ -14,13 +14,22 @@
 			<div class="col-sm-4 col-6 d-flex align-items-center justify-content-end">
 				{if count($CUSTOM_VIEWS) > 1}
 					<div class="col-8">
-						<select name="cvId" id="customFilter" class="js-cv-list">
-							{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
-								<option value="{$CV_ID}" {if $CV_ID === $VIEW_ID} selected="selected" {/if}>
-									{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
-								</option>
-							{/foreach}
-						</select>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<span class="fas fa-filter"></span>
+								</div>
+							</div>
+							<div>
+								<select name="cvId" id="customFilter" class="js-cv-list">
+									{foreach key=CV_ID item=CUSTOM_VIEW from=$CUSTOM_VIEWS}
+										<option value="{$CV_ID}" {if $CV_ID === $VIEW_ID} selected="selected" {/if}>
+											{App\Purifier::encodeHtml($CUSTOM_VIEW.viewname)}
+										</option>
+									{/foreach}
+								</select>
+							</div>
+						</div>
 					</div>
 				{elseif $VIEW_ID}
 					<input type="hidden" name="cvId" id="customFilter" value="{$VIEW_ID}">

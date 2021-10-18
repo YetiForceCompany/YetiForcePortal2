@@ -37,10 +37,12 @@ class UserPreferences extends \App\Controller\Action
 				break;
 		}
 		\App\Session::set($key, $value);
-
-		$result = \App\Api::getInstance()
-		->call('Users/Preferences/', [$key => $value], 'put');
-
+		try {
+			$result = \App\Api::getInstance()
+				->call('Users/Preferences/', [$key => $value], 'put');
+		} catch (\Throwable $th) {
+			$result = $th->getMessage();
+		}
 		$response = new \App\Response();
 		$response->setResult($result);
 		$response->emit();

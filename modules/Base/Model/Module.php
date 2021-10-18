@@ -106,7 +106,9 @@ class Module
 		if (\App\Cache::has('moduleFields', $this->moduleName)) {
 			$data = \App\Cache::get('moduleFields', $this->moduleName);
 		} else {
-			$data = Api::getInstance()->call($this->moduleName . '/Fields');
+			$data = Api::getInstance()
+				->setCustomHeaders(['x-response-params' => '["blocks", "privileges", "inventory"]'])
+				->call($this->moduleName . '/Fields');
 			\App\Cache::save('moduleFields', $this->moduleName, $data);
 		}
 		$this->apiFields = $data;

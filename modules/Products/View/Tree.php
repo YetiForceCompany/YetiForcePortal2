@@ -31,7 +31,7 @@ class Tree extends View\ListView
 		'unit_price',
 		'taxes',
 		'imagename',
-		'description'
+		'description',
 	];
 
 	/** {@inheritdoc} */
@@ -64,7 +64,7 @@ class Tree extends View\ListView
 						'fieldName' => 'ean',
 						'value' => $condition['value'],
 						'operator' => 'c',
-						'group' => false
+						'group' => false,
 					];
 				}
 			}
@@ -83,7 +83,9 @@ class Tree extends View\ListView
 	public function preProcess($display = true): void
 	{
 		$moduleName = $this->request->getModule();
-		$fields = \App\Api::getInstance()->call('Products/Fields') ?: [];
+		$fields = \App\Api::getInstance()
+			->setCustomHeaders(['x-response-params' => '["blocks", "privileges"]'])
+			->call('Products/Fields') ?: [];
 		$searchInfo = [];
 		if ($this->request->has('search') && !$this->request->isEmpty('search')) {
 			foreach ($this->request->get('search') as $condition) {

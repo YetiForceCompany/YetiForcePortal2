@@ -48,7 +48,8 @@ class Preview extends \App\Controller\View
 		}
 		$recordModel->setRawValue('amountInShoppingCart', $amountInCart);
 
-		$moduleStructure = $api->call($moduleName . '/Fields');
+		$moduleStructure = $api->setCustomHeaders(['x-response-params' => '["blocks", "privileges"]'])
+			->call($moduleName . '/Fields');
 		$fields = [];
 		foreach ($moduleStructure['fields'] as $field) {
 			if ($field['isViewable']) {
