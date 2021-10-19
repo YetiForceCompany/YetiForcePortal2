@@ -11,7 +11,7 @@
 		{assign var=DISPLAY_VALUE value=\App\Purifier::encodeHtml($VALUE['value'])}
 	{/if}
 	<div class="js-tree-content">
-		<input name="{$FIELD_NAME}" type="hidden" value="{\App\Purifier::encodeHtml($VALUE['raw'])}" class="js-tree-value" data-fieldinfo='{$FIELD_INFO_DATA}'
+		<input name="{$FIELD_NAME}" type="hidden" value="{if isset($VALUE['raw'])}{\App\Purifier::encodeHtml($VALUE['raw'])}{/if}" class="js-tree-value" data-fieldinfo='{$FIELD_INFO_DATA}'
 			data-multiple="{if $FIELD_MODEL->get('type') !== 'tree'}1{else}0{/if}" data-treetemplate="{$FIELD_MODEL->getFieldParams()}" data-modulename="{$MODULE_NAME}" data-js="val">
 		<div class="input-group">
 			<div class="input-group-prepend u-cursor-pointer">
