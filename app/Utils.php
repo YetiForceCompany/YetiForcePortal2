@@ -151,4 +151,28 @@ class Utils
 		}
 		return $str;
 	}
+
+	/**
+	 * Merge two arrays.
+	 *
+	 * @param array $array1
+	 * @param array $array2
+	 *
+	 * @return array
+	 */
+	public static function merge(array $array1, array $array2): array
+	{
+		foreach ($array2 as $key => $value) {
+			if (isset($array1[$key])) {
+				if (\is_array($array1[$key]) && \is_array($value)) {
+					$array1[$key] = self::merge($array1[$key], $value);
+				} else {
+					$array1[$key] = $value;
+				}
+			} else {
+				$array1[$key] = $value;
+			}
+		}
+		return $array1;
+	}
 }

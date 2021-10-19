@@ -4,22 +4,22 @@
 	{assign var=FIELD_NAME value=$FIELD_MODEL->getName()}
 	{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 	{assign var=FIELD_INFO_DATA value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_INFO))}
-	{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
+	{assign var=VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 	{assign var=SPECIAL_VALIDATOR value=$FIELD_MODEL->getValidator()}
 	{assign var=DISPLAY_VALUE value=$RECORD->getDisplayValue($FIELD_NAME)}
+	{if isset($VALUE['value'])}
+		{assign var=DISPLAY_VALUE value=\App\Purifier::encodeHtml($VALUE['value'])}
+	{/if}
 	<div class="js-tree-content">
-		<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" class="js-tree-value"
-			data-displayvalue='{$DISPLAY_VALUE}' data-fieldinfo='{$FIELD_INFO_DATA}'
-			data-multiple="{if $FIELD_MODEL->get('type') !== 'tree'}1{else}0{/if}"
-			data-treetemplate="{$FIELD_MODEL->getFieldParams()}" data-modulename="{$MODULE_NAME}" data-js="val">
+		<input name="{$FIELD_NAME}" type="hidden" value="{\App\Purifier::encodeHtml($VALUE['raw'])}" class="js-tree-value" data-fieldinfo='{$FIELD_INFO_DATA}'
+			data-multiple="{if $FIELD_MODEL->get('type') !== 'tree'}1{else}0{/if}" data-treetemplate="{$FIELD_MODEL->getFieldParams()}" data-modulename="{$MODULE_NAME}" data-js="val">
 		<div class="input-group">
 			<div class="input-group-prepend u-cursor-pointer">
 				<button class="btn btn-light js-tree-clear" type="button" data-js="click">
 					<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
 				</button>
 			</div>
-			{assign var=DISPLAY_ID value=$FIELD_MODEL->get('fieldvalue')}
-			<input type="text" data-display="{$FIELD_NAME}" value="{$DISPLAY_VALUE}" class="ml-0 js-tree-text form-control" {if !empty($DISPLAY_ID)}readonly="true" {/if}
+			<input type="text" data-display="{$FIELD_NAME}" value="{$DISPLAY_VALUE}" class="ml-0 js-tree-text form-control" {if !empty($VALUE['raw'])}readonly="true" {/if}
 				tabindex="{$FIELD_MODEL->getTabIndex()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 				data-fieldinfo='{$FIELD_INFO_DATA}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_SELECT_IN_MODAL',$MODULE_NAME)}" {/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}" {/if}

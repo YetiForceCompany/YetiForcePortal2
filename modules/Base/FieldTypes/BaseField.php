@@ -286,10 +286,13 @@ class BaseField extends \App\BaseModel
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
 		$value = '';
-		if ($recordModel && false !== $recordModel->get($this->getName())) {
+		if ($recordModel && false !== $recordModel->get($this->getName()) && '' !== $recordModel->get($this->getName())) {
 			$value = $recordModel->getRawValue($this->getName());
 		} elseif (empty($recordModel->getId())) {
 			$value = $this->get('defaultvalue') ?: '';
+			if ($defaultEditValue = $this->get('defaultEditValue') ?: []) {
+				$value = $defaultEditValue['value'];
+			}
 		}
 		return \App\Purifier::encodeHtml($value);
 	}

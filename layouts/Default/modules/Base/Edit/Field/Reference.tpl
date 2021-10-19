@@ -19,23 +19,21 @@
 		{if {$REFERENCE_LIST_COUNT} eq 1}
 			<input class="js-reference-module" type="hidden" data-multi-reference="0" title="{reset($REFERENCE_LIST)}" value="{reset($REFERENCE_LIST)}" />
 		{/if}
-		{assign var=FIELD_VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
-		{assign var=VALUE value=$RECORD->get($FIELD_NAME)}
+		{assign var=VALUE value=$FIELD_MODEL->getEditViewDisplayValue($RECORD)}
 		{assign var=DISPLAY_VALUE value=''}
-		{assign STATE value=settype($VALUE, 'array')}
-		{if isset($VALUE.value)}
-			{assign var=DISPLAY_VALUE value=$VALUE.value}
+		{if isset($VALUE['value'])}
+			{assign var=DISPLAY_VALUE value=$VALUE['value']}
 		{/if}
 		{if $REFERENCE_LIST_COUNT gt 1}
 			{assign var=REFERENCED_MODULE_NAME value=current($REFERENCE_LIST)}
-			{if isset($VALUE.referenceModule)}
-				{assign var=REFERENCED_MODULE_NAME value=$VALUE.referenceModule}
+			{if isset($VALUE['referenceModule'])}
+				{assign var=REFERENCED_MODULE_NAME value=$VALUE['referenceModule']}
 			{/if}
 			{if in_array($REFERENCED_MODULE_NAME, $REFERENCE_LIST)}
-				<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{$REFERENCED_MODULE_NAME}" />
+				<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{\App\Purifier::encodeHtml($REFERENCED_MODULE_NAME)}" />
 			{else}
 				{assign var=REFERENCED_MODULE_NAME value=$REFERENCE_LIST[0]}
-				<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{$REFERENCE_LIST[0]}" />
+				<input class="js-reference-module" type="hidden" data-multi-reference="1" value="{\App\Purifier::encodeHtml($REFERENCE_LIST[0])}" />
 			{/if}
 		{/if}
 		{if $REFERENCE_LIST_COUNT}
@@ -43,7 +41,7 @@
 		{else}
 			{assign var=REFERENCE_MODULE_MODEL value=false}
 		{/if}
-		<input name="{$FIELD_NAME}" type="hidden" value="{$FIELD_VALUE}" class="sourceField" data-type="entity" data-fieldtype="{$FIELD_MODEL->get('type')}" data-displayvalue="{$FIELD_VALUE}" data-fieldinfo='{$FIELD_INFO}' {if $IS_EDITABLE_READ_ONLY}readonly="readonly" {/if} />
+		<input name="{$FIELD_NAME}" type="hidden" value="{if isset($VALUE['raw'])}{\App\Purifier::encodeHtml($VALUE['raw'])}{/if}" class="sourceField" data-type="entity" data-fieldtype="{$FIELD_MODEL->get('type')}" data-fieldinfo='{$FIELD_INFO}' {if $IS_EDITABLE_READ_ONLY}readonly="readonly" {/if} />
 		<div class="input-group referenceGroup">
 			{if $REFERENCE_LIST_COUNT > 1}
 				<div class="input-group-prepend referenceModulesListGroup">
@@ -55,7 +53,7 @@
 				</div>
 			{/if}
 			<input type="text" data-display="{$FIELD_NAME}" class="marginLeftZero form-control autoComplete"
-				tabindex="{$TABINDEX}" {if !empty($VALUE)}readonly="true" {/if} value="{$DISPLAY_VALUE}"
+				tabindex="{$TABINDEX}" {if !empty($VALUE)}readonly="true" {/if} value="{\App\Purifier::encodeHtml($DISPLAY_VALUE)}"
 				data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Base_Validator_Js.invokeValidation]]"
 				data-fieldinfo='{$FIELD_INFO}' {if $FIELD_MODEL->get('displaytype') != 10}placeholder="{\App\Language::translate('LBL_SELECT_IN_MODAL',$MODULE_NAME)}" {/if} {if $IS_EDITABLE_READ_ONLY}disabled="disabled" {/if}
 				{if !empty($SPECIAL_VALIDATOR)}data-validator="{\App\Purifier::encodeHtml(\App\Json::encode($SPECIAL_VALIDATOR))}" {/if} {if $IS_EDITABLE_READ_ONLY}readonly="readonly" {/if} />

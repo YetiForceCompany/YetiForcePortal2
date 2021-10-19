@@ -27,10 +27,13 @@ class DateField extends BaseField
 	public function getEditViewDisplayValue(\YF\Modules\Base\Model\Record $recordModel = null)
 	{
 		$value = '';
-		if ($recordModel && '' !== $recordModel->get($this->getName())) {
+		if ($recordModel && false !== $recordModel->get($this->getName()) && '' !== $recordModel->get($this->getName())) {
 			$value = $recordModel->getDisplayValue($this->getName());
 		} elseif (empty($recordModel->getId())) {
 			$value = $this->get('defaultvalue') ?: '';
+			if ($defaultEditValue = $this->get('defaultEditValue') ?: '') {
+				$value = $defaultEditValue;
+			}
 		}
 		return \App\Purifier::encodeHtml($value);
 	}
