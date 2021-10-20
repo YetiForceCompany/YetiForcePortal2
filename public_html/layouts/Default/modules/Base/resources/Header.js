@@ -61,7 +61,7 @@ jQuery.Class(
 						else t = app.formatDate(d) + ' | ';
 					}
 					var format = $('#userDateFormat').val() + '' + $('#userDateFormat').val();
-					htmlContent += '<li><a href="' + item[1] + '">' + t + item[0] + '</a></li>';
+					htmlContent += ' <a class="item dropdown-item" href="' + item[1] + '">' + t + item[0] + '</a>';
 				}
 				var Label = this.getHistoryLabel();
 				if (Label.length > 1 && document.URL != BtnLink) {
@@ -79,10 +79,16 @@ jQuery.Class(
 					localStorage.setItem(key, stack.join('_|_'));
 				}
 			}
-			htmlContent +=
-				'<li class="divider"></li><li class="text-center"><a class="clearHistory" href="#">' +
-				app.translate('JS_CLEAR_HISTORY') +
-				'</a></li>';
+			if (history != null) {
+				htmlContent +=
+					'<div class="dropdown-divider"></div><a class="dropdown-item clearHistory" href="#">' +
+					app.translate('JS_CLEAR_HISTORY') +
+					'</a>';
+			} else {
+				htmlContent +=
+					' <a class="item dropdown-item" href="#" role="listitem">' + app.translate('JS_NO_RECORDS') + '</a>';
+			}
+
 			htmlContent += '</ul>';
 			$('.showHistoryBtn').after(htmlContent);
 			this.registerClearHistory();
@@ -90,7 +96,7 @@ jQuery.Class(
 		getHistoryLabel: function () {
 			var label = '';
 			$('.breadcrumbsLinks span').each(function (index) {
-				label += $(this).text();
+				label += $(this).text().replace(/\//g, ' ');
 			});
 			return label;
 		},
@@ -99,9 +105,7 @@ jQuery.Class(
 				var key = 'yf_history_portal_';
 				localStorage.removeItem(key);
 				var htmlContent =
-					'<li class="divider"></li><li class="text-center"><a class="clearHistory" href="#">' +
-					app.translate('JS_CLEAR_HISTORY') +
-					'</a></li>';
+					'<a class="item dropdown-item" href="#" role="listitem">' + app.translate('JS_NO_RECORDS') + '</a>';
 				$('.historyBtn .dropdown-menu').html(htmlContent);
 			});
 		},
@@ -138,7 +142,6 @@ jQuery.Class(
 			let pinButton = container.find('.js-menu--pin');
 			pinButton.on('click', () => {
 				let hideMenu = 0;
-				console.log(pinButton.attr('data-show'));
 				if (pinButton.attr('data-show') === '0') {
 					hideMenu = 1;
 					pinButton.removeClass('u-opacity-muted');
