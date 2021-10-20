@@ -65,7 +65,7 @@ class Record extends \YF\Modules\Base\Model\Record
 	{
 		$url = '';
 		if ($parent = $this->get('related_to')) {
-			$url = "index.php?module={$this->moduleName}&view=Comment&record={$this->getId()}&mode=getChildren&sourceId={$parent['record']}&sourceModule={$parent['referenceModule']}";
+			$url = "index.php?module={$this->moduleName}&view=Comment&record={$this->getId()}&mode=getChildren&sourceId={$parent['raw']}&sourceModule={$parent['referenceModule']}";
 		}
 		return $url;
 	}
