@@ -60,6 +60,7 @@
 .historyList {
 	overflow: auto;
 	left: calculate-rem(-490px) !important;
+	right: 8px !important;
 }
 
 .selectorHistory {
@@ -84,11 +85,6 @@
 .historyList a {
 	color: #222 !important;
 	font-size: 15px !important;
-}
-
-.clearHistory {
-	font-weight: 900 !important;
-	text-align: center;
 }
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
