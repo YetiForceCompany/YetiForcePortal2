@@ -25,10 +25,6 @@
 	top: 0;
 	left: $w-menu-mini-state;
 	z-index: $z-index-header;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
 
 	.leftSide {
 		padding-left: 10px;
