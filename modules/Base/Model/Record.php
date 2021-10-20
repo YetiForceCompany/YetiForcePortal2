@@ -306,7 +306,7 @@ class Record extends \App\BaseModel
 	 *
 	 * @return bool
 	 */
-	public function isViewable()
+	public function isViewable(): bool
 	{
 		return true;
 	}

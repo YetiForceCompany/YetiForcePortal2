@@ -60,7 +60,7 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return bool
 	 */
-	public function isViewable()
+	public function isViewable(): bool
 	{
 		return $this->get('isViewable');
 	}
@@ -70,29 +70,39 @@ class BaseField extends \App\BaseModel
 	 *
 	 * @return bool
 	 */
-	public function isEditable()
+	public function isEditable(): bool
 	{
 		return $this->get('isEditable') && !\in_array($this->get('type'), $this->notSupportedToEdit);
 	}
 
 	/**
-	 * Function to check if the current field is mandatory or not.
+	 * Function to check if the current field is mandatory.
 	 *
 	 * @return bool - true/false
 	 */
-	public function isMandatory()
+	public function isMandatory(): bool
 	{
 		return (bool) $this->get('mandatory');
 	}
 
 	/**
-	 * Function to check if the current field is readonly or not.
+	 * Function to check if the current field is readonly.
 	 *
 	 * @return bool - true/false
 	 */
-	public function isEditableReadOnly()
+	public function isEditableReadOnly(): bool
 	{
 		return (bool) $this->get('isEditableReadOnly');
+	}
+
+	/**
+	 * Function to check if the current field is hidden.
+	 *
+	 * @return bool - true/false
+	 */
+	public function isEditableHidden(): bool
+	{
+		return (bool) $this->get('isEditableHidden');
 	}
 
 	/**

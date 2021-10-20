@@ -5,17 +5,17 @@
 		<input type="hidden" name="module" value="{$MODULE_NAME}">
 		<input type="hidden" name="action" value="Save">
 		<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
-		<input type="hidden" name="_fromView" value="{$ACTION_NAME}">
+		<input type="hidden" name="_fromView" value="{\App\Purifier::encodeHtml($ACTION_NAME)}">
 		{if isset($RELATION_OPERATION)}
 			<input type="hidden" name="relationOperation" value="true">
-			<input type="hidden" name="relationId" value="{$RELATION_ID}">
+			<input type="hidden" name="relationId" value="{\App\Purifier::encodeHtml($RELATION_ID)}">
 		{/if}
 		{if isset($SOURCE_MODULE)}
-			<input type="hidden" name="sourceModule" value="{$SOURCE_MODULE}">
-			<input type="hidden" name="sourceRecord" value="{$SOURCE_RECORD}">
+			<input type="hidden" name="sourceModule" value="{\App\Purifier::encodeHtml($SOURCE_MODULE)}">
+			<input type="hidden" name="sourceRecord" value="{\App\Purifier::encodeHtml($SOURCE_RECORD)}">
 		{/if}
 		{foreach key=KEY item=VALUE from=$HIDDEN_FIELDS}
-			<input type="hidden" name="{$KEY}" value="{$VALUE}">
+			<input type="hidden" name="{\App\Purifier::encodeHtml($KEY)}" value="{\App\Purifier::encodeHtml($VALUE)}">
 		{/foreach}
 		{assign var=ITERATION value=0}
 		{foreach item=BLOCK from=$BLOCKS}
@@ -29,7 +29,7 @@
 					<div class="c-card__header card-header p-2 {if $IS_HIDDEN}collapsed{/if}" data-toggle="collapse" data-target="#block_{$BLOCK['id']}" aria-expanded="true">
 						<span class="fas fa-angle-right mr-2 c-card__icon-right {if !$IS_HIDDEN}d-none{/if}"></span>
 						<span class="fas fa-angle-down mr-2 c-card__icon-down {if $IS_HIDDEN}d-none{/if}"></span>
-						<h5>{if !empty($BLOCK['icon'])}<span class="{$BLOCK['icon']} mr-2"></span>{/if}{$BLOCK['name']}</h5>
+						<h5>{if !empty($BLOCK['icon'])}<span class="{$BLOCK['icon']} mr-2"></span>{/if}{\App\Purifier::encodeHtml($BLOCK['name'])}</h5>
 					</div>
 					<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
 						{foreach item=FIELD from=$FIELDS_FORM[$BLOCK['id']]}
@@ -37,11 +37,10 @@
 								<div class="{if $FIELD->getUIType() eq '300'}col-lg-12 text-left{else}col-xl-3 col-lg-4 col-md-12{/if} fieldLabel paddingLeft5px font-weight-bold">
 									<label class="muted mb-0 pt-0">
 										{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}
-										{$FIELD->getLabel()}
+										{\App\Purifier::encodeHtml($FIELD->getLabel())}
 									</label>
 								</div>
 								<div class="fieldValue {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-xl-9 col-lg-8 col-md-12{/if}  px-1">
-									{assign var=FIELD value=$FIELD->set('fieldvalue', $RECORD->getRawValue($FIELD->getName()))}
 									{include file=\App\Resources::templatePath($FIELD->getTemplatePath('Edit'), $MODULE_NAME) FIELD_MODEL=$FIELD}
 								</div>
 							</div>
