@@ -15188,11 +15188,7 @@ hr {
   right: 0;
   top: 0;
   left: 50px;
-  z-index: 1031;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
+  z-index: 1031; }
   .bodyHeader .leftHeader {
     background-color: #969696;
     color: #fff;
@@ -15554,27 +15550,7 @@ a {
   .c-menu-mobile__content.mainBody {
     left: 200px; }
     .c-menu-mobile__content.mainBody:hover {
-      left: 200px; }
-  .c-menu-mobile .bodyHeader {
-    transform: translate(200px); } }
-
-@media (min-width: 768px) {
-  .c-menu--animation .basePanel,
-  .c-menu--animation .bodyHeader {
-    -webkit-transition: left 0.35s ease-in-out 0.35s;
-    -moz-transition: left 0.35s ease-in-out 0.35s;
-    -ms-transition: left 0.35s ease-in-out 0.35s;
-    -o-transition: left 0.35s ease-in-out 0.35s;
-    transition: left 0.35s ease-in-out 0.35s; } }
-
-@media (max-width: 991.98px) {
-  .c-menu--animation .basePanel,
-  .c-menu--animation .bodyHeader {
-    -webkit-transition: left ease-in-out 0.35s;
-    -moz-transition: left ease-in-out 0.35s;
-    -ms-transition: left ease-in-out 0.35s;
-    -o-transition: left ease-in-out 0.35s;
-    transition: left ease-in-out 0.35s; } }
+      left: 200px; } }
 
 /* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 .modal-content {
