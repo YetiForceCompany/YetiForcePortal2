@@ -78,7 +78,7 @@ class Api
 			}
 			self::$instance = new self($header, [
 				'http_errors' => false,
-				'base_uri' => Config::$apiUrl . 'Portal/',
+				'base_uri' => Config::$apiUrl . 'WebservicePremium/',
 				'auth' => [Config::$serverName, Config::$serverPass],
 			]);
 		}
@@ -115,7 +115,7 @@ class Api
 		$this->dataFiles[] = array_filter([
 			'name' => $name,
 			'filename' => $filename,
-			'contents' => $contents
+			'contents' => $contents,
 		]);
 
 		return $this;
