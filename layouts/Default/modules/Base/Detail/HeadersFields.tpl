@@ -4,17 +4,19 @@
 	{if isset($FIELDS_HEADER['value']) || isset($FIELDS_HEADER['highlights'])}
 		<div class="row">
 			<div class="col-sm-8">
-				{if isset($FIELDS_HEADER['value'])}
+				{if !empty($FIELDS_HEADER['value'])}
 					{foreach from=$FIELDS_HEADER['value'] key=NAME item=FIELD_HEADER}
 						{assign var=FIELD_MODEL value=$FIELDS[$NAME]}
 						{assign var=VALUE value=$RECORD->getDisplayValue($FIELD_MODEL->getName())}
-						<div class="js-popover-tooltip--ellipsis-icon d-flex flex-nowrap align-items-center" data-content="{\App\Purifier::encodeHtml($VALUE)}" data-toggle="popover" data-js="popover | mouseenter">
-							<span class="mr-1 text-muted u-white-space-nowrap">
-								{$FIELD_HEADER['label']}:
-							</span>
-							<span class="js-popover-text" data-js="clone">{$VALUE}</span>
-							<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
-						</div>
+						{if !empty($VALUE)}
+							<div class="js-popover-tooltip--ellipsis-icon d-flex flex-nowrap align-items-center" data-content="{\App\Purifier::encodeHtml($VALUE)}" data-toggle="popover" data-js="popover | mouseenter">
+								<span class="mr-1 text-muted u-white-space-nowrap">
+									{$FIELD_HEADER['label']}:
+								</span>
+								<span class="js-popover-text" data-js="clone">{$VALUE}</span>
+								<span class="fas fa-info-circle fa-sm js-popover-icon d-none" data-js="class: d-none"></span>
+							</div>
+						{/if}
 					{/foreach}
 				{/if}
 			</div>
