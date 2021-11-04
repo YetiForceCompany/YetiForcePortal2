@@ -27,8 +27,8 @@ class Record extends \YF\Modules\Base\Model\Record
 	public function getCommentatorName(): string
 	{
 		$name = $this->get('assigned_user_id');
-		if ($customer = $this->get('customer')) {
-			$name = $customer['value'];
+		if ($this->get('customer')) {
+			$name = $this->getDisplayValue('customer');
 		}
 		return $name ?: '';
 	}

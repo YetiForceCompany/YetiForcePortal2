@@ -14655,6 +14655,18 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 .u-bg-gray {
   background: #e0e0e0; }
 
+.u-bg-light-blue {
+  background-color: #bbdefb !important; }
+
+.u-bg-light-green {
+  background-color: #b2dfdb !important; }
+
+.u-bg-light-orange {
+  background-color: #ffe0b2 !important; }
+
+.u-bg-light-brown {
+  background-color: #d7ccc8 !important; }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;

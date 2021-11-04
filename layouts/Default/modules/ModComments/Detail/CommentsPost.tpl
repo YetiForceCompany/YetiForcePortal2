@@ -2,13 +2,17 @@
 {strip}
 	<!-- tpl-ModComments-Detail-CommentsPost -->
 	{assign var="IS_CREATABLE" value=$COMMENT->getModuleModel()->isPermitted('CreateView')}
+	{assign var=COMMENT_BACKGROUND value='u-bg-gray'}
+	{if $COMMENT->get('customer')}
+		{assign var=COMMENT_BACKGROUND value='u-bg-light-orange'}
+	{/if}
 	<div class="js-post-container{if !$SUB_COMMENT} row{/if}">
 		<div class="col-md-12 {if $SUB_COMMENT} pr-0{/if}">
 			<div class="js-post-container_body border-bottom pb-2">
 				<div class="p-1 u-border-none">
 					<div class="d-flex">
 						<div class="col px-0 ml-5 d-flex justify-content-between">
-							<span class="small"> {$COMMENT->getCommentatorName()}</span>
+							<span class="small">{$COMMENT->getCommentatorName()}</span>
 							{assign var="CHILDREN_COUNT" value=$COMMENT->getRawValue('children_count')}
 							<div>
 								<button type="button" class="btn btn-sm text-info js-show-replies u-text-ellipsis mr-0 p-0 pl-1 {if !$CHILDREN_COUNT} d-none{/if}"
@@ -31,10 +35,10 @@
 						</div>
 					</div>
 					<div class="d-flex">
-						<div class="avatar u-fs-2x px-2 d-flex justify-content-center align-items-end">
-							<span class="fas fa-user"></span>
+						<div class="avatar u-fs-2x pr-2 d-flex justify-content-center align-items-end">
+							<span class="fas {if $COMMENT->get('customer')}fa-user-circle{else}fa-user{/if}"></span>
 						</div>
-						<div class="col py-1 px-2 pr-0 u-bg-gray">
+						<div class="col py-1 px-2 pr-0 {$COMMENT_BACKGROUND}">
 							<div>
 								{$COMMENT->getDisplayValue('commentcontent')}
 							</div>
