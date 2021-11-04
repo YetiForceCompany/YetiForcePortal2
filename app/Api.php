@@ -206,6 +206,19 @@ class Api
 				$responseBody['result'] = $rawResponse;
 			}
 		} catch (\Throwable $e) {
+			if (\App\Config::$debugApi) {
+				$_SESSION['debugApi'][] = [
+					'date' => date('Y-m-d H:i:s', $startTime),
+					'time' => round(microtime(true) - $startTime, 2),
+					'method' => $method,
+					'requestType' => strtoupper($requestType),
+					'requestId' => RequestUtil::requestId(),
+					'rawRequest' => [$headers, $this->dataBody],
+					'rawResponse' => $rawResponse ?? '',
+					'response' => $responseBody ?? [],
+					'trace' => Debug::getBacktrace(),
+				];
+			}
 			if (Config::$apiErrorLogs || Config::$apiAllLogs) {
 				\App\Log::info([
 					'request' => ['date' => date('Y-m-d H:i:s', $startTime), 'requestType' => strtoupper($requestType), 'method' => $method, 'headers' => $headers, 'rawBody' => $this->dataBody, 'body' => $data],
