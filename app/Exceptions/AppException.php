@@ -43,11 +43,18 @@ class AppException extends \Exception
 	 */
 	public static function view(\Throwable $e): void
 	{
+		$previous = $e->getPrevious();
 		$viewer = new \App\Viewer();
 		$viewer->assign('MESSAGE', $e->getMessage());
-		if (\App\Config::get('displayDetailsException')) {
-			$viewer->assign('BACKTRACE', empty($e->backtrace) ? $e->getTraceAsString() : $e->backtrace);
+		if (\Conf\Config::$displayDetailsException && $previous) {
+			$viewer->assign('PREVIOUS_MESSAGE', $previous->getMessage());
+		}
+		if (\Conf\Config::$displayTrackingException) {
+			$viewer->assign('BACKTRACE', empty($e->backtrace) ? rtrim(str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $e->getTraceAsString())) : $e->backtrace);
 			$viewer->assign('SESSION', $_SESSION);
+			if ($previous) {
+				$viewer->assign('PREVIOUS_BACKTRACE', rtrim(str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $previous->getTraceAsString()), PHP_EOL));
+			}
 		}
 		$viewer->assign('CODE', $e->getCode());
 		$viewer->assign('CSS_FILE', [

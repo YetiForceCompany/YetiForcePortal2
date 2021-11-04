@@ -14652,6 +14652,9 @@ table.dataTable > thead > tr > td:not(.sorting_disabled) {
 .u-opacity-muted {
   opacity: 0.2; }
 
+.u-bg-gray {
+  background: #e0e0e0; }
+
 input[type="checkbox"] {
   border: 1px solid rgba(0, 0, 0, 0.54);
   width: 17px;
@@ -14838,7 +14841,6 @@ input[type="checkbox"]:checked {
     background-color: #ffebee !important; }
   .c-exception__card-body {
     overflow-y: auto;
-    height: 300px !important;
     background-color: #fafafa; }
   .c-exception__card-footer a {
     color: #212529;
@@ -15219,7 +15221,8 @@ hr {
 
 .historyList {
   overflow: auto;
-  left: -30.625rem !important; }
+  left: -30.625rem !important;
+  right: 8px !important; }
 
 .selectorHistory {
   font-weight: 900 !important;
@@ -15241,10 +15244,6 @@ hr {
 .historyList a {
   color: #222 !important;
   font-size: 15px !important; }
-
-.clearHistory {
-  font-weight: 900 !important;
-  text-align: center; }
 
 .widget_header .breadCrumbs .breadcrumbsLinks {
   font-size: 15px; }

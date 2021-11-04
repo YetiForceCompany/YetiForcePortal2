@@ -61,4 +61,16 @@ class Json
 	{
 		return empty($value) || '[]' === $value || '""' === $value;
 	}
+
+	/**
+	 * Check that a string is a valid JSON string.
+	 *
+	 * @param string|null $value
+	 *
+	 * @return bool
+	 */
+	public static function isJson(?string $value): bool
+	{
+		return !('' === $value || null === self::decode($value) || JSON_ERROR_NONE !== \json_last_error());
+	}
 }

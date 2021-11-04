@@ -131,8 +131,8 @@ class Response
 			'message' => $reasonPhrase,
 			'code' => $e->getCode(),
 		];
-		if (\Conf\Config::$displayTrackingException) {
-			$error['message'] = (Config::get('displayDetailsException') || 0 === strpos($message, 'ERR_')) ? $message : \App\Language::translate('ERR_OCCURRED_ERROR');
+		if (\Conf\Config::$displayDetailsException) {
+			$error['message'] = $message;
 		}
 		if (\Conf\Config::$displayTrackingException) {
 			$error['trace'] = str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $e->getTraceAsString());

@@ -20,8 +20,9 @@
 		<div class="container pt-5 u-word-break">
 			<div class="card mx-auto shadow" role="alert">
 				<div class="card-header c-exception__card-header d-flex justify-content-center flex-wrap">
-					<h1 class="d-flex align-items-center justify-content-center">
-						<span class="fas fa-exclamation-triangle fa-lg mr-3"></span>
+					<h1 class="align-items-center justify-content-center m-0">
+						<span class="fas fa-exclamation-triangle fa-lg float-left mr-5"></span>
+						<span class="fas fa-exclamation-triangle fa-lg float-right ml-5"></span>
 						<strong>{\App\Language::translate('LBL_ERROR_CODE')} {$CODE}</strong>
 					</h1>
 				</div>
@@ -32,8 +33,21 @@
 						</h4>
 					{/if}
 					{if !empty($BACKTRACE)}
+						<hr>
 						<p class="card-text">
 							<strong>{\App\Language::translate('LBL_BACKTRACE')}</strong>:<br> {nl2br(\App\Purifier::encodeHtml($BACKTRACE))}
+						</p>
+					{/if}
+					{if !empty($PREVIOUS_MESSAGE)}
+						<hr>
+						<h5 class="card-text">
+							{\App\Language::translate('LBL_PREVIOUS')}: {\App\Purifier::encodeHtml($PREVIOUS_MESSAGE)}
+						</h5>
+					{/if}
+					{if !empty($PREVIOUS_BACKTRACE)}
+						<hr>
+						<p class="card-text">
+							<strong>{\App\Language::translate('LBL_PREVIOUS')}</strong>:<br> {nl2br(\App\Purifier::encodeHtml($PREVIOUS_BACKTRACE))}
 						</p>
 					{/if}
 				</div>

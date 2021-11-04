@@ -197,6 +197,9 @@ class Api
 				$rawResponse = $this->decryptData($rawResponse);
 			}
 			if ('application/json' == $headers['Accept']) {
+				if (!Json::isJson($rawResponse)) {
+					throw new Exceptions\AppException('The response format is not as expected. Json error code: ' . \json_last_error(), 500);
+				}
 				$responseBody = Json::decode($rawResponse);
 			} else {
 				$responseBody = [];
