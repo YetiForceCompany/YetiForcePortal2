@@ -9,9 +9,9 @@ updates:
     timezone: Europe/Warsaw
   open-pull-requests-limit: 10
   reviewers:
-  - TomaszQr
+  - rskrzypczak
   assignees:
-  - TomaszQr
+  - rskrzypczak
   ignore:
   - dependency-name: smarty/smarty
     versions:
@@ -32,10 +32,10 @@ updates:
     timezone: Europe/Warsaw
   open-pull-requests-limit: 10
   reviewers:
-  - TomaszQr
+  - rskrzypczak
   - mariuszkrzaczkowski
   assignees:
-  - TomaszQr
+  - rskrzypczak
   - mariuszkrzaczkowski
   ignore:
   - dependency-name: datatables.net-bs4
