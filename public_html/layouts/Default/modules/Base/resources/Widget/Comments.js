@@ -94,7 +94,10 @@ window.Base_Widget_Comments_Js = class {
 		form.on('submit', (e) => {
 			e.preventDefault();
 			if (form.validationEngine('validate')) {
-				AppConnector.request(form.serializeFormData()).done((response) => {
+				let formData = form.serializeFormData();
+				let commentContent = form.find('.js-comment-content');
+				formData['commentcontent'] = commentContent.html();
+				AppConnector.request(formData).done((response) => {
 					form.find('[name="commentcontent"]').val('');
 					this.loadContent();
 				});
