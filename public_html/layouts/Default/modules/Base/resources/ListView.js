@@ -76,6 +76,9 @@ window.Base_ListView_Js = class {
 				window.location.href = element.find('.js-detail-view').attr('href');
 			}
 		});
+		this.table.on('click', 'tbody button', function () {
+			e.stopPropagation();
+		});
 	}
 	/**
 	 * Register custom view event
