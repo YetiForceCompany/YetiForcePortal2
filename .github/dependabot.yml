@@ -10,8 +10,10 @@ updates:
   open-pull-requests-limit: 10
   reviewers:
   - rskrzypczak
+  - mariuszkrzaczkowski
   assignees:
   - rskrzypczak
+  - mariuszkrzaczkowski
   ignore:
   - dependency-name: smarty/smarty
     versions:
