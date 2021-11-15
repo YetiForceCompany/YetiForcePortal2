@@ -175,6 +175,7 @@
     "JS_WAIT_FOR_FILE_UPLOAD": "Wait for files to be uploaded",
     "JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE": "Are you sure that you want to delete?",
     "JS_MAXIMUM_TEXT_SIZE_IN_BYTES": "Exceeded the maximum text size in bytes",
-    "JS_SAVE_LOADER_INFO": "Saving data..."
+    "JS_SAVE_LOADER_INFO": "Saving data...",
+    "JS_LBL_COMMENT_VALUE_CANT_BE_EMPTY": "Comment value cannot be empty"
   }
 }

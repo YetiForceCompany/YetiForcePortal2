@@ -94,11 +94,23 @@ window.Base_Widget_Comments_Js = class {
 		form.on('submit', (e) => {
 			e.preventDefault();
 			if (form.validationEngine('validate')) {
-				let formData = form.serializeFormData();
 				let commentContent = form.find('.js-comment-content');
-				formData['commentcontent'] = commentContent.html();
+				let commentContentValue = commentContent.html();
+				if ('' === commentContentValue) {
+					commentContent.validationEngine(
+						'showPrompt',
+						app.translate('JS_LBL_COMMENT_VALUE_CANT_BE_EMPTY'),
+						'error',
+						'bottomLeft',
+						true
+					);
+
+					return false;
+				}
+				let formData = form.serializeFormData();
+				formData['commentcontent'] = commentContentValue;
 				AppConnector.request(formData).done((response) => {
-					form.find('[name="commentcontent"]').val('');
+					form.find('[name="commentcontent"]').empty();
 					this.loadContent();
 				});
 			}
