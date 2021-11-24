@@ -73,9 +73,9 @@ window.Base_ListView_Js = class {
 		this.table.on('click', 'tbody tr', function (e) {
 			let clickedElement = $(e.target);
 			let rowElement = jQuery(this);
-			if (clickedElement.prop('tagName') === 'TD') {
-				window.location.href = rowElement.find('.js-detail-view').attr('href');
-			}
+			if (clickedElement.closest('div').parent().hasClass('actions')) return;
+			if (clickedElement.closest('a').length > 0) return;
+			window.location.href = rowElement.find('.js-detail-view').attr('href');
 		});
 	}
 	/**
