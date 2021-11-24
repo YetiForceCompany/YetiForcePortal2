@@ -70,10 +70,11 @@ window.Base_ListView_Js = class {
 			});
 			this.dataTable.ajax.reload();
 		});
-		this.table.on('click', 'tbody tr', function () {
-			let element = jQuery(this);
-			if (element.prop('tagName') !== 'A') {
-				window.location.href = element.find('.js-detail-view').attr('href');
+		this.table.on('click', 'tbody tr', function (e) {
+			let clickedElement = $(e.target);
+			let rowElement = jQuery(this);
+			if (clickedElement.prop('tagName') === 'TD') {
+				window.location.href = rowElement.find('.js-detail-view').attr('href');
 			}
 		});
 	}
