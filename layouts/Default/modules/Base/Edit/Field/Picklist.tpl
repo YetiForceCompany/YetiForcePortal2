@@ -26,8 +26,8 @@
 			{/if}
 			{if !$IS_LAZY}
 				{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
-					<option value="{\App\Purifier::encodeHtml($PICKLIST_NAME)}" title="{\App\Purifier::encodeHtml($PICKLIST_VALUE)}" {if trim($FIELD_VALUE) eq trim($PICKLIST_NAME)}selected{/if}>
-						{\App\Purifier::encodeHtml($PICKLIST_VALUE)}
+					<option value="{\App\Purifier::encodeHtml($PICKLIST_NAME)}" title="{$PICKLIST_VALUE}" {if trim($FIELD_VALUE) eq trim($PICKLIST_NAME)}selected{/if}>
+						{$PICKLIST_VALUE}
 					</option>
 				{/foreach}
 			{/if}
