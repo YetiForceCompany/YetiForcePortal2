@@ -5,8 +5,8 @@
 	{assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
 	{assign var=FIELD_INFO_DATA value=\App\Purifier::encodeHtml(\App\Json::encode($FIELD_INFO))}
 	<div class="js-tree-content">
-		<input name="filters[{$FIELD_NAME}]" date-field-name="{$FIELD_NAME}" type="hidden" class="js-tree-value js-filter-field" data-fieldinfo='{$FIELD_INFO_DATA}' data-multiple="{if $FIELD_MODEL->get('type') !== 'tree'}1{else}0{/if}" data-treetemplate="{$FIELD_MODEL->getFieldParams()}" data-modulename="{$MODULE_NAME}" data-js="val">
-		<div class="input-group">
+		<input name="filters[{$FIELD_NAME}]" date-field-name="{$FIELD_NAME}" type="hidden" class="js-tree-value form-control js-filter-field" data-fieldinfo='{$FIELD_INFO_DATA}' data-multiple="{if $FIELD_MODEL->get('type') !== 'tree'}1{else}0{/if}" data-treetemplate="{$FIELD_MODEL->getFieldParams()}" data-modulename="{$MODULE_NAME}" data-js="val">
+		<div class="input-group d-flex flex-nowrap">
 			<div class="input-group-prepend u-cursor-pointer">
 				<button class="btn btn-light js-tree-clear" type="button" data-js="click">
 					<span id="{$MODULE_NAME}_editView_fieldName_{$FIELD_NAME}_clear" class="fas fa-times-circle" title="{\App\Language::translate('LBL_CLEAR', $MODULE_NAME)}"></span>
