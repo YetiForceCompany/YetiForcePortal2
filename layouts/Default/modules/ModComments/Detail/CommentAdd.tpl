@@ -16,11 +16,10 @@
 				<span class="input-group-prepend">
 					<div class="input-group-text"><span class="fas fa-comments"></span></div>
 				</span>
-				<textarea name="commentcontent" rows="1"
-					data-validation-engine="validate[required]"
-					class="u-resize-v form-control"
+				<div name="commentcontent" contenteditable="true"
+					class="u-resize-v form-control js-comment-content"
 					title="{\App\Language::translate('LBL_ADD_YOUR_COMMENT_HERE', $MODULE_NAME)}"
-					placeholder="{\App\Language::translate('LBL_ADD_YOUR_COMMENT_HERE', $MODULE_NAME)}"></textarea>
+					placeholder="{\App\Language::translate('LBL_ADD_YOUR_COMMENT_HERE', $MODULE_NAME)}"></div>
 				<div class="input-group-append">
 					<button class="btn btn-success" type="submit" title="{\App\Language::translate('LBL_ADD', $MODULE_NAME)}">
 						<span class="fas fa-plus"></span>
