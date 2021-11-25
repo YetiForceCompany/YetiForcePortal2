@@ -1,6 +1,6 @@
 /* {[The file is published on the basis of YetiForce Public License 4.0 that can be found in the following directory: licenses/LicenseEN.txt or yetiforce.com]} */
 Base_Validator_Js(
-	'Email_Validator_Js',
+	'Base_Email_Validator_Js',
 	{
 		/**
 		 *Function which invokes field validation
