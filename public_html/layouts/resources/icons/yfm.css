@@ -1,9 +1,8 @@
 @font-face {
 	font-family: 'yfm';
-	src: url('../fonts/yfm.eot?my5wef');
-	src: url('../fonts/yfm.eot?my5wef#iefix') format('embedded-opentype'),
-		url('../fonts/yfm.ttf?my5wef') format('truetype'), url('../fonts/yfm.woff?my5wef') format('woff'),
-		url('../fonts/yfm.svg?my5wef#yfm') format('svg');
+	src: url('fonts/yfm.eot?i2hwdd');
+	src: url('fonts/yfm.eot?i2hwdd#iefix') format('embedded-opentype'), url('fonts/yfm.ttf?i2hwdd') format('truetype'),
+		url('fonts/yfm.woff?i2hwdd') format('woff'), url('fonts/yfm.svg?i2hwdd#yfm') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -13,14 +12,13 @@
 [class*=' yfm-'] {
 	/* use !important to prevent issues with browser extensions that change fonts */
 	font-family: 'yfm' !important;
-	speak: none;
+	speak: never;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
 	content: '\e972';
-	display: inline-block;
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -28,6 +26,12 @@
 [class^='yfm-']:before,
 [class*=' yfm-']:before {
 	content: '\e972';
+}
+.yfm-Passwords:before {
+	content: '\e983';
+}
+.yfm-Queue:before {
+	content: '\e982';
 }
 .yfm-Approvals:before {
 	content: '\e90e';
@@ -55,6 +59,9 @@
 }
 .yfm-Occurrences:before {
 	content: '\e97a';
+}
+.yfm-DefaultIcon:before {
+	content: '\e972';
 }
 .yfm-Announcements:before {
 	content: '\e904';

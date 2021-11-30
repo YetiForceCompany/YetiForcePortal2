@@ -1,9 +1,8 @@
 @font-face {
 	font-family: 'yfi';
-	src: url('../fonts/yfi.eot?93a0ly');
-	src: url('../fonts/yfi.eot?93a0ly#iefix') format('embedded-opentype'),
-		url('../fonts/yfi.ttf?93a0ly') format('truetype'), url('../fonts/yfi.woff?93a0ly') format('woff'),
-		url('../fonts/yfi.svg?93a0ly#yfi') format('svg');
+	src: url('fonts/yfi.eot?ruhjh8');
+	src: url('fonts/yfi.eot?ruhjh8#iefix') format('embedded-opentype'), url('fonts/yfi.ttf?ruhjh8') format('truetype'),
+		url('fonts/yfi.woff?ruhjh8') format('woff'), url('fonts/yfi.svg?ruhjh8#yfi') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -19,14 +18,38 @@
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
-	display: inline-block;
+
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.yfi-rbl:before {
+.yfi-api-premium:before {
+	content: '\e9e5';
+}
+.yfi-hierarchy:before {
+	content: '\e9e2';
+}
+.yfi-api-webservice:before {
+	content: '\e9e3';
+}
+.yfi-tree-records:before {
+	content: '\e9e4';
+}
+.yfi-public-webservice:before {
+	content: '\e9e0';
+}
+.yfi-unshare-in-webservice:before {
+	content: '\e9e1';
+}
+.yfi-kanban:before {
 	content: '\e9df';
+}
+.yfi-map:before {
+	content: '\e920';
+}
+.yfi-rbl:before {
+	content: '\e9ce';
 }
 .yfi-free-support:before {
 	content: '\e9c1';
@@ -36,9 +59,6 @@
 }
 .yfi-twitter:before {
 	content: '\e9c3';
-}
-.yfi-social-media2:before {
-	content: '\e9c4';
 }
 .yfi-partner-solution-shop:before {
 	content: '\e9c5';
@@ -224,7 +244,7 @@
 	content: '\e91f';
 }
 .yfi-automatic-assignment:before {
-	content: '\e920';
+	content: '\e972';
 }
 .yfi-automation:before {
 	content: '\e921';
@@ -470,7 +490,7 @@
 	content: '\e971';
 }
 .yfi-owner:before {
-	content: '\e972';
+	content: '\e9c4';
 }
 .yfi-password-encryption:before {
 	content: '\e973';
