@@ -156,6 +156,16 @@ window.Base_ListView_Js = class {
 		});
 	}
 	/**
+	 * Register keyboard shortcuts events
+	 */
+	registerKeyboardShortcutsEvent() {
+		document.addEventListener('keydown', (event) => {
+			if (event.altKey && event.code === 'KeyA' && $('.js-add-record').length) {
+				window.location.href = 'index.php?module=' + app.getModuleName() + '&view=EditView';
+			}
+		});
+	}
+	/**
 	 * Register modal events.
 	 */
 	registerEvents() {
@@ -166,5 +176,6 @@ window.Base_ListView_Js = class {
 		this.registerListEvents();
 		this.registerTree();
 		this.registerCustomView();
+		this.registerKeyboardShortcutsEvent();
 	}
 };

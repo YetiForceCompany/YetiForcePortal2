@@ -34,7 +34,7 @@
 				{/if}
 				{if \YF\Modules\Base\Model\Module::isPermittedByModule($MODULE_NAME, 'CreateView')}
 					<div class="ml-1">
-						<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0">
+						<a href="index.php?module={$MODULE_NAME}&view=EditView" class="btn btn-success btn-sm mb-0 js-add-record">
 							<span class="fas fa-plus mr-2"></span>
 							<strong>{\App\Language::translate('BTN_ADD_RECORD', $MODULE_NAME)}</strong>
 						</a>

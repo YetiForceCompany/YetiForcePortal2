@@ -229,12 +229,14 @@ window.Base_EditView_Js = class {
 				}
 				callbackAfterSave(response['result']);
 			})
-			.fail(function (textStatus, errorThrown) {
+			.fail(function (textStatus, errorThrown, jqXHR) {
+				progress.progressIndicator({ mode: 'hide' });
 				callbackAfterSave(false);
 				app.showNotify({
-					text: errorThrown,
+					type: 'error',
 					title: app.translate('JS_ERROR'),
-					type: 'error'
+					text: jqXHR.responseJSON.error.message,
+					animation: 'show'
 				});
 			});
 	}
@@ -259,6 +261,16 @@ window.Base_EditView_Js = class {
 		});
 	}
 	/**
+	 * Register keyboard shortcuts events
+	 */
+	registerKeyboardShortcutsEvent() {
+		document.addEventListener('keydown', (event) => {
+			if (event.altKey && event.code === 'KeyS') {
+				this.container.find('.js-edit-view-submit, .js-form-submit').trigger('click');
+			}
+		});
+	}
+	/**
 	 * Register form events.
 	 */
 	registerFormEvents() {
@@ -266,6 +278,7 @@ window.Base_EditView_Js = class {
 		this.registerReferenceEvent();
 		this.registerFieldsValidations();
 		this.registerTree();
+		this.registerKeyboardShortcutsEvent();
 		this.form.find(':input').inputmask();
 	}
 	/**

@@ -137,7 +137,7 @@ class Response
 		if (\Conf\Config::$displayTrackingException) {
 			$error['trace'] = str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $e->getTraceAsString());
 		}
-		$this->setHeader($_SERVER['SERVER_PROTOCOL'] . ' ' . $e->getCode() . ' ' . str_ireplace(["\r\n", "\r", "\n"], ' ', $reasonPhrase));
+		$this->setHeader($_SERVER['SERVER_PROTOCOL'] . ' ' . $e->getCode() . ' Internal Server Error');
 		$this->error = $error;
 		http_response_code($e->getCode());
 	}

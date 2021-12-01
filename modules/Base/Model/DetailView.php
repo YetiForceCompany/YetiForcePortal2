@@ -105,7 +105,7 @@ class DetailView
 				'label' => 'BTN_EDIT',
 				'moduleName' => $this->moduleName,
 				'href' => $this->record->getEditViewUrl(),
-				'icon' => 'fas fa-edit',
+				'icon' => 'fas fa-edit js-edit-btn',
 				'class' => 'btn-sm btn-success',
 				'showLabel' => 1,
 			];

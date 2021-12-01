@@ -1289,11 +1289,12 @@ var app = {
 							app.registerAfterLoginEvents();
 						});
 					})
-					.fail(function (textStatus, errorThrown) {
+					.fail(function (textStatus, errorThrown, jqXHR) {
 						app.showNotify({
-							title: app.translate('JS_ERROR'),
-							text: errorThrown,
-							type: 'error'
+							type: 'error',
+							title: app.translate('JS_ERROR_ADMIN'),
+							text: jqXHR.responseJSON.error.message,
+							animation: 'show'
 						});
 					});
 				break;
@@ -1356,6 +1357,20 @@ var app = {
 			toolbar: 'Min'
 		});
 		App.Fields.MultiImage.register(container);
+	},
+	/**
+	 * Register keyboard shortcuts events
+	 * @param {jQuery} container
+	 */
+	registerKeyboardShortcutsEvent(container) {
+		document.addEventListener('keydown', (event) => {
+			if (event.altKey && event.code === 'KeyL') {
+				window.location.href = 'index.php?module=' + app.getModuleName() + '&view=ListView';
+			}
+			if (event.altKey && event.code === 'KeyQ') {
+				App.Components.QuickCreate.createRecord(app.getModuleName());
+			}
+		});
 	}
 };
 CKEDITOR.disableAutoInline = true;
@@ -1373,6 +1388,7 @@ $(function () {
 	app.registerIframeAndMoreContent();
 	app.registerBaseEvent(container);
 	app.registerAfterLoginEvents(container);
+	app.registerKeyboardShortcutsEvent(container);
 	if ($('#fingerPrint').length && typeof DeviceUUID === 'function') {
 		$('#fingerPrint').val(new DeviceUUID().get());
 	}

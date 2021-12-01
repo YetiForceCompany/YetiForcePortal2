@@ -4,8 +4,10 @@
 	<form class="form-horizontal recordEditView js-edit-view-form" name="EditView" method="post" action="index.php" enctype="multipart/form-data" data-js="container">
 		<input type="hidden" name="module" value="{$MODULE_NAME}">
 		<input type="hidden" name="action" value="Save">
-		<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 		<input type="hidden" name="_fromView" value="{\App\Purifier::encodeHtml($ACTION_NAME)}">
+		{if !empty($RECORD_ID)}
+			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
+		{/if}
 		{if isset($RELATION_OPERATION)}
 			<input type="hidden" name="relationOperation" value="true">
 			<input type="hidden" name="relationId" value="{\App\Purifier::encodeHtml($RELATION_ID)}">

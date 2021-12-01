@@ -59,6 +59,16 @@ window.Base_DetailView_Js = class {
 		}
 	}
 	/**
+	 * Register keyboard shortcuts events
+	 */
+	registerKeyboardShortcutsEvent() {
+		document.addEventListener('keydown', (event) => {
+			if (event.altKey && event.code === 'KeyE') {
+				this.container.find('.js-edit-btn').trigger('click');
+			}
+		});
+	}
+	/**
 	 * Register detail view events.
 	 */
 	registerEvents() {
@@ -66,5 +76,6 @@ window.Base_DetailView_Js = class {
 		this.registerRecordEvents();
 		this.registerWidgetsEvents();
 		this.registerRelatedListEvents();
+		this.registerKeyboardShortcutsEvent();
 	}
 };

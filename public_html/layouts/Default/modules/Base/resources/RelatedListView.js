@@ -64,11 +64,12 @@ window.Base_RelatedListView_Js = class {
 				.done((data) => {
 					App.Components.QuickCreate.showModal(data, params);
 				})
-				.fail((textStatus, errorThrown) => {
+				.fail((textStatus, errorThrown, jqXHR) => {
 					app.showNotify({
-						text: errorThrown,
+						type: 'error',
 						title: app.translate('JS_ERROR'),
-						type: 'error'
+						text: jqXHR.responseJSON.error.message,
+						animation: 'show'
 					});
 				})
 				.always(() => {

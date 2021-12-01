@@ -11,12 +11,17 @@
 	{else}
 		{assign var=HASCHILDS value='false'}
 	{/if}
+	{if empty($ITEM_MENU['icon'])}
+		{assign var=ICON value="yfm-{$ITEM_MENU['mod']}"}
+	{else}
+		{assign var=ICON value=$ITEM_MENU['icon']}
+	{/if}
 	<li role="presentation" class="tpl-menu-Module c-menu__item js-menu__item nav-item" data-id="{$ITEM_MENU['id']}">
-		<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} {if !empty($ITEM_MENU['icon'])} hasIcon {/if} js-submenu-toggler"
+		<a class="{if $ACTIVE == 'true'} active {else} collapsed {/if} {if $ICON}hasIcon{/if} js-submenu-toggler"
 			{if $HASCHILDS == 'true'} data-toggle="collapse" data-target="#submenu-{$ITEM_MENU['id']}" role="button" {/if}
 			href="{$ITEM_MENU['link']}" aria-haspopup="true" aria-expanded="{$ACTIVE}"
 			aria-controls="submenu-{$ITEM_MENU['id']}">
-			<span class="c-menu__item__icon {$ITEM_MENU['icon']}" aria-hidden="true"></span>
+			<span class="c-menu__item__icon {$ICON}" aria-hidden="true"></span>
 			<span class="c-menu__item__text" title="{App\Purifier::encodeHTML($ITEM_MENU['name'])}">
 				{App\Purifier::encodeHTML($ITEM_MENU['name'])}
 			</span>

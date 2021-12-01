@@ -8,7 +8,7 @@ Base_Validator_Js(
 		 * @return error if validation fails true on success
 		 */
 		invokeValidation: function (field, rules, i, options) {
-			var emailInstance = new Email_Validator_Js();
+			var emailInstance = new Base_Email_Validator_Js();
 			emailInstance.setElement(field);
 			var response = emailInstance.validate();
 			if (response != true) {
@@ -308,7 +308,7 @@ Base_Validator_Js(
 	}
 );
 
-Email_Validator_Js(
+Base_Email_Validator_Js(
 	'Base_MultiEmails_Validator_Js',
 	{
 		invokeValidation: function (field) {
