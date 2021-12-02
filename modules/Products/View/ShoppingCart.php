@@ -32,7 +32,7 @@ class ShoppingCart extends View\ListView
 		'unit_price',
 		'taxes',
 		'imagename',
-		'description'
+		'description',
 	];
 
 	/** {@inheritdoc} */
@@ -93,7 +93,7 @@ class ShoppingCart extends View\ListView
 			parent::getFooterScripts(false),
 			$this->convertScripts([
 				['layouts/' . \App\Viewer::getLayoutName() . '/modules/Products/resources/Tree.js'],
-				['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true]
+				['layouts/' . \App\Viewer::getLayoutName() . "/modules/{$moduleName}/resources/{$action}.js", true],
 			], 'js'),
 		);
 	}

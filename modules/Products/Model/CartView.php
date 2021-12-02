@@ -56,7 +56,7 @@ class CartView extends ListViewModel
 			$this->setConditions([
 				'fieldName' => 'id',
 				'value' => array_keys($card),
-				'operator' => 'e'
+				'operator' => 'e',
 			]);
 			return parent::loadRecordsList();
 		}

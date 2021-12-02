@@ -30,7 +30,7 @@ class BaseField extends \App\BaseModel
 	protected $defaultOperator = 'a';
 
 	/** @var string[] Not supported field types. */
-	protected $notSupportedToEdit = ['multiCurrency', 'serverAccess', 'multiReference', 'barcode', 'changesJson', 'iban', 'token', 'currencyInventory', 'twitter', 'multiReferenceValue', 'sharedOwner', 'taxes', 'recurrence', 'meetingUrl', 'reminder', 'totalTime',  'multiowner', 'userReference', 'currencyList', 'modules', 'inventoryLimit', 'multiEmail', 'multiDependField', 'smtp', 'multiDomain', 'magentoServer'];
+	protected $notSupportedToEdit = ['multiCurrency', 'serverAccess', 'multiReference', 'barcode', 'changesJson', 'iban', 'token', 'currencyInventory', 'twitter', 'multiReferenceValue',  'taxes', 'recurrence', 'meetingUrl', 'reminder', 'totalTime',  'multiowner', 'userReference', 'currencyList', 'modules', 'inventoryLimit', 'multiEmail', 'multiDependField', 'smtp', 'multiDomain', 'magentoServer'];
 
 	/**
 	 * Function to set the name of the module to which the record belongs.

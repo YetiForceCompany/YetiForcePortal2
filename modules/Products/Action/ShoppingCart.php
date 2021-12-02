@@ -49,7 +49,7 @@ class ShoppingCart extends \App\Controller\Action
 	{
 		$this->cart->set($this->request->getInteger('record'), $this->request->getInteger('amount', 1), [
 			'priceNetto' => (float) $this->request->get('priceNetto', 0.0),
-			'priceGross' => (float) $this->request->get('priceGross', 0.0)
+			'priceGross' => (float) $this->request->get('priceGross', 0.0),
 		]);
 		$this->saveCart();
 	}
@@ -68,7 +68,7 @@ class ShoppingCart extends \App\Controller\Action
 		} else {
 			$this->cart->set($recordId, $amount, [
 				'priceNetto' => (float) $this->request->get('priceNetto', 0.0),
-				'priceGross' => (float) $this->request->get('priceGross', 0.0)
+				'priceGross' => (float) $this->request->get('priceGross', 0.0),
 			]);
 		}
 		$this->saveCart();
@@ -92,19 +92,13 @@ class ShoppingCart extends \App\Controller\Action
 	 */
 	public function changeAddress()
 	{
-		$this->cart->setAddress([
-			'addresslevel1' => $this->request->getByType('addresslevel1', 'Text'),
-			'addresslevel2' => $this->request->getByType('addresslevel2', 'Text'),
-			'addresslevel3' => $this->request->getByType('addresslevel3', 'Text'),
-			'addresslevel4' => $this->request->getByType('addresslevel4', 'Text'),
-			'addresslevel5' => $this->request->getByType('addresslevel5', 'Text'),
-			'addresslevel6' => $this->request->getByType('addresslevel6', 'Text'),
-			'addresslevel7' => $this->request->getByType('addresslevel7', 'Text'),
-			'addresslevel8' => $this->request->getByType('addresslevel8', 'Text'),
-			'localnumber' => $this->request->getByType('localnumber', 'Text'),
-			'buildingnumber' => $this->request->getByType('buildingnumber', 'Text'),
-			'pobox' => $this->request->getByType('pobox', 'Text'),
-		]);
+		$address = $this->cart->getAddress();
+		foreach (['addresslevel1', 'addresslevel2', 'addresslevel3', 'addresslevel4', 'addresslevel5', 'addresslevel6', 'addresslevel7', 'addresslevel8', 'localnumber', 'buildingnumber', 'pobox'] as $value) {
+			if ($this->request->has($value)) {
+				$address[$value] = $this->request->getByType($value, 'Text');
+			}
+		}
+		$this->cart->setAddress($address);
 		$this->cart->save();
 		$response = new \App\Response();
 		$response->setResult(true);
@@ -122,7 +116,7 @@ class ShoppingCart extends \App\Controller\Action
 		$companyDetails = \App\User::getUser()->get('companyDetails');
 		if (!empty($companyDetails) && isset($companyDetails['creditlimit']) && $totalPrice > ($companyDetails['creditlimit'] - $companyDetails['sum_open_orders'])) {
 			$result = [
-				'error' => \App\Language::translate('LBL_MERCHANT_LIMIT_EXCEEDED', 'Products')
+				'error' => \App\Language::translate('LBL_MERCHANT_LIMIT_EXCEEDED', 'Products'),
 			];
 		} else {
 			$this->cart->save();

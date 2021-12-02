@@ -41,7 +41,7 @@
 						</div>
 						<input type="hidden" class="js-addresses" value="{App\Purifier::encodeHTML(App\Json::encode($ADDRESSES))}">
 						{if !(!empty($ADDRESSES) && empty($ADDRESSES['data']))}
-							<div class="px-2 px-sm-4">
+							<div class="px-2 px-sm-4 js-addresses-container" data-js="container">
 								{assign var=REQUIRED_FIELDS value=['addresslevel5', 'addresslevel7', 'addresslevel8', 'buildingnumber']}
 								{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
 									<div class="row small">
@@ -49,54 +49,58 @@
 											{App\Language::translate('LBL_ADDRESS_'|cat:(strtoupper($FIELDNAME)), $MODULE_NAME)}
 										</label>
 										<div class="col-sm-10">
-											<input type="text" name="{$FIELDNAME}"
-												{if !empty($ADDRESSES)}
-													readonly
+											{assign var=VALUE value=''}
+											{if isset($SELECTED_ADDRESS[$FIELDNAME])}
+												{assign var=VALUE value=$SELECTED_ADDRESS[$FIELDNAME]}
+											{/if}
+											<input type="text" name="{$FIELDNAME}" value="{$VALUE}" class="form-control{if !empty($ADDRESSES)}-plaintext{/if}"
+												{if !empty($ADDRESSES)}readonly
 												{elseif in_array($FIELDNAME, $REQUIRED_FIELDS)}
 													data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]"
-													{/if} class="form-control{if !empty($ADDRESSES)}-plaintext{/if}" value="">
-											</div>
+												{/if}>
 										</div>
-									{/foreach}
-								</div>
-							{/if}
+									</div>
+								{/foreach}
+							</div>
+						{/if}
+					</div>
+					<div class="{$CSS_CARD_CONTAINER} my-3">
+						<div class="{$CSS_CARD_CONTENT}">
+							<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
 						</div>
-						<div class="{$CSS_CARD_CONTAINER} my-3">
-							<div class="{$CSS_CARD_CONTENT}">
-								<h4 class="mb-0"><span class="fas fa-exclamation-circle mr-2"></span>{\App\Language::translate('LBL_ATTENTION', $MODULE_NAME)}</h4>
+						<div class="m-2">
+							<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
+						</div>
+					</div>
+					<div class="{$CSS_CARD_CONTAINER}">
+						<div class="{$CSS_CARD_CONTENT}">
+							<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
+						</div>
+						<div class="px-3">
+							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
+								{foreach from=$PAYMENTS item=PAYMENT}
+									{assign var=ACTIVE value=$SELECTED_PAYMENTS->getType()==$PAYMENT->getType()}
+									<label class="btn btn-primary {if $ACTIVE}active{/if}" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
+										<input type="radio" name="paymetsMethod" id="{$PAYMENT->getType()}" class="js-method-payments" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" autocomplete="off" {if $ACTIVE}checked{/if}>
+										<span class="{$PAYMENT->getIcon()} mx-1"></span>
+										{\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
+									</label>
+								{/foreach}
 							</div>
-							<div class="m-2">
-								<textarea class="form-control js-attention" name="attention" data-js="change">{$ATTENTION}</textarea>
+							<div id="payments-info-accordion" class="js-payments-info">
+								{foreach from=$PAYMENTS item=PAYMENT}
+									<div id="collapse-{$PAYMENT->getType()}" class="collapse js-{$PAYMENT->getType()}" data-parent="#payments-info-accordion">
+										{include file=\App\Resources::templatePath("components/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
+									</div>
+								{/foreach}
 							</div>
 						</div>
-						<div class="{$CSS_CARD_CONTAINER}">
-							<div class="{$CSS_CARD_CONTENT}">
-								<h4 class="mb-0"><span class="fas fa-dollar-sign mr-2"></span>{\App\Language::translate('LBL_METHOD_PAYMENTS', $MODULE_NAME)}</h4>
-							</div>
-							<div class="px-3">
-								<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
-									{foreach from=$PAYMENTS item=PAYMENT}
-										<label class="btn btn-primary" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
-											<input type="radio" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" class="js-method-payments" name="paymetsMethod" id="{$PAYMENT->getType()}" autocomplete="off">
-											<span class="{$PAYMENT->getIcon()} mx-1"></span>
-											{\App\Language::translate(strtoupper("LBL_"|cat:$PAYMENT->getType()), $MODULE_NAME)}
-										</label>
-									{/foreach}
-								</div>
-								<div id="payments-info-accordion" class="js-payments-info">
-									{foreach from=$PAYMENTS item=PAYMENT}
-										<div id="collapse-{$PAYMENT->getType()}" class="collapse js-{$PAYMENT->getType()}" data-parent="#payments-info-accordion">
-											{include file=\App\Resources::templatePath("components/Payments/"|cat:{$PAYMENT->getType()}|cat:".tpl", $MODULE_NAME)}
-										</div>
-									{/foreach}
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="col-12 col-lg-3 pl-lg-3 mt-3 mt-lg-0">
-					{include file=\App\Resources::templatePath("components/Summary.tpl", $MODULE_NAME)}
-				</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-12 col-lg-3 pl-lg-3 mt-3 mt-lg-0">
+				{include file=\App\Resources::templatePath("components/Summary.tpl", $MODULE_NAME)}
 			</div>
 		</div>
-	{/strip}
+	</div>
+{/strip}
