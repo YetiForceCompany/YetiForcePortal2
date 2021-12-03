@@ -44,7 +44,7 @@
 							<div class="px-2 px-sm-4 js-addresses-container" data-js="container">
 								{assign var=REQUIRED_FIELDS value=['addresslevel5', 'addresslevel7', 'addresslevel8', 'buildingnumber']}
 								{foreach from=YF\Modules\Products\Model\CartView::ADDRESS_FIELDS item=FIELDNAME}
-									<div class="row small">
+									<div class="row small my-1">
 										<label class="col-sm-2 col-form-label text-muted">
 											{App\Language::translate('LBL_ADDRESS_'|cat:(strtoupper($FIELDNAME)), $MODULE_NAME)}
 										</label>
