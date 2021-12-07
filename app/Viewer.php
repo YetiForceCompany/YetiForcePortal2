@@ -14,7 +14,7 @@ namespace App;
 /**
  * Base controller class.
  */
-class Viewer extends \SmartyBC
+class Viewer extends \Smarty
 {
 	const DEFAULTLAYOUT = 'Default';
 
