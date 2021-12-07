@@ -45,6 +45,7 @@ window.Base_ListView_Js = class {
 	registerListEvents() {
 		const self = this;
 		this.table.on('click', '.js-delete-record', (e) => {
+			const url = $(e.currentTarget).data('url');
 			app.showNotifyConfirm(
 				{
 					title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE')
@@ -52,7 +53,7 @@ window.Base_ListView_Js = class {
 				function () {
 					AppConnector.request({
 						data: {},
-						url: $(e.currentTarget).data('url')
+						url: url
 					}).done((data) => {
 						if (data.result) {
 							self.dataTable.ajax.reload();
@@ -73,7 +74,7 @@ window.Base_ListView_Js = class {
 		this.table.on('click', 'tbody tr', function (e) {
 			let clickedElement = $(e.target);
 			let rowElement = jQuery(this);
-			if (clickedElement.closest('div').parent().hasClass('actions')) return;
+			if (clickedElement.closest('div').parent().is('.actions, .dropdown-menu')) return;
 			if (clickedElement.closest('a').length > 0) return;
 			window.location.href = rowElement.find('.js-detail-view').attr('href');
 		});

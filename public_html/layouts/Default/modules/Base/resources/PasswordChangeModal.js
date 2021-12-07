@@ -16,7 +16,7 @@ window.Base_PasswordChangeModal_JS = class {
 		formElement.validationEngine(app.validationEngineOptions);
 		formElement.on('submit', function (e) {
 			e.preventDefault();
-			formElement.validationEngine('showPrompt', resultOfValidation, '', 'topLeft', true);
+			formElement.validationEngine('showPrompt', '', '', 'topLeft', true);
 			if (formElement.validationEngine('validate') === true) {
 				let formData = formElement.serializeFormData();
 				AppConnector.request(formData).done((data) => {
@@ -25,6 +25,7 @@ window.Base_PasswordChangeModal_JS = class {
 							text: data.result,
 							type: 'success'
 						});
+						app.hideModalWindow();
 					}
 				});
 			}

@@ -102,7 +102,15 @@ window.Products_ShoppingCart_Js = class extends Products_Tree_Js {
 		this.container.find('.js-amount').on('change', (e) => {
 			let amountInput = $(e.currentTarget);
 			let product = this.getCartItem(e.currentTarget);
-			this.updateProduct(product, parseInt(amountInput.val()));
+			let amountVal = parseInt(amountInput.val());
+			if (amountVal > 1) {
+				this.updateProduct(product, amountVal);
+			} else {
+				app.showNotify({
+					text: app.translate('JS_VALUE_SHOULD_BE_GREATER_THAN_ZERO'),
+					type: 'error'
+				});
+			}
 		});
 	}
 	registerChangeAddress() {

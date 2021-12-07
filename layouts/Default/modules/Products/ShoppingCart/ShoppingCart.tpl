@@ -79,7 +79,7 @@
 						<div class="px-3">
 							<div class="btn-group flex-wrap px-3 w-100" data-toggle="buttons">
 								{foreach from=$PAYMENTS item=PAYMENT}
-									{assign var=ACTIVE value=$SELECTED_PAYMENTS->getType()==$PAYMENT->getType()}
+									{assign var=ACTIVE value=($SELECTED_PAYMENTS && $SELECTED_PAYMENTS->getType() == $PAYMENT->getType())}
 									<label class="btn btn-primary {if $ACTIVE}active{/if}" data-toggle="collapse" data-target="#collapse-{$PAYMENT->getType()}">
 										<input type="radio" name="paymetsMethod" id="{$PAYMENT->getType()}" class="js-method-payments" data-validation-engine="validate[required,funcCall[Base_Validator_Js.invokeValidation]]" autocomplete="off" {if $ACTIVE}checked{/if}>
 										<span class="{$PAYMENT->getIcon()} mx-1"></span>
