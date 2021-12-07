@@ -5,7 +5,7 @@
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/yetiforceportal2/localized.svg)](https://crowdin.com/project/yetiforceportal2)
 [![Scrutinizer](https://scrutinizer-ci.com/g/YetiForceCompany/YetiForcePortal2/badges/quality-score.png?b=developer)](https://scrutinizer-ci.com/g/YetiForceCompany/YetiForcePortal2/)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/YetiForceCompany/YetiForcePortal2.svg)](http://isitmaintained.com/project/YetiForceCompany/YetiForcePortal2 'Percentage of issues still open')
-[![Depfu](https://badges.depfu.com/badges/4affeca7559c22dbeba7653979a51d29/status.svg)](https://depfu.com)
+[![Depfu](https://badges.depfu.com/badges/4affeca7559c22dbeba7653979a51d29/status.svg)](https://depfu.com/repos/github/YetiForceCompany/YetiForcePortal2)
 [![SecurityHeaders.io](https://img.shields.io/security-headers?url=https%3A%2F%2Fgitdevportal.yetiforce.com/)](https://securityheaders.io/?q=https://gitdevportal.yetiforce.com/)
 [![Snyk - Known Vulnerabilities](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2/badge.svg)](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2)
 [![sonarcloud.io status alert](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=alert_status)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
