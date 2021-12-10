@@ -17,11 +17,11 @@ namespace Conf;
 class Version
 {
 	/**
-	 * Application version.
+	 * @var string Application version.
 	 */
-	const APP = '6.2.0';
+	const APP = '6.3.0';
 	/**
-	 * Date of publication of the application.
+	 * @var string Date of publication of the application.
 	 */
-	const DATE = '2021.07.02';
+	const DATE = '2021.12.10';
 }
