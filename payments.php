@@ -2,8 +2,8 @@
 /**
  * File to handle notifications from the payment system.
  *
- * @copyright YetiForce Sp. z o.o.
- * @license YetiForce Public License 4.0 (licenses/LicenseEN.txt or yetiforce.com)
+ * @copyright YetiForce S.A.
+ * @license YetiForce Public License 5.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Arkadiusz Adach <a.adach@yetiforce.com>
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
  */
@@ -49,9 +49,9 @@ try {
 	$api = new \App\Api([
 		'Content-Type' => 'application/json',
 		'X-ENCRYPTED' => 1,
-		'X-API-KEY' => \App\Config::get('paymentApiKey')
+		'X-API-KEY' => \App\Config::get('paymentApiKey'),
 	], [
-		'auth' => [\App\Config::get('paymentServerName'), \App\Config::get('paymentServerPass')]
+		'auth' => [\App\Config::get('paymentServerName'), \App\Config::get('paymentServerPass')],
 	]);
 	$answerfromApi = $api->call('ReceiveFromPaymentsSystem', [
 		'ssingleordersid' => $transactionState->crmOrderId,
