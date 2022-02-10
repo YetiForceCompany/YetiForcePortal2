@@ -14,6 +14,8 @@
 [![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 
+<img src="https://stats.yetiforce.com/matomo.php?idsite=5&amp;rec=1" style="border:0" alt="" />
+
 <p align="center">
 	<a href="https://sourceforge.net/projects/yetiforce/files/YetiForce%20Portal%202%20for%20CRM%206.x.x/">
 		<img width="30%" src="https://a.fsdn.com/con/app/sf-download-button" srcset="https://a.fsdn.com/con/app/sf-download-button?button_size=2x 2x" alt="Download YetiForce CRM">
