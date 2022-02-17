@@ -7,8 +7,8 @@
 				{if isset($HISTORY_MODEL::$iconActions[$HISTORY['rawStatus']])}
 					<li data-type="{$HISTORY['rawStatus']}">
 						<div class="d-flex">
-							<span class="c-circle-icon mt-2 bg-success d-sm-inline d-none text-center" style="background-color: {$HISTORY_MODEL::$colorsActions[$HISTORY['rawStatus']]} !important;">
-								<span class="{$HISTORY_MODEL::$iconActions[$HISTORY['rawStatus']]} fa-fw text-light mt-2"></span>
+							<span class="c-circle-icon mt-2 pt-1 bg-success d-sm-inline d-none text-center" style="background-color: {$HISTORY_MODEL::$colorsActions[$HISTORY['rawStatus']]} !important;">
+								<span class="{$HISTORY_MODEL::$iconActions[$HISTORY['rawStatus']]} fa-fw text-light"></span>
 							</span>
 							<div class="flex-grow-1 ml-1 p-1 timeline-item">
 								<div class="timeline-body small">

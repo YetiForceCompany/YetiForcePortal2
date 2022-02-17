@@ -87,7 +87,7 @@ class EditView extends \App\Controller\View
 			if ($fieldModel->isEditableHidden()) {
 				$fieldModel->set('fieldvalue', $this->recordModel->getRawValue($fieldModel->getName()));
 				$value = $fieldModel->getEditViewDisplayValue($this->recordModel);
-				$this->hiddenFields[$fieldModel->getName()] = \is_array($value) ? $value['raw'] : $value;
+				$this->hiddenFields[$fieldModel->getName()] = \is_array($value) ? ($value['raw'] ?? '') : $value;
 			}
 		}
 	}
