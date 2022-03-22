@@ -23,7 +23,7 @@
   "homepage": "https://github.com/YetiForceCompany/YetiForcePortal2#readme",
   "license": "YetiForce Public License 4.0",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.2",
+    "@fortawesome/fontawesome-free": "^6.1.0",
     "@mdi/font": "^6.0.0",
     "block-ui": "^2.70.1",
     "blueimp-file-upload": "^10.6.0",
