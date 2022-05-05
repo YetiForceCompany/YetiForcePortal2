@@ -35,7 +35,10 @@ window.Base_ListView_Js = class {
 				}
 			}
 		});
-		this.listForm.find('input,select').on('change', () => {
+		console.log(this.listForm.find('input,select'));
+		this.listForm.find('input,select').on('change', (e) => {
+			console.log(11);
+			console.log(e);
 			this.dataTable.ajax.reload();
 		});
 	}
@@ -85,9 +88,11 @@ window.Base_ListView_Js = class {
 	registerCustomView() {
 		let customFilter = this.listForm.find('.js-cv-list');
 		App.Fields.Picklist.showSelect2ElementView(customFilter);
-		customFilter.on('change', (_) => {
-			$.progressIndicatorShow();
-			this.reloadView(false);
+		customFilter.on('change', (e) => {
+			console.log(22);
+			console.log(e);
+			// $.progressIndicatorShow();
+			// this.reloadView(false);
 		});
 		this.listForm.on('click', '.js-filter-tab', (e) => {
 			$.progressIndicatorShow();
