@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ad023d19e930f4eff25134952c755ba",
+    "content-hash": "ca4be8e24659f51c9c94a12bfb7ea8ca",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
@@ -686,20 +686,20 @@
         },
         {
             "name": "milon/barcode",
-            "version": "8.0.1",
+            "version": "9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/milon/barcode.git",
-                "reference": "a1b1ee1a743c1368597f1742e6ee4765333a15a1"
+                "reference": "6859fe19808380a0b40916d0009d7b4b5e04cc25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/milon/barcode/zipball/a1b1ee1a743c1368597f1742e6ee4765333a15a1",
-                "reference": "a1b1ee1a743c1368597f1742e6ee4765333a15a1",
+                "url": "https://api.github.com/repos/milon/barcode/zipball/6859fe19808380a0b40916d0009d7b4b5e04cc25",
+                "reference": "6859fe19808380a0b40916d0009d7b4b5e04cc25",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^8.0",
+                "illuminate/support": "^7.0|^8.0|^9.0",
                 "php": "^7.3 | ^8.0"
             },
             "type": "library",
@@ -744,7 +744,7 @@
             ],
             "support": {
                 "issues": "https://github.com/milon/barcode/issues",
-                "source": "https://github.com/milon/barcode/tree/8.0.1"
+                "source": "https://github.com/milon/barcode/tree/9.0.0"
             },
             "funding": [
                 {
@@ -756,7 +756,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-08T11:36:07+00:00"
+            "time": "2022-02-15T15:18:46+00:00"
         },
         {
             "name": "nesbot/carbon",
