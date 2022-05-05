@@ -2,7 +2,7 @@
 {strip}
 	<!-- tpl-Base-List-Field-Country -->
 	{assign var=PLACE_HOLDER value=($FIELD_MODEL->isEmptyPicklistOptionAllowed() && !($FIELD_MODEL->isMandatory() eq true))}
-	<select name="filters[{$FIELD_MODEL->getName()}]" class="select2 form-control js-filter-field" title="{$FIELD_MODEL->getFieldLabel()}" data-fieldinfo='{\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}' {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly" {/if}>
+	<select name="filters[{$FIELD_MODEL->getName()}]" class="select2 form-control js-filter-field" title="{$FIELD_MODEL->getFieldLabel()}" data-fieldinfo="{\App\Purifier::encodeHtml(\App\Json::encode($FIELD_MODEL->getFieldInfo()))}" multiple="multiple" {if $FIELD_MODEL->isEditableReadOnly()}readonly="readonly" {/if}>
 		{if $PLACE_HOLDER}
 			<optgroup class="p-0">
 				<option value="">{\App\Language::translate('LBL_SELECT_OPTION')}</option>

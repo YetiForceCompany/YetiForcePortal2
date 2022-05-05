@@ -631,8 +631,11 @@ window.App.Fields = {
 			if (typeof containerCssClass !== 'undefined') {
 				params.containerCssClass += ' ' + containerCssClass;
 			}
-			params.language.noResults = function (msn) {
+			params.language.noResults = function () {
 				return app.translate('JS_NO_RESULTS_FOUND');
+			};
+			params.language.removeAllItems = function () {
+				return app.translate('JS_REMOVE_ALL_ITEMS');
 			};
 
 			// Sort DOM nodes alphabetically in select box.

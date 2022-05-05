@@ -381,31 +381,6 @@ var app = {
 		var chosenSelectConainer = jQuery('.chosen-container-multi .default').css('width', '100%');
 		return chosenSelectConainer;
 	},
-	registerSelect2Field: function (parent, params) {
-		var thisInstance = this;
-		if (typeof parent == 'undefined') {
-			parent = jQuery('body');
-		}
-		if (typeof params == 'undefined') {
-			params = {};
-		}
-		var selectElement = jQuery('.select2', parent);
-		params.language = {};
-		//params.theme = "bootstrap";
-		params.width = '100%';
-		selectElement.each(function () {
-			if ($(this).prop('id').length == 0) {
-				$(this).attr(
-					'id',
-					'sel' +
-						thisInstance.generateRandomChar() +
-						thisInstance.generateRandomChar() +
-						thisInstance.generateRandomChar()
-				);
-			}
-			$(this).select2(params);
-		});
-	},
 	getUrlParam: function (name) {
 		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 			sURLVariables = sPageURL.split('&'),

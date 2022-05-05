@@ -20916,9 +20916,6 @@ h3 {
 .select2-selection--multiple {
   height: auto !important;
 }
-.select2-selection--multiple .select2-selection__rendered {
-  line-height: 28px !important;
-}
 
 .form-control:focus {
   box-shadow: none !important;

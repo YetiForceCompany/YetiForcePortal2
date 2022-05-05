@@ -98,6 +98,7 @@
     "JS_S_SORT_ASCENDING": ": activate to sort column ascending",
     "JS_S_SORT_DESCENDING": ": activate to sort column descending",
     "JS_NO_RESULTS_FOUND": "No results found",
+    "JS_REMOVE_ALL_ITEMS": "Remove all items",
     "JS_SELECT_AN_OPTION": "Select",
     "JS_SELECT_SOME_OPTIONS": "Select several values",
     "JS_DATE_MONTH_JANUARY": "January",
