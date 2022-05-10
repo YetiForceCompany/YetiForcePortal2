@@ -99,12 +99,6 @@
 	display: none;
 }
 
-.pnotify .bootstrap4-icon > * {
-	font-size: 2rem;
-	line-height: 2rem;
-	margin-right: 10px;
-}
-
 table.dataTable > thead > tr {
 	> th:not(.sorting_disabled),
 	> td:not(.sorting_disabled) {
@@ -194,5 +188,66 @@ table.dataTable > thead > tr {
 			top: 41px !important;
 			left: -170px !important;
 		}
+	}
+}
+
+//-------- datatable --------//
+.dataTables_wrapper {
+	.custom-select {
+		//removed additional arrows
+		background: unset;
+	}
+}
+
+//-------- flag-icon --------//
+.flag-icon {
+	box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
+	background-size: cover;
+	width: 1.3em;
+	margin-left: 2px;
+}
+
+//-------- font-awesome --------//
+.btn-sm {
+	.fa-xs {
+		vertical-align: calculate-rem(1px);
+	}
+}
+
+//-------- pnotify --------//
+.pnotify-container {
+	padding: 0.75rem;
+}
+.pnotify-closer {
+	visibility: visible !important;
+}
+.pnotify-title {
+	line-height: 1.3rem;
+}
+.pnotify .pnotify-icon {
+	line-height: 1.5rem;
+	font-size: 1.2rem;
+	margin-right: 5px;
+}
+.pnotify-action-bar {
+	margin-top: 1rem;
+}
+.pnotify.c-confirm-modal {
+	.pnotify-container {
+		color: #000;
+		background-color: #fff;
+		border-color: #fff;
+	}
+	.btn-primary {
+		background-color: #3eac33;
+		border-color: #3eac33;
+	}
+	.btn-secondary {
+		background-color: #d15d5d;
+		border-color: #d15d5d;
+	}
+	.pnotify-icon {
+		font-size: 3rem;
+		margin: 12px 10px 10px 0;
 	}
 }

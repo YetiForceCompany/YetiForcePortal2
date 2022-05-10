@@ -46,11 +46,9 @@ window.Base_ListView_Js = class {
 		const self = this;
 		this.table.on('click', '.js-delete-record', (e) => {
 			const url = $(e.currentTarget).data('url');
-			app.showNotifyConfirm(
-				{
-					title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE')
-				},
-				function () {
+			app.showConfirmModal({
+				title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE'),
+				confirmedCallback: () => {
 					AppConnector.request({
 						data: {},
 						url: url
@@ -60,7 +58,7 @@ window.Base_ListView_Js = class {
 						}
 					});
 				}
-			);
+			});
 		});
 		this.table.on('click', '.js-search-records', () => {
 			this.dataTable.ajax.reload();
@@ -139,7 +137,6 @@ window.Base_ListView_Js = class {
 					});
 					fieldDisplayElement.val(treeText.join(','));
 					fieldDisplayElement.attr('readonly', true);
-					console.log(treeValue.join(','));
 					treeValueField.val(treeValue.join(','));
 					treeValueField.trigger('change');
 					app.hideModalWindow();

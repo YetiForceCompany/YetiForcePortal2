@@ -12,13 +12,15 @@ window.Products_ProceedToCheckout_Js = class extends Products_Tree_Js {
 	registerButtonBuy() {
 		let self = this;
 		this.container.find('.js-buy').on('click', (e) => {
-			Base_Helper_Js.showConfirmationBox({
-				message: app.translate('LBL_VERIFY_ADDRESS')
-			}).done(function (data) {
-				self.order({
-					reference_id: self.container.data('referenceId'),
-					reference_module: self.container.data('referenceModule')
-				});
+			app.showConfirmModal({
+				title: app.translate('LBL_VERIFY_ADDRESS'),
+				icon: 'fas fa-address-card',
+				confirmedCallback: () => {
+					self.order({
+						reference_id: self.container.data('referenceId'),
+						reference_module: self.container.data('referenceModule')
+					});
+				}
 			});
 		});
 	}

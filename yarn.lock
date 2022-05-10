@@ -83,11 +83,6 @@ blueimp-tmpl@3:
   resolved "https://registry.yarnpkg.com/blueimp-tmpl/-/blueimp-tmpl-3.20.0.tgz#bed897db362c70d3740e0ad1020ce84bfa15ceaa"
   integrity sha512-g6ln9L+VX8ZA4WA8mgKMethYH+5teroJ2uOkCvcthy9Y9d9LrQ42OAMn+r3ECKu9CB+xe9GOChlIUJBSxwkI6g==
 
-bootbox@^5.4.0:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/bootbox/-/bootbox-5.5.3.tgz#6b32da9c401a22b089e1544797cc9a91f1c35b23"
-  integrity sha512-B4mnm1DYgNHzoNtD7I0L/fixqvya4EEQy5bFF/yNmGI2Eq3WwVVwdfWf3hoF8KS+EaV4f0uIMqtxB1EAZwZPhQ==
-
 bootstrap-chosen@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/bootstrap-chosen/-/bootstrap-chosen-1.4.2.tgz#d7a184b21ecd952d586982339c60128f8827334d"

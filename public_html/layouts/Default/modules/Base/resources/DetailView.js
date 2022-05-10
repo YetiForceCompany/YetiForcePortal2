@@ -13,11 +13,9 @@ window.Base_DetailView_Js = class {
 	 */
 	registerRecordEvents() {
 		this.container.on('click', '.js-delete-record', (e) => {
-			app.showNotifyConfirm(
-				{
-					title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE')
-				},
-				function () {
+			app.showConfirmModal({
+				title: app.translate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE'),
+				confirmedCallback: () => {
 					AppConnector.request({
 						data: {},
 						url: $(e.currentTarget).data('url')
@@ -27,7 +25,7 @@ window.Base_DetailView_Js = class {
 						}
 					});
 				}
-			);
+			});
 		});
 	}
 	/**

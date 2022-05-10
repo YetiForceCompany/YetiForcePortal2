@@ -352,48 +352,62 @@ class MultiImage {
 	 * @param {string} hash
 	 */
 	zoomPreview(hash) {
-		const thisInstance = this;
+		const self = this;
 		let fileInfo = this.getFileInfo(hash);
-		const titleTemplate = () => `<i class="fa fa-image"></i> ${fileInfo.name}`;
-		const bootboxOptions = {
-			size: 'large',
-			backdrop: true,
-			onEscape: true,
-			title: `<span id="bootbox-title-${hash}">${titleTemplate()}</span>`,
-			message: `<img src="${fileInfo.imageSrc}" class="w-100" />`,
-			buttons: {}
+		const titleTemplate = () => {
+			const titleObject = document.createElement('span');
+			const icon = document.createElement('i');
+			icon.setAttribute('class', `fa fa-image`);
+			titleObject.appendChild(icon);
+			titleObject.appendChild(document.createTextNode(` ${fileInfo.name}`));
+			return titleObject.innerHTML;
 		};
-		if (this.options.showCarousel) {
-			bootboxOptions.message = this.generateCarousel(hash);
-		}
-		if (!this.detailView) {
-			bootboxOptions.buttons.Delete = {
-				label: `<i class="fa fa-trash-alt"></i> ${app.translate('JS_DELETE')}`,
-				className: 'float-left btn btn-danger',
-				callback() {
-					thisInstance.deleteFile(fileInfo.hash);
-				}
-			};
-		}
-		bootboxOptions.buttons.Download = {
-			label: `<i class="fa fa-download" title="${app.translate('JS_DOWNLOAD')}"></i>`,
-			className: 'float-left btn btn-success',
-			callback() {
-				thisInstance.download(fileInfo.hash);
-			}
-		};
-		bootboxOptions.buttons.Close = {
-			label: `<i class="fa fa-times" title="${app.translate('JS_CLOSE')}"></i>`,
-			className: 'btn btn-warning',
-			callback: () => {}
-		};
-		bootbox.dialog(bootboxOptions);
-		if (this.options.showCarousel) {
-			$(`#carousel-${hash}`).on('slid.bs.carousel', (e) => {
-				fileInfo = this.getFileInfo($(e.relatedTarget).data('hash'));
-				$(`#bootbox-title-${hash}`).html(titleTemplate());
+
+		let buttons = [];
+		if (!self.detailView) {
+			buttons.push({
+				text: app.translate('JS_DELETE'),
+				icon: 'fa fa-trash-alt',
+				class: 'float-left btn btn-danger js-delete'
 			});
 		}
+		buttons.push(
+			{
+				text: app.translate('JS_DOWNLOAD'),
+				icon: 'fa fa-download',
+				class: 'float-left btn btn-success js-success'
+			},
+			{
+				text: app.translate('JS_CLOSE'),
+				icon: 'fa fa-times',
+				class: 'btn btn-warning',
+				data: { dismiss: 'modal' }
+			}
+		);
+		app.showModalHtml({
+			class: 'modal-lg',
+			header: titleTemplate(),
+			footerButtons: buttons,
+			body: self.options.showCarousel
+				? self.generateCarousel(hash)
+				: `<img src="${fileInfo.imageSrc}" class="w-100" />`,
+			cb: (modal) => {
+				modal.on('click', '.js-delete', function () {
+					self.deleteFile(fileInfo.hash);
+					app.hideModalWindow();
+				});
+				modal.on('click', '.js-success', function () {
+					self.download(fileInfo.hash);
+					app.hideModalWindow();
+				});
+				if (self.options.showCarousel) {
+					modal.find(`#carousel-${hash}`).on('slid.bs.carousel', (e) => {
+						fileInfo = self.getFileInfo($(e.relatedTarget).data('hash'));
+						modal.find('.js-modal-title').html(titleTemplate());
+					});
+				}
+			}
+		});
 	}
 
 	/**
@@ -420,15 +434,13 @@ class MultiImage {
 	deleteFile(hash, showConfirmation = true) {
 		if (showConfirmation) {
 			const fileInfo = this.getFileInfo(hash);
-			bootbox.confirm({
-				title: `<i class="fa fa-trash-alt"></i> ${app.translate('JS_DELETE_FILE')}`,
-				message: `${app.translate('JS_DELETE_FILE_CONFIRMATION')} <span class="font-weight-bold">${
-					fileInfo.name
-				}</span>`,
-				callback: (result) => {
-					if (result) {
-						this.deleteFileCallback(hash);
-					}
+			app.showConfirmModal({
+				title: fileInfo.name,
+				text: app.translate('JS_DELETE_FILE_CONFIRMATION'),
+				titleTrusted: false,
+				icon: 'fa fa-trash-alt',
+				confirmedCallback: () => {
+					this.deleteFileCallback(hash);
 				}
 			});
 		} else {
