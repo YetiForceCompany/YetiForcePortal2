@@ -2,11 +2,9 @@
 'use strict';
 window.Documents_EditView_Js = class extends Base_EditView_Js {
 	registerFileTypeChangeEvent() {
-		let container = this.container.find('.js-file-upload-container');
-		let fieldUrl = container.find('.js-file-upload-external');
-		let fieldFile = container.find('.js-file-upload-internal');
-		console.log(fieldUrl);
-		console.log(fieldFile);
+		const container = this.container.find('.js-file-upload-container'),
+			fieldUrl = container.find('.js-file-upload-external'),
+			fieldFile = container.find('.js-file-upload-internal');
 		this.container.find('select[name="filelocationtype"]').on('change', (e) => {
 			if (e.currentTarget.value === 'I') {
 				fieldUrl.addClass('d-none').attr('disabled', 'disabled');
@@ -17,7 +15,6 @@ window.Documents_EditView_Js = class extends Base_EditView_Js {
 			}
 		});
 	}
-
 	/**
 	 * Register form events.
 	 */
