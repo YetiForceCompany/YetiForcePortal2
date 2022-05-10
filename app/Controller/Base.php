@@ -101,16 +101,20 @@ abstract class Base
 	/**
 	 * Error handler.
 	 *
-	 * @param string $errno
-	 * @param string $errstr
-	 * @param string $errfile
-	 * @param string $errline
-	 * @param string $errcontext
+	 * @param int    $no
+	 * @param string $str
+	 * @param string $file
+	 * @param int    $line
+	 *
+	 * @throws \App\Exceptions\AppException
 	 *
 	 * @return void
 	 */
-	public static function exceptionErrorHandler(int $errno, string $errstr, $errfile, $errline, $errcontext)
+	public static function exceptionErrorHandler(int $no, string $str, string $file, int $line): void
 	{
-		throw new \App\Exceptions\AppException($errstr, $errno);
+		if (\in_array($no, [E_ERROR, E_WARNING, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR])) {
+			$file = rtrim(str_replace(ROOT_DIRECTORY . \DIRECTORY_SEPARATOR, '', $file));
+			throw new \App\Exceptions\AppException("{$str} in {$file}:{$line}", $no);
+		}
 	}
 }
