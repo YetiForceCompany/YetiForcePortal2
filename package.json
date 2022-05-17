@@ -24,7 +24,7 @@
   "license": "YetiForce Public License 4.0",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
-    "@mdi/font": "^6.0.0",
+    "@mdi/font": "^6.7.96",
     "block-ui": "^2.70.1",
     "blueimp-file-upload": "^10.6.0",
     "bootbox": "^5.4.0",
