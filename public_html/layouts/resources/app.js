@@ -913,6 +913,34 @@ var app = {
 			});
 		}
 	},
+	showModalHtml: function (params) {
+		let data = '',
+			icon = '';
+		let footer = params['footer'] ?? '';
+		if (params['header']) {
+			params['header'] = `<span class="${params['headerIcon']} mr-2"></span>${params['header']}`;
+		}
+		if (params['footerButtons']) {
+			$.each(params['footerButtons'], (i, button) => {
+				icon = data = '';
+				$.each(button['data'], (key, val) => {
+					data += ` data-${key}="${val}"`;
+				});
+				if (button['icon']) {
+					icon += `<span class="${button['icon']} mr-2"></span>`;
+				}
+				footer += `<button type="button" class="btn ${button['class']}" ${data}>${icon}${button['text']}</button>`;
+			});
+		}
+		if (footer) {
+			footer = `<div class="modal-footer">${footer}</div>`;
+		}
+		let html = `<div class="modal" tabindex="-1" role="dialog"><div class="modal-dialog ${params['class']}" role="document"><div class="modal-content">
+		<div class="modal-header"><h5 class="modal-title js-modal-title" data-js="container">${params['header']}</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+		<div class="modal-body js-modal-content text-break ${params['bodyClass']}" data-js="container">${params['body']}</div>${footer}</div></div></div>`;
+		params.data = html;
+		return app.showModalWindow(params);
+	},
 	registerModalController: function (modalId, modalContainer, cb) {
 		let windowParent = this.childFrame ? window.parent : window;
 		if (!modalId) {
@@ -1087,41 +1115,6 @@ var app = {
 			}
 		});
 	},
-
-	showNotifyConfirm: function (customParams, confirmFn, cancelFn) {
-		let params = {
-			title: '???',
-			icon: 'fas fa-question-circle',
-			hide: false,
-			closer: false,
-			sticker: false,
-			destroy: true,
-			stack: new PNotify.Stack({
-				dir1: 'down',
-				modal: true,
-				firstpos1: 25,
-				overlayClose: false
-			}),
-			modules: new Map([
-				...PNotify.defaultModules,
-				[
-					PNotifyConfirm,
-					{
-						confirm: true,
-						align: 'center'
-					}
-				]
-			])
-		};
-
-		let notice = PNotify.info($.extend(params, customParams));
-		if (typeof confirmFn === 'function') {
-			notice.on('pnotify:confirm', confirmFn);
-		}
-		if (typeof cancelFn === 'function') {
-			notice.on('pnotify:cancel', cancelFn);
-		}
-	},
 	/**
 	 * Show left scrollbar.
 	 *
@@ -1142,7 +1135,11 @@ var app = {
 			right: 'auto'
 		});
 	},
-
+	/**
+	 * Show notify
+	 * @param {object} customParams
+	 * @returns {PNotify}
+	 */
 	showNotify: function (customParams) {
 		let params = {
 			hide: false
@@ -1162,9 +1159,85 @@ var app = {
 		}
 		return PNotify[type]($.extend(params, userParams));
 	},
-
 	/**
-	 * Set Pnotify defaults options
+	 * Show confirm modal
+	 * @param {object} params
+	 * @returns {PNotify}
+	 * @returns
+	 */
+	showConfirmModal: function (params) {
+		let confirmButtonLabel = 'JS_OK';
+		let rejectedButtonLabel = 'JS_CANCEL';
+		if (typeof params.confirmButtonLabel !== 'undefined') {
+			confirmButtonLabel = params.confirmButtonLabel;
+		}
+		if (typeof params.rejectedButtonLabel !== 'undefined') {
+			rejectedButtonLabel = params.rejectedButtonLabel;
+		}
+		return this.showNotify(
+			$.extend(
+				{
+					icon: 'fas fa-question-circle',
+					closer: false,
+					sticker: false,
+					destroy: false,
+					hide: false,
+					width: 'auto',
+					animateSpeed: 'fast',
+					addModalClass: 'c-confirm-modal',
+					modules: new Map([
+						...PNotify.defaultModules,
+						[
+							PNotifyConfirm,
+							{
+								confirm: true,
+								prompt: 'showDialog' in params ? params['showDialog'] : false,
+								promptMultiLine: 'multiLineDialog' in params ? params['multiLineDialog'] : false,
+								buttons: [
+									{
+										text: '<span class="fas fa-check mr-2"></span>' + app.translate(confirmButtonLabel),
+										textTrusted: true,
+										primary: true,
+										promptTrigger: true,
+										click: function (notice, value, e) {
+											if (params['showDialog'] && !value) {
+												return;
+											}
+											if (typeof params.confirmedCallback !== 'undefined') {
+												params.confirmedCallback(notice, value, e);
+											}
+											notice.close();
+										}
+									},
+									{
+										text: '<span class="fas fa-times mr-2"></span>' + app.translate(rejectedButtonLabel),
+										textTrusted: true,
+										click: function (notice) {
+											if (typeof params.rejectedCallback !== 'undefined') {
+												params.rejectedCallback(notice);
+											}
+											notice.close();
+										}
+									}
+								]
+							}
+						]
+					]),
+					stack: new PNotify.Stack({
+						dir1: 'down',
+						firstpos1: 50,
+						spacing1: 0,
+						push: 'top',
+						modal: true,
+						overlayClose: false
+					})
+				},
+				params
+			)
+		);
+	},
+	/**
+	 * Set PNotify defaults options
 	 */
 	setNotifyDefaultOptions() {
 		PNotify.defaults.textTrusted = true; // *Trusted option enables html as parameter's value
@@ -1219,29 +1292,54 @@ var app = {
 			});
 		}
 	},
-	registerIframeAndMoreContent() {
-		let showMoreModal = (e) => {
+	registerIframeAndMoreContent(container = $(document)) {
+		container.on('click', '.js-more', (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 			const btn = $(e.currentTarget);
-			const message = btn.data('iframe')
-				? btn.siblings('iframe').clone().show()
-				: btn.closest('.js-more-content').find('.fullContent').html();
-			bootbox.dialog({
-				message,
-				title: '<span class="mdi mdi-overscan"></span>  ' + app.translate('JS_FULL_TEXT'),
-				className: 'u-word-break modal-fullscreen',
-				buttons: {
-					danger: {
-						label: '<span class="fas fa-times mr-1"></span>' + app.translate('JS_CLOSE'),
-						className: 'btn-danger',
-						callback: function () {}
+			app.showModalHtml({
+				class: 'modal-fullscreen',
+				header: app.translate('JS_FULL_TEXT'),
+				headerIcon: 'mdi mdi-overscan',
+				bodyClass: 'u-word-break pb-0 pt-1',
+				footerButtons: [
+					{ text: app.translate('JS_CANCEL'), icon: 'fas fa-times', class: 'btn-danger', data: { dismiss: 'modal' } }
+				],
+				cb: (modal) => {
+					if (btn.data('iframe')) {
+						let iframe = btn.siblings('iframe');
+						let message = iframe.clone();
+						if (message[0].hasAttribute('srcdoctemp')) {
+							message.attr('srcdoc', message.attr('srcdoctemp'));
+						}
+						let isHidden = iframe.is(':hidden');
+						let height = 0;
+						if (iframe.data('height')) {
+							if (iframe.data('height') === 'full') {
+								height = $(window).height() - 185;
+							} else {
+								height = iframe.data('height');
+							}
+						} else {
+							if (isHidden) {
+								message.css('display', '');
+								iframe.css('display', '');
+							}
+							height = iframe.contents().height() ?? iframe.contents().find('body').height();
+						}
+						if (height) {
+							message.height(height);
+						}
+						if (isHidden) {
+							iframe.css('display', 'none');
+						}
+						modal.find('.js-modal-content').html(message);
+					} else {
+						modal.find('.js-modal-content').html(btn.closest('.js-more-content').find('.fullContent').html());
 					}
 				}
 			});
-		};
-		$('.js-more').on('click', showMoreModal);
-		$(document).on('click', '.js-more', showMoreModal);
+		});
 	},
 	processEvents: false,
 	registerAfterLoginEvents: function () {

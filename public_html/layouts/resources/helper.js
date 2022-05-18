@@ -73,7 +73,6 @@ jQuery.Class(
 		 * @params dateFormat---user date format
 		 * @return date object
 		 */
-
 		getDateInstance: function (dateTime, dateFormat) {
 			var dateTimeComponents = dateTime.split(' ');
 			var dateComponent = dateTimeComponents[0];
@@ -124,96 +123,8 @@ jQuery.Class(
 					timeSections[0] = '00';
 				}
 			}
-
 			month = month - 1;
-			var dateInstance = new Date(year, month, date, timeSections[0], timeSections[1], seconds);
-			return dateInstance;
-		},
-		/*
-		 * Function to add clickoutside event on the element - By using outside events plugin
-		 * @params element---On which element you want to apply the click outside event
-		 * @params callbackFunction---This function will contain the actions triggered after clickoutside event
-		 */
-		addClickOutSideEvent: function (element, callbackFunction) {
-			element.one('clickoutside', callbackFunction);
-		},
-		/*
-		 * Function to show horizontal top scroll bar
-		 */
-		showHorizontalTopScrollBar: function () {
-			var container = jQuery('.contentsDiv');
-			var topScroll = jQuery('.contents-topscroll', container);
-			var bottomScroll = jQuery('.contents-bottomscroll', container);
-
-			jQuery('.bottomscroll-div', container).attr('style', '');
-			jQuery('.topscroll-div', container).css('width', jQuery('.bottomscroll-div', container).outerWidth());
-			jQuery('.bottomscroll-div', container).css('width', jQuery('.topscroll-div', container).outerWidth());
-
-			topScroll.scroll(function () {
-				bottomScroll.scrollLeft(topScroll.scrollLeft());
-			});
-
-			bottomScroll.scroll(function () {
-				topScroll.scrollLeft(bottomScroll.scrollLeft());
-			});
-		},
-		convertToDateString: function (stringDate, dateFormat, modDay, type) {
-			var dotMode = '-';
-			if (dateFormat.indexOf('-') !== -1) {
-				dotMode = '-';
-			}
-			if (dateFormat.indexOf('.') !== -1) {
-				dotMode = '.';
-			}
-			if (dateFormat.indexOf('/') !== -1) {
-				dotMode = '/';
-			}
-
-			var splittedDate = stringDate.split(dotMode);
-			var splittedDateFormat = dateFormat.split(dotMode);
-			var year = splittedDate[splittedDateFormat.indexOf('yyyy')];
-			var month = splittedDate[splittedDateFormat.indexOf('mm')];
-			var date = splittedDate[splittedDateFormat.indexOf('dd')];
-			var dateInstance = new Date(year, month - 1, date);
-			if (year.length > 4 || month.length > 2 || date.length > 2 || dateInstance === null) {
-				var errorMsg = app.translate('JS_INVALID_DATE');
-				throw errorMsg;
-			}
-			var newDate = dateInstance;
-			if ('0' === modDay) {
-				if ('Calendar' === type) {
-					newDate.setDate(dateInstance.getDate() - 1);
-				}
-			} else if ('-1' === modDay) {
-				if ('Calendar' === type) {
-					newDate.setDate(dateInstance.getDate() - 2);
-				} else {
-					newDate.setDate(dateInstance.getDate() - 1);
-				}
-			} else {
-				if ('Calendar' !== type) {
-					newDate.setTime(dateInstance.getTime() + parseInt(modDay) * 24 * 60 * 60 * 1000);
-				}
-			}
-			return app.getStringDate(newDate);
-		},
-		hideOptions: function (element, attr, value) {
-			var opval = '';
-			element.find('option').each(function (index, option) {
-				option = $(option);
-				if (value !== option.data(attr)) {
-					option.addClass('d-none');
-					option.attr('disabled', 'disabled');
-				} else {
-					if (opval === '') {
-						opval = option.val();
-					}
-					option.removeClass('d-none');
-					option.removeAttr('disabled');
-				}
-			});
-			element.val(opval);
-			element.trigger('chosen:updated');
+			return new Date(year, month, date, timeSections[0], timeSections[1], seconds);
 		},
 		unique: function (array) {
 			return array.filter(function (el, index, arr) {
