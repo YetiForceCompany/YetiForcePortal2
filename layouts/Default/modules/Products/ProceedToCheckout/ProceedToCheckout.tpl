@@ -3,9 +3,7 @@
 	{assign var=CSS_CARD_CONTAINER value="box-shadow border rounded shopping-cart p-0"}
 	{assign var=CSS_CARD_CONTENT value="row no-gutters p-3 m-0 product-border-b"}
 	<div class="tpl-Products-ProceedToCheckout-ProceedToCheckout product-container js-products-container"
-		data-reference-id="{{$REFERENCE_ID}}"
-		data-reference-module="{{$REFERENCE_MODULE}}"
-		data-js="container">
+		data-reference-id="{$REFERENCE_ID}" data-reference-module="{$REFERENCE_MODULE}" data-js="container">
 		<div class="row no-gutters">
 			<div class="col-12 col-lg-9">
 				<div class="{$CSS_CARD_CONTAINER}">

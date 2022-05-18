@@ -51,8 +51,8 @@ class CartView extends ListViewModel
 	/** {@inheritdoc} */
 	public function loadRecordsList(): AbstractListView
 	{
-		$card = $this->cart->getAll();
-		if ($card) {
+		$this->recordsList = [];
+		if ($card = $this->cart->getAll()) {
 			$this->setConditions([
 				'fieldName' => 'id',
 				'value' => array_keys($card),
@@ -60,8 +60,6 @@ class CartView extends ListViewModel
 			]);
 			return parent::loadRecordsList();
 		}
-		$this->recordsList = [];
-
 		return $this;
 	}
 
@@ -121,9 +119,7 @@ class CartView extends ListViewModel
 				continue;
 			}
 			$address[$typeAddress] = array_intersect_key($accountRecordDetail['data'], array_flip(
-				array_map(function ($val) use ($typeAddress) {
-					return $val . $typeAddress;
-				}, static::ADDRESS_FIELDS)
+				array_map(fn ($val) => $val . $typeAddress, static::ADDRESS_FIELDS)
 			));
 		}
 		$fields = [];

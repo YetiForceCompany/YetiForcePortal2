@@ -32,7 +32,9 @@ class Buy extends \App\Controller\Action
 				$totalPriceGross = $cart->calculateTotalPriceGross();
 				if (!isset($responseFromApi['errors'])) {
 					$paymentMethod = $cart->getPayment();
-					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
+					if (isset($_SESSION['user']['companyDetails']['sum_open_orders'])) {
+						$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
+					}
 					$cart->removeAll();
 					$cart->save();
 				}
@@ -42,7 +44,9 @@ class Buy extends \App\Controller\Action
 				$totalPriceGross = $cart->calculateTotalPriceGross();
 				if (!isset($responseFromApi['errors'])) {
 					$paymentMethod = $cart->getPayment();
-					$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
+					if (isset($_SESSION['user']['companyDetails']['sum_open_orders'])) {
+						$_SESSION['user']['companyDetails']['sum_open_orders'] = $_SESSION['user']['companyDetails']['sum_open_orders'] + $totalPriceGross;
+					}
 				}
 			}
 			if (!empty($paymentMethod)) {

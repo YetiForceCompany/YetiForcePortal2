@@ -28,9 +28,8 @@
 						<a href="index.php?module=Products&view=Preview&record={$RECORD->getId()}">{$RECORD->getDisplayValue('productname')}</a>
 					</h6>
 					<div class="fs-80 text-muted text-truncate">EAN: {$RECORD->getDisplayValue('ean')}</div>
-					<div class="alert alert-warning d-none js-no-such-quantity" role="alert">
-						{\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)}
-						{\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
+					<div class="alert alert-danger d-none js-no-such-quantity" role="alert">
+						{\App\Language::translate('LBL_NO_SUCH_QUANTITY', $MODULE_NAME)} {\App\Language::translate('LBL_MAXIMUM_AMOUNT', $MODULE_NAME)}
 						<span class="pl-2 js-maximum-quantity">{App\Fields\Integer::formatToDisplay($RECORD->getRawValue('qtyinstock'))}</span>
 					</div>
 				</div>
