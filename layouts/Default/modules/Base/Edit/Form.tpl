@@ -5,7 +5,7 @@
 		<input type="hidden" name="module" value="{$MODULE_NAME}">
 		<input type="hidden" name="action" value="Save">
 		<input type="hidden" name="_fromView" value="{\App\Purifier::encodeHtml($ACTION_NAME)}">
-		{if !empty($RECORD_ID)}
+		{if $RECORD->getId()}
 			<input type="hidden" name="record" id="recordId" value="{$RECORD->getId()}">
 		{/if}
 		{if isset($RELATION_OPERATION)}

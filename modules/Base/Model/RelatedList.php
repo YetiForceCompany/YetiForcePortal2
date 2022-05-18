@@ -151,7 +151,7 @@ class RelatedList extends AbstractListView
 					'moduleName' => $this->relatedModuleName,
 					'data' => ['url' => "index.php?module={$this->relatedModuleName}&view=QuickCreateModal&sourceModule={$this->getModuleName()}&sourceRecord={$record}&relationOperation=true&relationId={$relationId}"],
 					'icon' => 'fas fa-plus',
-					'class' => 'btn-sm btn-outline-secondary js-create-related-record',
+					'class' => 'btn-sm btn-success js-create-related-record',
 					'showLabel' => 1,
 				];
 			}

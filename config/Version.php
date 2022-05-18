@@ -19,9 +19,9 @@ class Version
 	/**
 	 * @var string Application version.
 	 */
-	const APP = '6.3.0';
+	const APP = '6.3.1';
 	/**
 	 * @var string Date of publication of the application.
 	 */
-	const DATE = '2021.12.10';
+	const DATE = '2022.05.18';
 }

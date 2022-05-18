@@ -310,7 +310,7 @@ class Dotpay extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 *
 	 * @param string $dotpayPin
 	 *
-	 * @return self
+	 * @return $this
 	 */
 	public function setDotpayPin(string $dotpayPin): self
 	{

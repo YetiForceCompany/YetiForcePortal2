@@ -299,7 +299,7 @@ class Redsys extends AbstractPayments implements PaymentsSystemInterface, Paymen
 	 *
 	 * @param string $privateKey
 	 *
-	 * @return self
+	 * @return $this
 	 */
 	public function setPrivateKey(string $privateKey): self
 	{

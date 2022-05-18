@@ -47,7 +47,7 @@ class BaseModel
 	 * @param $key
 	 * @param $value
 	 *
-	 * @return self
+	 * @return $this
 	 */
 	public function set(string $key, $value)
 	{
@@ -60,7 +60,7 @@ class BaseModel
 	 *
 	 * @param array (key-value mapping) $values
 	 *
-	 * @return self
+	 * @return $this
 	 */
 	public function setData(array $values): self
 	{
