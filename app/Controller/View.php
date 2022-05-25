@@ -173,6 +173,7 @@ abstract class View extends Base
             ['layouts/resources/icons/yfm.css'],
             ['layouts/resources/icons/yfi.css'],
             ['layouts/' . \App\Viewer::getLayoutName() . '/skins/basic/Main.css'],
+			['layouts/Custom.css', true],
         ], 'css');
     }
 
