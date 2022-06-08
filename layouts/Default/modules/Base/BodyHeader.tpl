@@ -15,23 +15,25 @@
 					<i class="{if empty(\Conf\Config::$headerAlertIcon)}fas fa-exclamation-triangle{else}{\Conf\Config::$headerAlertIcon}{/if}"></i>
 				</div>
 			{/if}
-			{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
-			{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
-				<div class="badge badge-light mr-2 p-2 text-truncate text-black">
-					{if !empty($COMPANY_DETAILS['sum_open_orders'])}
-						<i class="fas fa-file-alt mr-2"></i>
-						<span class="u-font-size-19px">
-							{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}
-						</span>
-					{/if}
-					{if !empty($COMPANY_DETAILS['creditlimit'])}
-						<br>
-						<i class="fas fa-wallet mr-2"></i>
-						<span class="u-font-size-19px">
-							{\App\Language::translate('LBL_CREDIT_LIMIT')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['creditlimit'])}
-						</span>
-					{/if}
-				</div>
+			{if \Conf\Modules\Products::$shoppingMode}
+				{assign var="COMPANY_DETAILS" value=$USER->get('companyDetails')}
+				{if !empty($COMPANY_DETAILS['sum_open_orders']) || !empty($COMPANY_DETAILS['creditlimit'])}
+					<div class="badge badge-light mr-2 p-2 text-truncate text-black">
+						{if !empty($COMPANY_DETAILS['sum_open_orders'])}
+							<i class="fas fa-file-alt mr-2"></i>
+							<span class="u-font-size-19px">
+								{\App\Language::translate('LBL_SUM_OPEN_ORDERS')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['sum_open_orders'])}
+							</span>
+						{/if}
+						{if !empty($COMPANY_DETAILS['creditlimit'])}
+							<br>
+							<i class="fas fa-wallet mr-2"></i>
+							<span class="u-font-size-19px">
+								{\App\Language::translate('LBL_CREDIT_LIMIT')}: {App\Fields\Currency::formatToDisplay($COMPANY_DETAILS['creditlimit'])}
+							</span>
+						{/if}
+					</div>
+				{/if}
 			{/if}
 			<div class="dropdown historyBtn js-popover-tooltip" data-content="{\App\Language::translate('LBL_PAGES_HISTORY')}" data-js="popover">
 				<a class="btn btn-light showHistoryBtn mr-2 mb-0 py-1" role="button" href="#" data-placement="left" data-toggle="dropdown" aria-expanded="false">
