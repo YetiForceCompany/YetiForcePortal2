@@ -39,7 +39,6 @@ class Save extends \App\Controller\Action
 		foreach ($moduleModel->getFieldsModels() as $fieldModel) {
 			$fieldModel->setApiData($this->request, $api);
 		}
-		$formData = array_diff_key($formData, $moduleModel->getFieldsModels());
 		unset($formData['_csrf'], $formData['_fromView'], $formData['action']);
 		$result = $api->call($moduleName . '/Record/' . $record, $formData, $record ? 'put' : 'post');
 		if ($this->request->isEmpty('record')) {
