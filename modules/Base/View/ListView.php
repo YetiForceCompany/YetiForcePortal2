@@ -27,7 +27,7 @@ class ListView extends \App\Controller\View
 		}
 		$this->viewer->assign('FIELDS', $moduleModel->getFieldsModels());
 		$this->viewer->assign('CUSTOM_VIEWS', $listViewModel->getCustomViews());
-		$this->viewer->assign('VIEW_ID', $listViewModel->getDefaultCustomView());
+		$this->viewer->assign('VIEW_ID', $listViewModel->getCustomView());
 		$this->viewer->assign('HEADERS', $listViewModel->getHeaders());
 		$this->viewer->view($this->processTplName(), $this->moduleName);
 	}

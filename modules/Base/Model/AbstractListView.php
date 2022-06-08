@@ -212,8 +212,8 @@ abstract class AbstractListView
 		if (!empty($this->order) && $this->orderField) {
 			$headers['x-order-by'] = \App\Json::encode([$this->orderField => $this->order]);
 		}
-		if ($cvId = $this->getDefaultCustomView()) {
-			$headers['x-cv-id'] = $cvId;
+		if ($id = $this->getCustomView()) {
+			$headers['x-cv-id'] = $id;
 		}
 		return $headers;
 	}
@@ -266,8 +266,8 @@ abstract class AbstractListView
 	{
 		if (empty($this->recordsList)) {
 			$headers = ['x-only-column' => 1];
-			if ($cvId = $this->getDefaultCustomView()) {
-				$headers['x-cv-id'] = $cvId;
+			if ($id = $this->getCustomView()) {
+				$headers['x-cv-id'] = $id;
 			}
 			$this->recordsList = $this->getFromApi($headers);
 		}
@@ -297,7 +297,7 @@ abstract class AbstractListView
 	 *
 	 * @return int|null
 	 */
-	public function getDefaultCustomView(): ?int
+	public function getCustomView(): ?int
 	{
 		if (!$this->cvId) {
 			foreach ($this->getCustomViews() as $cvId => $cvData) {

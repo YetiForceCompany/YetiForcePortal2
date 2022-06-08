@@ -48,6 +48,9 @@ class ListView extends \App\Controller\Action
 		$listModel->setFields($fields);
 		$listModel->setLimit($this->request->getInteger('length'));
 		$listModel->setOffset($this->request->getInteger('start'));
+		if (!$this->request->isEmpty('cvId')) {
+			$listModel->setCvId($this->request->getInteger('cvId'));
+		}
 		$listModel->loadRecordsList();
 		foreach ($listModel->getRecordsListModel() as $id => $recordModel) {
 			$row = [];

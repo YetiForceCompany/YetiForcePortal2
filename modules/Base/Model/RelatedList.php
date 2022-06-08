@@ -41,7 +41,7 @@ class RelatedList extends AbstractListView
 	}
 
 	/** {@inheritdoc} */
-	public function getDefaultCustomView(): ?int
+	public function getCustomView(): ?int
 	{
 		return null;
 	}
