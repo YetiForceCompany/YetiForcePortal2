@@ -24,6 +24,11 @@ class Pdf
 	 */
 	public static function getTemplates(string $moduleName, int $recordId = null)
 	{
-		return \App\Api::getInstance()->call("{$moduleName}/PdfTemplates/{$recordId}");
+		try {
+			$pdf = \App\Api::getInstance()->call("{$moduleName}/PdfTemplates/{$recordId}");
+		} catch (\Throwable $th) {
+			$pdf = [];
+		}
+		return $pdf;
 	}
 }
