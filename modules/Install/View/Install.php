@@ -7,6 +7,7 @@
  * @copyright YetiForce S.A.
  * @license   YetiForce Public License 5.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Install\View;
@@ -24,6 +25,7 @@ class Install extends \App\Controller\View
 	/** {@inheritdoc} */
 	public function __construct(Request $request)
 	{
+		$this->setLanguage($request);
 		parent::__construct($request);
 		$this->exposeMethod('step1');
 		$this->exposeMethod('step2');
@@ -46,7 +48,6 @@ class Install extends \App\Controller\View
 	/** {@inheritdoc} */
 	public function preProcess($display = true): void
 	{
-		$this->setLanguage();
 		parent::preProcess(false);
 		if ($display) {
 			$this->preProcessDisplay();
@@ -97,13 +98,15 @@ class Install extends \App\Controller\View
 	/**
 	 * Set user language.
 	 *
+	 * @param Request $request
+	 *
 	 * @return void
 	 */
-	public function setLanguage()
+	public function setLanguage(Request $request)
 	{
-		if (!$this->request->isEmpty('lang')) {
+		if (!$request->isEmpty('lang')) {
 			$userInstance = \App\User::getUser();
-			$userInstance->set('language', $this->request->getByType('lang', Purifier::STANDARD));
+			$userInstance->set('language', $request->getByType('lang', Purifier::STANDARD));
 		}
 	}
 
