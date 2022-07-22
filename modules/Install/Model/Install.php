@@ -7,6 +7,7 @@
  * @copyright YetiForce S.A.
  * @license   YetiForce Public License 5.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace YF\Modules\Install\Model;
@@ -34,6 +35,11 @@ class Install
 		return new $handlerModule();
 	}
 
+	/**
+	 * Check if application is installed.
+	 *
+	 * @return bool
+	 */
 	public static function isInstalled()
 	{
 		return '__API_PATH__' !== Config::get('apiUrl');
@@ -74,6 +80,7 @@ class Install
 		$configFile = str_replace('__PORTAL_PATH__', addslashes($webRoot), $configFile);
 		Config::$portalUrl = $webRoot;
 		file_put_contents($path, $configFile);
+		\App\Cache::resetFileCache($path);
 	}
 
 	public function removeInstallationFiles()

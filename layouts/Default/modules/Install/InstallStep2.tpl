@@ -2,10 +2,7 @@
 {strip}
 	<!-- tpl-Install-InstallStep2 -->
 	<div id="js_strings" class="d-none d-print-none">{\App\Json::encode(\App\Language::export($MODULE_NAME, 'js'))}</div>
-	<input type="hidden" id="module" value="Install">
-	<input type="hidden" id="view" value="Install">
-	<form action="index.php?module=Install&action=Install" method="POST">
-		<input type="hidden" name="mode" value="Step3" />
+	<form action="index.php" method="POST">
 		<input type="hidden" name="lang" value="{$LANGUAGE}" />
 		<div class="row">
 			<div class="col-md-12">

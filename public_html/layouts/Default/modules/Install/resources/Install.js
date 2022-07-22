@@ -4,7 +4,7 @@ window.Install_Install_Js = class {
 		$('.js-install').on('click', () => {
 			if ($('form').validationEngine('validate')) {
 				let params = $('form').serializeFormData();
-				params.module = app.getModuleName();
+				params.module = 'Install';
 				params.action = 'Install';
 				const progressInstance = $.progressIndicatorShow();
 				AppConnector.request(params).done((data) => {
@@ -14,7 +14,7 @@ window.Install_Install_Js = class {
 							text: data.result.error,
 							type: 'error'
 						});
-					} else if (typeof data.result.url !== 'undefined') {
+					} else if (data.success && typeof data.result.url !== 'undefined') {
 						app.openUrl(data.result.url);
 					}
 				});
@@ -24,7 +24,7 @@ window.Install_Install_Js = class {
 	registerEvents() {
 		$('form').validationEngine(app.validationEngineOptions);
 		this.registerSave();
-		$('select[name="lang"]').on('change', (e) => {
+		$('select[name="lang"]').on('change', () => {
 			$('input[name="mode"]').val('step1');
 			$('form').trigger('submit');
 		});
