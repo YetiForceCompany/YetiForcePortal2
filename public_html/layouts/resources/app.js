@@ -998,6 +998,9 @@ var app = {
 	},
 	registerAdditions: function ($) {
 		$.fn.serializeFormData = function () {
+			for (let instance in CKEDITOR.instances) {
+				CKEDITOR.instances[instance].updateElement();
+			}
 			let form = $(this);
 			let values = form.serializeArray();
 			let data = {};
