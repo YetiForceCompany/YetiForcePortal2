@@ -23,11 +23,11 @@
   ],
   "require": {
     "php": ">=7.3.0",
-    "smarty/smarty": "^v3.1.39",
+    "smarty/smarty": "^v4",
     "guzzlehttp/guzzle": "^7.0",
     "yetiforce/csrf-magic": "^v1.1.1",
     "ckeditor/ckeditor": "^4.9.2",
-    "milon/barcode": "^8.0.0"
+    "milon/barcode": "^9.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
