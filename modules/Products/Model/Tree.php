@@ -74,6 +74,4 @@ class Tree extends \YF\Modules\Base\Model\AbstractListView
 		}
 		return $tree;
 	}
-
-
 }
