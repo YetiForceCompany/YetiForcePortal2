@@ -43,8 +43,9 @@ class Dashboard extends \App\Controller\View
 		$moduleName = $this->request->getModule();
 		$selectedDashboard = $this->request->getByType('dashboard', Purifier::INTEGER);
 		$dashboard = $this->getDashboardData($moduleName, $selectedDashboard);
-		$this->viewer->assign('DASHBOARD_TYPE', $dashboard['types']);
-		$this->viewer->assign('SELECTED_DASHBOARD', $selectedDashboard);
+		$tabs = $dashboard['types'];
+		$this->viewer->assign('DASHBOARD_TYPE', $tabs);
+		$this->viewer->assign('SELECTED_DASHBOARD', $selectedDashboard ?: array_key_first($tabs));
 		$this->viewer->view('Dashboard/PreDashboard.tpl', $moduleName);
 	}
 
