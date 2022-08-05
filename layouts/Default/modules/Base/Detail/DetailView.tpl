@@ -2,7 +2,7 @@
 {strip}
 	<!-- tpl-Base-Detail-DetailView -->
 	<div class="row">
-		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4{else}col-12{/if}">
+		<div class="{if !empty($INVENTORY_FIELDS) && $SHOW_INVENTORY_RIGHT_COLUMN}col-4 pr-0{else}col-12{/if}">
 			{assign var=ITERATION value=0}
 			{foreach item=BLOCK from=$BLOCKS}
 				{if isset($FIELDS_FORM[$BLOCK['id']])}
