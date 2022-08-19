@@ -89,7 +89,7 @@ window.Base_Widget_Comments_Js = class {
 	 * Add comments
 	 */
 	registerAddComments() {
-		let form = this.container.find('.js-add-comment-block form');
+		const form = this.container.find('.js-add-comment-block form');
 		form.validationEngine({ binded: false, ...app.validationEngineOptions });
 		form.on('submit', (e) => {
 			e.preventDefault();
@@ -120,11 +120,24 @@ window.Base_Widget_Comments_Js = class {
 			let formReply = $(e.currentTarget);
 			formReply.validationEngine({ binded: false, ...app.validationEngineOptions });
 			if (formReply.validationEngine('validate')) {
-				AppConnector.request(formReply.serializeFormData()).done((response) => {
+				let commentContent = formReply.find('.js-comment-content');
+				let commentContentValue = commentContent.html();
+				if ('' === commentContentValue) {
+					commentContent.validationEngine(
+						'showPrompt',
+						app.translate('JS_LBL_COMMENT_VALUE_CANT_BE_EMPTY'),
+						'error',
+						'bottomLeft',
+						true
+					);
+					return false;
+				}
+				let formData = formReply.serializeFormData();
+				formData['commentcontent'] = commentContentValue;
+				AppConnector.request(formData).done((_response) => {
 					formReply.find('[name="commentcontent"]').val('');
-					let postContainer = formReply.closest('.js-post-container');
-					let url = postContainer.find('.js-show-replies:first').data('url');
-					this.getContent(url).done((result) => {
+					const postContainer = formReply.closest('.js-post-container');
+					this.getContent(postContainer.find('.js-show-replies:first').data('url')).done((result) => {
 						postContainer.find('.js-post-container').remove();
 						postContainer.find('.js-post-cancel').trigger('click');
 						postContainer.find('.js-post-container_body').append(result);
