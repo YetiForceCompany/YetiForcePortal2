@@ -18,7 +18,7 @@ namespace Conf;
 class Config
 {
 	/** @var string portal version. */
-	public static $version = '6.2';
+	public static $version = '6.4';
 
 	/** @var string Portal name. */
 	public static $siteName = '';
