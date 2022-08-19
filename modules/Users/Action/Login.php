@@ -75,7 +75,7 @@ class Login extends \App\Controller\Action
 				'password' => $password,
 				'code' => $token,
 				'params' => [
-					'version' => \App\Config::$version,
+					'version' => \Conf\Version::APP,
 					'language' => \App\Language::getLanguage(),
 					'ip' => \App\Server::getRemoteIp(),
 					'fromUrl' => \App\Config::$portalUrl,

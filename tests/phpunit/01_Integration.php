@@ -58,7 +58,7 @@ final class Integration extends TestCase
 	public function testLangAfterLogin()
 	{
 		$params = [
-			'version' => Config::$version,
+			'version' => \Conf\Version::APP,
 			'language' => Language::getLanguage(),
 			'ip' => Server::getRemoteIp(),
 			'fromUrl' => Config::$portalUrl
