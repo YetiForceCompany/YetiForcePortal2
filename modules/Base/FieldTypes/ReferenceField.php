@@ -32,8 +32,8 @@ class ReferenceField extends BaseField
 		if (\is_array($value)) {
 			if ($value['isPermitted']) {
 				$url = "index.php?module={$value['referenceModule']}&view=DetailView&record={$value['raw']}";
-				$label = $value['value'];
-				$title = \App\Language::translateModule($value['referenceModule']) . ' - ' . $value['value'];
+				$label = \App\Purifier::encodeHtml($value['value']);
+				$title = \App\Language::translateModule($value['referenceModule']) . ' - ' . $label;
 				if ('Active' !== $value['state']) {
 					$label = '<s>' . $label . '</s>';
 				}
@@ -54,13 +54,13 @@ class ReferenceField extends BaseField
 		if (\is_array($value)) {
 			if ($value['isPermitted']) {
 				$url = "index.php?module={$value['referenceModule']}&view=DetailView&record={$value['raw']}";
-				$label = $value['value'];
-				$title = \App\Language::translateModule($value['referenceModule']) . ' - ' . $value['value'];
+				$label = \App\Purifier::encodeHtml($value['value']);
+				$title = \App\Language::translateModule($value['referenceModule']) . ' - ' . $label;
 				if ('Active' !== $value['state']) {
 					$label = '<s>' . $label . '</s>';
 				}
 				if (\mb_strlen($label) > \App\Config::$listViewItemMaxLength) {
-					$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . \App\TextParser::textTruncate($label, \App\Config::$listViewItemMaxLength) . '</a>';
+					$value = "<a class=\"modCT_{$value['referenceModule']} js-popover-tooltip\" data-content=\"$title\" href=\"$url\" >" . \App\Purifier::encodeHtml(\App\TextParser::textTruncate($value['value'], \App\Config::$listViewItemMaxLength)) . '</a>';
 				} else {
 					$value = "<a class=\"modCT_{$value['referenceModule']}\" href=\"$url\" title=\"$title\">$label</a>";
 				}
@@ -69,7 +69,7 @@ class ReferenceField extends BaseField
 			$value = $value['value'];
 		}
 		if (\mb_strlen($value) > \App\Config::$listViewItemMaxLength) {
-			$value = '<span class="js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '">' . \App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength) . '</span>';
+			$value = '<span class="js-popover-tooltip" data-content="' . \App\Purifier::encodeHtml($value) . '">' . \App\Purifier::encodeHtml(\App\TextParser::textTruncate($value, \App\Config::$listViewItemMaxLength)) . '</span>';
 		}
 		return $value;
 	}
