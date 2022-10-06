@@ -49,6 +49,8 @@ class Login extends \App\Controller\Action
 					'email' => $this->request->getByType('email', \App\Purifier::TEXT),
 					'password' => $this->request->getRaw('password'),
 				];
+			} elseif (!\Conf\Config::$displayDetailsException && 401 === $th->getCode()) {
+				$_SESSION['login_errors'][] = \App\Language::translate('LBL_INCORRECT_ACCESS_DATA', 'Users');
 			} else {
 				$_SESSION['login_errors'][] = $th->getMessage();
 			}
