@@ -9,38 +9,6 @@
 	</div>
 	</div>
 	<div>
-		{assign var=COMPANIES value=$USER->getCompanies()}
-		{if $COMPANIES}
-			<div class="modal fade" id="modalSelectCompanies" tabindex="-1" role="dialog" aria-labelledby="selectCompanies">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">
-								<span class="fas fa-exchange-alt mr-2"></span>{\App\Language::translate('LBL_CHANGE_COMPANY')}
-							</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<select class="select2 form-control" id="companyId">
-								{foreach item=ITEM key=KEY from=$COMPANIES}
-									<option value="{$KEY}" {if $USER->get('companyId') eq $KEY}selected{/if}>{$ITEM['name']}</option>
-								{/foreach}
-							</select>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-success js-change-company" data-js="click">
-								<span class="fas fa-check mr-2"></span>{\App\Language::translate('LBL_CHANGE')}
-							</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">
-								<span class="fas fa-times mr-2"></span>{\App\Language::translate('BTN_CANCEL')}
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		{/if}
 	</div>
 	{if $SHOW_FOOTER_BAR}
 		<footer class="footerContainer d-print-none w-100">

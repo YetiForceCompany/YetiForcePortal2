@@ -353,7 +353,20 @@ abstract class View extends Base
 	protected function getUserQuickMenuLinks(): array
 	{
 		$user = \App\User::getUser();
-		$links = [
+		$links = [];
+		if ($user->getCompanies()) {
+			$links[0][] = [
+				'label' => 'LBL_SWITCH_USERS',
+				'moduleName' => 'Users',
+				'data' => ['url' => 'index.php?module=Users&view=SwitchCompany'],
+				'icon' => 'fas fa-exchange-alt',
+				'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
+				'btnClass' => ' ',
+				'href' => '#',
+				'showLabel' => true,
+			];
+		}
+		$links[1][] =
 			[
 				'label' => 'LBL_CHANGE_PASSWORD',
 				'moduleName' => 'Users',
@@ -363,20 +376,20 @@ abstract class View extends Base
 				'btnClass' => ' ',
 				'href' => '#',
 				'showLabel' => true,
-			],
-			[
-				'label' => 'BTN_YOUR_ACCOUNT_ACCESS_HISTORY',
-				'moduleName' => 'Users',
-				'data' => ['url' => 'index.php?module=Users&view=AccessActivityHistoryModal'],
-				'icon' => 'yfi yfi-login-history',
-				'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
-				'btnClass' => ' ',
-				'href' => '#',
-				'showLabel' => true,
-			],
+			];
+		$links[1][] = [
+			'label' => 'BTN_YOUR_ACCOUNT_ACCESS_HISTORY',
+			'moduleName' => 'Users',
+			'data' => ['url' => 'index.php?module=Users&view=AccessActivityHistoryModal'],
+			'icon' => 'yfi yfi-login-history',
+			'class' => 'text-decoration-none u-fs-sm text-secondary js-show-modal d-block',
+			'btnClass' => ' ',
+			'href' => '#',
+			'showLabel' => true,
 		];
+
 		if ('PLL_PASSWORD_2FA' === $user->get('login_method') && !$user->isEmpty('authy_methods')) {
-			$links[] = [
+			$links[1][] = [
 				'label' => 'BTN_2FA_TOTP_QR_CODE',
 				'moduleName' => 'Users',
 				'data' => ['url' => 'index.php?module=Users&view=TwoFactorAuthenticationModal'],

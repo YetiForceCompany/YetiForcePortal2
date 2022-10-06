@@ -4,6 +4,7 @@
  * @copyright YetiForce S.A.
  * @license YetiForce Public License 5.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 'use strict';
 
@@ -109,23 +110,6 @@ jQuery.Class(
 				$('.historyBtn .dropdown-menu').html(htmlContent);
 			});
 		},
-		registerChangeCompany: function () {
-			$('#modalSelectCompanies').on('show.bs.modal', function (relatedTarget) {
-				let modal = $(relatedTarget.target);
-				let select = modal.find('select').addClass('select2');
-				App.Fields.Picklist.showSelect2ElementView(select);
-				modal.on('click', '.js-change-company', function (e) {
-					AppConnector.request({
-						module: app.getModuleName(),
-						action: 'ChangeCompany',
-						record: modal.find('#companyId').val()
-					}).done((data) => {
-						window.location.href = 'index.php';
-					});
-					e.preventDefault();
-				});
-			});
-		},
 		/**
 		 * Show left scrollbar for menu.
 		 */
@@ -173,7 +157,6 @@ jQuery.Class(
 		registerEvents: function () {
 			var thisInstance = this;
 			thisInstance.recentPageViews();
-			thisInstance.registerChangeCompany();
 			thisInstance.registerScrolbarToMenu();
 			thisInstance.registerPinEvent();
 			App.Fields.Tree.getInstance();

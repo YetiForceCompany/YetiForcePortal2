@@ -57,7 +57,7 @@
 								data-content="{\App\Language::translate('LBL_MY_PREFERENCES')}" href="#" role="button">
 								<span class="fas fa-user fa-fw" title="{\App\Language::translate('LBL_MY_PREFERENCES')}"></span>
 							</a>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" role="list"
+							<div class="dropdown-menu pb-0" aria-labelledby="dropdownMenuButton" role="list"
 								data-js="perfectscrollbar">
 								<div class="user-info-body container-fluid m-0 pl-2 pr-2 pt-2">
 									<div class="user-info row w-100 m-0 p-0">
@@ -78,24 +78,16 @@
 											<span class="text-uppercase font-weight-bold text-dark u-fs-sm">{\App\Language::translate('LBL_ACCOUNT_SETTINGS', 'Users')}</span>
 										</div>
 									</div>
-									{if $USER->getCompanies()}
-										<div class="user-menu-element row px-2 m-2">
-											<a class="text-decoration-none u-fs-sm text-secondary d-block active" role="button"
-												href="#" data-toggle="modal" data-target="#modalSelectCompanies">
-												<span class="fas fa-exchange-alt" title="{\App\Language::translate('LBL_SWITCH_USERS', 'Users')}"></span>
-												<span class="ml-2">{\App\Language::translate('LBL_SWITCH_USERS', 'Users')}</span>
-											</a>
-										</div>
+									{foreach item=ITEMS from=$USER_QUICK_MENU}
+										{foreach item=ITEM from=$ITEMS}
+											<div class="user-menu-element row px-2 m-2">
+												{\App\Layout\Action::getButton($ITEM)}
+											</div>
+										{/foreach}
 										<div class="dropdown-divider d-none d-sm-none d-md-block"></div>
-									{/if}
-									{foreach item=ITEM_MENU from=$USER_QUICK_MENU}
-										<div class="user-menu-element row px-2 m-2">
-											{\App\Layout\Action::getButton($ITEM_MENU)}
-										</div>
 									{/foreach}
-									<div class="dropdown-divider d-none d-sm-none d-md-block"></div>
 									<div class="user-menu-element row px-2 m-2">
-										<a class="loadPage text-decoration-none u-fs-sm text-secondary" role="button" href="index.php?module=Users&action=Logout">
+										<a class="loadPage text-decoration-none u-fs-sm text-secondary ml-1" role="button" href="index.php?module=Users&action=Logout">
 											<span class="fas fa-power-off" aria-hidden="true"></span>
 											<span class="ml-2">{\App\Language::translate('LBL_SIGN_OUT', 'Users')}</span>
 										</a>
