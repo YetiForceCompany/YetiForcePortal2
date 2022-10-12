@@ -1,6 +1,6 @@
 <?php
 /**
- * System version class.
+ * System version file.
  *
  * @package Config
  *
