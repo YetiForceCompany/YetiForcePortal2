@@ -125,13 +125,12 @@ class Response
 	 */
 	public function setException(\Throwable $e): void
 	{
-		$reasonPhrase = \App\Language::translate('ERR_OCCURRED_ERROR');
 		$message = $e->getMessage();
 		$error = [
-			'message' => $reasonPhrase,
+			'message' => \App\Language::translate('ERR_OCCURRED_ERROR'),
 			'code' => $e->getCode(),
 		];
-		if (\Conf\Config::$displayDetailsException) {
+		if (\Conf\Config::$displayDetailsException || 406 === $e->getCode()) {
 			$error['message'] = $message;
 		}
 		if (\Conf\Config::$displayTrackingException) {

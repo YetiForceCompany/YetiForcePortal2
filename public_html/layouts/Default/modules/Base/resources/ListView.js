@@ -70,11 +70,13 @@ window.Base_ListView_Js = class {
 			this.dataTable.ajax.reload();
 		});
 		this.table.on('click', 'tbody tr', function (e) {
-			let clickedElement = $(e.target);
-			let rowElement = jQuery(this);
+			const clickedElement = $(e.target),
+				rowElement = jQuery(this);
 			if (clickedElement.closest('div').parent().is('.actions, .dropdown-menu')) return;
 			if (clickedElement.closest('a').length > 0) return;
-			window.location.href = rowElement.find('.js-detail-view').attr('href');
+			if (rowElement.find('.js-detail-view').attr('href')) {
+				window.location.href = rowElement.find('.js-detail-view').attr('href');
+			}
 		});
 	}
 	/**

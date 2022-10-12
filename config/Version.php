@@ -19,7 +19,7 @@ class Version
 	/**
 	 * @var string Application version.
 	 */
-	const APP = '6.4.4';
+	const APP = '6.4.5';
 	/**
 	 * @var string Date of publication of the application.
 	 */
