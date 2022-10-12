@@ -68,11 +68,24 @@ class BaseField extends \App\BaseModel
 	/**
 	 * Function checks if there are permissions to edit record.
 	 *
+	 * @param string $actionName
+	 *
 	 * @return bool
 	 */
-	public function isEditable(): bool
+	public function isEditable(string $actionName): bool
 	{
-		return $this->get('isEditable') && !\in_array($this->get('type'), $this->notSupportedToEdit);
+		switch ($actionName) {
+			case 'CreateView':
+				$return = $this->get('isCreatable');
+				break;
+			case 'EditView':
+				$return = $this->get('isEditable');
+				break;
+			default:
+				$return = false;
+				break;
+		}
+		return $return && !\in_array($this->get('type'), $this->notSupportedToEdit);
 	}
 
 	/**

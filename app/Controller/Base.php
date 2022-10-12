@@ -1,6 +1,6 @@
 <?php
 /**
- * Base controller class.
+ * Base controller file.
  *
  * @package   Controller
  *
@@ -11,6 +11,9 @@
 
 namespace App\Controller;
 
+/**
+ * Base controller class.
+ */
 abstract class Base
 {
 	/** @var \App\Headers Headers instance. */

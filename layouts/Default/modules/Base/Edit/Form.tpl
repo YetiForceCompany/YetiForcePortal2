@@ -16,7 +16,7 @@
 			<input type="hidden" name="sourceModule" value="{\App\Purifier::encodeHtml($SOURCE_MODULE)}">
 			<input type="hidden" name="sourceRecord" value="{\App\Purifier::encodeHtml($SOURCE_RECORD)}">
 		{/if}
-		{foreach key=KEY item=VALUE from=$HIDDEN_FIELDS}
+		{foreach key=KEY item=VALUE from=$VIEW_CONTROLLER->getHiddenFields()}
 			<input type="hidden" name="{\App\Purifier::encodeHtml($KEY)}" value="{\App\Purifier::encodeHtml($VALUE)}">
 		{/foreach}
 		{assign var=ITERATION value=0}
@@ -35,7 +35,7 @@
 					</div>
 					<div class="c-card__body card-body blockContent row m-0 {if $IS_HIDDEN}d-none{else}show{/if}" id="block_{$BLOCK['id']}">
 						{foreach item=FIELD from=$FIELDS_FORM[$BLOCK['id']]}
-							<div class="editFields {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-sm-12 col-md-6{/if} row m-0 d-flex align-items-center {if !$FIELD->isEditable()}d-none{/if}">
+							<div class="editFields {if $FIELD->getUIType() eq '300'}col-lg-12{else}col-sm-12 col-md-6{/if} row m-0 d-flex align-items-center {if !$FIELD->isEditable($VIEW_CONTROLLER->getActionName())}d-none{/if}">
 								<div class="{if $FIELD->getUIType() eq '300'}col-lg-12 text-left{else}col-xl-3 col-lg-4 col-md-12{/if} fieldLabel paddingLeft5px font-weight-bold">
 									<label class="muted mb-0 pt-0">
 										{if $FIELD->isMandatory()}<span class="redColor">*</span>{/if}

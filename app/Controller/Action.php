@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract action controller class.
+ * Abstract action controller file.
  *
  * @package   Controller
  *
@@ -12,6 +12,9 @@
 
 namespace App\Controller;
 
+/**
+ * Abstract action controller class.
+ */
 abstract class Action extends Base
 {
 	/**
