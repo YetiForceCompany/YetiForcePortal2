@@ -21,19 +21,18 @@ class Credits
 
 	/** @var array Information about libraries license. */
 	public static $licenses = [
-		'html5shiv' => 'MIT',
-		'@fortawesome/fontawesome-free-regular' => 'MIT',
-		'@fortawesome/fontawesome-free-solid' => 'MIT',
-		'@fortawesome/fontawesome-free-brands' => 'MIT',
 		'bootstrap-tabdrop' => 'Apache-2.0',
-		'respond.js' => 'MIT',
+		'@fortawesome/fontawesome-free' => 'MIT',
+		'ckeditor/ckeditor' => 'MPL-1.1+',
+		'block-ui' => 'MIT',
+		'html5shiv' => 'MIT',
 	];
 
 	/** @var array Information about forks CRM. */
 	public static $libraries = [
 		'YetiForce' => [
 			'name' => 'YetiForcePortal2',
-			'version' => '',
+			'version' => \Conf\Version::APP,
 			'license' => 'YetiForce Public License 5.0',
 			'homepage' => 'https://yetiforce.com/en/yetiforce/license',
 			'notPackageFile' => true,
@@ -46,7 +45,7 @@ class Credits
 	 *
 	 * @return array
 	 */
-	public static function getVendorLibraries(): array
+	public static function getVendorLibraries()
 	{
 		$libraries = [];
 		if (file_exists(ROOT_DIRECTORY . '/composer.lock')) {
@@ -58,12 +57,14 @@ class Credits
 					if (!empty($package['version'])) {
 						$libraries[$package['name']]['version'] = $package['version'];
 					}
-					if ($package['license'] && \count($package['license']) > 1) {
-						$libraries[$package['name']]['license'] = implode(', ', $package['license']);
-						$libraries[$package['name']]['licenseError'] = true;
-					} else {
-						$libraries[$package['name']]['license'] = $package['license'][0];
-						$libraries[$package['name']]['showLicenseModal'] = self::checkIfLicenseFileExists($package['license'][0]);
+					if (!empty($package['license'])) {
+						if (\count($package['license']) > 1) {
+							$libraries[$package['name']]['license'] = implode(', ', $package['license']);
+							$libraries[$package['name']]['licenseError'] = true;
+						} else {
+							$libraries[$package['name']]['license'] = $package['license'][0];
+							$libraries[$package['name']]['showLicenseModal'] = self::checkIfLicenseFileExists($package['license'][0]);
+						}
 					}
 					if (isset(static::$licenses[$package['name']])) {
 						$libraries[$package['name']]['license'] = static::$licenses[$package['name']] . ' [' . $libraries[$package['name']]['license'] . ']';
@@ -89,19 +90,20 @@ class Credits
 	public static function getPublicLibraries(): array
 	{
 		$libraries = [];
-		$dir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'public_html' . \DIRECTORY_SEPARATOR . 'libraries' . \DIRECTORY_SEPARATOR;
-		if (file_exists($dir . '.yarn-integrity')) {
-			$yarnFile = \App\Json::decode(file_get_contents($dir . '.yarn-integrity'), true);
+		$srcDir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'public_html' . \DIRECTORY_SEPARATOR . 'libraries' . \DIRECTORY_SEPARATOR;
+		if (file_exists($srcDir . '.yarn-integrity')) {
+			$yarnFile = \App\Json::decode(file_get_contents($srcDir . '.yarn-integrity'), true);
 			if ($yarnFile && $yarnFile['lockfileEntries']) {
-				$libraryDir = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'public_html' . \DIRECTORY_SEPARATOR . 'libraries' . \DIRECTORY_SEPARATOR;
 				foreach ($yarnFile['lockfileEntries'] as $nameWithVersion => $page) {
 					$isPrefix = 0 === strpos($nameWithVersion, '@');
 					$name = $isPrefix ? '@' : '';
 					$tempName = explode('@', $isPrefix ? ltrim($nameWithVersion, '@') : $nameWithVersion);
 					$name .= array_shift($tempName);
-					$libraries[$name] = self::getLibraryValues($name, $libraryDir);
-					if (empty($libraries[$name]['homepage'])) {
-						$libraries[$name]['homepage'] = "https://yarnpkg.com/en/package/$name";
+					if (\is_dir($srcDir . $name)) {
+						$libraries[$name] = self::getLibraryValues($name, $srcDir);
+						if (empty($libraries[$name]['homepage'])) {
+							$libraries[$name]['homepage'] = "https://yarnpkg.com/en/package/{$name}";
+						}
 					}
 				}
 			}
@@ -165,10 +167,12 @@ class Credits
 			$packageFile = $dir . $libraryName . \DIRECTORY_SEPARATOR . $file;
 			if (file_exists($packageFile)) {
 				$packageFileContent = \App\Json::decode(file_get_contents($packageFile), true);
-				$license = $packageFileContent['license'] ?? '';
+				$license = $packageFileContent['license'] ?? $packageFileContent['licenses'] ?? '';
 				if ($license) {
 					if (\is_array($license)) {
-						if (\is_array($license[0]) && isset($license[0]['type'])) {
+						if (isset($license['type'])) {
+							$returnLicense = $license['type'];
+						} elseif (isset($license[0]['type'])) {
 							$returnLicense = implode(', ', array_column($license, 'type'));
 						} else {
 							$returnLicense = implode(', ', $license);
@@ -181,7 +185,7 @@ class Credits
 						$returnLicense = $license;
 					}
 					if (isset(static::$licenses[$libraryName]) && $returnLicense) {
-						$returnLicense = static::$licenses[$libraryName] . " [$returnLicense]";
+						$returnLicense = static::$licenses[$libraryName] . " [{$returnLicense}]";
 						$licenseToDisplay = static::$licenses[$libraryName];
 						$licenseError = false;
 						$showLicenseModal = self::checkIfLicenseFileExists($licenseToDisplay);
@@ -241,7 +245,7 @@ class Credits
 	public static function checkIfLicenseFileExists(string $license): bool
 	{
 		$filePath = ROOT_DIRECTORY . \DIRECTORY_SEPARATOR . 'licenses' . \DIRECTORY_SEPARATOR . $license . '.txt';
-		return file_exists($filePath) ? true : false;
+		return file_exists($filePath);
 	}
 
 	/**
