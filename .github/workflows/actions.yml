@@ -38,7 +38,7 @@ jobs:
           exclude: 'vendor,tests'
 
       - name: Check PHP syntax errors
-        uses: overtrue/phplint@5.3.0
+        uses: overtrue/phplint@6.0.0
 
       - name: DevSkim
         uses: microsoft/DevSkim-Action@v1
