@@ -40,7 +40,7 @@
     "html5shiv": "^3.7.3",
     "inputmask": "^5.0.2",
     "jQuery-Validation-Engine": "https://github.com/YetiForceCompany/jQuery-Validation-Engine#master",
-    "jquery": "^3.5",
+    "jquery": "^3.6",
     "jquery-ui-dist": "^1.12.1",
     "jquery.class.js": "^1.0.0",
     "jstree": "^3.3.7",
