@@ -8,12 +8,15 @@
 [![Depfu](https://badges.depfu.com/badges/4affeca7559c22dbeba7653979a51d29/overview.svg)](https://depfu.com/github/YetiForceCompany/YetiForcePortal2?project_id=25466)
 [![SecurityHeaders.io](https://img.shields.io/security-headers?url=https%3A%2F%2Fgitdevportal.yetiforce.com/)](https://securityheaders.io/?q=https://gitdevportal.yetiforce.com/)
 [![Snyk - Known Vulnerabilities](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2/badge.svg)](https://snyk.io/test/github/YetiForceCompany/YetiForcePortal2)
+[![Dependency Vulnerabilities](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-hooks.soos.io%2Fapi%2Fshieldsio-badges%3FbadgeType%3DDependencyVulnerabilities%26pid%3D0k3q3bpz4)](https://app.soos.io)
 [![sonarcloud.io status alert](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=alert_status)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io bugs](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=bugs)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io sqale](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io security](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=security_rating)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
 [![sonarcloud.io vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=YetiForceCompany_YetiForcePortal2&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=YetiForceCompany_YetiForcePortal2)
+
 <img src="https://stats.yetiforce.com/matomo.php?idsite=5&amp;rec=1" style="border:0" alt="" />
+
 <p align="center">
 	<a href="https://sourceforge.net/projects/yetiforce/files/YetiForce%20Portal%202%20for%20CRM%206.x.x/">
 		<img width="30%" src="https://a.fsdn.com/con/app/sf-download-button" srcset="https://a.fsdn.com/con/app/sf-download-button?button_size=2x 2x" alt="Download YetiForce CRM">
