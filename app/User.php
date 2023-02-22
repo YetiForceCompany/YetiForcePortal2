@@ -5,6 +5,7 @@
  * @copyright YetiForce S.A.
  * @license   YetiForce Public License 5.0 (licenses/LicenseEN.txt or yetiforce.com)
  * @author    Mariusz Krzaczkowski <m.krzaczkowski@yetiforce.com>
+ * @author    Radosław Skrzypczak <r.skrzypczak@yetiforce.com>
  */
 
 namespace App;
@@ -103,7 +104,7 @@ class User extends BaseModel
 	 */
 	public function getCompanies()
 	{
-		if ($this->isEmpty('type') || $this->get('type') < 3) {
+		if ($this->isEmpty('type') || !\in_array($this->get('type'), [3, 4])) {
 			return false;
 		}
 		$companies = Session::get('Companies');
