@@ -13,6 +13,9 @@
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
+						{if is_array($ERROR)}
+							{assign var="ERROR" value=print_r($ERROR,true)}
+						{/if}
 						{\App\Purifier::encodeHtml($ERROR)}
 					</div>
 				{/foreach}
