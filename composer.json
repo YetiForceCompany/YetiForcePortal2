@@ -26,7 +26,7 @@
     "smarty/smarty": "^v4",
     "guzzlehttp/guzzle": "^7.0",
     "yetiforce/csrf-magic": "^v1.1.1",
-    "ckeditor/ckeditor": "^4.9.2",
+    "ckeditor/ckeditor": "^4.24.0",
     "milon/barcode": "^9.0"
   },
   "config": {
