@@ -1,3 +1,11 @@
+# This repository is no longer being used and has been archived!
+
+This version of Portal is only compatible with [YetiForce](https://github.com/YetiForceCompany/YetiForceCRM) version 6.4.
+
+YetiForce 7.0 and newer versions require [Portal v3](https://doc.yetiforce.com/en/portal/), and will not work with any previous versions of the Portal.
+
+# YetiForce Portal v2
+
 [![Latest Stable Version](https://poser.pugx.org/yetiforce/yetiforce-portal/v/stable)](https://packagist.org/packages/yetiforce/yetiforce-portal)
 ![release date](https://img.shields.io/github/release-date/YetiForceCompany/YetiForcePortal2)
 ![PHP Version](https://img.shields.io/packagist/php-v/yetiforce/yetiforce-portal)
