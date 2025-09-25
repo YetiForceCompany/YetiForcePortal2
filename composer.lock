@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca4be8e24659f51c9c94a12bfb7ea8ca",
+    "content-hash": "970b5a055f1f54dbaaee25a862bcadca",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
-            "version": "4.20.1",
+            "version": "4.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ckeditor/ckeditor4-releases.git",
-                "reference": "d519387a9448cbb66a5091361ddf665fd8728743"
+                "reference": "f51eacdb067fd090c4b076d8290f008d9e400480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ckeditor/ckeditor4-releases/zipball/d519387a9448cbb66a5091361ddf665fd8728743",
-                "reference": "d519387a9448cbb66a5091361ddf665fd8728743",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor4-releases/zipball/f51eacdb067fd090c4b076d8290f008d9e400480",
+                "reference": "f51eacdb067fd090c4b076d8290f008d9e400480",
                 "shasum": ""
             },
             "type": "library",
@@ -52,7 +52,7 @@
                 "source": "https://github.com/ckeditor/ckeditor4",
                 "wiki": "https://ckeditor.com/docs/ckeditor4/latest/"
             },
-            "time": "2022-11-30T15:28:41+00:00"
+            "time": "2024-02-07T11:28:48+00:00"
         },
         {
             "name": "doctrine/inflector",
